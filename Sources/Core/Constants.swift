@@ -79,7 +79,7 @@ enum Layout {
     static let gridIcon: CGFloat = 52
     static let legendDot: CGFloat = 10
     static let legendMax = 6
-    static let legendItemMin: CGFloat = 220  // segments named in a legend; the rest is grouped
+    static let legendColumns = 2
     static let chartHeight: CGFloat = 220
     static let statTileMin: CGFloat = 150
     static let statColumns = 3

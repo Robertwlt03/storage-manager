@@ -1,4 +1,3 @@
-import Charts
 import SwiftUI
 
 struct StorageSegment: Identifiable {
@@ -10,24 +9,26 @@ struct StorageSegment: Identifiable {
     static let usedID = "used"  // used space no category covers (yet)
 }
 
-/// Stacked bar like in System Settings › Storage.
+/// Stacked bar like in System Settings › Storage. Plain shapes instead of a chart: when the sidebar or the window
+/// changes the width, they follow frame by frame without redrawing a whole chart each time.
 struct StorageBar: View {
     let segments: [StorageSegment]
     let total: Int64
-    private static let row = "volume"
 
     var body: some View {
-        Chart(segments) { s in
-            BarMark(x: .value(Loc.columnSize.s, s.bytes), y: .value(Self.row, Self.row))  // one category row: a stacked bar
-                .foregroundStyle(s.colorIndex.map { Theme.color($0) } ?? Theme.freeSegment)
-                .accessibilityLabel(s.title)
-                .accessibilityValue(Fmt.bytes(s.bytes))
+        let sum = CGFloat(max(total, segments.reduce(0) { $0 + max($1.bytes, 0) }, 1))
+        GeometryReader { geo in
+            HStack(spacing: 0) {
+                ForEach(segments) { s in
+                    Rectangle()
+                        .fill(s.colorIndex.map { Theme.color($0) } ?? Theme.freeSegment)
+                        .frame(width: geo.size.width * CGFloat(max(s.bytes, 0)) / sum)
+                        .accessibilityElement()
+                        .accessibilityLabel(s.title)
+                        .accessibilityValue(Fmt.bytes(s.bytes))
+                }
+            }
         }
-        .chartXScale(domain: 0...max(total, segments.reduce(0) { $0 + $1.bytes }))
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .chartLegend(.hidden)
-        .staticChart()
         .frame(height: Layout.storageBarHeight)
         .clipShape(RoundedRectangle(cornerRadius: Layout.storageBarRadius, style: .continuous))
     }
@@ -68,7 +69,10 @@ struct StorageLegend: View {
     var canSelect: (StorageSegment) -> Bool = { _ in true }
 
     var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.legendItemMin), alignment: .leading)], alignment: .leading, spacing: Space.s) {
+        // A fixed number of columns: an adaptive grid would jump from two to three columns halfway through the
+        // sidebar animation and move every entry at once.
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), alignment: .leading), count: Layout.legendColumns),
+                  alignment: .leading, spacing: Space.s) {
             ForEach(items) { s in
                 // Named categories lead to their folder; "Other" and free space have nowhere to go.
                 let target = onSelect != nil && s.colorIndex != nil && s.id != Self.otherID && canSelect(s)
