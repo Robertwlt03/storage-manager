@@ -156,7 +156,6 @@
 "remove" = "Remove";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statistics";
 "paneCleaner" = "Clean Up";
 "paneApps" = "Unused Apps";
 "sectionTidy" = "Free Up Space";
@@ -166,7 +165,6 @@
 "settings" = "Settings";
 "emptyFolder" = "This folder is empty";
 "otherCategories" = "Other";
-"otherTypes" = "Other";
 "cleanCaches" = "App Caches";
 "cleanCachesDetail" = "Caches that apps rebuild when needed. Running apps and macOS itself are left alone.";
 "cleanDeveloper" = "Developer Caches";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Sizes are the space in use, as reported by “du”. APFS clones count in full; copies that share storage blocks really use less. “System & Other” is the remainder up to what macOS reports as used.";
-"infoStatistics" = "Figures and charts from the last scan. File types count files from 1 MB; smaller files are grouped during the scan to save memory and energy.";
 "infoCleaner" = "Remove files your system barely needs or not at all: caches that rebuild themselves, old logs and old temporary files. Choose what may go and confirm.";
 "infoApps" = "Apps you have not opened for a while. The date comes from macOS itself; the app records nothing. Move what you no longer need to the Trash here; you can restore it from there.";
 "infoExplorer" = "All measured folders, sorted by size. Double-click opens a folder; the context menu shows files in Finder and gives information about them.";
@@ -232,15 +229,9 @@
 "stopReading" = "Stop Reading";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "What is the space used for?";
-"statCategoriesCaption" = "Each colour stands for a category. Clicking an entry in the legend opens the matching folder.";
-"statTypesTitle" = "Which kinds of files take the most space?";
-"statTypesCaption" = "Files from 1 MB are counted. Files without an extension are mostly parts of programs.";
 "statSizesTitle" = "How big are your files?";
 "statSizesCaption" = "How much space each size class takes and how many files are in it. A few big files usually take more room than many small ones.";
-"statUsedOf" = "used of %@";
 "statLargeFilesFrom" = "large files from %@";
 "bucketValue" = "%@
 %@ files";
-"typeNoExtension" = "No file extension";
 "settingsSystemNote" = "Appearance, language and units come from System Settings. A separate language for this app is set there under General › Language & Region › Applications.";

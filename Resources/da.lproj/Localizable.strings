@@ -156,7 +156,6 @@
 "remove" = "Fjern";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statistik";
 "paneCleaner" = "Ryd op";
 "paneApps" = "Ubrugte apps";
 "sectionTidy" = "Frigør plads";
@@ -166,7 +165,6 @@
 "settings" = "Indstillinger";
 "emptyFolder" = "Denne mappe er tom";
 "otherCategories" = "Øvrige";
-"otherTypes" = "Andre";
 "cleanCaches" = "Appcacher";
 "cleanCachesDetail" = "Cacher, som apps opretter igen efter behov. Apps, der kører, og macOS selv bliver ikke rørt.";
 "cleanDeveloper" = "Udviklercacher";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Størrelserne er den plads, der er i brug, målt som med »du«. APFS-kloner tæller fuldt med; kopier, der deler lagerblokke, fylder i virkeligheden mindre. »System og andet« er resten op til det, macOS melder som brugt.";
-"infoStatistics" = "Nøgletal og diagrammer fra den seneste måling. Filtyper tæller filer fra 1 MB; mindre filer samles under målingen for at spare hukommelse og strøm.";
 "infoCleaner" = "Her fjerner du filer, som dit system næsten ikke eller slet ikke har brug for: cacher, der opretter sig selv igen, gamle logfiler og gamle midlertidige filer. Vælg, hvad der må væk, og bekræft.";
 "infoApps" = "Apps, som du ikke har åbnet i et stykke tid. Datoen kommer fra macOS selv; appen registrerer ingenting. Det, du ikke længere har brug for, kan du flytte til papirkurven herfra og gendanne derfra.";
 "infoExplorer" = "Alle målte mapper, sorteret efter størrelse. Dobbeltklik åbner en mappe; lokalmenuen viser filer i Finder og giver oplysninger om dem.";
@@ -232,15 +229,9 @@
 "stopReading" = "Stop oplæsning";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "Hvad bruges pladsen til?";
-"statCategoriesCaption" = "Hver farve står for en kategori. Hvis du klikker på en post i forklaringen, åbnes den tilhørende mappe.";
-"statTypesTitle" = "Hvilke filtyper fylder mest?";
-"statTypesCaption" = "Filer fra 1 MB tælles med. Filer uden filtypenavn er oftest dele af programmer.";
 "statSizesTitle" = "Hvor store er dine filer?";
 "statSizesCaption" = "Hvor meget plads hver størrelsesklasse fylder, og hvor mange filer der er i den. Nogle få store filer fylder som regel mere end mange små.";
-"statUsedOf" = "brugt af %@";
 "statLargeFilesFrom" = "store filer fra %@";
 "bucketValue" = "%@
 %@ filer";
-"typeNoExtension" = "Intet filtypenavn";
 "settingsSystemNote" = "Udseende, sprog og enheder overtager appen fra Systemindstillinger. Et særskilt sprog til denne app indstiller du dér under Generelt › Sprog og region › Programmer.";

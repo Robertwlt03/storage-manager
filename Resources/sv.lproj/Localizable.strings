@@ -156,7 +156,6 @@
 "remove" = "Ta bort";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statistik";
 "paneCleaner" = "Rensa upp";
 "paneApps" = "Oanvända appar";
 "sectionTidy" = "Frigör utrymme";
@@ -166,7 +165,6 @@
 "settings" = "Inställningar";
 "emptyFolder" = "Den här mappen är tom";
 "otherCategories" = "Övrigt";
-"otherTypes" = "Övrigt";
 "cleanCaches" = "Appars cacheminnen";
 "cleanCachesDetail" = "Cacheminnen som appar bygger upp igen vid behov. Appar som körs och macOS själv lämnas ifred.";
 "cleanDeveloper" = "Cacheminnen för utveckling";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Storlekarna är det upptagna utrymmet, mätt som med ”du”. APFS-kloner räknas fullt ut; kopior som delar lagringsblock tar i verkligheten mindre plats. ”System och övrigt” är resten upp till det macOS anger som använt.";
-"infoStatistics" = "Nyckeltal och diagram från den senaste mätningen. Filtyper räknar filer från 1 MB; mindre filer slås ihop under mätningen för att spara minne och energi.";
 "infoCleaner" = "Här tar du bort filer som systemet knappt eller inte alls behöver: cacheminnen som byggs upp av sig själva, gamla loggar och gamla tillfälliga filer. Välj vad som får försvinna och bekräfta.";
 "infoApps" = "Appar som du inte har öppnat på ett tag. Datumet kommer från macOS självt; appen registrerar ingenting. Det du inte längre behöver flyttar du härifrån till papperskorgen och kan återställa därifrån.";
 "infoExplorer" = "Alla uppmätta mappar, sorterade efter storlek. Dubbelklicka för att öppna en mapp; snabbmenyn visar filer i Finder och ger information om dem.";
@@ -232,15 +229,9 @@
 "stopReading" = "Sluta läsa upp";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "Vad används utrymmet till?";
-"statCategoriesCaption" = "Varje färg står för en kategori. Om du klickar på en post i teckenförklaringen öppnas motsvarande mapp.";
-"statTypesTitle" = "Vilka sorters filer tar mest plats?";
-"statTypesCaption" = "Filer från 1 MB räknas. Filer utan filändelse är oftast delar av program.";
 "statSizesTitle" = "Hur stora är dina filer?";
 "statSizesCaption" = "Hur mycket plats varje storleksklass tar och hur många filer som finns i den. Några få stora filer tar oftast mer plats än många små.";
-"statUsedOf" = "använt av %@";
 "statLargeFilesFrom" = "stora filer från %@";
 "bucketValue" = "%@
 %@ filer";
-"typeNoExtension" = "Ingen filändelse";
 "settingsSystemNote" = "Utseende, språk och enheter hämtas från Systeminställningar. Ett eget språk för den här appen ställer du in där under Allmänt › Språk och region › Appar.";

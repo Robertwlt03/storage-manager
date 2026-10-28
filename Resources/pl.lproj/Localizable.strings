@@ -156,7 +156,6 @@
 "remove" = "Usuń";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statystyki";
 "paneCleaner" = "Porządkowanie";
 "paneApps" = "Nieużywane aplikacje";
 "sectionTidy" = "Zwolnij miejsce";
@@ -166,7 +165,6 @@
 "settings" = "Ustawienia";
 "emptyFolder" = "Ten folder jest pusty";
 "otherCategories" = "Pozostałe";
-"otherTypes" = "Inne";
 "cleanCaches" = "Pamięci podręczne aplikacji";
 "cleanCachesDetail" = "Pamięci podręczne, które aplikacje tworzą ponownie w razie potrzeby. Uruchomione aplikacje i sam macOS pozostają nietknięte.";
 "cleanDeveloper" = "Pamięci podręczne programisty";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Rozmiary to zajęte miejsce, mierzone jak poleceniem „du”. Klony APFS są liczone w całości; kopie ze wspólnymi blokami pamięci w rzeczywistości zajmują mniej. „System i inne” to reszta aż do wartości, którą macOS podaje jako zajętą.";
-"infoStatistics" = "Wskaźniki i wykresy z ostatniego pomiaru. Typy plików uwzględniają pliki od 1 MB; mniejsze pliki są podczas pomiaru grupowane, aby oszczędzać pamięć i energię.";
 "infoCleaner" = "Tutaj usuniesz pliki, których system prawie lub wcale nie potrzebuje: pamięci podręczne, które odtwarzają się same, stare dzienniki i stare pliki tymczasowe. Wybierz, co może zniknąć, i potwierdź.";
 "infoApps" = "Aplikacje, których od dawna nie otwierano. Data pochodzi od samego macOS; aplikacja niczego nie zapisuje. To, czego już nie potrzebujesz, przenosisz tutaj do Kosza i możesz stamtąd przywrócić.";
 "infoExplorer" = "Wszystkie zmierzone foldery posortowane według rozmiaru. Dwukrotne kliknięcie otwiera folder; menu kontekstowe pokazuje pliki w Finderze i podaje informacje o nich.";
@@ -232,15 +229,9 @@
 "stopReading" = "Przestań czytać";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "Na co idzie miejsce?";
-"statCategoriesCaption" = "Każdy kolor oznacza kategorię. Kliknięcie wpisu w legendzie otwiera odpowiedni folder.";
-"statTypesTitle" = "Jakie rodzaje plików zajmują najwięcej miejsca?";
-"statTypesCaption" = "Uwzględniono pliki od 1 MB. Pliki bez rozszerzenia to najczęściej części programów.";
 "statSizesTitle" = "Jak duże są Twoje pliki?";
 "statSizesCaption" = "Ile miejsca zajmuje każda klasa rozmiaru i ile plików w niej jest. Kilka dużych plików zwykle zajmuje więcej niż wiele małych.";
-"statUsedOf" = "zajęte z %@";
 "statLargeFilesFrom" = "dużych plików od %@";
 "bucketValue" = "%@
 %@ plików";
-"typeNoExtension" = "Bez rozszerzenia";
 "settingsSystemNote" = "Wygląd, język i jednostki aplikacja przejmuje z Ustawień systemowych. Osobny język dla tej aplikacji ustawisz tam w sekcji Ogólne › Język i region › Aplikacje.";

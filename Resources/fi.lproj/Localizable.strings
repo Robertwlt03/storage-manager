@@ -156,7 +156,6 @@
 "remove" = "Poista";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Tilastot";
 "paneCleaner" = "Siivoa";
 "paneApps" = "Käyttämättömät apit";
 "sectionTidy" = "Vapauta tilaa";
@@ -166,7 +165,6 @@
 "settings" = "Asetukset";
 "emptyFolder" = "Tämä kansio on tyhjä";
 "otherCategories" = "Muut";
-"otherTypes" = "Muut";
 "cleanCaches" = "Appien välimuistit";
 "cleanCachesDetail" = "Välimuistit, jotka apit luovat tarvittaessa uudelleen. Käynnissä olevia appeja ja macOS:ää itseään ei kosketa.";
 "cleanDeveloper" = "Kehittäjän välimuistit";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Koot ovat käytössä olevaa tilaa, mitattuna kuten ”du”-komennolla. APFS-kloonit lasketaan kokonaan; kopiot, jotka jakavat tallennuslohkoja, vievät todellisuudessa vähemmän tilaa. ”Järjestelmä ja muu” on loput siihen asti, minkä macOS ilmoittaa käytetyksi.";
-"infoStatistics" = "Tunnusluvut ja kaaviot viimeisimmästä mittauksesta. Tiedostotyypeissä lasketaan tiedostot, jotka ovat vähintään 1 MB; pienemmät tiedostot ryhmitellään mittauksen aikana muistin ja energian säästämiseksi.";
 "infoCleaner" = "Täällä poistat tiedostoja, joita järjestelmä tuskin tarvitsee tai ei lainkaan: välimuisteja, jotka syntyvät itsestään uudelleen, vanhoja lokeja ja vanhoja tilapäisiä tiedostoja. Valitse, mitä saa poistaa, ja vahvista.";
 "infoApps" = "Apit, joita et ole avannut pitkään aikaan. Päivämäärä tulee macOS:ltä itseltään; app ei tallenna mitään. Sen, mitä et enää tarvitse, voit siirtää täältä roskakoriin ja palauttaa sieltä.";
 "infoExplorer" = "Kaikki mitatut kansiot koon mukaan lajiteltuina. Kaksoisnapsautus avaa kansion; kontekstivalikko näyttää tiedostot Finderissa ja antaa niistä tietoja.";
@@ -232,15 +229,9 @@
 "stopReading" = "Lopeta lukeminen";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "Mihin tila kuluu?";
-"statCategoriesCaption" = "Jokainen väri edustaa yhtä luokkaa. Selitteen merkintää napsauttamalla avautuu vastaava kansio.";
-"statTypesTitle" = "Mitkä tiedostolajit vievät eniten tilaa?";
-"statTypesCaption" = "Mukana ovat tiedostot, jotka ovat vähintään 1 MB. Tiedostot ilman tunnistetta ovat enimmäkseen ohjelmien osia.";
 "statSizesTitle" = "Kuinka suuria tiedostosi ovat?";
 "statSizesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
-"statUsedOf" = "käytetty, yhteensä %@";
 "statLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
 "bucketValue" = "%@
 %@ tiedostoa";
-"typeNoExtension" = "Ei tiedostotunnistetta";
 "settingsSystemNote" = "Ulkoasu, kieli ja yksiköt tulevat Järjestelmäasetuksista. Tämän apin oman kielen voit asettaa siellä kohdassa Yleiset › Kieli ja alue › Apit.";

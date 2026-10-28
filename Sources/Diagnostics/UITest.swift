@@ -25,7 +25,7 @@ import SwiftUI
         await digIntoFolders(model)
         await search(model)
         await flipSettings(model)
-        await rescanOnStatistics(model)
+        await rescanOnOverview(model)
 
         log(problems.isEmpty ? "ERGEBNIS: keine Fehler in \(steps) Schritten" : "ERGEBNIS: \(problems.count) Probleme")
         problems.forEach { log("PROBLEM: \($0)") }
@@ -128,17 +128,17 @@ import SwiftUI
         await step("Aufräumen neu suchen", model, wait: 0.5)
     }
 
-    /// The scenario that crashed Swift Charts: rescan while the statistics page is open, then switch around.
-    private static func rescanOnStatistics(_ model: AppModel) async {
-        model.pane = .statistics
+    /// The scenario that crashed Swift Charts: rescan while the page with the chart is open, then switch around.
+    private static func rescanOnOverview(_ model: AppModel) async {
+        model.pane = .overview
         model.scan()
-        for pane in allPanes(model) + [.statistics, .overview, .statistics] {
+        for pane in allPanes(model) + [.overview, .explorer, .overview] {
             model.pane = pane
             await step("Neu messen \(pane.launchKey)", model, wait: 0.3, picture: false)
         }
         await waitForScan(model)
-        model.pane = .statistics
-        await step("Statistik am Ende", model, wait: 1)
+        model.pane = .overview
+        await step("Überblick am Ende", model, wait: 1)
     }
 
     // MARK: Helpers

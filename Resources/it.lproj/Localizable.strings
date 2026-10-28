@@ -156,7 +156,6 @@
 "remove" = "Rimuovi";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statistiche";
 "paneCleaner" = "Pulisci";
 "paneApps" = "App inutilizzate";
 "sectionTidy" = "Libera spazio";
@@ -166,7 +165,6 @@
 "settings" = "Impostazioni";
 "emptyFolder" = "Questa cartella è vuota";
 "otherCategories" = "Altre";
-"otherTypes" = "Altri";
 "cleanCaches" = "Cache delle app";
 "cleanCachesDetail" = "Cache che le app ricreano quando serve. Le app in esecuzione e macOS stesso non vengono toccati.";
 "cleanDeveloper" = "Cache di sviluppo";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Le dimensioni indicano lo spazio in uso, come lo riporta “du”. I cloni APFS contano per intero; le copie che condividono blocchi di archiviazione in realtà usano meno spazio. “Sistema e altro” è il resto fino a quanto macOS indica come utilizzato.";
-"infoStatistics" = "Cifre e grafici dell’ultima analisi. I tipi di file contano i file da 1 MB in su; i file più piccoli vengono raggruppati durante l’analisi per risparmiare memoria ed energia.";
 "infoCleaner" = "Rimuovi i file di cui il sistema ha poco o nessun bisogno: cache che si ricreano da sole, vecchi log e vecchi file temporanei. Scegli cosa può essere eliminato e conferma.";
 "infoApps" = "App che non apri da un po’. La data proviene da macOS stesso; l’app non registra nulla. Sposta qui nel Cestino ciò che non ti serve più; potrai ripristinarlo da lì.";
 "infoExplorer" = "Tutte le cartelle analizzate, ordinate per dimensioni. Con un doppio clic si apre una cartella; il menu contestuale mostra i file nel Finder e ne fornisce le informazioni.";
@@ -232,15 +229,9 @@
 "stopReading" = "Interrompi la lettura";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "A cosa serve lo spazio?";
-"statCategoriesCaption" = "Ogni colore rappresenta una categoria. Un clic su una voce della legenda apre la cartella corrispondente.";
-"statTypesTitle" = "Quali tipi di file occupano più spazio?";
-"statTypesCaption" = "Vengono considerati i file da 1 MB in su. I file senza estensione sono per lo più parti di programmi.";
 "statSizesTitle" = "Quanto sono grandi i tuoi file?";
 "statSizesCaption" = "Quanto spazio occupa ogni classe di dimensioni e quanti file contiene. Pochi file grandi di solito occupano più spazio di tanti file piccoli.";
-"statUsedOf" = "utilizzati su %@";
 "statLargeFilesFrom" = "file grandi da %@";
 "bucketValue" = "%@
 %@ file";
-"typeNoExtension" = "Senza estensione";
 "settingsSystemNote" = "Aspetto, lingua e unità vengono prese da Impostazioni di Sistema. Una lingua separata per questa app si imposta lì, in Generali › Lingua e zona › Applicazioni.";

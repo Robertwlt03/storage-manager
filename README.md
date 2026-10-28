@@ -32,30 +32,28 @@ zu müssen.
 <table>
   <tr>
     <td width="50%" valign="top"><img src="assets/screenshots/ueberblick.png" alt="Überblick mit Speicherbalken, Legende und Zusammenfassung"></td>
-    <td width="50%" valign="top"><img src="assets/screenshots/statistik.png" alt="Statistik mit Kennzahlen und Ringdiagramm"></td>
+    <td width="50%" valign="top"><img src="assets/screenshots/aufraeumen.png" alt="Aufräumen im dunklen Erscheinungsbild"></td>
   </tr>
   <tr>
     <td align="center"><sub>Der <b>Überblick</b> mit Speicherbalken, Legende und einer kurzen Zusammenfassung</sub></td>
-    <td align="center"><sub>Die <b>Statistik</b> mit Kennzahlen und Diagrammen</sub></td>
-  </tr>
-  <tr>
-    <td valign="top"><img src="assets/screenshots/aufraeumen.png" alt="Aufräumen im dunklen Erscheinungsbild"></td>
-    <td valign="top"><img src="assets/screenshots/messung.png" alt="Messung mit Fortschritt in der Seitenleiste"></td>
-  </tr>
-  <tr>
     <td align="center"><sub>Beim <b>Aufräumen</b> wählst du aus, was weg darf, hier im dunklen Erscheinungsbild</sub></td>
-    <td align="center"><sub>Während der <b>Messung</b> zeigt die Seitenleiste unten den Fortschritt</sub></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" valign="top"><img src="assets/screenshots/messung.png" width="50%" alt="Messung mit Fortschritt in der Seitenleiste"></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><sub>Während der <b>Messung</b> zeigt die Seitenleiste unten den Fortschritt</sub></td>
   </tr>
 </table>
 
 ## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">Was die App kann
 
-Der **Überblick** zeigt deinen Mac mit einem farbigen Balken, einer Legende und allen Kategorien, von Programmen über
-Downloads bis zu Caches. Ganz oben fasst er in wenigen Sätzen zusammen, wie es um deinen Speicher steht, und liest dir
-das auf Wunsch auch vor.
-
-In der **Statistik** findest du die wichtigsten Zahlen auf einen Blick, dazu ein Ringdiagramm der Kategorien und eine
-Übersicht, welche Dateitypen und Dateigrößen den meisten Platz belegen.
+Der **Überblick** ist deine Startseite. Ganz oben stehen die wichtigsten Zahlen, also wie viele Dateien du hast, wie
+viele davon groß sind und wie viele Apps du lange nicht geöffnet hast, und ein Klick darauf führt dich direkt zur
+passenden Seite. Darunter zeigt er deinen Mac mit einem farbigen Balken und einer Legende. Danach fasst er in wenigen
+Sätzen zusammen, wie es um deinen Speicher steht, und liest dir das auf Wunsch auch vor. Ein Diagramm zeigt dir
+außerdem, wie viel Platz kleine und große Dateien belegen, und ganz unten findest du alle Kategorien, von Programmen
+über Downloads bis zu Caches.
 
 Unter **Ordner** klickst du dich wie im Finder durch alle Ordner, nach Größe sortiert. Bei **Große Dateien** siehst du
 alle Dateien ab einer Größe, die du selbst wählst, und mit der **Suche** findest du Ordner und Dateien nach ihrem
@@ -193,7 +191,7 @@ Der Code ist in kleine Teile gegliedert, und jede Datei hat genau eine Aufgabe:
 
 | Ordner | Inhalt |
 | --- | --- |
-| `Sources/Features` | Für jede Seite der App ein eigener Ordner, zum Beispiel Überblick, Statistik und Aufräumen. |
+| `Sources/Features` | Für jede Seite der App ein eigener Ordner, zum Beispiel Überblick, Ordner und Aufräumen. |
 | `Sources/DesignSystem` | Alle Bausteine der Oberfläche an einer Stelle (`UI`) und die Farben. |
 | `Sources/Services` | Messen, Kategorien, Aufräumen, Apps, Suche, Zusammenfassung und Vorlesen. |
 | `Sources/State` | Der Zustand der App, der die Services zusammenführt. |

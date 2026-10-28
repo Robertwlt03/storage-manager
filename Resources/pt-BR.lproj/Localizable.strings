@@ -156,7 +156,6 @@
 "remove" = "Remover";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Estatísticas";
 "paneCleaner" = "Limpar";
 "paneApps" = "Apps não usados";
 "sectionTidy" = "Liberar espaço";
@@ -166,7 +165,6 @@
 "settings" = "Ajustes";
 "emptyFolder" = "Esta pasta está vazia";
 "otherCategories" = "Outras";
-"otherTypes" = "Outros";
 "cleanCaches" = "Caches de apps";
 "cleanCachesDetail" = "Caches que os apps recriam quando necessário. Apps em execução e o próprio macOS não são afetados.";
 "cleanDeveloper" = "Caches de desenvolvimento";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Os tamanhos são o espaço em uso, como informado pelo “du”. Clones do APFS contam por inteiro; cópias que compartilham blocos de armazenamento usam, na prática, menos espaço. “Sistema e outros” é o restante até o valor que o macOS informa como usado.";
-"infoStatistics" = "Números e gráficos da última análise. Os tipos de arquivo contam arquivos de 1 MB ou mais; arquivos menores são agrupados durante a análise para economizar memória e energia.";
 "infoCleaner" = "Remova arquivos de que o sistema quase não precisa ou não precisa: caches que se recriam sozinhos, registros antigos e arquivos temporários antigos. Escolha o que pode sair e confirme.";
 "infoApps" = "Apps que você não abre há algum tempo. A data vem do próprio macOS; o app não registra nada. O que você não precisa mais, mova aqui para o Lixo e restaure de lá, se quiser.";
 "infoExplorer" = "Todas as pastas analisadas, ordenadas por tamanho. Um clique duplo abre uma pasta; o menu de contexto mostra os arquivos no Finder e dá informações sobre eles.";
@@ -232,15 +229,9 @@
 "stopReading" = "Parar leitura";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "Para que o espaço é usado?";
-"statCategoriesCaption" = "Cada cor representa uma categoria. Um clique em uma entrada da legenda abre a pasta correspondente.";
-"statTypesTitle" = "Quais tipos de arquivo ocupam mais espaço?";
-"statTypesCaption" = "São contados arquivos de 1 MB ou mais. Arquivos sem extensão costumam ser partes de programas.";
 "statSizesTitle" = "Qual é o tamanho dos seus arquivos?";
 "statSizesCaption" = "Quanto espaço cada faixa de tamanho ocupa e quantos arquivos há nela. Poucos arquivos grandes costumam ocupar mais espaço do que muitos pequenos.";
-"statUsedOf" = "usados de %@";
 "statLargeFilesFrom" = "arquivos grandes a partir de %@";
 "bucketValue" = "%@
 %@ arquivos";
-"typeNoExtension" = "Sem extensão de arquivo";
 "settingsSystemNote" = "Aparência, idioma e unidades vêm dos Ajustes do Sistema. Um idioma separado para este app é definido lá, em Geral › Idioma e Região › Apps.";

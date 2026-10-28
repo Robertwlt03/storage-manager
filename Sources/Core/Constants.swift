@@ -77,17 +77,15 @@ enum Layout {
     static let legendItemMin: CGFloat = 220  // segments named in a legend; the rest is grouped
     static let chartHeight: CGFloat = 220
     static let statTileMin: CGFloat = 150
-    static let statColumns = 2
+    static let statColumns = 3
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
     static let fillShare = 0.72
-    static let donutInner = 0.62
 }
 
 /// SF Symbol names used across the app.
 enum Symbols {
     static let overview = "chart.bar.xaxis"
-    static let statistics = "chart.pie"
     static let cleaner = "sparkles"
     static let apps = "app.badge.clock"
     static let settings = "gearshape"

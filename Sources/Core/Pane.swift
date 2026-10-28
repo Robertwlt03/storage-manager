@@ -1,9 +1,9 @@
 /// Every page of the app. The sidebar is built from this enum, so a new page cannot be forgotten there.
 enum Pane: Hashable {
-    case overview, statistics, explorer, largeFiles, cleaner, apps, temp, copies
+    case overview, explorer, largeFiles, cleaner, apps, temp, copies
     case volume(String)
 
-    static let main: [Pane] = [.overview, .statistics, .explorer, .largeFiles]
+    static let main: [Pane] = [.overview, .explorer, .largeFiles]
     static let tidy: [Pane] = [.cleaner, .apps]
     static let system: [Pane] = [.temp, .copies]
 
@@ -25,7 +25,6 @@ enum Pane: Hashable {
     var launchKey: String {
         switch self {
         case .overview: "overview"
-        case .statistics: "statistics"
         case .cleaner: "cleaner"
         case .apps: "apps"
         case .explorer: "explorer"
@@ -39,7 +38,6 @@ enum Pane: Hashable {
     var title: Loc {
         switch self {
         case .overview: .paneOverview
-        case .statistics: .paneStatistics
         case .cleaner: .paneCleaner
         case .apps: .paneApps
         case .explorer: .paneExplorer
@@ -54,7 +52,6 @@ enum Pane: Hashable {
     var info: Loc {
         switch self {
         case .overview: .infoOverview
-        case .statistics: .infoStatistics
         case .cleaner: .infoCleaner
         case .apps: .infoApps
         case .explorer: .infoExplorer
@@ -68,7 +65,6 @@ enum Pane: Hashable {
     var symbol: String {
         switch self {
         case .overview: Symbols.overview
-        case .statistics: Symbols.statistics
         case .cleaner: Symbols.cleaner
         case .apps: Symbols.apps
         case .explorer: Symbols.explorer

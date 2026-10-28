@@ -25,7 +25,7 @@ struct Tile: View {
     }
 }
 
-/// A figure with a label, for the statistics page.
+/// A figure with a label, for the key figures on the start page.
 struct StatTile: View {
     let value: String
     let label: String

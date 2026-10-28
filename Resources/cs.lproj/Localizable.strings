@@ -156,7 +156,6 @@
 "remove" = "Odebrat";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statistiky";
 "paneCleaner" = "Vyčistit";
 "paneApps" = "Nepoužívané aplikace";
 "sectionTidy" = "Uvolnit místo";
@@ -166,7 +165,6 @@
 "settings" = "Nastavení";
 "emptyFolder" = "Tato složka je prázdná";
 "otherCategories" = "Ostatní";
-"otherTypes" = "Ostatní";
 "cleanCaches" = "Mezipaměti aplikací";
 "cleanCachesDetail" = "Mezipaměti, které si aplikace podle potřeby vytvoří znovu. Spuštěných aplikací ani samotného macOS se to netýká.";
 "cleanDeveloper" = "Mezipaměti pro vývojáře";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Velikosti odpovídají využitému místu, jak je hlásí příkaz „du“. Klony APFS se počítají celé; kopie sdílející datové bloky ve skutečnosti zabírají méně. „Systém a ostatní“ je zbytek do hodnoty, kterou macOS uvádí jako využitou.";
-"infoStatistics" = "Čísla a grafy z posledního skenování. Typy souborů zahrnují soubory od 1 MB; menší soubory se při skenování seskupují, aby se šetřila paměť a energie.";
 "infoCleaner" = "Odstraňte soubory, které váš systém sotva nebo vůbec nepotřebuje: mezipaměti, které se samy obnoví, staré protokoly a staré dočasné soubory. Vyberte, co smí pryč, a potvrďte.";
 "infoApps" = "Aplikace, které jste delší dobu neotevřeli. Datum pochází přímo z macOS; aplikace nic nezaznamenává. Co už nepotřebujete, můžete tady přesunout do Koše a odtud znovu obnovit.";
 "infoExplorer" = "Všechny naskenované složky seřazené podle velikosti. Dvojitým kliknutím složku otevřete; místní nabídka zobrazí soubory ve Finderu a informace o nich.";
@@ -232,15 +229,9 @@
 "stopReading" = "Zastavit čtení";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "K čemu se místo využívá?";
-"statCategoriesCaption" = "Každá barva představuje jednu kategorii. Kliknutím na položku v legendě otevřete příslušnou složku.";
-"statTypesTitle" = "Které druhy souborů zabírají nejvíc místa?";
-"statTypesCaption" = "Počítají se soubory od 1 MB. Soubory bez přípony jsou většinou součástí programů.";
 "statSizesTitle" = "Jak velké jsou vaše soubory?";
 "statSizesCaption" = "Kolik místa zabírá každá velikostní třída a kolik souborů v ní je. Několik velkých souborů obvykle zabírá víc než mnoho malých.";
-"statUsedOf" = "využito z %@";
 "statLargeFilesFrom" = "velké soubory od %@";
 "bucketValue" = "%@
 Souborů: %@";
-"typeNoExtension" = "Bez přípony souboru";
 "settingsSystemNote" = "Vzhled, jazyk a jednotky aplikace přebírá z Nastavení systému. Vlastní jazyk pro tuto aplikaci tam nastavíte v části Obecné › Jazyk a region › Aplikace.";

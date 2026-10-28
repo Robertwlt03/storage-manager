@@ -156,7 +156,6 @@
 "remove" = "Verwijder";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statistieken";
 "paneCleaner" = "Opruimen";
 "paneApps" = "Ongebruikte apps";
 "sectionTidy" = "Ruimte vrijmaken";
@@ -166,7 +165,6 @@
 "settings" = "Instellingen";
 "emptyFolder" = "Deze map is leeg";
 "otherCategories" = "Overig";
-"otherTypes" = "Overig";
 "cleanCaches" = "App-caches";
 "cleanCachesDetail" = "Caches die apps zo nodig opnieuw aanmaken. Actieve apps en macOS zelf blijven met rust gelaten.";
 "cleanDeveloper" = "Ontwikkelaarscaches";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Groottes zijn de ruimte die in gebruik is, zoals “du” die meldt. APFS-klonen tellen volledig mee; kopieën die opslagblokken delen, gebruiken in werkelijkheid minder. “Systeem en overig” is de rest tot aan wat macOS als in gebruik meldt.";
-"infoStatistics" = "Cijfers en grafieken uit de laatste scan. Bestandstypen tellen bestanden vanaf 1 MB; kleinere bestanden worden tijdens de scan gegroepeerd om geheugen en energie te besparen.";
 "infoCleaner" = "Verwijder bestanden die je systeem nauwelijks of helemaal niet nodig heeft: caches die zichzelf opnieuw aanmaken, oude logbestanden en oude tijdelijke bestanden. Kies wat weg mag en bevestig.";
 "infoApps" = "Apps die je al een tijd niet hebt geopend. De datum komt van macOS zelf; de app legt niets vast. Wat je niet meer nodig hebt, verplaats je hier naar de prullenmand en kun je daar terughalen.";
 "infoExplorer" = "Alle gescande mappen, gesorteerd op grootte. Dubbelklikken opent een map; het contextmenu toont bestanden in de Finder en geeft er informatie over.";
@@ -232,15 +229,9 @@
 "stopReading" = "Stop met voorlezen";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "Waarvoor wordt de ruimte gebruikt?";
-"statCategoriesCaption" = "Elke kleur staat voor een categorie. Een klik op een item in de legenda opent de bijbehorende map.";
-"statTypesTitle" = "Welke soorten bestanden nemen de meeste ruimte in?";
-"statTypesCaption" = "Bestanden vanaf 1 MB worden meegeteld. Bestanden zonder extensie zijn meestal onderdelen van programma’s.";
 "statSizesTitle" = "Hoe groot zijn je bestanden?";
 "statSizesCaption" = "Hoeveel ruimte elke groottecategorie inneemt en hoeveel bestanden erin zitten. Een paar grote bestanden nemen meestal meer ruimte in dan veel kleine.";
-"statUsedOf" = "in gebruik van %@";
 "statLargeFilesFrom" = "grote bestanden vanaf %@";
 "bucketValue" = "%@
 %@ bestanden";
-"typeNoExtension" = "Geen bestandsextensie";
 "settingsSystemNote" = "Weergave, taal en eenheden neemt de app over uit Systeeminstellingen. Een aparte taal voor deze app stel je daar in onder Algemeen › Taal en regio › Apps.";

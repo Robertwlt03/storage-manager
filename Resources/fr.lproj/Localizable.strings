@@ -156,7 +156,6 @@
 "remove" = "Supprimer";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statistiques";
 "paneCleaner" = "Nettoyer";
 "paneApps" = "Apps inutilisées";
 "sectionTidy" = "Libérer de l’espace";
@@ -166,7 +165,6 @@
 "settings" = "Réglages";
 "emptyFolder" = "Ce dossier est vide";
 "otherCategories" = "Autres";
-"otherTypes" = "Autres";
 "cleanCaches" = "Caches des apps";
 "cleanCachesDetail" = "Caches que les apps recréent en cas de besoin. Les apps ouvertes et macOS lui-même ne sont pas touchés.";
 "cleanDeveloper" = "Caches de développement";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Les tailles indiquent l’espace utilisé, tel que le rapporte « du ». Les clones APFS comptent en entier ; les copies qui partagent des blocs de stockage utilisent en réalité moins d’espace. « Système et autres » correspond au reste jusqu’à l’espace utilisé indiqué par macOS.";
-"infoStatistics" = "Chiffres et graphiques issus de la dernière analyse. Les types de fichiers comptent les fichiers de 1 Mo ou plus ; les fichiers plus petits sont regroupés pendant l’analyse afin d’économiser la mémoire et l’énergie.";
 "infoCleaner" = "Supprimez les fichiers dont votre système n’a presque pas ou pas du tout besoin : caches qui se recréent d’eux-mêmes, anciens journaux et anciens fichiers temporaires. Choisissez ce qui peut disparaître, puis confirmez.";
 "infoApps" = "Apps que vous n’avez pas ouvertes depuis un moment. La date provient de macOS lui-même ; l’app n’enregistre rien. Placez ici dans la Corbeille ce dont vous n’avez plus besoin ; vous pourrez le restaurer depuis la Corbeille.";
 "infoExplorer" = "Tous les dossiers analysés, triés par taille. Un double-clic ouvre un dossier ; le menu contextuel affiche les fichiers dans le Finder et donne des informations à leur sujet.";
@@ -232,15 +229,9 @@
 "stopReading" = "Arrêter la lecture";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "À quoi sert l’espace ?";
-"statCategoriesCaption" = "Chaque couleur représente une catégorie. Un clic sur une entrée de la légende ouvre le dossier correspondant.";
-"statTypesTitle" = "Quels types de fichiers occupent le plus d’espace ?";
-"statTypesCaption" = "Les fichiers de 1 Mo ou plus sont pris en compte. Les fichiers sans extension sont le plus souvent des éléments de programmes.";
 "statSizesTitle" = "Quelle est la taille de vos fichiers ?";
 "statSizesCaption" = "L’espace que prend chaque classe de taille et le nombre de fichiers qu’elle contient. Quelques gros fichiers occupent généralement plus de place que beaucoup de petits.";
-"statUsedOf" = "utilisés sur %@";
 "statLargeFilesFrom" = "fichiers volumineux à partir de %@";
 "bucketValue" = "%@
 %@ fichiers";
-"typeNoExtension" = "Sans extension de fichier";
 "settingsSystemNote" = "L’apparence, la langue et les unités proviennent de Réglages Système. Une langue distincte pour cette app se définit dans Général › Langue et région › Applications.";

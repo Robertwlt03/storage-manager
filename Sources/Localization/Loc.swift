@@ -42,17 +42,17 @@ enum Loc: String, CaseIterable {
     case accessTitle, accessDetail, accessOneSwitch, accessOpenSettings, accessContinue
     case accessGranted, fullDiskAccess, accessRestart, accessRestartHint
 
-    // Statistics, cleaner, unused apps, layout
-    case paneStatistics, paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, emptyFolder, otherCategories, otherTypes, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail, cleanLogs, cleanLogsDetail, cleanTemp, cleanTempDetail, cleanTrash, cleanTrashDetail, cleanerSearching, cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle, cleanConfirmMessage, appsNoneUnused, unusedSince, daysOption, trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed, statFiles, statUnusedApps, bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
+    // Key figures, cleaner, unused apps, layout
+    case paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, emptyFolder, otherCategories, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail, cleanLogs, cleanLogsDetail, cleanTemp, cleanTempDetail, cleanTrash, cleanTrashDetail, cleanerSearching, cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle, cleanConfirmMessage, appsNoneUnused, unusedSince, daysOption, trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed, statFiles, statUnusedApps, bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
 
     // Scan progress and empty values
     case scanningPercent, scanningArea, emptyValue
 
     // Page info, scan details, summary
-    case infoOverview, infoStatistics, infoCleaner, infoApps, infoExplorer, infoLargeFiles, infoTemp, infoCopies, infoVolume, aboutPage, scanDetails, scanProgress, scanArea, scanFinished, accessMissingShort, summaryTitle, summaryDisk, summaryTop, summaryNotMeasured, summaryClean, summaryCopies, summaryApps, readAloud, stopReading
+    case infoOverview, infoCleaner, infoApps, infoExplorer, infoLargeFiles, infoTemp, infoCopies, infoVolume, aboutPage, scanDetails, scanProgress, scanArea, scanFinished, accessMissingShort, summaryTitle, summaryDisk, summaryTop, summaryNotMeasured, summaryClean, summaryCopies, summaryApps, readAloud, stopReading
 
-    // Statistics in plain words
-    case statCategoriesTitle, statCategoriesCaption, statTypesTitle, statTypesCaption, statSizesTitle, statSizesCaption, statUsedOf, statLargeFilesFrom, bucketValue, typeNoExtension
+    // Key figures and size classes in plain words
+    case statSizesTitle, statSizesCaption, statLargeFilesFrom, bucketValue
 
     // Settings
     case autoScan

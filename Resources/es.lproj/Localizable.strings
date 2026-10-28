@@ -156,7 +156,6 @@
 "remove" = "Quitar";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Estadísticas";
 "paneCleaner" = "Limpiar";
 "paneApps" = "Apps sin usar";
 "sectionTidy" = "Liberar espacio";
@@ -166,7 +165,6 @@
 "settings" = "Ajustes";
 "emptyFolder" = "Esta carpeta está vacía";
 "otherCategories" = "Otras";
-"otherTypes" = "Otros";
 "cleanCaches" = "Cachés de apps";
 "cleanCachesDetail" = "Cachés que las apps recrean cuando hace falta. Las apps en ejecución y el propio macOS no se tocan.";
 "cleanDeveloper" = "Cachés de desarrollo";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Los tamaños son el espacio en uso, tal como lo indica “du”. Los clones de APFS cuentan por completo; las copias que comparten bloques de almacenamiento ocupan realmente menos. “Sistema y otros” es el resto hasta lo que macOS indica como usado.";
-"infoStatistics" = "Cifras y gráficos del último análisis. Los tipos de archivo cuentan los archivos de 1 MB o más; los archivos más pequeños se agrupan durante el análisis para ahorrar memoria y energía.";
 "infoCleaner" = "Elimina archivos que tu sistema apenas necesita o no necesita en absoluto: cachés que se recrean solas, registros antiguos y archivos temporales antiguos. Elige lo que puede desaparecer y confirma.";
 "infoApps" = "Apps que no has abierto desde hace tiempo. La fecha procede del propio macOS; la app no registra nada. Mueve aquí a la Papelera lo que ya no necesites; podrás recuperarlo desde allí.";
 "infoExplorer" = "Todas las carpetas analizadas, ordenadas por tamaño. Al hacer doble clic se abre una carpeta; el menú contextual muestra los archivos en el Finder y da información sobre ellos.";
@@ -232,15 +229,9 @@
 "stopReading" = "Detener la lectura";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "¿Para qué se usa el espacio?";
-"statCategoriesCaption" = "Cada color representa una categoría. Al hacer clic en una entrada de la leyenda se abre la carpeta correspondiente.";
-"statTypesTitle" = "¿Qué tipos de archivo ocupan más espacio?";
-"statTypesCaption" = "Se cuentan los archivos de 1 MB o más. Los archivos sin extensión suelen ser partes de programas.";
 "statSizesTitle" = "¿Qué tamaño tienen tus archivos?";
 "statSizesCaption" = "Cuánto espacio ocupa cada clase de tamaño y cuántos archivos contiene. Unos pocos archivos grandes suelen ocupar más que muchos pequeños.";
-"statUsedOf" = "usados de %@";
 "statLargeFilesFrom" = "archivos grandes desde %@";
 "bucketValue" = "%@
 %@ archivos";
-"typeNoExtension" = "Sin extensión de archivo";
 "settingsSystemNote" = "La apariencia, el idioma y las unidades se toman de Ajustes del Sistema. Un idioma propio para esta app se establece allí, en General › Idioma y región › Aplicaciones.";

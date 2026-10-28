@@ -156,7 +156,6 @@
 "remove" = "Kaldır";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "İstatistikler";
 "paneCleaner" = "Temizle";
 "paneApps" = "Kullanılmayan Uygulamalar";
 "sectionTidy" = "Yer Aç";
@@ -166,7 +165,6 @@
 "settings" = "Ayarlar";
 "emptyFolder" = "Bu klasör boş";
 "otherCategories" = "Diğer";
-"otherTypes" = "Diğer";
 "cleanCaches" = "Uygulama Önbellekleri";
 "cleanCachesDetail" = "Uygulamaların gerektiğinde yeniden oluşturduğu önbellekler. Çalışan uygulamalara ve macOS'un kendisine dokunulmaz.";
 "cleanDeveloper" = "Geliştirici Önbellekleri";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Boyutlar, “du” komutunun bildirdiği gibi kullanılan alandır. APFS klonları tam sayılır; depolama bloklarını paylaşan kopyalar gerçekte daha az yer kaplar. “Sistem ve Diğer”, macOS'un kullanılan olarak bildirdiği miktara kadar kalan kısımdır.";
-"infoStatistics" = "Son taramadan sayılar ve grafikler. Dosya türleri 1 MB ve üzeri dosyaları sayar; daha küçük dosyalar bellek ve enerji tasarrufu için tarama sırasında gruplanır.";
 "infoCleaner" = "Sisteminizin pek ya da hiç ihtiyaç duymadığı dosyaları kaldırın: kendiliğinden yeniden oluşan önbellekler, eski günlükler ve eski geçici dosyalar. Nelerin gidebileceğini seçin ve onaylayın.";
 "infoApps" = "Bir süredir açmadığınız uygulamalar. Tarih macOS'un kendisinden gelir; uygulama hiçbir şey kaydetmez. Artık ihtiyacınız olmayanları buradan Çöp Sepeti'ne taşıyın; oradan geri yükleyebilirsiniz.";
 "infoExplorer" = "Ölçülen tüm klasörler, boyuta göre sıralı. Çift tıklama bir klasörü açar; bağlam menüsü dosyaları Finder'da gösterir ve bunlar hakkında bilgi verir.";
@@ -232,15 +229,9 @@
 "stopReading" = "Okumayı Durdur";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "Alan ne için kullanılıyor?";
-"statCategoriesCaption" = "Her renk bir kategoriyi temsil eder. Göstergedeki bir girişe tıklamak ilgili klasörü açar.";
-"statTypesTitle" = "Hangi dosya türleri en çok yer kaplıyor?";
-"statTypesCaption" = "1 MB ve üzeri dosyalar sayılır. Uzantısız dosyalar çoğunlukla programların parçalarıdır.";
 "statSizesTitle" = "Dosyalarınız ne kadar büyük?";
 "statSizesCaption" = "Her boyut sınıfının ne kadar yer kapladığı ve içinde kaç dosya olduğu. Birkaç büyük dosya genellikle çok sayıda küçük dosyadan daha fazla yer kaplar.";
-"statUsedOf" = "kullanılan, toplam %@";
 "statLargeFilesFrom" = "%@ ve üzeri büyük dosyalar";
 "bucketValue" = "%@
 %@ dosya";
-"typeNoExtension" = "Dosya uzantısı yok";
 "settingsSystemNote" = "Görünüm, dil ve birimler Sistem Ayarları'ndan alınır. Bu uygulama için ayrı bir dil, orada Genel › Dil ve Bölge › Uygulamalar altında ayarlanır.";

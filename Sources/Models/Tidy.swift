@@ -86,6 +86,5 @@ struct Statistics {
     var files = 0
     var bytes: Int64 = 0
     var largeFiles = 0
-    var types: [(ext: String, name: String, bytes: Int64)] = []  // name: what the system calls this kind of file
     var buckets: [(bucket: SizeBucket, count: Int, bytes: Int64)] = []
 }

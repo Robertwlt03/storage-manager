@@ -156,7 +156,6 @@
 "remove" = "Entfernen";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "Statistik";
 "paneCleaner" = "Aufräumen";
 "paneApps" = "Ungenutzte Apps";
 "sectionTidy" = "Platz schaffen";
@@ -166,7 +165,6 @@
 "settings" = "Einstellungen";
 "emptyFolder" = "Dieser Ordner ist leer";
 "otherCategories" = "Weitere";
-"otherTypes" = "Andere";
 "cleanCaches" = "Zwischenspeicher von Apps";
 "cleanCachesDetail" = "Zwischenspeicher, die Apps bei Bedarf neu anlegen. Laufende Apps und macOS selbst bleiben unberührt.";
 "cleanDeveloper" = "Zwischenspeicher für Entwickler";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "Gemessen wird der belegte Platz wie mit „du“. APFS-Klone zählen dabei voll mit, Kopien mit gemeinsamen Speicherblöcken belegen real weniger. „System & Sonstiges“ ist der Rest bis zur Belegung, die macOS meldet.";
-"infoStatistics" = "Kennzahlen und Diagramme aus der letzten Messung. Dateitypen berücksichtigen Dateien ab 1 MB; kleinere Dateien fasst die Messung zusammen, um Speicher und Energie zu sparen.";
 "infoCleaner" = "Hier entfernst du Dateien, die dein System kaum oder gar nicht brauchen: Zwischenspeicher, die von selbst neu entstehen, alte Protokolle und alte temporäre Dateien. Wähle aus, was weg darf, und bestätige.";
 "infoApps" = "Apps, die du länger nicht geöffnet hast. Das Datum stammt von macOS selbst; die App zeichnet nichts auf. Was du nicht mehr brauchst, legst du hier in den Papierkorb und kannst es von dort wiederherstellen.";
 "infoExplorer" = "Alle gemessenen Ordner, sortiert nach Größe. Ein Doppelklick öffnet einen Ordner, das Kontextmenü zeigt Dateien im Finder und Informationen dazu.";
@@ -232,15 +229,9 @@
 "stopReading" = "Vorlesen beenden";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "Wofür wird der Platz genutzt?";
-"statCategoriesCaption" = "Jede Farbe steht für eine Kategorie. Ein Klick auf einen Eintrag der Legende öffnet den passenden Ordner.";
-"statTypesTitle" = "Welche Dateiarten brauchen am meisten Platz?";
-"statTypesCaption" = "Berücksichtigt sind Dateien ab 1 MB. Dateien ohne Endung sind meist Teile von Programmen.";
 "statSizesTitle" = "Wie groß sind deine Dateien?";
 "statSizesCaption" = "Wie viel Platz jede Größenklasse belegt und wie viele Dateien darin liegen. Meist belegen wenige große Dateien mehr als viele kleine.";
-"statUsedOf" = "belegt von %@";
 "statLargeFilesFrom" = "große Dateien ab %@";
 "bucketValue" = "%@
 %@ Dateien";
-"typeNoExtension" = "Ohne Dateiendung";
 "settingsSystemNote" = "Erscheinungsbild, Sprache und Einheiten übernimmt die App aus den Systemeinstellungen. Eine eigene Sprache für diese App stellst du dort unter Allgemein › Sprache & Region › Apps ein.";

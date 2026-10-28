@@ -156,7 +156,6 @@
 "remove" = "削除";
 
 /* Statistics, cleaner, unused apps, layout */
-"paneStatistics" = "統計";
 "paneCleaner" = "クリーンアップ";
 "paneApps" = "未使用のApp";
 "sectionTidy" = "空き容量を増やす";
@@ -166,7 +165,6 @@
 "settings" = "設定";
 "emptyFolder" = "このフォルダは空です";
 "otherCategories" = "その他";
-"otherTypes" = "その他";
 "cleanCaches" = "Appのキャッシュ";
 "cleanCachesDetail" = "必要に応じてAppが再作成するキャッシュです。実行中のAppとmacOS自体は対象外です。";
 "cleanDeveloper" = "開発用キャッシュ";
@@ -207,7 +205,6 @@
 
 /* Page info, scan details, summary */
 "infoOverview" = "サイズは「du」と同じ方法で測った使用中の容量です。APFSのクローンは全体が計上されますが、ストレージブロックを共有するコピーは実際にはそれより少ない容量を使います。「システムとその他」は、macOSが報告する使用量との差の残りです。";
-"infoStatistics" = "前回のスキャンの数値とグラフです。ファイルタイプでは1 MB以上のファイルを数えます。それより小さいファイルは、メモリとエネルギーを節約するため、スキャン中にまとめられます。";
 "infoCleaner" = "システムがほとんど、またはまったく必要としないファイルを削除します。自動的に再作成されるキャッシュ、古いログ、古い一時ファイルが対象です。削除してよいものを選んで、確認してください。";
 "infoApps" = "しばらく開いていないAppです。日付はmacOS自身から取得していて、このAppは何も記録しません。不要なものはここでゴミ箱に入れることができ、ゴミ箱から元に戻すこともできます。";
 "infoExplorer" = "スキャンしたすべてのフォルダを、サイズの大きい順に表示します。ダブルクリックでフォルダを開きます。コンテキストメニューでは、Finderでの表示や情報の確認ができます。";
@@ -232,15 +229,9 @@
 "stopReading" = "読み上げを停止";
 
 /* Statistics in plain words */
-"statCategoriesTitle" = "容量は何に使われていますか?";
-"statCategoriesCaption" = "色はカテゴリを表します。凡例の項目をクリックすると、対応するフォルダが開きます。";
-"statTypesTitle" = "どの種類のファイルが最も容量を使っていますか?";
-"statTypesCaption" = "1 MB以上のファイルを対象にしています。拡張子のないファイルは、多くの場合プログラムの一部です。";
 "statSizesTitle" = "ファイルの大きさはどのくらいですか?";
 "statSizesCaption" = "各サイズ区分が使っている容量と、その区分に含まれるファイルの数です。多くの場合、小さなファイルがたくさんあるより、大きなファイルが少しあるほうが多くの容量を使います。";
-"statUsedOf" = "使用中(全体%@)";
 "statLargeFilesFrom" = "%@以上の大きなファイル";
 "bucketValue" = "%@
 %@個のファイル";
-"typeNoExtension" = "拡張子なし";
 "settingsSystemNote" = "外観、言語、単位はシステム設定の内容が使われます。このApp専用の言語は、システム設定の「一般 › 言語と地域 › アプリケーション」で設定できます。";

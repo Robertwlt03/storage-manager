@@ -40,7 +40,6 @@ struct RootView: View {
             Group {
                 switch model.pane ?? .overview {
             case .overview: OverviewView()
-            case .statistics: StatisticsView()
             case .cleaner: CleanerView()
             case .apps: UnusedAppsView()
             case .explorer: ExplorerView()
