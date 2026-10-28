@@ -186,7 +186,7 @@ import SwiftUI
     }
 
     private static func log(_ text: String) {
-        print("[UITest] \(text)")
+        print("[UITest] \(Date().formatted(.dateTime.hour().minute().second().secondFraction(.fractional(3)))) \(text)")
         fflush(stdout)
     }
 }

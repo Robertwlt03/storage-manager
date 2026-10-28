@@ -19,7 +19,7 @@ struct FolderView: View {
 
     var body: some View {
         let _ = model.revision
-        EntryBrowser(entries: Entry.contents(of: node), total: node.bytes, emptyTitle: Loc.emptyFolder.s)
+        EntryBrowser(entries: Entry.contents(of: node), total: node.bytes, emptyTitle: Loc.emptyFolder.s, contentKey: node.path)
             .navigationTitle(node.isVirtual ? Loc.paneExplorer.s : node.displayName)
             .navigationSubtitle(subtitle)
             .safeAreaInset(edge: .top, spacing: 0) {

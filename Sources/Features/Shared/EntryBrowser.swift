@@ -8,6 +8,10 @@ struct EntryBrowser: View {
     var showLocation = false
     let emptyTitle: String
     var emptyDetail: String?
+    /// Changes when the whole content is replaced (other folder, query, filter or threshold). The table is then
+    /// rebuilt instead of diffed row by row; diffing a completely new result set made AppKit report reentrant
+    /// NSTableView delegate calls.
+    var contentKey = ""
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
     @State private var info: Entry?
@@ -26,7 +30,7 @@ struct EntryBrowser: View {
                 }
                 .background(Backdrop())
             } else {
-                EntryTable(entries: entries, total: total, showLocation: showLocation)
+                EntryTable(entries: entries, total: total, showLocation: showLocation).id(contentKey)
             }
         }
         .overlay { if entries.isEmpty { UI.emptyOrScanning(emptyTitle, symbol: Symbols.search, detail: emptyDetail) } }

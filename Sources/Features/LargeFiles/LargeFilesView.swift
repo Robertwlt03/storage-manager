@@ -8,7 +8,8 @@ struct LargeFilesView: View {
 
     var body: some View {
         let sum = entries.reduce(0) { $0 + $1.bytes }
-        EntryBrowser(entries: entries, total: sum, showLocation: true, emptyTitle: Loc.noFilesFrom.f(threshold(minMB)))
+        EntryBrowser(entries: entries, total: sum, showLocation: true, emptyTitle: Loc.noFilesFrom.f(threshold(minMB)),
+                     contentKey: "\(minMB)")
             .navigationTitle(Loc.paneLargeFiles.s)
             .navigationSubtitle(Loc.filesTotal.f(Fmt.count(entries.count), Fmt.bytes(sum)))
             .safeAreaInset(edge: .top, spacing: 0) {
