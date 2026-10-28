@@ -69,7 +69,7 @@ enum Layout {
     static let shareColumn = (min: CGFloat(90), ideal: CGFloat(150))
     static let countColumn = (min: CGFloat(60), ideal: CGFloat(80), max: CGFloat(110))
     static let percentWidth: CGFloat = 38
-    /// The page never gets narrower than this; with the sidebar open the window has to make room for both.
+    /// The page never gets narrower than this; a narrower window shows the sidebar floating above the page.
     static let pageMinWidth: CGFloat = 600
     static let minWindowWidth: CGFloat = pageMinWidth
     /// Room for the sidebar and the page side by side; below it the sidebar closes by itself, like in Mail.

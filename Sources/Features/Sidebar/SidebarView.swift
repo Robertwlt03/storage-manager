@@ -1,7 +1,24 @@
 import SwiftUI
 
-/// Built from `Pane` and the mounted volumes, so every page appears here automatically.
+/// The sidebar column with its toolbar button.
 struct SidebarView: View {
+    var body: some View {
+        SidebarList()
+            .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
+            .toolbar {
+                // A flexible spacer first puts the button at the sidebar's trailing edge, where the system keeps its own.
+                if #available(macOS 26.0, *) { ToolbarSpacer(.flexible) }
+                ToolbarItem { SidebarToggle() }
+            }
+            // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
+            // animation, which made the reopening sidebar jump.
+            .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
+    }
+}
+
+/// The pages, built from `Pane` and the mounted volumes so every page appears here automatically, with the scan
+/// status below. Used by the sidebar column and by the floating sidebar of narrow windows.
+struct SidebarList: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
@@ -18,16 +35,8 @@ struct SidebarView: View {
                 }
             }
         }
+        .listStyle(.sidebar)
         .safeAreaInset(edge: .bottom, spacing: 0) { SidebarFooter() }
-        .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
-        .toolbar {
-            // A flexible spacer first puts the button at the sidebar's trailing edge, where the system keeps its own.
-            if #available(macOS 26.0, *) { ToolbarSpacer(.flexible) }
-            ToolbarItem { SidebarToggle() }
-        }
-        // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
-        // animation, which made the reopening sidebar jump.
-        .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
     }
 
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
@@ -47,8 +56,25 @@ struct SidebarToggle: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        let title = model.sidebarVisible ? Loc.hideSidebar.s : Loc.showSidebar.s
+        let title = model.sidebarShown ? Loc.hideSidebar.s : Loc.showSidebar.s
         Button { model.toggleSidebar() } label: { Label(title, systemImage: Symbols.sidebar) }
             .help(title)
+    }
+}
+
+/// In a window too narrow for sidebar and page side by side, the sidebar floats above the page like a popover and
+/// the window keeps its size. Picking a page, clicking beside it, the sidebar button again or Escape closes it.
+struct SidebarOverlay: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Color.clear.contentShape(Rectangle()).onTapGesture { model.closeSidebarOverlay() }
+            SidebarList()
+                .scrollContentBackground(.hidden)
+                .frame(width: Layout.sidebarIdeal)
+                .surface()
+                .padding(Space.s)
+        }
     }
 }

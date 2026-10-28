@@ -12,6 +12,9 @@ struct RootView: View {
         } detail: {
             detail
                 .frame(minWidth: Layout.pageMinWidth)  // cards are never squeezed, also with the sidebar open
+                .overlay(alignment: .leading) {
+                    if model.sidebarOverlay { SidebarOverlay().transition(.move(edge: .leading).combined(with: .opacity)) }
+                }
                 .smoothChanges(of: model.pane)
                 .smoothChanges(of: model.isSearching)
         }
@@ -20,8 +23,13 @@ struct RootView: View {
         .searchable(text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar, prompt: Loc.searchPrompt.s)
         .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }
         .syncPreferences()
-        .onExitCommand { if model.isSearching || model.searchPresented { model.endSearch() } }  // Escape leaves the search
-        .onChange(of: model.pane) { if model.isSearching { model.endSearch() } }  // picking a page leaves it too
+        .onExitCommand {  // Escape closes the floating sidebar, otherwise it leaves the search
+            if model.sidebarOverlay { model.closeSidebarOverlay() } else if model.isSearching || model.searchPresented { model.endSearch() }
+        }
+        .onChange(of: model.pane) {  // picking a page leaves the search and closes the floating sidebar
+            if model.isSearching { model.endSearch() }
+            model.closeSidebarOverlay()
+        }
         .onAppear {
             model.windowResized()
             if AppSettings.launchSettings { openSettings() }

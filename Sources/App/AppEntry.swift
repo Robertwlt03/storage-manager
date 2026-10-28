@@ -31,7 +31,7 @@ struct SpeicherExplorerApp: App {
         .commands {
             LayoutCommands()
             CommandGroup(replacing: .sidebar) {  // the system item would use the jerky AppKit toggle
-                Button(model.sidebarVisible ? Loc.hideSidebar.s : Loc.showSidebar.s) { model.toggleSidebar() }
+                Button(model.sidebarShown ? Loc.hideSidebar.s : Loc.showSidebar.s) { model.toggleSidebar() }
                     .keyboardShortcut("s", modifiers: [.control, .command])
             }
             CommandGroup(after: .newItem) {

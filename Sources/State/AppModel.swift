@@ -38,29 +38,33 @@ import SwiftUI
     var searchQuery: String { searchText.trimmingCharacters(in: .whitespaces) }
 
     var sidebarVisible: Bool { columns != .detailOnly }
+    /// In a narrow window the sidebar floats above the page for a moment instead of taking room beside it.
+    private(set) var sidebarOverlay = false
+    var sidebarShown: Bool { sidebarVisible || sidebarOverlay }
 
     /// Shows or hides the sidebar with SwiftUI's animation. The system's own toggle lets AppKit slide the column
     /// while the page jumps to its new width without any frames in between, which looked jerky when showing it.
+    /// A window too narrow for both keeps its size: the sidebar then floats above the page until it is dismissed.
     func toggleSidebar() {
+        if windowNarrow && !sidebarVisible {
+            withAnimation(Motion.standard) { sidebarOverlay.toggle() }
+            return
+        }
         sidebarHiddenByWidth = false  // the user's choice wins until the window crosses the width again
-        if !sidebarVisible { makeRoomForSidebar() }
         withAnimation(Motion.standard) { columns = sidebarVisible ? .detailOnly : .all }
+    }
+
+    /// Picking a page, clicking beside the floating sidebar or pressing Escape closes it.
+    func closeSidebarOverlay() {
+        guard sidebarOverlay else { return }
+        withAnimation(Motion.standard) { sidebarOverlay = false }
     }
 
     private var mainWindow: NSWindow? { NSApp.windows.first { $0.identifier?.rawValue == WindowID.main } }
 
-    /// Opening the sidebar in a narrow window widens the window by the sidebar's width, so the page keeps the width
-    /// it had. That is what AppKit's own split view does in Mail, Finder or Notes.
-    private func makeRoomForSidebar() {
-        guard let window = mainWindow, window.frame.width < Layout.sidebarCollapseWidth else { return }
-        var frame = window.frame
-        frame.size.width += Layout.sidebarIdeal
-        window.setFrame(window.constrainFrameRect(frame, to: window.screen), display: true, animate: !Motion.reduced)
-    }
-
     /// Like Mail, as Apple's guidelines suggest: a narrow window closes the sidebar to make room for the page, and
-    /// widening it again brings the sidebar back, unless the user closed it themselves. Called only when the
-    /// window crosses `Layout.sidebarCollapseWidth`; opening the sidebar by hand widens a narrow window to that width.
+    /// widening it again brings the sidebar back, unless the user closed it themselves; a floating sidebar settles
+    /// into its column then. Called only when the window crosses `Layout.sidebarCollapseWidth`.
     /// It reads the window's own width: SwiftUI's layout width flickers past the limit while the sidebar moves.
     func windowResized() {
         guard let width = mainWindow?.frame.width else { return }
@@ -70,9 +74,12 @@ import SwiftUI
         if narrow && sidebarVisible {
             sidebarHiddenByWidth = true
             withAnimation(Motion.standard) { columns = .detailOnly }
-        } else if !narrow && sidebarHiddenByWidth {
+        } else if !narrow && (sidebarHiddenByWidth || sidebarOverlay) {
             sidebarHiddenByWidth = false
-            withAnimation(Motion.standard) { columns = .all }
+            withAnimation(Motion.standard) {
+                sidebarOverlay = false
+                columns = .all
+            }
         }
     }
 
