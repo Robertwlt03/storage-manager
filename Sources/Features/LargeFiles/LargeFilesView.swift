@@ -4,9 +4,11 @@ import SwiftUI
 struct LargeFilesView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.largeFileMB) private var minMB = LargeFileThreshold.defaultMB
-    @State private var entries: [Entry] = []
-
     var body: some View {
+        // Computed right away (a quick walk over the tree), so the table is created with its rows instead of
+        // starting empty and being diffed into thousands of rows a moment later.
+        let _ = model.revision
+        let entries = SearchService.largeFiles(atLeast: LargeFileThreshold.bytes(minMB), in: model.root)
         let sum = entries.reduce(0) { $0 + $1.bytes }
         EntryBrowser(entries: entries, total: sum, showLocation: true, emptyTitle: Loc.noFilesFrom.f(threshold(minMB)),
                      contentKey: "\(minMB)")
@@ -18,9 +20,6 @@ struct LargeFilesView: View {
                         ForEach(LargeFileThreshold.optionsMB, id: \.self) { Text(Loc.fromSize.f(threshold($0))).tag($0) }
                     }
                 }
-            }
-            .task(id: "\(minMB)-\(model.revision)") {
-                entries = SearchService.largeFiles(atLeast: LargeFileThreshold.bytes(minMB), in: model.root)
             }
     }
 
