@@ -11,7 +11,10 @@ struct RootView: View {
         NavigationSplitView {
             SidebarView()
         } detail: {
-            detail.id(binaryUnits)  // re-render sizes when the unit setting changes
+            detail
+                .id(binaryUnits)  // re-render sizes when the unit setting changes
+                .smoothChanges(of: model.pane)
+                .smoothChanges(of: model.isSearching)
         }
         .searchable(text: $model.searchText, placement: .toolbar, prompt: Loc.searchPrompt.s)
         .searchScopes($model.searchScope) {
@@ -29,9 +32,10 @@ struct RootView: View {
 
     @ViewBuilder private var detail: some View {
         if model.isSearching {
-            SearchResultsView()
+            SearchResultsView().fadeTransition()
         } else {
-            switch model.pane ?? .overview {
+            Group {
+                switch model.pane ?? .overview {
             case .overview: OverviewView()
             case .statistics: StatisticsView()
             case .cleaner: CleanerView()
@@ -41,7 +45,10 @@ struct RootView: View {
             case .temp: TempView()
             case .copies: CopiesView()
             case .volume(let path): VolumeView(path: path)
+                }
             }
+            .id(model.pane)
+            .fadeTransition()
         }
     }
 }

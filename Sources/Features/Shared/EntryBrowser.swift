@@ -31,6 +31,7 @@ struct EntryBrowser: View {
         }
         .overlay { if entries.isEmpty { UI.emptyOrScanning(emptyTitle, symbol: Symbols.search, detail: emptyDetail) } }
         .sheet(item: $info) { InfoSheet(entry: $0) }
+        .smoothChanges(of: layout)
     }
 }
 

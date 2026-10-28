@@ -26,6 +26,8 @@ struct OverviewView: View {
                 }
             }
         }
+        .smoothChanges(of: layout)
+        .smoothChanges(of: model.categories.isEmpty)
     }
 
     private func badge(_ c: Category) -> RowIcon { .badge(symbol: c.kind.symbol, colorIndex: c.kind.rawValue) }

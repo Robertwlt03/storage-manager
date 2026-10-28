@@ -28,7 +28,10 @@ struct StatisticsView: View {
                 UI.card(Loc.sizeDistribution.s) { bucketChart.padding(.vertical, Layout.rowPadding) }
             }
         }
-        .task(id: model.revision) { stats = StatsService.compute(root: model.root) }
+        .task(id: model.revision) {
+            let computed = StatsService.compute(root: model.root)
+            Motion.animate { stats = computed }
+        }
     }
 
     /// Only what the scan measured; purgeable space and the remainder come from macOS, not from the scan.

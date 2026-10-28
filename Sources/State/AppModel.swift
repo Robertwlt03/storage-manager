@@ -66,7 +66,7 @@ import Observation
             unreadable = 0
             explorerPath = []
         }
-        scanning = true
+        Motion.animate { scanning = true }
         progress = .init(files: root.fileCount, bytes: root.bytes)
         let todo = paths ?? ScanService.defaultRoots()
         task = Task {
@@ -82,7 +82,7 @@ import Observation
                 progress = .init(files: root.fileCount, bytes: root.bytes)
                 treeChanged()
             }
-            scanning = false
+            Motion.animate { scanning = false }
             if !Task.isCancelled {
                 lastScan = Date()
                 if reset { UserDefaults.standard.set(root.fileCount, forKey: SettingsKey.lastScanFiles) }
@@ -104,7 +104,7 @@ import Observation
 
     func cancelScan() {
         task?.cancel()
-        scanning = false
+        Motion.animate { scanning = false }
     }
 
     private func scanInBackground(_ path: String, base: ScanService.Progress) async -> ScanService.Result? {
@@ -118,12 +118,16 @@ import Observation
 
     // MARK: Changes
 
-    func refreshApps() { apps = AppUsageService.apps(in: root) }
+    func refreshApps() {
+        let found = AppUsageService.apps(in: root)
+        Motion.animate { apps = found }
+    }
 
     /// What the cleaner could remove; computed once after each scan and shared by the overview and the cleaner.
     func refreshCleanItems() async {
         cleanItems = nil
-        cleanItems = await Task.detached(priority: .utility) { CleanerService.candidates() }.value
+        let found = await Task.detached(priority: .utility) { CleanerService.candidates() }.value
+        Motion.animate { cleanItems = found }
     }
 
     /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
@@ -169,7 +173,10 @@ import Observation
     private func treeChanged() {
         refreshVolumes()
         // The remainder ("System & Other") only makes sense once every area is measured.
-        categories = CategoryService.compute(root: root, volume: scanning ? nil : startupVolume)
-        revision += 1
+        let cats = CategoryService.compute(root: root, volume: scanning ? nil : startupVolume)
+        Motion.animate {
+            categories = cats
+            revision += 1
+        }
     }
 }
