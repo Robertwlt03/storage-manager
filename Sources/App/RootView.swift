@@ -15,12 +15,9 @@ struct RootView: View {
                 .smoothChanges(of: model.isSearching)
         }
         .searchable(text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar, prompt: Loc.searchPrompt.s)
-        .searchScopes($model.searchScope) {
-            ForEach(SearchScope.allCases) { Text($0.title.s).tag($0) }
-        }
         .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }
         .syncPreferences()
-        .onExitCommand { if model.isSearching { model.endSearch() } }  // Escape leaves the search
+        .onExitCommand { if model.isSearching || model.searchPresented { model.endSearch() } }  // Escape leaves the search
         .onChange(of: model.pane) { if model.isSearching { model.endSearch() } }  // picking a page leaves it too
         .onAppear {
             if AppSettings.launchSettings { openSettings() }

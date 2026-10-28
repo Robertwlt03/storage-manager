@@ -23,10 +23,12 @@ enum SelfTest {
         precondition(!cats.isEmpty && zip(cats, cats.dropFirst()).allSatisfy { $0.bytes >= $1.bytes })
         print("Kategorien: \(cats.count), zusammen \(Fmt.bytes(cats.reduce(0) { $0 + $1.bytes }))")
 
+        let searchStart = Date()
         let folders = SearchService.search("a", scope: .folders, in: root)
         let files = SearchService.search("a", scope: .files, in: root)
+        let searchMs = Date().timeIntervalSince(searchStart) * 500  // two searches, milliseconds each
         precondition(folders.allSatisfy(\.isFolder) && files.allSatisfy { !$0.isFolder })
-        print("Suche: \(folders.count) Ordner, \(files.count) Dateien (Grenze \(ScanConfig.searchLimit))")
+        print("Suche: \(folders.count) Ordner, \(files.count) Dateien (Grenze \(ScanConfig.searchLimit)), \(Int(searchMs)) ms je Suche")
         print("Große Dateien ab \(LargeFileThreshold.defaultMB) MB: \(SearchService.largeFiles(atLeast: LargeFileThreshold.bytes(LargeFileThreshold.defaultMB), in: root).count)")
         print("Prüfkopien-Gruppen: \(CopyService.groups(in: root.descendant(at: Paths.tempCopies)).count)")
         print("Datenträger: \(VolumeService.all().count), Vollzugriff: \(PermissionService.hasFullDiskAccess)")

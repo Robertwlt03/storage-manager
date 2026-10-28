@@ -7,7 +7,7 @@ import Observation
     var pane: Pane? = .overview
     var explorerPath: [Node] = []
     var searchText = ""
-    var searchPresented = false  // the search field is active, even before anything is typed
+    var searchPresented = false  // the search field has focus; results only replace the page once text is typed
     var searchScope = SearchScope.all
     var showAccessSheet = false
 
@@ -29,7 +29,7 @@ import Observation
 
     var startupVolume: VolumeInfo? { volumes.first { $0.isRoot } }
     var hasData: Bool { !root.children.isEmpty }
-    var isSearching: Bool { searchPresented || !searchQuery.isEmpty }
+    var isSearching: Bool { !searchQuery.isEmpty }
     var searchQuery: String { searchText.trimmingCharacters(in: .whitespaces) }
 
     /// Leaves the search: clears the field and closes it (Cancel button, Escape, or picking a page in the sidebar).

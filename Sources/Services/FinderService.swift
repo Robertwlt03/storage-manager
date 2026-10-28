@@ -3,7 +3,20 @@ import SwiftUI
 
 /// Everything that talks to Finder, the pasteboard or System Settings.
 enum FinderService {
-    static func icon(_ path: String) -> Image { Image(nsImage: NSWorkspace.shared.icon(forFile: path)) }
+    /// Finder icons are looked up once per path: rows are rebuilt often (search, sorting, scrolling) and each lookup
+    /// asks Launch Services and the disk again.
+    static func icon(_ path: String) -> Image {
+        if let cached = icons.object(forKey: path as NSString) { return Image(nsImage: cached) }
+        let image = NSWorkspace.shared.icon(forFile: path)
+        icons.setObject(image, forKey: path as NSString)
+        return Image(nsImage: image)
+    }
+
+    private static let icons: NSCache<NSString, NSImage> = {
+        let cache = NSCache<NSString, NSImage>()
+        cache.countLimit = ScanConfig.iconCacheLimit
+        return cache
+    }()
     static func reveal(_ path: String) { NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)]) }
 
     static func copyPath(_ path: String) {

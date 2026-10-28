@@ -1,20 +1,24 @@
 import SwiftUI
 
-/// Results of the search field in the toolbar; replaces the page while the field is active.
-/// The header always offers Cancel, so the search can be left without typing or clicking elsewhere.
+/// Results of the search field in the toolbar; replaces the page once something is typed.
+/// The header holds the scope and Cancel, so the toolbar stays a single slim field.
 struct SearchResultsView: View {
     @Environment(AppModel.self) private var model
     @State private var results: [Entry] = []
     @State private var resultsKey = ""  // query and scope the results belong to
 
     var body: some View {
+        @Bindable var model = model
         EntryBrowser(entries: results, total: results.reduce(0) { $0 + $1.bytes }, showLocation: true,
-                     emptyTitle: model.searchQuery.isEmpty ? Loc.searchPrompt.s : Loc.noResults.f(model.searchQuery),
+                     emptyTitle: Loc.noResults.f(model.searchQuery),
                      emptyDetail: Loc.searchNote.s,
                      contentKey: resultsKey)
             .navigationTitle(Loc.searchResults.f(Fmt.count(results.count)))
             .safeAreaInset(edge: .top, spacing: 0) {
                 UI.header(.searchNote) {
+                    UI.segments(selection: $model.searchScope) {
+                        ForEach(SearchScope.allCases) { Text($0.title.s).tag($0) }
+                    }
                     UI.button(Loc.cancel.s) { model.endSearch() }.keyboardShortcut(.cancelAction)
                 }
             }

@@ -10,6 +10,7 @@ enum ScanConfig {
     static let deleteSettleDelay: Duration = .seconds(2)  // APFS reports freed blocks with a short delay
     static let searchDebounce: Duration = .milliseconds(250)
     static let searchLimit = 500
+    static let iconCacheLimit = 2_000
     static let selfTestTolerance = 0.02
     static let maxEstimatedFraction = 0.99  // an estimate never claims "done" before the scan really is
 }

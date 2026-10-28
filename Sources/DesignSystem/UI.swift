@@ -26,6 +26,14 @@ enum UI {
             .fixedSize()
     }
 
+    /// A compact segmented control without a label, for a few choices that sit next to each other.
+    static func segments<V: Hashable, C: View>(selection: Binding<V>, @ViewBuilder _ items: () -> C) -> some View {
+        Picker(selection: selection, content: items) { EmptyView() }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .fixedSize()
+    }
+
     static func card<C: View>(_ title: String? = nil, @ViewBuilder _ content: () -> C) -> some View {
         Card(title: title, content: content)
     }
