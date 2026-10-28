@@ -24,6 +24,7 @@ import Observation
     private(set) var apps: [AppUsage] = []
     private(set) var cleanItems: [CleanItem]?
     private var task: Task<Void, Never>?
+    private var scanID = UUID()  // the current scan; older, cancelled runs check it and step aside
 
     var startupVolume: VolumeInfo? { volumes.first { $0.isRoot } }
     var hasData: Bool { !root.children.isEmpty }
@@ -61,6 +62,8 @@ import Observation
     /// Measures `paths` one after another; with `reset` the tree starts empty.
     func scan(_ paths: [String]? = nil, reset: Bool = true) {
         task?.cancel()
+        let id = UUID()
+        scanID = id
         if reset {
             root.removeAll()
             unreadable = 0
@@ -73,7 +76,7 @@ import Observation
             for (i, path) in todo.enumerated() {
                 scanStep = (i + 1, todo.count, path)
                 root.child(named: path)?.detach()
-                guard let result = await scanInBackground(path, base: progress), !Task.isCancelled else { break }
+                guard let result = await scanInBackground(path, base: progress, id: id), !Task.isCancelled, scanID == id else { break }
                 result.root.attach(to: root)
                 unreadable += result.unreadable
                 // A home folder without any blocked folder proves Full Disk Access, whatever the quick check said.
@@ -82,6 +85,7 @@ import Observation
                 progress = .init(files: root.fileCount, bytes: root.bytes)
                 treeChanged()
             }
+            guard scanID == id else { return }  // a newer scan took over; it finishes the state itself
             Motion.animate { scanning = false }
             if !Task.isCancelled {
                 lastScan = Date()
@@ -104,14 +108,15 @@ import Observation
 
     func cancelScan() {
         task?.cancel()
+        scanID = UUID()
         Motion.animate { scanning = false }
     }
 
-    private func scanInBackground(_ path: String, base: ScanService.Progress) async -> ScanService.Result? {
+    private func scanInBackground(_ path: String, base: ScanService.Progress, id: UUID) async -> ScanService.Result? {
         // Background QoS runs on the efficiency cores of Apple Silicon.
         let priority: TaskPriority = AppSettings.eco ? .background : .utility
         let inner = Task.detached(priority: priority) {
-            ScanService.scan(path) { p in Task { @MainActor in self.progress = base + p } }
+            ScanService.scan(path) { p in Task { @MainActor in if self.scanID == id { self.progress = base + p } } }
         }
         return await withTaskCancellationHandler { await inner.value } onCancel: { inner.cancel() }
     }
@@ -174,9 +179,7 @@ import Observation
         refreshVolumes()
         // The remainder ("System & Other") only makes sense once every area is measured.
         let cats = CategoryService.compute(root: root, volume: scanning ? nil : startupVolume)
-        Motion.animate {
-            categories = cats
-            revision += 1
-        }
+        Motion.animate { categories = cats }
+        revision += 1  // drives the tables, which must not update inside an animation (NSTableView reentrancy)
     }
 }
