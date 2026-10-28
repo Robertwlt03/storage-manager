@@ -35,6 +35,7 @@ struct StorageBar: View {
 struct VolumeSummary: View {
     let volume: VolumeInfo
     let segments: [StorageSegment]
+    var onSelect: ((StorageSegment) -> Void)?
 
     var body: some View {
         VStack(alignment: .leading, spacing: Layout.spacing) {
@@ -42,7 +43,7 @@ struct VolumeSummary: View {
                       subtitle: Loc.availableOf.f(Fmt.bytes(volume.available), Fmt.bytes(volume.total)))
             let all = shown + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)]
             StorageBar(segments: all, total: volume.total)
-            StorageLegend(segments: all)
+            StorageLegend(segments: all, onSelect: onSelect)
         }
         .padding(.vertical, Layout.rowPadding)
     }
@@ -58,29 +59,41 @@ struct VolumeSummary: View {
 /// Says which colour stands for what: the biggest parts by name, the rest grouped, free space last.
 struct StorageLegend: View {
     let segments: [StorageSegment]
+    var onSelect: ((StorageSegment) -> Void)?
     @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
 
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.legendItemMin), alignment: .leading)], alignment: .leading, spacing: 6) {
             ForEach(items) { s in
-                HStack(spacing: 6) {
-                    Circle().fill(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)
-                        .frame(width: Layout.legendDot, height: Layout.legendDot)
-                    Text(s.title).lineLimit(1)
-                    Text(Fmt.bytes(s.bytes)).foregroundStyle(.muted).monospacedDigit().lineLimit(1)
+                // Named categories lead to their folder; "Other" and free space have nowhere to go.
+                let target = onSelect != nil && s.colorIndex != nil && s.id != Self.otherID
+                Button { onSelect?(s) } label: {
+                    HStack(spacing: 6) {
+                        Circle().fill(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)
+                            .frame(width: Layout.legendDot, height: Layout.legendDot)
+                        Text(s.title).lineLimit(1)
+                        Text(Fmt.bytes(s.bytes)).foregroundStyle(.muted).monospacedDigit().lineLimit(1)
+                            .contentTransition(.numericText())
+                        if target { Image(systemName: Symbols.chevron).font(.caption2.weight(.semibold)).foregroundStyle(.muted) }
+                    }
+                    .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .allowsHitTesting(target)
                 .font(.callout)
                 .accessibilityElement(children: .combine)
             }
         }
     }
 
+    private static let otherID = "other"
+
     private var items: [StorageSegment] {
         let used = segments.filter { $0.colorIndex != nil }
         let free = segments.filter { $0.colorIndex == nil }
         guard used.count > Layout.legendMax else { return used + free }
         let rest = used.dropFirst(Layout.legendMax - 1)
-        let other = StorageSegment(id: "other", title: Loc.otherCategories.s, bytes: rest.reduce(0) { $0 + $1.bytes },
+        let other = StorageSegment(id: Self.otherID, title: Loc.otherCategories.s, bytes: rest.reduce(0) { $0 + $1.bytes },
                                    colorIndex: rest.first?.colorIndex)
         return Array(used.prefix(Layout.legendMax - 1)) + [other] + free
     }

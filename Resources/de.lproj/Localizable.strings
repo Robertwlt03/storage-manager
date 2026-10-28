@@ -4,8 +4,8 @@
 "paneExplorer" = "Ordner";
 "paneLargeFiles" = "Große Dateien";
 "paneTemp" = "Temporärer Bereich";
-"paneCopies" = "Prüfkopien";
-"sectionSystem" = "macOS";
+"paneCopies" = "App-Kopien";
+"sectionSystem" = "Versteckte Bereiche";
 "sectionVolumes" = "Datenträger";
 "rescan" = "Neu messen";
 "rescanHelp" = "Alle Bereiche neu messen (⌘R)";
@@ -35,12 +35,12 @@
 "catICloud" = "iCloud Drive";
 "catMail" = "Mail & Nachrichten";
 "catDeveloper" = "Entwicklung";
-"catCaches" = "Caches";
+"catCaches" = "Zwischenspeicher";
 "catAppData" = "App-Daten";
 "catTrash" = "Papierkorb";
 "catTemp" = "Temporäre Dateien";
 "catUser" = "Weitere Benutzerdaten";
-"catLibrary" = "Library (systemweit)";
+"catLibrary" = "Gemeinsame App-Daten";
 "catOther" = "Weitere Ordner";
 "catPurgeable" = "Von macOS löschbar";
 "catSystem" = "System & Sonstiges";
@@ -83,18 +83,18 @@
 "location" = "Ort";
 "total" = "Zusammen";
 "subfolders" = "Unterordner";
-"viewCopies" = "Prüfkopien ansehen …";
+"viewCopies" = "App-Kopien ansehen …";
 "tempT" = "Temporäre Dateien";
 "tempTDetail" = "Wird beim Neustart größtenteils geleert.";
-"tempC" = "Caches";
+"tempC" = "Zwischenspeicher";
 "tempCDetail" = "Zwischenspeicher von Apps und Systemdiensten.";
-"tempX" = "Prüfkopien von Apps";
+"tempX" = "Kopien von Apps";
 "tempXDetail" = "Kopien, die macOS beim Prüfen von Signaturen anlegt.";
 "temp0" = "Systemdienste";
 "temp0Detail" = "Daten von Hintergrunddiensten.";
 
 /* Signature copies */
-"noCopies" = "Keine Prüfkopien";
+"noCopies" = "Keine App-Kopien";
 "noCopiesDetail" = "Im Ordner X liegen keine Kopien von Apps.";
 "running" = "läuft";
 "stopped" = "beendet";
@@ -114,7 +114,7 @@
 "quitToDelete" = "Beende %@ mit ⌘Q, dann lässt sich löschen.";
 "openInExplorer" = "Im Explorer öffnen";
 "deleteAll" = "Alle Kopien löschen …";
-"deleteTitle" = "%@ Prüfkopien von %@ löschen?";
+"deleteTitle" = "%@ Kopien von %@ löschen?";
 "deleteForever" = "Endgültig löschen";
 "deleteMessage" = "Die Kopien landen nicht im Papierkorb. macOS legt bei Bedarf eine neue an.";
 
@@ -187,9 +187,9 @@
 "emptyFolder" = "Dieser Ordner ist leer";
 "otherCategories" = "Weitere";
 "otherTypes" = "Andere";
-"cleanCaches" = "App-Caches";
+"cleanCaches" = "Zwischenspeicher von Apps";
 "cleanCachesDetail" = "Zwischenspeicher, die Apps bei Bedarf neu anlegen. Laufende Apps und macOS selbst bleiben unberührt.";
-"cleanDeveloper" = "Entwickler-Caches";
+"cleanDeveloper" = "Zwischenspeicher für Entwickler";
 "cleanDeveloperDetail" = "Build-Daten von Xcode und Paket-Caches wie npm; sie entstehen beim nächsten Bauen neu.";
 "cleanLogs" = "Alte Protokolle";
 "cleanLogsDetail" = "Protokolle von Apps, die älter als eine Woche sind.";
@@ -249,7 +249,20 @@
 "summaryTop" = "Am meisten Platz brauchen %@ mit %@ und %@ mit %@.";
 "summaryNotMeasured" = "Wie sich der Platz verteilt, steht nach der ersten Messung hier.";
 "summaryClean" = "Beim Aufräumen lassen sich etwa %@ freigeben.";
-"summaryCopies" = "Prüfkopien von Apps belegen gezählt %@.";
+"summaryCopies" = "Kopien von Apps, die macOS beim Prüfen anlegt, belegen gezählt %@.";
 "summaryApps" = "%@ Apps wurden länger nicht geöffnet.";
 "readAloud" = "Vorlesen";
 "stopReading" = "Vorlesen beenden";
+
+/* Statistics in plain words */
+"statCategoriesTitle" = "Wofür wird der Platz genutzt?";
+"statCategoriesCaption" = "Jede Farbe steht für eine Kategorie. Ein Klick auf einen Eintrag der Legende öffnet den passenden Ordner.";
+"statTypesTitle" = "Welche Dateiarten brauchen am meisten Platz?";
+"statTypesCaption" = "Berücksichtigt sind Dateien ab 1 MB. Dateien ohne Endung sind meist Teile von Programmen.";
+"statSizesTitle" = "Wie groß sind deine Dateien?";
+"statSizesCaption" = "Wie viel Platz jede Größenklasse belegt und wie viele Dateien darin liegen. Meist belegen wenige große Dateien mehr als viele kleine.";
+"statUsedOf" = "belegt von %@";
+"statLargeFilesFrom" = "große Dateien ab %@";
+"bucketValue" = "%@
+%@ Dateien";
+"typeNoExtension" = "Ohne Dateiendung";

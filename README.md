@@ -69,7 +69,7 @@ Die Seite **Ungenutzte Apps** erinnert dich an Apps, die du lange nicht geöffne
 selbst, die App zeichnet also nichts auf. Was du nicht mehr brauchst, legst du von dort in den Papierkorb.
 
 Außerdem zeigt die App zwei Bereiche, die man im Finder nicht sieht: den **temporären Bereich** von macOS und die
-**Prüfkopien**, die macOS beim Prüfen von Apps anlegt. Auch externe Festplatten und USB-Sticks erscheinen in der
+**App-Kopien**, die macOS beim Prüfen von Apps anlegt. Auch externe Festplatten und USB-Sticks erscheinen in der
 Seitenleiste, sobald du sie anschließt.
 
 Jede Seite hat oben rechts einen Info-Knopf, der erklärt, wofür sie da ist. Die App gibt es auf Deutsch und Englisch,
@@ -151,7 +151,7 @@ Messung nur die Bereiche, die du ablehnst.
 ## <img src="assets/icons/privacy.svg" height="33" align="absmiddle" alt="">Deine Daten bleiben bei dir
 
 Die App liest nur Namen und Größen, aber nie den Inhalt deiner Dateien, und sie schickt nichts ins Internet. Etwas
-gelöscht wird nur, wenn du es beim Aufräumen oder bei den Prüfkopien ausdrücklich bestätigst. Apps, die du nicht mehr
+gelöscht wird nur, wenn du es beim Aufräumen oder bei den App-Kopien ausdrücklich bestätigst. Apps, die du nicht mehr
 brauchst, landen im Papierkorb und lassen sich von dort wiederherstellen.
 
 ## <img src="assets/icons/energy.svg" height="33" align="absmiddle" alt="">Sparsam mit Energie

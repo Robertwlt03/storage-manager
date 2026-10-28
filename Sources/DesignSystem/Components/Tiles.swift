@@ -29,18 +29,25 @@ struct StatTile: View {
     let value: String
     let label: String
     let symbol: String
+    var action: (() -> Void)?
 
     var body: some View {
-        HStack(spacing: Layout.rowSpacing) {
-            Image(systemName: symbol).font(.title2).foregroundStyle(.tint).frame(width: Layout.badgeSize)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(value).font(.title2.weight(.semibold)).monospacedDigit()
-                Text(label).foregroundStyle(.muted)
+        Button { action?() } label: {
+            HStack(spacing: Layout.rowSpacing) {
+                Image(systemName: symbol).font(.title2).foregroundStyle(.tint).frame(width: Layout.badgeSize)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(value).font(.title2.weight(.semibold)).monospacedDigit().contentTransition(.numericText())
+                    Text(label).foregroundStyle(.muted)
+                }
+                Spacer(minLength: 0)
+                if action != nil { Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted) }
             }
-            Spacer(minLength: 0)
+            .padding(Layout.cardPadding)
+            .surface()
+            .contentShape(Rectangle())
         }
-        .padding(Layout.cardPadding)
-        .surface()
+        .buttonStyle(.plain)
+        .allowsHitTesting(action != nil)
         .accessibilityElement(children: .combine)
     }
 }

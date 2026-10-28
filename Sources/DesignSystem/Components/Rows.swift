@@ -44,7 +44,7 @@ struct NavRow: View {
                     if let detail { Text(detail).font(.callout).foregroundStyle(.muted) }
                 }
                 Spacer(minLength: Layout.rowSpacing)
-                if let value { Text(value).monospacedDigit().foregroundStyle(.muted) }
+                if let value { Text(value).monospacedDigit().foregroundStyle(.muted).contentTransition(.numericText()) }
                 Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted)
                     .opacity(action == nil ? 0 : 1)
             }

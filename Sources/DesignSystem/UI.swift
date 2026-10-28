@@ -80,8 +80,13 @@ enum UI {
             content()
         }
     }
-    static func stat(_ value: String, _ label: Loc, symbol: String) -> some View { StatTile(value: value, label: label.s, symbol: symbol) }
-    static func legend(_ segments: [StorageSegment]) -> some View { StorageLegend(segments: segments) }
+    static func stat(_ value: String, _ label: String, symbol: String, action: (() -> Void)? = nil) -> some View {
+        StatTile(value: value, label: label, symbol: symbol, action: action)
+    }
+    static func legend(_ segments: [StorageSegment], onSelect: ((StorageSegment) -> Void)? = nil) -> some View {
+        StorageLegend(segments: segments, onSelect: onSelect)
+    }
+    static func caption(_ text: String) -> some View { Note(text: text) }
 
     static func empty(_ title: String, symbol: String, detail: String? = nil) -> some View {
         FillPage { EmptyState(title: title, symbol: symbol, detail: detail) { EmptyView() } }
@@ -91,7 +96,9 @@ enum UI {
         Button(title, role: role, action: action).appButton(kind)
     }
 
-    static func volume(_ v: VolumeInfo, segments: [StorageSegment]) -> some View { VolumeSummary(volume: v, segments: segments) }
+    static func volume(_ v: VolumeInfo, segments: [StorageSegment], onSelect: ((StorageSegment) -> Void)? = nil) -> some View {
+        VolumeSummary(volume: v, segments: segments, onSelect: onSelect)
+    }
 
     // Table cells
     static func fileCell(_ e: Entry) -> some View { FileCell(name: e.name, path: e.path) }

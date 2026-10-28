@@ -4,8 +4,8 @@
 "paneExplorer" = "Folders";
 "paneLargeFiles" = "Large Files";
 "paneTemp" = "Temporary Area";
-"paneCopies" = "Signature Copies";
-"sectionSystem" = "macOS";
+"paneCopies" = "App Copies";
+"sectionSystem" = "Hidden Areas";
 "sectionVolumes" = "Volumes";
 "rescan" = "Rescan";
 "rescanHelp" = "Rescan all areas (⌘R)";
@@ -40,7 +40,7 @@
 "catTrash" = "Trash";
 "catTemp" = "Temporary Files";
 "catUser" = "Other User Data";
-"catLibrary" = "Library (System-wide)";
+"catLibrary" = "Shared App Data";
 "catOther" = "Other Folders";
 "catPurgeable" = "Purgeable by macOS";
 "catSystem" = "System & Other";
@@ -83,18 +83,18 @@
 "location" = "Location";
 "total" = "Total";
 "subfolders" = "Subfolders";
-"viewCopies" = "View Signature Copies …";
+"viewCopies" = "View App Copies …";
 "tempT" = "Temporary Files";
 "tempTDetail" = "Mostly emptied on restart.";
 "tempC" = "Caches";
 "tempCDetail" = "Caches of apps and system services.";
-"tempX" = "Signature Copies of Apps";
+"tempX" = "App Copies";
 "tempXDetail" = "Copies macOS makes while checking signatures.";
 "temp0" = "System Services";
 "temp0Detail" = "Data of background services.";
 
 /* Signature copies */
-"noCopies" = "No Signature Copies";
+"noCopies" = "No App Copies";
 "noCopiesDetail" = "There are no app copies in folder X.";
 "running" = "running";
 "stopped" = "quit";
@@ -114,7 +114,7 @@
 "quitToDelete" = "Quit %@ with ⌘Q to delete.";
 "openInExplorer" = "Open in Explorer";
 "deleteAll" = "Delete All Copies …";
-"deleteTitle" = "Delete %@ signature copies of %@?";
+"deleteTitle" = "Delete %@ copies of %@?";
 "deleteForever" = "Delete Permanently";
 "deleteMessage" = "The copies do not go to the Trash. macOS creates a new one when needed.";
 
@@ -249,7 +249,20 @@
 "summaryTop" = "The most space goes to %@ with %@ and %@ with %@.";
 "summaryNotMeasured" = "How the space is divided appears here after the first scan.";
 "summaryClean" = "Cleaning up can free about %@.";
-"summaryCopies" = "Signature copies of apps count for %@.";
+"summaryCopies" = "Copies of apps that macOS makes while checking them count for %@.";
 "summaryApps" = "%@ apps have not been opened for a while.";
 "readAloud" = "Read Aloud";
 "stopReading" = "Stop Reading";
+
+/* Statistics in plain words */
+"statCategoriesTitle" = "What is the space used for?";
+"statCategoriesCaption" = "Each colour stands for a category. Clicking an entry in the legend opens the matching folder.";
+"statTypesTitle" = "Which kinds of files take the most space?";
+"statTypesCaption" = "Files from 1 MB are counted. Files without an extension are mostly parts of programs.";
+"statSizesTitle" = "How big are your files?";
+"statSizesCaption" = "How much space each size class takes and how many files are in it. A few big files usually take more room than many small ones.";
+"statUsedOf" = "used of %@";
+"statLargeFilesFrom" = "large files from %@";
+"bucketValue" = "%@
+%@ files";
+"typeNoExtension" = "No file extension";

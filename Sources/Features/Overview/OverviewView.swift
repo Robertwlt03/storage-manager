@@ -7,7 +7,9 @@ struct OverviewView: View {
     var body: some View {
         UI.page(.overview) {
             if let v = model.startupVolume {
-                UI.card { UI.volume(v, segments: segments) }
+                UI.card {
+                    UI.volume(v, segments: segments) { seg in model.categories.first { "\($0.kind)" == seg.id }?.node.map(model.open) }
+                }
             }
             SummaryCard()
             if model.categories.isEmpty {

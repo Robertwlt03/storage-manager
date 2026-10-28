@@ -51,6 +51,9 @@ enum Loc: String, CaseIterable {
     // Page info, scan details, summary
     case infoOverview, infoStatistics, infoCleaner, infoApps, infoExplorer, infoLargeFiles, infoTemp, infoCopies, infoVolume, aboutPage, scanDetails, scanProgress, scanArea, scanFinished, accessMissingShort, summaryTitle, summaryDisk, summaryTop, summaryNotMeasured, summaryClean, summaryCopies, summaryApps, readAloud, stopReading
 
+    // Statistics in plain words
+    case statCategoriesTitle, statCategoriesCaption, statTypesTitle, statTypesCaption, statSizesTitle, statSizesCaption, statUsedOf, statLargeFilesFrom, bucketValue, typeNoExtension
+
     // Settings
     case tabGeneral, tabAppearance, tabScanning, language, languageSystem, languageNote
     case appearance, appearanceSystem, appearanceLight, appearanceDark
