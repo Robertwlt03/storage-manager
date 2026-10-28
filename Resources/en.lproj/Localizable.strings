@@ -149,27 +149,7 @@
 "fullDiskAccess" = "Full Disk Access";
 
 /* Settings */
-"tabGeneral" = "General";
-"tabAppearance" = "Appearance";
-"tabScanning" = "Scanning";
-"language" = "Language";
-"languageSystem" = "System (%@)";
-"languageNote" = "Without a choice of your own the app follows the system language; German and English are included.";
-"appearance" = "Appearance";
-"appearanceSystem" = "System";
-"appearanceLight" = "Light";
-"appearanceDark" = "Dark";
-"chartColors" = "Chart Colors";
-"paletteColourful" = "Colorful";
-"paletteAccent" = "Accent Color";
-"paletteGrey" = "Greys";
-"binaryUnits" = "Binary Units (GiB)";
-"binaryUnitsDetail" = "Off: sizes as in Finder, 1 GB = 1000 MB.";
 "autoScan" = "Scan automatically at launch";
-"pauseLowPower" = "Don't scan automatically in Low Power Mode";
-"pauseLowPowerDetail" = "Then the app only scans when you click “Rescan”.";
-"eco" = "Energy-saving scan";
-"ecoDetail" = "Scans at low priority on the efficiency cores. It takes a little longer but uses much less power and keeps the Mac cool.";
 "extraFolders" = "Additional Folders";
 "none" = "None";
 "add" = "Add";
@@ -213,10 +193,7 @@
 "lastOpened" = "Last opened on %@";
 "trashAppFailed" = "“%@” could not be moved. In Finder it works with your password.";
 "statFiles" = "Files";
-"statScanned" = "scanned";
-"statLargeFiles" = "large files";
 "statUnusedApps" = "unused apps";
-"sizeDistribution" = "Files by Size";
 "bucketUnder1MB" = "under 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -266,3 +243,4 @@
 "bucketValue" = "%@
 %@ files";
 "typeNoExtension" = "No file extension";
+"settingsSystemNote" = "Appearance, language and units come from System Settings. A separate language for this app is set there under General › Language & Region › Applications.";

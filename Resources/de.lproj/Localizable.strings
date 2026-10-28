@@ -149,27 +149,7 @@
 "fullDiskAccess" = "Festplattenvollzugriff";
 
 /* Settings */
-"tabGeneral" = "Allgemein";
-"tabAppearance" = "Darstellung";
-"tabScanning" = "Messen";
-"language" = "Sprache";
-"languageSystem" = "Wie das System (%@)";
-"languageNote" = "Ohne eigene Wahl folgt die App der Sprache des Systems; Deutsch und Englisch sind enthalten.";
-"appearance" = "Erscheinungsbild";
-"appearanceSystem" = "Wie das System";
-"appearanceLight" = "Hell";
-"appearanceDark" = "Dunkel";
-"chartColors" = "Diagrammfarben";
-"paletteColourful" = "Bunt";
-"paletteAccent" = "Akzentfarbe";
-"paletteGrey" = "Grautöne";
-"binaryUnits" = "Binäre Einheiten (GiB)";
-"binaryUnitsDetail" = "Aus: Größen wie im Finder, 1 GB = 1000 MB.";
 "autoScan" = "Beim Start automatisch messen";
-"pauseLowPower" = "Im Stromsparmodus nicht automatisch messen";
-"pauseLowPowerDetail" = "Dann misst die App erst, wenn du auf „Neu messen“ klickst.";
-"eco" = "Energiesparend messen";
-"ecoDetail" = "Misst mit niedriger Priorität auf den Effizienzkernen. Das dauert etwas länger, braucht aber deutlich weniger Strom und hält den Mac kühl.";
 "extraFolders" = "Zusätzliche Ordner";
 "none" = "Keine";
 "add" = "Hinzufügen";
@@ -213,10 +193,7 @@
 "lastOpened" = "Zuletzt geöffnet am %@";
 "trashAppFailed" = "„%@“ ließ sich nicht verschieben. Im Finder geht es mit deinem Passwort.";
 "statFiles" = "Dateien";
-"statScanned" = "gemessen";
-"statLargeFiles" = "große Dateien";
 "statUnusedApps" = "ungenutzte Apps";
-"sizeDistribution" = "Dateien nach Größe";
 "bucketUnder1MB" = "unter 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -266,3 +243,4 @@
 "bucketValue" = "%@
 %@ Dateien";
 "typeNoExtension" = "Ohne Dateiendung";
+"settingsSystemNote" = "Erscheinungsbild, Sprache und Einheiten übernimmt die App aus den Systemeinstellungen. Eine eigene Sprache für diese App stellst du dort unter Allgemein › Sprache & Region › Apps ein.";

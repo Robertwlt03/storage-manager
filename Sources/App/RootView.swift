@@ -4,7 +4,6 @@ import SwiftUI
 struct RootView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openSettings) private var openSettings
-    @AppStorage(SettingsKey.binaryUnits) private var binaryUnits = false
 
     var body: some View {
         @Bindable var model = model
@@ -12,7 +11,6 @@ struct RootView: View {
             SidebarView()
         } detail: {
             detail
-                .id(binaryUnits)  // re-render sizes when the unit setting changes
                 .smoothChanges(of: model.pane)
                 .smoothChanges(of: model.isSearching)
         }

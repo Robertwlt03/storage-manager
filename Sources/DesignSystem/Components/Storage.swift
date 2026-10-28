@@ -12,13 +12,12 @@ struct StorageSegment: Identifiable {
 struct StorageBar: View {
     let segments: [StorageSegment]
     let total: Int64
-    @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
     private static let row = "volume"
 
     var body: some View {
         Chart(segments) { s in
             BarMark(x: .value(Loc.columnSize.s, s.bytes), y: .value(Self.row, Self.row))  // one category row: a stacked bar
-                .foregroundStyle(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)
+                .foregroundStyle(s.colorIndex.map { Theme.color($0) } ?? Theme.freeSegment)
                 .accessibilityLabel(s.title)
                 .accessibilityValue(Fmt.bytes(s.bytes))
         }
@@ -63,7 +62,6 @@ struct StorageLegend: View {
     let segments: [StorageSegment]
     var onSelect: ((StorageSegment) -> Void)?
     var canSelect: (StorageSegment) -> Bool = { _ in true }
-    @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
 
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.legendItemMin), alignment: .leading)], alignment: .leading, spacing: 6) {
@@ -72,7 +70,7 @@ struct StorageLegend: View {
                 let target = onSelect != nil && s.colorIndex != nil && s.id != Self.otherID && canSelect(s)
                 Button { onSelect?(s) } label: {
                     HStack(spacing: 6) {
-                        Circle().fill(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)
+                        Circle().fill(s.colorIndex.map { Theme.color($0) } ?? Theme.freeSegment)
                             .frame(width: Layout.legendDot, height: Layout.legendDot)
                         Text(s.title).lineLimit(1)
                         Text(Fmt.bytes(s.bytes)).foregroundStyle(.muted).monospacedDigit().lineLimit(1)

@@ -54,9 +54,7 @@ enum Layout {
     static let sheetWidth: CGFloat = 560
     static let sheetHeight: CGFloat = 600
     static let folderListHeight: CGFloat = 90
-    static let settingsGeneralHeight: CGFloat = 220
-    static let settingsAppearanceHeight: CGFloat = 290
-    static let settingsScanHeight: CGFloat = 440
+    static let settingsHeight: CGFloat = 330
     static let placeholderHeight: CGFloat = 320
     static let backdropOpacity = 0.16
     static let gridTile: CGFloat = 170
@@ -107,9 +105,6 @@ enum Symbols {
     static let unknownApp = "app.dashed"
     static let add = "plus"
     static let remove = "minus"
-    static let tabGeneral = "gearshape"
-    static let tabAppearance = "paintbrush"
-    static let tabScanning = "gauge.with.dots.needle.50percent"
 }
 
 enum SystemLinks {

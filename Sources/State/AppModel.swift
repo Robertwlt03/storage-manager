@@ -53,7 +53,7 @@ import Observation
 
     private func autoScanIfWanted() {
         guard AppSettings.autoScan, lastScan == nil, !scanning else { return }
-        if AppSettings.pauseOnLowPower && ProcessInfo.processInfo.isLowPowerModeEnabled { return }
+        if ProcessInfo.processInfo.isLowPowerModeEnabled { return }  // follows the system's Low Power Mode
         scan()
     }
 
@@ -114,7 +114,7 @@ import Observation
 
     private func scanInBackground(_ path: String, base: ScanService.Progress, id: UUID) async -> ScanService.Result? {
         // Background QoS runs on the efficiency cores of Apple Silicon.
-        let priority: TaskPriority = AppSettings.eco ? .background : .utility
+        let priority = TaskPriority.background
         let inner = Task.detached(priority: priority) {
             ScanService.scan(path) { p in Task { @MainActor in if self.scanID == id { self.progress = base + p } } }
         }

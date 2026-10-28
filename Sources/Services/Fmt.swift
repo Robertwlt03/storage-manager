@@ -5,7 +5,7 @@ enum Fmt {
     private static var locale: Locale { Localizer.shared.locale }
 
     static func bytes(_ b: Int64) -> String {
-        b.formatted(.byteCount(style: AppSettings.binaryUnits ? .binary : .file).locale(locale))
+        b.formatted(.byteCount(style: .file).locale(locale))  // like Finder
     }
 
     static func count(_ n: Int) -> String { n.formatted(.number.locale(locale)) }

@@ -43,7 +43,7 @@ enum Loc: String, CaseIterable {
     case accessGranted, fullDiskAccess, accessRestart, accessRestartHint
 
     // Statistics, cleaner, unused apps, layout
-    case paneStatistics, paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, emptyFolder, otherCategories, otherTypes, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail, cleanLogs, cleanLogsDetail, cleanTemp, cleanTempDetail, cleanTrash, cleanTrashDetail, cleanerSearching, cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle, cleanConfirmMessage, appsNoneUnused, unusedSince, daysOption, trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed, statFiles, statScanned, statLargeFiles, statUnusedApps, sizeDistribution, bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
+    case paneStatistics, paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, emptyFolder, otherCategories, otherTypes, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail, cleanLogs, cleanLogsDetail, cleanTemp, cleanTempDetail, cleanTrash, cleanTrashDetail, cleanerSearching, cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle, cleanConfirmMessage, appsNoneUnused, unusedSince, daysOption, trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed, statFiles, statUnusedApps, bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
 
     // Scan progress and empty values
     case scanningPercent, scanningArea, emptyValue
@@ -55,9 +55,6 @@ enum Loc: String, CaseIterable {
     case statCategoriesTitle, statCategoriesCaption, statTypesTitle, statTypesCaption, statSizesTitle, statSizesCaption, statUsedOf, statLargeFilesFrom, bucketValue, typeNoExtension
 
     // Settings
-    case tabGeneral, tabAppearance, tabScanning, language, languageSystem, languageNote
-    case appearance, appearanceSystem, appearanceLight, appearanceDark
-    case chartColors, paletteColourful, paletteAccent, paletteGrey
-    case binaryUnits, binaryUnitsDetail, autoScan, pauseLowPower, pauseLowPowerDetail, eco, ecoDetail
-    case extraFolders, none, add, remove
+    case autoScan
+    case extraFolders, none, add, remove, settingsSystemNote
 }

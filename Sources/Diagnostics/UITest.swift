@@ -6,8 +6,7 @@ import SwiftUI
 /// searches, checks the data after every step and saves a picture of the window. It never deletes, cleans up or
 /// moves anything to the Trash, prints only counts (no names) and restores the user's settings at the end.
 @MainActor enum UITest {
-    private static let settingKeys = [SettingsKey.language, SettingsKey.appearance, SettingsKey.palette, SettingsKey.layoutMode,
-                                      SettingsKey.largeFileMB, SettingsKey.unusedDays]
+    private static let settingKeys = [SettingsKey.layoutMode, SettingsKey.largeFileMB, SettingsKey.unusedDays]
     private static var problems: [String] = []
     private static var steps = 0
     private static var folder = URL(fileURLWithPath: NSTemporaryDirectory())
@@ -67,17 +66,18 @@ import SwiftUI
 
     /// Every page in light and dark, as list and as grid, with a picture of each.
     private static func visitEverything(_ model: AppModel) async {
-        for appearance in AppAppearance.allCases where appearance != .system {
-            set(SettingsKey.appearance, appearance.rawValue)
+        for appearance in [NSAppearance(named: .aqua), NSAppearance(named: .darkAqua)] {
+            NSApp.appearance = appearance  // only for this test run; the app itself follows the system
             for pane in allPanes(model) {
                 for layout in LayoutMode.allCases where layout == .list || pane.supportsGrid {
                     set(SettingsKey.layoutMode, layout.rawValue)
                     model.pane = pane
-                    await step("Seite \(pane.launchKey) \(appearance) \(layout)", model, wait: 0.8)
+                    await step("Seite \(pane.launchKey) \(appearance?.name.rawValue ?? "") \(layout)", model, wait: 0.8)
                 }
             }
         }
         set(SettingsKey.layoutMode, LayoutMode.list.rawValue)
+        NSApp.appearance = nil
     }
 
     /// Open every category, go five levels deep, back out, and repeat quickly.
@@ -111,17 +111,8 @@ import SwiftUI
         model.searchText = ""
     }
 
-    /// Languages, palettes, thresholds and day ranges, each on the page that shows it.
+    /// Thresholds and day ranges, each on the page that shows it.
     private static func flipSettings(_ model: AppModel) async {
-        model.pane = .overview
-        for language in AppLanguage.allCases {
-            set(SettingsKey.language, language.rawValue)
-            await step("Sprache \(language.rawValue)", model, wait: 0.6)
-        }
-        for palette in ChartPalette.allCases {
-            set(SettingsKey.palette, palette.rawValue)
-            await step("Farben \(palette.rawValue)", model, wait: 0.4)
-        }
         model.pane = .largeFiles
         for mb in LargeFileThreshold.optionsMB {
             set(SettingsKey.largeFileMB, mb)

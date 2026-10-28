@@ -1,49 +1,37 @@
 import SwiftUI
 
+/// Only what macOS does not already cover: appearance, language and units come from System Settings.
 struct SettingsView: View {
-    var body: some View {
-        TabView {
-            GeneralSettings().tabItem { Label(Loc.tabGeneral.s, systemImage: Symbols.tabGeneral) }
-            AppearanceSettings().tabItem { Label(Loc.tabAppearance.s, systemImage: Symbols.tabAppearance) }
-            ScanSettings().tabItem { Label(Loc.tabScanning.s, systemImage: Symbols.tabScanning) }
-        }
-        .formStyle(.grouped)
-        .frame(width: Layout.settingsWidth)
-        .syncPreferences()
-    }
-}
-
-/// A toggle with a muted explanation below.
-struct DetailToggle: View {
-    let title: Loc
-    let detail: String
-    @Binding var isOn: Bool
+    @AppStorage(SettingsKey.autoScan) private var autoScan = true
+    @AppStorage(SettingsKey.extraFolders) private var extraFolders = ""
+    @State private var selected: String?
 
     var body: some View {
-        Toggle(isOn: $isOn) {
-            Text(title.s)
-            Text(detail).foregroundStyle(.muted)
-        }
-    }
-}
-
-struct GeneralSettings: View {
-    @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.language) private var language = AppLanguage.system
-
-    var body: some View {
+        let folders = AppSettings.folders(from: extraFolders)
         Form {
-            Picker(Loc.language.s, selection: $language) {
-                ForEach(AppLanguage.allCases) { Text($0.title).tag($0) }
-            }
-            Text(Loc.languageNote.s).foregroundStyle(.muted)
-            LabeledContent(Loc.fullDiskAccess.s) {
-                if model.hasFullDiskAccess { UI.status(Loc.accessGranted.s, symbol: Symbols.success, .good) } else {
-                    UI.button(Loc.accessOpenSettings.s) { FinderService.openFullDiskAccessSettings() }
+            Toggle(Loc.autoScan.s, isOn: $autoScan)
+            LabeledContent(Loc.extraFolders.s) {
+                VStack(alignment: .leading, spacing: 6) {
+                    List(folders, id: \.self, selection: $selected) { Text(Paths.display($0)).lineLimit(1).truncationMode(.middle) }
+                        .frame(height: Layout.folderListHeight)
+                        .overlay { if folders.isEmpty { Text(Loc.none.s).foregroundStyle(.muted) } }
+                    HStack(spacing: 4) {
+                        Button(Loc.add.s, systemImage: Symbols.add) {
+                            extraFolders = AppSettings.store(Array(NSOrderedSet(array: folders + FinderService.chooseFolders()))
+                                .compactMap { $0 as? String })
+                        }
+                        Button(Loc.remove.s, systemImage: Symbols.remove) {
+                            extraFolders = AppSettings.store(folders.filter { $0 != selected })
+                        }
+                        .disabled(selected == nil)
+                    }
+                    .labelStyle(.iconOnly)
                 }
             }
+            Text(Loc.settingsSystemNote.s).foregroundStyle(.muted)
         }
-        .frame(height: Layout.settingsGeneralHeight)
-        .onAppear { model.refreshAccess() }
+        .formStyle(.grouped)
+        .frame(width: Layout.settingsWidth, height: Layout.settingsHeight)
+        .syncPreferences()
     }
 }

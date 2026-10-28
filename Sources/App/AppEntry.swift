@@ -40,17 +40,9 @@ struct SpeicherExplorerApp: App {
     }
 }
 
-/// Applies language and appearance from the settings; used by every window so none can forget it.
+/// Gives every window the app's locale for dates and numbers; used by every window so none can forget it.
 private struct PreferenceSync: ViewModifier {
-    @AppStorage(SettingsKey.language) private var language = AppLanguage.system
-    @AppStorage(SettingsKey.appearance) private var appearance = AppAppearance.system
-
-    func body(content: Content) -> some View {
-        content
-            .environment(\.locale, Localizer.shared.locale)
-            .onChange(of: language, initial: true) { _, l in Localizer.shared.apply(l) }
-            .onChange(of: appearance, initial: true) { _, a in NSApp.appearance = a.nsAppearance }
-    }
+    func body(content: Content) -> some View { content.environment(\.locale, Localizer.shared.locale) }
 }
 
 extension View {

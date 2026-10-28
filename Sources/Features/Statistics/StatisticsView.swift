@@ -5,7 +5,6 @@ import SwiftUI
 /// page with the details; the charts show no axes or grid lines, because every bar carries its own value.
 struct StatisticsView: View {
     @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
     @AppStorage(SettingsKey.largeFileMB) private var largeFileMB = LargeFileThreshold.defaultMB
     @State private var stats = Statistics()
@@ -70,7 +69,7 @@ struct StatisticsView: View {
         return ZStack {
             Chart(cats) { c in
                 SectorMark(angle: .value(Loc.columnSize.s, c.bytes), innerRadius: .ratio(Layout.donutInner), angularInset: 1)
-                    .foregroundStyle(Theme.color(c.kind.rawValue, palette))
+                    .foregroundStyle(Theme.color(c.kind.rawValue))
                     .accessibilityLabel(c.kind.title.s)
                     .accessibilityValue(Fmt.bytes(c.bytes))
             }
@@ -94,7 +93,7 @@ struct StatisticsView: View {
     private var typeChart: some View {
         Chart(stats.types, id: \.name) { t in
             BarMark(x: .value(Loc.columnSize.s, t.bytes), y: .value(Loc.kind.s, t.name))
-                .foregroundStyle(Theme.color(CategoryKind.apps.rawValue, palette))
+                .foregroundStyle(Theme.color(CategoryKind.apps.rawValue))
                 .annotation(position: .trailing) { Text(Fmt.bytes(t.bytes)).font(.caption).foregroundStyle(.muted) }
         }
         .chartXAxis(.hidden)
@@ -107,7 +106,7 @@ struct StatisticsView: View {
     private var sizeChart: some View {
         Chart(stats.buckets, id: \.bucket) { b in
             BarMark(x: .value(Loc.columnSize.s, b.bucket.title.s), y: .value(Loc.columnSize.s, b.bytes))
-                .foregroundStyle(Theme.color(CategoryKind.media.rawValue, palette))
+                .foregroundStyle(Theme.color(CategoryKind.media.rawValue))
                 .annotation(position: .top) {
                     Text(Loc.bucketValue.f(Fmt.bytes(b.bytes), Fmt.count(b.count))).font(.caption).foregroundStyle(.muted)
                         .multilineTextAlignment(.center)

@@ -30,7 +30,7 @@ enum Checks {
     /// Every `Loc` key exists in every language, with the same number of placeholders.
     static func strings() -> Bool {
         var ok = true
-        let bundles = AppLanguage.supported.map { ($0.rawValue, Localizer.bundle(for: $0.rawValue)) }
+        let bundles = AppLanguage.allCases.map { ($0.rawValue, Localizer.bundle(for: $0.rawValue)) }
         for (code, bundle) in bundles {
             guard let bundle else {
                 print("FAIL \(code).lproj fehlt")

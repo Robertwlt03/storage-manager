@@ -38,13 +38,7 @@ enum Theme {
                                      .cyan, .gray, .blue, .purple, .secondary]
     static let freeSegment = Color.gray.opacity(0.25)
 
-    static func color(_ index: Int, _ palette: ChartPalette) -> Color {
-        switch palette {
-        case .colourful: colourful[index % colourful.count]
-        case .accent: Color.accentColor.opacity(1 - Double(index % 7) * 0.11)
-        case .greys: Color(white: 0.25 + Double(index % 8) * 0.08)
-        }
-    }
+    static func color(_ index: Int) -> Color { colourful[index % colourful.count] }
 
     /// WCAG contrast ratio of two sRGB colours.
     static func ratio(_ a: UInt32, _ b: UInt32) -> Double {

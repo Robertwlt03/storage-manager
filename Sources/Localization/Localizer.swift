@@ -1,21 +1,16 @@
 import Foundation
-import Observation
 
-/// Looks up texts in `Resources/<code>.lproj/Localizable.strings` for the chosen language.
-/// Views read it while rendering, so switching the language updates every window right away.
-@Observable final class Localizer {
+/// Looks up texts in `Resources/<code>.lproj/Localizable.strings` for the system's language.
+final class Localizer {
     static let shared = Localizer()
 
-    private(set) var language = AppLanguage.system
-    private(set) var locale = Locale.current
-    private var bundle = Bundle.main
+    let locale: Locale
+    private let bundle: Bundle
 
-    private init() { apply(AppSettings.language) }
-
-    func apply(_ choice: AppLanguage) {
-        language = choice
-        locale = Locale(identifier: choice.code)
-        bundle = Self.bundle(for: choice.code) ?? .main
+    private init() {
+        let code = AppLanguage.current.rawValue
+        locale = Locale(identifier: code)
+        bundle = Self.bundle(for: code) ?? .main
     }
 
     func string(_ key: String) -> String {
