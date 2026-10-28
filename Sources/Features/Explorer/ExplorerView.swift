@@ -22,10 +22,12 @@ struct FolderView: View {
         EntryBrowser(entries: Entry.contents(of: node), total: node.bytes, emptyTitle: Loc.emptyFolder.s)
             .navigationTitle(node.isVirtual ? Loc.paneExplorer.s : node.displayName)
             .navigationSubtitle(subtitle)
-            .toolbar {
-                if !node.isVirtual {
-                    Button(Loc.showInFinder.s, systemImage: Symbols.finder) { FinderService.reveal(node.path) }
-                    Button(Loc.info.s, systemImage: Symbols.info) { info = .folder(node) }
+            .safeAreaInset(edge: .top, spacing: 0) {
+                UI.header(Pane.explorer.info) {
+                    if !node.isVirtual {
+                        UI.button(Loc.showInFinder.s) { FinderService.reveal(node.path) }
+                        UI.button(Loc.info.s) { info = .folder(node) }
+                    }
                 }
             }
             .sheet(item: $info) { InfoSheet(entry: $0) }

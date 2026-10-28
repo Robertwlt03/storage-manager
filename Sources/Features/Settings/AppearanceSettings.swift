@@ -2,7 +2,6 @@ import SwiftUI
 
 struct AppearanceSettings: View {
     @AppStorage(SettingsKey.appearance) private var appearance = AppAppearance.system
-    @AppStorage(SettingsKey.liquidGlass) private var liquidGlass = true
     @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
     @AppStorage(SettingsKey.binaryUnits) private var binaryUnits = false
 
@@ -11,9 +10,6 @@ struct AppearanceSettings: View {
             Picker(Loc.appearance.s, selection: $appearance) {
                 ForEach(AppAppearance.allCases) { Text($0.title.s).tag($0) }
             }
-            DetailToggle(title: .liquidGlass, detail: Glass.isAvailable ? Loc.liquidGlassDetail.s : Loc.liquidGlassUnavailable.s,
-                         isOn: $liquidGlass)
-                .disabled(!Glass.isAvailable)
             Picker(Loc.chartColors.s, selection: $palette) {
                 ForEach(ChartPalette.allCases) { Text($0.title.s).tag($0) }
             }

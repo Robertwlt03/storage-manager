@@ -1,21 +1,14 @@
 import AppKit
 import SwiftUI
 
-/// Liquid Glass is available from macOS 26; below that, or when switched off, surfaces fall back to classic cards.
-enum Glass {
-    static var isAvailable: Bool {
-        if #available(macOS 26.0, *) { true } else { false }
-    }
-}
-
-/// Card background: Liquid Glass or a classic opaque card, chosen by the setting.
+/// Card background. On macOS 26 and later it is Liquid Glass, which follows the system's own setting
+/// (clear or tinted, System Settings › Appearance); earlier systems get a classic card.
 private struct SurfaceModifier: ViewModifier {
-    @AppStorage(SettingsKey.liquidGlass) private var glass = true
     let radius: CGFloat
 
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: radius, style: .continuous)
-        if #available(macOS 26.0, *), glass {
+        if #available(macOS 26.0, *) {
             content.glassEffect(.regular, in: shape)
         } else {
             content
@@ -40,33 +33,21 @@ enum ButtonKind {
 }
 
 private struct AppButtonModifier: ViewModifier {
-    @AppStorage(SettingsKey.liquidGlass) private var glass = true
     let kind: ButtonKind
 
     func body(content: Content) -> some View {
         if let fill = kind.fill {
-            if #available(macOS 26.0, *), glass { content.buttonStyle(.glassProminent).tint(fill.color) }
+            if #available(macOS 26.0, *) { content.buttonStyle(.glassProminent).tint(fill.color) }
             else { content.buttonStyle(.borderedProminent).tint(fill.color) }
         } else {
-            if #available(macOS 26.0, *), glass { content.buttonStyle(.glass) } else { content.buttonStyle(.bordered) }
+            if #available(macOS 26.0, *) { content.buttonStyle(.glass) } else { content.buttonStyle(.bordered) }
         }
     }
 }
 
-/// Calm, static page background. With Liquid Glass a light accent tint gives the glass something to refract.
+/// Plain window background behind pages, like other Apple apps.
 struct Backdrop: View {
-    @AppStorage(SettingsKey.liquidGlass) private var glass = true
-
-    var body: some View {
-        ZStack {
-            Color(nsColor: .windowBackgroundColor)
-            if glass && Glass.isAvailable {
-                LinearGradient(colors: [Color.accentColor.opacity(Layout.backdropOpacity), .clear],
-                               startPoint: .topLeading, endPoint: .bottomTrailing)
-            }
-        }
-        .ignoresSafeArea()
-    }
+    var body: some View { Color(nsColor: .windowBackgroundColor).ignoresSafeArea() }
 }
 
 extension View {

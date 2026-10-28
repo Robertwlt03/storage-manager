@@ -17,7 +17,7 @@ struct RowIconView: View {
         switch icon {
         case .badge(let symbol, let index):
             Image(systemName: symbol).font(.system(size: size / 2, weight: .semibold)).foregroundStyle(.white)
-                .frame(width: size, height: size).background(Theme.color(index, palette), in: shape)
+                .frame(width: size, height: size).background(Theme.color(index, palette).gradient, in: shape)
         case .letter(let text):
             Text(text).font(.system(.body, design: .monospaced).weight(.semibold))
                 .frame(width: size, height: size).background(.quaternary, in: shape)

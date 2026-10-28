@@ -7,16 +7,17 @@ struct VolumeView: View {
 
     var body: some View {
         if let v = model.volumes.first(where: { $0.path == path }) {
-            UI.page(v.name) {
+            UI.page(.volume(path), title: v.name, options: { action(v) }) {
                 UI.card {
-                    UI.volume(v, segments: [StorageSegment(id: "used", title: Loc.used.s, bytes: v.used - v.purgeable, colorIndex: CategoryKind.apps.rawValue),
-                                            StorageSegment(id: "purgeable", title: Loc.purgeable.s, bytes: v.purgeable, colorIndex: CategoryKind.purgeable.rawValue)])
+                    UI.volume(v, segments: [
+                        StorageSegment(id: "used", title: Loc.used.s, bytes: v.used - v.purgeable, colorIndex: CategoryKind.apps.rawValue),
+                        StorageSegment(id: "purgeable", title: Loc.purgeable.s, bytes: v.purgeable, colorIndex: CategoryKind.purgeable.rawValue),
+                    ])
                     Divider()
                     UI.fields([FieldItem(.capacity, Fmt.bytes(v.total)), FieldItem(.used, Fmt.bytes(v.used - v.purgeable)),
                                FieldItem(.purgeable, Fmt.bytes(v.purgeable)), FieldItem(.freeSpace, Fmt.bytes(v.free)),
                                FieldItem(.available, Fmt.bytes(v.available)), FieldItem(.kind, v.format)])
                 }
-                action(v)
             }
         } else {
             UI.empty(Loc.volumeGone.s, symbol: Symbols.volumeGone)

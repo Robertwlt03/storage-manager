@@ -22,6 +22,7 @@ import Observation
     private(set) var categories: [Category] = []
     private(set) var hasFullDiskAccess = PermissionService.hasFullDiskAccess
     private(set) var apps: [AppUsage] = []
+    private(set) var cleanItems: [CleanItem]?
     private var task: Task<Void, Never>?
 
     var startupVolume: VolumeInfo? { volumes.first { $0.isRoot } }
@@ -88,6 +89,7 @@ import Observation
             }
             treeChanged()
             refreshApps()
+            await refreshCleanItems()
         }
     }
 
@@ -117,6 +119,12 @@ import Observation
     // MARK: Changes
 
     func refreshApps() { apps = AppUsageService.apps(in: root) }
+
+    /// What the cleaner could remove; computed once after each scan and shared by the overview and the cleaner.
+    func refreshCleanItems() async {
+        cleanItems = nil
+        cleanItems = await Task.detached(priority: .utility) { CleanerService.candidates() }.value
+    }
 
     /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
     func activate(_ entry: Entry) {

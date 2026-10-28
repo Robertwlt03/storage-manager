@@ -13,13 +13,16 @@ struct UnusedAppsView: View {
     }
 
     var body: some View {
-        UI.page(Loc.paneApps.s) {
-            UI.note(Loc.appsIntro.f(Fmt.count(days)))
+        UI.page(.apps, options: {
+            UI.menu(.unusedSince, selection: $days) {
+                ForEach(CleanConfig.unusedDayOptions, id: \.self) { Text(Loc.daysOption.f(Fmt.count($0))).tag($0) }
+            }
+        }) {
             if let error { UI.status(error, symbol: Symbols.warning, .bad) }
             if !model.hasData || model.apps.isEmpty {
-                UI.card { UI.notMeasured().frame(minHeight: Layout.placeholderHeight) }
+                UI.notMeasured()
             } else if unused.isEmpty {
-                UI.card { UI.empty(Loc.appsNoneUnused.s, symbol: Symbols.success).frame(minHeight: Layout.placeholderHeight) }
+                UI.empty(Loc.appsNoneUnused.s, symbol: Symbols.success)
             } else if layout == .grid {
                 UI.grid(unused) { app in
                     UI.tile(icon: .file(app.path), title: app.name, value: Fmt.bytes(app.bytes), detail: lastUsed(app))
@@ -44,12 +47,6 @@ struct UnusedAppsView: View {
                     }
                 }
             }
-        }
-        .toolbar {
-            Picker(Loc.unusedSince.s, selection: $days) {
-                ForEach(CleanConfig.unusedDayOptions, id: \.self) { Text(Loc.daysOption.f(Fmt.count($0))).tag($0) }
-            }
-            .pickerStyle(.menu)
         }
         .confirmationDialog(Loc.trashAppTitle.f(pending?.name ?? ""), isPresented: Binding(get: { pending != nil }, set: { if !$0 { pending = nil } })) {
             Button(Loc.moveToTrash.s, role: .destructive) { pending.map(trash) }

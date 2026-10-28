@@ -4,7 +4,6 @@ import AppKit
 enum SettingsKey {
     static let language = "language"
     static let appearance = "appearance"
-    static let liquidGlass = "liquidGlass"
     static let palette = "palette"
     static let binaryUnits = "binaryUnits"
     static let autoScan = "autoScan"
@@ -25,7 +24,7 @@ enum AppSettings {
 
     static func registerDefaults() {
         d.register(defaults: [SettingsKey.autoScan: true, SettingsKey.eco: true, SettingsKey.pauseOnLowPower: true,
-                              SettingsKey.liquidGlass: true, SettingsKey.largeFileMB: LargeFileThreshold.defaultMB,
+                              SettingsKey.largeFileMB: LargeFileThreshold.defaultMB,
                               SettingsKey.unusedDays: CleanConfig.defaultUnusedDays])
     }
 

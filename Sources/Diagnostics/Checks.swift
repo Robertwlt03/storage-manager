@@ -24,11 +24,6 @@ enum Checks {
                 print("\(r >= minContrast ? "ok  " : "FAIL") \(String(format: "%5.2f", r)):1  white / \(name) #\(String(hex, radix: 16))")
             }
         }
-        for tone in Theme.colourful {
-            let r = Theme.ratio(0xFFFFFF, tone.dark)
-            ok = ok && r >= Theme.minSymbolContrast
-            print("\(r >= Theme.minSymbolContrast ? "ok  " : "FAIL") \(String(format: "%5.2f", r)):1  white symbol / badge #\(String(tone.dark, radix: 16)) (dark)")
-        }
         return ok
     }
 

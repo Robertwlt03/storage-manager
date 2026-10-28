@@ -6,11 +6,11 @@ enum Loc: String, CaseIterable {
     case rescan, rescanHelp, cancelScan
 
     // Scan status and placeholders
-    case scanning, cancel, filesAndSize, measuredAt, scanNow, unreadable, unreadableHelp
+    case scanning, cancel, filesAndSize, measuredAt, scanNow, unreadable
     case notMeasuredTitle, notMeasuredDetail, scanningTitle, scanningDetail
 
     // Overview and categories
-    case availableOf, categories, overviewNote, freeSpace, tempAreaName
+    case availableOf, categories, freeSpace, tempAreaName
     case catApps, catDocuments, catDownloads, catMedia, catICloud, catMail, catDeveloper, catCaches, catAppData
     case catTrash, catTemp, catUser, catLibrary, catOther, catPurgeable, catSystem
 
@@ -24,11 +24,11 @@ enum Loc: String, CaseIterable {
     case minSize, fromSize, noFilesFrom, filesTotal
 
     // Temporary area
-    case tempIntro, location, total, subfolders, viewCopies
+    case location, total, subfolders, viewCopies
     case tempT, tempTDetail, tempC, tempCDetail, tempX, tempXDetail, temp0, temp0Detail
 
     // Signature copies
-    case copiesIntro, noCopies, noCopiesDetail, running, stopped, copiesLabel, countedSize, installedVersion, notFound
+    case noCopies, noCopiesDetail, running, stopped, copiesLabel, countedSize, installedVersion, notFound
     case versionLabel, copiesOne, copiesMany, current, old, unknown, createdOn, freed, deleteError, quitToDelete
     case openInExplorer, deleteAll, deleteTitle, deleteForever, deleteMessage
 
@@ -43,15 +43,18 @@ enum Loc: String, CaseIterable {
     case accessGranted, fullDiskAccess, accessRestart, accessRestartHint
 
     // Statistics, cleaner, unused apps, layout
-    case paneStatistics, paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, scanningBanner, emptyFolder, otherCategories, otherTypes, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail, cleanLogs, cleanLogsDetail, cleanTemp, cleanTempDetail, cleanTrash, cleanTrashDetail, cleanerIntro, cleanerSearching, cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle, cleanConfirmMessage, appsIntro, appsNoneUnused, unusedSince, daysOption, trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed, statFiles, statScanned, statLargeFiles, statUnusedApps, sizeDistribution, statisticsNote, bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
+    case paneStatistics, paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, emptyFolder, otherCategories, otherTypes, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail, cleanLogs, cleanLogsDetail, cleanTemp, cleanTempDetail, cleanTrash, cleanTrashDetail, cleanerSearching, cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle, cleanConfirmMessage, appsNoneUnused, unusedSince, daysOption, trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed, statFiles, statScanned, statLargeFiles, statUnusedApps, sizeDistribution, bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
 
     // Scan progress and empty values
     case scanningPercent, scanningArea, emptyValue
 
+    // Page info, scan details, summary
+    case infoOverview, infoStatistics, infoCleaner, infoApps, infoExplorer, infoLargeFiles, infoTemp, infoCopies, infoVolume, aboutPage, scanDetails, scanProgress, scanArea, scanFinished, accessMissingShort, summaryTitle, summaryDisk, summaryTop, summaryNotMeasured, summaryClean, summaryCopies, summaryApps, readAloud, stopReading
+
     // Settings
     case tabGeneral, tabAppearance, tabScanning, language, languageSystem, languageNote
     case appearance, appearanceSystem, appearanceLight, appearanceDark
-    case liquidGlass, liquidGlassDetail, liquidGlassUnavailable, chartColors, paletteColourful, paletteAccent, paletteGrey
+    case chartColors, paletteColourful, paletteAccent, paletteGrey
     case binaryUnits, binaryUnitsDetail, autoScan, pauseLowPower, pauseLowPowerDetail, eco, ecoDetail
     case extraFolders, none, add, remove
 }

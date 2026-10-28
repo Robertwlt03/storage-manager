@@ -18,7 +18,6 @@
 "measuredAt" = "Scanned at %@";
 "scanNow" = "Scan Now";
 "unreadable" = "%@ folders unreadable – allow Full Disk Access …";
-"unreadableHelp" = "With Full Disk Access the app also measures protected folders, such as those of Mail or Safari.";
 "notMeasuredTitle" = "Not Scanned Yet";
 "notMeasuredDetail" = "One pass measures every area; after that every click is instant.";
 "scanningTitle" = "Scanning …";
@@ -27,7 +26,6 @@
 /* Overview and categories */
 "availableOf" = "%@ available of %@";
 "categories" = "Categories";
-"overviewNote" = "Sizes are the space in use, as reported by “du”. APFS clones count in full; copies that share storage blocks really use less. “System & Other” is the remainder up to what macOS reports as used.";
 "freeSpace" = "Free";
 "tempAreaName" = "Temporary System Area";
 "catApps" = "Applications";
@@ -82,7 +80,6 @@
 "filesTotal" = "%@ files · %@ total";
 
 /* Temporary area */
-"tempIntro" = "macOS creates this area for every user under /private/var/folders. It is hidden in Finder and not broken down in “Manage Storage”.";
 "location" = "Location";
 "total" = "Total";
 "subfolders" = "Subfolders";
@@ -97,7 +94,6 @@
 "temp0Detail" = "Data of background services.";
 
 /* Signature copies */
-"copiesIntro" = "While checking a signature, macOS sometimes places complete copies of an app in folder X. They are not separate programs; macOS creates a new one when needed. Deleting them is safe as long as the app is quit.";
 "noCopies" = "No Signature Copies";
 "noCopiesDetail" = "There are no app copies in folder X.";
 "running" = "running";
@@ -163,9 +159,6 @@
 "appearanceSystem" = "System";
 "appearanceLight" = "Light";
 "appearanceDark" = "Dark";
-"liquidGlass" = "Liquid Glass";
-"liquidGlassDetail" = "Glass surfaces in the style of macOS 26. Off saves a little graphics power and energy.";
-"liquidGlassUnavailable" = "Requires macOS 26 or later.";
 "chartColors" = "Chart Colors";
 "paletteColourful" = "Colorful";
 "paletteAccent" = "Accent Color";
@@ -191,7 +184,6 @@
 "layoutList" = "List";
 "layoutGrid" = "Grid";
 "settings" = "Settings";
-"scanningBanner" = "Scanning … %@ files · %@";
 "emptyFolder" = "This folder is empty";
 "otherCategories" = "Other";
 "otherTypes" = "Other";
@@ -205,7 +197,6 @@
 "cleanTempDetail" = "Temporary files not changed for at least three days.";
 "cleanTrash" = "Trash";
 "cleanTrashDetail" = "Empties the Trash permanently. Not selected by default.";
-"cleanerIntro" = "Remove files your system barely needs or not at all: caches that rebuild themselves, old logs and old temporary files. Choose what may go and confirm.";
 "cleanerSearching" = "Looking for files to clean up …";
 "cleanFailed" = "%@ items could not be removed because they are in use or protected.";
 "cleaning" = "Cleaning up …";
@@ -213,7 +204,6 @@
 "cleanSelected" = "Clean Up Selection (%@)";
 "cleanConfirmTitle" = "Remove %@ permanently?";
 "cleanConfirmMessage" = "The files do not go to the Trash. Apps rebuild their caches when needed. Afterwards the app measures everything again.";
-"appsIntro" = "Apps you have not opened for more than %@ days. The date comes from macOS itself; the app records nothing. Move what you no longer need to the Trash here.";
 "appsNoneUnused" = "All apps were used recently";
 "unusedSince" = "Not opened for";
 "daysOption" = "more than %@ days";
@@ -227,7 +217,6 @@
 "statLargeFiles" = "large files";
 "statUnusedApps" = "unused apps";
 "sizeDistribution" = "Files by Size";
-"statisticsNote" = "File types count files from 1 MB; smaller files are grouped during the scan to save memory and energy.";
 "bucketUnder1MB" = "under 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -238,3 +227,29 @@
 "scanningPercent" = "%@ scanned";
 "scanningArea" = "Area %@ of %@ · %@";
 "emptyValue" = "empty";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Sizes are the space in use, as reported by “du”. APFS clones count in full; copies that share storage blocks really use less. “System & Other” is the remainder up to what macOS reports as used.";
+"infoStatistics" = "Figures and charts from the last scan. File types count files from 1 MB; smaller files are grouped during the scan to save memory and energy.";
+"infoCleaner" = "Remove files your system barely needs or not at all: caches that rebuild themselves, old logs and old temporary files. Choose what may go and confirm.";
+"infoApps" = "Apps you have not opened for a while. The date comes from macOS itself; the app records nothing. Move what you no longer need to the Trash here; you can restore it from there.";
+"infoExplorer" = "All measured folders, sorted by size. Double-click opens a folder; the context menu shows files in Finder and gives information about them.";
+"infoLargeFiles" = "All files from the chosen size in the last scan. Double-click shows the file in Finder.";
+"infoTemp" = "macOS creates this area for every user under /private/var/folders. It is hidden in Finder and not broken down in “Manage Storage”.";
+"infoCopies" = "While checking a signature, macOS sometimes places complete copies of an app in folder X. They are not separate programs; macOS creates a new one when needed. Deleting them is safe as long as the app is quit.";
+"infoVolume" = "Capacity of this volume: what is used, what macOS can free by itself when needed and what is free. External volumes can be measured here.";
+"aboutPage" = "About This Page";
+"scanDetails" = "Scan";
+"scanProgress" = "Progress";
+"scanArea" = "Area";
+"scanFinished" = "Scanned at";
+"accessMissingShort" = "Not granted";
+"summaryTitle" = "In Short";
+"summaryDisk" = "On “%@”, %@ of %@ is used and %@ is available.";
+"summaryTop" = "The most space goes to %@ with %@ and %@ with %@.";
+"summaryNotMeasured" = "How the space is divided appears here after the first scan.";
+"summaryClean" = "Cleaning up can free about %@.";
+"summaryCopies" = "Signature copies of apps count for %@.";
+"summaryApps" = "%@ apps have not been opened for a while.";
+"readAloud" = "Read Aloud";
+"stopReading" = "Stop Reading";

@@ -65,32 +65,6 @@ struct NotMeasured: View {
     }
 }
 
-/// Shown at the top of every page while a scan runs: how far it is, which area, and a way to stop.
-struct ScanBanner: View {
-    var inset = false  // true when it floats above a table instead of sitting inside a page
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: Layout.rowSpacing) {
-                Text(Loc.scanningPercent.f(Fmt.percent(model.scanFraction))).font(.headline).monospacedDigit()
-                Text(Loc.scanningArea.f(Fmt.count(model.scanStep.index), Fmt.count(model.scanStep.count), Paths.display(model.scanStep.path)))
-                    .foregroundStyle(.muted).lineLimit(1).truncationMode(.middle)
-                Spacer(minLength: Layout.rowSpacing)
-                Button(Loc.cancel.s) { model.cancelScan() }.appButton()
-            }
-            ProgressView(value: model.scanFraction).progressViewStyle(.linear)
-            Text(Loc.filesAndSize.f(Fmt.count(model.progress.files), Fmt.bytes(model.progress.bytes)))
-                .font(.callout).foregroundStyle(.muted).monospacedDigit()
-        }
-        .padding(Layout.cardPadding)
-        .surface()
-        .padding(.horizontal, inset ? Layout.pagePadding : 0)
-        .padding(.top, inset ? Layout.rowPadding : 0)
-        .accessibilityElement(children: .combine)
-    }
-}
-
 /// Empty result: while scanning it says so, otherwise it shows the given empty state.
 struct EmptyOrScanning: View {
     let title: String

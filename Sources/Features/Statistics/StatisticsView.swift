@@ -9,9 +9,9 @@ struct StatisticsView: View {
     @State private var stats = Statistics()
 
     var body: some View {
-        UI.page(Loc.paneStatistics.s) {
+        UI.page(.statistics) {
             if !model.hasData {
-                UI.card { UI.notMeasured().frame(minHeight: Layout.placeholderHeight) }
+                UI.notMeasured()
             } else {
                 UI.tiles(columns: Layout.statColumns) {
                     UI.stat(Fmt.count(stats.files), .statFiles, symbol: Symbols.files)
@@ -26,7 +26,6 @@ struct StatisticsView: View {
                 }
                 UI.card(Loc.typesBySize.s) { typeChart.padding(.vertical, Layout.rowPadding) }
                 UI.card(Loc.sizeDistribution.s) { bucketChart.padding(.vertical, Layout.rowPadding) }
-                UI.note(Loc.statisticsNote.s)
             }
         }
         .task(id: model.revision) { stats = StatsService.compute(root: model.root) }

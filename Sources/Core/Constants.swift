@@ -68,6 +68,9 @@ enum Layout {
     static let chartHeight: CGFloat = 220
     static let statTileMin: CGFloat = 150
     static let statColumns = 2
+    static let popoverWidth: CGFloat = 340
+    static let headerHeight: CGFloat = 28
+    static let fillShare = 0.72  // empty states fill this share of the visible page height
     static let donutInner = 0.62
 }
 

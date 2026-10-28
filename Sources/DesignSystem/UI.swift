@@ -3,8 +3,27 @@ import SwiftUI
 /// The component factory: every page builds its interface from these functions, so a design change
 /// happens here once instead of on every page.
 enum UI {
-    static func page<C: View>(_ title: String, @ViewBuilder _ content: () -> C) -> some View {
-        Page(title: title, content: content)
+    static func page<C: View>(_ pane: Pane, title: String? = nil, @ViewBuilder _ content: () -> C) -> some View {
+        Page(title: title ?? pane.title.s, info: pane.info, options: { EmptyView() }, content: content)
+    }
+
+    static func page<O: View, C: View>(_ pane: Pane, title: String? = nil, @ViewBuilder options: () -> O,
+                                       @ViewBuilder _ content: () -> C) -> some View {
+        Page(title: title ?? pane.title.s, info: pane.info, options: options, content: content)
+    }
+
+    /// The page header on its own, above tables (which bring their own scrolling).
+    static func header<O: View>(_ info: Loc, @ViewBuilder options: () -> O) -> some View {
+        PageHeader(info: info, options: options)
+            .padding(.horizontal, Layout.pagePadding)
+            .padding(.vertical, Layout.rowPadding)
+    }
+
+    /// An option menu that always shows its current choice next to its name.
+    static func menu<V: Hashable, C: View>(_ title: Loc, selection: Binding<V>, @ViewBuilder _ items: () -> C) -> some View {
+        Picker(selection: selection, content: items) { Text(title.s) }
+            .pickerStyle(.menu)
+            .fixedSize()
     }
 
     static func card<C: View>(_ title: String? = nil, @ViewBuilder _ content: () -> C) -> some View {
@@ -36,11 +55,15 @@ enum UI {
         StatusLabel(text: text, symbol: symbol, kind: kind)
     }
 
-    static func notMeasured() -> some View { NotMeasured() }
+    /// Full-size, centred states for pages without content.
+    static func notMeasured() -> some View { FillPage { NotMeasured() } }
+    /// The same state inside a card, below other content.
+    static func notMeasuredCard(_ title: String) -> some View {
+        Card(title: title) { NotMeasured().frame(maxWidth: .infinity, minHeight: Layout.placeholderHeight) }
+    }
     static func emptyOrScanning(_ title: String, symbol: String, detail: String? = nil) -> some View {
         EmptyOrScanning(title: title, symbol: symbol, detail: detail)
     }
-    static func scanBanner(inset: Bool = false) -> some View { ScanBanner(inset: inset) }
 
     // Grid
     static func tile(icon: RowIcon, title: String, value: String, detail: String? = nil, share: Double? = nil) -> some View {
@@ -61,7 +84,7 @@ enum UI {
     static func legend(_ segments: [StorageSegment]) -> some View { StorageLegend(segments: segments) }
 
     static func empty(_ title: String, symbol: String, detail: String? = nil) -> some View {
-        EmptyState(title: title, symbol: symbol, detail: detail) { EmptyView() }
+        FillPage { EmptyState(title: title, symbol: symbol, detail: detail) { EmptyView() } }
     }
 
     static func button(_ title: String, _ kind: ButtonKind = .normal, role: ButtonRole? = nil, action: @escaping () -> Void) -> some View {

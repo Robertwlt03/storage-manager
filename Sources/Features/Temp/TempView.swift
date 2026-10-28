@@ -7,11 +7,11 @@ struct TempView: View {
     var body: some View {
         let _ = model.revision
         let area = model.root.descendant(at: Paths.tempArea)
-        UI.page(Loc.paneTemp.s) {
+        UI.page(.temp, options: {
+            if !model.copyGroups.isEmpty { UI.button(Loc.viewCopies.s) { model.pane = .copies } }
+        }) {
             if let area {
                 UI.card {
-                    UI.note(Loc.tempIntro.s).padding(.vertical, Layout.rowPadding)
-                    Divider()
                     UI.fields([FieldItem(.location, Paths.tempArea), FieldItem(.total, Fmt.bytes(area.bytes))])
                 }
                 UI.card(Loc.subfolders.s) {
@@ -21,11 +21,8 @@ struct TempView: View {
                                   value: node.map { Fmt.bytes($0.bytes) } ?? "–", action: node.map { n in { model.open(n) } })
                     }
                 }
-                if !model.copyGroups.isEmpty {
-                    UI.button(Loc.viewCopies.s) { model.pane = .copies }
-                }
             } else {
-                UI.notMeasured().frame(minHeight: Layout.placeholderHeight)
+                UI.notMeasured()
             }
         }
     }

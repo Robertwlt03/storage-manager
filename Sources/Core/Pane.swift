@@ -50,6 +50,21 @@ enum Pane: Hashable {
         }
     }
 
+    /// What the page is for, shown by its info button.
+    var info: Loc {
+        switch self {
+        case .overview: .infoOverview
+        case .statistics: .infoStatistics
+        case .cleaner: .infoCleaner
+        case .apps: .infoApps
+        case .explorer: .infoExplorer
+        case .largeFiles: .infoLargeFiles
+        case .temp: .infoTemp
+        case .copies: .infoCopies
+        case .volume: .infoVolume
+        }
+    }
+
     var symbol: String {
         switch self {
         case .overview: Symbols.overview

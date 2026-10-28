@@ -5,12 +5,13 @@ struct OverviewView: View {
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
 
     var body: some View {
-        UI.page(Loc.paneOverview.s) {
+        UI.page(.overview) {
             if let v = model.startupVolume {
                 UI.card { UI.volume(v, segments: segments) }
             }
+            SummaryCard()
             if model.categories.isEmpty {
-                UI.card(Loc.categories.s) { UI.notMeasured().frame(minHeight: Layout.placeholderHeight) }
+                UI.notMeasuredCard(Loc.categories.s)
             } else if layout == .grid {
                 Text(Loc.categories.s).font(.headline).padding(.leading, 4)
                 UI.grid(model.categories) { c in
@@ -24,7 +25,6 @@ struct OverviewView: View {
                     }
                 }
             }
-            if !model.categories.isEmpty { UI.note(Loc.overviewNote.s) }
         }
     }
 

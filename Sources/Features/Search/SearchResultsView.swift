@@ -9,6 +9,7 @@ struct SearchResultsView: View {
         EntryBrowser(entries: results, total: results.reduce(0) { $0 + $1.bytes }, showLocation: true,
                      emptyTitle: Loc.noResults.f(model.searchText), emptyDetail: Loc.searchNote.s)
             .navigationTitle(Loc.searchResults.f(Fmt.count(results.count)))
+            .safeAreaInset(edge: .top, spacing: 0) { UI.header(.searchNote) { EmptyView() } }
             .task(id: "\(model.searchText)|\(model.searchScope)|\(model.revision)") {
                 try? await Task.sleep(for: ScanConfig.searchDebounce)  // wait until typing pauses
                 guard !Task.isCancelled else { return }

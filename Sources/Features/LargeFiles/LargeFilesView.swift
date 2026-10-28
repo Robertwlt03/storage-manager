@@ -11,11 +11,12 @@ struct LargeFilesView: View {
         EntryBrowser(entries: entries, total: sum, showLocation: true, emptyTitle: Loc.noFilesFrom.f(threshold(minMB)))
             .navigationTitle(Loc.paneLargeFiles.s)
             .navigationSubtitle(Loc.filesTotal.f(Fmt.count(entries.count), Fmt.bytes(sum)))
-            .toolbar {
-                Picker(Loc.minSize.s, selection: $minMB) {
-                    ForEach(LargeFileThreshold.optionsMB, id: \.self) { Text(Loc.fromSize.f(threshold($0))).tag($0) }
+            .safeAreaInset(edge: .top, spacing: 0) {
+                UI.header(Pane.largeFiles.info) {
+                    UI.menu(.minSize, selection: $minMB) {
+                        ForEach(LargeFileThreshold.optionsMB, id: \.self) { Text(Loc.fromSize.f(threshold($0))).tag($0) }
+                    }
                 }
-                .pickerStyle(.menu)
             }
             .task(id: "\(minMB)-\(model.revision)") {
                 entries = SearchService.largeFiles(atLeast: LargeFileThreshold.bytes(minMB), in: model.root)

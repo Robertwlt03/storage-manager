@@ -1,24 +1,62 @@
 import SwiftUI
 
-/// A scrolling page with the backdrop and a readable maximum width.
-struct Page<Content: View>: View {
+/// A scrolling page: the header with the page's options and info button, then the content.
+struct Page<Options: View, Content: View>: View {
     let title: String
+    let info: Loc
+    @ViewBuilder let options: Options
     @ViewBuilder let content: Content
-    @Environment(AppModel.self) private var model
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Layout.spacing) {
-                if model.scanning { ScanBanner() }
+                PageHeader(info: info) { options }
                 content
             }
-                .padding(Layout.pagePadding)
-                .frame(maxWidth: Layout.maxContentWidth)
-                .frame(maxWidth: .infinity)
+            .padding(Layout.pagePadding)
+            .frame(maxWidth: Layout.maxContentWidth)
+            .frame(maxWidth: .infinity)
         }
         .scrollContentBackground(.hidden)
         .background(Backdrop())
         .navigationTitle(title)
+    }
+}
+
+/// Always at the top of a page: its options on the left, an info button explaining the page on the right.
+struct PageHeader<Options: View>: View {
+    let info: Loc
+    @ViewBuilder let options: Options
+    @State private var showInfo = false
+
+    var body: some View {
+        HStack(spacing: Layout.rowSpacing) {
+            options
+            Spacer(minLength: 0)
+            Button { showInfo.toggle() } label: { Label(Loc.aboutPage.s, systemImage: Symbols.info) }
+                .labelStyle(.iconOnly)
+                .buttonStyle(.borderless)
+                .font(.title3)
+                .help(Loc.aboutPage.s)
+                .popover(isPresented: $showInfo, arrowEdge: .bottom) {
+                    Text(info.s)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(Layout.cardPadding)
+                        .frame(width: Layout.popoverWidth, alignment: .leading)
+                }
+        }
+        .frame(minHeight: Layout.headerHeight)
+    }
+}
+
+/// Fills the visible height of a page and centres its content, for empty and loading states.
+struct FillPage<Content: View>: View {
+    @ViewBuilder let content: Content
+
+    var body: some View {
+        content
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .containerRelativeFrame(.vertical, alignment: .center) { height, _ in height * Layout.fillShare }
     }
 }
 

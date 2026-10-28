@@ -6,12 +6,11 @@ struct CopiesView: View {
 
     var body: some View {
         let groups = model.copyGroups
-        UI.page(Loc.paneCopies.s) {
-            UI.note(Loc.copiesIntro.s)
+        UI.page(.copies) {
             if !model.hasData {
-                UI.notMeasured().frame(minHeight: Layout.placeholderHeight)
+                UI.notMeasured()
             } else if groups.isEmpty {
-                UI.empty(Loc.noCopies.s, symbol: Symbols.copies, detail: Loc.noCopiesDetail.s).frame(minHeight: Layout.placeholderHeight)
+                UI.empty(Loc.noCopies.s, symbol: Symbols.copies, detail: Loc.noCopiesDetail.s)
             }
             ForEach(groups) { CopyGroupCard(group: $0) }
         }
