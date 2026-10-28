@@ -1,0 +1,182 @@
+/* App and sidebar */
+"appName" = "Storage Explorer";
+"paneOverview" = "Overview";
+"paneExplorer" = "Folders";
+"paneLargeFiles" = "Large Files";
+"paneTemp" = "Temporary Area";
+"paneCopies" = "Signature Copies";
+"sectionSystem" = "macOS";
+"sectionVolumes" = "Volumes";
+"rescan" = "Rescan";
+"rescanHelp" = "Rescan all areas (⌘R)";
+"cancelScan" = "Cancel Scan";
+
+/* Scan status and placeholders */
+"scanning" = "Scanning …";
+"cancel" = "Cancel";
+"filesAndSize" = "%@ files · %@";
+"measuredAt" = "Scanned at %@";
+"scanNow" = "Scan Now";
+"unreadable" = "%@ folders unreadable – allow Full Disk Access …";
+"unreadableHelp" = "With Full Disk Access the app also measures protected folders, such as those of Mail or Safari.";
+"notMeasuredTitle" = "Not Scanned Yet";
+"notMeasuredDetail" = "One pass measures every area; after that every click is instant.";
+"scanningTitle" = "Scanning …";
+"scanningDetail" = "Results appear as soon as the first area is done.";
+
+/* Overview and categories */
+"availableOf" = "%@ available of %@";
+"categories" = "Categories";
+"overviewNote" = "Sizes are the space in use, as reported by “du”. APFS clones count in full; copies that share storage blocks really use less. “System & Other” is the remainder up to what macOS reports as used.";
+"freeSpace" = "Free";
+"tempAreaName" = "Temporary System Area";
+"catApps" = "Applications";
+"catDocuments" = "Documents & Desktop";
+"catDownloads" = "Downloads";
+"catMedia" = "Photos, Music & Movies";
+"catICloud" = "iCloud Drive";
+"catMail" = "Mail & Messages";
+"catDeveloper" = "Developer";
+"catCaches" = "Caches";
+"catAppData" = "App Data";
+"catTrash" = "Trash";
+"catTemp" = "Temporary Files";
+"catUser" = "Other User Data";
+"catLibrary" = "Library (System-wide)";
+"catOther" = "Other Folders";
+"catPurgeable" = "Purgeable by macOS";
+"catSystem" = "System & Other";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Name";
+"columnSize" = "Size";
+"columnShare" = "Share";
+"columnFiles" = "Files";
+"columnLocation" = "Location";
+"smallerItems" = "%@ smaller items under 1 MB";
+"measuredTotal" = "%@ scanned";
+"open" = "Open";
+"showInFinder" = "Show in Finder";
+"info" = "Get Info";
+"copyPath" = "Copy Path";
+"done" = "Done";
+"allocated" = "Size on Disk";
+"kind" = "Kind";
+"modified" = "Modified";
+"created" = "Created";
+"contents" = "Contents";
+"files" = "Files";
+"folders" = "Folders";
+"packages" = "App Packages";
+"modifiedBetween" = "Modified Between";
+"dateRange" = "%@ and %@";
+"analyzing" = "Analyzing files …";
+"typesBySize" = "File Types by Size";
+"fileCount" = "%@ files";
+"noExtension" = "no extension";
+
+/* Large files */
+"minSize" = "Minimum Size";
+"fromSize" = "from %@";
+"noFilesFrom" = "No files from %@";
+"filesTotal" = "%@ files · %@ total";
+
+/* Temporary area */
+"tempIntro" = "macOS creates this area for every user under /private/var/folders. It is hidden in Finder and not broken down in “Manage Storage”.";
+"location" = "Location";
+"total" = "Total";
+"subfolders" = "Subfolders";
+"viewCopies" = "View Signature Copies …";
+"tempT" = "Temporary Files";
+"tempTDetail" = "Mostly emptied on restart.";
+"tempC" = "Caches";
+"tempCDetail" = "Caches of apps and system services.";
+"tempX" = "Signature Copies of Apps";
+"tempXDetail" = "Copies macOS makes while checking signatures.";
+"temp0" = "System Services";
+"temp0Detail" = "Data of background services.";
+
+/* Signature copies */
+"copiesIntro" = "While checking a signature, macOS sometimes places complete copies of an app in folder X. They are not separate programs; macOS creates a new one when needed. Deleting them is safe as long as the app is quit.";
+"noCopies" = "No Signature Copies";
+"noCopiesDetail" = "There are no app copies in folder X.";
+"running" = "running";
+"stopped" = "quit";
+"copiesLabel" = "Copies";
+"countedSize" = "Counted Size";
+"installedVersion" = "Installed Version";
+"notFound" = "not found";
+"versionLabel" = "Version %@";
+"copiesOne" = "1 copy";
+"copiesMany" = "%@ copies";
+"current" = "current";
+"old" = "old";
+"unknown" = "unknown";
+"createdOn" = "Created on %@";
+"freed" = "Space actually freed: %@";
+"deleteError" = "Not everything could be deleted: %@";
+"quitToDelete" = "Quit %@ with ⌘Q to delete.";
+"openInExplorer" = "Open in Explorer";
+"deleteAll" = "Delete All Copies …";
+"deleteTitle" = "Delete %@ signature copies of %@?";
+"deleteForever" = "Delete Permanently";
+"deleteMessage" = "The copies do not go to the Trash. macOS creates a new one when needed.";
+
+/* Volumes */
+"capacity" = "Capacity";
+"used" = "Used";
+"purgeable" = "Purgeable by macOS";
+"available" = "Available";
+"toOverview" = "Go to Overview";
+"exploreContents" = "Explore Contents";
+"scanAndExplore" = "Scan and Explore";
+"volumeGone" = "Volume No Longer Connected";
+
+/* Search */
+"searchPrompt" = "Search folders and files";
+"scopeAll" = "All";
+"scopeFolders" = "Folders";
+"scopeFiles" = "Files";
+"searchResults" = "%@ Results";
+"noResults" = "No Results for “%@”";
+"searchNote" = "Searches folders and files from 1 MB in the last scan.";
+
+/* Full Disk Access */
+"accessTitle" = "One Permission Instead of Many Prompts";
+"accessDetail" = "Without Full Disk Access, macOS asks separately for Desktop, Documents, Downloads, iCloud Drive, other apps' data and external volumes. A single switch in System Settings replaces all of these prompts. The app only reads sizes and sends nothing anywhere.";
+"accessOneSwitch" = "Privacy & Security › Full Disk Access";
+"accessOpenSettings" = "Open System Settings";
+"accessContinue" = "Continue Without Full Disk Access";
+"accessDontAsk" = "Don't ask again";
+"accessGranted" = "Granted";
+"fullDiskAccess" = "Full Disk Access";
+
+/* Settings */
+"tabGeneral" = "General";
+"tabAppearance" = "Appearance";
+"tabScanning" = "Scanning";
+"language" = "Language";
+"languageSystem" = "System (%@)";
+"languageNote" = "Without a choice of your own the app follows the system language; German and English are included.";
+"appearance" = "Appearance";
+"appearanceSystem" = "System";
+"appearanceLight" = "Light";
+"appearanceDark" = "Dark";
+"liquidGlass" = "Liquid Glass";
+"liquidGlassDetail" = "Glass surfaces in the style of macOS 26. Off saves a little graphics power and energy.";
+"liquidGlassUnavailable" = "Requires macOS 26 or later.";
+"chartColors" = "Chart Colors";
+"paletteColourful" = "Colorful";
+"paletteAccent" = "Accent Color";
+"paletteGrey" = "Greys";
+"binaryUnits" = "Binary Units (GiB)";
+"binaryUnitsDetail" = "Off: sizes as in Finder, 1 GB = 1000 MB.";
+"autoScan" = "Scan automatically at launch";
+"pauseLowPower" = "Don't scan automatically in Low Power Mode";
+"pauseLowPowerDetail" = "Then the app only scans when you click “Rescan”.";
+"eco" = "Energy-saving scan";
+"ecoDetail" = "Scans at low priority on the efficiency cores. It takes a little longer but uses much less power and keeps the Mac cool.";
+"extraFolders" = "Additional Folders";
+"none" = "None";
+"add" = "Add";
+"remove" = "Remove";
