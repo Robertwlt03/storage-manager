@@ -91,6 +91,7 @@ enum Layout {
     static let chartHeight: CGFloat = 220
     static let statTileMin: CGFloat = 150
     static let statColumns = 3
+    static let statMinScale = 0.7
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
     static let fillShare = 0.72

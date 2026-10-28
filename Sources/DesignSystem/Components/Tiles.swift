@@ -36,9 +36,11 @@ struct StatTile: View {
     var body: some View {
         Button { action?() } label: {
             HStack(spacing: Space.item) {
-                Image(systemName: symbol).font(.title2).foregroundStyle(.tint).frame(width: Layout.badgeSize)
+                // The symbol sits above the figure, so number and label get the tile's whole width even when narrow.
                 VStack(alignment: .leading, spacing: Space.hairline) {
+                    Image(systemName: symbol).font(.title3).foregroundStyle(.tint).padding(.bottom, Space.xs)
                     Text(value).font(.title2.weight(.semibold)).monospacedDigit().contentTransition(.numericText())
+                        .lineLimit(1).minimumScaleFactor(Layout.statMinScale)  // a number never breaks
                         .calculating(loading)
                     Text(label).foregroundStyle(.muted).lineLimit(2, reservesSpace: true)  // same height in every tile
                 }
