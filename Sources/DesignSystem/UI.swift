@@ -15,8 +15,8 @@ enum UI {
     /// The page header on its own, above tables (which bring their own scrolling).
     static func header<O: View>(_ info: Loc, @ViewBuilder options: () -> O) -> some View {
         PageHeader(info: info, options: options)
-            .padding(.horizontal, Layout.pagePadding)
-            .padding(.vertical, Layout.rowPadding)
+            .padding(.horizontal, Space.page)
+            .padding(.vertical, Space.row)
     }
 
     /// An option menu that always shows its current choice next to its name.
@@ -76,7 +76,7 @@ enum UI {
     }
     /// Grid for a fixed set of tiles.
     static func tiles<C: View>(columns: Int, @ViewBuilder _ content: () -> C) -> some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Layout.spacing), count: columns), spacing: Layout.spacing) {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Space.section), count: columns), spacing: Space.section) {
             content()
         }
     }

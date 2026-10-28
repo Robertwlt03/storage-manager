@@ -36,22 +36,22 @@ struct NavRow: View {
 
     var body: some View {
         Button { action?() } label: {
-            HStack(spacing: Layout.rowSpacing) {
+            HStack(spacing: Space.item) {
                 if let icon { RowIconView(icon: icon) }
-                VStack(alignment: .leading, spacing: 1) {
+                VStack(alignment: .leading, spacing: Space.hairline) {
                     Text(title)
                     if let detail { Text(detail).font(.callout).foregroundStyle(.muted) }
                 }
-                Spacer(minLength: Layout.rowSpacing)
+                Spacer(minLength: Space.item)
                 if let value { Text(value).monospacedDigit().foregroundStyle(.muted).contentTransition(.numericText()) }
                 Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted)
                     .opacity(action == nil ? 0 : 1)
             }
             .contentShape(Rectangle())
             // The highlight reaches a little beyond the row without changing its layout.
-            .padding(.horizontal, Layout.hoverInset).padding(.vertical, Layout.hoverInset / 2)
+            .padding(.horizontal, Space.s).padding(.vertical, Space.xs)
             .modifier(OptionalHover(active: action != nil))
-            .padding(.horizontal, -Layout.hoverInset).padding(.vertical, -Layout.hoverInset / 2)
+            .padding(.horizontal, -Space.s).padding(.vertical, -Space.xs)
         }
         .buttonStyle(.plain)
         .allowsHitTesting(action != nil)  // not .disabled: that would dim the text below 4.5:1
@@ -77,9 +77,9 @@ struct FieldRow: View {
     let value: String
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: Layout.rowSpacing) {
+        HStack(alignment: .firstTextBaseline, spacing: Space.item) {
             Text(label)
-            Spacer(minLength: Layout.rowSpacing)
+            Spacer(minLength: Space.item)
             Text(value).foregroundStyle(.muted).monospacedDigit().multilineTextAlignment(.trailing).textSelection(.enabled)
         }
     }
@@ -93,9 +93,9 @@ struct HeaderRow: View {
     var iconSize = Layout.headerIcon
 
     var body: some View {
-        HStack(spacing: Layout.rowSpacing) {
+        HStack(spacing: Space.item) {
             RowIconView(icon: icon, size: iconSize)
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: Space.hairline) {
                 Text(title).font(.title2.weight(.semibold)).lineLimit(2)
                 Text(subtitle).foregroundStyle(.muted).lineLimit(2).textSelection(.enabled)
             }

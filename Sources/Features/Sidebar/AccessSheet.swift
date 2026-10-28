@@ -7,7 +7,7 @@ struct AccessSheet: View {
     @State private var visitedSettings = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Layout.spacing) {
+        VStack(alignment: .leading, spacing: Space.section) {
             UI.header(Loc.accessTitle.s, subtitle: Loc.accessOneSwitch.s, icon: .file(Bundle.main.bundlePath))
             UI.note(Loc.accessDetail.s)
             if visitedSettings { UI.status(Loc.accessRestartHint.s, symbol: Symbols.warning, .warn) }
@@ -25,7 +25,7 @@ struct AccessSheet: View {
                 }
             }
         }
-        .padding(Layout.pagePadding)
+        .padding(Space.page)
         .frame(width: Layout.sheetWidth)
         // Back from System Settings: close if access works already, otherwise the hint above explains the restart.
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in

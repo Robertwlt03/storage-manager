@@ -28,12 +28,24 @@ enum LargeFileThreshold {
     static func bytes(_ mb: Int) -> Int64 { Int64(mb) * 1_000_000 }
 }
 
+/// The spacing scale: every gap in the app is one of these steps on Apple's 4-point grid,
+/// and each kind of gap always uses the same step.
+enum Space {
+    static let hairline: CGFloat = 2  // title and subtitle of one item
+    static let xs: CGFloat = 4  // headings to their card, tight groups
+    static let s: CGFloat = 8  // inside a row: icon to text, dot to label; row padding; card title to card
+    static let m: CGFloat = 12  // between the parts of a row
+    static let l: CGFloat = 16  // between cards and sections; inside cards
+    static let xl: CGFloat = 24  // page margins
+
+    static let page = xl
+    static let section = l
+    static let card = l
+    static let row = s
+    static let item = m
+}
+
 enum Layout {
-    static let spacing: CGFloat = 16
-    static let rowSpacing: CGFloat = 12
-    static let pagePadding: CGFloat = 24
-    static let cardPadding: CGFloat = 16
-    static let rowPadding: CGFloat = 9
     static let cardRadius: CGFloat = 16
     static let badgeRadius: CGFloat = 6
     static let badgeSize: CGFloat = 26
@@ -68,7 +80,6 @@ enum Layout {
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
     static let fillShare = 0.72
-    static let hoverInset: CGFloat = 6  // empty states fill this share of the visible page height
     static let donutInner = 0.62
 }
 

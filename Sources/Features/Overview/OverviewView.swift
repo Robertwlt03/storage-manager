@@ -15,7 +15,7 @@ struct OverviewView: View {
             if model.categories.isEmpty {
                 UI.notMeasuredCard(Loc.categories.s)
             } else if layout == .grid {
-                Text(Loc.categories.s).font(.headline).padding(.leading, 4)
+                Text(Loc.categories.s).font(.headline).padding(.leading, Space.xs)
                 UI.grid(model.categories) { c in
                     UI.tile(icon: badge(c), title: c.kind.title.s, value: Fmt.bytes(c.bytes))
                         .onTapGesture { c.node.map(model.open) }

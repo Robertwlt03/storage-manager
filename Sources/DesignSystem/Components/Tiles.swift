@@ -9,14 +9,14 @@ struct Tile: View {
     var share: Double?
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: Space.s) {
             RowIconView(icon: icon, size: Layout.gridIcon)
             Text(title).font(.headline).lineLimit(2).multilineTextAlignment(.center)
             Text(value).monospacedDigit().foregroundStyle(.muted)
             if let detail { Text(detail).font(.callout).foregroundStyle(.muted).lineLimit(1) }
             if let share { ProgressView(value: min(max(share, 0), 1)).progressViewStyle(.linear) }
         }
-        .padding(Layout.cardPadding)
+        .padding(Space.card)
         .frame(maxWidth: .infinity, minHeight: Layout.gridTile)
         .surface()
         .contentShape(Rectangle())
@@ -34,16 +34,16 @@ struct StatTile: View {
 
     var body: some View {
         Button { action?() } label: {
-            HStack(spacing: Layout.rowSpacing) {
+            HStack(spacing: Space.item) {
                 Image(systemName: symbol).font(.title2).foregroundStyle(.tint).frame(width: Layout.badgeSize)
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: Space.hairline) {
                     Text(value).font(.title2.weight(.semibold)).monospacedDigit().contentTransition(.numericText())
                     Text(label).foregroundStyle(.muted)
                 }
                 Spacer(minLength: 0)
                 if action != nil { Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted) }
             }
-            .padding(Layout.cardPadding)
+            .padding(Space.card)
             .surface()
             .contentShape(Rectangle())
         }
@@ -61,7 +61,7 @@ struct TileGrid<Data: RandomAccessCollection, Content: View>: View where Data.El
     @ViewBuilder let tile: (Data.Element) -> Content
 
     var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: minWidth), spacing: Layout.spacing)], spacing: Layout.spacing) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: minWidth), spacing: Space.section)], spacing: Space.section) {
             ForEach(data) { tile($0) }
         }
     }

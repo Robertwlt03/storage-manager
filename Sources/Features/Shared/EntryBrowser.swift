@@ -26,7 +26,7 @@ struct EntryBrowser: View {
                             .onTapGesture(count: 2) { model.activate(e) }
                             .contextMenu { EntryMenu(entry: e, info: $info) }
                     }
-                    .padding(Layout.pagePadding)
+                    .padding(Space.page)
                 }
                 .background(Backdrop())
             } else {

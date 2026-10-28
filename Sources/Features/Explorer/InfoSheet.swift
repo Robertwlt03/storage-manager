@@ -10,16 +10,16 @@ struct InfoSheet: View {
         let path = entry.path ?? ""
         VStack(spacing: 0) {
             ScrollView {
-                VStack(alignment: .leading, spacing: Layout.spacing) {
+                VStack(alignment: .leading, spacing: Space.section) {
                     UI.card {
                         UI.header(entry.name, subtitle: Paths.display(path), icon: .file(path), size: Layout.sheetIcon)
-                            .padding(.vertical, Layout.rowPadding)
+                            .padding(.vertical, Space.row)
                         Divider()
                         UI.fields(basics(path))
                     }
                     if entry.isFolder { contents }
                 }
-                .padding(Layout.pagePadding)
+                .padding(Space.page)
             }
             .background(Backdrop())
             HStack {
@@ -27,7 +27,7 @@ struct InfoSheet: View {
                 Spacer()
                 UI.button(Loc.done.s, .primary) { dismiss() }.keyboardShortcut(.defaultAction)
             }
-            .padding(Layout.cardPadding)
+            .padding(Space.card)
         }
         .frame(width: Layout.sheetWidth, height: Layout.sheetHeight)
         .task {
@@ -55,13 +55,13 @@ struct InfoSheet: View {
                                FieldItem(.modifiedBetween, Loc.dateRange.f(Fmt.dayShort(o), Fmt.dayShort(n)))
                            } }])
             } else {
-                UI.progress(Loc.analyzing.s).padding(.vertical, Layout.rowPadding)
+                UI.progress(Loc.analyzing.s).padding(.vertical, Space.row)
             }
         }
         if let p = profile, let top = p.types.first?.bytes {
             UI.card(Loc.typesBySize.s) {
                 UI.rows(p.types.map { TypeRow(ext: $0.ext, bytes: $0.bytes, count: $0.count) }) { t in
-                    HStack(spacing: Layout.rowSpacing) {
+                    HStack(spacing: Space.item) {
                         Text(t.ext).frame(maxWidth: .infinity, alignment: .leading)
                         UI.shareCell(t.bytes, of: top)
                         UI.sizeCell(t.bytes).frame(width: Layout.sizeColumn.ideal)

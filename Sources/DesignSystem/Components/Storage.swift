@@ -39,14 +39,14 @@ struct VolumeSummary: View {
     var canSelect: (StorageSegment) -> Bool = { _ in true }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Layout.spacing) {
+        VStack(alignment: .leading, spacing: Space.section) {
             HeaderRow(icon: .file(volume.path), title: volume.name,
                       subtitle: Loc.availableOf.f(Fmt.bytes(volume.available), Fmt.bytes(volume.total)))
             let all = shown + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)]
             StorageBar(segments: all, total: volume.total)
             StorageLegend(segments: all, onSelect: onSelect, canSelect: canSelect)
         }
-        .padding(.vertical, Layout.rowPadding)
+        .padding(.vertical, Space.row)
     }
 
     /// Before the first scan there are no categories yet; then the bar shows the whole used space in one piece.
@@ -64,12 +64,12 @@ struct StorageLegend: View {
     var canSelect: (StorageSegment) -> Bool = { _ in true }
 
     var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.legendItemMin), alignment: .leading)], alignment: .leading, spacing: 6) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.legendItemMin), alignment: .leading)], alignment: .leading, spacing: Space.s) {
             ForEach(items) { s in
                 // Named categories lead to their folder; "Other" and free space have nowhere to go.
                 let target = onSelect != nil && s.colorIndex != nil && s.id != Self.otherID && canSelect(s)
                 Button { onSelect?(s) } label: {
-                    HStack(spacing: 6) {
+                    HStack(spacing: Space.s) {
                         Circle().fill(s.colorIndex.map { Theme.color($0) } ?? Theme.freeSegment)
                             .frame(width: Layout.legendDot, height: Layout.legendDot)
                         Text(s.title).lineLimit(1)
@@ -105,7 +105,7 @@ struct ShareCell: View {
     let fraction: Double
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             ProgressView(value: min(max(fraction, 0), 1)).progressViewStyle(.linear)
             Text(Fmt.percent(fraction)).monospacedDigit().frame(width: Layout.percentWidth, alignment: .trailing)
         }

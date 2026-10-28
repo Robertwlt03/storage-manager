@@ -31,13 +31,13 @@ struct UnusedAppsView: View {
             } else {
                 UI.card {
                     UI.rows(unused) { app in
-                        HStack(spacing: Layout.rowSpacing) {
+                        HStack(spacing: Space.item) {
                             RowIconView(icon: .file(app.path))
-                            VStack(alignment: .leading, spacing: 1) {
+                            VStack(alignment: .leading, spacing: Space.hairline) {
                                 Text(app.name)
                                 Text(lastUsed(app)).font(.callout).foregroundStyle(.muted)
                             }
-                            Spacer(minLength: Layout.rowSpacing)
+                            Spacer(minLength: Space.item)
                             Text(Fmt.bytes(app.bytes)).monospacedDigit().foregroundStyle(.muted)
                             UI.button(Loc.showInFinder.s) { FinderService.reveal(app.path) }
                             UI.button(Loc.moveToTrash.s, role: .destructive) { pending = app }

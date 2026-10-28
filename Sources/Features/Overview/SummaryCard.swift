@@ -12,7 +12,7 @@ struct SummaryCard: View {
             cleanable: model.cleanItems?.reduce(0) { $0 + $1.bytes }, copies: model.copyGroups.reduce(0) { $0 + $1.node.bytes },
             unusedApps: model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count))
         UI.card(Loc.summaryTitle.s) {
-            VStack(alignment: .leading, spacing: Layout.rowSpacing) {
+            VStack(alignment: .leading, spacing: Space.item) {
                 Text(text).fixedSize(horizontal: false, vertical: true).textSelection(.enabled)
                 Button { speech.toggle(text) } label: {
                     Label(speech.isSpeaking ? Loc.stopReading.s : Loc.readAloud.s, systemImage: Symbols.speaker)
@@ -20,7 +20,7 @@ struct SummaryCard: View {
                 }
                 .appButton()
             }
-            .padding(.vertical, Layout.rowPadding)
+            .padding(.vertical, Space.row)
         }
     }
 }

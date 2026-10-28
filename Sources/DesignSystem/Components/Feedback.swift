@@ -14,7 +14,7 @@ struct ProgressLine: View {
     let text: String
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             ProgressView().controlSize(.small)
             Text(text).foregroundStyle(.muted)
         }

@@ -8,7 +8,7 @@ struct SidebarFooter: View {
     @State private var showDetails = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Layout.rowPadding) {
+        VStack(alignment: .leading, spacing: Space.row) {
             Button { showDetails.toggle() } label: { status }
                 .buttonStyle(.plain)
                 .help(Loc.scanDetails.s)
@@ -19,15 +19,15 @@ struct SidebarFooter: View {
                     .fadeTransition()
             }
             Divider()
-            HStack(spacing: 6) {
-                Picker(Loc.layout.s, selection: $layout) {
-                    ForEach(LayoutMode.allCases) { Image(systemName: $0.symbol).help($0.title.s).tag($0) }
+            HStack(spacing: Space.m) {
+                // One quiet button like the two next to it; the symbol shows what a click switches to.
+                Button { layout = layout == .list ? .grid : .list } label: {
+                    Image(systemName: layout == .list ? Symbols.grid : Symbols.list).contentTransition(.symbolEffect(.replace))
                 }
-                .pickerStyle(.segmented)
-                .labelsHidden()
-                .fixedSize()
+                .buttonStyle(.borderless)
                 .disabled(!(model.pane ?? .overview).supportsGrid || model.isSearching)
-                .help(Loc.layout.s)
+                .help(layout == .list ? Loc.layoutGrid.s : Loc.layoutList.s)
+                .accessibilityLabel(layout == .list ? Loc.layoutGrid.s : Loc.layoutList.s)
                 Spacer()
                 Button { model.scan() } label: { Image(systemName: Symbols.rescan) }
                     .buttonStyle(.borderless)
@@ -38,12 +38,12 @@ struct SidebarFooter: View {
                     .help(Loc.settings.s)
             }
         }
-        .padding(Layout.rowSpacing)
+        .padding(Space.item)
     }
 
     /// One short line: spinner and percent while scanning, otherwise when it was measured.
     private var status: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: Space.s) {
             if model.scanning {
                 ProgressView().controlSize(.small)
                 Text(Loc.scanningPercent.f(Fmt.percent(model.scanFraction))).monospacedDigit()
@@ -71,7 +71,7 @@ struct ScanDetails: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Layout.rowSpacing) {
+        VStack(alignment: .leading, spacing: Space.item) {
             Text(model.scanning ? Loc.scanningTitle.s : Loc.scanDetails.s).font(.headline)
             if model.scanning {
                 ProgressView(value: model.scanFraction).progressViewStyle(.linear)
@@ -92,7 +92,7 @@ struct ScanDetails: View {
                 UI.button(model.lastScan == nil ? Loc.scanNow.s : Loc.rescan.s) { model.scan() }
             }
         }
-        .padding(Layout.cardPadding)
+        .padding(Space.card)
         .frame(width: Layout.popoverWidth)
     }
 }

@@ -20,7 +20,7 @@ struct CleanerView: View {
                 if let items {
                     UI.rows(items) { item in row(item) }
                 } else {
-                    UI.progress(Loc.cleanerSearching.s).padding(.vertical, Layout.rowPadding)
+                    UI.progress(Loc.cleanerSearching.s).padding(.vertical, Space.row)
                 }
             }
             if let result {
@@ -45,18 +45,18 @@ struct CleanerView: View {
 
     /// Only the checkbox is disabled for empty items, so their text stays readable.
     private func row(_ item: CleanItem) -> some View {
-        HStack(spacing: Layout.rowSpacing) {
+        HStack(spacing: Space.item) {
             Toggle(item.kind.title.s, isOn: Binding(get: { selected.contains(item.kind) && item.bytes > 0 },
                                                     set: { on in if on { selected.insert(item.kind) } else { selected.remove(item.kind) } }))
                 .toggleStyle(.checkbox)
                 .labelsHidden()
                 .disabled(item.bytes == 0 || cleaning)
             RowIconView(icon: .badge(symbol: item.kind.category.symbol, colorIndex: item.kind.category.rawValue))
-            VStack(alignment: .leading, spacing: 1) {
+            VStack(alignment: .leading, spacing: Space.hairline) {
                 Text(item.kind.title.s)
                 Text(item.kind.detail.s).font(.callout).foregroundStyle(.muted).fixedSize(horizontal: false, vertical: true)
             }
-            Spacer(minLength: Layout.rowSpacing)
+            Spacer(minLength: Space.item)
             Text(item.bytes > 0 ? Fmt.bytes(item.bytes) : Loc.emptyValue.s).monospacedDigit().foregroundStyle(.muted)
         }
     }

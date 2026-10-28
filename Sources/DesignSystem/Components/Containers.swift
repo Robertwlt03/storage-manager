@@ -9,11 +9,11 @@ struct Page<Options: View, Content: View>: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: Layout.spacing) {
+            VStack(alignment: .leading, spacing: Space.section) {
                 PageHeader(info: info) { options }
                 content
             }
-            .padding(Layout.pagePadding)
+            .padding(Space.page)
             .frame(maxWidth: Layout.maxContentWidth)
             .frame(maxWidth: .infinity)
         }
@@ -30,7 +30,7 @@ struct PageHeader<Options: View>: View {
     @State private var showInfo = false
 
     var body: some View {
-        HStack(spacing: Layout.rowSpacing) {
+        HStack(spacing: Space.item) {
             options
             Spacer(minLength: 0)
             Button { showInfo.toggle() } label: { Label(Loc.aboutPage.s, systemImage: Symbols.info) }
@@ -41,7 +41,7 @@ struct PageHeader<Options: View>: View {
                 .popover(isPresented: $showInfo, arrowEdge: .bottom) {
                     Text(info.s)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(Layout.cardPadding)
+                        .padding(Space.card)
                         .frame(width: Layout.popoverWidth, alignment: .leading)
                 }
         }
@@ -66,11 +66,11 @@ struct Card<Content: View>: View {
     @ViewBuilder let content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            if let title { Text(title).font(.headline).padding(.leading, 4) }
+        VStack(alignment: .leading, spacing: Space.s) {
+            if let title { Text(title).font(.headline).padding(.leading, Space.xs) }
             VStack(alignment: .leading, spacing: 0) { content }
-                .padding(.horizontal, Layout.cardPadding)
-                .padding(.vertical, Layout.cardPadding / 2)
+                .padding(.horizontal, Space.card)
+                .padding(.vertical, Space.s)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .surface()
         }
@@ -85,7 +85,7 @@ struct DividedRows<Data: RandomAccessCollection, Row: View>: View where Data.Ele
     var body: some View {
         ForEach(Array(data.enumerated()), id: \.element.id) { index, item in
             if index > 0 { Divider() }
-            row(item).padding(.vertical, Layout.rowPadding)
+            row(item).padding(.vertical, Space.row)
         }
     }
 }

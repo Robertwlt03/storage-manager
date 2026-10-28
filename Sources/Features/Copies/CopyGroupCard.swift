@@ -19,13 +19,13 @@ struct CopyGroupCard: View {
                 Spacer()
                 running ? UI.status(Loc.running.s, symbol: Symbols.running, .warn) : UI.status(Loc.stopped.s, symbol: Symbols.stopped, .good)
             }
-            .padding(.vertical, Layout.rowPadding)
+            .padding(.vertical, Space.row)
             Divider()
             UI.fields(fields)
-            if let freed { Divider(); UI.status(Loc.freed.f(Fmt.bytes(freed)), symbol: Symbols.success, .good).padding(.vertical, Layout.rowPadding) }
-            if let error { Divider(); UI.status(error, symbol: Symbols.warning, .bad).padding(.vertical, Layout.rowPadding) }
+            if let freed { Divider(); UI.status(Loc.freed.f(Fmt.bytes(freed)), symbol: Symbols.success, .good).padding(.vertical, Space.row) }
+            if let error { Divider(); UI.status(error, symbol: Symbols.warning, .bad).padding(.vertical, Space.row) }
             Divider()
-            actions.padding(.vertical, Layout.rowPadding)
+            actions.padding(.vertical, Space.row)
         }
         .task(id: group.id) {
             running = CopyService.isRunning(group.bundleID)

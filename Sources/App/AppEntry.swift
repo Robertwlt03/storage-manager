@@ -29,6 +29,7 @@ struct SpeicherExplorerApp: App {
                 .frame(minWidth: Layout.minWindowWidth, minHeight: Layout.minWindowHeight)
         }
         .commands {
+            LayoutCommands()
             CommandGroup(after: .newItem) {
                 Button(Loc.rescan.s) { model.scan() }.keyboardShortcut("r").disabled(model.scanning)
                 Button(Loc.cancelScan.s) { model.cancelScan() }.keyboardShortcut(".").disabled(!model.scanning)
@@ -47,4 +48,19 @@ private struct PreferenceSync: ViewModifier {
 
 extension View {
     func syncPreferences() -> some View { modifier(PreferenceSync()) }
+}
+
+/// "View" menu entries like Finder's: ⌘1 shows lists, ⌘2 shows tiles.
+private struct LayoutCommands: Commands {
+    @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
+
+    var body: some Commands {
+        CommandGroup(before: .sidebar) {
+            ForEach(LayoutMode.allCases) { mode in
+                Toggle(mode.title.s, isOn: Binding(get: { layout == mode }, set: { if $0 { layout = mode } }))
+                    .keyboardShortcut(mode == .list ? "1" : "2")
+            }
+            Divider()
+        }
+    }
 }

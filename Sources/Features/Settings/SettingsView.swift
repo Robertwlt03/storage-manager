@@ -11,11 +11,11 @@ struct SettingsView: View {
         Form {
             Toggle(Loc.autoScan.s, isOn: $autoScan)
             LabeledContent(Loc.extraFolders.s) {
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: Space.s) {
                     List(folders, id: \.self, selection: $selected) { Text(Paths.display($0)).lineLimit(1).truncationMode(.middle) }
                         .frame(height: Layout.folderListHeight)
                         .overlay { if folders.isEmpty { Text(Loc.none.s).foregroundStyle(.muted) } }
-                    HStack(spacing: 4) {
+                    HStack(spacing: Space.xs) {
                         Button(Loc.add.s, systemImage: Symbols.add) {
                             extraFolders = AppSettings.store(Array(NSOrderedSet(array: folders + FinderService.chooseFolders()))
                                 .compactMap { $0 as? String })

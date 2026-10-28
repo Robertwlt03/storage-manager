@@ -16,17 +16,17 @@ struct StatisticsView: View {
             } else {
                 tiles
                 UI.card(Loc.statCategoriesTitle.s) {
-                    UI.caption(Loc.statCategoriesCaption.s).padding(.top, Layout.rowPadding)
-                    categoryChart.padding(.vertical, Layout.rowPadding)
-                    UI.legend(segments, canSelect: { node(for: $0) != nil }) { node(for: $0).map(model.open) }.padding(.bottom, Layout.rowPadding)
+                    UI.caption(Loc.statCategoriesCaption.s).padding(.top, Space.row)
+                    categoryChart.padding(.vertical, Space.row)
+                    UI.legend(segments, canSelect: { node(for: $0) != nil }) { node(for: $0).map(model.open) }.padding(.bottom, Space.row)
                 }
                 UI.card(Loc.statTypesTitle.s) {
-                    UI.caption(Loc.statTypesCaption.s).padding(.top, Layout.rowPadding)
-                    typeChart.padding(.vertical, Layout.rowPadding)
+                    UI.caption(Loc.statTypesCaption.s).padding(.top, Space.row)
+                    typeChart.padding(.vertical, Space.row)
                 }
                 UI.card(Loc.statSizesTitle.s) {
-                    UI.caption(Loc.statSizesCaption.s).padding(.top, Layout.rowPadding)
-                    sizeChart.padding(.vertical, Layout.rowPadding)
+                    UI.caption(Loc.statSizesCaption.s).padding(.top, Space.row)
+                    sizeChart.padding(.vertical, Space.row)
                 }
             }
         }
@@ -76,7 +76,7 @@ struct StatisticsView: View {
             .chartLegend(.hidden)
             .staticChart()
             if let top = cats.first {
-                VStack(spacing: 2) {
+                VStack(spacing: Space.hairline) {
                     Text(Fmt.percent(Double(top.bytes) / Double(total))).font(.title2.weight(.semibold)).monospacedDigit()
                         .contentTransition(.numericText())
                     Text(top.kind.title.s).foregroundStyle(.muted).multilineTextAlignment(.center)
