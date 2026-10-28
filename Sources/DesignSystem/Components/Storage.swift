@@ -13,10 +13,11 @@ struct StorageBar: View {
     let segments: [StorageSegment]
     let total: Int64
     @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
+    private static let row = "volume"
 
     var body: some View {
         Chart(segments) { s in
-            BarMark(x: .value(Loc.columnSize.s, s.bytes), y: .value("", 0))
+            BarMark(x: .value(Loc.columnSize.s, s.bytes), y: .value(Self.row, Self.row))  // one category row: a stacked bar
                 .foregroundStyle(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)
                 .accessibilityLabel(s.title)
                 .accessibilityValue(Fmt.bytes(s.bytes))
@@ -39,10 +40,17 @@ struct VolumeSummary: View {
         VStack(alignment: .leading, spacing: Layout.spacing) {
             HeaderRow(icon: .file(volume.path), title: volume.name,
                       subtitle: Loc.availableOf.f(Fmt.bytes(volume.available), Fmt.bytes(volume.total)))
-            StorageBar(segments: segments + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)],
+            StorageBar(segments: shown + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)],
                        total: volume.total)
         }
         .padding(.vertical, Layout.rowPadding)
+    }
+
+    /// Before the first scan there are no categories yet; then the bar shows the whole used space in one piece.
+    private var shown: [StorageSegment] {
+        segments.isEmpty
+            ? [StorageSegment(id: "used", title: Loc.used.s, bytes: volume.used, colorIndex: CategoryKind.system.rawValue)]
+            : segments
     }
 }
 

@@ -42,7 +42,7 @@ struct EmptyState<Actions: View>: View {
 
     var body: some View {
         ContentUnavailableView {
-            Label(title, systemImage: symbol)
+            Label(title, systemImage: symbol).foregroundStyle(.primary)  // the default is too faint in light mode
         } description: {
             if let detail { Text(detail).foregroundStyle(.muted) }
         } actions: {
