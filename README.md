@@ -7,6 +7,7 @@
   <img src="https://img.shields.io/badge/-SwiftUI-1D1D1F?style=flat-square&logo=swift&logoColor=F05138" alt="SwiftUI">
   <img src="https://img.shields.io/badge/Sprachen-Deutsch%20%C2%B7%20English-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="Deutsch und Englisch">
   <img src="https://img.shields.io/badge/Preis-kostenlos-1B7332?style=flat-square&labelColor=1D1D1F" alt="kostenlos">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Lizenz-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="Lizenz: MIT"></a>
 </p>
 
 Der **Speicher-Explorer** zeigt dir, wo auf deinem Mac der Speicherplatz steckt. Er misst alle wichtigen Bereiche,
@@ -155,7 +156,26 @@ erhalten bleibt. Mit einer Developer ID von Apple beglaubigt es die DMG zusätzl
 scripts/release.sh
 ```
 
+So ist der Code aufgeteilt; jede Datei hat eine Aufgabe und bleibt kurz:
+
+| Ordner | Inhalt |
+| --- | --- |
+| `Sources/Features` | je Bereich der App ein Ordner, zum Beispiel Überblick, Ordner, Suche, Einstellungen |
+| `Sources/DesignSystem` | alle Bausteine der Oberfläche an einer Stelle (`UI`), Farben, Liquid Glass |
+| `Sources/Services` | Messen, Datenträger, Kategorien, Prüfkopien, Suche, Berechtigungen |
+| `Sources/State` | der Zustand der App, der die Services zusammenführt |
+| `Sources/Core` | Konstanten und feste Auswahlwerte wie Seiten, Farben und Einstellungen |
+| `Sources/Localization` und `Resources` | alle Texte, auf Deutsch und Englisch |
+| `Sources/Diagnostics` | Prüfungen für Kontrast, Texte und einen Selbsttest mit echten Daten |
+
 </details>
+
+## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">Mitmachen
+
+Der Speicher-Explorer ist Open Source: Jeder kann den Code ansehen, verbessern und eigene Ideen einbringen. Fehler
+und Wünsche gehören in die [Issues](../../issues), Verbesserungen gern als Pull Request. Der Code ist in kleine,
+klar benannte Teile gegliedert; wo was liegt, steht im Abschnitt „Für Entwickler“. Neue Texte bitte immer auf
+Deutsch und Englisch anlegen, die Prüfung beim Bauen meldet sonst, was fehlt.
 
 > <img src="assets/icons/windows.svg" height="22" align="absmiddle" alt=""> **Windows:** Eine Version für Windows ist geplant, aber noch nicht umgesetzt.
 
@@ -165,5 +185,5 @@ scripts/release.sh
 
 <p align="center">
   <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
-  <sub>© 2026 Robertwlt03 · Für macOS 14 oder neuer</sub>
+  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
 </p>
