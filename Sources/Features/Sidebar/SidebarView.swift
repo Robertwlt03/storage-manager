@@ -10,8 +10,12 @@ struct SidebarView: View {
             Section { ForEach(Pane.main, id: \.self, content: row) }
             Section(Loc.sectionTidy.s) { ForEach(Pane.tidy, id: \.self, content: row) }
             Section(Loc.sectionSystem.s) { ForEach(Pane.system, id: \.self, content: row) }
-            Section(Loc.sectionVolumes.s) {
-                ForEach(model.volumes) { v in Label(v.name, systemImage: v.symbol).tag(Pane.volume(v.path)) }
+            // The startup disk is the overview; only other volumes (USB sticks, external drives) get their own page.
+            let external = model.volumes.filter { !$0.isRoot }
+            if !external.isEmpty {
+                Section(Loc.sectionVolumes.s) {
+                    ForEach(external) { v in Label(v.name, systemImage: v.symbol).tag(Pane.volume(v.path)) }
+                }
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) { SidebarFooter() }
