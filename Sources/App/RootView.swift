@@ -13,10 +13,8 @@ struct RootView: View {
             detail
                 .smoothChanges(of: model.pane)
                 .smoothChanges(of: model.isSearching)
-                .toolbar {
-                    if !model.sidebarVisible { ToolbarItem(placement: .navigation) { SidebarToggle() } }
-                }
         }
+        .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
         .searchable(text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar, prompt: Loc.searchPrompt.s)
         .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }
         .syncPreferences()

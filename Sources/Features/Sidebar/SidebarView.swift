@@ -37,8 +37,8 @@ struct SidebarView: View {
 }
 
 
-/// The button that shows and hides the sidebar, in the sidebar while it is open and next to the page title
-/// while it is closed, like the system's own.
+/// The button that shows and hides the sidebar, next to the window buttons like the system's own. It belongs to the
+/// sidebar's toolbar, which macOS keeps visible while the sidebar is closed, so one button serves both states.
 struct SidebarToggle: View {
     @Environment(AppModel.self) private var model
 
