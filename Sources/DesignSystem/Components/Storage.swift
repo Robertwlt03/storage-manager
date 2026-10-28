@@ -6,6 +6,8 @@ struct StorageSegment: Identifiable {
     let title: String
     let bytes: Int64
     let colorIndex: Int?  // nil = free space
+
+    static let usedID = "used"  // used space no category covers (yet)
 }
 
 /// Stacked bar like in System Settings › Storage.
@@ -49,11 +51,13 @@ struct VolumeSummary: View {
         .padding(.vertical, Space.row)
     }
 
-    /// Before the first scan there are no categories yet; then the bar shows the whole used space in one piece.
+    /// Used space the categories do not cover yet stays one piece: all of it before the first scan, a shrinking
+    /// part while scanning. So the bar always spans the whole volume and only its split changes.
     private var shown: [StorageSegment] {
-        segments.isEmpty
-            ? [StorageSegment(id: "used", title: Loc.used.s, bytes: volume.used, colorIndex: CategoryKind.system.rawValue)]
-            : segments
+        let rest = volume.used - segments.reduce(0) { $0 + $1.bytes }
+        guard rest > 0 else { return segments }
+        return segments + [StorageSegment(id: StorageSegment.usedID, title: Loc.used.s, bytes: rest,
+                                          colorIndex: CategoryKind.system.rawValue)]
     }
 }
 
@@ -90,8 +94,9 @@ struct StorageLegend: View {
     private static let otherID = "other"
 
     private var items: [StorageSegment] {
-        let used = segments.filter { $0.colorIndex != nil }
-        let free = segments.filter { $0.colorIndex == nil }
+        // The uncovered used space and free space always keep their own entries at the end.
+        let used = segments.filter { $0.colorIndex != nil && $0.id != StorageSegment.usedID }
+        let free = segments.filter { $0.colorIndex == nil || $0.id == StorageSegment.usedID }
         guard used.count > Layout.legendMax else { return used + free }
         let rest = used.dropFirst(Layout.legendMax - 1)
         let other = StorageSegment(id: Self.otherID, title: Loc.otherCategories.s, bytes: rest.reduce(0) { $0 + $1.bytes },

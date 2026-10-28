@@ -10,7 +10,7 @@ struct VolumeView: View {
             UI.page(.volume(path), title: v.name, options: { action(v) }) {
                 UI.card {
                     UI.volume(v, segments: [
-                        StorageSegment(id: "used", title: Loc.used.s, bytes: v.used - v.purgeable, colorIndex: CategoryKind.apps.rawValue),
+                        StorageSegment(id: StorageSegment.usedID, title: Loc.used.s, bytes: v.used - v.purgeable, colorIndex: CategoryKind.apps.rawValue),
                         StorageSegment(id: "purgeable", title: Loc.purgeable.s, bytes: v.purgeable, colorIndex: CategoryKind.purgeable.rawValue),
                     ])
                     Divider()
