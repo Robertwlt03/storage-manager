@@ -7,6 +7,7 @@ import Observation
     var pane: Pane? = .overview
     var explorerPath: [Node] = []
     var searchText = ""
+    var searchPresented = false  // the search field is active, even before anything is typed
     var searchScope = SearchScope.all
     var showAccessSheet = false
 
@@ -28,7 +29,14 @@ import Observation
 
     var startupVolume: VolumeInfo? { volumes.first { $0.isRoot } }
     var hasData: Bool { !root.children.isEmpty }
-    var isSearching: Bool { !searchText.trimmingCharacters(in: .whitespaces).isEmpty }
+    var isSearching: Bool { searchPresented || !searchQuery.isEmpty }
+    var searchQuery: String { searchText.trimmingCharacters(in: .whitespaces) }
+
+    /// Leaves the search: clears the field and closes it (Cancel button, Escape, or picking a page in the sidebar).
+    func endSearch() {
+        searchText = ""
+        searchPresented = false
+    }
     var copyGroups: [CopyGroup] {
         _ = revision
         return CopyService.groups(in: root.descendant(at: Paths.tempCopies))
@@ -161,7 +169,7 @@ import Observation
 
     func open(_ node: Node) {
         explorerPath = node.chain
-        searchText = ""
+        endSearch()  // opening a result leaves the search, even when the explorer is already shown
         pane = .explorer
     }
 
