@@ -21,7 +21,7 @@ struct EntryBrowser: View {
             if layout == .grid {
                 ScrollView {
                     TileGrid(data: entries.sorted { $0.bytes > $1.bytes }) { e in
-                        UI.tile(icon: e.path.map { .file($0) } ?? .letter("…"), title: e.name, value: Fmt.bytes(e.bytes),
+                        UI.tile(icon: e.path.map { .preview($0) } ?? .letter("…"), title: e.name, value: Fmt.bytes(e.bytes),
                                 detail: showLocation ? e.location : nil, share: Double(e.bytes) / Double(max(total, 1)))
                             .onTapGesture(count: 2) { model.activate(e) }
                             .contextMenu { EntryMenu(entry: e, info: $info) }

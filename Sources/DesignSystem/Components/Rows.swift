@@ -5,6 +5,7 @@ enum RowIcon {
     case badge(symbol: String, colorIndex: Int)  // white symbol on a coloured square, like System Settings
     case letter(String)  // a short code on a neutral square (T, C, X, 0)
     case file(String)  // the Finder icon of a path
+    case preview(String)  // a Quick Look thumbnail of a path, the Finder icon until it is ready or if there is none
 }
 
 struct RowIconView: View {
@@ -22,7 +23,24 @@ struct RowIconView: View {
                 .frame(width: size, height: size).background(.quaternary, in: shape)
         case .file(let path):
             FinderService.icon(path).resizable().frame(width: size, height: size)
+        case .preview(let path):
+            PreviewIcon(path: path, size: size)
         }
+    }
+}
+
+/// Starts with the Finder icon and swaps in the thumbnail once Quick Look has it; only tiles on screen ask for one.
+private struct PreviewIcon: View {
+    let path: String
+    let size: CGFloat
+    @State private var thumbnail: NSImage?
+
+    var body: some View {
+        Image(nsImage: thumbnail ?? FinderService.iconImage(path))
+            .resizable()
+            .scaledToFit()
+            .frame(width: size, height: size)
+            .task(id: path) { thumbnail = await PreviewService.thumbnail(path, size: size) }
     }
 }
 

@@ -5,11 +5,13 @@ import SwiftUI
 enum FinderService {
     /// Finder icons are looked up once per path: rows are rebuilt often (search, sorting, scrolling) and each lookup
     /// asks Launch Services and the disk again.
-    static func icon(_ path: String) -> Image {
-        if let cached = icons.object(forKey: path as NSString) { return Image(nsImage: cached) }
+    static func icon(_ path: String) -> Image { Image(nsImage: iconImage(path)) }
+
+    static func iconImage(_ path: String) -> NSImage {
+        if let cached = icons.object(forKey: path as NSString) { return cached }
         let image = NSWorkspace.shared.icon(forFile: path)
         icons.setObject(image, forKey: path as NSString)
-        return Image(nsImage: image)
+        return image
     }
 
     private static let icons: NSCache<NSString, NSImage> = {
