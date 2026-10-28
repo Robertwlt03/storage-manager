@@ -149,6 +149,8 @@
 "accessContinue" = "Ohne Vollzugriff fortfahren";
 "accessDontAsk" = "Nicht mehr fragen";
 "accessGranted" = "Erteilt";
+"accessRestart" = "App neu starten";
+"accessRestartHint" = "Schalter eingeschaltet? macOS gibt den Zugriff erst nach einem Neustart der App frei. Wirkt er danach immer noch nicht, stammt der Eintrag von einem früheren Build: dann in den Systemeinstellungen mit „–“ entfernen und neu hinzufügen.";
 "fullDiskAccess" = "Festplattenvollzugriff";
 
 /* Settings */

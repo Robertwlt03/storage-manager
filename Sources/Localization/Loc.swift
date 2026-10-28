@@ -40,7 +40,7 @@ enum Loc: String, CaseIterable {
 
     // Full Disk Access
     case accessTitle, accessDetail, accessOneSwitch, accessOpenSettings, accessContinue, accessDontAsk
-    case accessGranted, fullDiskAccess
+    case accessGranted, fullDiskAccess, accessRestart, accessRestartHint
 
     // Settings
     case tabGeneral, tabAppearance, tabScanning, language, languageSystem, languageNote
