@@ -65,7 +65,8 @@ enum Layout {
     static let shareColumn = (min: CGFloat(90), ideal: CGFloat(150))
     static let countColumn = (min: CGFloat(60), ideal: CGFloat(80), max: CGFloat(110))
     static let percentWidth: CGFloat = 38
-    static let minWindowWidth: CGFloat = 860
+    static let minWindowWidth: CGFloat = 560  // narrow windows work without the sidebar
+    static let sidebarCollapseWidth: CGFloat = 800  // below this the sidebar closes by itself, like in Mail
     static let minWindowHeight: CGFloat = 560
     static let sidebarIdeal: CGFloat = 230
     static let settingsWidth: CGFloat = 520

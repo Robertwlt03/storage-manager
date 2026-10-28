@@ -12,6 +12,7 @@ import SwiftUI
     var searchScope = SearchScope.all
     var showAccessSheet = false
     var columns = NavigationSplitViewVisibility.all  // whether the sidebar is shown
+    private var sidebarHiddenByWidth = false  // closed because the window got narrow, not by the user
 
     let root = Node.virtualRoot()
     private(set) var revision = 0  // bumped whenever the tree changes; views read it to refresh
@@ -40,7 +41,21 @@ import SwiftUI
     /// Shows or hides the sidebar with SwiftUI's animation. The system's own toggle lets AppKit slide the column
     /// while the page jumps to its new width without any frames in between, which looked jerky when showing it.
     func toggleSidebar() {
+        sidebarHiddenByWidth = false  // the user's choice wins until the window crosses the width again
         withAnimation(Motion.standard) { columns = sidebarVisible ? .detailOnly : .all }
+    }
+
+    /// Like Mail, as Apple's guidelines suggest: a narrow window closes the sidebar to make room for the page, and
+    /// widening it again brings the sidebar back, unless the user closed it themselves. Called only when the
+    /// window crosses `Layout.sidebarCollapseWidth`, so a sidebar opened by hand in a narrow window stays open.
+    func windowNarrowChanged(_ narrow: Bool) {
+        if narrow && sidebarVisible {
+            sidebarHiddenByWidth = true
+            withAnimation(Motion.standard) { columns = .detailOnly }
+        } else if !narrow && sidebarHiddenByWidth {
+            sidebarHiddenByWidth = false
+            withAnimation(Motion.standard) { columns = .all }
+        }
     }
 
     /// Leaves the search: clears the field and closes it (Cancel button, Escape, or picking a page in the sidebar).

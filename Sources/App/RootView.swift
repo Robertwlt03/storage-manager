@@ -15,6 +15,7 @@ struct RootView: View {
                 .smoothChanges(of: model.isSearching)
         }
         .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
+        .onGeometryChange(for: Bool.self) { $0.size.width < Layout.sidebarCollapseWidth } action: { model.windowNarrowChanged($0) }
         .searchable(text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar, prompt: Loc.searchPrompt.s)
         .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }
         .syncPreferences()

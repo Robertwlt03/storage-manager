@@ -20,7 +20,11 @@ struct SidebarView: View {
         }
         .safeAreaInset(edge: .bottom, spacing: 0) { SidebarFooter() }
         .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
-        .toolbar { ToolbarItem { SidebarToggle() } }
+        .toolbar {
+            // A flexible spacer first puts the button at the sidebar's trailing edge, where the system keeps its own.
+            if #available(macOS 26.0, *) { ToolbarSpacer(.flexible) }
+            ToolbarItem { SidebarToggle() }
+        }
         // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
         // animation, which made the reopening sidebar jump.
         .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
