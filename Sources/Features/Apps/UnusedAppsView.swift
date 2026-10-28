@@ -21,6 +21,10 @@ struct UnusedAppsView: View {
             if let error { UI.status(error, symbol: Symbols.warning, .bad) }
             if !model.hasData || model.apps.isEmpty {
                 UI.notMeasured()
+            } else if model.scanning {  // a running scan is about to replace sizes and dates
+                UI.card {
+                    UI.loading(.loadingAppsTitle, .loadingAppsDetail, symbol: Symbols.apps).frame(minHeight: Layout.placeholderHeight)
+                }
             } else if unused.isEmpty {
                 UI.empty(Loc.appsNoneUnused.s, symbol: Symbols.success)
             } else if layout == .grid {
@@ -28,7 +32,6 @@ struct UnusedAppsView: View {
                     UI.tile(icon: .file(app.path), title: app.name, value: Fmt.bytes(app.bytes), detail: lastUsed(app))
                         .contextMenu { menu(app) }
                 }
-                .calculating(model.scanning, alignment: .top)  // a running scan is about to replace sizes and dates
             } else {
                 UI.card {
                     UI.rows(unused) { app in
@@ -47,7 +50,6 @@ struct UnusedAppsView: View {
                         .contextMenu { menu(app) }
                     }
                 }
-                .calculating(model.scanning, alignment: .top)
             }
         }
         .confirmationDialog(Loc.trashAppTitle.f(pending?.name ?? ""), isPresented: Binding(get: { pending != nil }, set: { if !$0 { pending = nil } })) {

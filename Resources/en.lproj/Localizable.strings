@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "One pass measures every area; after that every click is instant.";
 "scanningTitle" = "Scanning …";
 "scanningDetail" = "Results appear as soon as the first area is done.";
+"loadingSummaryTitle" = "Writing the summary …";
+"loadingSummaryDetail" = "Once every area is measured, a few sentences here tell you how your storage looks.";
+"loadingSizesTitle" = "Counting files by size …";
+"loadingSizesDetail" = "The chart appears as soon as every area is measured.";
+"loadingAppsTitle" = "Checking apps …";
+"loadingAppsDetail" = "Sizes and last use are final once the scan is done.";
 
 /* Overview and categories */
 "availableOf" = "%@ available of %@";

@@ -77,12 +77,16 @@ struct EmptyOrScanning: View {
     }
 }
 
-/// Stands in for a chart that is still being calculated: the same height with a small spinner, so nothing moves.
-struct PendingBlock: View {
-    let height: CGFloat
+/// What is being calculated right now, with icon, text and a spinner: the same look as the other waiting states,
+/// for places with enough room. Small values use `calculating(_:)` instead.
+struct LoadingState: View {
+    let title: Loc
+    let detail: Loc
+    let symbol: String
 
     var body: some View {
-        ProgressView().controlSize(.small).frame(maxWidth: .infinity, minHeight: height)
+        EmptyState(title: title.s, symbol: symbol, detail: detail.s) { ProgressView().controlSize(.small) }
+            .frame(maxWidth: .infinity)
     }
 }
 

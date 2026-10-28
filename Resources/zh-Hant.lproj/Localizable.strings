@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "一次掃描即可測量所有區域，之後每次按一下都會立即顯示。";
 "scanningTitle" = "正在掃描⋯";
 "scanningDetail" = "第一個區域完成後，結果就會顯示。";
+"loadingSummaryTitle" = "正在撰寫摘要⋯";
+"loadingSummaryDetail" = "所有區域測量完成後，這裡會用幾句話說明你的儲存空間狀況。";
+"loadingSizesTitle" = "正在按大小統計檔案⋯";
+"loadingSizesDetail" = "所有區域測量完成後，圖表就會顯示。";
+"loadingAppsTitle" = "正在檢查 App⋯";
+"loadingAppsDetail" = "掃描完成後，大小和上次使用時間才會確定。";
 
 /* Overview and categories */
 "availableOf" = "可用 %@，共 %@";

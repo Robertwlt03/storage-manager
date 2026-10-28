@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "Eén ronde scant alle gebieden; daarna is elke klik meteen klaar.";
 "scanningTitle" = "Bezig met scannen …";
 "scanningDetail" = "De resultaten verschijnen zodra het eerste gebied klaar is.";
+"loadingSummaryTitle" = "Samenvatting wordt geschreven …";
+"loadingSummaryDetail" = "Zodra alle gebieden gemeten zijn, lees je hier in een paar zinnen hoe je opslag ervoor staat.";
+"loadingSizesTitle" = "Bestanden worden op grootte geteld …";
+"loadingSizesDetail" = "Het diagram verschijnt zodra alle gebieden gemeten zijn.";
+"loadingAppsTitle" = "Apps worden gecontroleerd …";
+"loadingAppsDetail" = "Groottes en laatste gebruik staan vast zodra de scan klaar is.";
 
 /* Overview and categories */
 "availableOf" = "%@ beschikbaar van %@";

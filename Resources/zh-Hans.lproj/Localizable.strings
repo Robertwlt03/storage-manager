@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "一次扫描即可测量所有区域，之后每次点按都会立即显示。";
 "scanningTitle" = "正在扫描…";
 "scanningDetail" = "第一个区域完成后，结果就会显示。";
+"loadingSummaryTitle" = "正在撰写摘要…";
+"loadingSummaryDetail" = "所有区域测量完成后，这里会用几句话说明你的存储空间情况。";
+"loadingSizesTitle" = "正在按大小统计文件…";
+"loadingSizesDetail" = "所有区域测量完成后，图表就会显示。";
+"loadingAppsTitle" = "正在检查应用…";
+"loadingAppsDetail" = "扫描完成后，大小和上次使用时间才会确定。";
 
 /* Overview and categories */
 "availableOf" = "可用 %@，共 %@";

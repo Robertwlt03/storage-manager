@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "Tek bir geçiş tüm alanları ölçer; ardından her tıklama anında yanıt verir.";
 "scanningTitle" = "Taranıyor …";
 "scanningDetail" = "İlk alan tamamlanır tamamlanmaz sonuçlar görünür.";
+"loadingSummaryTitle" = "Özet yazılıyor …";
+"loadingSummaryDetail" = "Tüm alanlar ölçüldüğünde burada depolamanın durumunu birkaç cümleyle görürsün.";
+"loadingSizesTitle" = "Dosyalar boyuta göre sayılıyor …";
+"loadingSizesDetail" = "Tüm alanlar ölçülür ölçülmez grafik görünür.";
+"loadingAppsTitle" = "Uygulamalar kontrol ediliyor …";
+"loadingAppsDetail" = "Boyutlar ve son kullanım, tarama bittiğinde kesinleşir.";
 
 /* Overview and categories */
 "availableOf" = "%@ kullanılabilir, toplam %@";

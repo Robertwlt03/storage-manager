@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "Yksi läpikäynti mittaa kaikki alueet; sen jälkeen jokainen napsautus toimii heti.";
 "scanningTitle" = "Mitataan …";
 "scanningDetail" = "Tulokset näkyvät heti, kun ensimmäinen alue on valmis.";
+"loadingSummaryTitle" = "Kirjoitetaan yhteenvetoa …";
+"loadingSummaryDetail" = "Kun kaikki alueet on mitattu, tässä kerrotaan muutamalla lauseella, miltä tallennustilasi näyttää.";
+"loadingSizesTitle" = "Tiedostoja lasketaan koon mukaan …";
+"loadingSizesDetail" = "Kaavio näkyy heti, kun kaikki alueet on mitattu.";
+"loadingAppsTitle" = "Tarkistetaan appeja …";
+"loadingAppsDetail" = "Koot ja viimeisin käyttö ovat lopullisia, kun mittaus on valmis.";
 
 /* Overview and categories */
 "availableOf" = "%@ käytettävissä (yhteensä %@)";

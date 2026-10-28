@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "Én runde måler alle områder; etter det er hvert klikk umiddelbart.";
 "scanningTitle" = "Måler …";
 "scanningDetail" = "Resultatene vises så snart det første området er ferdig.";
+"loadingSummaryTitle" = "Skriver sammendraget …";
+"loadingSummaryDetail" = "Når alle områder er målt, står det her i noen få setninger hvordan lagringen din ser ut.";
+"loadingSizesTitle" = "Teller filer etter størrelse …";
+"loadingSizesDetail" = "Diagrammet vises så snart alle områder er målt.";
+"loadingAppsTitle" = "Sjekker apper …";
+"loadingAppsDetail" = "Størrelser og siste bruk er endelige når målingen er ferdig.";
 
 /* Overview and categories */
 "availableOf" = "%@ tilgjengelig av %@";

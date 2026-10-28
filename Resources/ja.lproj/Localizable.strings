@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "1回のスキャンですべての領域を調べます。その後はどのクリックもすぐに表示されます。";
 "scanningTitle" = "スキャン中…";
 "scanningDetail" = "最初の領域が終わり次第、結果が表示されます。";
+"loadingSummaryTitle" = "概要を作成中…";
+"loadingSummaryDetail" = "すべての領域を測定すると、ここにストレージの状況が数文で表示されます。";
+"loadingSizesTitle" = "ファイルをサイズ別に集計中…";
+"loadingSizesDetail" = "すべての領域の測定が終わるとグラフが表示されます。";
+"loadingAppsTitle" = "アプリを確認中…";
+"loadingAppsDetail" = "サイズと最終使用日はスキャン完了後に確定します。";
 
 /* Overview and categories */
 "availableOf" = "%@利用可能(全体%@)";

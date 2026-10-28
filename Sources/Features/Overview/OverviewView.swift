@@ -3,7 +3,7 @@ import SwiftUI
 
 /// The start page: key figures, the disk split, a short summary, the size classes and every category.
 /// Figures and the chart come from the last finished scan; while a scan runs their cards stay in place with a
-/// small spinner where the values go, so nothing jumps around and nothing stale can be clicked.
+/// spinner where the values go, so nothing jumps around and nothing stale can be clicked.
 struct OverviewView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
@@ -24,7 +24,8 @@ struct OverviewView: View {
                     UI.caption(Loc.statSizesCaption.s).padding(.top, Space.row)
                     // Swift Charts must not redraw while a scan changes its data, so the chart waits for the scan.
                     if let stats = model.stats, !model.scanning { sizeChart(stats).padding(.vertical, Space.row) } else {
-                        UI.pendingBlock().padding(.vertical, Space.row)
+                        UI.loading(.loadingSizesTitle, .loadingSizesDetail, symbol: Symbols.overview)
+                            .frame(minHeight: Layout.chartHeight).padding(.vertical, Space.row)
                     }
                 }
             }

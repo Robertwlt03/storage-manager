@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "Jeden průchod změří všechny oblasti, potom je každé kliknutí okamžité.";
 "scanningTitle" = "Skenování …";
 "scanningDetail" = "Výsledky se zobrazí, jakmile bude hotová první oblast.";
+"loadingSummaryTitle" = "Píše se shrnutí …";
+"loadingSummaryDetail" = "Až budou změřeny všechny oblasti, zde v několika větách uvidíte, jak na tom je vaše úložiště.";
+"loadingSizesTitle" = "Počítají se soubory podle velikosti …";
+"loadingSizesDetail" = "Graf se zobrazí, jakmile budou změřeny všechny oblasti.";
+"loadingAppsTitle" = "Kontrolují se aplikace …";
+"loadingAppsDetail" = "Velikosti a poslední použití budou konečné po dokončení skenování.";
 
 /* Overview and categories */
 "availableOf" = "K dispozici %@ z %@";

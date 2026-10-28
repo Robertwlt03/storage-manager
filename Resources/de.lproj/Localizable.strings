@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "Ein Durchgang misst alle Bereiche; danach ist jeder Klick sofort da.";
 "scanningTitle" = "Wird gemessen …";
 "scanningDetail" = "Die Ergebnisse erscheinen, sobald der erste Bereich fertig ist.";
+"loadingSummaryTitle" = "Zusammenfassung wird geschrieben …";
+"loadingSummaryDetail" = "Wenn alle Bereiche gemessen sind, steht hier in wenigen Sätzen, wie es um deinen Speicher steht.";
+"loadingSizesTitle" = "Dateien werden nach Größe gezählt …";
+"loadingSizesDetail" = "Das Diagramm erscheint, sobald alle Bereiche gemessen sind.";
+"loadingAppsTitle" = "Apps werden geprüft …";
+"loadingAppsDetail" = "Größen und letzte Nutzung stehen fest, sobald die Messung fertig ist.";
 
 /* Overview and categories */
 "availableOf" = "%@ verfügbar von %@";

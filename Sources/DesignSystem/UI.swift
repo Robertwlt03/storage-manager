@@ -69,7 +69,7 @@ enum UI {
     static func notMeasuredCard(_ title: String) -> some View {
         Card(title: title) { NotMeasured().frame(maxWidth: .infinity, minHeight: Layout.placeholderHeight) }
     }
-    static func pendingBlock(height: CGFloat = Layout.chartHeight) -> some View { PendingBlock(height: height) }
+    static func loading(_ title: Loc, _ detail: Loc, symbol: String) -> some View { LoadingState(title: title, detail: detail, symbol: symbol) }
     static func emptyOrScanning(_ title: String, symbol: String, detail: String? = nil) -> some View {
         EmptyOrScanning(title: title, symbol: symbol, detail: detail)
     }

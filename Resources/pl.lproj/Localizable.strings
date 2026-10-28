@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "Jeden przebieg mierzy wszystkie obszary; potem każde kliknięcie działa od razu.";
 "scanningTitle" = "Mierzenie …";
 "scanningDetail" = "Wyniki pojawią się, gdy tylko pierwszy obszar będzie gotowy.";
+"loadingSummaryTitle" = "Tworzenie podsumowania …";
+"loadingSummaryDetail" = "Gdy wszystkie obszary zostaną zmierzone, zobaczysz tu w kilku zdaniach, jak wygląda Twoja pamięć.";
+"loadingSizesTitle" = "Liczenie plików według rozmiaru …";
+"loadingSizesDetail" = "Wykres pojawi się, gdy tylko wszystkie obszary zostaną zmierzone.";
+"loadingAppsTitle" = "Sprawdzanie aplikacji …";
+"loadingAppsDetail" = "Rozmiary i ostatnie użycie będą ostateczne po zakończeniu pomiaru.";
 
 /* Overview and categories */
 "availableOf" = "%@ dostępne z %@";

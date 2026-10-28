@@ -22,6 +22,12 @@
 "notMeasuredDetail" = "Un seul passage analyse toutes les zones ; ensuite, chaque clic est instantané.";
 "scanningTitle" = "Analyse en cours …";
 "scanningDetail" = "Les résultats apparaissent dès que la première zone est terminée.";
+"loadingSummaryTitle" = "Rédaction du résumé …";
+"loadingSummaryDetail" = "Une fois toutes les zones analysées, quelques phrases ici décrivent l’état de ton stockage.";
+"loadingSizesTitle" = "Comptage des fichiers par taille …";
+"loadingSizesDetail" = "Le graphique apparaît dès que toutes les zones sont analysées.";
+"loadingAppsTitle" = "Vérification des apps …";
+"loadingAppsDetail" = "Les tailles et la dernière utilisation sont définitives à la fin de l’analyse.";
 
 /* Overview and categories */
 "availableOf" = "%@ disponibles sur %@";
