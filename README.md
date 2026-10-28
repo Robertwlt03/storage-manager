@@ -1,28 +1,49 @@
 # Speicher-Explorer
 
-Eine kleine macOS-App, die zeigt, wo auf dem Mac der Speicherplatz steckt. Sie ist aus dem Terminal-Skript
-`speicher_explorer.sh` entstanden und übernimmt dessen Bereiche und Pixel-Symbole, jetzt als native SwiftUI-App.
-Die App schickt nichts weg und löscht nur an einer Stelle, nämlich die Chrome-Prüfkopien, und das nur nach einer
-ausdrücklichen Bestätigung.
+Eine native macOS-App, die zeigt, wo auf dem Mac der Speicherplatz steckt. Sie misst alle wichtigen Bereiche in einem
+einzigen, energiesparenden Durchgang, ordnet den belegten Platz in Kategorien wie in den Systemeinstellungen unter
+„Speicher“ und lässt dich danach ohne erneutes Messen durch alle Ordner klicken. Die App schickt nichts weg und löscht
+nur an einer Stelle, nämlich bei den Prüfkopien, und das erst nach einer ausdrücklichen Bestätigung.
 
 ## Bereiche
 
-- **Überblick**: Belegungsring der Festplatte, freie und belegte Größe, Zahl der Time-Machine-Schnappschüsse und die
-  großen Bereiche (Benutzerordner, Library, Programme, temporärer Systembereich …) mit Größenbalken. Ein Klick öffnet
-  den Bereich im Ordner-Explorer.
-- **Temporärer Bereich**: der persönliche Bereich unter `/private/var/folders/…` mit den Unterordnern T (temporäre
-  Dateien), C (Caches), X (Prüfkopien von Apps) und 0 (Systemdienste) sowie dem Inhalt von X.
-- **Chrome-Prüfkopien**: Kopien, die macOS beim Prüfen der Chrome-Signatur unter
-  `…/X/com.google.Chrome.code_sign_clone` anlegt. Die App zeigt Anzahl, Versionen im Vergleich zur installierten
-  Chrome-Version und die Tage, an denen die Kopien entstanden sind. Löschen geht nur, solange Chrome beendet ist, und
-  nur nach Bestätigung; danach zeigt die App, wie viel Platz wirklich frei geworden ist.
-- **Ordner erkunden**: Inhalt eines Ordners nach Größe sortiert. Ein Klick auf einen Ordner geht tiefer, „Zurück“ geht
-  eine Ebene hoch, „Details“ zählt Dateien, Ordner und App-Pakete und listet die Dateitypen nach Größe, das
-  Kontextmenü zeigt einen Eintrag im Finder.
-- **Große Dateien**: sucht einzelne Dateien ab einer Mindestgröße (Standard 500 MB) in einem Ordner.
+- **Überblick**: der Startdatenträger mit einem gestapelten Balken wie in den Systemeinstellungen und die Kategorien
+  nach Größe sortiert (Programme, Dokumente, Downloads, App-Daten, Caches, Entwicklung, Papierkorb, temporäre Dateien,
+  von macOS löschbarer Platz, System & Sonstiges …). Die Kategorien entstehen aus Regeln für bekannte Ordner; was auf
+  einem Mac nicht existiert, bleibt einfach weg. Ein Klick öffnet die Kategorie im Ordner-Explorer.
+- **Ordner**: eine native Tabelle mit Finder-Symbolen, sortierbar nach Name, Größe, Anteil und Dateizahl. Doppelklick
+  geht tiefer, die Zurück-Taste in der Symbolleiste wieder hoch. Das Kontextmenü zeigt „Im Finder zeigen“,
+  „Informationen“ (Dateitypen, Anzahl, Zeitraum) und „Pfad kopieren“. Spalten lassen sich über den Tabellenkopf
+  ein- und ausblenden.
+- **Große Dateien**: alle Dateien ab einer wählbaren Größe (10 MB bis 5 GB), sofort aus der letzten Messung.
+- **Temporärer Bereich**: der versteckte Bereich unter `/private/var/folders/…` mit T, C, X und 0.
+- **Prüfkopien**: Kopien, die macOS beim Prüfen von App-Signaturen im Ordner X anlegt, für jede App getrennt (zum
+  Beispiel Chrome). Die App zeigt Anzahl, Versionen im Vergleich zur installierten Version und die Tage, an denen die
+  Kopien entstanden sind. Löschen geht nur, solange die App beendet ist, und nur nach Bestätigung; danach zeigt sie,
+  wie viel Platz wirklich frei geworden ist.
+- **Datenträger**: jeder angeschlossene Datenträger mit Kapazität, belegtem, löschbarem und freiem Platz. Externe
+  Datenträger lassen sich mit einem Klick zusätzlich messen.
 
-Alle Größen zählen APFS-Klone voll mit, so wie `du`. Kopien, die sich Speicherblöcke teilen, belegen real weniger;
-deshalb misst die App nach dem Löschen den tatsächlich frei gewordenen Platz.
+Gemessen wird der belegte Platz wie mit `du` (der Selbsttest vergleicht beides). APFS-Klone zählen dabei voll mit;
+Kopien mit gemeinsamen Speicherblöcken belegen real weniger.
+
+## Energie
+
+- Ein einziger Durchgang mit `fts(3)` direkt in der App statt vieler `du`-Prozesse; das Ergebnis bleibt als Baum im
+  Speicher, deshalb kosten Klicks, Sortieren und die Suche nach großen Dateien keine neue Messung.
+- Standardmäßig misst die App mit Hintergrund-Priorität; auf Apple Silicon läuft das auf den Effizienzkernen.
+- Im Stromsparmodus misst sie nicht automatisch.
+- Nach der Messung liegt die App bei 0 % CPU: keine Timer, keine Dauer-Animationen, keine Abfragen im Hintergrund.
+  Datenträger werden nur neu gelesen, wenn macOS das An- oder Abmelden eines Datenträgers meldet.
+- Ordner und Dateien unter 1 MB fasst die App pro Ordner zu einer Zeile zusammen; so bleibt der Baum klein
+  (rund 110 MB Arbeitsspeicher für eine Million Dateien).
+
+## Einstellungen (⌘,)
+
+- **Darstellung**: Erscheinungsbild (System, Hell, Dunkel), Diagrammfarben (bunt, Akzentfarbe, Grautöne) und binäre
+  Einheiten statt der Finder-Einheiten.
+- **Messen**: beim Start automatisch messen, im Stromsparmodus pausieren, energiesparend messen und zusätzliche Ordner,
+  die mitgemessen werden.
 
 ## Bauen und starten
 
@@ -36,15 +57,14 @@ open build/Speicher-Explorer.app
 Mit `./build.sh --install` landet die App zusätzlich in `~/Applications`, danach lässt sie sich wie jede andere App
 über Launchpad, Spotlight oder den Finder öffnen und im Dock behalten.
 
-Das Skript baut mit `swift build -c release`, prüft die Textkontraste, packt das Programm in ein `.app`-Paket mit
-Symbol und signiert es ad hoc für diesen Mac.
+Das Skript baut mit `swift build -c release`, prüft die Textkontraste, zeichnet das App-Symbol, packt alles in ein
+`.app`-Paket und signiert es ad hoc für diesen Mac.
 
 ### Zugriffsrechte
 
-Beim ersten Messen fragt macOS eventuell, ob die App auf Schreibtisch, Dokumente oder Downloads zugreifen darf. Für
-vollständige Zahlen (zum Beispiel in `~/Library/Containers`) kann die App unter Systemeinstellungen → Datenschutz &
-Sicherheit → Festplattenvollzugriff freigegeben werden. Weil jeder Neubau ad hoc neu signiert wird, kann macOS nach
-einem Neubau erneut fragen.
+Geschützte Ordner (zum Beispiel von Mail oder Safari) kann die App erst mit Festplattenvollzugriff messen. Unten in
+der Seitenleiste steht dann, wie viele Ordner nicht lesbar waren, mit einem Link zur passenden Systemeinstellung.
+Weil jeder Neubau ad hoc neu signiert wird, kann macOS nach einem Neubau erneut fragen.
 
 ## Prüfungen
 
@@ -52,31 +72,32 @@ einem Neubau erneut fragen.
 swift build && .build/debug/SpeicherExplorer --check-contrast
 ```
 
-prüft alle Text- und Hintergrundfarben in hellem und dunklem Modus auf mindestens 4,5:1 (WCAG AA); `build.sh` bricht
-ab, wenn ein Paar darunter liegt.
+prüft die Textfarben gegen helle und dunkle Systemflächen auf mindestens 4,5:1 (WCAG AA); `build.sh` bricht ab, wenn
+ein Paar darunter liegt.
 
 ```bash
-.build/debug/SpeicherExplorer --selftest
+swift build -c release && .build/release/SpeicherExplorer --selftest
 ```
 
-rechnet alle Bereiche auf den echten Daten dieses Macs durch und gibt dabei nur Anzahlen und Größen aus, keine Datei-
-oder Ordnernamen.
+misst Benutzerordner, Programme und den temporären Bereich, vergleicht jedes Ergebnis mit `du` (höchstens 2 %
+Abweichung) und gibt Dateizahl, Größe, Dauer und CPU-Zeit aus, aber keine Datei- oder Ordnernamen.
 
 Zum Ausprobieren lässt sich die App direkt in einem Bereich öffnen, zum Beispiel
-`open build/Speicher-Explorer.app --args -area chrome` (Werte: `overview`, `temp`, `chrome`, `explorer`, `bigFiles`).
+`open build/Speicher-Explorer.app --args -pane copies` (Werte: `overview`, `explorer`, `largeFiles`, `temp`, `copies`);
+`--args -openSettings YES` öffnet gleich die Einstellungen.
 
 ## Aufbau
 
 | Datei | Inhalt |
 | --- | --- |
-| `Sources/App.swift` | Einstieg, Kommandozeilen-Schalter, Seitenleiste und Bereichswechsel |
-| `Sources/Screens.swift` | die fünf Bereiche und das Detailfenster |
-| `Sources/Components.swift` | Pixel-Symbole, Größenbalken, Kopfzeile, Karten |
-| `Sources/Disk.swift` | Messen (`du`, `find`, `FileManager`), Chrome-Kopien, Selbsttest |
-| `Sources/Theme.swift` | Farben für hell und dunkel und die Kontrastprüfung |
+| `Sources/App.swift` | Einstieg, Kommandozeilen-Schalter, Fenster, Seitenleiste, Einstellungen, Selbsttest |
+| `Sources/Model.swift` | Messablauf, Datenträger, Kategorien, Prüfkopien |
+| `Sources/Scanner.swift` | der fts-Scanner und der Ordner-Baum |
+| `Sources/Views.swift` | alle Ansichten und das Informationsfenster |
+| `Sources/Theme.swift` | Einstellungsschlüssel, Textfarben mit Kontrastprüfung, Diagrammfarben, App-Symbol |
 
 ## Windows
 
-Die App ist bewusst nur für macOS gebaut. Für Windows müsste die Oberfläche neu entstehen (zum Beispiel mit WinUI
-oder einer plattformübergreifenden Lösung); die macOS-spezifischen Teile wie `/private/var/folders` und die
-Chrome-Prüfkopien gibt es dort nicht, die übrigen Bereiche lassen sich übertragen.
+Die App ist bewusst nur für macOS gebaut. Für Windows müsste die Oberfläche neu entstehen; der Scanner-Gedanke (ein
+Durchgang, Baum im Speicher) lässt sich übertragen, die macOS-Bereiche wie `/private/var/folders` und die Prüfkopien
+gibt es dort nicht.
