@@ -3,13 +3,17 @@ import Foundation
 /// Full Disk Access replaces the single prompts for Desktop, Documents, Downloads, iCloud Drive, other apps' data
 /// and external volumes. Apps cannot request it with a dialog; they can only check it and open System Settings.
 enum PermissionService {
-    /// A file that only processes with Full Disk Access may open; reading it never triggers a prompt.
-    private static let probePath = Paths.home + "/Library/Application Support/com.apple.TCC/TCC.db"
+    /// Folders only Full Disk Access may list; listing them without it fails quietly, without a prompt.
+    /// Several, because not every Mac has every folder, and macOS 27 no longer lets even Full Disk Access
+    /// open the TCC database that older checks relied on.
+    private static let probeFolders = ["/Library/Safari", "/Library/Mail", "/Library/Messages", "/Library/Cookies"]
+        .map { Paths.home + $0 }
 
     static var hasFullDiskAccess: Bool {
-        let fd = open(probePath, O_RDONLY)
-        guard fd >= 0 else { return false }
-        close(fd)
-        return true
+        probeFolders.contains { path in
+            guard let dir = opendir(path) else { return false }
+            closedir(dir)
+            return true
+        }
     }
 }

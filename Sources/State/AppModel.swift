@@ -36,7 +36,7 @@ import Observation
     func launch() {
         if let p = AppSettings.launchPane { pane = p }
         refreshAccess()
-        if !hasFullDiskAccess { showAccessSheet = true } else { autoScanIfWanted() }
+        if !hasFullDiskAccess && !AppSettings.launchSkipAccess { showAccessSheet = true } else { autoScanIfWanted() }
     }
 
     func refreshAccess() { hasFullDiskAccess = PermissionService.hasFullDiskAccess }
@@ -71,6 +71,9 @@ import Observation
                 guard let result = await scanInBackground(path, base: progress), !Task.isCancelled else { break }
                 result.root.attach(to: root)
                 unreadable += result.unreadable
+                // A home folder without any blocked folder proves Full Disk Access, whatever the quick check said.
+                // (System folders in the temporary area stay blocked even with it.)
+                if path == Paths.home && result.unreadable == 0 { hasFullDiskAccess = true }
                 progress = .init(files: root.fileCount, bytes: root.bytes)
                 treeChanged()
             }
