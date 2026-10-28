@@ -49,11 +49,12 @@ import SwiftUI
 
     private var mainWindow: NSWindow? { NSApp.windows.first { $0.identifier?.rawValue == WindowID.main } }
 
-    /// Opening the sidebar in a narrow window widens the window first, so the page keeps its minimum width.
+    /// Opening the sidebar in a narrow window widens the window by the sidebar's width, so the page keeps the width
+    /// it had. That is what AppKit's own split view does in Mail, Finder or Notes.
     private func makeRoomForSidebar() {
         guard let window = mainWindow, window.frame.width < Layout.sidebarCollapseWidth else { return }
         var frame = window.frame
-        frame.size.width = Layout.sidebarCollapseWidth
+        frame.size.width += Layout.sidebarIdeal
         window.setFrame(window.constrainFrameRect(frame, to: window.screen), display: true, animate: !Motion.reduced)
     }
 
