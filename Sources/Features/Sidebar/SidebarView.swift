@@ -19,7 +19,9 @@ struct SidebarView: View {
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) { SidebarFooter() }
-        .navigationSplitViewColumnWidth(min: Layout.sidebarMin, ideal: Layout.sidebarIdeal)
+        // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
+        // animation, which made the reopening sidebar jump.
+        .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
     }
 
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays

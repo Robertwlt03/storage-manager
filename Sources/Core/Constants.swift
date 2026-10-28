@@ -49,7 +49,6 @@ enum Layout {
     static let percentWidth: CGFloat = 38
     static let minWindowWidth: CGFloat = 860
     static let minWindowHeight: CGFloat = 560
-    static let sidebarMin: CGFloat = 210
     static let sidebarIdeal: CGFloat = 230
     static let settingsWidth: CGFloat = 520
     static let sheetWidth: CGFloat = 560
