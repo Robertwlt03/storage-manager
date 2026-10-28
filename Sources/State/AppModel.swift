@@ -31,11 +31,12 @@ import Observation
 
     // MARK: Launch
 
-    /// Asks for Full Disk Access once (one switch instead of many prompts), then scans if the settings allow it.
+    /// Asks for Full Disk Access on every launch until it works (one switch instead of many prompts),
+    /// then scans if the settings allow it.
     func launch() {
         if let p = AppSettings.launchPane { pane = p }
         refreshAccess()
-        if !hasFullDiskAccess && !AppSettings.accessPromptDismissed { showAccessSheet = true } else { autoScanIfWanted() }
+        if !hasFullDiskAccess { showAccessSheet = true } else { autoScanIfWanted() }
     }
 
     func refreshAccess() { hasFullDiskAccess = PermissionService.hasFullDiskAccess }

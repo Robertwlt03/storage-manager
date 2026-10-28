@@ -12,7 +12,6 @@ enum SettingsKey {
     static let pauseOnLowPower = "pauseOnLowPower"
     static let largeFileMB = "largeFileMB"
     static let extraFolders = "extraFolders"
-    static let accessPromptDismissed = "accessPromptDismissed"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let launchSettings = "openSettings"  // `open … --args -openSettings YES`
 }
@@ -32,7 +31,6 @@ enum AppSettings {
     static var language: AppLanguage { AppLanguage(rawValue: d.string(forKey: SettingsKey.language) ?? "") ?? .system }
     static var launchPane: Pane? { d.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:)) }
     static var launchSettings: Bool { d.bool(forKey: SettingsKey.launchSettings) }
-    static var accessPromptDismissed: Bool { d.bool(forKey: SettingsKey.accessPromptDismissed) }
 
     /// Extra folders are stored as one string, one path per line (AppStorage cannot hold arrays).
     static func folders(from stored: String) -> [String] { stored.split(separator: "\n").map(String.init) }

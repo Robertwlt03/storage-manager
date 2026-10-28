@@ -22,6 +22,11 @@ enum Theme {
     static let bad = Tone(light: 0xB3141F, dark: 0xFF8C8C)
     static let textTones: [(name: String, tone: Tone)] = [("muted", muted), ("good", good), ("warn", warn), ("bad", bad)]
 
+    // Button fills with white text on top.
+    static let primaryFill = Tone(light: 0x0A5BC4, dark: 0x1F6FD0)
+    static let confirmFill = Tone(light: 0x1B7332, dark: 0x1B7332)
+    static let fills: [(name: String, tone: Tone)] = [("primaryFill", primaryFill), ("confirmFill", confirmFill)]
+
     /// Approximations of the system surfaces (content, window, grouped rows, sidebar, glass over the backdrop).
     static let lightSurfaces: [UInt32] = [0xFFFFFF, 0xF5F5F7, 0xECECEC, 0xE3E3E3, 0xDDE3EE]
     static let darkSurfaces: [UInt32] = [0x1E1E1E, 0x262626, 0x2D2D2D, 0x323232, 0x3A3A3A, 0x28303E]

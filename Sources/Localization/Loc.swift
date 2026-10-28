@@ -39,7 +39,7 @@ enum Loc: String, CaseIterable {
     case searchPrompt, scopeAll, scopeFolders, scopeFiles, searchResults, noResults, searchNote
 
     // Full Disk Access
-    case accessTitle, accessDetail, accessOneSwitch, accessOpenSettings, accessContinue, accessDontAsk
+    case accessTitle, accessDetail, accessOneSwitch, accessOpenSettings, accessContinue
     case accessGranted, fullDiskAccess, accessRestart, accessRestartHint
 
     // Settings

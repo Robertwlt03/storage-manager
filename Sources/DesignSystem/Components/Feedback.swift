@@ -59,7 +59,7 @@ struct NotMeasured: View {
         EmptyState(title: model.scanning ? Loc.scanningTitle.s : Loc.notMeasuredTitle.s, symbol: Symbols.measure,
                    detail: model.scanning ? Loc.scanningDetail.s : Loc.notMeasuredDetail.s) {
             if model.scanning { ProgressView().controlSize(.small) } else {
-                Button(Loc.scanNow.s) { model.scan() }.appButton(prominent: true)
+                Button(Loc.scanNow.s) { model.scan() }.appButton(.primary)
             }
         }
     }

@@ -17,6 +17,13 @@ enum Checks {
                 }
             }
         }
+        for (name, fill) in Theme.fills {
+            for hex in [fill.light, fill.dark] {
+                let r = Theme.ratio(0xFFFFFF, hex)
+                ok = ok && r >= minContrast
+                print("\(r >= minContrast ? "ok  " : "FAIL") \(String(format: "%5.2f", r)):1  white / \(name) #\(String(hex, radix: 16))")
+            }
+        }
         return ok
     }
 

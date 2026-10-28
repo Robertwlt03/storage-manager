@@ -25,15 +25,30 @@ private struct SurfaceModifier: ViewModifier {
     }
 }
 
+/// Button roles with their own colour, so several buttons side by side stay distinguishable.
+enum ButtonKind {
+    case normal, primary, confirm
+
+    /// Fill behind white text; nil = neutral system button.
+    var fill: Tone? {
+        switch self {
+        case .normal: nil
+        case .primary: Theme.primaryFill
+        case .confirm: Theme.confirmFill
+        }
+    }
+}
+
 private struct AppButtonModifier: ViewModifier {
     @AppStorage(SettingsKey.liquidGlass) private var glass = true
-    let prominent: Bool
+    let kind: ButtonKind
 
     func body(content: Content) -> some View {
-        if #available(macOS 26.0, *), glass {
-            if prominent { content.buttonStyle(.glassProminent) } else { content.buttonStyle(.glass) }
+        if let fill = kind.fill {
+            if #available(macOS 26.0, *), glass { content.buttonStyle(.glassProminent).tint(fill.color) }
+            else { content.buttonStyle(.borderedProminent).tint(fill.color) }
         } else {
-            if prominent { content.buttonStyle(.borderedProminent) } else { content.buttonStyle(.bordered) }
+            if #available(macOS 26.0, *), glass { content.buttonStyle(.glass) } else { content.buttonStyle(.bordered) }
         }
     }
 }
@@ -56,5 +71,5 @@ struct Backdrop: View {
 
 extension View {
     func surface(radius: CGFloat = Layout.cardRadius) -> some View { modifier(SurfaceModifier(radius: radius)) }
-    func appButton(prominent: Bool = false) -> some View { modifier(AppButtonModifier(prominent: prominent)) }
+    func appButton(_ kind: ButtonKind = .normal) -> some View { modifier(AppButtonModifier(kind: kind)) }
 }

@@ -147,7 +147,6 @@
 "accessOneSwitch" = "Privacy & Security › Full Disk Access";
 "accessOpenSettings" = "Open System Settings";
 "accessContinue" = "Continue Without Full Disk Access";
-"accessDontAsk" = "Don't ask again";
 "accessGranted" = "Granted";
 "accessRestart" = "Restart App";
 "accessRestartHint" = "Switch turned on? macOS only grants access after the app restarts. If it still does not work, the entry belongs to an earlier build: remove it with “–” in System Settings and add it again.";

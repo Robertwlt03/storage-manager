@@ -29,7 +29,7 @@ struct VolumeView: View {
         } else if let node = model.root.descendant(at: v.path) {
             UI.button(Loc.exploreContents.s) { model.open(node) }
         } else {
-            UI.button(Loc.scanAndExplore.s, prominent: true) {
+            UI.button(Loc.scanAndExplore.s, .primary) {
                 model.scan([v.path], reset: false)
                 model.pane = .explorer
             }

@@ -1,13 +1,14 @@
 import AppKit
 
 enum LifecycleService {
-    /// Quits and opens the app again; macOS applies a newly granted Full Disk Access only to a new process.
-    static func relaunch() {
-        let script = "sleep 1; /usr/bin/open \"\(Bundle.main.bundlePath)\""
-        let p = Process()
-        p.executableURL = URL(fileURLWithPath: "/bin/sh")
-        p.arguments = ["-c", script]
-        try? p.run()
-        NSApp.terminate(nil)
+    /// Opens a new instance of the app, then quits this one; macOS applies a newly granted Full Disk Access
+    /// only to a new process. Quitting with `exit` also works while a sheet is open, which blocks `terminate`.
+    @MainActor static func relaunch() {
+        let config = NSWorkspace.OpenConfiguration()
+        config.createsNewApplicationInstance = true
+        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: config) { _, error in
+            guard error == nil else { return }
+            DispatchQueue.main.async { exit(0) }
+        }
     }
 }

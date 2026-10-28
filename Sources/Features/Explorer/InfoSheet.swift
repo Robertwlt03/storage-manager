@@ -25,7 +25,7 @@ struct InfoSheet: View {
             HStack {
                 UI.button(Loc.showInFinder.s) { FinderService.reveal(path) }
                 Spacer()
-                UI.button(Loc.done.s, prominent: true) { dismiss() }.keyboardShortcut(.defaultAction)
+                UI.button(Loc.done.s, .primary) { dismiss() }.keyboardShortcut(.defaultAction)
             }
             .padding(Layout.cardPadding)
         }

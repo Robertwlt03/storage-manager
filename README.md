@@ -27,9 +27,10 @@ und löscht nur an einer Stelle, nämlich bei den Prüfkopien, und das erst nach
 ## Berechtigungen
 
 Ohne Festplattenvollzugriff fragt macOS einzeln nach Schreibtisch, Dokumenten, Downloads, iCloud Drive, den Daten
-anderer Apps und externen Datenträgern. Deshalb bietet die App beim ersten Start an, stattdessen einmal den
-Festplattenvollzugriff zu erteilen: Der Knopf öffnet die passende Systemeinstellung, danach die App neu starten.
-Wer das nicht möchte, fährt ohne Vollzugriff fort und bekommt die einzelnen Abfragen.
+anderer Apps und externen Datenträgern. Deshalb bietet die App bei jedem Start, solange der Vollzugriff fehlt, an,
+ihn einmal zu erteilen: „Systemeinstellungen öffnen“ (blau) führt zum Schalter, „App neu starten“ (grün) übernimmt
+ihn, denn macOS gibt ihn erst einem neuen Prozess. Wer das nicht möchte, fährt ohne Vollzugriff fort und bekommt die
+einzelnen Abfragen. Ist der Vollzugriff erteilt, erscheint das Fenster nicht mehr.
 
 Einmal erteilte Freigaben gelten, solange die App mit derselben Signatur gebaut wird. Ad hoc signierte Neubauten
 gelten für macOS als neue App und fragen erneut. Für eine feste Identität beim Entwickeln:

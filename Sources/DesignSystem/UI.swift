@@ -42,8 +42,8 @@ enum UI {
         EmptyState(title: title, symbol: symbol, detail: detail) { EmptyView() }
     }
 
-    static func button(_ title: String, prominent: Bool = false, role: ButtonRole? = nil, action: @escaping () -> Void) -> some View {
-        Button(title, role: role, action: action).appButton(prominent: prominent)
+    static func button(_ title: String, _ kind: ButtonKind = .normal, role: ButtonRole? = nil, action: @escaping () -> Void) -> some View {
+        Button(title, role: role, action: action).appButton(kind)
     }
 
     static func volume(_ v: VolumeInfo, segments: [StorageSegment]) -> some View { VolumeSummary(volume: v, segments: segments) }
