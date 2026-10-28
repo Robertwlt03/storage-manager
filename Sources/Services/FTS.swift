@@ -23,19 +23,6 @@ enum FTS {
         }
     }
 
-    /// Allocated bytes of everything below `path` (one quick pass, for small areas like caches).
-    static func size(_ path: String) -> Int64 {
-        var total: Int64 = 0
-        walk(path) { ent in
-            switch info(ent) {
-            case FTS_F, FTS_SL, FTS_DEFAULT: if let st = ent.pointee.fts_statp?.pointee { total += allocated(st) }
-            default: break
-            }
-            return true
-        }
-        return total
-    }
-
     /// Allocated bytes on disk, like `du`.
     static func allocated(_ st: stat) -> Int64 { Int64(st.st_blocks) * 512 }
 }
