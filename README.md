@@ -25,11 +25,11 @@ sie auf Wunsch, aber nur nach Rückfrage und nur, wenn die App dazu beendet ist.
 
 <table>
   <tr>
-    <td width="50%" valign="top"><img src="assets/screenshots/kategorien-hell.png" alt="Kategorien im hellen Erscheinungsbild"></td>
-    <td width="50%" valign="top"><img src="assets/screenshots/kategorien-dunkel.png" alt="Kategorien im dunklen Erscheinungsbild"></td>
+    <td width="50%" valign="top"><img src="assets/screenshots/ueberblick-hell.png" alt="Überblick im hellen Erscheinungsbild"></td>
+    <td width="50%" valign="top"><img src="assets/screenshots/ueberblick-dunkel.png" alt="Überblick im dunklen Erscheinungsbild"></td>
   </tr>
   <tr>
-    <td align="center"><sub><b>Überblick</b> – der Speicher nach Kategorien, hell …</sub></td>
+    <td align="center"><sub><b>Überblick</b> – Speicherbalken und Kategorien, hell …</sub></td>
     <td align="center"><sub>… oder dunkel, ganz wie dein Mac</sub></td>
   </tr>
   <tr>
