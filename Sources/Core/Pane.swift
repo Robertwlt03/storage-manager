@@ -14,6 +14,10 @@ enum Pane: Hashable {
     var supportsGrid: Bool { [.overview, .explorer, .largeFiles, .apps].contains(self) }
 
     init?(launchKey: String) {
+        if launchKey.hasPrefix("/") {  // a volume by its mount point, e.g. `-pane /`
+            self = .volume(launchKey)
+            return
+        }
         guard let p = (Self.main + Self.tidy + Self.system).first(where: { $0.launchKey == launchKey }) else { return nil }
         self = p
     }

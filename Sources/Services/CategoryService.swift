@@ -4,6 +4,9 @@ enum CategoryKind: Int, CaseIterable {
     case apps, documents, downloads, media, iCloud, mail, developer, caches, appData, trash, temp, user, library
     case other, purgeable, system
 
+    /// Kinds that come from what macOS reports, not from the scan.
+    static let estimated: Set<CategoryKind> = [.purgeable, .system]
+
     var title: Loc {
         switch self {
         case .apps: .catApps

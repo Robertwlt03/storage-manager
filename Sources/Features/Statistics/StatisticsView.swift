@@ -32,13 +32,16 @@ struct StatisticsView: View {
         .task(id: model.revision) { stats = StatsService.compute(root: model.root) }
     }
 
+    /// Only what the scan measured; purgeable space and the remainder come from macOS, not from the scan.
+    private var measured: [Category] { model.categories.filter { !CategoryKind.estimated.contains($0.kind) } }
+
     private var segments: [StorageSegment] {
-        model.categories.map { StorageSegment(id: "\($0.kind)", title: $0.kind.title.s, bytes: $0.bytes, colorIndex: $0.kind.rawValue) }
+        measured.map { StorageSegment(id: "\($0.kind)", title: $0.kind.title.s, bytes: $0.bytes, colorIndex: $0.kind.rawValue) }
     }
 
     /// Ring of all categories with the total in the middle; the legend below names every colour with its size.
     private var categoryChart: some View {
-        let cats = model.categories
+        let cats = measured
         return ZStack {
             Chart(cats) { c in
                 SectorMark(angle: .value(Loc.columnSize.s, c.bytes), innerRadius: .ratio(Layout.donutInner), angularInset: 1)
@@ -48,7 +51,7 @@ struct StatisticsView: View {
             }
             .chartLegend(.hidden)
             VStack(spacing: 2) {
-                Text(Fmt.bytes(cats.reduce(0) { $0 + $1.bytes })).font(.title2.weight(.semibold)).monospacedDigit()
+                Text(Fmt.bytes(model.root.bytes)).font(.title2.weight(.semibold)).monospacedDigit()
                 Text(Loc.statScanned.s).foregroundStyle(.muted)  // clones count in full, so "used" would overstate
             }
         }
