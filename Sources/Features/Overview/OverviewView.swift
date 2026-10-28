@@ -8,7 +8,7 @@ struct OverviewView: View {
         UI.page(.overview) {
             if let v = model.startupVolume {
                 UI.card {
-                    UI.volume(v, segments: segments) { seg in model.categories.first { "\($0.kind)" == seg.id }?.node.map(model.open) }
+                    UI.volume(v, segments: segments, canSelect: { node(for: $0) != nil }) { node(for: $0).map(model.open) }
                 }
             }
             SummaryCard()
@@ -31,6 +31,8 @@ struct OverviewView: View {
         .smoothChanges(of: layout)
         .smoothChanges(of: model.categories.isEmpty)
     }
+
+    private func node(for segment: StorageSegment) -> Node? { model.categories.first { "\($0.kind)" == segment.id }?.node }
 
     private func badge(_ c: Category) -> RowIcon { .badge(symbol: c.kind.symbol, colorIndex: c.kind.rawValue) }
 

@@ -14,7 +14,7 @@ struct CleanerView: View {
 
     var body: some View {
         UI.page(.cleaner, options: {
-            UI.button(Loc.cleanerRefresh.s) { Task { await model.refreshCleanItems() } }.disabled(cleaning || items == nil)
+            UI.button(Loc.cleanerRefresh.s) { model.refreshCleanItems() }.disabled(cleaning || items == nil)
         }) {
             UI.card {
                 if let items {
@@ -34,7 +34,7 @@ struct CleanerView: View {
                     .disabled(chosen.isEmpty || cleaning)
             }
         }
-        .task { if items == nil && !model.scanning { await model.refreshCleanItems() } }
+        .task { if items == nil && !model.scanning { model.refreshCleanItems() } }
         .confirmationDialog(Loc.cleanConfirmTitle.f(Fmt.bytes(chosenBytes)), isPresented: $confirming) {
             Button(Loc.deleteForever.s, role: .destructive) { Task { await clean() } }
             Button(Loc.cancel.s, role: .cancel) {}

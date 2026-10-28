@@ -11,11 +11,12 @@ enum CleanerService {
     private static let developerFolders = ["~/Library/Developer/Xcode/DerivedData", "~/Library/Developer/CoreSimulator/Caches",
                                            "~/.npm/_cacache", "~/.gradle/caches", "~/.cache"]
 
-    /// Runs on the caller's thread; call it from a low-priority task.
-    static func candidates() -> [CleanItem] {
+    /// Lists what could go; `size` comes from the scanned tree, so no second walk over the disk is needed.
+    /// Entries under 1 MB are folded in the tree and count as zero, which is negligible here.
+    static func candidates(size: (String) -> Int64) -> [CleanItem] {
         CleanKind.allCases.map { kind in
             let paths = paths(for: kind)
-            return CleanItem(kind: kind, paths: paths, bytes: paths.reduce(0) { $0 + FTS.size($1) })
+            return CleanItem(kind: kind, paths: paths, bytes: paths.reduce(0) { $0 + size($1) })
         }
     }
 

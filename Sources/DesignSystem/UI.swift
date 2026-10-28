@@ -83,8 +83,9 @@ enum UI {
     static func stat(_ value: String, _ label: String, symbol: String, action: (() -> Void)? = nil) -> some View {
         StatTile(value: value, label: label, symbol: symbol, action: action)
     }
-    static func legend(_ segments: [StorageSegment], onSelect: ((StorageSegment) -> Void)? = nil) -> some View {
-        StorageLegend(segments: segments, onSelect: onSelect)
+    static func legend(_ segments: [StorageSegment], canSelect: @escaping (StorageSegment) -> Bool = { _ in true },
+                       onSelect: ((StorageSegment) -> Void)? = nil) -> some View {
+        StorageLegend(segments: segments, onSelect: onSelect, canSelect: canSelect)
     }
     static func caption(_ text: String) -> some View { Note(text: text) }
 
@@ -96,8 +97,9 @@ enum UI {
         Button(title, role: role, action: action).appButton(kind)
     }
 
-    static func volume(_ v: VolumeInfo, segments: [StorageSegment], onSelect: ((StorageSegment) -> Void)? = nil) -> some View {
-        VolumeSummary(volume: v, segments: segments, onSelect: onSelect)
+    static func volume(_ v: VolumeInfo, segments: [StorageSegment], canSelect: @escaping (StorageSegment) -> Bool = { _ in false },
+                       onSelect: ((StorageSegment) -> Void)? = nil) -> some View {
+        VolumeSummary(volume: v, segments: segments, onSelect: onSelect, canSelect: canSelect)
     }
 
     // Table cells

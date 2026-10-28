@@ -26,6 +26,7 @@ struct StorageBar: View {
         .chartXAxis(.hidden)
         .chartYAxis(.hidden)
         .chartLegend(.hidden)
+        .staticChart()
         .frame(height: Layout.storageBarHeight)
         .clipShape(RoundedRectangle(cornerRadius: Layout.storageBarRadius, style: .continuous))
     }
@@ -36,6 +37,7 @@ struct VolumeSummary: View {
     let volume: VolumeInfo
     let segments: [StorageSegment]
     var onSelect: ((StorageSegment) -> Void)?
+    var canSelect: (StorageSegment) -> Bool = { _ in true }
 
     var body: some View {
         VStack(alignment: .leading, spacing: Layout.spacing) {
@@ -43,7 +45,7 @@ struct VolumeSummary: View {
                       subtitle: Loc.availableOf.f(Fmt.bytes(volume.available), Fmt.bytes(volume.total)))
             let all = shown + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)]
             StorageBar(segments: all, total: volume.total)
-            StorageLegend(segments: all, onSelect: onSelect)
+            StorageLegend(segments: all, onSelect: onSelect, canSelect: canSelect)
         }
         .padding(.vertical, Layout.rowPadding)
     }
@@ -60,13 +62,14 @@ struct VolumeSummary: View {
 struct StorageLegend: View {
     let segments: [StorageSegment]
     var onSelect: ((StorageSegment) -> Void)?
+    var canSelect: (StorageSegment) -> Bool = { _ in true }
     @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
 
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.legendItemMin), alignment: .leading)], alignment: .leading, spacing: 6) {
             ForEach(items) { s in
                 // Named categories lead to their folder; "Other" and free space have nowhere to go.
-                let target = onSelect != nil && s.colorIndex != nil && s.id != Self.otherID
+                let target = onSelect != nil && s.colorIndex != nil && s.id != Self.otherID && canSelect(s)
                 Button { onSelect?(s) } label: {
                     HStack(spacing: 6) {
                         Circle().fill(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)

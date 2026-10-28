@@ -89,7 +89,7 @@ import Observation
             }
             treeChanged()
             refreshApps()
-            await refreshCleanItems()
+            refreshCleanItems()
         }
     }
 
@@ -124,9 +124,9 @@ import Observation
     }
 
     /// What the cleaner could remove; computed once after each scan and shared by the overview and the cleaner.
-    func refreshCleanItems() async {
-        cleanItems = nil
-        let found = await Task.detached(priority: .utility) { CleanerService.candidates() }.value
+    func refreshCleanItems() {
+        guard hasData else { return }
+        let found = CleanerService.candidates { [root] path in root.descendant(at: path)?.bytes ?? 0 }
         Motion.animate { cleanItems = found }
     }
 

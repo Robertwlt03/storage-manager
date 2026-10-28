@@ -21,6 +21,10 @@ enum Motion {
 }
 
 extension View {
+    /// Charts redraw without animation: Swift Charts crashed while animating between changing datasets during a scan,
+    /// and redrawing once is also cheaper.
+    func staticChart() -> some View { transaction { $0.animation = nil } }
+
     /// Animates this view whenever `value` changes.
     func smoothChanges<V: Equatable>(of value: V) -> some View { animation(Motion.standard, value: value) }
 

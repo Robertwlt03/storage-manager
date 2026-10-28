@@ -12,14 +12,14 @@ struct StatisticsView: View {
 
     var body: some View {
         UI.page(.statistics) {
-            if !model.hasData {
+            if !model.hasData || model.scanning {
                 UI.notMeasured()
             } else {
                 tiles
                 UI.card(Loc.statCategoriesTitle.s) {
                     UI.caption(Loc.statCategoriesCaption.s).padding(.top, Layout.rowPadding)
                     categoryChart.padding(.vertical, Layout.rowPadding)
-                    UI.legend(segments) { s in node(for: s).map(model.open) }.padding(.bottom, Layout.rowPadding)
+                    UI.legend(segments, canSelect: { node(for: $0) != nil }) { node(for: $0).map(model.open) }.padding(.bottom, Layout.rowPadding)
                 }
                 UI.card(Loc.statTypesTitle.s) {
                     UI.caption(Loc.statTypesCaption.s).padding(.top, Layout.rowPadding)
@@ -31,9 +31,9 @@ struct StatisticsView: View {
                 }
             }
         }
-        .task(id: "\(model.revision)-\(largeFileMB)") {
-            let computed = StatsService.compute(root: model.root)
-            Motion.animate { stats = computed }
+        .task(id: "\(model.revision)-\(largeFileMB)-\(model.scanning)") {
+            guard !model.scanning else { return }  // figures once, when the scan is done
+            stats = StatsService.compute(root: model.root)
         }
     }
 
@@ -75,6 +75,7 @@ struct StatisticsView: View {
                     .accessibilityValue(Fmt.bytes(c.bytes))
             }
             .chartLegend(.hidden)
+            .staticChart()
             if let top = cats.first {
                 VStack(spacing: 2) {
                     Text(Fmt.percent(Double(top.bytes) / Double(total))).font(.title2.weight(.semibold)).monospacedDigit()
@@ -98,6 +99,7 @@ struct StatisticsView: View {
         }
         .chartXAxis(.hidden)
         .chartYAxis { AxisMarks { AxisValueLabel() } }  // names only, no grid lines
+        .staticChart()
         .frame(height: Layout.chartHeight)
     }
 
@@ -113,6 +115,7 @@ struct StatisticsView: View {
         }
         .chartYAxis(.hidden)
         .chartXAxis { AxisMarks { AxisValueLabel() } }  // size classes only, no grid lines
+        .staticChart()
         .frame(height: Layout.chartHeight)
     }
 }
