@@ -47,7 +47,6 @@ struct OverviewView: View {
         }
         .smoothChanges(of: layout)
         .smoothChanges(of: model.categories.isEmpty)
-        .smoothChanges(of: model.scanning)
         .onChange(of: largeFileMB) { if !model.scanning { model.refreshStats() } }
     }
 

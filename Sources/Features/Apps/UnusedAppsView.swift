@@ -59,7 +59,6 @@ struct UnusedAppsView: View {
             Text(Loc.trashAppMessage.s)
         }
         .smoothChanges(of: layout)
-        .smoothChanges(of: model.scanning)
     }
 
     @ViewBuilder private func menu(_ app: AppUsage) -> some View {

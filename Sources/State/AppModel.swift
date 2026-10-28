@@ -4,7 +4,7 @@ import Observation
 /// App state: what is selected, the scanned tree and everything derived from it.
 /// The work itself happens in the services; this class only orchestrates them.
 @MainActor @Observable final class AppModel {
-    var pane: Pane? = .overview
+    var pane: Pane? = AppSettings.launchPane ?? .overview  // set before the first frame, so nothing animates in
     var explorerPath: [Node] = []
     var searchText = ""
     var searchPresented = false  // the search field has focus; results only replace the page once text is typed
@@ -48,7 +48,6 @@ import Observation
     /// Asks for Full Disk Access on every launch until it works (one switch instead of many prompts),
     /// then scans if the settings allow it.
     func launch() {
-        if let p = AppSettings.launchPane { pane = p }
         refreshAccess()
         if !hasFullDiskAccess && !AppSettings.launchSkipAccess { showAccessSheet = true } else { autoScanIfWanted() }
     }
@@ -78,7 +77,9 @@ import Observation
             unreadable = 0
             explorerPath = []
         }
-        Motion.animate { scanning = true }
+        // Not animated: the scan at launch starts before the window's first frame, and an animation here would let
+        // every card grow out of the top-left corner. Waiting states and results simply take their place.
+        scanning = true
         progress = .init(files: root.fileCount, bytes: root.bytes)
         let todo = paths ?? ScanService.defaultRoots()
         task = Task {
@@ -95,7 +96,7 @@ import Observation
                 treeChanged()
             }
             guard scanID == id else { return }  // a newer scan took over; it finishes the state itself
-            Motion.animate { scanning = false }
+            scanning = false
             if !Task.isCancelled {
                 lastScan = Date()
                 if reset { UserDefaults.standard.set(root.fileCount, forKey: SettingsKey.lastScanFiles) }
@@ -118,7 +119,7 @@ import Observation
     func cancelScan() {
         task?.cancel()
         scanID = UUID()
-        Motion.animate { scanning = false }
+        scanning = false
     }
 
     private func scanInBackground(_ path: String, base: ScanService.Progress, id: UUID) async -> ScanService.Result? {
