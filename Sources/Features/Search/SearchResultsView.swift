@@ -6,11 +6,8 @@ struct SearchResultsView: View {
     @State private var results: [Entry] = []
 
     var body: some View {
-        EntryTable(entries: results, total: results.reduce(0) { $0 + $1.bytes }, showLocation: true)
-            .overlay {
-                if !model.hasData { UI.notMeasured() }
-                else if results.isEmpty { UI.empty(Loc.noResults.f(model.searchText), symbol: Symbols.search, detail: Loc.searchNote.s) }
-            }
+        EntryBrowser(entries: results, total: results.reduce(0) { $0 + $1.bytes }, showLocation: true,
+                     emptyTitle: Loc.noResults.f(model.searchText), emptyDetail: Loc.searchNote.s)
             .navigationTitle(Loc.searchResults.f(Fmt.count(results.count)))
             .task(id: "\(model.searchText)|\(model.searchScope)|\(model.revision)") {
                 try? await Task.sleep(for: ScanConfig.searchDebounce)  // wait until typing pauses

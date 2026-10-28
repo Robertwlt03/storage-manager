@@ -40,8 +40,9 @@ struct VolumeSummary: View {
         VStack(alignment: .leading, spacing: Layout.spacing) {
             HeaderRow(icon: .file(volume.path), title: volume.name,
                       subtitle: Loc.availableOf.f(Fmt.bytes(volume.available), Fmt.bytes(volume.total)))
-            StorageBar(segments: shown + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)],
-                       total: volume.total)
+            let all = shown + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)]
+            StorageBar(segments: all, total: volume.total)
+            StorageLegend(segments: all)
         }
         .padding(.vertical, Layout.rowPadding)
     }
@@ -51,6 +52,37 @@ struct VolumeSummary: View {
         segments.isEmpty
             ? [StorageSegment(id: "used", title: Loc.used.s, bytes: volume.used, colorIndex: CategoryKind.system.rawValue)]
             : segments
+    }
+}
+
+/// Says which colour stands for what: the biggest parts by name, the rest grouped, free space last.
+struct StorageLegend: View {
+    let segments: [StorageSegment]
+    @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
+
+    var body: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.statTileMin), alignment: .leading)], alignment: .leading, spacing: 6) {
+            ForEach(items) { s in
+                HStack(spacing: 6) {
+                    Circle().fill(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)
+                        .frame(width: Layout.legendDot, height: Layout.legendDot)
+                    Text(s.title).lineLimit(1)
+                    Text(Fmt.bytes(s.bytes)).foregroundStyle(.muted).monospacedDigit().lineLimit(1)
+                }
+                .font(.callout)
+                .accessibilityElement(children: .combine)
+            }
+        }
+    }
+
+    private var items: [StorageSegment] {
+        let used = segments.filter { $0.colorIndex != nil }
+        let free = segments.filter { $0.colorIndex == nil }
+        guard used.count > Layout.legendMax else { return used + free }
+        let rest = used.dropFirst(Layout.legendMax - 1)
+        let other = StorageSegment(id: "other", title: Loc.otherCategories.s, bytes: rest.reduce(0) { $0 + $1.bytes },
+                                   colorIndex: rest.first?.colorIndex)
+        return Array(used.prefix(Layout.legendMax - 1)) + [other] + free
     }
 }
 

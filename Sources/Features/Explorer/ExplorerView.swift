@@ -19,8 +19,7 @@ struct FolderView: View {
 
     var body: some View {
         let _ = model.revision
-        EntryTable(entries: Entry.contents(of: node), total: node.bytes)
-            .overlay { if node.isVirtual && !model.hasData { UI.notMeasured() } }
+        EntryBrowser(entries: Entry.contents(of: node), total: node.bytes, emptyTitle: Loc.emptyFolder.s)
             .navigationTitle(node.isVirtual ? Loc.paneExplorer.s : node.displayName)
             .navigationSubtitle(subtitle)
             .toolbar {

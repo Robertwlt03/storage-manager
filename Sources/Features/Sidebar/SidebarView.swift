@@ -8,6 +8,7 @@ struct SidebarView: View {
         @Bindable var model = model
         List(selection: $model.pane) {
             Section { ForEach(Pane.main, id: \.self, content: row) }
+            Section(Loc.sectionTidy.s) { ForEach(Pane.tidy, id: \.self, content: row) }
             Section(Loc.sectionSystem.s) { ForEach(Pane.system, id: \.self, content: row) }
             Section(Loc.sectionVolumes.s) {
                 ForEach(model.volumes) { v in Label(v.name, systemImage: v.symbol).tag(Pane.volume(v.path)) }
@@ -17,8 +18,13 @@ struct SidebarView: View {
         .navigationSplitViewColumnWidth(min: Layout.sidebarMin, ideal: Layout.sidebarIdeal)
     }
 
+    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
+
+    /// The apps row shows how many apps were not opened for a while, as a gentle reminder.
     private func row(_ pane: Pane) -> some View {
-        Label(pane.title.s, systemImage: pane.symbol).tag(pane)
+        Label(pane.title.s, systemImage: pane.symbol)
+            .badge(pane == .apps ? model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count : 0)
+            .tag(pane)
     }
 }
 

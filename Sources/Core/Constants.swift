@@ -13,6 +13,14 @@ enum ScanConfig {
     static let selfTestTolerance = 0.02
 }
 
+/// What the cleaner may remove and how old things must be.
+enum CleanConfig {
+    static let tempMinAgeDays = 3
+    static let logMinAgeDays = 7
+    static let unusedDayOptions = [30, 90, 180, 365]
+    static let defaultUnusedDays = 90
+}
+
 enum LargeFileThreshold {
     static let optionsMB = [10, 50, 100, 250, 500, 1000, 5000]
     static let defaultMB = 500
@@ -51,11 +59,25 @@ enum Layout {
     static let settingsScanHeight: CGFloat = 440
     static let placeholderHeight: CGFloat = 320
     static let backdropOpacity = 0.16
+    static let gridTile: CGFloat = 170
+    static let gridIcon: CGFloat = 52
+    static let legendDot: CGFloat = 10
+    static let legendMax = 6  // segments named in a legend; the rest is grouped
+    static let chartHeight: CGFloat = 220
+    static let statTileMin: CGFloat = 150
 }
 
 /// SF Symbol names used across the app.
 enum Symbols {
     static let overview = "chart.bar.xaxis"
+    static let statistics = "chart.pie"
+    static let cleaner = "sparkles"
+    static let apps = "app.badge.clock"
+    static let settings = "gearshape"
+    static let list = "list.bullet"
+    static let grid = "square.grid.2x2"
+    static let trashApp = "trash"
+    static let files = "doc.on.doc"
     static let explorer = "folder"
     static let largeFiles = "doc.viewfinder"
     static let temp = "hourglass"

@@ -64,3 +64,34 @@ struct NotMeasured: View {
         }
     }
 }
+
+/// Shown at the top of every page while a scan runs, so an empty page reads as "still measuring", not "nothing there".
+struct ScanBanner: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        HStack(spacing: Layout.rowSpacing) {
+            ProgressView().controlSize(.small)
+            Text(Loc.scanningBanner.f(Fmt.count(model.progress.files), Fmt.bytes(model.progress.bytes))).monospacedDigit()
+            Spacer()
+            Button(Loc.cancel.s) { model.cancelScan() }.appButton()
+        }
+        .padding(.horizontal, Layout.cardPadding)
+        .padding(.vertical, Layout.rowPadding)
+        .surface()
+        .padding(.horizontal, Layout.pagePadding)
+        .padding(.top, Layout.rowPadding)
+    }
+}
+
+/// Empty result: while scanning it says so, otherwise it shows the given empty state.
+struct EmptyOrScanning: View {
+    let title: String
+    let symbol: String
+    var detail: String?
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        if model.scanning || !model.hasData { NotMeasured() } else { EmptyState(title: title, symbol: symbol, detail: detail) { EmptyView() } }
+    }
+}

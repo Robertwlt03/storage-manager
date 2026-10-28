@@ -8,11 +8,7 @@ struct LargeFilesView: View {
 
     var body: some View {
         let sum = entries.reduce(0) { $0 + $1.bytes }
-        EntryTable(entries: entries, total: sum, showLocation: true)
-            .overlay {
-                if !model.hasData { UI.notMeasured() }
-                else if entries.isEmpty { UI.empty(Loc.noFilesFrom.f(threshold(minMB)), symbol: Symbols.search) }
-            }
+        EntryBrowser(entries: entries, total: sum, showLocation: true, emptyTitle: Loc.noFilesFrom.f(threshold(minMB)))
             .navigationTitle(Loc.paneLargeFiles.s)
             .navigationSubtitle(Loc.filesTotal.f(Fmt.count(entries.count), Fmt.bytes(sum)))
             .toolbar {

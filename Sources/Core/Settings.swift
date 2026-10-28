@@ -12,6 +12,8 @@ enum SettingsKey {
     static let pauseOnLowPower = "pauseOnLowPower"
     static let largeFileMB = "largeFileMB"
     static let extraFolders = "extraFolders"
+    static let layoutMode = "layoutMode"
+    static let unusedDays = "unusedDays"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let launchSettings = "openSettings"  // `open … --args -openSettings YES`
     static let launchSkipAccess = "skipAccessSheet"  // `open … --args -skipAccessSheet YES` (screenshots, tests)
@@ -22,7 +24,8 @@ enum AppSettings {
 
     static func registerDefaults() {
         d.register(defaults: [SettingsKey.autoScan: true, SettingsKey.eco: true, SettingsKey.pauseOnLowPower: true,
-                              SettingsKey.liquidGlass: true, SettingsKey.largeFileMB: LargeFileThreshold.defaultMB])
+                              SettingsKey.liquidGlass: true, SettingsKey.largeFileMB: LargeFileThreshold.defaultMB,
+                              SettingsKey.unusedDays: CleanConfig.defaultUnusedDays])
     }
 
     static var autoScan: Bool { d.bool(forKey: SettingsKey.autoScan) }
@@ -32,6 +35,8 @@ enum AppSettings {
     static var language: AppLanguage { AppLanguage(rawValue: d.string(forKey: SettingsKey.language) ?? "") ?? .system }
     static var launchPane: Pane? { d.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:)) }
     static var launchSettings: Bool { d.bool(forKey: SettingsKey.launchSettings) }
+    static var unusedDays: Int { d.integer(forKey: SettingsKey.unusedDays) }
+    static var largeFileMB: Int { d.integer(forKey: SettingsKey.largeFileMB) }
     static var launchSkipAccess: Bool { d.bool(forKey: SettingsKey.launchSkipAccess) }
 
     /// Extra folders are stored as one string, one path per line (AppStorage cannot hold arrays).
@@ -80,6 +85,13 @@ enum AppAppearance: Int, CaseIterable, Identifiable {
         case .dark: NSAppearance(named: .darkAqua)
         }
     }
+}
+
+enum LayoutMode: Int, CaseIterable, Identifiable {
+    case list, grid
+    var id: Self { self }
+    var title: Loc { self == .list ? .layoutList : .layoutGrid }
+    var symbol: String { self == .list ? Symbols.list : Symbols.grid }
 }
 
 enum ChartPalette: Int, CaseIterable, Identifiable {

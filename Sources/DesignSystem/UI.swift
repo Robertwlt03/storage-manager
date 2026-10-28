@@ -37,6 +37,26 @@ enum UI {
     }
 
     static func notMeasured() -> some View { NotMeasured() }
+    static func emptyOrScanning(_ title: String, symbol: String, detail: String? = nil) -> some View {
+        EmptyOrScanning(title: title, symbol: symbol, detail: detail)
+    }
+    static func scanBanner() -> some View { ScanBanner() }
+
+    // Grid
+    static func tile(icon: RowIcon, title: String, value: String, detail: String? = nil, share: Double? = nil) -> some View {
+        Tile(icon: icon, title: title, value: value, detail: detail, share: share)
+    }
+    static func grid<D: RandomAccessCollection, C: View>(_ data: D, minWidth: CGFloat = Layout.gridTile,
+                                                         @ViewBuilder _ tile: @escaping (D.Element) -> C) -> some View
+    where D.Element: Identifiable {
+        TileGrid(data: data, minWidth: minWidth, tile: tile)
+    }
+    /// Grid for a fixed set of tiles.
+    static func tiles<C: View>(minWidth: CGFloat = Layout.gridTile, @ViewBuilder _ content: () -> C) -> some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: minWidth), spacing: Layout.spacing)], spacing: Layout.spacing) { content() }
+    }
+    static func stat(_ value: String, _ label: Loc, symbol: String) -> some View { StatTile(value: value, label: label.s, symbol: symbol) }
+    static func legend(_ segments: [StorageSegment]) -> some View { StorageLegend(segments: segments) }
 
     static func empty(_ title: String, symbol: String, detail: String? = nil) -> some View {
         EmptyState(title: title, symbol: symbol, detail: detail) { EmptyView() }

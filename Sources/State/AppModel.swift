@@ -19,6 +19,7 @@ import Observation
     private(set) var volumes = VolumeService.all()
     private(set) var categories: [Category] = []
     private(set) var hasFullDiskAccess = PermissionService.hasFullDiskAccess
+    private(set) var apps: [AppUsage] = []
     private var task: Task<Void, Never>?
 
     var startupVolume: VolumeInfo? { volumes.first { $0.isRoot } }
@@ -80,6 +81,7 @@ import Observation
             scanning = false
             if !Task.isCancelled { lastScan = Date() }
             treeChanged()
+            refreshApps()
         }
     }
 
@@ -98,6 +100,30 @@ import Observation
     }
 
     // MARK: Changes
+
+    func refreshApps() { apps = AppUsageService.apps(in: root) }
+
+    /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
+    func activate(_ entry: Entry) {
+        if let node = entry.node { open(node) } else if let path = entry.path { FinderService.reveal(path) }
+    }
+
+    func moveToTrash(_ app: AppUsage) throws {
+        try AppUsageService.moveToTrash(app)
+        root.descendant(at: app.path)?.detach()
+        treeChanged()
+        refreshApps()
+    }
+
+    /// Removes the chosen items, measures what really got free, then measures everything again.
+    func clean(_ items: [CleanItem]) async -> (freed: Int64, failed: Int) {
+        let before = VolumeService.startup()?.free ?? 0
+        let failed = await Task.detached(priority: .utility) { CleanerService.clean(items) }.value
+        try? await Task.sleep(for: ScanConfig.deleteSettleDelay)
+        let freed = (VolumeService.startup()?.free ?? before) - before
+        scan()
+        return (freed, failed)
+    }
 
     func refreshVolumes() { volumes = VolumeService.all() }
 

@@ -40,27 +40,13 @@ struct EntryTable: View {
                 .customizationID(Column.files)
         }
         .contextMenu(forSelectionType: Entry.ID.self) { ids in
-            menu(for: rows.first { ids.contains($0.id) })
+            if let entry = rows.first(where: { ids.contains($0.id) }) { EntryMenu(entry: entry, info: $info) }
         } primaryAction: { ids in
-            rows.first { ids.contains($0.id) }.map(activate)
+            rows.first { ids.contains($0.id) }.map(model.activate)
         }
         .sheet(item: $info) { InfoSheet(entry: $0) }
     }
 
-    @ViewBuilder private func menu(for entry: Entry?) -> some View {
-        if let entry, let path = entry.path {
-            if let node = entry.node { Button(Loc.open.s) { model.open(node) } }
-            Button(Loc.showInFinder.s) { FinderService.reveal(path) }
-            Button(Loc.info.s) { info = entry }
-            Divider()
-            Button(Loc.copyPath.s) { FinderService.copyPath(path) }
-        }
-    }
-
-    /// Double-click: folders open in the explorer, files show in Finder.
-    private func activate(_ entry: Entry) {
-        if let node = entry.node { model.open(node) } else if let path = entry.path { FinderService.reveal(path) }
-    }
 }
 
 extension Entry {
