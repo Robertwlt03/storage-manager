@@ -11,17 +11,19 @@ struct RootView: View {
             SidebarView()
         } detail: {
             detail
+                .frame(minWidth: Layout.pageMinWidth)  // cards are never squeezed, also with the sidebar open
                 .smoothChanges(of: model.pane)
                 .smoothChanges(of: model.isSearching)
         }
         .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
-        .onGeometryChange(for: Bool.self) { $0.size.width < Layout.sidebarCollapseWidth } action: { model.windowNarrowChanged($0) }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didResizeNotification)) { _ in model.windowResized() }
         .searchable(text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar, prompt: Loc.searchPrompt.s)
         .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }
         .syncPreferences()
         .onExitCommand { if model.isSearching || model.searchPresented { model.endSearch() } }  // Escape leaves the search
         .onChange(of: model.pane) { if model.isSearching { model.endSearch() } }  // picking a page leaves it too
         .onAppear {
+            model.windowResized()
             if AppSettings.launchSettings { openSettings() }
             model.launch()
             if let dir = AppSettings.launchUITest {

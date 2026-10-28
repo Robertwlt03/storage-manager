@@ -51,6 +51,10 @@ enum Placeholder {
     static let figure = "0.000.000"
 }
 
+enum WindowID {
+    static let main = "main"
+}
+
 enum Layout {
     static let cardRadius: CGFloat = 16
     static let badgeRadius: CGFloat = 6
@@ -65,8 +69,11 @@ enum Layout {
     static let shareColumn = (min: CGFloat(90), ideal: CGFloat(150))
     static let countColumn = (min: CGFloat(60), ideal: CGFloat(80), max: CGFloat(110))
     static let percentWidth: CGFloat = 38
-    static let minWindowWidth: CGFloat = 560  // narrow windows work without the sidebar
-    static let sidebarCollapseWidth: CGFloat = 800  // below this the sidebar closes by itself, like in Mail
+    /// The page never gets narrower than this; with the sidebar open the window has to make room for both.
+    static let pageMinWidth: CGFloat = 600
+    static let minWindowWidth: CGFloat = pageMinWidth
+    /// Room for the sidebar and the page side by side; below it the sidebar closes by itself, like in Mail.
+    static let sidebarCollapseWidth: CGFloat = sidebarIdeal + pageMinWidth
     static let minWindowHeight: CGFloat = 560
     static let sidebarIdeal: CGFloat = 230
     static let settingsWidth: CGFloat = 520

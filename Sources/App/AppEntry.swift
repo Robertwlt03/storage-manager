@@ -23,7 +23,7 @@ struct SpeicherExplorerApp: App {
     @State private var model = AppModel()
 
     var body: some Scene {
-        Window(Loc.appName.s, id: "main") {
+        Window(Loc.appName.s, id: WindowID.main) {
             RootView()
                 .environment(model)
                 .frame(minWidth: Layout.minWindowWidth, minHeight: Layout.minWindowHeight)

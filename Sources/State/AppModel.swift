@@ -13,6 +13,7 @@ import SwiftUI
     var showAccessSheet = false
     var columns = NavigationSplitViewVisibility.all  // whether the sidebar is shown
     private var sidebarHiddenByWidth = false  // closed because the window got narrow, not by the user
+    private var windowNarrow = false
 
     let root = Node.virtualRoot()
     private(set) var revision = 0  // bumped whenever the tree changes; views read it to refresh
@@ -42,13 +43,29 @@ import SwiftUI
     /// while the page jumps to its new width without any frames in between, which looked jerky when showing it.
     func toggleSidebar() {
         sidebarHiddenByWidth = false  // the user's choice wins until the window crosses the width again
+        if !sidebarVisible { makeRoomForSidebar() }
         withAnimation(Motion.standard) { columns = sidebarVisible ? .detailOnly : .all }
+    }
+
+    private var mainWindow: NSWindow? { NSApp.windows.first { $0.identifier?.rawValue == WindowID.main } }
+
+    /// Opening the sidebar in a narrow window widens the window first, so the page keeps its minimum width.
+    private func makeRoomForSidebar() {
+        guard let window = mainWindow, window.frame.width < Layout.sidebarCollapseWidth else { return }
+        var frame = window.frame
+        frame.size.width = Layout.sidebarCollapseWidth
+        window.setFrame(window.constrainFrameRect(frame, to: window.screen), display: true, animate: !Motion.reduced)
     }
 
     /// Like Mail, as Apple's guidelines suggest: a narrow window closes the sidebar to make room for the page, and
     /// widening it again brings the sidebar back, unless the user closed it themselves. Called only when the
-    /// window crosses `Layout.sidebarCollapseWidth`, so a sidebar opened by hand in a narrow window stays open.
-    func windowNarrowChanged(_ narrow: Bool) {
+    /// window crosses `Layout.sidebarCollapseWidth`; opening the sidebar by hand widens a narrow window to that width.
+    /// It reads the window's own width: SwiftUI's layout width flickers past the limit while the sidebar moves.
+    func windowResized() {
+        guard let width = mainWindow?.frame.width else { return }
+        let narrow = width < Layout.sidebarCollapseWidth
+        guard narrow != windowNarrow else { return }
+        windowNarrow = narrow
         if narrow && sidebarVisible {
             sidebarHiddenByWidth = true
             withAnimation(Motion.standard) { columns = .detailOnly }
