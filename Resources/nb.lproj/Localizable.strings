@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Midlertidige filer som ikke er endret på minst tre dager.";
 "cleanTrash" = "Papirkurv";
 "cleanTrashDetail" = "Tømmer papirkurven permanent. Er ikke valgt som standard.";
-"cleanerSearching" = "Leter etter filer som kan ryddes …";
 "cleanFailed" = "%@ objekter kunne ikke fjernes fordi de er i bruk eller beskyttet.";
 "cleaning" = "Rydder opp …";
 "cleanerRefresh" = "Søk på nytt";

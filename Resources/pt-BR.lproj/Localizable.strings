@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Arquivos temporários não modificados há pelo menos três dias.";
 "cleanTrash" = "Lixo";
 "cleanTrashDetail" = "Esvazia o Lixo permanentemente. Não selecionado por padrão.";
-"cleanerSearching" = "Procurando arquivos para limpar …";
 "cleanFailed" = "%@ itens não puderam ser removidos porque estão em uso ou protegidos.";
 "cleaning" = "Limpando …";
 "cleanerRefresh" = "Procurar novamente";

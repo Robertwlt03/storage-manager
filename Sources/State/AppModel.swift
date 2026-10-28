@@ -24,6 +24,7 @@ import Observation
     private(set) var hasFullDiskAccess = PermissionService.hasFullDiskAccess
     private(set) var apps: [AppUsage] = []
     private(set) var cleanItems: [CleanItem]?
+    private(set) var stats: Statistics?  // key figures of the last finished scan
     private var task: Task<Void, Never>?
     private var scanID = UUID()  // the current scan; older, cancelled runs check it and step aside
 
@@ -136,6 +137,9 @@ import Observation
         Motion.animate { apps = found }
     }
 
+    /// Also when the large-file threshold changes, which one of the figures depends on.
+    func refreshStats() { stats = StatsService.compute(root: root) }
+
     /// What the cleaner could remove; computed once after each scan and shared by the overview and the cleaner.
     func refreshCleanItems() {
         guard hasData else { return }
@@ -188,6 +192,7 @@ import Observation
         // The remainder ("System & Other") only makes sense once every area is measured.
         let cats = CategoryService.compute(root: root, volume: scanning ? nil : startupVolume)
         Motion.animate { categories = cats }
+        if !scanning { refreshStats() }  // figures only from complete data, so they never jump
         revision += 1  // drives the tables, which must not update inside an animation (NSTableView reentrancy)
     }
 }

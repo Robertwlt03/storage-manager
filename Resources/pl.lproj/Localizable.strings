@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Pliki tymczasowe niezmieniane od co najmniej trzech dni.";
 "cleanTrash" = "Kosz";
 "cleanTrashDetail" = "Opróżnia Kosz na stałe. Domyślnie nie jest zaznaczone.";
-"cleanerSearching" = "Szukanie plików do uporządkowania …";
 "cleanFailed" = "Nie udało się usunąć %@ elementów, ponieważ są używane lub chronione.";
 "cleaning" = "Porządkowanie …";
 "cleanerRefresh" = "Szukaj ponownie";

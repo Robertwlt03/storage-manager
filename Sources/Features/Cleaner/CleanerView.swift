@@ -9,19 +9,18 @@ struct CleanerView: View {
     @State private var result: (freed: Int64, failed: Int)?
 
     private var items: [CleanItem]? { model.cleanItems }
+    /// Sizes are still being found, or a scan is about to replace them.
+    private var loading: Bool { items == nil || model.scanning }
     private var chosen: [CleanItem] { (items ?? []).filter { selected.contains($0.kind) && $0.bytes > 0 } }
     private var chosenBytes: Int64 { chosen.reduce(0) { $0 + $1.bytes } }
 
     var body: some View {
         UI.page(.cleaner, options: {
-            UI.button(Loc.cleanerRefresh.s) { model.refreshCleanItems() }.disabled(cleaning || items == nil)
+            UI.button(Loc.cleanerRefresh.s) { model.refreshCleanItems() }.disabled(cleaning || loading)
         }) {
             UI.card {
-                if let items {
-                    UI.rows(items) { item in row(item) }
-                } else {
-                    UI.progress(Loc.cleanerSearching.s).padding(.vertical, Space.row)
-                }
+                UI.rows(items ?? CleanKind.allCases.map { CleanItem(kind: $0, paths: [], bytes: 0) }) { item in row(item) }
+                    .skeleton(loading)
             }
             if let result {
                 UI.status(Loc.freed.f(Fmt.bytes(result.freed)), symbol: Symbols.success, .good)
@@ -31,7 +30,7 @@ struct CleanerView: View {
                 if cleaning { UI.progress(Loc.cleaning.s) }
                 Spacer()
                 UI.button(Loc.cleanSelected.f(Fmt.bytes(chosenBytes)), .primary) { confirming = true }
-                    .disabled(chosen.isEmpty || cleaning)
+                    .disabled(chosen.isEmpty || cleaning || loading)
             }
         }
         .task { if items == nil && !model.scanning { model.refreshCleanItems() } }

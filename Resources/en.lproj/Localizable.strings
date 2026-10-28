@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Temporary files not changed for at least three days.";
 "cleanTrash" = "Trash";
 "cleanTrashDetail" = "Empties the Trash permanently. Not selected by default.";
-"cleanerSearching" = "Looking for files to clean up …";
 "cleanFailed" = "%@ items could not be removed because they are in use or protected.";
 "cleaning" = "Cleaning up …";
 "cleanerRefresh" = "Search Again";

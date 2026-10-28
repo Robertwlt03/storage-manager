@@ -175,7 +175,6 @@
 "cleanTempDetail" = "3日以上変更されていない一時ファイルです。";
 "cleanTrash" = "ゴミ箱";
 "cleanTrashDetail" = "ゴミ箱を完全に空にします。初期設定では選択されていません。";
-"cleanerSearching" = "クリーンアップできるファイルを検索中…";
 "cleanFailed" = "使用中または保護されているため、%@個の項目を削除できませんでした。";
 "cleaning" = "クリーンアップ中…";
 "cleanerRefresh" = "再検索";

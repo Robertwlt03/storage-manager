@@ -46,6 +46,12 @@ enum Space {
     static let item = m
 }
 
+/// Stand-in text for skeletons: only its length matters, it is drawn as a grey bar and never read.
+enum Skeleton {
+    static let figure = "0.000.000"
+    static let line = String(repeating: "00000 ", count: 12)
+}
+
 enum Layout {
     static let cardRadius: CGFloat = 16
     static let badgeRadius: CGFloat = 6
@@ -78,6 +84,7 @@ enum Layout {
     static let chartHeight: CGFloat = 220
     static let statTileMin: CGFloat = 150
     static let statColumns = 3
+    static let summaryLines = 3  // lines the summary skeleton stands in for
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
     static let fillShare = 0.72

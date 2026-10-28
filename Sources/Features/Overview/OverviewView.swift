@@ -2,28 +2,30 @@ import Charts
 import SwiftUI
 
 /// The start page: key figures, the disk split, a short summary, the size classes and every category.
-/// Figures and the chart come from the last finished scan, so they never jump around while a scan runs.
+/// Figures and the chart come from the last finished scan; while a scan runs their cards stay in place with
+/// skeletons, so nothing jumps around and nothing stale can be clicked.
 struct OverviewView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
     @AppStorage(SettingsKey.largeFileMB) private var largeFileMB = LargeFileThreshold.defaultMB
-    @State private var stats = Statistics()
 
     var body: some View {
         UI.page(.overview) {
-            if stats.files > 0 { tiles }
+            if model.scanning || model.stats != nil { tiles }
             if let v = model.startupVolume {
                 UI.card {
                     UI.volume(v, segments: segments, canSelect: { node(for: $0) != nil }) { node(for: $0).map(model.open) }
                 }
             }
             SummaryCard()
-            // Swift Charts must not redraw this chart while a scan changes its data, so it waits for the scan.
-            if !model.scanning && !stats.buckets.isEmpty {
+            if model.scanning || model.stats != nil {
                 UI.card(Loc.statSizesTitle.s) {
                     UI.caption(Loc.statSizesCaption.s).padding(.top, Space.row)
-                    sizeChart.padding(.vertical, Space.row)
+                    // Swift Charts must not redraw while a scan changes its data, so the chart waits for the scan.
+                    if let stats = model.stats, !model.scanning { sizeChart(stats).padding(.vertical, Space.row) } else {
+                        UI.skeletonBlock().padding(.vertical, Space.row)
+                    }
                 }
             }
             if model.categories.isEmpty {
@@ -44,10 +46,8 @@ struct OverviewView: View {
         }
         .smoothChanges(of: layout)
         .smoothChanges(of: model.categories.isEmpty)
-        .task(id: "\(model.revision)-\(largeFileMB)-\(model.scanning)") {
-            guard !model.scanning else { return }  // figures once, when the scan is done
-            stats = StatsService.compute(root: model.root)
-        }
+        .smoothChanges(of: model.scanning)
+        .onChange(of: largeFileMB) { if !model.scanning { model.refreshStats() } }
     }
 
     // MARK: Key figures
@@ -55,18 +55,21 @@ struct OverviewView: View {
     /// Each figure leads to the page with the details; the used space is already in the disk card below.
     private var tiles: some View {
         let unused = model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count
+        let loading = model.scanning || model.stats == nil
+        func figure(_ n: Int?) -> String { loading ? Skeleton.figure : n.map(Fmt.count) ?? Skeleton.figure }
         return UI.tiles(columns: Layout.statColumns) {
-            UI.stat(Fmt.count(stats.files), Loc.statFiles.s, symbol: Symbols.files) { model.pane = .explorer }
-            UI.stat(Fmt.count(stats.largeFiles), Loc.statLargeFilesFrom.f(Fmt.bytes(LargeFileThreshold.bytes(largeFileMB))),
+            UI.stat(figure(model.stats?.files), Loc.statFiles.s, symbol: Symbols.files) { model.pane = .explorer }
+            UI.stat(figure(model.stats?.largeFiles), Loc.statLargeFilesFrom.f(Fmt.bytes(LargeFileThreshold.bytes(largeFileMB))),
                     symbol: Symbols.largeFiles) { model.pane = .largeFiles }
-            UI.stat(Fmt.count(unused), Loc.statUnusedApps.s, symbol: Symbols.apps) { model.pane = .apps }
+            UI.stat(figure(unused), Loc.statUnusedApps.s, symbol: Symbols.apps) { model.pane = .apps }
         }
+        .skeleton(loading)
     }
 
     // MARK: Size classes
 
     /// Space per size class, with the number of files: few big files usually take more room than many small ones.
-    private var sizeChart: some View {
+    private func sizeChart(_ stats: Statistics) -> some View {
         Chart(stats.buckets, id: \.bucket) { b in
             BarMark(x: .value(Loc.columnSize.s, b.bucket.title.s), y: .value(Loc.columnSize.s, b.bytes))
                 .foregroundStyle(Theme.color(CategoryKind.media.rawValue))

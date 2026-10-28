@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Tijdelijke bestanden die al minstens drie dagen niet zijn gewijzigd.";
 "cleanTrash" = "Prullenmand";
 "cleanTrashDetail" = "Leegt de prullenmand definitief. Standaard niet geselecteerd.";
-"cleanerSearching" = "Zoeken naar bestanden om op te ruimen …";
 "cleanFailed" = "%@ onderdelen konden niet worden verwijderd omdat ze in gebruik of beveiligd zijn.";
 "cleaning" = "Bezig met opruimen …";
 "cleanerRefresh" = "Opnieuw zoeken";

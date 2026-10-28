@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Tilapäiset tiedostot, joita ei ole muutettu vähintään kolmeen päivään.";
 "cleanTrash" = "Roskakori";
 "cleanTrashDetail" = "Tyhjentää roskakorin pysyvästi. Ei valittuna oletuksena.";
-"cleanerSearching" = "Etsitään siivottavia tiedostoja …";
 "cleanFailed" = "%@ kohdetta ei voitu poistaa, koska ne ovat käytössä tai suojattuja.";
 "cleaning" = "Siivotaan …";
 "cleanerRefresh" = "Hae uudelleen";

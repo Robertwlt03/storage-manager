@@ -175,7 +175,6 @@
 "cleanTempDetail" = "3일 이상 변경되지 않은 임시 파일입니다.";
 "cleanTrash" = "휴지통";
 "cleanTrashDetail" = "휴지통을 영구적으로 비웁니다. 기본적으로 선택되어 있지 않습니다.";
-"cleanerSearching" = "정리할 파일을 찾는 중…";
 "cleanFailed" = "사용 중이거나 보호되어 있어 항목 %@개를 제거하지 못했습니다.";
 "cleaning" = "정리 중…";
 "cleanerRefresh" = "다시 검색";

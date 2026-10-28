@@ -76,3 +76,24 @@ struct EmptyOrScanning: View {
         if model.scanning || !model.hasData { NotMeasured() } else { EmptyState(title: title, symbol: symbol, detail: detail) { EmptyView() } }
     }
 }
+
+/// Stands in for a chart whose data is still loading: the same height, so nothing moves once it is there.
+struct SkeletonBlock: View {
+    let height: CGFloat
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: Layout.storageBarRadius, style: .continuous)
+            .fill(.quaternary)
+            .frame(height: height)
+            .accessibilityHidden(true)
+    }
+}
+
+extension View {
+    /// Keeps the container and its layout but shows grey placeholders while the content is still loading, so
+    /// nothing is clicked, selected or read aloud in a state that is about to change. Static on purpose: no
+    /// endless shimmer that keeps the GPU busy.
+    func skeleton(_ active: Bool) -> some View {
+        redacted(reason: active ? .placeholder : []).disabled(active).accessibilityHidden(active)
+    }
+}

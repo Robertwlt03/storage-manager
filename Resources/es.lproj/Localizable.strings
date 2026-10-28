@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Archivos temporales sin modificar desde hace al menos tres días.";
 "cleanTrash" = "Papelera";
 "cleanTrashDetail" = "Vacía la Papelera de forma definitiva. No está seleccionada por defecto.";
-"cleanerSearching" = "Buscando archivos que limpiar …";
 "cleanFailed" = "No se pudieron eliminar %@ elementos porque están en uso o protegidos.";
 "cleaning" = "Limpiando …";
 "cleanerRefresh" = "Buscar de nuevo";

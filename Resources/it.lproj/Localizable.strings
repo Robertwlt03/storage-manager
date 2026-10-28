@@ -175,7 +175,6 @@
 "cleanTempDetail" = "File temporanei non modificati da almeno tre giorni.";
 "cleanTrash" = "Cestino";
 "cleanTrashDetail" = "Svuota il Cestino in modo definitivo. Non selezionato per impostazione predefinita.";
-"cleanerSearching" = "Ricerca dei file da pulire …";
 "cleanFailed" = "Non è stato possibile rimuovere %@ elementi perché sono in uso o protetti.";
 "cleaning" = "Pulizia in corso …";
 "cleanerRefresh" = "Cerca di nuovo";

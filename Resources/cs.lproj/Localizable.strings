@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Dočasné soubory, které se nezměnily alespoň tři dny.";
 "cleanTrash" = "Koš";
 "cleanTrashDetail" = "Vysype Koš natrvalo. Ve výchozím nastavení není vybráno.";
-"cleanerSearching" = "Hledám soubory k vyčištění …";
 "cleanFailed" = "Položek, které se nepodařilo odstranit, protože se používají nebo jsou chráněné: %@.";
 "cleaning" = "Čistím …";
 "cleanerRefresh" = "Hledat znovu";

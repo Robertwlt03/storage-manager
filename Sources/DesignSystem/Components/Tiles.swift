@@ -38,7 +38,7 @@ struct StatTile: View {
                 Image(systemName: symbol).font(.title2).foregroundStyle(.tint).frame(width: Layout.badgeSize)
                 VStack(alignment: .leading, spacing: Space.hairline) {
                     Text(value).font(.title2.weight(.semibold)).monospacedDigit().contentTransition(.numericText())
-                    Text(label).foregroundStyle(.muted)
+                    Text(label).foregroundStyle(.muted).lineLimit(2, reservesSpace: true)  // same height in every tile
                 }
                 Spacer(minLength: 0)
                 if action != nil { Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted) }

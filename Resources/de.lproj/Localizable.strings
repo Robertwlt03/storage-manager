@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Temporäre Dateien, die seit mindestens drei Tagen nicht mehr geändert wurden.";
 "cleanTrash" = "Papierkorb";
 "cleanTrashDetail" = "Leert den Papierkorb endgültig. Standardmäßig nicht ausgewählt.";
-"cleanerSearching" = "Suche aufräumbare Dateien …";
 "cleanFailed" = "%@ Einträge ließen sich nicht entfernen, weil sie gerade benutzt werden oder geschützt sind.";
 "cleaning" = "Räume auf …";
 "cleanerRefresh" = "Neu suchen";

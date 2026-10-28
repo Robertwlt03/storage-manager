@@ -175,7 +175,6 @@
 "cleanTempDetail" = "至少三天未更改的临时文件。";
 "cleanTrash" = "废纸篓";
 "cleanTrashDetail" = "永久清倒废纸篓。默认不选中。";
-"cleanerSearching" = "正在查找可清理的文件…";
 "cleanFailed" = "有 %@ 个项目无法移除，因为它们正在使用中或受到保护。";
 "cleaning" = "正在清理…";
 "cleanerRefresh" = "重新搜索";

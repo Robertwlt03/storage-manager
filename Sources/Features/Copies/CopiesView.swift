@@ -7,7 +7,7 @@ struct CopiesView: View {
     var body: some View {
         let groups = model.copyGroups
         UI.page(.copies) {
-            if !model.hasData {
+            if !model.hasData || (model.scanning && groups.isEmpty) {  // the temporary area is measured last
                 UI.notMeasured()
             } else if groups.isEmpty {
                 UI.empty(Loc.noCopies.s, symbol: Symbols.copies, detail: Loc.noCopiesDetail.s)

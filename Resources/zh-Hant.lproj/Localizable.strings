@@ -175,7 +175,6 @@
 "cleanTempDetail" = "至少三天未更改的暫存檔案。";
 "cleanTrash" = "垃圾桶";
 "cleanTrashDetail" = "永久清空垃圾桶。預設不會選取。";
-"cleanerSearching" = "正在尋找可清理的檔案⋯";
 "cleanFailed" = "有 %@ 個項目無法移除，因為它們正在使用中或受到保護。";
 "cleaning" = "正在清理⋯";
 "cleanerRefresh" = "重新搜尋";

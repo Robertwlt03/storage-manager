@@ -175,7 +175,6 @@
 "cleanTempDetail" = "Tillfälliga filer som inte har ändrats på minst tre dagar.";
 "cleanTrash" = "Papperskorgen";
 "cleanTrashDetail" = "Tömmer papperskorgen permanent. Inte markerad som standard.";
-"cleanerSearching" = "Söker efter filer att rensa …";
 "cleanFailed" = "%@ objekt kunde inte tas bort eftersom de används eller är skyddade.";
 "cleaning" = "Rensar upp …";
 "cleanerRefresh" = "Sök igen";
