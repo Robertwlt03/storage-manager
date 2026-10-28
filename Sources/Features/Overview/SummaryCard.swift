@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// "In short": how the storage looks in a few sentences, with a button to hear it. While a scan runs the text
-/// would be rewritten several times, so it shows a skeleton and the button waits until the text is final.
+/// would be rewritten several times, so a small spinner holds its place and the button waits until the text is final.
 struct SummaryCard: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
@@ -15,9 +15,9 @@ struct SummaryCard: View {
         let loading = model.scanning
         UI.card(Loc.summaryTitle.s) {
             VStack(alignment: .leading, spacing: Space.item) {
-                Text(loading ? Array(repeating: Skeleton.line, count: Layout.summaryLines).joined(separator: " ") : text)
+                Text(loading ? Array(repeating: Placeholder.line, count: Layout.summaryLines).joined(separator: " ") : text)
                     .fixedSize(horizontal: false, vertical: true).textSelection(.enabled)
-                    .skeleton(loading)
+                    .calculating(loading, alignment: .topLeading)
                 Button { speech.toggle(text) } label: {
                     Label(speech.isSpeaking ? Loc.stopReading.s : Loc.readAloud.s, systemImage: Symbols.speaker)
                         .symbolEffect(.variableColor.iterative, isActive: speech.isSpeaking)  // only while speaking

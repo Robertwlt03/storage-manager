@@ -30,6 +30,7 @@ struct StatTile: View {
     let value: String
     let label: String
     let symbol: String
+    var loading = false  // the value is still being calculated
     var action: (() -> Void)?
 
     var body: some View {
@@ -38,6 +39,7 @@ struct StatTile: View {
                 Image(systemName: symbol).font(.title2).foregroundStyle(.tint).frame(width: Layout.badgeSize)
                 VStack(alignment: .leading, spacing: Space.hairline) {
                     Text(value).font(.title2.weight(.semibold)).monospacedDigit().contentTransition(.numericText())
+                        .calculating(loading)
                     Text(label).foregroundStyle(.muted).lineLimit(2, reservesSpace: true)  // same height in every tile
                 }
                 Spacer(minLength: 0)
@@ -49,7 +51,7 @@ struct StatTile: View {
         }
         .buttonStyle(.plain)
         .hoverLift()
-        .allowsHitTesting(action != nil)
+        .allowsHitTesting(action != nil && !loading)
         .accessibilityElement(children: .combine)
     }
 }

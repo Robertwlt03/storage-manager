@@ -28,7 +28,7 @@ struct UnusedAppsView: View {
                     UI.tile(icon: .file(app.path), title: app.name, value: Fmt.bytes(app.bytes), detail: lastUsed(app))
                         .contextMenu { menu(app) }
                 }
-                .skeleton(model.scanning)  // a running scan is about to replace sizes and dates
+                .calculating(model.scanning, alignment: .top)  // a running scan is about to replace sizes and dates
             } else {
                 UI.card {
                     UI.rows(unused) { app in
@@ -47,7 +47,7 @@ struct UnusedAppsView: View {
                         .contextMenu { menu(app) }
                     }
                 }
-                .skeleton(model.scanning)
+                .calculating(model.scanning, alignment: .top)
             }
         }
         .confirmationDialog(Loc.trashAppTitle.f(pending?.name ?? ""), isPresented: Binding(get: { pending != nil }, set: { if !$0 { pending = nil } })) {

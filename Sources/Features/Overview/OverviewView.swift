@@ -2,8 +2,8 @@ import Charts
 import SwiftUI
 
 /// The start page: key figures, the disk split, a short summary, the size classes and every category.
-/// Figures and the chart come from the last finished scan; while a scan runs their cards stay in place with
-/// skeletons, so nothing jumps around and nothing stale can be clicked.
+/// Figures and the chart come from the last finished scan; while a scan runs their cards stay in place with a
+/// small spinner where the values go, so nothing jumps around and nothing stale can be clicked.
 struct OverviewView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
@@ -24,7 +24,7 @@ struct OverviewView: View {
                     UI.caption(Loc.statSizesCaption.s).padding(.top, Space.row)
                     // Swift Charts must not redraw while a scan changes its data, so the chart waits for the scan.
                     if let stats = model.stats, !model.scanning { sizeChart(stats).padding(.vertical, Space.row) } else {
-                        UI.skeletonBlock().padding(.vertical, Space.row)
+                        UI.pendingBlock().padding(.vertical, Space.row)
                     }
                 }
             }
@@ -56,14 +56,13 @@ struct OverviewView: View {
     private var tiles: some View {
         let unused = model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count
         let loading = model.scanning || model.stats == nil
-        func figure(_ n: Int?) -> String { loading ? Skeleton.figure : n.map(Fmt.count) ?? Skeleton.figure }
+        func figure(_ n: Int?) -> String { loading ? Placeholder.figure : n.map(Fmt.count) ?? Placeholder.figure }
         return UI.tiles(columns: Layout.statColumns) {
-            UI.stat(figure(model.stats?.files), Loc.statFiles.s, symbol: Symbols.files) { model.pane = .explorer }
+            UI.stat(figure(model.stats?.files), Loc.statFiles.s, symbol: Symbols.files, loading: loading) { model.pane = .explorer }
             UI.stat(figure(model.stats?.largeFiles), Loc.statLargeFilesFrom.f(Fmt.bytes(LargeFileThreshold.bytes(largeFileMB))),
-                    symbol: Symbols.largeFiles) { model.pane = .largeFiles }
-            UI.stat(figure(unused), Loc.statUnusedApps.s, symbol: Symbols.apps) { model.pane = .apps }
+                    symbol: Symbols.largeFiles, loading: loading) { model.pane = .largeFiles }
+            UI.stat(figure(unused), Loc.statUnusedApps.s, symbol: Symbols.apps, loading: loading) { model.pane = .apps }
         }
-        .skeleton(loading)
     }
 
     // MARK: Size classes

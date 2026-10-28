@@ -69,7 +69,7 @@ enum UI {
     static func notMeasuredCard(_ title: String) -> some View {
         Card(title: title) { NotMeasured().frame(maxWidth: .infinity, minHeight: Layout.placeholderHeight) }
     }
-    static func skeletonBlock(height: CGFloat = Layout.chartHeight) -> some View { SkeletonBlock(height: height) }
+    static func pendingBlock(height: CGFloat = Layout.chartHeight) -> some View { PendingBlock(height: height) }
     static func emptyOrScanning(_ title: String, symbol: String, detail: String? = nil) -> some View {
         EmptyOrScanning(title: title, symbol: symbol, detail: detail)
     }
@@ -89,8 +89,9 @@ enum UI {
             content()
         }
     }
-    static func stat(_ value: String, _ label: String, symbol: String, action: (() -> Void)? = nil) -> some View {
-        StatTile(value: value, label: label, symbol: symbol, action: action)
+    static func stat(_ value: String, _ label: String, symbol: String, loading: Bool = false,
+                     action: (() -> Void)? = nil) -> some View {
+        StatTile(value: value, label: label, symbol: symbol, loading: loading, action: action)
     }
     static func caption(_ text: String) -> some View { Note(text: text) }
 

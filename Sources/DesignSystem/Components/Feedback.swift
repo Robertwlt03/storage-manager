@@ -77,23 +77,23 @@ struct EmptyOrScanning: View {
     }
 }
 
-/// Stands in for a chart whose data is still loading: the same height, so nothing moves once it is there.
-struct SkeletonBlock: View {
+/// Stands in for a chart that is still being calculated: the same height with a small spinner, so nothing moves.
+struct PendingBlock: View {
     let height: CGFloat
 
     var body: some View {
-        RoundedRectangle(cornerRadius: Layout.storageBarRadius, style: .continuous)
-            .fill(.quaternary)
-            .frame(height: height)
-            .accessibilityHidden(true)
+        ProgressView().controlSize(.small).frame(maxWidth: .infinity, minHeight: height)
     }
 }
 
 extension View {
-    /// Keeps the container and its layout but shows grey placeholders while the content is still loading, so
-    /// nothing is clicked, selected or read aloud in a state that is about to change. Static on purpose: no
-    /// endless shimmer that keeps the GPU busy.
-    func skeleton(_ active: Bool) -> some View {
-        redacted(reason: active ? .placeholder : []).disabled(active).accessibilityHidden(active)
+    /// While a value is still being calculated it keeps its place but shows a small spinner instead, like
+    /// "Calculating…" in Finder's Info window, and cannot be clicked, selected or read aloud in a state that is
+    /// about to change. The spinner only runs as long as the calculation does.
+    func calculating(_ active: Bool, alignment: Alignment = .leading) -> some View {
+        opacity(active ? 0 : 1)
+            .overlay(alignment: alignment) { if active { ProgressView().controlSize(.small) } }
+            .disabled(active)
+            .accessibilityHidden(active)
     }
 }

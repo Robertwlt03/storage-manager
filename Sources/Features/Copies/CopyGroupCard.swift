@@ -21,7 +21,7 @@ struct CopyGroupCard: View {
             }
             .padding(.vertical, Space.row)
             Divider()
-            UI.fields(fields).skeleton(details == nil)
+            UI.fields(fields)
             if let freed { Divider(); UI.status(Loc.freed.f(Fmt.bytes(freed)), symbol: Symbols.success, .good).padding(.vertical, Space.row) }
             if let error { Divider(); UI.status(error, symbol: Symbols.warning, .bad).padding(.vertical, Space.row) }
             Divider()
@@ -43,7 +43,7 @@ struct CopyGroupCard: View {
     }
 
     private var fields: [FieldItem?] {
-        var items: [FieldItem?] = [FieldItem(.copiesLabel, details.map { Fmt.count($0.count) } ?? Skeleton.figure),
+        var items: [FieldItem?] = [FieldItem(.copiesLabel, details.map { Fmt.count($0.count) }),
                                    FieldItem(.countedSize, Fmt.bytes(group.node.bytes)),
                                    FieldItem(.installedVersion, group.installedVersion ?? Loc.notFound.s)]
         for v in details?.versions ?? [] {

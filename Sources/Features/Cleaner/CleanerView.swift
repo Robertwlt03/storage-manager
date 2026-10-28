@@ -20,7 +20,6 @@ struct CleanerView: View {
         }) {
             UI.card {
                 UI.rows(items ?? CleanKind.allCases.map { CleanItem(kind: $0, paths: [], bytes: 0) }) { item in row(item) }
-                    .skeleton(loading)
             }
             if let result {
                 UI.status(Loc.freed.f(Fmt.bytes(result.freed)), symbol: Symbols.success, .good)
@@ -49,7 +48,7 @@ struct CleanerView: View {
                                                     set: { on in if on { selected.insert(item.kind) } else { selected.remove(item.kind) } }))
                 .toggleStyle(.checkbox)
                 .labelsHidden()
-                .disabled(item.bytes == 0 || cleaning)
+                .disabled(item.bytes == 0 || cleaning || loading)
             RowIconView(icon: .badge(symbol: item.kind.category.symbol, colorIndex: item.kind.category.rawValue))
             VStack(alignment: .leading, spacing: Space.hairline) {
                 Text(item.kind.title.s)
@@ -57,6 +56,7 @@ struct CleanerView: View {
             }
             Spacer(minLength: Space.item)
             Text(item.bytes > 0 ? Fmt.bytes(item.bytes) : Loc.emptyValue.s).monospacedDigit().foregroundStyle(.muted)
+                .calculating(loading, alignment: .trailing)
         }
     }
 

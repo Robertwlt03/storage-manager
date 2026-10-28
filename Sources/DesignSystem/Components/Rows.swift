@@ -61,11 +61,11 @@ struct NavRow: View {
 
 struct FieldItem: Identifiable {
     let label: String
-    let value: String
+    let value: String?  // nil while it is still being calculated
     var id: String { label }
 
-    init(_ label: Loc, _ value: String) { self.init(label.s, value) }
-    init(_ label: String, _ value: String) {
+    init(_ label: Loc, _ value: String?) { self.init(label.s, value) }
+    init(_ label: String, _ value: String?) {
         self.label = label
         self.value = value
     }
@@ -74,13 +74,15 @@ struct FieldItem: Identifiable {
 /// Label on the left, value on the right.
 struct FieldRow: View {
     let label: String
-    let value: String
+    let value: String?
 
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: Space.item) {
             Text(label)
             Spacer(minLength: Space.item)
-            Text(value).foregroundStyle(.muted).monospacedDigit().multilineTextAlignment(.trailing).textSelection(.enabled)
+            Text(value ?? Placeholder.figure).foregroundStyle(.muted).monospacedDigit().multilineTextAlignment(.trailing)
+                .textSelection(.enabled)
+                .calculating(value == nil, alignment: .trailing)
         }
     }
 }
