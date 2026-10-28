@@ -31,25 +31,25 @@ enum Theme {
     static let lightSurfaces: [UInt32] = [0xFFFFFF, 0xF5F5F7, 0xECECEC, 0xE3E3E3, 0xDDE3EE]
     static let darkSurfaces: [UInt32] = [0x1E1E1E, 0x262626, 0x2D2D2D, 0x323232, 0x3A3A3A, 0x28303E]
 
-    /// Category colours: Apple's light system colours, and in dark mode deeper shades instead of the brighter ones
-    /// SwiftUI would pick, so the white symbols on the badges stay easy to see.
-    static let colourful: [Tone] = [
-        Tone(light: 0x007AFF, dark: 0x0A5BC4),  // blue
-        Tone(light: 0xAF52DE, dark: 0x8034B0),  // purple
-        Tone(light: 0xFF2D55, dark: 0xC2183F),  // pink
-        Tone(light: 0xFF9500, dark: 0xB35A00),  // orange
-        Tone(light: 0xFFCC00, dark: 0x8F6A00),  // yellow
-        Tone(light: 0x34C759, dark: 0x1E7A38),  // green
-        Tone(light: 0x30B0C7, dark: 0x16707F),  // teal
-        Tone(light: 0x5856D6, dark: 0x4341B8),  // indigo
-        Tone(light: 0xFF3B30, dark: 0xC0261E),  // red
-        Tone(light: 0xA2845E, dark: 0x7A6145),  // brown
-        Tone(light: 0x00C7BE, dark: 0x007A73),  // mint
-        Tone(light: 0x32ADE6, dark: 0x1B6E99),  // cyan
-        Tone(light: 0x8E8E93, dark: 0x5E5E63),  // gray
-        Tone(light: 0x007AFF, dark: 0x0A5BC4),  // blue
-        Tone(light: 0xAF52DE, dark: 0x8034B0),  // purple
-        Tone(light: 0xAEAEB2, dark: 0x636366),  // light gray
+    /// Category colours: Apple's system colours in light mode (vivid, in the P3 colour space), and in dark mode
+    /// deeper shades instead of the brighter ones the system would pick, so white symbols stay easy to see.
+    static let colourful: [BadgeTone] = [
+        BadgeTone(light: .systemBlue, dark: 0x0A5BC4),
+        BadgeTone(light: .systemPurple, dark: 0x8034B0),
+        BadgeTone(light: .systemPink, dark: 0xC2183F),
+        BadgeTone(light: .systemOrange, dark: 0xB35A00),
+        BadgeTone(light: .systemYellow, dark: 0x8F6A00),
+        BadgeTone(light: .systemGreen, dark: 0x1E7A38),
+        BadgeTone(light: .systemTeal, dark: 0x16707F),
+        BadgeTone(light: .systemIndigo, dark: 0x4341B8),
+        BadgeTone(light: .systemRed, dark: 0xC0261E),
+        BadgeTone(light: .systemBrown, dark: 0x7A6145),
+        BadgeTone(light: .systemMint, dark: 0x007A73),
+        BadgeTone(light: .systemCyan, dark: 0x1B6E99),
+        BadgeTone(light: .systemGray, dark: 0x5E5E63),
+        BadgeTone(light: .systemBlue, dark: 0x0A5BC4),
+        BadgeTone(light: .systemPurple, dark: 0x8034B0),
+        BadgeTone(light: .tertiaryLabelColor, dark: 0x636366),
     ]
     static let freeSegment = Color.gray.opacity(0.25)
     /// White symbols are graphics, not text: WCAG asks for 3:1 there.
@@ -74,6 +74,18 @@ enum Theme {
         }
         let (x, y) = (luminance(a), luminance(b))
         return (max(x, y) + 0.05) / (min(x, y) + 0.05)
+    }
+}
+
+/// A system colour for light mode and a fixed deeper shade for dark mode.
+struct BadgeTone {
+    let light: NSColor
+    let dark: UInt32
+
+    var color: Color {
+        Color(nsColor: NSColor(name: nil) { [light, dark] appearance in
+            appearance.bestMatch(from: [.aqua, .darkAqua]) == .darkAqua ? NSColor(hex: dark) : light
+        })
     }
 }
 
