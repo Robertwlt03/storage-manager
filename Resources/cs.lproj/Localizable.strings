@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Průzkumník úložiště";
+"paneOverview" = "Přehled";
+"paneExplorer" = "Složky";
+"paneLargeFiles" = "Velké soubory";
+"paneTemp" = "Dočasná oblast";
+"paneCopies" = "Kopie aplikací";
+"sectionSystem" = "Skryté oblasti";
+"sectionVolumes" = "Svazky";
+"rescan" = "Znovu skenovat";
+"rescanHelp" = "Znovu naskenovat všechny oblasti (⌘R)";
+"cancelScan" = "Zrušit skenování";
+
+/* Scan status and placeholders */
+"scanning" = "Skenování …";
+"cancel" = "Zrušit";
+"filesAndSize" = "Souborů: %@ · %@";
+"measuredAt" = "Naskenováno v %@";
+"scanNow" = "Skenovat nyní";
+"unreadable" = "Nečitelných složek: %@ – povolit Plný přístup k disku …";
+"notMeasuredTitle" = "Zatím neskenováno";
+"notMeasuredDetail" = "Jeden průchod změří všechny oblasti, potom je každé kliknutí okamžité.";
+"scanningTitle" = "Skenování …";
+"scanningDetail" = "Výsledky se zobrazí, jakmile bude hotová první oblast.";
+
+/* Overview and categories */
+"availableOf" = "K dispozici %@ z %@";
+"categories" = "Kategorie";
+"freeSpace" = "Volné";
+"tempAreaName" = "Dočasná systémová oblast";
+"catApps" = "Aplikace";
+"catDocuments" = "Dokumenty a Plocha";
+"catDownloads" = "Stažené soubory";
+"catMedia" = "Fotky, hudba a filmy";
+"catICloud" = "iCloud Drive";
+"catMail" = "Mail a Zprávy";
+"catDeveloper" = "Vývoj";
+"catCaches" = "Mezipaměti";
+"catAppData" = "Data aplikací";
+"catTrash" = "Koš";
+"catTemp" = "Dočasné soubory";
+"catUser" = "Další uživatelská data";
+"catLibrary" = "Sdílená data aplikací";
+"catOther" = "Další složky";
+"catPurgeable" = "Odstranitelné systémem macOS";
+"catSystem" = "Systém a ostatní";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Název";
+"columnSize" = "Velikost";
+"columnShare" = "Podíl";
+"columnFiles" = "Soubory";
+"columnLocation" = "Umístění";
+"smallerItems" = "Menších položek do 1 MB: %@";
+"measuredTotal" = "Naskenováno: %@";
+"open" = "Otevřít";
+"showInFinder" = "Zobrazit ve Finderu";
+"info" = "Získat informace";
+"copyPath" = "Kopírovat cestu";
+"done" = "Hotovo";
+"allocated" = "Velikost na disku";
+"kind" = "Druh";
+"modified" = "Změněno";
+"created" = "Vytvořeno";
+"contents" = "Obsah";
+"files" = "Soubory";
+"folders" = "Složky";
+"packages" = "Balíčky aplikací";
+"modifiedBetween" = "Změněno mezi";
+"dateRange" = "%@ a %@";
+"analyzing" = "Analyzuji soubory …";
+"typesBySize" = "Typy souborů podle velikosti";
+"fileCount" = "Souborů: %@";
+"noExtension" = "bez přípony";
+
+/* Large files */
+"minSize" = "Minimální velikost";
+"fromSize" = "od %@";
+"noFilesFrom" = "Žádné soubory od %@";
+"filesTotal" = "Souborů: %@ · celkem %@";
+
+/* Temporary area */
+"location" = "Umístění";
+"total" = "Celkem";
+"subfolders" = "Podsložky";
+"viewCopies" = "Zobrazit kopie aplikací …";
+"tempT" = "Dočasné soubory";
+"tempTDetail" = "Většinou se vyprázdní při restartu.";
+"tempC" = "Mezipaměti";
+"tempCDetail" = "Mezipaměti aplikací a systémových služeb.";
+"tempX" = "Kopie aplikací";
+"tempXDetail" = "Kopie, které macOS vytváří při kontrole podpisů.";
+"temp0" = "Systémové služby";
+"temp0Detail" = "Data služeb běžících na pozadí.";
+
+/* Signature copies */
+"noCopies" = "Žádné kopie aplikací";
+"noCopiesDetail" = "Ve složce X nejsou žádné kopie aplikací.";
+"running" = "spuštěno";
+"stopped" = "ukončeno";
+"copiesLabel" = "Kopie";
+"countedSize" = "Započtená velikost";
+"installedVersion" = "Nainstalovaná verze";
+"notFound" = "nenalezeno";
+"versionLabel" = "Verze %@";
+"copiesOne" = "1 kopie";
+"copiesMany" = "Kopií: %@";
+"current" = "aktuální";
+"old" = "stará";
+"unknown" = "neznámá";
+"createdOn" = "Vytvořeno %@";
+"freed" = "Skutečně uvolněno: %@";
+"deleteError" = "Ne vše se podařilo smazat: %@";
+"quitToDelete" = "Ukončete %@ pomocí ⌘Q, pak půjde smazat.";
+"openInExplorer" = "Otevřít v Průzkumníku";
+"deleteAll" = "Smazat všechny kopie …";
+"deleteTitle" = "Smazat kopie (%@) aplikace %@?";
+"deleteForever" = "Smazat trvale";
+"deleteMessage" = "Kopie nepřejdou do Koše. macOS v případě potřeby vytvoří novou.";
+
+/* Volumes */
+"capacity" = "Kapacita";
+"used" = "Využito";
+"purgeable" = "Odstranitelné systémem macOS";
+"available" = "K dispozici";
+"toOverview" = "Přejít na přehled";
+"exploreContents" = "Prozkoumat obsah";
+"scanAndExplore" = "Skenovat a prozkoumat";
+"volumeGone" = "Svazek už není připojen";
+
+/* Search */
+"searchPrompt" = "Hledat složky a soubory";
+"scopeAll" = "Vše";
+"scopeFolders" = "Složky";
+"scopeFiles" = "Soubory";
+"searchResults" = "Výsledků: %@";
+"noResults" = "Žádné výsledky pro „%@“";
+"searchNote" = "Prohledává složky a soubory od 1 MB z posledního skenování.";
+
+/* Full Disk Access */
+"accessTitle" = "Jedno oprávnění místo mnoha dotazů";
+"accessDetail" = "Bez plného přístupu k disku se vás macOS ptá zvlášť na Plochu, Dokumenty, Stažené soubory, iCloud Drive, data jiných aplikací a externí disky. Jediný přepínač v Nastavení systému všechny tyto dotazy nahradí. Aplikace čte pouze velikosti a nic nikam neodesílá.";
+"accessOneSwitch" = "Soukromí a zabezpečení › Plný přístup k disku";
+"accessOpenSettings" = "Otevřít Nastavení systému";
+"accessContinue" = "Pokračovat bez plného přístupu k disku";
+"accessGranted" = "Uděleno";
+"accessRestart" = "Restartovat aplikaci";
+"accessRestartHint" = "Přepínač zapnut? macOS udělí přístup až po restartu aplikace. Pokud to pak stále nefunguje, patří záznam k dřívější verzi sestavení: odeberte ho v Nastavení systému tlačítkem „–“ a přidejte znovu.";
+"fullDiskAccess" = "Plný přístup k disku";
+
+/* Settings */
+"autoScan" = "Skenovat automaticky při spuštění";
+"extraFolders" = "Další složky";
+"none" = "Žádné";
+"add" = "Přidat";
+"remove" = "Odebrat";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneStatistics" = "Statistiky";
+"paneCleaner" = "Vyčistit";
+"paneApps" = "Nepoužívané aplikace";
+"sectionTidy" = "Uvolnit místo";
+"layout" = "Zobrazení";
+"layoutList" = "Seznam";
+"layoutGrid" = "Mřížka";
+"settings" = "Nastavení";
+"emptyFolder" = "Tato složka je prázdná";
+"otherCategories" = "Ostatní";
+"otherTypes" = "Ostatní";
+"cleanCaches" = "Mezipaměti aplikací";
+"cleanCachesDetail" = "Mezipaměti, které si aplikace podle potřeby vytvoří znovu. Spuštěných aplikací ani samotného macOS se to netýká.";
+"cleanDeveloper" = "Mezipaměti pro vývojáře";
+"cleanDeveloperDetail" = "Data sestavení Xcode a mezipaměti balíčků, například npm; při příštím sestavení se vytvoří znovu.";
+"cleanLogs" = "Staré protokoly";
+"cleanLogsDetail" = "Protokoly aplikací starší než jeden týden.";
+"cleanTemp" = "Staré dočasné soubory";
+"cleanTempDetail" = "Dočasné soubory, které se nezměnily alespoň tři dny.";
+"cleanTrash" = "Koš";
+"cleanTrashDetail" = "Vysype Koš natrvalo. Ve výchozím nastavení není vybráno.";
+"cleanerSearching" = "Hledám soubory k vyčištění …";
+"cleanFailed" = "Položek, které se nepodařilo odstranit, protože se používají nebo jsou chráněné: %@.";
+"cleaning" = "Čistím …";
+"cleanerRefresh" = "Hledat znovu";
+"cleanSelected" = "Vyčistit výběr (%@)";
+"cleanConfirmTitle" = "Trvale odstranit %@?";
+"cleanConfirmMessage" = "Soubory nepřejdou do Koše. Aplikace si mezipaměti podle potřeby vytvoří znovu. Poté aplikace vše naskenuje znovu.";
+"appsNoneUnused" = "Všechny aplikace byly nedávno použity";
+"unusedSince" = "Neotevřeno po dobu";
+"daysOption" = "více než %@ dní";
+"trashAppTitle" = "Přesunout „%@“ do Koše?";
+"trashAppMessage" = "Dokud Koš nevysypete, můžete aplikaci z Koše obnovit.";
+"moveToTrash" = "Přesunout do Koše";
+"lastOpened" = "Naposledy otevřeno %@";
+"trashAppFailed" = "Aplikaci „%@“ se nepodařilo přesunout. Ve Finderu to půjde po zadání hesla.";
+"statFiles" = "Soubory";
+"statUnusedApps" = "nepoužívané aplikace";
+"bucketUnder1MB" = "do 1 MB";
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "přes 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "Naskenováno: %@";
+"scanningArea" = "Oblast %@ z %@ · %@";
+"emptyValue" = "prázdné";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Velikosti odpovídají využitému místu, jak je hlásí příkaz „du“. Klony APFS se počítají celé; kopie sdílející datové bloky ve skutečnosti zabírají méně. „Systém a ostatní“ je zbytek do hodnoty, kterou macOS uvádí jako využitou.";
+"infoStatistics" = "Čísla a grafy z posledního skenování. Typy souborů zahrnují soubory od 1 MB; menší soubory se při skenování seskupují, aby se šetřila paměť a energie.";
+"infoCleaner" = "Odstraňte soubory, které váš systém sotva nebo vůbec nepotřebuje: mezipaměti, které se samy obnoví, staré protokoly a staré dočasné soubory. Vyberte, co smí pryč, a potvrďte.";
+"infoApps" = "Aplikace, které jste delší dobu neotevřeli. Datum pochází přímo z macOS; aplikace nic nezaznamenává. Co už nepotřebujete, můžete tady přesunout do Koše a odtud znovu obnovit.";
+"infoExplorer" = "Všechny naskenované složky seřazené podle velikosti. Dvojitým kliknutím složku otevřete; místní nabídka zobrazí soubory ve Finderu a informace o nich.";
+"infoLargeFiles" = "Všechny soubory od zvolené velikosti z posledního skenování. Dvojitým kliknutím se soubor zobrazí ve Finderu.";
+"infoTemp" = "macOS tuto oblast vytváří pro každého uživatele v /private/var/folders. Ve Finderu je skrytá a v části „Spravovat úložiště“ se nerozepisuje.";
+"infoCopies" = "Při kontrole podpisu macOS někdy vytvoří úplné kopie aplikace ve složce X. Nejde o samostatné programy; macOS v případě potřeby vytvoří novou. Smazání je bezpečné, dokud je aplikace ukončená.";
+"infoVolume" = "Kapacita tohoto svazku: co je využito, co může macOS v případě potřeby uvolnit sám a co je volné. Externí svazky lze naskenovat tady.";
+"aboutPage" = "O této stránce";
+"scanDetails" = "Skenování";
+"scanProgress" = "Průběh";
+"scanArea" = "Oblast";
+"scanFinished" = "Naskenováno v";
+"accessMissingShort" = "Neuděleno";
+"summaryTitle" = "Stručně";
+"summaryDisk" = "Na disku „%@“ je využito %@ z %@, k dispozici je %@.";
+"summaryTop" = "Nejvíc místa zabírají %@ (%@) a %@ (%@).";
+"summaryNotMeasured" = "Jak je místo rozděleno, se zobrazí tady po prvním skenování.";
+"summaryClean" = "Vyčištěním lze uvolnit asi %@.";
+"summaryCopies" = "Kopie aplikací, které macOS vytváří při kontrole, se započítávají do %@.";
+"summaryApps" = "Aplikací, které jste delší dobu neotevřeli: %@.";
+"readAloud" = "Přečíst nahlas";
+"stopReading" = "Zastavit čtení";
+
+/* Statistics in plain words */
+"statCategoriesTitle" = "K čemu se místo využívá?";
+"statCategoriesCaption" = "Každá barva představuje jednu kategorii. Kliknutím na položku v legendě otevřete příslušnou složku.";
+"statTypesTitle" = "Které druhy souborů zabírají nejvíc místa?";
+"statTypesCaption" = "Počítají se soubory od 1 MB. Soubory bez přípony jsou většinou součástí programů.";
+"statSizesTitle" = "Jak velké jsou vaše soubory?";
+"statSizesCaption" = "Kolik místa zabírá každá velikostní třída a kolik souborů v ní je. Několik velkých souborů obvykle zabírá víc než mnoho malých.";
+"statUsedOf" = "využito z %@";
+"statLargeFilesFrom" = "velké soubory od %@";
+"bucketValue" = "%@
+Souborů: %@";
+"typeNoExtension" = "Bez přípony souboru";
+"settingsSystemNote" = "Vzhled, jazyk a jednotky aplikace přebírá z Nastavení systému. Vlastní jazyk pro tuto aplikaci tam nastavíte v části Obecné › Jazyk a region › Aplikace.";

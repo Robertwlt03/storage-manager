@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "저장 공간 탐색기";
+"paneOverview" = "개요";
+"paneExplorer" = "폴더";
+"paneLargeFiles" = "큰 파일";
+"paneTemp" = "임시 영역";
+"paneCopies" = "앱 사본";
+"sectionSystem" = "숨겨진 영역";
+"sectionVolumes" = "볼륨";
+"rescan" = "다시 검사";
+"rescanHelp" = "모든 영역 다시 검사(⌘R)";
+"cancelScan" = "검사 취소";
+
+/* Scan status and placeholders */
+"scanning" = "검사 중…";
+"cancel" = "취소";
+"filesAndSize" = "파일 %@개 · %@";
+"measuredAt" = "%@에 검사함";
+"scanNow" = "지금 검사";
+"unreadable" = "폴더 %@개를 읽을 수 없음 – 전체 디스크 접근 허용…";
+"notMeasuredTitle" = "아직 검사하지 않음";
+"notMeasuredDetail" = "한 번 검사하면 모든 영역을 측정하며, 이후에는 클릭할 때마다 바로 표시됩니다.";
+"scanningTitle" = "검사 중…";
+"scanningDetail" = "첫 번째 영역이 끝나는 대로 결과가 표시됩니다.";
+
+/* Overview and categories */
+"availableOf" = "%@ 사용 가능(전체 %@)";
+"categories" = "카테고리";
+"freeSpace" = "여유 공간";
+"tempAreaName" = "임시 시스템 영역";
+"catApps" = "응용 프로그램";
+"catDocuments" = "문서 및 데스크탑";
+"catDownloads" = "다운로드";
+"catMedia" = "사진, 음악 및 영화";
+"catICloud" = "iCloud Drive";
+"catMail" = "메일 및 메시지";
+"catDeveloper" = "개발";
+"catCaches" = "캐시";
+"catAppData" = "앱 데이터";
+"catTrash" = "휴지통";
+"catTemp" = "임시 파일";
+"catUser" = "기타 사용자 데이터";
+"catLibrary" = "공유 앱 데이터";
+"catOther" = "기타 폴더";
+"catPurgeable" = "macOS에서 삭제 가능";
+"catSystem" = "시스템 및 기타";
+
+/* Explorer, tables and info sheet */
+"columnName" = "이름";
+"columnSize" = "크기";
+"columnShare" = "비율";
+"columnFiles" = "파일";
+"columnLocation" = "위치";
+"smallerItems" = "1MB 미만의 작은 항목 %@개";
+"measuredTotal" = "%@ 검사함";
+"open" = "열기";
+"showInFinder" = "Finder에서 보기";
+"info" = "정보 가져오기";
+"copyPath" = "경로 복사";
+"done" = "완료";
+"allocated" = "디스크 점유 크기";
+"kind" = "종류";
+"modified" = "수정일";
+"created" = "생성일";
+"contents" = "내용";
+"files" = "파일";
+"folders" = "폴더";
+"packages" = "앱 패키지";
+"modifiedBetween" = "수정일 범위";
+"dateRange" = "%@~%@";
+"analyzing" = "파일 분석 중…";
+"typesBySize" = "크기별 파일 유형";
+"fileCount" = "파일 %@개";
+"noExtension" = "확장자 없음";
+
+/* Large files */
+"minSize" = "최소 크기";
+"fromSize" = "%@ 이상";
+"noFilesFrom" = "%@ 이상인 파일 없음";
+"filesTotal" = "파일 %@개 · 총 %@";
+
+/* Temporary area */
+"location" = "위치";
+"total" = "합계";
+"subfolders" = "하위 폴더";
+"viewCopies" = "앱 사본 보기…";
+"tempT" = "임시 파일";
+"tempTDetail" = "대부분 재시동할 때 비워집니다.";
+"tempC" = "캐시";
+"tempCDetail" = "앱 및 시스템 서비스의 캐시입니다.";
+"tempX" = "앱 사본";
+"tempXDetail" = "macOS가 서명을 확인할 때 만드는 사본입니다.";
+"temp0" = "시스템 서비스";
+"temp0Detail" = "백그라운드 서비스의 데이터입니다.";
+
+/* Signature copies */
+"noCopies" = "앱 사본 없음";
+"noCopiesDetail" = "X 폴더에 앱 사본이 없습니다.";
+"running" = "실행 중";
+"stopped" = "종료됨";
+"copiesLabel" = "사본";
+"countedSize" = "집계된 크기";
+"installedVersion" = "설치된 버전";
+"notFound" = "찾을 수 없음";
+"versionLabel" = "버전 %@";
+"copiesOne" = "사본 1개";
+"copiesMany" = "사본 %@개";
+"current" = "최신";
+"old" = "이전";
+"unknown" = "알 수 없음";
+"createdOn" = "생성일: %@";
+"freed" = "실제로 확보된 공간: %@";
+"deleteError" = "일부 항목을 삭제하지 못했습니다: %@";
+"quitToDelete" = "삭제하려면 %@을(를) ⌘Q로 종료하십시오.";
+"openInExplorer" = "탐색기에서 열기";
+"deleteAll" = "모든 사본 삭제…";
+"deleteTitle" = "%@개의 “%@” 사본을 삭제하시겠습니까?";
+"deleteForever" = "영구 삭제";
+"deleteMessage" = "사본은 휴지통으로 이동하지 않습니다. 필요하면 macOS가 새로 만듭니다.";
+
+/* Volumes */
+"capacity" = "용량";
+"used" = "사용 중";
+"purgeable" = "macOS에서 삭제 가능";
+"available" = "사용 가능";
+"toOverview" = "개요로 이동";
+"exploreContents" = "내용 탐색";
+"scanAndExplore" = "검사 및 탐색";
+"volumeGone" = "볼륨이 더 이상 연결되어 있지 않음";
+
+/* Search */
+"searchPrompt" = "폴더 및 파일 검색";
+"scopeAll" = "전체";
+"scopeFolders" = "폴더";
+"scopeFiles" = "파일";
+"searchResults" = "검색 결과 %@개";
+"noResults" = "“%@”에 대한 검색 결과 없음";
+"searchNote" = "마지막 검사에서 찾은 1MB 이상의 폴더와 파일을 검색합니다.";
+
+/* Full Disk Access */
+"accessTitle" = "여러 번의 요청 대신 한 번의 허용";
+"accessDetail" = "전체 디스크 접근 권한이 없으면 macOS는 데스크탑, 문서, 다운로드, iCloud Drive, 다른 앱의 데이터, 외장 볼륨에 대해 각각 따로 허용을 요청합니다. 시스템 설정에서 스위치 하나만 켜면 이 모든 요청이 필요 없어집니다. 이 앱은 크기만 읽으며 어디로도 아무것도 전송하지 않습니다.";
+"accessOneSwitch" = "개인정보 보호 및 보안 › 전체 디스크 접근";
+"accessOpenSettings" = "시스템 설정 열기";
+"accessContinue" = "전체 디스크 접근 없이 계속";
+"accessGranted" = "허용됨";
+"accessRestart" = "앱 다시 시작";
+"accessRestartHint" = "스위치를 켰나요? macOS는 앱을 다시 시작한 후에야 접근을 허용합니다. 그래도 작동하지 않으면 이전 빌드의 항목이 남아 있는 것입니다. 시스템 설정에서 “–”로 제거한 후 다시 추가하십시오.";
+"fullDiskAccess" = "전체 디스크 접근";
+
+/* Settings */
+"autoScan" = "실행할 때 자동으로 검사";
+"extraFolders" = "추가 폴더";
+"none" = "없음";
+"add" = "추가";
+"remove" = "제거";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneStatistics" = "통계";
+"paneCleaner" = "정리";
+"paneApps" = "사용하지 않는 앱";
+"sectionTidy" = "공간 확보";
+"layout" = "보기";
+"layoutList" = "목록";
+"layoutGrid" = "격자";
+"settings" = "설정";
+"emptyFolder" = "이 폴더는 비어 있습니다";
+"otherCategories" = "기타";
+"otherTypes" = "기타";
+"cleanCaches" = "앱 캐시";
+"cleanCachesDetail" = "필요할 때 앱이 다시 만드는 캐시입니다. 실행 중인 앱과 macOS 자체는 건드리지 않습니다.";
+"cleanDeveloper" = "개발자용 캐시";
+"cleanDeveloperDetail" = "Xcode 빌드 데이터와 npm 같은 패키지 캐시입니다. 다음 빌드 때 다시 만들어집니다.";
+"cleanLogs" = "오래된 로그";
+"cleanLogsDetail" = "일주일보다 오래된 앱 로그입니다.";
+"cleanTemp" = "오래된 임시 파일";
+"cleanTempDetail" = "3일 이상 변경되지 않은 임시 파일입니다.";
+"cleanTrash" = "휴지통";
+"cleanTrashDetail" = "휴지통을 영구적으로 비웁니다. 기본적으로 선택되어 있지 않습니다.";
+"cleanerSearching" = "정리할 파일을 찾는 중…";
+"cleanFailed" = "사용 중이거나 보호되어 있어 항목 %@개를 제거하지 못했습니다.";
+"cleaning" = "정리 중…";
+"cleanerRefresh" = "다시 검색";
+"cleanSelected" = "선택 항목 정리(%@)";
+"cleanConfirmTitle" = "%@을(를) 영구적으로 제거하시겠습니까?";
+"cleanConfirmMessage" = "파일은 휴지통으로 이동하지 않습니다. 앱은 필요할 때 캐시를 다시 만듭니다. 이후 이 앱이 모든 항목을 다시 검사합니다.";
+"appsNoneUnused" = "모든 앱을 최근에 사용했습니다";
+"unusedSince" = "열지 않은 기간";
+"daysOption" = "%@일 이상";
+"trashAppTitle" = "“%@” 앱을 휴지통으로 이동하시겠습니까?";
+"trashAppMessage" = "휴지통을 비우기 전까지는 휴지통에서 앱을 복원할 수 있습니다.";
+"moveToTrash" = "휴지통으로 이동";
+"lastOpened" = "마지막으로 연 날짜: %@";
+"trashAppFailed" = "“%@” 앱을 이동하지 못했습니다. Finder에서는 암호를 입력하면 이동할 수 있습니다.";
+"statFiles" = "파일";
+"statUnusedApps" = "사용하지 않는 앱";
+"bucketUnder1MB" = "1MB 미만";
+"bucketTo10MB" = "1~10MB";
+"bucketTo100MB" = "10~100MB";
+"bucketTo1GB" = "100MB~1GB";
+"bucketOver1GB" = "1GB 초과";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ 검사함";
+"scanningArea" = "영역 %@/%@ · %@";
+"emptyValue" = "비어 있음";
+
+/* Page info, scan details, summary */
+"infoOverview" = "크기는 “du”와 같은 방식으로 측정한 사용 중인 공간입니다. APFS 복제본은 전체 크기로 계산되며, 저장 블록을 공유하는 사본은 실제로는 더 적은 공간을 사용합니다. “시스템 및 기타”는 macOS가 보고하는 사용량까지의 나머지입니다.";
+"infoStatistics" = "마지막 검사의 수치와 차트입니다. 파일 유형에는 1MB 이상의 파일이 집계되며, 더 작은 파일은 메모리와 에너지를 절약하기 위해 검사 중에 묶어서 처리됩니다.";
+"infoCleaner" = "시스템에 거의 또는 전혀 필요하지 않은 파일을 제거합니다. 저절로 다시 만들어지는 캐시, 오래된 로그, 오래된 임시 파일이 대상입니다. 지워도 되는 항목을 선택하고 확인하십시오.";
+"infoApps" = "한동안 열지 않은 앱입니다. 날짜는 macOS에서 가져오며 이 앱은 아무것도 기록하지 않습니다. 더 이상 필요하지 않은 앱은 여기에서 휴지통으로 이동할 수 있으며, 휴지통에서 복원할 수도 있습니다.";
+"infoExplorer" = "측정한 모든 폴더를 크기순으로 보여 줍니다. 더블 클릭하면 폴더가 열리고, 단축 메뉴에서는 Finder에서 보기와 정보 보기를 사용할 수 있습니다.";
+"infoLargeFiles" = "마지막 검사에서 선택한 크기 이상인 모든 파일입니다. 더블 클릭하면 Finder에서 파일을 보여 줍니다.";
+"infoTemp" = "macOS는 모든 사용자를 위해 /private/var/folders 아래에 이 영역을 만듭니다. Finder에서는 숨겨져 있으며 “저장 공간 관리”에서도 세부 내역이 표시되지 않습니다.";
+"infoCopies" = "서명을 확인할 때 macOS가 X 폴더에 앱의 전체 사본을 만들기도 합니다. 이는 별도의 프로그램이 아니며, 필요하면 macOS가 새로 만듭니다. 앱이 종료되어 있다면 삭제해도 안전합니다.";
+"infoVolume" = "이 볼륨의 용량입니다. 사용 중인 공간, 필요할 때 macOS가 자동으로 확보할 수 있는 공간, 여유 공간을 보여 줍니다. 외장 볼륨도 여기에서 검사할 수 있습니다.";
+"aboutPage" = "이 페이지 정보";
+"scanDetails" = "검사";
+"scanProgress" = "진행 상황";
+"scanArea" = "영역";
+"scanFinished" = "검사 시각";
+"accessMissingShort" = "허용되지 않음";
+"summaryTitle" = "요약";
+"summaryDisk" = "“%@”에서 %@/%@을(를) 사용 중이며 %@을(를) 사용할 수 있습니다.";
+"summaryTop" = "가장 많은 공간을 차지하는 항목은 %@(%@)와(과) %@(%@)입니다.";
+"summaryNotMeasured" = "공간이 어떻게 나뉘어 있는지는 첫 번째 검사 후에 여기에 표시됩니다.";
+"summaryClean" = "정리하면 약 %@을(를) 확보할 수 있습니다.";
+"summaryCopies" = "macOS가 확인할 때 만드는 앱 사본은 %@(으)로 집계됩니다.";
+"summaryApps" = "앱 %@개를 한동안 열지 않았습니다.";
+"readAloud" = "소리 내어 읽기";
+"stopReading" = "읽기 중단";
+
+/* Statistics in plain words */
+"statCategoriesTitle" = "공간은 무엇에 사용되고 있나요?";
+"statCategoriesCaption" = "각 색상은 하나의 카테고리를 나타냅니다. 범례의 항목을 클릭하면 해당 폴더가 열립니다.";
+"statTypesTitle" = "어떤 종류의 파일이 공간을 가장 많이 차지하나요?";
+"statTypesCaption" = "1MB 이상의 파일만 집계됩니다. 확장자가 없는 파일은 대부분 프로그램의 일부입니다.";
+"statSizesTitle" = "파일은 얼마나 큰가요?";
+"statSizesCaption" = "각 크기 구간이 차지하는 공간과 그 구간에 있는 파일 수입니다. 보통은 작은 파일이 많은 것보다 큰 파일 몇 개가 더 많은 공간을 차지합니다.";
+"statUsedOf" = "사용 중(전체 %@)";
+"statLargeFilesFrom" = "%@ 이상의 큰 파일";
+"bucketValue" = "%@
+파일 %@개";
+"typeNoExtension" = "파일 확장자 없음";
+"settingsSystemNote" = "화면 모드, 언어, 단위는 시스템 설정의 값을 따릅니다. 이 앱만의 언어는 시스템 설정의 일반 › 언어 및 지역 › 응용 프로그램에서 설정할 수 있습니다.";

@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Opslagverkenner";
+"paneOverview" = "Overzicht";
+"paneExplorer" = "Mappen";
+"paneLargeFiles" = "Grote bestanden";
+"paneTemp" = "Tijdelijk gebied";
+"paneCopies" = "App-kopieën";
+"sectionSystem" = "Verborgen gebieden";
+"sectionVolumes" = "Volumes";
+"rescan" = "Opnieuw scannen";
+"rescanHelp" = "Alle gebieden opnieuw scannen (⌘R)";
+"cancelScan" = "Scan annuleren";
+
+/* Scan status and placeholders */
+"scanning" = "Bezig met scannen …";
+"cancel" = "Annuleer";
+"filesAndSize" = "%@ bestanden · %@";
+"measuredAt" = "Gescand om %@";
+"scanNow" = "Nu scannen";
+"unreadable" = "%@ mappen onleesbaar – geef volledige schijftoegang …";
+"notMeasuredTitle" = "Nog niet gescand";
+"notMeasuredDetail" = "Eén ronde scant alle gebieden; daarna is elke klik meteen klaar.";
+"scanningTitle" = "Bezig met scannen …";
+"scanningDetail" = "De resultaten verschijnen zodra het eerste gebied klaar is.";
+
+/* Overview and categories */
+"availableOf" = "%@ beschikbaar van %@";
+"categories" = "Categorieën";
+"freeSpace" = "Vrij";
+"tempAreaName" = "Tijdelijk systeemgebied";
+"catApps" = "Apps";
+"catDocuments" = "Documenten en bureaublad";
+"catDownloads" = "Downloads";
+"catMedia" = "Foto’s, muziek en films";
+"catICloud" = "iCloud Drive";
+"catMail" = "Mail en Berichten";
+"catDeveloper" = "Ontwikkeling";
+"catCaches" = "Caches";
+"catAppData" = "Appgegevens";
+"catTrash" = "Prullenmand";
+"catTemp" = "Tijdelijke bestanden";
+"catUser" = "Overige gebruikersgegevens";
+"catLibrary" = "Gedeelde appgegevens";
+"catOther" = "Overige mappen";
+"catPurgeable" = "Door macOS te wissen";
+"catSystem" = "Systeem en overig";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Naam";
+"columnSize" = "Grootte";
+"columnShare" = "Aandeel";
+"columnFiles" = "Bestanden";
+"columnLocation" = "Locatie";
+"smallerItems" = "%@ kleinere onderdelen onder 1 MB";
+"measuredTotal" = "%@ gescand";
+"open" = "Open";
+"showInFinder" = "Toon in Finder";
+"info" = "Toon info";
+"copyPath" = "Kopieer pad";
+"done" = "Gereed";
+"allocated" = "Grootte op schijf";
+"kind" = "Soort";
+"modified" = "Gewijzigd";
+"created" = "Aangemaakt";
+"contents" = "Inhoud";
+"files" = "Bestanden";
+"folders" = "Mappen";
+"packages" = "Apppakketten";
+"modifiedBetween" = "Gewijzigd tussen";
+"dateRange" = "%@ en %@";
+"analyzing" = "Bestanden analyseren …";
+"typesBySize" = "Bestandstypen op grootte";
+"fileCount" = "%@ bestanden";
+"noExtension" = "zonder extensie";
+
+/* Large files */
+"minSize" = "Minimale grootte";
+"fromSize" = "vanaf %@";
+"noFilesFrom" = "Geen bestanden vanaf %@";
+"filesTotal" = "%@ bestanden · %@ in totaal";
+
+/* Temporary area */
+"location" = "Locatie";
+"total" = "Totaal";
+"subfolders" = "Submappen";
+"viewCopies" = "App-kopieën bekijken …";
+"tempT" = "Tijdelijke bestanden";
+"tempTDetail" = "Wordt meestal bij het herstarten geleegd.";
+"tempC" = "Caches";
+"tempCDetail" = "Caches van apps en systeemdiensten.";
+"tempX" = "App-kopieën";
+"tempXDetail" = "Kopieën die macOS maakt bij het controleren van handtekeningen.";
+"temp0" = "Systeemdiensten";
+"temp0Detail" = "Gegevens van achtergronddiensten.";
+
+/* Signature copies */
+"noCopies" = "Geen app-kopieën";
+"noCopiesDetail" = "In map X staan geen app-kopieën.";
+"running" = "actief";
+"stopped" = "gestopt";
+"copiesLabel" = "Kopieën";
+"countedSize" = "Getelde grootte";
+"installedVersion" = "Geïnstalleerde versie";
+"notFound" = "niet gevonden";
+"versionLabel" = "Versie %@";
+"copiesOne" = "1 kopie";
+"copiesMany" = "%@ kopieën";
+"current" = "actueel";
+"old" = "oud";
+"unknown" = "onbekend";
+"createdOn" = "Aangemaakt op %@";
+"freed" = "Echt vrijgekomen ruimte: %@";
+"deleteError" = "Niet alles kon worden verwijderd: %@";
+"quitToDelete" = "Stop %@ met ⌘Q om te kunnen verwijderen.";
+"openInExplorer" = "Open in verkenner";
+"deleteAll" = "Alle kopieën verwijderen …";
+"deleteTitle" = "%@ kopieën van %@ verwijderen?";
+"deleteForever" = "Definitief verwijderen";
+"deleteMessage" = "De kopieën gaan niet naar de prullenmand. macOS maakt zo nodig een nieuwe aan.";
+
+/* Volumes */
+"capacity" = "Capaciteit";
+"used" = "In gebruik";
+"purgeable" = "Door macOS te wissen";
+"available" = "Beschikbaar";
+"toOverview" = "Ga naar overzicht";
+"exploreContents" = "Inhoud verkennen";
+"scanAndExplore" = "Scannen en verkennen";
+"volumeGone" = "Volume niet meer verbonden";
+
+/* Search */
+"searchPrompt" = "Zoek mappen en bestanden";
+"scopeAll" = "Alles";
+"scopeFolders" = "Mappen";
+"scopeFiles" = "Bestanden";
+"searchResults" = "%@ resultaten";
+"noResults" = "Geen resultaten voor “%@”";
+"searchNote" = "Doorzoekt mappen en bestanden vanaf 1 MB uit de laatste scan.";
+
+/* Full Disk Access */
+"accessTitle" = "Eén toestemming in plaats van veel vragen";
+"accessDetail" = "Zonder volledige schijftoegang vraagt macOS apart om toegang tot het bureaublad, Documenten, Downloads, iCloud Drive, de gegevens van andere apps en externe volumes. Eén enkele schakelaar in Systeeminstellingen vervangt al deze vragen. De app leest alleen groottes en verstuurt niets.";
+"accessOneSwitch" = "Privacy en beveiliging › Volledige schijftoegang";
+"accessOpenSettings" = "Open Systeeminstellingen";
+"accessContinue" = "Doorgaan zonder volledige schijftoegang";
+"accessGranted" = "Toegestaan";
+"accessRestart" = "App herstarten";
+"accessRestartHint" = "Schakelaar aangezet? macOS geeft pas toegang nadat de app is herstart. Werkt het daarna nog steeds niet, dan hoort het item bij een eerdere build: verwijder het met “–” in Systeeminstellingen en voeg het opnieuw toe.";
+"fullDiskAccess" = "Volledige schijftoegang";
+
+/* Settings */
+"autoScan" = "Automatisch scannen bij het openen";
+"extraFolders" = "Extra mappen";
+"none" = "Geen";
+"add" = "Voeg toe";
+"remove" = "Verwijder";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneStatistics" = "Statistieken";
+"paneCleaner" = "Opruimen";
+"paneApps" = "Ongebruikte apps";
+"sectionTidy" = "Ruimte vrijmaken";
+"layout" = "Weergave";
+"layoutList" = "Lijst";
+"layoutGrid" = "Raster";
+"settings" = "Instellingen";
+"emptyFolder" = "Deze map is leeg";
+"otherCategories" = "Overig";
+"otherTypes" = "Overig";
+"cleanCaches" = "App-caches";
+"cleanCachesDetail" = "Caches die apps zo nodig opnieuw aanmaken. Actieve apps en macOS zelf blijven met rust gelaten.";
+"cleanDeveloper" = "Ontwikkelaarscaches";
+"cleanDeveloperDetail" = "Buildgegevens van Xcode en pakketcaches zoals npm; ze worden bij de volgende build opnieuw aangemaakt.";
+"cleanLogs" = "Oude logbestanden";
+"cleanLogsDetail" = "Logbestanden van apps die ouder zijn dan een week.";
+"cleanTemp" = "Oude tijdelijke bestanden";
+"cleanTempDetail" = "Tijdelijke bestanden die al minstens drie dagen niet zijn gewijzigd.";
+"cleanTrash" = "Prullenmand";
+"cleanTrashDetail" = "Leegt de prullenmand definitief. Standaard niet geselecteerd.";
+"cleanerSearching" = "Zoeken naar bestanden om op te ruimen …";
+"cleanFailed" = "%@ onderdelen konden niet worden verwijderd omdat ze in gebruik of beveiligd zijn.";
+"cleaning" = "Bezig met opruimen …";
+"cleanerRefresh" = "Opnieuw zoeken";
+"cleanSelected" = "Selectie opruimen (%@)";
+"cleanConfirmTitle" = "%@ definitief verwijderen?";
+"cleanConfirmMessage" = "De bestanden gaan niet naar de prullenmand. Apps maken hun caches zo nodig opnieuw aan. Daarna scant de app alles opnieuw.";
+"appsNoneUnused" = "Alle apps zijn onlangs gebruikt";
+"unusedSince" = "Niet geopend gedurende";
+"daysOption" = "meer dan %@ dagen";
+"trashAppTitle" = "“%@” naar de prullenmand verplaatsen?";
+"trashAppMessage" = "Je kunt de app uit de prullenmand terughalen totdat je die leegt.";
+"moveToTrash" = "Verplaats naar prullenmand";
+"lastOpened" = "Laatst geopend op %@";
+"trashAppFailed" = "“%@” kon niet worden verplaatst. In de Finder lukt het met je wachtwoord.";
+"statFiles" = "Bestanden";
+"statUnusedApps" = "ongebruikte apps";
+"bucketUnder1MB" = "onder 1 MB";
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "boven 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ gescand";
+"scanningArea" = "Gebied %@ van %@ · %@";
+"emptyValue" = "leeg";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Groottes zijn de ruimte die in gebruik is, zoals “du” die meldt. APFS-klonen tellen volledig mee; kopieën die opslagblokken delen, gebruiken in werkelijkheid minder. “Systeem en overig” is de rest tot aan wat macOS als in gebruik meldt.";
+"infoStatistics" = "Cijfers en grafieken uit de laatste scan. Bestandstypen tellen bestanden vanaf 1 MB; kleinere bestanden worden tijdens de scan gegroepeerd om geheugen en energie te besparen.";
+"infoCleaner" = "Verwijder bestanden die je systeem nauwelijks of helemaal niet nodig heeft: caches die zichzelf opnieuw aanmaken, oude logbestanden en oude tijdelijke bestanden. Kies wat weg mag en bevestig.";
+"infoApps" = "Apps die je al een tijd niet hebt geopend. De datum komt van macOS zelf; de app legt niets vast. Wat je niet meer nodig hebt, verplaats je hier naar de prullenmand en kun je daar terughalen.";
+"infoExplorer" = "Alle gescande mappen, gesorteerd op grootte. Dubbelklikken opent een map; het contextmenu toont bestanden in de Finder en geeft er informatie over.";
+"infoLargeFiles" = "Alle bestanden vanaf de gekozen grootte uit de laatste scan. Dubbelklikken toont het bestand in de Finder.";
+"infoTemp" = "macOS maakt dit gebied voor elke gebruiker aan onder /private/var/folders. Het is verborgen in de Finder en wordt niet uitgesplitst in “Beheer opslag”.";
+"infoCopies" = "Bij het controleren van een handtekening plaatst macOS soms complete kopieën van een app in map X. Het zijn geen aparte programma’s; macOS maakt zo nodig een nieuwe aan. Verwijderen is veilig zolang de app is gestopt.";
+"infoVolume" = "Capaciteit van dit volume: wat in gebruik is, wat macOS zo nodig zelf kan vrijmaken en wat vrij is. Externe volumes kunnen hier worden gescand.";
+"aboutPage" = "Over deze pagina";
+"scanDetails" = "Scan";
+"scanProgress" = "Voortgang";
+"scanArea" = "Gebied";
+"scanFinished" = "Gescand om";
+"accessMissingShort" = "Niet toegestaan";
+"summaryTitle" = "Kort samengevat";
+"summaryDisk" = "Op “%@” is %@ van %@ in gebruik en is %@ beschikbaar.";
+"summaryTop" = "De meeste ruimte gaat naar %@ met %@ en %@ met %@.";
+"summaryNotMeasured" = "Hoe de ruimte is verdeeld, verschijnt hier na de eerste scan.";
+"summaryClean" = "Door op te ruimen kun je ongeveer %@ vrijmaken.";
+"summaryCopies" = "Kopieën van apps die macOS maakt tijdens het controleren, tellen mee voor %@.";
+"summaryApps" = "%@ apps zijn al een tijd niet geopend.";
+"readAloud" = "Lees voor";
+"stopReading" = "Stop met voorlezen";
+
+/* Statistics in plain words */
+"statCategoriesTitle" = "Waarvoor wordt de ruimte gebruikt?";
+"statCategoriesCaption" = "Elke kleur staat voor een categorie. Een klik op een item in de legenda opent de bijbehorende map.";
+"statTypesTitle" = "Welke soorten bestanden nemen de meeste ruimte in?";
+"statTypesCaption" = "Bestanden vanaf 1 MB worden meegeteld. Bestanden zonder extensie zijn meestal onderdelen van programma’s.";
+"statSizesTitle" = "Hoe groot zijn je bestanden?";
+"statSizesCaption" = "Hoeveel ruimte elke groottecategorie inneemt en hoeveel bestanden erin zitten. Een paar grote bestanden nemen meestal meer ruimte in dan veel kleine.";
+"statUsedOf" = "in gebruik van %@";
+"statLargeFilesFrom" = "grote bestanden vanaf %@";
+"bucketValue" = "%@
+%@ bestanden";
+"typeNoExtension" = "Geen bestandsextensie";
+"settingsSystemNote" = "Weergave, taal en eenheden neemt de app over uit Systeeminstellingen. Een aparte taal voor deze app stel je daar in onder Algemeen › Taal en regio › Apps.";

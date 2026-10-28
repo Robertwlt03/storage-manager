@@ -37,16 +37,29 @@ enum AppSettings {
     static var extraFolders: [String] { folders(from: d.string(forKey: SettingsKey.extraFolders) ?? "") }
 }
 
-/// Languages the app ships. Which one is used comes from macOS, which also allows a language per app
-/// (System Settings › General › Language & Region › Applications).
+/// Languages the app ships; the raw value is the name of the `.lproj` folder. Which one is used comes from macOS,
+/// which also allows a language per app (System Settings › General › Language & Region › Applications).
 enum AppLanguage: String, CaseIterable {
-    case de, en
+    case de, en, fr, es, it, nl, ptBR = "pt-BR", sv, da, nb, fi, pl, cs, tr, ru, uk, ja, ko
+    case zhHans = "zh-Hans", zhHant = "zh-Hant"
+
     static let fallback = AppLanguage.en
 
     /// The first preferred system language the app supports.
     static var current: AppLanguage {
-        let preferred = Locale.preferredLanguages.compactMap { Locale(identifier: $0).language.languageCode?.identifier }
-        return preferred.lazy.compactMap(AppLanguage.init(rawValue:)).first ?? fallback
+        Locale.preferredLanguages.lazy.compactMap(match).first ?? fallback
+    }
+
+    /// Maps a system language like "zh-TW", "pt-PT" or "no" to one of the shipped languages.
+    static func match(_ identifier: String) -> AppLanguage? {
+        let language = Locale.Language(identifier: identifier)
+        guard let code = language.languageCode?.identifier else { return nil }
+        switch code {
+        case "zh": return language.maximalIdentifier.contains("Hant") ? .zhHant : .zhHans
+        case "pt": return .ptBR
+        case "no", "nn": return .nb
+        default: return AppLanguage(rawValue: code)
+        }
     }
 }
 

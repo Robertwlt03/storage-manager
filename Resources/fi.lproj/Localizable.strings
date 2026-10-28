@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Tallennustilan tutkija";
+"paneOverview" = "Yleiskatsaus";
+"paneExplorer" = "Kansiot";
+"paneLargeFiles" = "Suuret tiedostot";
+"paneTemp" = "Tilapäinen alue";
+"paneCopies" = "Appien kopiot";
+"sectionSystem" = "Piilotetut alueet";
+"sectionVolumes" = "Taltiot";
+"rescan" = "Mittaa uudelleen";
+"rescanHelp" = "Mittaa kaikki alueet uudelleen (⌘R)";
+"cancelScan" = "Keskeytä mittaus";
+
+/* Scan status and placeholders */
+"scanning" = "Mitataan …";
+"cancel" = "Keskeytä";
+"filesAndSize" = "%@ tiedostoa · %@";
+"measuredAt" = "Mitattu klo %@";
+"scanNow" = "Mittaa nyt";
+"unreadable" = "%@ kansiota ei voi lukea – salli täysi levyn käyttöoikeus …";
+"notMeasuredTitle" = "Ei vielä mitattu";
+"notMeasuredDetail" = "Yksi läpikäynti mittaa kaikki alueet; sen jälkeen jokainen napsautus toimii heti.";
+"scanningTitle" = "Mitataan …";
+"scanningDetail" = "Tulokset näkyvät heti, kun ensimmäinen alue on valmis.";
+
+/* Overview and categories */
+"availableOf" = "%@ käytettävissä (yhteensä %@)";
+"categories" = "Luokat";
+"freeSpace" = "Vapaana";
+"tempAreaName" = "Tilapäinen järjestelmäalue";
+"catApps" = "Ohjelmat";
+"catDocuments" = "Dokumentit ja Työpöytä";
+"catDownloads" = "Lataukset";
+"catMedia" = "Kuvat, musiikki ja elokuvat";
+"catICloud" = "iCloud Drive";
+"catMail" = "Mail ja viestit";
+"catDeveloper" = "Kehitys";
+"catCaches" = "Välimuistit";
+"catAppData" = "Appien tiedot";
+"catTrash" = "Roskakori";
+"catTemp" = "Tilapäiset tiedostot";
+"catUser" = "Muut käyttäjätiedot";
+"catLibrary" = "Yhteiset appien tiedot";
+"catOther" = "Muut kansiot";
+"catPurgeable" = "macOS voi tyhjentää";
+"catSystem" = "Järjestelmä ja muu";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Nimi";
+"columnSize" = "Koko";
+"columnShare" = "Osuus";
+"columnFiles" = "Tiedostot";
+"columnLocation" = "Sijainti";
+"smallerItems" = "%@ pienempää kohdetta alle 1 MB";
+"measuredTotal" = "%@ mitattu";
+"open" = "Avaa";
+"showInFinder" = "Näytä Finderissa";
+"info" = "Näytä tiedot";
+"copyPath" = "Kopioi polku";
+"done" = "Valmis";
+"allocated" = "Levyllä käytetty tila";
+"kind" = "Laji";
+"modified" = "Muokattu";
+"created" = "Luotu";
+"contents" = "Sisältö";
+"files" = "Tiedostot";
+"folders" = "Kansiot";
+"packages" = "Appipaketit";
+"modifiedBetween" = "Muokattu välillä";
+"dateRange" = "%@ – %@";
+"analyzing" = "Analysoidaan tiedostoja …";
+"typesBySize" = "Tiedostotyypit koon mukaan";
+"fileCount" = "%@ tiedostoa";
+"noExtension" = "ei tiedostotunnistetta";
+
+/* Large files */
+"minSize" = "Vähimmäiskoko";
+"fromSize" = "vähintään %@";
+"noFilesFrom" = "Ei tiedostoja, jotka ovat vähintään %@";
+"filesTotal" = "%@ tiedostoa · yhteensä %@";
+
+/* Temporary area */
+"location" = "Sijainti";
+"total" = "Yhteensä";
+"subfolders" = "Alikansiot";
+"viewCopies" = "Näytä appien kopiot …";
+"tempT" = "Tilapäiset tiedostot";
+"tempTDetail" = "Tyhjennetään enimmäkseen uudelleenkäynnistyksessä.";
+"tempC" = "Välimuistit";
+"tempCDetail" = "Appien ja järjestelmäpalvelujen välimuistit.";
+"tempX" = "Appien kopiot";
+"tempXDetail" = "Kopioita, jotka macOS luo allekirjoitusten tarkistuksen aikana.";
+"temp0" = "Järjestelmäpalvelut";
+"temp0Detail" = "Taustapalvelujen tiedot.";
+
+/* Signature copies */
+"noCopies" = "Ei appien kopioita";
+"noCopiesDetail" = "Kansiossa X ei ole appien kopioita.";
+"running" = "käynnissä";
+"stopped" = "suljettu";
+"copiesLabel" = "Kopiot";
+"countedSize" = "Laskettu koko";
+"installedVersion" = "Asennettu versio";
+"notFound" = "ei löytynyt";
+"versionLabel" = "Versio %@";
+"copiesOne" = "1 kopio";
+"copiesMany" = "%@ kopiota";
+"current" = "nykyinen";
+"old" = "vanha";
+"unknown" = "tuntematon";
+"createdOn" = "Luotu %@";
+"freed" = "Todellisuudessa vapautunut: %@";
+"deleteError" = "Kaikkea ei voitu poistaa: %@";
+"quitToDelete" = "Lopeta %@ komennolla ⌘Q, niin voit poistaa kopiot.";
+"openInExplorer" = "Avaa Tallennustilan tutkijassa";
+"deleteAll" = "Poista kaikki kopiot …";
+"deleteTitle" = "Poistetaanko %@ kopiota kohteesta %@?";
+"deleteForever" = "Poista pysyvästi";
+"deleteMessage" = "Kopiot eivät siirry roskakoriin. macOS luo tarvittaessa uuden.";
+
+/* Volumes */
+"capacity" = "Kapasiteetti";
+"used" = "Käytetty";
+"purgeable" = "macOS voi tyhjentää";
+"available" = "Käytettävissä";
+"toOverview" = "Yleiskatsaukseen";
+"exploreContents" = "Tutki sisältöä";
+"scanAndExplore" = "Mittaa ja tutki";
+"volumeGone" = "Taltio ei ole enää kytkettynä";
+
+/* Search */
+"searchPrompt" = "Hae kansioita ja tiedostoja";
+"scopeAll" = "Kaikki";
+"scopeFolders" = "Kansiot";
+"scopeFiles" = "Tiedostot";
+"searchResults" = "%@ tulosta";
+"noResults" = "Ei tuloksia haulle ”%@”";
+"searchNote" = "Hakee viimeisimmästä mittauksesta kansioita ja tiedostoja, jotka ovat vähintään 1 MB.";
+
+/* Full Disk Access */
+"accessTitle" = "Yksi lupa monen kysymyksen sijaan";
+"accessDetail" = "Ilman täyttä levyn käyttöoikeutta macOS kysyy erikseen Työpöydästä, Dokumenteista, Latauksista, iCloud Drivesta, muiden appien tiedoista ja ulkoisista taltioista. Yksi kytkin Järjestelmäasetuksissa poistaa kaikki nämä kysymykset. App lukee vain kokoja eikä lähetä mitään minnekään.";
+"accessOneSwitch" = "Tietosuoja ja turvallisuus › Täysi levyn käyttöoikeus";
+"accessOpenSettings" = "Avaa Järjestelmäasetukset";
+"accessContinue" = "Jatka ilman täyttä levyn käyttöoikeutta";
+"accessGranted" = "Myönnetty";
+"accessRestart" = "Käynnistä app uudelleen";
+"accessRestartHint" = "Onko kytkin päällä? macOS antaa käyttöoikeuden vasta, kun app on käynnistetty uudelleen. Jos se ei vieläkään toimi, merkintä kuuluu aiemmalle versiolle: poista se Järjestelmäasetuksissa ”–”-painikkeella ja lisää se uudelleen.";
+"fullDiskAccess" = "Täysi levyn käyttöoikeus";
+
+/* Settings */
+"autoScan" = "Mittaa automaattisesti käynnistyksessä";
+"extraFolders" = "Lisäkansiot";
+"none" = "Ei mitään";
+"add" = "Lisää";
+"remove" = "Poista";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneStatistics" = "Tilastot";
+"paneCleaner" = "Siivoa";
+"paneApps" = "Käyttämättömät apit";
+"sectionTidy" = "Vapauta tilaa";
+"layout" = "Näkymä";
+"layoutList" = "Luettelo";
+"layoutGrid" = "Ruudukko";
+"settings" = "Asetukset";
+"emptyFolder" = "Tämä kansio on tyhjä";
+"otherCategories" = "Muut";
+"otherTypes" = "Muut";
+"cleanCaches" = "Appien välimuistit";
+"cleanCachesDetail" = "Välimuistit, jotka apit luovat tarvittaessa uudelleen. Käynnissä olevia appeja ja macOS:ää itseään ei kosketa.";
+"cleanDeveloper" = "Kehittäjän välimuistit";
+"cleanDeveloperDetail" = "Xcoden koontitiedot ja pakettien välimuistit, kuten npm; ne syntyvät uudelleen seuraavassa koonnissa.";
+"cleanLogs" = "Vanhat lokit";
+"cleanLogsDetail" = "Appien lokit, jotka ovat yli viikon vanhoja.";
+"cleanTemp" = "Vanhat tilapäiset tiedostot";
+"cleanTempDetail" = "Tilapäiset tiedostot, joita ei ole muutettu vähintään kolmeen päivään.";
+"cleanTrash" = "Roskakori";
+"cleanTrashDetail" = "Tyhjentää roskakorin pysyvästi. Ei valittuna oletuksena.";
+"cleanerSearching" = "Etsitään siivottavia tiedostoja …";
+"cleanFailed" = "%@ kohdetta ei voitu poistaa, koska ne ovat käytössä tai suojattuja.";
+"cleaning" = "Siivotaan …";
+"cleanerRefresh" = "Hae uudelleen";
+"cleanSelected" = "Siivoa valinta (%@)";
+"cleanConfirmTitle" = "Poistetaanko %@ pysyvästi?";
+"cleanConfirmMessage" = "Tiedostot eivät siirry roskakoriin. Apit luovat välimuistinsa tarvittaessa uudelleen. Sen jälkeen app mittaa kaiken uudelleen.";
+"appsNoneUnused" = "Kaikkia appeja on käytetty äskettäin";
+"unusedSince" = "Ei avattu";
+"daysOption" = "yli %@ päivään";
+"trashAppTitle" = "Siirretäänkö ”%@” roskakoriin?";
+"trashAppMessage" = "Voit palauttaa apin roskakorista, kunnes tyhjennät sen.";
+"moveToTrash" = "Siirrä roskakoriin";
+"lastOpened" = "Viimeksi avattu %@";
+"trashAppFailed" = "Kohdetta ”%@” ei voitu siirtää. Finderissa se onnistuu salasanallasi.";
+"statFiles" = "Tiedostot";
+"statUnusedApps" = "käyttämätöntä appia";
+"bucketUnder1MB" = "alle 1 MB";
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "yli 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ mitattu";
+"scanningArea" = "Alue %@ / %@ · %@";
+"emptyValue" = "tyhjä";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Koot ovat käytössä olevaa tilaa, mitattuna kuten ”du”-komennolla. APFS-kloonit lasketaan kokonaan; kopiot, jotka jakavat tallennuslohkoja, vievät todellisuudessa vähemmän tilaa. ”Järjestelmä ja muu” on loput siihen asti, minkä macOS ilmoittaa käytetyksi.";
+"infoStatistics" = "Tunnusluvut ja kaaviot viimeisimmästä mittauksesta. Tiedostotyypeissä lasketaan tiedostot, jotka ovat vähintään 1 MB; pienemmät tiedostot ryhmitellään mittauksen aikana muistin ja energian säästämiseksi.";
+"infoCleaner" = "Täällä poistat tiedostoja, joita järjestelmä tuskin tarvitsee tai ei lainkaan: välimuisteja, jotka syntyvät itsestään uudelleen, vanhoja lokeja ja vanhoja tilapäisiä tiedostoja. Valitse, mitä saa poistaa, ja vahvista.";
+"infoApps" = "Apit, joita et ole avannut pitkään aikaan. Päivämäärä tulee macOS:ltä itseltään; app ei tallenna mitään. Sen, mitä et enää tarvitse, voit siirtää täältä roskakoriin ja palauttaa sieltä.";
+"infoExplorer" = "Kaikki mitatut kansiot koon mukaan lajiteltuina. Kaksoisnapsautus avaa kansion; kontekstivalikko näyttää tiedostot Finderissa ja antaa niistä tietoja.";
+"infoLargeFiles" = "Kaikki tiedostot viimeisimmästä mittauksesta valitusta koosta alkaen. Kaksoisnapsautus näyttää tiedoston Finderissa.";
+"infoTemp" = "macOS luo tämän alueen jokaiselle käyttäjälle kohteeseen /private/var/folders. Se on piilotettu Finderissa, eikä sitä eritellä kohdassa ”Hallitse tallennustilaa”.";
+"infoCopies" = "Allekirjoitusta tarkistaessaan macOS luo joskus apista täydellisiä kopioita kansioon X. Ne eivät ole omia ohjelmiaan; macOS luo tarvittaessa uuden. Niiden poistaminen on turvallista, kun app on suljettu.";
+"infoVolume" = "Tämän taltion kapasiteetti: mitä on käytetty, minkä macOS voi tarvittaessa vapauttaa itse ja mitä on vapaana. Ulkoisia taltioita voi mitata täällä.";
+"aboutPage" = "Tietoja tästä sivusta";
+"scanDetails" = "Mittaus";
+"scanProgress" = "Eteneminen";
+"scanArea" = "Alue";
+"scanFinished" = "Mitattu klo";
+"accessMissingShort" = "Ei myönnetty";
+"summaryTitle" = "Lyhyesti";
+"summaryDisk" = "Levyllä ”%@” on käytetty %@ / %@ ja käytettävissä on %@.";
+"summaryTop" = "Eniten tilaa vievät %@ (%@) ja %@ (%@).";
+"summaryNotMeasured" = "Tilan jakautuminen näkyy tässä ensimmäisen mittauksen jälkeen.";
+"summaryClean" = "Siivoamalla voit vapauttaa noin %@.";
+"summaryCopies" = "Appien kopiot, jotka macOS luo tarkistuksen aikana, vievät laskettuna %@.";
+"summaryApps" = "%@ appia ei ole avattu pitkään aikaan.";
+"readAloud" = "Lue ääneen";
+"stopReading" = "Lopeta lukeminen";
+
+/* Statistics in plain words */
+"statCategoriesTitle" = "Mihin tila kuluu?";
+"statCategoriesCaption" = "Jokainen väri edustaa yhtä luokkaa. Selitteen merkintää napsauttamalla avautuu vastaava kansio.";
+"statTypesTitle" = "Mitkä tiedostolajit vievät eniten tilaa?";
+"statTypesCaption" = "Mukana ovat tiedostot, jotka ovat vähintään 1 MB. Tiedostot ilman tunnistetta ovat enimmäkseen ohjelmien osia.";
+"statSizesTitle" = "Kuinka suuria tiedostosi ovat?";
+"statSizesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
+"statUsedOf" = "käytetty, yhteensä %@";
+"statLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
+"bucketValue" = "%@
+%@ tiedostoa";
+"typeNoExtension" = "Ei tiedostotunnistetta";
+"settingsSystemNote" = "Ulkoasu, kieli ja yksiköt tulevat Järjestelmäasetuksista. Tämän apin oman kielen voit asettaa siellä kohdassa Yleiset › Kieli ja alue › Apit.";

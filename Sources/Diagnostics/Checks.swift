@@ -53,6 +53,13 @@ enum Checks {
                 ok = false
             }
         }
+        // System languages map to the shipped ones, including script and regional variants.
+        let expected: [(String, AppLanguage?)] = [("de-DE", .de), ("en-GB", .en), ("zh-TW", .zhHant), ("zh-Hans-CN", .zhHans),
+                                                  ("zh-HK", .zhHant), ("pt-PT", .ptBR), ("no", .nb), ("nb-NO", .nb), ("xx", nil)]
+        for (id, language) in expected where AppLanguage.match(id) != language {
+            print("FAIL Sprache \(id) wird falsch zugeordnet")
+            ok = false
+        }
         print("\(Loc.allCases.count) Texte in \(bundles.count) Sprachen geprüft: \(ok ? "ok" : "Fehler")")
         return ok
     }

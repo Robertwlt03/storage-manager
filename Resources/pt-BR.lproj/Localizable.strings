@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Explorador de Armazenamento";
+"paneOverview" = "Visão geral";
+"paneExplorer" = "Pastas";
+"paneLargeFiles" = "Arquivos grandes";
+"paneTemp" = "Área temporária";
+"paneCopies" = "Cópias de apps";
+"sectionSystem" = "Áreas ocultas";
+"sectionVolumes" = "Volumes";
+"rescan" = "Analisar novamente";
+"rescanHelp" = "Analisar todas as áreas novamente (⌘R)";
+"cancelScan" = "Cancelar análise";
+
+/* Scan status and placeholders */
+"scanning" = "Analisando …";
+"cancel" = "Cancelar";
+"filesAndSize" = "%@ arquivos · %@";
+"measuredAt" = "Analisado às %@";
+"scanNow" = "Analisar agora";
+"unreadable" = "%@ pastas ilegíveis – permitir Acesso Total ao Disco …";
+"notMeasuredTitle" = "Ainda não analisado";
+"notMeasuredDetail" = "Uma única passada analisa todas as áreas; depois disso, cada clique é instantâneo.";
+"scanningTitle" = "Analisando …";
+"scanningDetail" = "Os resultados aparecem assim que a primeira área terminar.";
+
+/* Overview and categories */
+"availableOf" = "%@ disponíveis de %@";
+"categories" = "Categorias";
+"freeSpace" = "Livre";
+"tempAreaName" = "Área temporária do sistema";
+"catApps" = "Aplicativos";
+"catDocuments" = "Documentos e Mesa";
+"catDownloads" = "Downloads";
+"catMedia" = "Fotos, música e filmes";
+"catICloud" = "iCloud Drive";
+"catMail" = "Mail e Mensagens";
+"catDeveloper" = "Desenvolvimento";
+"catCaches" = "Caches";
+"catAppData" = "Dados de apps";
+"catTrash" = "Lixo";
+"catTemp" = "Arquivos temporários";
+"catUser" = "Outros dados do usuário";
+"catLibrary" = "Dados de apps compartilhados";
+"catOther" = "Outras pastas";
+"catPurgeable" = "Removível pelo macOS";
+"catSystem" = "Sistema e outros";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Nome";
+"columnSize" = "Tamanho";
+"columnShare" = "Proporção";
+"columnFiles" = "Arquivos";
+"columnLocation" = "Local";
+"smallerItems" = "%@ itens menores que 1 MB";
+"measuredTotal" = "%@ analisados";
+"open" = "Abrir";
+"showInFinder" = "Mostrar no Finder";
+"info" = "Obter informações";
+"copyPath" = "Copiar caminho";
+"done" = "OK";
+"allocated" = "Tamanho em disco";
+"kind" = "Tipo";
+"modified" = "Modificado";
+"created" = "Criado";
+"contents" = "Conteúdo";
+"files" = "Arquivos";
+"folders" = "Pastas";
+"packages" = "Pacotes de apps";
+"modifiedBetween" = "Modificado entre";
+"dateRange" = "%@ e %@";
+"analyzing" = "Analisando arquivos …";
+"typesBySize" = "Tipos de arquivo por tamanho";
+"fileCount" = "%@ arquivos";
+"noExtension" = "sem extensão";
+
+/* Large files */
+"minSize" = "Tamanho mínimo";
+"fromSize" = "a partir de %@";
+"noFilesFrom" = "Nenhum arquivo a partir de %@";
+"filesTotal" = "%@ arquivos · %@ no total";
+
+/* Temporary area */
+"location" = "Local";
+"total" = "Total";
+"subfolders" = "Subpastas";
+"viewCopies" = "Ver cópias de apps …";
+"tempT" = "Arquivos temporários";
+"tempTDetail" = "Na maior parte, são esvaziados ao reiniciar.";
+"tempC" = "Caches";
+"tempCDetail" = "Caches de apps e serviços do sistema.";
+"tempX" = "Cópias de apps";
+"tempXDetail" = "Cópias que o macOS cria ao verificar assinaturas.";
+"temp0" = "Serviços do sistema";
+"temp0Detail" = "Dados de serviços em segundo plano.";
+
+/* Signature copies */
+"noCopies" = "Nenhuma cópia de app";
+"noCopiesDetail" = "Não há cópias de apps na pasta X.";
+"running" = "em execução";
+"stopped" = "encerrado";
+"copiesLabel" = "Cópias";
+"countedSize" = "Tamanho contabilizado";
+"installedVersion" = "Versão instalada";
+"notFound" = "não encontrada";
+"versionLabel" = "Versão %@";
+"copiesOne" = "1 cópia";
+"copiesMany" = "%@ cópias";
+"current" = "atual";
+"old" = "antiga";
+"unknown" = "desconhecida";
+"createdOn" = "Criada em %@";
+"freed" = "Espaço realmente liberado: %@";
+"deleteError" = "Nem tudo pôde ser excluído: %@";
+"quitToDelete" = "Encerre %@ com ⌘Q para poder excluir.";
+"openInExplorer" = "Abrir no explorador";
+"deleteAll" = "Excluir todas as cópias …";
+"deleteTitle" = "Excluir %@ cópias de %@?";
+"deleteForever" = "Excluir permanentemente";
+"deleteMessage" = "As cópias não vão para o Lixo. O macOS cria uma nova quando necessário.";
+
+/* Volumes */
+"capacity" = "Capacidade";
+"used" = "Usado";
+"purgeable" = "Removível pelo macOS";
+"available" = "Disponível";
+"toOverview" = "Ir para a visão geral";
+"exploreContents" = "Explorar conteúdo";
+"scanAndExplore" = "Analisar e explorar";
+"volumeGone" = "Volume não está mais conectado";
+
+/* Search */
+"searchPrompt" = "Buscar pastas e arquivos";
+"scopeAll" = "Tudo";
+"scopeFolders" = "Pastas";
+"scopeFiles" = "Arquivos";
+"searchResults" = "%@ resultados";
+"noResults" = "Nenhum resultado para “%@”";
+"searchNote" = "Busca pastas e arquivos de 1 MB ou mais na última análise.";
+
+/* Full Disk Access */
+"accessTitle" = "Uma única permissão em vez de várias solicitações";
+"accessDetail" = "Sem o Acesso Total ao Disco, o macOS pergunta separadamente sobre a Mesa, Documentos, Downloads, iCloud Drive, os dados de outros apps e os volumes externos. Um único interruptor nos Ajustes do Sistema substitui todas essas solicitações. O app só lê tamanhos e não envia nada para lugar nenhum.";
+"accessOneSwitch" = "Privacidade e Segurança › Acesso Total ao Disco";
+"accessOpenSettings" = "Abrir Ajustes do Sistema";
+"accessContinue" = "Continuar sem Acesso Total ao Disco";
+"accessGranted" = "Concedido";
+"accessRestart" = "Reiniciar o app";
+"accessRestartHint" = "Ligou o interruptor? O macOS só concede o acesso depois que o app for reiniciado. Se mesmo assim não funcionar, a entrada pertence a uma versão anterior: remova-a com “–” nos Ajustes do Sistema e adicione-a novamente.";
+"fullDiskAccess" = "Acesso Total ao Disco";
+
+/* Settings */
+"autoScan" = "Analisar automaticamente ao abrir";
+"extraFolders" = "Pastas adicionais";
+"none" = "Nenhuma";
+"add" = "Adicionar";
+"remove" = "Remover";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneStatistics" = "Estatísticas";
+"paneCleaner" = "Limpar";
+"paneApps" = "Apps não usados";
+"sectionTidy" = "Liberar espaço";
+"layout" = "Visualização";
+"layoutList" = "Lista";
+"layoutGrid" = "Grade";
+"settings" = "Ajustes";
+"emptyFolder" = "Esta pasta está vazia";
+"otherCategories" = "Outras";
+"otherTypes" = "Outros";
+"cleanCaches" = "Caches de apps";
+"cleanCachesDetail" = "Caches que os apps recriam quando necessário. Apps em execução e o próprio macOS não são afetados.";
+"cleanDeveloper" = "Caches de desenvolvimento";
+"cleanDeveloperDetail" = "Dados de build do Xcode e caches de pacotes, como o npm; eles são recriados na próxima build.";
+"cleanLogs" = "Registros antigos";
+"cleanLogsDetail" = "Registros de apps com mais de uma semana.";
+"cleanTemp" = "Arquivos temporários antigos";
+"cleanTempDetail" = "Arquivos temporários não modificados há pelo menos três dias.";
+"cleanTrash" = "Lixo";
+"cleanTrashDetail" = "Esvazia o Lixo permanentemente. Não selecionado por padrão.";
+"cleanerSearching" = "Procurando arquivos para limpar …";
+"cleanFailed" = "%@ itens não puderam ser removidos porque estão em uso ou protegidos.";
+"cleaning" = "Limpando …";
+"cleanerRefresh" = "Procurar novamente";
+"cleanSelected" = "Limpar seleção (%@)";
+"cleanConfirmTitle" = "Remover %@ permanentemente?";
+"cleanConfirmMessage" = "Os arquivos não vão para o Lixo. Os apps recriam seus caches quando necessário. Depois, o app analisa tudo novamente.";
+"appsNoneUnused" = "Todos os apps foram usados recentemente";
+"unusedSince" = "Não aberto há";
+"daysOption" = "mais de %@ dias";
+"trashAppTitle" = "Mover “%@” para o Lixo?";
+"trashAppMessage" = "Você pode restaurar o app a partir do Lixo até esvaziá-lo.";
+"moveToTrash" = "Mover para o Lixo";
+"lastOpened" = "Última abertura em %@";
+"trashAppFailed" = "Não foi possível mover “%@”. No Finder, isso funciona com a sua senha.";
+"statFiles" = "Arquivos";
+"statUnusedApps" = "apps não usados";
+"bucketUnder1MB" = "menos de 1 MB";
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "mais de 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ analisado";
+"scanningArea" = "Área %@ de %@ · %@";
+"emptyValue" = "vazio";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Os tamanhos são o espaço em uso, como informado pelo “du”. Clones do APFS contam por inteiro; cópias que compartilham blocos de armazenamento usam, na prática, menos espaço. “Sistema e outros” é o restante até o valor que o macOS informa como usado.";
+"infoStatistics" = "Números e gráficos da última análise. Os tipos de arquivo contam arquivos de 1 MB ou mais; arquivos menores são agrupados durante a análise para economizar memória e energia.";
+"infoCleaner" = "Remova arquivos de que o sistema quase não precisa ou não precisa: caches que se recriam sozinhos, registros antigos e arquivos temporários antigos. Escolha o que pode sair e confirme.";
+"infoApps" = "Apps que você não abre há algum tempo. A data vem do próprio macOS; o app não registra nada. O que você não precisa mais, mova aqui para o Lixo e restaure de lá, se quiser.";
+"infoExplorer" = "Todas as pastas analisadas, ordenadas por tamanho. Um clique duplo abre uma pasta; o menu de contexto mostra os arquivos no Finder e dá informações sobre eles.";
+"infoLargeFiles" = "Todos os arquivos a partir do tamanho escolhido na última análise. Um clique duplo mostra o arquivo no Finder.";
+"infoTemp" = "O macOS cria esta área para cada usuário em /private/var/folders. Ela fica oculta no Finder e não é detalhada em “Gerenciar Armazenamento”.";
+"infoCopies" = "Ao verificar uma assinatura, o macOS às vezes coloca cópias completas de um app na pasta X. Elas não são programas independentes; o macOS cria uma nova quando necessário. Excluí-las é seguro enquanto o app estiver encerrado.";
+"infoVolume" = "Capacidade deste volume: o que está em uso, o que o macOS pode liberar sozinho quando necessário e o que está livre. Volumes externos podem ser analisados aqui.";
+"aboutPage" = "Sobre esta página";
+"scanDetails" = "Análise";
+"scanProgress" = "Progresso";
+"scanArea" = "Área";
+"scanFinished" = "Analisado às";
+"accessMissingShort" = "Não concedido";
+"summaryTitle" = "Em resumo";
+"summaryDisk" = "Em “%@”, %@ de %@ estão em uso e %@ estão disponíveis.";
+"summaryTop" = "A maior parte do espaço vai para %@ com %@ e para %@ com %@.";
+"summaryNotMeasured" = "Como o espaço está dividido aparece aqui após a primeira análise.";
+"summaryClean" = "Ao limpar, é possível liberar cerca de %@.";
+"summaryCopies" = "Cópias de apps que o macOS cria durante a verificação ocupam %@.";
+"summaryApps" = "%@ apps não são abertos há algum tempo.";
+"readAloud" = "Ler em voz alta";
+"stopReading" = "Parar leitura";
+
+/* Statistics in plain words */
+"statCategoriesTitle" = "Para que o espaço é usado?";
+"statCategoriesCaption" = "Cada cor representa uma categoria. Um clique em uma entrada da legenda abre a pasta correspondente.";
+"statTypesTitle" = "Quais tipos de arquivo ocupam mais espaço?";
+"statTypesCaption" = "São contados arquivos de 1 MB ou mais. Arquivos sem extensão costumam ser partes de programas.";
+"statSizesTitle" = "Qual é o tamanho dos seus arquivos?";
+"statSizesCaption" = "Quanto espaço cada faixa de tamanho ocupa e quantos arquivos há nela. Poucos arquivos grandes costumam ocupar mais espaço do que muitos pequenos.";
+"statUsedOf" = "usados de %@";
+"statLargeFilesFrom" = "arquivos grandes a partir de %@";
+"bucketValue" = "%@
+%@ arquivos";
+"typeNoExtension" = "Sem extensão de arquivo";
+"settingsSystemNote" = "Aparência, idioma e unidades vêm dos Ajustes do Sistema. Um idioma separado para este app é definido lá, em Geral › Idioma e Região › Apps.";

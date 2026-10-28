@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-14%20oder%20neuer-1D1D1F?style=flat-square&logo=apple&logoColor=white" alt="macOS 14 oder neuer">
   <img src="https://img.shields.io/badge/-SwiftUI-1D1D1F?style=flat-square&logo=swift&logoColor=F05138" alt="SwiftUI">
-  <img src="https://img.shields.io/badge/Sprachen-Deutsch%20%C2%B7%20English-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="Deutsch und Englisch">
+  <img src="https://img.shields.io/badge/Sprachen-20-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="20 Sprachen">
   <img src="https://img.shields.io/badge/Preis-kostenlos-1B7332?style=flat-square&labelColor=1D1D1F" alt="kostenlos">
   <a href="LICENSE"><img src="https://img.shields.io/badge/Lizenz-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="Lizenz: MIT"></a>
 </p>
@@ -72,8 +72,11 @@ Außerdem zeigt die App zwei Bereiche, die man im Finder nicht sieht: den **temp
 **App-Kopien**, die macOS beim Prüfen von Apps anlegt. Auch externe Festplatten und USB-Sticks erscheinen in der
 Seitenleiste, sobald du sie anschließt.
 
-Jede Seite hat oben rechts einen Info-Knopf, der erklärt, wofür sie da ist. Die App gibt es auf Deutsch und Englisch,
-sie folgt dem hellen oder dunklen Erscheinungsbild deines Macs und nutzt ab macOS 26 Liquid Glass. Neue Inhalte
+Jede Seite hat oben rechts einen Info-Knopf, der erklärt, wofür sie da ist. Die App spricht 20 Sprachen, darunter
+Deutsch, Englisch, Französisch, Spanisch, Japanisch und Chinesisch, und richtet sich dabei nach der Sprache deines Macs.
+Wenn du die App in einer anderen Sprache nutzen möchtest, stellst du das in den Systemeinstellungen unter Allgemein,
+Sprache & Region und dann Apps ein. Auch das helle oder dunkle Erscheinungsbild übernimmt sie von deinem Mac, und ab
+macOS 26 nutzt sie Liquid Glass. Neue Inhalte
 erscheinen mit sanften Bewegungen, und wenn du in den Bedienungshilfen „Bewegung reduzieren“ eingeschaltet hast,
 verzichtet die App darauf.
 
@@ -195,7 +198,7 @@ Der Code ist in kleine Teile gegliedert, und jede Datei hat genau eine Aufgabe:
 | `Sources/Services` | Messen, Kategorien, Aufräumen, Apps, Suche, Zusammenfassung und Vorlesen. |
 | `Sources/State` | Der Zustand der App, der die Services zusammenführt. |
 | `Sources/Core` | Konstanten und feste Auswahlwerte wie Seiten und Einstellungen. |
-| `Sources/Localization` und `Resources` | Alle Texte auf Deutsch und Englisch. |
+| `Sources/Localization` und `Resources` | Alle Texte in 20 Sprachen, mit Deutsch und Englisch als Vorlage. |
 | `Sources/Diagnostics` | Prüfungen für Kontrast und Texte und ein Selbsttest mit echten Daten. |
 
 </details>
@@ -204,7 +207,8 @@ Der Code ist in kleine Teile gegliedert, und jede Datei hat genau eine Aufgabe:
 
 Der Speicher-Explorer ist Open Source. Jeder kann den Code ansehen, verbessern und eigene Ideen einbringen. Fehler und
 Wünsche kannst du in den [Issues](../../issues) melden, und Verbesserungen nehme ich gern als Pull Request entgegen.
-Neue Texte legst du bitte immer auf Deutsch und Englisch an, denn die Prüfung beim Bauen meldet sonst, was fehlt.
+Neue Texte legst du bitte in allen Sprachen an, denn die Prüfung beim Bauen meldet sonst, was fehlt. Die meisten
+Übersetzungen sind maschinell entstanden, deshalb freue ich mich besonders über Verbesserungen von Muttersprachlern.
 
 > <img src="assets/icons/windows.svg" height="22" align="absmiddle" alt=""> Eine Version für **Windows** ist geplant, aber noch nicht umgesetzt.
 

@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Lagringsudforsker";
+"paneOverview" = "Oversigt";
+"paneExplorer" = "Mapper";
+"paneLargeFiles" = "Store filer";
+"paneTemp" = "Midlertidigt område";
+"paneCopies" = "Appkopier";
+"sectionSystem" = "Skjulte områder";
+"sectionVolumes" = "Diske";
+"rescan" = "Mål igen";
+"rescanHelp" = "Mål alle områder igen (⌘R)";
+"cancelScan" = "Annuller måling";
+
+/* Scan status and placeholders */
+"scanning" = "Måler …";
+"cancel" = "Annuller";
+"filesAndSize" = "%@ filer · %@";
+"measuredAt" = "Målt kl. %@";
+"scanNow" = "Mål nu";
+"unreadable" = "%@ mapper kan ikke læses – tillad fuld diskadgang …";
+"notMeasuredTitle" = "Endnu ikke målt";
+"notMeasuredDetail" = "Én gennemgang måler alle områder; derefter er hvert klik øjeblikkeligt.";
+"scanningTitle" = "Måler …";
+"scanningDetail" = "Resultaterne vises, så snart det første område er færdigt.";
+
+/* Overview and categories */
+"availableOf" = "%@ ledigt af %@";
+"categories" = "Kategorier";
+"freeSpace" = "Ledigt";
+"tempAreaName" = "Midlertidigt systemområde";
+"catApps" = "Programmer";
+"catDocuments" = "Dokumenter og Skrivebord";
+"catDownloads" = "Downloads";
+"catMedia" = "Fotos, musik og film";
+"catICloud" = "iCloud Drive";
+"catMail" = "Mail og beskeder";
+"catDeveloper" = "Udvikling";
+"catCaches" = "Cacher";
+"catAppData" = "App-data";
+"catTrash" = "Papirkurv";
+"catTemp" = "Midlertidige filer";
+"catUser" = "Øvrige brugerdata";
+"catLibrary" = "Delte app-data";
+"catOther" = "Øvrige mapper";
+"catPurgeable" = "Kan ryddes af macOS";
+"catSystem" = "System og andet";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Navn";
+"columnSize" = "Størrelse";
+"columnShare" = "Andel";
+"columnFiles" = "Filer";
+"columnLocation" = "Placering";
+"smallerItems" = "%@ mindre emner under 1 MB";
+"measuredTotal" = "%@ målt";
+"open" = "Åbn";
+"showInFinder" = "Vis i Finder";
+"info" = "Vis info";
+"copyPath" = "Kopiér stien";
+"done" = "Udført";
+"allocated" = "Fylder på disken";
+"kind" = "Type";
+"modified" = "Ændret";
+"created" = "Oprettet";
+"contents" = "Indhold";
+"files" = "Filer";
+"folders" = "Mapper";
+"packages" = "Apppakker";
+"modifiedBetween" = "Ændret mellem";
+"dateRange" = "%@ og %@";
+"analyzing" = "Analyserer filer …";
+"typesBySize" = "Filtyper efter størrelse";
+"fileCount" = "%@ filer";
+"noExtension" = "uden filtypenavn";
+
+/* Large files */
+"minSize" = "Mindste størrelse";
+"fromSize" = "fra %@";
+"noFilesFrom" = "Ingen filer fra %@";
+"filesTotal" = "%@ filer · %@ i alt";
+
+/* Temporary area */
+"location" = "Placering";
+"total" = "I alt";
+"subfolders" = "Undermapper";
+"viewCopies" = "Vis appkopier …";
+"tempT" = "Midlertidige filer";
+"tempTDetail" = "Tømmes for det meste ved genstart.";
+"tempC" = "Cacher";
+"tempCDetail" = "Cacher fra apps og systemtjenester.";
+"tempX" = "Appkopier";
+"tempXDetail" = "Kopier, som macOS opretter, når signaturer kontrolleres.";
+"temp0" = "Systemtjenester";
+"temp0Detail" = "Data fra baggrundstjenester.";
+
+/* Signature copies */
+"noCopies" = "Ingen appkopier";
+"noCopiesDetail" = "Der er ingen appkopier i mappen X.";
+"running" = "kører";
+"stopped" = "lukket";
+"copiesLabel" = "Kopier";
+"countedSize" = "Talt størrelse";
+"installedVersion" = "Installeret version";
+"notFound" = "ikke fundet";
+"versionLabel" = "Version %@";
+"copiesOne" = "1 kopi";
+"copiesMany" = "%@ kopier";
+"current" = "aktuel";
+"old" = "gammel";
+"unknown" = "ukendt";
+"createdOn" = "Oprettet den %@";
+"freed" = "Faktisk frigjort: %@";
+"deleteError" = "Det hele kunne ikke slettes: %@";
+"quitToDelete" = "Afslut %@ med ⌘Q for at kunne slette.";
+"openInExplorer" = "Åbn i Lagringsudforsker";
+"deleteAll" = "Slet alle kopier …";
+"deleteTitle" = "Vil du slette %@ kopier af %@?";
+"deleteForever" = "Slet permanent";
+"deleteMessage" = "Kopierne havner ikke i papirkurven. macOS opretter en ny, når der er behov for det.";
+
+/* Volumes */
+"capacity" = "Kapacitet";
+"used" = "Brugt";
+"purgeable" = "Kan ryddes af macOS";
+"available" = "Tilgængeligt";
+"toOverview" = "Til oversigten";
+"exploreContents" = "Udforsk indhold";
+"scanAndExplore" = "Mål og udforsk";
+"volumeGone" = "Disken er ikke længere tilsluttet";
+
+/* Search */
+"searchPrompt" = "Søg efter mapper og filer";
+"scopeAll" = "Alle";
+"scopeFolders" = "Mapper";
+"scopeFiles" = "Filer";
+"searchResults" = "%@ resultater";
+"noResults" = "Ingen resultater for »%@«";
+"searchNote" = "Søger i mapper og filer fra 1 MB i den seneste måling.";
+
+/* Full Disk Access */
+"accessTitle" = "Én tilladelse i stedet for mange spørgsmål";
+"accessDetail" = "Uden fuld diskadgang spørger macOS enkeltvis om Skrivebord, Dokumenter, Downloads, iCloud Drive, andre apps' data og eksterne diske. Med én enkelt kontakt i Systemindstillinger forsvinder alle disse spørgsmål. Appen læser kun størrelser og sender ikke noget nogen steder hen.";
+"accessOneSwitch" = "Anonymitet og sikkerhed › Fuld diskadgang";
+"accessOpenSettings" = "Åbn Systemindstillinger";
+"accessContinue" = "Fortsæt uden fuld diskadgang";
+"accessGranted" = "Givet";
+"accessRestart" = "Genstart appen";
+"accessRestartHint" = "Har du slået kontakten til? macOS giver først adgang, når appen er genstartet. Virker det stadig ikke, hører posten til en tidligere build: Fjern den med »–« i Systemindstillinger, og tilføj den igen.";
+"fullDiskAccess" = "Fuld diskadgang";
+
+/* Settings */
+"autoScan" = "Mål automatisk ved start";
+"extraFolders" = "Yderligere mapper";
+"none" = "Ingen";
+"add" = "Tilføj";
+"remove" = "Fjern";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneStatistics" = "Statistik";
+"paneCleaner" = "Ryd op";
+"paneApps" = "Ubrugte apps";
+"sectionTidy" = "Frigør plads";
+"layout" = "Visning";
+"layoutList" = "Liste";
+"layoutGrid" = "Gitter";
+"settings" = "Indstillinger";
+"emptyFolder" = "Denne mappe er tom";
+"otherCategories" = "Øvrige";
+"otherTypes" = "Andre";
+"cleanCaches" = "Appcacher";
+"cleanCachesDetail" = "Cacher, som apps opretter igen efter behov. Apps, der kører, og macOS selv bliver ikke rørt.";
+"cleanDeveloper" = "Udviklercacher";
+"cleanDeveloperDetail" = "Byggedata fra Xcode og pakkecacher som npm; de oprettes igen ved næste build.";
+"cleanLogs" = "Gamle logfiler";
+"cleanLogsDetail" = "Applogfiler, der er ældre end en uge.";
+"cleanTemp" = "Gamle midlertidige filer";
+"cleanTempDetail" = "Midlertidige filer, der ikke er ændret i mindst tre dage.";
+"cleanTrash" = "Papirkurv";
+"cleanTrashDetail" = "Tømmer papirkurven permanent. Er ikke valgt som standard.";
+"cleanerSearching" = "Leder efter filer, der kan ryddes op …";
+"cleanFailed" = "%@ emner kunne ikke fjernes, fordi de er i brug eller beskyttet.";
+"cleaning" = "Rydder op …";
+"cleanerRefresh" = "Søg igen";
+"cleanSelected" = "Ryd op i markeringen (%@)";
+"cleanConfirmTitle" = "Vil du fjerne %@ permanent?";
+"cleanConfirmMessage" = "Filerne havner ikke i papirkurven. Apps opretter deres cacher igen efter behov. Derefter måler appen alt igen.";
+"appsNoneUnused" = "Alle apps er brugt for nylig";
+"unusedSince" = "Ikke åbnet i";
+"daysOption" = "mere end %@ dage";
+"trashAppTitle" = "Vil du flytte »%@« til papirkurven?";
+"trashAppMessage" = "Du kan gendanne appen fra papirkurven, indtil du tømmer den.";
+"moveToTrash" = "Flyt til papirkurv";
+"lastOpened" = "Sidst åbnet den %@";
+"trashAppFailed" = "»%@« kunne ikke flyttes. I Finder virker det med din adgangskode.";
+"statFiles" = "Filer";
+"statUnusedApps" = "ubrugte apps";
+"bucketUnder1MB" = "under 1 MB";
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "over 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ målt";
+"scanningArea" = "Område %@ af %@ · %@";
+"emptyValue" = "tom";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Størrelserne er den plads, der er i brug, målt som med »du«. APFS-kloner tæller fuldt med; kopier, der deler lagerblokke, fylder i virkeligheden mindre. »System og andet« er resten op til det, macOS melder som brugt.";
+"infoStatistics" = "Nøgletal og diagrammer fra den seneste måling. Filtyper tæller filer fra 1 MB; mindre filer samles under målingen for at spare hukommelse og strøm.";
+"infoCleaner" = "Her fjerner du filer, som dit system næsten ikke eller slet ikke har brug for: cacher, der opretter sig selv igen, gamle logfiler og gamle midlertidige filer. Vælg, hvad der må væk, og bekræft.";
+"infoApps" = "Apps, som du ikke har åbnet i et stykke tid. Datoen kommer fra macOS selv; appen registrerer ingenting. Det, du ikke længere har brug for, kan du flytte til papirkurven herfra og gendanne derfra.";
+"infoExplorer" = "Alle målte mapper, sorteret efter størrelse. Dobbeltklik åbner en mappe; lokalmenuen viser filer i Finder og giver oplysninger om dem.";
+"infoLargeFiles" = "Alle filer fra den valgte størrelse i den seneste måling. Dobbeltklik viser filen i Finder.";
+"infoTemp" = "macOS opretter dette område for hver bruger under /private/var/folders. Det er skjult i Finder og bliver ikke specificeret i »Administrer lagerplads«.";
+"infoCopies" = "Når macOS kontrollerer en signatur, lægger det nogle gange komplette kopier af en app i mappen X. De er ikke egne programmer; macOS opretter en ny, når der er behov for det. Det er ufarligt at slette dem, så længe appen er afsluttet.";
+"infoVolume" = "Kapaciteten på denne disk: hvad der er brugt, hvad macOS selv kan frigøre efter behov, og hvad der er ledigt. Eksterne diske kan måles her.";
+"aboutPage" = "Om denne side";
+"scanDetails" = "Måling";
+"scanProgress" = "Fremdrift";
+"scanArea" = "Område";
+"scanFinished" = "Målt kl.";
+"accessMissingShort" = "Ikke givet";
+"summaryTitle" = "Kort sagt";
+"summaryDisk" = "På »%@« er %@ af %@ i brug, og %@ er ledigt.";
+"summaryTop" = "Mest plads fylder %@ med %@ og %@ med %@.";
+"summaryNotMeasured" = "Hvordan pladsen er fordelt, vises her efter den første måling.";
+"summaryClean" = "Ved at rydde op kan du frigøre ca. %@.";
+"summaryCopies" = "Kopier af apps, som macOS opretter ved kontrol, fylder %@.";
+"summaryApps" = "%@ apps er ikke blevet åbnet i et stykke tid.";
+"readAloud" = "Læs op";
+"stopReading" = "Stop oplæsning";
+
+/* Statistics in plain words */
+"statCategoriesTitle" = "Hvad bruges pladsen til?";
+"statCategoriesCaption" = "Hver farve står for en kategori. Hvis du klikker på en post i forklaringen, åbnes den tilhørende mappe.";
+"statTypesTitle" = "Hvilke filtyper fylder mest?";
+"statTypesCaption" = "Filer fra 1 MB tælles med. Filer uden filtypenavn er oftest dele af programmer.";
+"statSizesTitle" = "Hvor store er dine filer?";
+"statSizesCaption" = "Hvor meget plads hver størrelsesklasse fylder, og hvor mange filer der er i den. Nogle få store filer fylder som regel mere end mange små.";
+"statUsedOf" = "brugt af %@";
+"statLargeFilesFrom" = "store filer fra %@";
+"bucketValue" = "%@
+%@ filer";
+"typeNoExtension" = "Intet filtypenavn";
+"settingsSystemNote" = "Udseende, sprog og enheder overtager appen fra Systemindstillinger. Et særskilt sprog til denne app indstiller du dér under Generelt › Sprog og region › Programmer.";
