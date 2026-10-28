@@ -20,6 +20,7 @@ struct Tile: View {
         .frame(maxWidth: .infinity, minHeight: Layout.gridTile)
         .surface()
         .contentShape(Rectangle())
+        .hoverLift()
         .accessibilityElement(children: .combine)
     }
 }
@@ -47,6 +48,7 @@ struct StatTile: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .hoverLift()
         .allowsHitTesting(action != nil)
         .accessibilityElement(children: .combine)
     }

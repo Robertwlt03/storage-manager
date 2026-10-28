@@ -14,7 +14,11 @@ struct SummaryCard: View {
         UI.card(Loc.summaryTitle.s) {
             VStack(alignment: .leading, spacing: Layout.rowSpacing) {
                 Text(text).fixedSize(horizontal: false, vertical: true).textSelection(.enabled)
-                UI.button(speech.isSpeaking ? Loc.stopReading.s : Loc.readAloud.s) { speech.toggle(text) }
+                Button { speech.toggle(text) } label: {
+                    Label(speech.isSpeaking ? Loc.stopReading.s : Loc.readAloud.s, systemImage: Symbols.speaker)
+                        .symbolEffect(.variableColor.iterative, isActive: speech.isSpeaking)  // only while speaking
+                }
+                .appButton()
             }
             .padding(.vertical, Layout.rowPadding)
         }

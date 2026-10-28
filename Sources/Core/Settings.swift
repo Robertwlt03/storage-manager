@@ -16,7 +16,8 @@ enum SettingsKey {
     static let lastScanFiles = "lastScanFiles"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let launchSettings = "openSettings"  // `open … --args -openSettings YES`
-    static let launchSkipAccess = "skipAccessSheet"  // `open … --args -skipAccessSheet YES` (screenshots, tests)
+    static let launchSkipAccess = "skipAccessSheet"
+    static let launchUITest = "uiTest"  // `open … --args -uiTest <folder>` runs the stress test  // `open … --args -skipAccessSheet YES` (screenshots, tests)
 }
 
 enum AppSettings {
@@ -37,6 +38,7 @@ enum AppSettings {
     static var launchSettings: Bool { d.bool(forKey: SettingsKey.launchSettings) }
     static var unusedDays: Int { d.integer(forKey: SettingsKey.unusedDays) }
     static var largeFileMB: Int { d.integer(forKey: SettingsKey.largeFileMB) }
+    static var launchUITest: String? { d.string(forKey: SettingsKey.launchUITest) }
     static var launchSkipAccess: Bool { d.bool(forKey: SettingsKey.launchSkipAccess) }
 
     /// Extra folders are stored as one string, one path per line (AppStorage cannot hold arrays).

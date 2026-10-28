@@ -49,6 +49,10 @@ struct NavRow: View {
                     .opacity(action == nil ? 0 : 1)
             }
             .contentShape(Rectangle())
+            // The highlight reaches a little beyond the row without changing its layout.
+            .padding(.horizontal, Layout.hoverInset).padding(.vertical, Layout.hoverInset / 2)
+            .modifier(OptionalHover(active: action != nil))
+            .padding(.horizontal, -Layout.hoverInset).padding(.vertical, -Layout.hoverInset / 2)
         }
         .buttonStyle(.plain)
         .allowsHitTesting(action != nil)  // not .disabled: that would dim the text below 4.5:1
@@ -97,5 +101,13 @@ struct HeaderRow: View {
                 Text(subtitle).foregroundStyle(.muted).lineLimit(2).textSelection(.enabled)
             }
         }
+    }
+}
+
+/// Hover highlight only for rows that lead somewhere.
+private struct OptionalHover: ViewModifier {
+    let active: Bool
+    func body(content: Content) -> some View {
+        if active { content.hoverHighlight() } else { content }
     }
 }

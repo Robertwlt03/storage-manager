@@ -25,6 +25,12 @@ struct RootView: View {
         .onAppear {
             if AppSettings.launchSettings { openSettings() }
             model.launch()
+            if let dir = AppSettings.launchUITest {
+                Task {
+                    await UITest.run(model, into: dir)
+                    NSApp.terminate(nil)
+                }
+            }
         }
         .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didMountNotification)) { _ in model.refreshVolumes() }
         .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didUnmountNotification)) { _ in model.refreshVolumes() }

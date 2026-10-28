@@ -51,6 +51,7 @@ struct SidebarFooter: View {
                     .animation(Motion.progress, value: model.scanFraction)
             } else if let t = model.lastScan {
                 Image(systemName: model.unreadable > 0 && !model.hasFullDiskAccess ? Symbols.warning : Symbols.success)
+                    .contentTransition(.symbolEffect(.replace))
                     .foregroundStyle(model.unreadable > 0 && !model.hasFullDiskAccess ? .warn : .good)
                 Text(Loc.measuredAt.f(Fmt.time(t)))
             } else {

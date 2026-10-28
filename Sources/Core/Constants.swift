@@ -69,7 +69,8 @@ enum Layout {
     static let statColumns = 2
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
-    static let fillShare = 0.72  // empty states fill this share of the visible page height
+    static let fillShare = 0.72
+    static let hoverInset: CGFloat = 6  // empty states fill this share of the visible page height
     static let donutInner = 0.62
 }
 
@@ -84,6 +85,7 @@ enum Symbols {
     static let grid = "square.grid.2x2"
     static let trashApp = "trash"
     static let files = "doc.on.doc"
+    static let speaker = "speaker.wave.2"
     static let explorer = "folder"
     static let largeFiles = "doc.viewfinder"
     static let temp = "hourglass"
