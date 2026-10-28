@@ -13,14 +13,17 @@ struct StatisticsView: View {
             if !model.hasData {
                 UI.card { UI.notMeasured().frame(minHeight: Layout.placeholderHeight) }
             } else {
-                UI.tiles(minWidth: Layout.statTileMin) {
+                UI.tiles(columns: Layout.statColumns) {
                     UI.stat(Fmt.count(stats.files), .statFiles, symbol: Symbols.files)
                     UI.stat(Fmt.bytes(stats.bytes), .statScanned, symbol: Symbols.internalDrive)
                     UI.stat(Fmt.count(stats.largeFiles), .statLargeFiles, symbol: Symbols.largeFiles)
                     UI.stat(Fmt.count(model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count), .statUnusedApps,
                             symbol: Symbols.apps)
                 }
-                UI.card(Loc.categories.s) { categoryChart.padding(.vertical, Layout.rowPadding) }
+                UI.card(Loc.categories.s) {
+                    categoryChart.padding(.vertical, Layout.rowPadding)
+                    UI.legend(segments).padding(.bottom, Layout.rowPadding)
+                }
                 UI.card(Loc.typesBySize.s) { typeChart.padding(.vertical, Layout.rowPadding) }
                 UI.card(Loc.sizeDistribution.s) { bucketChart.padding(.vertical, Layout.rowPadding) }
                 UI.note(Loc.statisticsNote.s)
@@ -29,16 +32,28 @@ struct StatisticsView: View {
         .task(id: model.revision) { stats = StatsService.compute(root: model.root) }
     }
 
-    /// Ring of all categories; the legend below comes from the colour scale.
+    private var segments: [StorageSegment] {
+        model.categories.map { StorageSegment(id: "\($0.kind)", title: $0.kind.title.s, bytes: $0.bytes, colorIndex: $0.kind.rawValue) }
+    }
+
+    /// Ring of all categories with the total in the middle; the legend below names every colour with its size.
     private var categoryChart: some View {
         let cats = model.categories
-        return Chart(cats) { c in
-            SectorMark(angle: .value(Loc.columnSize.s, c.bytes), innerRadius: .ratio(0.6), angularInset: 1)
-                .foregroundStyle(by: .value(Loc.categories.s, c.kind.title.s))
+        return ZStack {
+            Chart(cats) { c in
+                SectorMark(angle: .value(Loc.columnSize.s, c.bytes), innerRadius: .ratio(Layout.donutInner), angularInset: 1)
+                    .foregroundStyle(Theme.color(c.kind.rawValue, palette))
+                    .accessibilityLabel(c.kind.title.s)
+                    .accessibilityValue(Fmt.bytes(c.bytes))
+            }
+            .chartLegend(.hidden)
+            VStack(spacing: 2) {
+                Text(Fmt.bytes(cats.reduce(0) { $0 + $1.bytes })).font(.title2.weight(.semibold)).monospacedDigit()
+                Text(Loc.statScanned.s).foregroundStyle(.muted)  // clones count in full, so "used" would overstate
+            }
         }
-        .chartForegroundStyleScale(domain: cats.map { $0.kind.title.s }, range: cats.map { Theme.color($0.kind.rawValue, palette) })
-        .chartLegend(position: .trailing, alignment: .center)
         .frame(height: Layout.chartHeight)
+        .frame(maxWidth: .infinity)
     }
 
     private var typeChart: some View {

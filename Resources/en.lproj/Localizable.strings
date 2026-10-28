@@ -233,3 +233,8 @@
 "bucketTo100MB" = "10–100 MB";
 "bucketTo1GB" = "100 MB–1 GB";
 "bucketOver1GB" = "over 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ scanned";
+"scanningArea" = "Area %@ of %@ · %@";
+"emptyValue" = "empty";

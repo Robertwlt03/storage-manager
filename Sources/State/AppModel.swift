@@ -14,6 +14,8 @@ import Observation
     private(set) var revision = 0  // bumped whenever the tree changes; views read it to refresh
     private(set) var scanning = false
     private(set) var progress = ScanService.Progress()
+    /// Which area is measured right now (1-based) of how many, and its path.
+    private(set) var scanStep = (index: 0, count: 0, path: "")
     private(set) var lastScan: Date?
     private(set) var unreadable = 0
     private(set) var volumes = VolumeService.all()
@@ -67,7 +69,8 @@ import Observation
         progress = .init(files: root.fileCount, bytes: root.bytes)
         let todo = paths ?? ScanService.defaultRoots()
         task = Task {
-            for path in todo {
+            for (i, path) in todo.enumerated() {
+                scanStep = (i + 1, todo.count, path)
                 root.child(named: path)?.detach()
                 guard let result = await scanInBackground(path, base: progress), !Task.isCancelled else { break }
                 result.root.attach(to: root)
@@ -79,10 +82,22 @@ import Observation
                 treeChanged()
             }
             scanning = false
-            if !Task.isCancelled { lastScan = Date() }
+            if !Task.isCancelled {
+                lastScan = Date()
+                if reset { UserDefaults.standard.set(root.fileCount, forKey: SettingsKey.lastScanFiles) }
+            }
             treeChanged()
             refreshApps()
         }
+    }
+
+    /// How far the scan is, estimated from the file count of the last full scan; the first time from the used space.
+    var scanFraction: Double {
+        let lastFiles = UserDefaults.standard.integer(forKey: SettingsKey.lastScanFiles)
+        let raw = lastFiles > 0
+            ? Double(progress.files) / Double(lastFiles)
+            : Double(progress.bytes) / Double(max(startupVolume?.used ?? 1, 1))
+        return min(raw, ScanConfig.maxEstimatedFraction)
     }
 
     func cancelScan() {

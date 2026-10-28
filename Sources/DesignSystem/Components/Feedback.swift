@@ -65,22 +65,29 @@ struct NotMeasured: View {
     }
 }
 
-/// Shown at the top of every page while a scan runs, so an empty page reads as "still measuring", not "nothing there".
+/// Shown at the top of every page while a scan runs: how far it is, which area, and a way to stop.
 struct ScanBanner: View {
+    var inset = false  // true when it floats above a table instead of sitting inside a page
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        HStack(spacing: Layout.rowSpacing) {
-            ProgressView().controlSize(.small)
-            Text(Loc.scanningBanner.f(Fmt.count(model.progress.files), Fmt.bytes(model.progress.bytes))).monospacedDigit()
-            Spacer()
-            Button(Loc.cancel.s) { model.cancelScan() }.appButton()
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: Layout.rowSpacing) {
+                Text(Loc.scanningPercent.f(Fmt.percent(model.scanFraction))).font(.headline).monospacedDigit()
+                Text(Loc.scanningArea.f(Fmt.count(model.scanStep.index), Fmt.count(model.scanStep.count), Paths.display(model.scanStep.path)))
+                    .foregroundStyle(.muted).lineLimit(1).truncationMode(.middle)
+                Spacer(minLength: Layout.rowSpacing)
+                Button(Loc.cancel.s) { model.cancelScan() }.appButton()
+            }
+            ProgressView(value: model.scanFraction).progressViewStyle(.linear)
+            Text(Loc.filesAndSize.f(Fmt.count(model.progress.files), Fmt.bytes(model.progress.bytes)))
+                .font(.callout).foregroundStyle(.muted).monospacedDigit()
         }
-        .padding(.horizontal, Layout.cardPadding)
-        .padding(.vertical, Layout.rowPadding)
+        .padding(Layout.cardPadding)
         .surface()
-        .padding(.horizontal, Layout.pagePadding)
-        .padding(.top, Layout.rowPadding)
+        .padding(.horizontal, inset ? Layout.pagePadding : 0)
+        .padding(.top, inset ? Layout.rowPadding : 0)
+        .accessibilityElement(children: .combine)
     }
 }
 

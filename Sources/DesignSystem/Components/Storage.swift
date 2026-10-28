@@ -61,7 +61,7 @@ struct StorageLegend: View {
     @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
 
     var body: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.statTileMin), alignment: .leading)], alignment: .leading, spacing: 6) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: Layout.legendItemMin), alignment: .leading)], alignment: .leading, spacing: 6) {
             ForEach(items) { s in
                 HStack(spacing: 6) {
                     Circle().fill(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)

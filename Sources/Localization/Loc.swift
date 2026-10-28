@@ -45,6 +45,9 @@ enum Loc: String, CaseIterable {
     // Statistics, cleaner, unused apps, layout
     case paneStatistics, paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, scanningBanner, emptyFolder, otherCategories, otherTypes, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail, cleanLogs, cleanLogsDetail, cleanTemp, cleanTempDetail, cleanTrash, cleanTrashDetail, cleanerIntro, cleanerSearching, cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle, cleanConfirmMessage, appsIntro, appsNoneUnused, unusedSince, daysOption, trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed, statFiles, statScanned, statLargeFiles, statUnusedApps, sizeDistribution, statisticsNote, bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
 
+    // Scan progress and empty values
+    case scanningPercent, scanningArea, emptyValue
+
     // Settings
     case tabGeneral, tabAppearance, tabScanning, language, languageSystem, languageNote
     case appearance, appearanceSystem, appearanceLight, appearanceDark

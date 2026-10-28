@@ -40,7 +40,7 @@ enum UI {
     static func emptyOrScanning(_ title: String, symbol: String, detail: String? = nil) -> some View {
         EmptyOrScanning(title: title, symbol: symbol, detail: detail)
     }
-    static func scanBanner() -> some View { ScanBanner() }
+    static func scanBanner(inset: Bool = false) -> some View { ScanBanner(inset: inset) }
 
     // Grid
     static func tile(icon: RowIcon, title: String, value: String, detail: String? = nil, share: Double? = nil) -> some View {
@@ -52,8 +52,10 @@ enum UI {
         TileGrid(data: data, minWidth: minWidth, tile: tile)
     }
     /// Grid for a fixed set of tiles.
-    static func tiles<C: View>(minWidth: CGFloat = Layout.gridTile, @ViewBuilder _ content: () -> C) -> some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: minWidth), spacing: Layout.spacing)], spacing: Layout.spacing) { content() }
+    static func tiles<C: View>(columns: Int, @ViewBuilder _ content: () -> C) -> some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Layout.spacing), count: columns), spacing: Layout.spacing) {
+            content()
+        }
     }
     static func stat(_ value: String, _ label: Loc, symbol: String) -> some View { StatTile(value: value, label: label.s, symbol: symbol) }
     static func legend(_ segments: [StorageSegment]) -> some View { StorageLegend(segments: segments) }

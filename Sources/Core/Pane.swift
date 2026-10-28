@@ -7,6 +7,9 @@ enum Pane: Hashable {
     static let tidy: [Pane] = [.cleaner, .apps]
     static let system: [Pane] = [.temp, .copies]
 
+    /// Pages built from a table rather than a scrolling page (they need the scan banner above them).
+    var showsTable: Bool { [.explorer, .largeFiles].contains(self) }
+
     /// Pages whose contents can be shown as a list or as a grid.
     var supportsGrid: Bool { [.overview, .explorer, .largeFiles, .apps].contains(self) }
 

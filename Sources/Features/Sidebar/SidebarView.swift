@@ -41,6 +41,7 @@ struct ScanStatusView: View {
                     Spacer()
                     Button(Loc.cancel.s) { model.cancelScan() }.buttonStyle(.link)
                 }
+                ProgressView(value: model.scanFraction).progressViewStyle(.linear)
                 summary(model.progress.files, model.progress.bytes)
             } else if let t = model.lastScan {
                 Text(Loc.measuredAt.f(Fmt.time(t))).font(.callout)

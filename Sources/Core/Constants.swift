@@ -11,6 +11,7 @@ enum ScanConfig {
     static let searchDebounce: Duration = .milliseconds(250)
     static let searchLimit = 500
     static let selfTestTolerance = 0.02
+    static let maxEstimatedFraction = 0.99  // an estimate never claims "done" before the scan really is
 }
 
 /// What the cleaner may remove and how old things must be.
@@ -62,9 +63,12 @@ enum Layout {
     static let gridTile: CGFloat = 170
     static let gridIcon: CGFloat = 52
     static let legendDot: CGFloat = 10
-    static let legendMax = 6  // segments named in a legend; the rest is grouped
+    static let legendMax = 6
+    static let legendItemMin: CGFloat = 220  // segments named in a legend; the rest is grouped
     static let chartHeight: CGFloat = 220
     static let statTileMin: CGFloat = 150
+    static let statColumns = 2
+    static let donutInner = 0.62
 }
 
 /// SF Symbol names used across the app.

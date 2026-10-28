@@ -43,21 +43,22 @@ struct CleanerView: View {
         }
     }
 
+    /// Only the checkbox is disabled for empty items, so their text stays readable.
     private func row(_ item: CleanItem) -> some View {
-        Toggle(isOn: Binding(get: { selected.contains(item.kind) },
-                             set: { on in if on { selected.insert(item.kind) } else { selected.remove(item.kind) } })) {
-            HStack(spacing: Layout.rowSpacing) {
-                RowIconView(icon: .badge(symbol: item.kind.category.symbol, colorIndex: item.kind.category.rawValue))
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(item.kind.title.s)
-                    Text(item.kind.detail.s).font(.callout).foregroundStyle(.muted)
-                }
-                Spacer(minLength: Layout.rowSpacing)
-                Text(Fmt.bytes(item.bytes)).monospacedDigit().foregroundStyle(.muted)
+        HStack(spacing: Layout.rowSpacing) {
+            Toggle(item.kind.title.s, isOn: Binding(get: { selected.contains(item.kind) && item.bytes > 0 },
+                                                    set: { on in if on { selected.insert(item.kind) } else { selected.remove(item.kind) } }))
+                .toggleStyle(.checkbox)
+                .labelsHidden()
+                .disabled(item.bytes == 0 || cleaning)
+            RowIconView(icon: .badge(symbol: item.kind.category.symbol, colorIndex: item.kind.category.rawValue))
+            VStack(alignment: .leading, spacing: 1) {
+                Text(item.kind.title.s)
+                Text(item.kind.detail.s).font(.callout).foregroundStyle(.muted).fixedSize(horizontal: false, vertical: true)
             }
+            Spacer(minLength: Layout.rowSpacing)
+            Text(item.bytes > 0 ? Fmt.bytes(item.bytes) : Loc.emptyValue.s).monospacedDigit().foregroundStyle(.muted)
         }
-        .toggleStyle(.checkbox)
-        .disabled(item.bytes == 0 || cleaning)
     }
 
     private func load() async {

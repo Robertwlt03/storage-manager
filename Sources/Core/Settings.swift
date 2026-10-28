@@ -14,6 +14,7 @@ enum SettingsKey {
     static let extraFolders = "extraFolders"
     static let layoutMode = "layoutMode"
     static let unusedDays = "unusedDays"
+    static let lastScanFiles = "lastScanFiles"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let launchSettings = "openSettings"  // `open … --args -openSettings YES`
     static let launchSkipAccess = "skipAccessSheet"  // `open … --args -skipAccessSheet YES` (screenshots, tests)

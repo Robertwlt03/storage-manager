@@ -14,7 +14,9 @@ struct RootView: View {
         } detail: {
             detail
                 .id(binaryUnits)  // re-render sizes when the unit setting changes
-                .safeAreaInset(edge: .top, spacing: 0) { if model.scanning { UI.scanBanner() } }
+                .safeAreaInset(edge: .top, spacing: 0) {
+                    if model.scanning && (model.isSearching || (model.pane ?? .overview).showsTable) { UI.scanBanner(inset: true) }
+                }
         }
         .searchable(text: $model.searchText, placement: .toolbar, prompt: Loc.searchPrompt.s)
         .searchScopes($model.searchScope) {

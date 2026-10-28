@@ -4,10 +4,14 @@ import SwiftUI
 struct Page<Content: View>: View {
     let title: String
     @ViewBuilder let content: Content
+    @Environment(AppModel.self) private var model
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: Layout.spacing) { content }
+            VStack(alignment: .leading, spacing: Layout.spacing) {
+                if model.scanning { ScanBanner() }
+                content
+            }
                 .padding(Layout.pagePadding)
                 .frame(maxWidth: Layout.maxContentWidth)
                 .frame(maxWidth: .infinity)
