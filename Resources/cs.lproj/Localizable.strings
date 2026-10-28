@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Graf se zobrazí, jakmile budou změřeny všechny oblasti.";
 "loadingAppsTitle" = "Kontrolují se aplikace …";
 "loadingAppsDetail" = "Velikosti a poslední použití budou konečné po dokončení skenování.";
+"showSidebar" = "Zobrazit postranní panel";
+"hideSidebar" = "Skrýt postranní panel";
 
 /* Overview and categories */
 "availableOf" = "K dispozici %@ z %@";

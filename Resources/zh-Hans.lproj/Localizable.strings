@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "所有区域测量完成后，图表就会显示。";
 "loadingAppsTitle" = "正在检查应用…";
 "loadingAppsDetail" = "扫描完成后，大小和上次使用时间才会确定。";
+"showSidebar" = "显示边栏";
+"hideSidebar" = "隐藏边栏";
 
 /* Overview and categories */
 "availableOf" = "可用 %@，共 %@";

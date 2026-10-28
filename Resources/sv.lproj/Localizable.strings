@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Diagrammet visas så snart alla områden är mätta.";
 "loadingAppsTitle" = "Kontrollerar appar …";
 "loadingAppsDetail" = "Storlekar och senaste användning är slutgiltiga när mätningen är klar.";
+"showSidebar" = "Visa sidofält";
+"hideSidebar" = "Göm sidofält";
 
 /* Overview and categories */
 "availableOf" = "%@ tillgängligt av %@";

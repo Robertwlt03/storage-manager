@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Het diagram verschijnt zodra alle gebieden gemeten zijn.";
 "loadingAppsTitle" = "Apps worden gecontroleerd …";
 "loadingAppsDetail" = "Groottes en laatste gebruik staan vast zodra de scan klaar is.";
+"showSidebar" = "Toon navigatiekolom";
+"hideSidebar" = "Verberg navigatiekolom";
 
 /* Overview and categories */
 "availableOf" = "%@ beschikbaar van %@";

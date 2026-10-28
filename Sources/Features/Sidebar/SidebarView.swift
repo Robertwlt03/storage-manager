@@ -19,6 +19,8 @@ struct SidebarView: View {
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) { SidebarFooter() }
+        .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
+        .toolbar { ToolbarItem { SidebarToggle() } }
         // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
         // animation, which made the reopening sidebar jump.
         .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
@@ -34,3 +36,15 @@ struct SidebarView: View {
     }
 }
 
+
+/// The button that shows and hides the sidebar, in the sidebar while it is open and next to the page title
+/// while it is closed, like the system's own.
+struct SidebarToggle: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        let title = model.sidebarVisible ? Loc.hideSidebar.s : Loc.showSidebar.s
+        Button { model.toggleSidebar() } label: { Label(title, systemImage: Symbols.sidebar) }
+            .help(title)
+    }
+}

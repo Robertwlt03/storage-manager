@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "所有區域測量完成後，圖表就會顯示。";
 "loadingAppsTitle" = "正在檢查 App⋯";
 "loadingAppsDetail" = "掃描完成後，大小和上次使用時間才會確定。";
+"showSidebar" = "顯示側邊欄";
+"hideSidebar" = "隱藏側邊欄";
 
 /* Overview and categories */
 "availableOf" = "可用 %@，共 %@";

@@ -30,6 +30,10 @@ struct SpeicherExplorerApp: App {
         }
         .commands {
             LayoutCommands()
+            CommandGroup(replacing: .sidebar) {  // the system item would use the jerky AppKit toggle
+                Button(model.sidebarVisible ? Loc.hideSidebar.s : Loc.showSidebar.s) { model.toggleSidebar() }
+                    .keyboardShortcut("s", modifiers: [.control, .command])
+            }
             CommandGroup(after: .newItem) {
                 Button(Loc.rescan.s) { model.scan() }.keyboardShortcut("r").disabled(model.scanning)
                 Button(Loc.cancelScan.s) { model.cancelScan() }.keyboardShortcut(".").disabled(!model.scanning)

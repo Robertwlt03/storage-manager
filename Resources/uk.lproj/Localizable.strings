@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Діаграма з’явиться, щойно всі області буде виміряно.";
 "loadingAppsTitle" = "Перевірка програм …";
 "loadingAppsDetail" = "Розміри й останнє використання стануть точними після завершення сканування.";
+"showSidebar" = "Показати бічну панель";
+"hideSidebar" = "Сховати бічну панель";
 
 /* Overview and categories */
 "availableOf" = "Доступно %@ з %@";

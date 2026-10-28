@@ -7,12 +7,15 @@ struct RootView: View {
 
     var body: some View {
         @Bindable var model = model
-        NavigationSplitView {
+        NavigationSplitView(columnVisibility: $model.columns) {
             SidebarView()
         } detail: {
             detail
                 .smoothChanges(of: model.pane)
                 .smoothChanges(of: model.isSearching)
+                .toolbar {
+                    if !model.sidebarVisible { ToolbarItem(placement: .navigation) { SidebarToggle() } }
+                }
         }
         .searchable(text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar, prompt: Loc.searchPrompt.s)
         .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }

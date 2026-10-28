@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Diagrammet vises, så snart alle områder er målt.";
 "loadingAppsTitle" = "Tjekker apps …";
 "loadingAppsDetail" = "Størrelser og seneste brug er endelige, når målingen er færdig.";
+"showSidebar" = "Vis indholdsoversigt";
+"hideSidebar" = "Skjul indholdsoversigt";
 
 /* Overview and categories */
 "availableOf" = "%@ ledigt af %@";

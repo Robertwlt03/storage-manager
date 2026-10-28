@@ -100,6 +100,7 @@ enum Symbols {
     static let files = "doc.on.doc"
     static let speaker = "speaker.wave.2"
     static let summary = "text.bubble"
+    static let sidebar = "sidebar.left"
     static let explorer = "folder"
     static let largeFiles = "doc.viewfinder"
     static let temp = "hourglass"

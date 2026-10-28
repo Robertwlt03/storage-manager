@@ -8,7 +8,7 @@ enum Loc: String, CaseIterable {
     // Scan status and placeholders
     case scanning, cancel, filesAndSize, measuredAt, scanNow, unreadable
     case notMeasuredTitle, notMeasuredDetail, scanningTitle, scanningDetail
-    case loadingSummaryTitle, loadingSummaryDetail, loadingSizesTitle, loadingSizesDetail, loadingAppsTitle, loadingAppsDetail
+    case loadingSummaryTitle, loadingSummaryDetail, loadingSizesTitle, loadingSizesDetail, loadingAppsTitle, loadingAppsDetail, showSidebar, hideSidebar
 
     // Overview and categories
     case availableOf, categories, freeSpace, tempAreaName

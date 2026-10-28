@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "모든 영역을 측정하면 차트가 표시됩니다.";
 "loadingAppsTitle" = "앱 확인 중…";
 "loadingAppsDetail" = "크기와 마지막 사용일은 검사가 끝나면 확정됩니다.";
+"showSidebar" = "사이드바 보기";
+"hideSidebar" = "사이드바 가리기";
 
 /* Overview and categories */
 "availableOf" = "%@ 사용 가능(전체 %@)";

@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Kaavio näkyy heti, kun kaikki alueet on mitattu.";
 "loadingAppsTitle" = "Tarkistetaan appeja …";
 "loadingAppsDetail" = "Koot ja viimeisin käyttö ovat lopullisia, kun mittaus on valmis.";
+"showSidebar" = "Näytä sivupalkki";
+"hideSidebar" = "Kätke sivupalkki";
 
 /* Overview and categories */
 "availableOf" = "%@ käytettävissä (yhteensä %@)";

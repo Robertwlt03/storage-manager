@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Wykres pojawi się, gdy tylko wszystkie obszary zostaną zmierzone.";
 "loadingAppsTitle" = "Sprawdzanie aplikacji …";
 "loadingAppsDetail" = "Rozmiary i ostatnie użycie będą ostateczne po zakończeniu pomiaru.";
+"showSidebar" = "Pokaż pasek boczny";
+"hideSidebar" = "Ukryj pasek boczny";
 
 /* Overview and categories */
 "availableOf" = "%@ dostępne z %@";

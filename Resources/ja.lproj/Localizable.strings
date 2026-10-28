@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "すべての領域の測定が終わるとグラフが表示されます。";
 "loadingAppsTitle" = "アプリを確認中…";
 "loadingAppsDetail" = "サイズと最終使用日はスキャン完了後に確定します。";
+"showSidebar" = "サイドバーを表示";
+"hideSidebar" = "サイドバーを非表示";
 
 /* Overview and categories */
 "availableOf" = "%@利用可能(全体%@)";

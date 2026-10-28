@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "The chart appears as soon as every area is measured.";
 "loadingAppsTitle" = "Checking apps …";
 "loadingAppsDetail" = "Sizes and last use are final once the scan is done.";
+"showSidebar" = "Show Sidebar";
+"hideSidebar" = "Hide Sidebar";
 
 /* Overview and categories */
 "availableOf" = "%@ available of %@";

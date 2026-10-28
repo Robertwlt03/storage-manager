@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Das Diagramm erscheint, sobald alle Bereiche gemessen sind.";
 "loadingAppsTitle" = "Apps werden geprüft …";
 "loadingAppsDetail" = "Größen und letzte Nutzung stehen fest, sobald die Messung fertig ist.";
+"showSidebar" = "Seitenleiste einblenden";
+"hideSidebar" = "Seitenleiste ausblenden";
 
 /* Overview and categories */
 "availableOf" = "%@ verfügbar von %@";

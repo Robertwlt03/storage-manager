@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "El gráfico aparece en cuanto se han analizado todas las zonas.";
 "loadingAppsTitle" = "Comprobando apps …";
 "loadingAppsDetail" = "Los tamaños y el último uso son definitivos cuando termina el análisis.";
+"showSidebar" = "Mostrar barra lateral";
+"hideSidebar" = "Ocultar barra lateral";
 
 /* Overview and categories */
 "availableOf" = "%@ disponibles de %@";

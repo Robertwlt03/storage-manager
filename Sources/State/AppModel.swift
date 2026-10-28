@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import SwiftUI
 
 /// App state: what is selected, the scanned tree and everything derived from it.
 /// The work itself happens in the services; this class only orchestrates them.
@@ -10,6 +11,7 @@ import Observation
     var searchPresented = false  // the search field has focus; results only replace the page once text is typed
     var searchScope = SearchScope.all
     var showAccessSheet = false
+    var columns = NavigationSplitViewVisibility.all  // whether the sidebar is shown
 
     let root = Node.virtualRoot()
     private(set) var revision = 0  // bumped whenever the tree changes; views read it to refresh
@@ -32,6 +34,14 @@ import Observation
     var hasData: Bool { !root.children.isEmpty }
     var isSearching: Bool { !searchQuery.isEmpty }
     var searchQuery: String { searchText.trimmingCharacters(in: .whitespaces) }
+
+    var sidebarVisible: Bool { columns != .detailOnly }
+
+    /// Shows or hides the sidebar with SwiftUI's animation. The system's own toggle lets AppKit slide the column
+    /// while the page jumps to its new width without any frames in between, which looked jerky when showing it.
+    func toggleSidebar() {
+        withAnimation(Motion.standard) { columns = sidebarVisible ? .detailOnly : .all }
+    }
 
     /// Leaves the search: clears the field and closes it (Cancel button, Escape, or picking a page in the sidebar).
     func endSearch() {

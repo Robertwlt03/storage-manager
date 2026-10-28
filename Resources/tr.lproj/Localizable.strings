@@ -28,6 +28,8 @@
 "loadingSizesDetail" = "Tüm alanlar ölçülür ölçülmez grafik görünür.";
 "loadingAppsTitle" = "Uygulamalar kontrol ediliyor …";
 "loadingAppsDetail" = "Boyutlar ve son kullanım, tarama bittiğinde kesinleşir.";
+"showSidebar" = "Kenar Çubuğunu Göster";
+"hideSidebar" = "Kenar Çubuğunu Gizle";
 
 /* Overview and categories */
 "availableOf" = "%@ kullanılabilir, toplam %@";
