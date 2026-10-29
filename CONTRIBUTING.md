@@ -50,6 +50,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | --- | --- |
 | `make run` | baut die App, schließt sie, falls sie offen ist, und öffnet die neue |
 | `make demo` | baut die App ohne Zertifikat und öffnet sie im Vorführmodus mit erfundenen Daten |
+| `make snapshots` | freiwillig: fotografiert jede Seite im Vorführmodus, hell und dunkel, und vergleicht die Bilder |
 | `make restart` | schließt die App, falls sie offen ist, und öffnet sie neu, ohne zu bauen |
 | `make build` | baut die App und zeichnet ihr Symbol |
 | `make check` | startet die ganze Prüfkette, genau wie auf GitHub |
@@ -101,6 +102,13 @@ make demo
 So prüfst du vor jedem Beitrag das Aussehen der Seiten, die du geändert hast, im hellen und im dunklen
 Erscheinungsbild. Auch die Bildschirmfotos für das README entstehen im Vorführmodus. Die erfundenen Daten stehen in
 `Sources/Diagnostics/DemoData.swift`.
+
+Wer mag, lässt den Vergleich auch vom Mac machen. `make snapshots RECORD=1` fotografiert jede Seite einmal hell und
+einmal dunkel und legt die Bilder als Vorlage in den Ordner `snapshots`, den git nicht beachtet, weil die Bilder von
+deinem Bildschirm und Hintergrundbild abhängen. Nach einer Änderung fotografiert `make snapshots` die Seiten erneut
+und nennt jede Seite, auf der sich mehr als ein Prozent der Bildpunkte geändert hat; die geänderten Stellen zeigt es
+rot in `snapshots/difference`. Dafür fragt macOS beim ersten Mal, ob dein Terminal den Bildschirm aufnehmen darf. Das
+ist der einzige Grund für diese Freigabe, und deshalb ist der Vergleich freiwillig und läuft nicht auf GitHub.
 
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">Prüfungen vor jedem Beitrag
 

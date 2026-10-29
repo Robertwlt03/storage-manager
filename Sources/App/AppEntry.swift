@@ -95,9 +95,14 @@ private struct LayoutCommands: Commands {
     }
 }
 
-/// Accepts the quit request macOS sends after Full Disk Access is switched on ("Quit & Reopen"),
-/// also while the access sheet is open; macOS then opens the app again.
+/// Applies a forced appearance (`-appearance`) and accepts the quit request macOS sends after Full
+/// Disk Access is switched on ("Quit & Reopen"), also while the access sheet is open; macOS then
+/// opens the app again.
 final class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationWillFinishLaunching(_: Notification) {
+        NSApp.appearance = AppSettings.launchAppearance
+    }
+
     func applicationDidFinishLaunching(_: Notification) {
         NSAppleEventManager.shared()
             .setEventHandler(

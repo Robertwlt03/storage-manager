@@ -13,10 +13,10 @@ SELFTEST_REPORT := $(TMPDIR)speicher-selftest.txt
 SECONDS_BETWEEN_QUIT_CHECKS := 0.2
 
 .DEFAULT_GOAL := help
-.PHONY: help build run restart demo check test coverage format selftest stress release identity clean
+.PHONY: help build run restart demo snapshots check test coverage format selftest stress release identity clean
 
 help: ## List every command
-	@grep -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  make %-9s %s\n", $$1, $$2 }'
+	@grep -h -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  make %-10s %s\n", $$1, $$2 }'
 
 build: ## Build the app and render its icon
 	./build.sh
@@ -35,6 +35,11 @@ demo: ## Build without your certificate, then open the app with made-up data (no
 	$(MAKE) build BUILD_DIR="$(DEMO_BUILD_DIR)" SIGN_IDENTITY=- BUNDLE_ID=local.speicher-explorer.demo
 	open -n "$(DEMO_BUILD_DIR)/Speicher-Explorer.app" --args -demo YES
 
+snapshots: ## Optional: photograph every demo page, light and dark, and compare (RECORD=1 keeps them)
+	@# Only you run it: macOS asks once whether your terminal may record the screen.
+	$(MAKE) build BUILD_DIR="$(DEMO_BUILD_DIR)" SIGN_IDENTITY=- BUNDLE_ID=local.speicher-explorer.demo
+	swift scripts/snapshots.swift "$(DEMO_BUILD_DIR)/Speicher-Explorer.app" $(if $(RECORD),--record)
+
 check: ## Run the whole check pipeline, as on GitHub
 	scripts/inspect.py
 
@@ -45,7 +50,7 @@ coverage: ## Show how much of each source folder the tests reach
 	scripts/inspect.py coverage
 
 format: ## Bring every Swift file into the shared form
-	swift format --in-place --recursive Sources Tests
+	swift format --in-place --recursive Sources Tests scripts
 
 selftest: ## Measure real folders and compare with du (prints only counts and sizes)
 	@# Started as the app, so macOS uses the app's Full Disk Access instead of asking per folder.

@@ -17,6 +17,8 @@ enum SettingsKey {
     static let launchDemo = "demo"
     /// `open … --args -uiTest <folder>` runs the stress test.
     static let uiTestReportFolder = "uiTest"
+    /// `open … --args -appearance dark` (or `light`) overrides System Settings, for snapshots.
+    static let launchAppearance = "appearance"
 }
 
 enum AppSettings {
@@ -44,6 +46,13 @@ enum AppSettings {
     static var showsDemo: Bool { defaults.bool(forKey: SettingsKey.launchDemo) }
     static var uiTestReportFolder: String? {
         defaults.string(forKey: SettingsKey.uiTestReportFolder)
+    }
+    static var launchAppearance: NSAppearance? {
+        switch defaults.string(forKey: SettingsKey.launchAppearance) {
+        case "light": NSAppearance(named: .aqua)
+        case "dark": NSAppearance(named: .darkAqua)
+        default: nil  // follows System Settings
+        }
     }
 
     /// Extra folders are stored as one string, one path per line (AppStorage cannot hold arrays).

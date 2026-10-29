@@ -49,6 +49,7 @@ You do not have to remember long commands. Just like npm scripts, every workflow
 | --- | --- |
 | `make run` | builds the app, quits it if it is open, and opens the new one |
 | `make demo` | builds the app without a certificate and opens it in demo mode with made-up data |
+| `make snapshots` | optional: photographs every page in demo mode, light and dark, and compares the pictures |
 | `make restart` | quits the app if it is open and opens it again, without building |
 | `make build` | builds the app and draws its icon |
 | `make check` | runs the whole check chain, exactly as on GitHub |
@@ -99,6 +100,13 @@ make demo
 This is how you check the look of the pages you changed before every contribution, in light and in dark
 appearance. The screenshots for the README are also taken in demo mode. The made-up data lives in
 `Sources/Diagnostics/DemoData.swift`.
+
+If you like, let the Mac do the comparing. `make snapshots RECORD=1` photographs every page once light and once dark
+and keeps the pictures as references in the `snapshots` folder, which git ignores, because the pictures depend on
+your screen and wallpaper. After a change, `make snapshots` photographs the pages again and names every page on
+which more than one per cent of the pixels changed; it shows the changed spots in red in `snapshots/difference`. For
+this, macOS asks the first time whether your terminal may record the screen. That is the only reason for this
+permission, which is why the comparison is optional and does not run on GitHub.
 
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">Checks before every contribution
 

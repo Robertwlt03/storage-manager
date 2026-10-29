@@ -30,6 +30,8 @@ content here or in comments.
   (hundreds of prompts). Start test windows with `-autoScan NO` and never trigger a scan there. Never run
   `.build/release/SpeicherExplorer --selftest` from the shell; the self test runs only as `make selftest` on the user's
   signed app, so ask the user to run it and send the output.
+- `make snapshots` is the user's alone: it asks macOS for screen recording for their terminal. Do not run it; the
+  pictures and references live in the git-ignored `snapshots/`.
 - Never quit the user's running app; `make restart` and `make run` quit every running copy.
 - Ask before pushing, opening a PR or installing anything (Homebrew, toolchains). Commands that need a password
   (`sudo …`) are the user's to run.
@@ -78,7 +80,7 @@ open -n <scratchpad>/build/Speicher-Explorer.app --args -ApplePersistenceIgnoreS
 
 Find the window number with a small CoreGraphics script (`CGWindowListCopyWindowInfo`, filter by the app's PID and a
 width over 500) and capture it with `screencapture -x -o -l <window>`. Panes: `overview`, `explorer`, `largeFiles`,
-`cleaner`, `apps`, `temp`, `copies`; add `-AppleInterfaceStyle Dark` for the dark look. For refactors, build the
+`cleaner`, `apps`, `temp`, `copies`; add `-appearance dark` (or `light`) for a fixed look. For refactors, build the
 previous commit into a separate scratchpad folder and compare both captures pixel by pixel; differences in free space
 and selection colour (window focus) are expected.
 

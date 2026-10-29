@@ -33,7 +33,8 @@ ALLOWED_SHORT_NAMES = {"id", "x", "y"}
 CALLED_BY_THE_SYSTEM = {
     "body", "main", "init", "id", "hash", "makeBody", "makeNSView", "updateNSView",
     "speechSynthesizer", "applicationShouldTerminateAfterLastWindowClosed",
-    "applicationDidFinishLaunching", "previewValue", "defaultValue", "reduce",
+    "applicationWillFinishLaunching", "applicationDidFinishLaunching",
+    "previewValue", "defaultValue", "reduce",
     "description", "makeIterator", "next", "allCases", "rawValue", "path",
 }
 NUMBER = re.compile(r"(?<![\w.])\d[\d_]*(?:\.\d+)?(?![\w.])")
@@ -101,7 +102,9 @@ def run(command: list[str]) -> tuple[int, str]:
 
 
 def formatting_findings() -> list[str]:
-    _, output = run(["swift", "format", "lint", "--strict", "--recursive", "Sources", "Tests"])
+    _, output = run(
+        ["swift", "format", "lint", "--strict", "--recursive", "Sources", "Tests", "scripts"]
+    )
     return [line for line in output.splitlines() if ": warning:" in line or ": error:" in line]
 
 
@@ -205,6 +208,10 @@ def shell_script_findings() -> list[str]:
         status, output = run(["bash", "-n", str(script)])
         if status != 0:
             findings.append(output.strip())
+    for script in sorted((PROJECT / "scripts").glob("*.swift")):
+        status, output = run(["swiftc", "-typecheck", str(script)])
+        if status != 0:
+            findings.append(output.strip())
     # A dry run reads every short command in the Makefile without running one.
     targets = re.findall(r"^([a-z]+):", (PROJECT / "Makefile").read_text(), re.MULTILINE)
     status, output = run(["make", "--dry-run", *targets])
@@ -299,7 +306,7 @@ STEPS = [
     ("design", "Design rules", design_findings),
     ("deadcode", "Dead code", dead_code_findings),
     ("plists", "Translation files and Info.plist (plutil)", property_list_findings),
-    ("scripts", "Shell scripts and Makefile (bash -n, make -n)", shell_script_findings),
+    ("scripts", "Scripts and Makefile (bash -n, swiftc -typecheck, make -n)", shell_script_findings),
 ]
 # Reports that only run when asked for by name, like `scripts/inspect.py coverage`.
 EXTRA_STEPS = [
