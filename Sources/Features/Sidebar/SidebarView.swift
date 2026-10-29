@@ -5,6 +5,13 @@ struct SidebarView: View {
     var body: some View {
         SidebarList()
             .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
+            .toolbar {
+                // Like Apple's own toggle: always in the same place next to the window buttons, whether the sidebar
+                // is open or closed (macOS keeps a sidebar's toolbar items there while it is closed). It never moves,
+                // so nothing is faded over. No spacer or padding: both made it shift between the two states or
+                // pushed the symbol off the middle of its glass circle.
+                ToolbarItem { SidebarToggle() }
+            }
             // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
             // animation, which made the reopening sidebar jump.
             .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
@@ -45,10 +52,8 @@ struct SidebarList: View {
 }
 
 
-/// The button that shows and hides the sidebar. It belongs to the page's toolbar, at its leading edge: right beside
-/// the open sidebar, next to the window buttons while it is closed. In the sidebar's own toolbar it had to change
-/// toolbar sections whenever the sidebar opened or closed, and macOS faded it over, leaving an empty glass button
-/// behind for a moment.
+/// The button that shows and hides the sidebar, always next to the window buttons like Apple's own. A button that
+/// changed places with the sidebar was faded over by macOS on every change and left an empty glass button behind.
 struct SidebarToggle: View {
     @Environment(AppModel.self) private var model
 
