@@ -1,4 +1,5 @@
-/// Every page of the app. The sidebar is built from this enum, so a new page cannot be forgotten there.
+/// Every page of the app; the sidebar is built from it. A new page needs a case here, its line in `details` and
+/// its view in `Pane.page` (Features/Pages.swift).
 enum Pane: Hashable {
     case overview, explorer, largeFiles, cleaner, apps, temp, copies
     case volume(String)
@@ -22,56 +23,21 @@ enum Pane: Hashable {
         self = p
     }
 
-    var launchKey: String {
-        switch self {
-        case .overview: "overview"
-        case .cleaner: "cleaner"
-        case .apps: "apps"
-        case .explorer: "explorer"
-        case .largeFiles: "largeFiles"
-        case .temp: "temp"
-        case .copies: "copies"
-        case .volume(let path): path
-        }
-    }
+    var launchKey: String { details.key }
+    var title: Loc { details.title }
+    var info: Loc { details.info }  // what the page is for, shown by its info button
+    var symbol: String { details.symbol }
 
-    var title: Loc {
+    private var details: (key: String, title: Loc, info: Loc, symbol: String) {
         switch self {
-        case .overview: .paneOverview
-        case .cleaner: .paneCleaner
-        case .apps: .paneApps
-        case .explorer: .paneExplorer
-        case .largeFiles: .paneLargeFiles
-        case .temp: .paneTemp
-        case .copies: .paneCopies
-        case .volume: .sectionVolumes
-        }
-    }
-
-    /// What the page is for, shown by its info button.
-    var info: Loc {
-        switch self {
-        case .overview: .infoOverview
-        case .cleaner: .infoCleaner
-        case .apps: .infoApps
-        case .explorer: .infoExplorer
-        case .largeFiles: .infoLargeFiles
-        case .temp: .infoTemp
-        case .copies: .infoCopies
-        case .volume: .infoVolume
-        }
-    }
-
-    var symbol: String {
-        switch self {
-        case .overview: Symbols.overview
-        case .cleaner: Symbols.cleaner
-        case .apps: Symbols.apps
-        case .explorer: Symbols.explorer
-        case .largeFiles: Symbols.largeFiles
-        case .temp: Symbols.temp
-        case .copies: Symbols.copies
-        case .volume: Symbols.internalDrive
+        case .overview: ("overview", .paneOverview, .infoOverview, Symbols.overview)
+        case .explorer: ("explorer", .paneExplorer, .infoExplorer, Symbols.explorer)
+        case .largeFiles: ("largeFiles", .paneLargeFiles, .infoLargeFiles, Symbols.largeFiles)
+        case .cleaner: ("cleaner", .paneCleaner, .infoCleaner, Symbols.cleaner)
+        case .apps: ("apps", .paneApps, .infoApps, Symbols.apps)
+        case .temp: ("temp", .paneTemp, .infoTemp, Symbols.temp)
+        case .copies: ("copies", .paneCopies, .infoCopies, Symbols.copies)
+        case .volume(let path): (path, .sectionVolumes, .infoVolume, Symbols.internalDrive)
         }
     }
 }

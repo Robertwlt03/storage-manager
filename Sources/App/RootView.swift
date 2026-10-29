@@ -57,20 +57,9 @@ struct RootView: View {
         if model.isSearching {
             SearchResultsView().fadeTransition()
         } else {
-            Group {
-                switch model.pane ?? .overview {
-            case .overview: OverviewView()
-            case .cleaner: CleanerView()
-            case .apps: UnusedAppsView()
-            case .explorer: ExplorerView()
-            case .largeFiles: LargeFilesView()
-            case .temp: TempView()
-            case .copies: CopiesView()
-            case .volume(let path): VolumeView(path: path)
-                }
-            }
-            .id(model.pane)
-            .fadeTransition()
+            (model.pane ?? .overview).page
+                .id(model.pane)
+                .fadeTransition()
         }
     }
 }
