@@ -115,8 +115,8 @@ enum SelfTest {
         process.standardOutput = output
         process.standardError = FileHandle.nullDevice
         try? process.run()
-        let text = String(
-            decoding: output.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
+        let outputData = output.fileHandleForReading.readDataToEndOfFile()
+        let text = String(bytes: outputData, encoding: .utf8) ?? ""
         process.waitUntilExit()
         let kilobytes = Int64(text.prefix { character in character != "\t" }) ?? 0
         return kilobytes * bytesPerKilobyte

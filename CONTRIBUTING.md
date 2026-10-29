@@ -8,12 +8,19 @@ achten solltest. Wie der Code aufgebaut ist und welche Regeln absichtlich gelten
 
 ## <img src="assets/icons/requirements.svg" height="33" align="absmiddle" alt="">Was du brauchst
 
-Zum Bauen brauchst du einen Mac mit macOS 26 und die Command Line Tools von Apple ab Version 26, denn der Code nutzt
-Swift 6.2 und Liquid Glass. Die fertige App läuft trotzdem ab macOS 14. Die Command Line Tools installierst du mit dem
-Befehl unten. Xcode selbst ist nicht nötig.
+Du brauchst einen Mac mit Apple-Chip und macOS 27, denn die App nutzt Swift 6.4, Liquid Glass und die Neuerungen von
+macOS 27. Genauso läuft sie später bei allen, die sie benutzen.
+
+Zum Bauen brauchst du außerdem Xcode 27 aus dem App Store. Du musst Xcode nie öffnen, es dient nur als Werkzeugkasten:
+Die Command Line Tools allein reichen nicht mehr, weil SwiftUI für macOS 27 Makros nutzt, die nur Xcode mitbringt.
+Nach der Installation stellst du die Werkzeuge einmalig auf Xcode um. Für die Prüfkette kommt noch SwiftLint dazu.
 
 ```bash
-xcode-select --install
+sudo xcode-select --switch /Applications/Xcode.app
+```
+
+```bash
+brew install swiftlint
 ```
 
 ## <img src="assets/icons/editor.svg" height="33" align="absmiddle" alt="">Dein Editor
@@ -24,8 +31,8 @@ Code schreibst:
 
 - **Xcode** öffnet die `Package.swift` direkt, du brauchst kein eigenes Xcode-Projekt.
 - **VS Code, Cursor und Zed** verstehen Swift mit der offiziellen Swift-Erweiterung beziehungsweise von Haus aus.
-- **Neovim, Helix und andere Editoren** sprechen mit `sourcekit-lsp`. Dieser Sprachserver ist in den Command Line Tools
-  schon enthalten.
+- **Neovim, Helix und andere Editoren** sprechen mit `sourcekit-lsp`. Dieser Sprachserver ist in Xcode schon
+  enthalten.
 - **JetBrains-IDEs wie PhpStorm** können die Dateien bearbeiten, bieten für Swift aber keine eigene Unterstützung mehr.
   Bauen und prüfen läuft dort über das Terminal.
 
@@ -169,5 +176,5 @@ Wir gehen freundlich und respektvoll miteinander um. Die Einzelheiten stehen in 
 <p align="center">
   <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
   <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
+  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 27 auf Macs mit Apple-Chip</sub>
 </p>

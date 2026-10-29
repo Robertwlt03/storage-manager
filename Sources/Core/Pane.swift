@@ -28,16 +28,32 @@ enum Pane: Hashable {
     var info: TextKey { details.info }  // what the page is for, shown by its info button
     var symbol: String { details.symbol }
 
-    private var details: (key: String, title: TextKey, info: TextKey, symbol: String) {
+    /// One row of the page table: launch key, title, info text and symbol.
+    private struct Details {
+        let key: String
+        let title: TextKey
+        let info: TextKey
+        let symbol: String
+
+        init(_ key: String, _ title: TextKey, _ info: TextKey, _ symbol: String) {
+            self.key = key
+            self.title = title
+            self.info = info
+            self.symbol = symbol
+        }
+    }
+
+    private var details: Details {
         switch self {
-        case .overview: ("overview", .paneOverview, .infoOverview, Symbols.overview)
-        case .explorer: ("explorer", .paneExplorer, .infoExplorer, Symbols.explorer)
-        case .largeFiles: ("largeFiles", .paneLargeFiles, .infoLargeFiles, Symbols.largeFiles)
-        case .cleaner: ("cleaner", .paneCleaner, .infoCleaner, Symbols.cleaner)
-        case .apps: ("apps", .paneApps, .infoApps, Symbols.apps)
-        case .temp: ("temp", .paneTemp, .infoTemp, Symbols.temporaryArea)
-        case .copies: ("copies", .paneCopies, .infoCopies, Symbols.copies)
-        case .volume(let path): (path, .sectionVolumes, .infoVolume, Symbols.internalDrive)
+        case .overview: Details("overview", .paneOverview, .infoOverview, Symbols.overview)
+        case .explorer: Details("explorer", .paneExplorer, .infoExplorer, Symbols.explorer)
+        case .largeFiles:
+            Details("largeFiles", .paneLargeFiles, .infoLargeFiles, Symbols.largeFiles)
+        case .cleaner: Details("cleaner", .paneCleaner, .infoCleaner, Symbols.cleaner)
+        case .apps: Details("apps", .paneApps, .infoApps, Symbols.apps)
+        case .temp: Details("temp", .paneTemp, .infoTemp, Symbols.temporaryArea)
+        case .copies: Details("copies", .paneCopies, .infoCopies, Symbols.copies)
+        case .volume(let path): Details(path, .sectionVolumes, .infoVolume, Symbols.internalDrive)
         }
     }
 }

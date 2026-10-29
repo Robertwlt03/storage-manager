@@ -34,9 +34,13 @@ extension UI {
         }
 
         var body: some View {
-            Picker(selection: $selection, content: { items }) { Text(title.translated) }
-                .pickerStyle(.menu)
-                .fixedSize()
+            Picker(selection: $selection) {
+                items
+            } label: {
+                Text(title.translated)
+            }
+            .pickerStyle(.menu)
+            .fixedSize()
         }
     }
 
@@ -51,10 +55,14 @@ extension UI {
         }
 
         var body: some View {
-            Picker(selection: $selection, content: { items }) { EmptyView() }
-                .pickerStyle(.segmented)
-                .labelsHidden()
-                .fixedSize()
+            Picker(selection: $selection) {
+                items
+            } label: {
+                EmptyView()
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .fixedSize()
         }
     }
 }

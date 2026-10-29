@@ -14,12 +14,14 @@ concurrency:
 
 jobs:
   checks:
-    # The app uses the macOS 26 SDK (Liquid Glass), which needs Xcode 26.
-    runs-on: macos-26
+    # The app needs macOS 27 and Xcode 27; this image runs both on Apple silicon.
+    runs-on: xcode-27
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Code inspection (format, compiler, tests, rules, design, dead code)
+      - name: Install SwiftLint
+        run: brew install swiftlint
+      - name: Code inspection (format, lint, compiler, tests, rules, design, dead code)
         run: make check
       - name: Build the app and its icon
         run: make build

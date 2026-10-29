@@ -1,4 +1,4 @@
-// swift-tools-version:6.2
+// swift-tools-version:6.4
 import PackageDescription
 
 // Swift 6 checks data races at compile time. Code runs on the main actor unless it says otherwise,
@@ -7,7 +7,7 @@ let mainActorByDefault: [SwiftSetting] = [.defaultIsolation(MainActor.self)]
 
 let package = Package(
     name: "SpeicherExplorer",
-    platforms: [.macOS(.v14)],
+    platforms: [.macOS(.v27)],
     targets: [
         .executableTarget(
             name: "SpeicherExplorer", path: "Sources", swiftSettings: mainActorByDefault),

@@ -44,9 +44,11 @@ struct CopyGroupCard: View {
         HStack {
             UI.TitleRow(group.appName, subtitle: group.bundleID, icon: .file(group.appPath ?? ""))
             Spacer()
-            isAppRunning
-                ? UI.Note(TextKey.running.translated, .warning(symbol: Symbols.running))
-                : UI.Note(TextKey.stopped.translated, .good(symbol: Symbols.stopped))
+            if isAppRunning {
+                UI.Note(TextKey.running.translated, .warning(symbol: Symbols.running))
+            } else {
+                UI.Note(TextKey.stopped.translated, .good(symbol: Symbols.stopped))
+            }
         }
     }
 

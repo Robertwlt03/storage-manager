@@ -8,6 +8,7 @@ It exits with status 1 as soon as one finding is left, so it guards every pull r
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from collections import Counter
@@ -23,8 +24,6 @@ TOKENS_FILE = "DesignSystem/Tokens.swift"
 MOTION_FILE = "DesignSystem/Motion.swift"
 DESIGN_FOLDER = "DesignSystem/"
 DIAGNOSTICS_FOLDER = "Diagnostics/"
-# The Command Line Tools ship Swift Testing outside the default search paths; Xcode does not need this.
-COMMAND_LINE_TOOLS = Path("/Library/Developer/CommandLineTools/Library/Developer")
 # swift format wraps code but not comments, so this check covers the comments.
 LINE_LENGTH = json.loads((PROJECT / ".swift-format").read_text())["lineLength"]
 ALLOWED_SHORT_NAMES = {"id", "x", "y"}
@@ -100,6 +99,14 @@ def formatting_findings() -> list[str]:
     return [line for line in output.splitlines() if ": warning:" in line or ": error:" in line]
 
 
+def lint_findings() -> list[str]:
+    """Length, nesting and complexity limits from .swiftlint.yml."""
+    if not shutil.which("swiftlint"):
+        return ["SwiftLint is missing: brew install swiftlint"]
+    _, output = run(["swiftlint", "lint", "--quiet", "--strict"])
+    return [line for line in output.splitlines() if ": warning:" in line or ": error:" in line]
+
+
 def compiler_findings() -> list[str]:
     command = [
         "swift", "build", "--scratch-path", BUILD_FOLDER,
@@ -115,16 +122,19 @@ def compiler_findings() -> list[str]:
     return findings
 
 
+XCODE_HINT = (
+    "The tools point to the Command Line Tools, which lack SwiftUI's macros for macOS 27.\n"
+    "Install Xcode 27 and switch once: sudo xcode-select --switch /Applications/Xcode.app"
+)
+
+
+def uses_xcode() -> bool:
+    developer_folder = os.environ.get("DEVELOPER_DIR") or run(["xcode-select", "--print-path"])[1]
+    return "Xcode" in developer_folder
+
+
 def swift_test_command(*options: str) -> list[str]:
-    command = ["swift", "test", "--scratch-path", BUILD_FOLDER, *options]
-    if subprocess.run(["xcode-select", "-p"], capture_output=True, text=True).stdout.strip() == str(
-        COMMAND_LINE_TOOLS.parent.parent
-    ):
-        frameworks = str(COMMAND_LINE_TOOLS / "Frameworks")
-        command += ["-Xswiftc", "-F", "-Xswiftc", frameworks]
-        for library_folder in [frameworks, str(COMMAND_LINE_TOOLS / "usr" / "lib")]:
-            command += ["-Xlinker", "-rpath", "-Xlinker", library_folder]
-    return command
+    return ["swift", "test", "--scratch-path", BUILD_FOLDER, *options]
 
 
 def test_findings() -> list[str]:
@@ -269,6 +279,7 @@ def unused_text_findings(words: Counter) -> list[str]:
 
 STEPS = [
     ("format", "Formatting (swift format)", formatting_findings),
+    ("lint", "Length, nesting and complexity (SwiftLint)", lint_findings),
     ("compiler", "Compiler warnings and errors", compiler_findings),
     ("tests", "Unit tests (Swift Testing)", test_findings),
     ("rules", "House rules", rule_findings),
@@ -291,6 +302,9 @@ def main() -> int:
     if unknown:
         print(f"Unknown step: {', '.join(unknown)}. Steps: {', '.join(known)}")
         return 2
+    if not uses_xcode():
+        print(XCODE_HINT)
+        return 1
     total = 0
     for key, title, check in STEPS + EXTRA_STEPS:
         if key not in chosen:

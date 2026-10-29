@@ -59,12 +59,8 @@ extension View {
     /// Turns an SF Symbol once whenever `value` changes; on macOS 14, which has no turning effect,
     /// it bounces. A one-off effect of the system: it costs nothing at rest and is left out with
     /// "Reduce motion".
-    @ViewBuilder func turnOnce<Value: Equatable>(value: Value) -> some View {
-        if #available(macOS 15.0, *) {
-            symbolEffect(.rotate, value: value)
-        } else {
-            symbolEffect(.bounce, value: value)
-        }
+    func turnOnce<Value: Equatable>(value: Value) -> some View {
+        symbolEffect(.rotate, value: value)
     }
     func hoverHighlight() -> some View { modifier(HoverHighlight()) }
 

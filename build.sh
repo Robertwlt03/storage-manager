@@ -3,6 +3,12 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# SwiftUI's macros for macOS 27 ship only with Xcode, not with the Command Line Tools.
+if [[ "${DEVELOPER_DIR:-$(xcode-select --print-path)}" != *Xcode* ]]; then
+  echo "Xcode 27 is needed. Install it, then switch once: sudo xcode-select --switch /Applications/Xcode.app"
+  exit 1
+fi
+
 swift build -c release
 BIN=.build/release/SpeicherExplorer
 

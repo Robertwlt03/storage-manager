@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/macOS-14%20oder%20neuer-1D1D1F?style=flat-square&logo=apple&logoColor=white" alt="macOS 14 oder neuer">
+  <img src="https://img.shields.io/badge/macOS-27%20oder%20neuer-1D1D1F?style=flat-square&logo=apple&logoColor=white" alt="macOS 27 oder neuer">
   <img src="https://img.shields.io/badge/-SwiftUI-1D1D1F?style=flat-square&logo=swift&logoColor=F05138" alt="SwiftUI">
   <img src="https://img.shields.io/badge/Sprachen-20-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="20 Sprachen">
   <img src="https://img.shields.io/badge/Preis-kostenlos-1B7332?style=flat-square&labelColor=1D1D1F" alt="kostenlos">
@@ -73,14 +73,13 @@ Seitenleiste, sobald du sie anschließt.
 Jede Seite hat oben rechts einen Info-Knopf, der erklärt, wofür sie da ist. Die App spricht 20 Sprachen, darunter
 Deutsch, Englisch, Französisch, Spanisch, Japanisch und Chinesisch, und richtet sich dabei nach der Sprache deines Macs.
 Wenn du die App in einer anderen Sprache nutzen möchtest, stellst du das in den Systemeinstellungen unter Allgemein,
-Sprache & Region und dann Apps ein. Auch das helle oder dunkle Erscheinungsbild übernimmt sie von deinem Mac, und ab
-macOS 26 nutzt sie Liquid Glass. Neue Inhalte
-erscheinen mit sanften Bewegungen, und wenn du in den Bedienungshilfen „Bewegung reduzieren“ eingeschaltet hast,
+Sprache & Region und dann Apps ein. Auch das helle oder dunkle Erscheinungsbild übernimmt sie von deinem Mac, und sie nutzt
+Liquid Glass. Neue Inhalte erscheinen mit sanften Bewegungen, und wenn du in den Bedienungshilfen „Bewegung reduzieren“ eingeschaltet hast,
 verzichtet die App darauf.
 
 ## <img src="assets/icons/install.svg" height="33" align="absmiddle" alt="">Installieren
 
-Du brauchst einen Mac mit macOS 14 oder neuer und die Datei **Speicher-Explorer-1.0.dmg**. Alles Weitere erledigst du
+Du brauchst einen Mac mit Apple-Chip, also M1 oder neuer, mit macOS 27 oder neuer und die Datei **Speicher-Explorer-1.0.dmg**. Alles Weitere erledigst du
 mit der Maus.
 
 **1. Öffne die DMG-Datei und ziehe den Speicher-Explorer in den Ordner „Programme“.**
@@ -171,8 +170,12 @@ ausgebaut habe.
 <details>
 <summary><b>Für Entwickler: selbst bauen</b></summary>
 
-Du brauchst die Command Line Tools von Apple, die du mit `xcode-select --install` installierst. Xcode selbst ist nicht
-nötig.
+Du brauchst Xcode 27 aus dem App Store, aber nur als Werkzeugkasten: Gebaut wird über das Terminal, und du kannst jeden
+Editor benutzen. Nach der Installation stellst du die Werkzeuge einmalig auf Xcode um.
+
+```bash
+sudo xcode-select --switch /Applications/Xcode.app
+```
 
 ```bash
 make run
@@ -222,5 +225,5 @@ Neue Texte legst du bitte in allen Sprachen an, denn die Prüfung beim Bauen mel
 <p align="center">
   <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
   <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
+  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 27 auf Macs mit Apple-Chip</sub>
 </p>

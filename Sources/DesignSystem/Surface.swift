@@ -6,13 +6,7 @@ import SwiftUI
 private struct SurfaceModifier: ViewModifier {
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: Layout.cardRadius, style: .continuous)
-        if #available(macOS 26.0, *) {
-            content.glassEffect(.regular, in: shape)
-        } else {
-            content
-                .background(Theme.cardBackground, in: shape)
-                .overlay(shape.strokeBorder(.separator, lineWidth: Layout.cardBorderWidth))
-        }
+        content.glassEffect(.regular, in: shape)
     }
 }
 
@@ -43,20 +37,12 @@ private struct AppButtonModifier: ViewModifier {
         }
     }
 
-    /// Liquid Glass on macOS 26 and later, the classic bordered button before.
+    /// Liquid Glass, tinted when the button has a fill of its own.
     @ViewBuilder private func framed(_ content: Content) -> some View {
-        if #available(macOS 26.0, *) {
-            if let fill = kind.fill {
-                content.buttonStyle(.glassProminent).tint(fill.color)
-            } else {
-                content.buttonStyle(.glass)
-            }
+        if let fill = kind.fill {
+            content.buttonStyle(.glassProminent).tint(fill.color)
         } else {
-            if let fill = kind.fill {
-                content.buttonStyle(.borderedProminent).tint(fill.color)
-            } else {
-                content.buttonStyle(.bordered)
-            }
+            content.buttonStyle(.glass)
         }
     }
 }

@@ -148,6 +148,19 @@ extension View {
         }
     }
 
+    /// The same question about one item; the dialog shows while `item` is set and clears it.
+    func confirmRemoval<Item>(
+        _ title: String, item: Binding<Item?>, button: TextKey, message: TextKey,
+        action: @escaping (Item) -> Void
+    ) -> some View {
+        confirmationDialog(title, item: item) { chosen in
+            Button(button.translated, role: .destructive) { action(chosen) }
+            Button(TextKey.cancel.translated, role: .cancel) {}
+        } message: { _ in
+            Text(message.translated)
+        }
+    }
+
     /// A value still being calculated keeps its place but shows a small spinner, like
     /// "Calculating…" in Finder's Info window, and cannot be clicked, selected or read aloud until
     /// it is final.

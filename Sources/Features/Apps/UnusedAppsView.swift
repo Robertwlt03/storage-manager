@@ -15,10 +15,9 @@ struct UnusedAppsView: View {
         UI.Page(.apps, options: { unusedSincePicker }, content)
             .confirmRemoval(
                 TextKey.trashAppTitle.translated(with: appToTrash?.name ?? ""),
-                isPresented: isConfirmingTrash, button: .moveToTrash, message: .trashAppMessage
-            ) {
-                if let appToTrash { moveToTrash(appToTrash) }
-            }
+                item: $appToTrash, button: .moveToTrash, message: .trashAppMessage,
+                action: moveToTrash
+            )
             .smoothChanges(of: layout)
     }
 
@@ -83,12 +82,6 @@ struct UnusedAppsView: View {
         Button(TextKey.showInFinder.translated) { FinderService.reveal(app.path) }
         Button(TextKey.moveToTrash.translated) { appToTrash = app }
             .disabled(AppUsageService.isRunning(app))
-    }
-
-    private var isConfirmingTrash: Binding<Bool> {
-        Binding(
-            get: { appToTrash != nil },
-            set: { isPresented in if !isPresented { appToTrash = nil } })
     }
 
     private func lastOpenedText(_ app: AppUsage) -> String {

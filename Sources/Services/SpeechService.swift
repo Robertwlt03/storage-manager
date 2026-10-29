@@ -42,12 +42,12 @@ import Observation
     }
 
     nonisolated func speechSynthesizer(
-        _ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance
+        _: AVSpeechSynthesizer, didFinish _: AVSpeechUtterance
     ) {
         markAsFinished()
     }
     nonisolated func speechSynthesizer(
-        _ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance
+        _: AVSpeechSynthesizer, didCancel _: AVSpeechUtterance
     ) {
         markAsFinished()
     }

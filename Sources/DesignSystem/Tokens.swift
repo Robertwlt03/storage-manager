@@ -66,7 +66,6 @@ enum Layout {
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
     static let placeholderPageShare = 0.72
-    static let cardBorderWidth: CGFloat = 0.5
     /// Titles and labels that may wrap show at most this many lines.
     static let maxWrappedLines = 2
 }

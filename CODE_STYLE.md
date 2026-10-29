@@ -89,7 +89,8 @@ func run() async {
 }
 ```
 
-Lange Ketten aus vielen Aufrufen hintereinander teilen wir in benannte Zwischenschritte. Bei SwiftUI fassen wir
+Lange Ketten aus vielen Aufrufen hintereinander teilen wir in benannte Zwischenschritte. Eine Funktion bleibt unter
+40 Zeilen und unter zehn Verzweigungen; darüber meldet sich SwiftLint. Bei SwiftUI fassen wir
 Modifikatoren, die zusammengehören, in einer eigenen Eigenschaft oder einem eigenen Modifikator zusammen, damit eine
 Ansicht nicht zu einer langen Treppe wird.
 
@@ -128,26 +129,28 @@ Dahinter steckt das Skript `scripts/inspect.py`. Einzelne Schritte startest du m
 make check
 ```
 
-Das Skript führt acht Prüfungen nacheinander aus:
+Das Skript führt neun Prüfungen nacheinander aus:
 
 1. **Form:** `swift format lint --strict` meldet jede Abweichung von der einheitlichen Form.
-2. **Compiler:** Die App wird mit `-warnings-as-errors` gebaut, sodass schon eine Warnung als Fehler zählt.
-3. **Tests:** `swift test` startet alle Tests aus `Tests/SpeicherExplorerTests`.
-4. **Hausregeln:** Zahlen ohne Namen, Farben außerhalb von `Theme.swift`, deutscher Text im Code, `$0`, Namen aus ein
+2. **Länge und Verschachtelung:** SwiftLint meldet Funktionen über 40 Zeilen, Closures über 30 Zeilen, zu viele
+   Verzweigungen in einer Funktion und zu tief verschachtelte Typen. Die Grenzen stehen in `.swiftlint.yml`.
+3. **Compiler:** Die App wird mit `-warnings-as-errors` gebaut, sodass schon eine Warnung als Fehler zählt.
+4. **Tests:** `swift test` startet alle Tests aus `Tests/SpeicherExplorerTests`.
+5. **Hausregeln:** Zahlen ohne Namen, Farben außerhalb von `Theme.swift`, deutscher Text im Code, `$0`, Namen aus ein
    oder zwei Buchstaben und Zeilen über 100 Zeichen.
-5. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, Animationen außerhalb von `Motion`,
+6. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, Animationen außerhalb von `Motion`,
    ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb der Diagnose.
-6. **Toter Code:** jede Funktion, jeder Wert und jeder Text, der zwar angelegt, aber nirgends benutzt wird.
-7. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
-8. **Skripte:** `bash -n` prüft die Shell-Skripte auf Schreibfehler.
+7. **Toter Code:** jede Funktion, jeder Wert und jeder Text, der zwar angelegt, aber nirgends benutzt wird.
+8. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
+9. **Skripte:** `bash -n` und `make -n` prüfen die Shell-Skripte und das `Makefile` auf Schreibfehler.
 
-Ob jeder Text in allen 20 Sprachen vorhanden ist und ob jede Farbe den Kontrast erreicht, prüfen die Tests im dritten
+Ob jeder Text in allen 20 Sprachen vorhanden ist und ob jede Farbe den Kontrast erreicht, prüfen die Tests im vierten
 Schritt. Wie viel des Codes die Tests erreichen, zeigt `make coverage` je Ordner an.
 
 Auf GitHub läuft dieselbe Prüfung bei jedem Pull Request von selbst, beschrieben in
 `.github/workflows/checks.yml`. Meldet sie auch nur einen Fund, wird der Pull Request rot, und der Beitrag muss
-nachgebessert werden, bevor er übernommen wird. Wie lange Ketten getrennt sind und ob Namen verständlich sind, kann
-kein Skript beurteilen. Darauf achten wir beim Lesen eines Beitrags.
+nachgebessert werden, bevor er übernommen wird. Ob Namen verständlich sind und ob ein Schritt gut
+geschnitten ist, kann kein Skript beurteilen. Darauf achten wir beim Lesen eines Beitrags.
 
 <p align="center">
   <img src="assets/banner-footer.svg" alt="" width="480">
@@ -156,5 +159,5 @@ kein Skript beurteilen. Darauf achten wir beim Lesen eines Beitrags.
 <p align="center">
   <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
   <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
+  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 27 auf Macs mit Apple-Chip</sub>
 </p>

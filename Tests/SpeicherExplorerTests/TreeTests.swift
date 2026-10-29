@@ -9,8 +9,15 @@ struct TreeTests {
     private static let bigFile = ScanLimits.keepBytes * 3
     private static let smallFile = ScanLimits.keepBytes / 2
 
+    private struct SampleTree {
+        let root: Node
+        let scanRoot: Node
+        let media: Node
+        let notes: Node
+    }
+
     /// /scan/media with one big and one small file, and /scan/notes with one small file.
-    private static func sampleTree() -> (root: Node, scanRoot: Node, media: Node, notes: Node) {
+    private static func sampleTree() -> SampleTree {
         let root = Node.virtualRoot()
         let scanRoot = Node(name: "/scan", parent: root)
         let media = Node(name: "media", parent: scanRoot)
@@ -24,7 +31,7 @@ struct TreeTests {
         scanRoot.adopt(notes)
         scanRoot.finish()
         scanRoot.attach(to: root)
-        return (root, scanRoot, media, notes)
+        return SampleTree(root: root, scanRoot: scanRoot, media: media, notes: notes)
     }
 
     @Test("Big files are listed, small ones fold into one row")

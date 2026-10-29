@@ -246,8 +246,11 @@ enum UITest {
         for problem in problems { log("PROBLEM: \(problem)") }
     }
 
-    // MARK: Helpers
+}
 
+// MARK: Helpers
+
+extension UITest {
     private static func allPanes(_ model: AppModel) -> [Pane] {
         let otherVolumes = model.volumes.filter { volume in !volume.isRoot }
         return Pane.main + Pane.tidy + Pane.system

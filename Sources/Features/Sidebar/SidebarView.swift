@@ -9,15 +9,11 @@ struct SidebarView: View {
             .toolbar {
                 // Where Apple puts it: trailing edge of the open sidebar, next to the window
                 // buttons when closed.
-                if #available(macOS 26.0, *) {
-                    ToolbarSpacer(.flexible)
-                    // Own glass circle, so no empty background stays behind when it moves (see
-                    // ARCHITECTURE.md).
-                    ToolbarItem { SidebarToggle().buttonStyle(.glass).buttonBorderShape(.circle) }
-                        .sharedBackgroundVisibility(.hidden)
-                } else {
-                    ToolbarItem { SidebarToggle() }
-                }
+                ToolbarSpacer(.flexible)
+                // Own glass circle, so no empty background stays behind when it moves (see
+                // ARCHITECTURE.md).
+                ToolbarItem { SidebarToggle().buttonStyle(.glass).buttonBorderShape(.circle) }
+                    .sharedBackgroundVisibility(.hidden)
             }
             // Fixed: a flexible width jumped at the end of the reveal animation.
             .navigationSplitViewColumnWidth(Layout.sidebarIdealWidth)

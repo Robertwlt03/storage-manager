@@ -28,8 +28,7 @@ enum Theme {
     static let primaryFill = Tone(light: 0x0A5BC4, dark: 0x1F6FD0)
     static let confirmFill = Tone(light: 0x1B7332, dark: 0x1B7332)
 
-    // Native surfaces, which follow light and dark mode by themselves.
-    static let cardBackground = Color(nsColor: .controlBackgroundColor)
+    // The native window surface, which follows light and dark mode by itself.
     static let windowBackground = Color(nsColor: .windowBackgroundColor)
     /// Tinted by `Motion.hoverTint` behind rows under the mouse.
     static let highlight = Color.primary

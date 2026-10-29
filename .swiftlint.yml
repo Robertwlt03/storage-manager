@@ -1,0 +1,44 @@
+# SwiftLint measures what swift format cannot: length, nesting and complexity, so that
+# "small, clearly separated steps" (CODE_STYLE.md) is checked, not only asked for.
+# Form and naming are already covered by swift format and scripts/inspect.py; the rules
+# that would argue with them are switched off.
+included:
+  - Sources
+  - Tests
+disabled_rules:
+  - trailing_comma        # swift format adds trailing commas to multi-line lists
+  - opening_brace         # swift format decides where braces go
+  - line_length           # swift format and inspect.py hold every line to 100 characters
+  - identifier_name       # inspect.py checks names with the house rules
+  - type_name
+  - todo
+opt_in_rules:
+  - closure_body_length
+  - empty_count
+  - first_where
+  - contains_over_filter_count
+  - last_where
+  - sorted_first_last
+  - redundant_type_annotation
+  - unused_parameter
+function_body_length:
+  warning: 40
+  error: 60
+closure_body_length:
+  warning: 30
+  error: 50
+type_body_length:
+  warning: 250
+  error: 350
+file_length:
+  warning: 400
+  error: 500
+cyclomatic_complexity:
+  warning: 10
+  error: 15
+nesting:
+  type_level: 2
+  function_level: 3
+large_tuple:
+  warning: 3
+  error: 4
