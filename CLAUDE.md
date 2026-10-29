@@ -108,6 +108,7 @@ with the access sheet open were checked):
 - Every guide follows the README's layout: banner at the top (`assets/banner-*.svg`), an icon in front of every `##`
   heading (`<img src="assets/icons/<name>.svg" height="33" align="absmiddle" alt="">`), and the shared footer with the
   small banner, the navigation line to all guides and the licence line.
+- Draw new banners and icons with `scripts/doc-assets.py` (see its help) so they match the others.
 - Section icons: 60×56 canvas, 45 px rounded tile with a two-stop gradient, white 2 px stroke glyph in a 24 px grid.
   Within one guide every icon has its own colour and its own shape; check new icons rendered large and at 33 px in
   light and dark.
