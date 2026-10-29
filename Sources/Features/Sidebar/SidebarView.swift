@@ -4,11 +4,12 @@ import SwiftUI
 struct SidebarView: View {
     var body: some View {
         SidebarList()
-            .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
+            // Replaced by `SidebarToggle`, see `AppModel.toggleSidebar`.
+            .toolbar(removing: .sidebarToggle)
             .toolbar {
                 // Where Apple puts it: trailing edge of the open sidebar, next to the window buttons when closed.
-                if #available(macOS 26.0, *) { ToolbarSpacer(.flexible) }
                 if #available(macOS 26.0, *) {
+                    ToolbarSpacer(.flexible)
                     // Own glass circle, so no empty background stays behind when it moves (see ARCHITECTURE.md).
                     ToolbarItem { SidebarToggle().buttonStyle(.glass).buttonBorderShape(.circle) }
                         .sharedBackgroundVisibility(.hidden)
@@ -23,8 +24,9 @@ struct SidebarView: View {
 
 /// The pages, built from `Pane` and the mounted volumes so every page appears here automatically, with the scan
 /// status below. Used by the sidebar column and by the floating sidebar of narrow windows.
-struct SidebarList: View {
+private struct SidebarList: View {
     @Environment(AppModel.self) private var model
+    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
 
     var body: some View {
         @Bindable var model = model
@@ -34,36 +36,39 @@ struct SidebarList: View {
             Section(TextKey.sectionSystem.translated) {
                 ForEach(Pane.system, id: \.self, content: row)
             }
-            // The startup disk is the overview; only other volumes (USB sticks, external drives) get their own page.
-            let external = model.volumes.filter { !$0.isRoot }
-            if !external.isEmpty {
-                Section(TextKey.sectionVolumes.translated) {
-                    ForEach(external) { v in
-                        Label(v.name, systemImage: v.symbol).tag(Pane.volume(v.path))
-                    }
-                }
-            }
+            volumesSection
         }
         .listStyle(.sidebar)
         .safeAreaInset(edge: .bottom, spacing: 0) { SidebarFooter() }
     }
 
-    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
+    /// The startup disk is the overview; only other volumes (USB sticks, external drives) get their own page.
+    @ViewBuilder private var volumesSection: some View {
+        let externalVolumes = model.volumes.filter { volume in !volume.isRoot }
+        if !externalVolumes.isEmpty {
+            Section(TextKey.sectionVolumes.translated) {
+                ForEach(externalVolumes) { volume in
+                    Label(volume.name, systemImage: volume.symbol).tag(Pane.volume(volume.path))
+                }
+            }
+        }
+    }
 
     /// The apps row shows how many apps were not opened for a while, as a gentle reminder.
     private func row(_ pane: Pane) -> some View {
         Label(pane.title.translated, systemImage: pane.symbol)
-            .badge(
-                pane == .apps
-                    ? model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count : 0
-            )
+            .badge(pane == .apps ? unusedAppCount : 0)
             .tag(pane)
+    }
+
+    private var unusedAppCount: Int {
+        model.apps.filter { app in AppUsageService.isUnused(app, days: unusedDays) }.count
     }
 }
 
 /// The button that shows and hides the sidebar, placed like Apple's own: at the open sidebar's trailing edge, next to
 /// the window buttons while it is closed.
-struct SidebarToggle: View {
+private struct SidebarToggle: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
@@ -85,7 +90,8 @@ struct SidebarOverlay: View {
 
     var body: some View {
         ZStack(alignment: .leading) {
-            Color.clear.contentShape(Rectangle()).onTapGesture { model.closeSidebarOverlay() }
+            Theme.clickCatcher.contentShape(Rectangle())
+                .onTapGesture { model.closeSidebarOverlay() }
             SidebarList()
                 .scrollContentBackground(.hidden)
                 .frame(width: Layout.sidebarIdeal)

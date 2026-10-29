@@ -6,16 +6,17 @@ import SwiftUI
 enum Motion {
     static let duration = 0.35
     static let hoverScale = 1.015
+    static let restingScale = 1.0
     static let hoverTint = 0.06
 
-    static var reduced: Bool { NSWorkspace.shared.accessibilityDisplayShouldReduceMotion }
+    static var isReduced: Bool { NSWorkspace.shared.accessibilityDisplayShouldReduceMotion }
 
     /// For content appearing, pages switching, list and grid swapping.
-    static var standard: Animation? { reduced ? nil : .smooth(duration: duration) }
+    static var standard: Animation? { isReduced ? nil : .smooth(duration: duration) }
 
     /// For changes that follow the user's own movement, and for each step of the progress bar, which then rests
     /// until the next step instead of redrawing for the whole scan.
-    static var quick: Animation? { reduced ? nil : .smooth(duration: quickDuration) }
+    static var quick: Animation? { isReduced ? nil : .smooth(duration: quickDuration) }
     static let quickDuration = 0.2
 
     /// Changes model state with the standard animation.
@@ -26,30 +27,28 @@ enum Motion {
 
 /// Clickable tiles lift a little under the mouse. Runs only while hovering, so it costs nothing at rest.
 private struct HoverLift: ViewModifier {
-    @State private var hovering = false
+    @State private var isHovering = false
 
     func body(content: Content) -> some View {
         content
-            .scaleEffect(hovering ? Motion.hoverScale : 1)
-            .animation(Motion.standard, value: hovering)
-            .onHover { hovering = $0 }
+            .scaleEffect(isHovering ? Motion.hoverScale : Motion.restingScale)
+            .animation(Motion.standard, value: isHovering)
+            .onHover { isInside in isHovering = isInside }
     }
 }
 
 /// Clickable rows get a soft highlight under the mouse, like lists in macOS.
 private struct HoverHighlight: ViewModifier {
-    @State private var hovering = false
+    @State private var isHovering = false
 
     func body(content: Content) -> some View {
+        let tint = Theme.highlight.opacity(isHovering ? Motion.hoverTint : Opacity.hidden)
+        let shape = RoundedRectangle(
+            cornerRadius: IconSize.medium.rawValue * Layout.badgeRadiusShare, style: .continuous)
         content
-            .background(
-                Color.primary.opacity(hovering ? Motion.hoverTint : 0),
-                in: RoundedRectangle(
-                    cornerRadius: IconSize.medium.rawValue * Layout.badgeRadiusShare,
-                    style: .continuous)
-            )
-            .animation(Motion.standard, value: hovering)
-            .onHover { hovering = $0 }
+            .background(tint, in: shape)
+            .animation(Motion.standard, value: isHovering)
+            .onHover { isInside in isHovering = isInside }
     }
 }
 
@@ -58,7 +57,7 @@ extension View {
 
     /// Turns an SF Symbol once whenever `value` changes; on macOS 14, which has no turning effect, it bounces.
     /// A one-off effect of the system: it costs nothing at rest and is left out with "Reduce motion".
-    @ViewBuilder func turnOnce<V: Equatable>(value: V) -> some View {
+    @ViewBuilder func turnOnce<Value: Equatable>(value: Value) -> some View {
         if #available(macOS 15.0, *) {
             symbolEffect(.rotate, value: value)
         } else {
@@ -68,10 +67,10 @@ extension View {
     func hoverHighlight() -> some View { modifier(HoverHighlight()) }
 
     /// Charts redraw without animation: animating between changing datasets crashed Swift Charts.
-    func staticChart() -> some View { transaction { $0.animation = nil } }
+    func staticChart() -> some View { transaction { transaction in transaction.animation = nil } }
 
     /// Animates this view whenever `value` changes.
-    func smoothChanges<V: Equatable>(of value: V) -> some View {
+    func smoothChanges<Value: Equatable>(of value: Value) -> some View {
         animation(Motion.standard, value: value)
     }
 

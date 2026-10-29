@@ -32,13 +32,10 @@ extension UI {
                     }
                     Spacer(minLength: Space.item)
                     if let value { Text(value).textRole(.value).contentTransition(.numericText()) }
-                    Chevron().opacity(action == nil ? 0 : 1)
+                    Chevron().opacity(action == nil ? Opacity.hidden : Opacity.full)
                 }
                 .contentShape(Rectangle())
-                // The highlight reaches a little beyond the row without changing its layout.
-                .padding(.horizontal, Space.small).padding(.vertical, Space.extraSmall)
-                .modifier(OptionalHover(active: action != nil))
-                .padding(.horizontal, -Space.small).padding(.vertical, -Space.extraSmall)
+                .modifier(RowHighlight(isActive: action != nil))
             }
             .appButton(.content)
             .allowsHitTesting(action != nil)  // not .disabled, which would dim the text below 4.5:1
@@ -63,7 +60,7 @@ extension UI {
     struct Fields: View {
         let fields: [Field]
 
-        init(_ fields: [Field?]) { self.fields = fields.compactMap { $0 } }
+        init(_ fields: [Field?]) { self.fields = fields.compactMap { field in field } }
 
         var body: some View {
             Rows(fields) { field in
@@ -97,18 +94,25 @@ extension UI {
             HStack(spacing: Space.item) {
                 Icon(icon, size: size)
                 VStack(alignment: .leading, spacing: Space.hairline) {
-                    Text(title).textRole(.title).lineLimit(2)
-                    Text(subtitle).foregroundStyle(.muted).lineLimit(2).textSelection(.enabled)
+                    Text(title).textRole(.title).lineLimit(Layout.maxWrappedLines)
+                    Text(subtitle).foregroundStyle(.muted).lineLimit(Layout.maxWrappedLines)
+                        .textSelection(.enabled)
                 }
             }
         }
     }
 }
 
-/// Only rows that lead somewhere light up under the mouse.
-private struct OptionalHover: ViewModifier {
-    let active: Bool
+/// Only rows that lead somewhere light up under the mouse. The highlight reaches a little beyond the row
+/// without changing its layout.
+private struct RowHighlight: ViewModifier {
+    let isActive: Bool
+
     func body(content: Content) -> some View {
-        if active { content.hoverHighlight() } else { content }
+        let widened = content.padding(.horizontal, Space.small).padding(.vertical, Space.extraSmall)
+        Group {
+            if isActive { widened.hoverHighlight() } else { widened }
+        }
+        .padding(.horizontal, -Space.small).padding(.vertical, -Space.extraSmall)
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 
 /// A few plain sentences about the storage, for reading at a glance or aloud.
 enum SummaryService {
-    static let topCategories = 2
+    private static let largestCategoryCount = 2
 
     struct Input {
         let volume: VolumeInfo?
@@ -12,35 +12,44 @@ enum SummaryService {
         let unusedApps: Int
     }
 
-    static func text(_ i: Input) -> String {
+    static func text(_ input: Input) -> String {
         var sentences: [String] = []
-        if let v = i.volume {
-            sentences.append(
-                TextKey.summaryDisk.translated(
-                    with: v.name, Format.bytes(v.used), Format.bytes(v.total),
-                    Format.bytes(v.available)))
+        if let volume = input.volume {
+            sentences.append(diskSentence(volume))
         }
-        let top = i.categories.filter { !CategoryKind.estimated.contains($0.kind) }
-            .prefix(topCategories)
-        if top.count == topCategories {
-            sentences.append(
-                TextKey.summaryTop.translated(
-                    with: top[top.startIndex].kind.title.translated,
-                    Format.bytes(top[top.startIndex].bytes),
-                    top[top.startIndex + 1].kind.title.translated,
-                    Format.bytes(top[top.startIndex + 1].bytes)))
-        } else if i.categories.isEmpty {
-            sentences.append(TextKey.summaryNotMeasured.translated)
+        if let categoriesSentence = largestCategoriesSentence(input.categories) {
+            sentences.append(categoriesSentence)
         }
-        if let c = i.cleanable, c > 0 {
-            sentences.append(TextKey.summaryClean.translated(with: Format.bytes(c)))
+        if let cleanableBytes = input.cleanable, cleanableBytes > 0 {
+            sentences.append(TextKey.summaryClean.translated(with: Format.bytes(cleanableBytes)))
         }
-        if i.copies > 0 {
-            sentences.append(TextKey.summaryCopies.translated(with: Format.bytes(i.copies)))
+        if input.copies > 0 {
+            sentences.append(TextKey.summaryCopies.translated(with: Format.bytes(input.copies)))
         }
-        if i.unusedApps > 0 {
-            sentences.append(TextKey.summaryApps.translated(with: Format.count(i.unusedApps)))
+        if input.unusedApps > 0 {
+            sentences.append(TextKey.summaryApps.translated(with: Format.count(input.unusedApps)))
         }
         return sentences.joined(separator: " ")
+    }
+
+    private static func diskSentence(_ volume: VolumeInfo) -> String {
+        TextKey.summaryDisk.translated(
+            with: volume.name, Format.bytes(volume.used), Format.bytes(volume.total),
+            Format.bytes(volume.available))
+    }
+
+    private static func largestCategoriesSentence(_ categories: [Category]) -> String? {
+        let measured = categories.filter { category in
+            !CategoryKind.estimated.contains(category.kind)
+        }
+        let largest = measured.prefix(largestCategoryCount)
+        if largest.count == largestCategoryCount, let first = largest.first,
+            let second = largest.last
+        {
+            return TextKey.summaryTop.translated(
+                with: first.kind.title.translated, Format.bytes(first.bytes),
+                second.kind.title.translated, Format.bytes(second.bytes))
+        }
+        return categories.isEmpty ? TextKey.summaryNotMeasured.translated : nil
     }
 }

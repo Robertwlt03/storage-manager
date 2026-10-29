@@ -5,19 +5,13 @@ import SwiftUI
 struct SidebarFooter: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
-    @State private var showDetails = false
-    @State private var scanStarts = 0  // turns the rescan symbol once when a scan starts (button or ⌘R; not at launch)
+    @State private var isShowingDetails = false
+    /// Turns the rescan symbol once when a scan starts (button or ⌘R; not at launch).
+    @State private var scanStarts = 0
 
     var body: some View {
         VStack(alignment: .leading, spacing: Space.row) {
-            Button {
-                showDetails.toggle()
-            } label: {
-                status
-            }
-            .appButton(.content)
-            .help(TextKey.scanDetails.translated)
-            .popover(isPresented: $showDetails, arrowEdge: .trailing) { ScanDetails() }
+            statusButton
             if model.scanning {
                 ProgressView(value: model.scanFraction).progressViewStyle(.linear)
                     .controlSize(.small)
@@ -26,29 +20,9 @@ struct SidebarFooter: View {
             }
             Divider()
             HStack(spacing: Space.medium) {
-                // One quiet button like the two next to it; the symbol shows what a click switches to.
-                Button {
-                    layout = layout == .list ? .grid : .list
-                } label: {
-                    UI.Icon(.symbol(layout == .list ? Symbols.grid : Symbols.list), size: .small)
-                        .contentTransition(.symbolEffect(.replace))
-                }
-                .appButton(.quiet)
-                .disabled(!(model.pane ?? .overview).supportsGrid || model.isSearching)
-                .help(
-                    layout == .list ? TextKey.layoutGrid.translated : TextKey.layoutList.translated
-                )
-                .accessibilityLabel(
-                    layout == .list ? TextKey.layoutGrid.translated : TextKey.layoutList.translated)
+                layoutButton
                 Spacer()
-                Button {
-                    model.scan()
-                } label: {
-                    UI.Icon(.symbol(Symbols.rescan), size: .small).turnOnce(value: scanStarts)
-                }
-                .appButton(.quiet)
-                .disabled(model.scanning)
-                .help(TextKey.rescanHelp.translated)
+                rescanButton
                 SettingsLink { UI.Icon(.symbol(Symbols.settings), size: .small) }
                     .appButton(.quiet)
                     .help(TextKey.settings.translated)
@@ -56,6 +30,44 @@ struct SidebarFooter: View {
         }
         .padding(Space.item)
         .onChange(of: model.scanning) { if model.scanning { scanStarts += 1 } }
+    }
+
+    private var statusButton: some View {
+        Button {
+            isShowingDetails.toggle()
+        } label: {
+            status
+        }
+        .appButton(.content)
+        .help(TextKey.scanDetails.translated)
+        .popover(isPresented: $isShowingDetails, arrowEdge: .trailing) { ScanDetails() }
+    }
+
+    /// One quiet button like the two next to it; the symbol shows what a click switches to.
+    private var layoutButton: some View {
+        let switchTitle =
+            layout == .list ? TextKey.layoutGrid.translated : TextKey.layoutList.translated
+        return Button {
+            layout = layout == .list ? .grid : .list
+        } label: {
+            UI.Icon(.symbol(layout == .list ? Symbols.grid : Symbols.list), size: .small)
+                .contentTransition(.symbolEffect(.replace))
+        }
+        .appButton(.quiet)
+        .disabled(!(model.pane ?? .overview).supportsGrid || model.isSearching)
+        .help(switchTitle)
+        .accessibilityLabel(switchTitle)
+    }
+
+    private var rescanButton: some View {
+        Button {
+            model.scan()
+        } label: {
+            UI.Icon(.symbol(Symbols.rescan), size: .small).turnOnce(value: scanStarts)
+        }
+        .appButton(.quiet)
+        .disabled(model.scanning)
+        .help(TextKey.rescanHelp.translated)
     }
 
     /// One short line: spinner and percent while scanning, otherwise when it was measured.
@@ -69,17 +81,9 @@ struct SidebarFooter: View {
                     .monospacedDigit()
                     .contentTransition(.numericText(value: model.scanFraction))
                     .animation(Motion.quick, value: model.scanFraction)
-            } else if let t = model.lastScan {
-                UI.Icon(
-                    .symbol(
-                        model.unreadable > 0 && !model.hasFullDiskAccess
-                            ? Symbols.warning : Symbols.success),
-                    size: .small
-                )
-                .contentTransition(.symbolEffect(.replace))
-                .symbolEffect(.bounce, value: t)  // a small nod when a scan has finished
-                .foregroundStyle(model.unreadable > 0 && !model.hasFullDiskAccess ? .warn : .good)
-                Text(TextKey.measuredAt.translated(with: Format.time(t)))
+            } else if let lastScan = model.lastScan {
+                finishedIcon(lastScan)
+                Text(TextKey.measuredAt.translated(with: Format.time(lastScan)))
             } else {
                 UI.Icon(.symbol(Symbols.measure), size: .small).foregroundStyle(.muted)
                 Text(TextKey.notMeasuredTitle.translated)
@@ -90,10 +94,18 @@ struct SidebarFooter: View {
         .font(.callout)
         .contentShape(Rectangle())
     }
+
+    @ViewBuilder private func finishedIcon(_ lastScan: Date) -> some View {
+        let isMissingFolders = model.hasUnreadableFoldersWithoutAccess
+        UI.Icon(.symbol(isMissingFolders ? Symbols.warning : Symbols.success), size: .small)
+            .contentTransition(.symbolEffect(.replace))
+            .symbolEffect(.bounce, value: lastScan)  // a small nod when a scan has finished
+            .foregroundStyle(isMissingFolders ? .warn : .good)
+    }
 }
 
 /// Everything about the scan, shown only when asked for.
-struct ScanDetails: View {
+private struct ScanDetails: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
@@ -101,49 +113,61 @@ struct ScanDetails: View {
             Text(model.scanning ? TextKey.scanningTitle.translated : TextKey.scanDetails.translated)
                 .textRole(.section)
             if model.scanning {
-                ProgressView(value: model.scanFraction).progressViewStyle(.linear)
-                    .animation(Motion.quick, value: model.scanFraction)
-                UI.Fields([
-                    UI.Field(.scanProgress, Format.percent(model.scanFraction)),
-                    UI.Field(
-                        .scanArea,
-                        TextKey.scanningArea.translated(
-                            with: Format.count(model.scanStep.index),
-                            Format.count(model.scanStep.count),
-                            Paths.display(model.scanStep.path))),
-                    UI.Field(
-                        .files,
-                        TextKey.filesAndSize.translated(
-                            with: Format.count(model.progress.files),
-                            Format.bytes(model.progress.bytes))),
-                ])
-                UI.ActionButton(TextKey.cancelScan.translated) { model.cancelScan() }
+                runningScan
             } else {
-                UI.Fields([
-                    model.lastScan.map { UI.Field(.scanFinished, Format.time($0)) },
-                    UI.Field(
-                        .files,
-                        TextKey.filesAndSize.translated(
-                            with: Format.count(model.root.fileCount), Format.bytes(model.root.bytes)
-                        )),
-                    UI.Field(
-                        .fullDiskAccess,
-                        model.hasFullDiskAccess
-                            ? TextKey.accessGranted.translated
-                            : TextKey.accessMissingShort.translated),
-                ])
-                if model.unreadable > 0 && !model.hasFullDiskAccess {
-                    UI.Note(TextKey.unreadable.translated(with: Format.count(model.unreadable)))
-                    UI.ActionButton(TextKey.accessOpenSettings.translated, .primary) {
-                        FinderService.openFullDiskAccessSettings()
-                    }
-                }
-                UI.ActionButton(
-                    model.lastScan == nil ? TextKey.scanNow.translated : TextKey.rescan.translated
-                ) { model.scan() }
+                finishedScan
             }
         }
         .padding(Space.card)
         .frame(width: Layout.popoverWidth)
+    }
+
+    @ViewBuilder private var runningScan: some View {
+        let step = model.scanStep
+        ProgressView(value: model.scanFraction).progressViewStyle(.linear)
+            .animation(Motion.quick, value: model.scanFraction)
+        UI.Fields([
+            UI.Field(.scanProgress, Format.percent(model.scanFraction)),
+            UI.Field(
+                .scanArea,
+                TextKey.scanningArea.translated(
+                    with: Format.count(step.index), Format.count(step.count),
+                    Paths.display(step.path))),
+            UI.Field(
+                .files,
+                TextKey.filesAndSize.translated(
+                    with: Format.count(model.progress.files), Format.bytes(model.progress.bytes))),
+        ])
+        UI.ActionButton(TextKey.cancelScan.translated) { model.cancelScan() }
+    }
+
+    @ViewBuilder private var finishedScan: some View {
+        UI.Fields([
+            model.lastScan.map { lastScan in UI.Field(.scanFinished, Format.time(lastScan)) },
+            UI.Field(
+                .files,
+                TextKey.filesAndSize.translated(
+                    with: Format.count(model.root.fileCount), Format.bytes(model.root.bytes))),
+            UI.Field(
+                .fullDiskAccess,
+                model.hasFullDiskAccess
+                    ? TextKey.accessGranted.translated : TextKey.accessMissingShort.translated),
+        ])
+        if model.hasUnreadableFoldersWithoutAccess {
+            UI.Note(TextKey.unreadable.translated(with: Format.count(model.unreadable)))
+            UI.ActionButton(TextKey.accessOpenSettings.translated, .primary) {
+                FinderService.openFullDiskAccessSettings()
+            }
+        }
+        UI.ActionButton(
+            model.lastScan == nil ? TextKey.scanNow.translated : TextKey.rescan.translated
+        ) { model.scan() }
+    }
+}
+
+extension AppModel {
+    /// The last scan could not read some folders, and Full Disk Access would let it.
+    fileprivate var hasUnreadableFoldersWithoutAccess: Bool {
+        unreadable > 0 && !hasFullDiskAccess
     }
 }

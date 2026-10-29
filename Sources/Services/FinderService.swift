@@ -8,17 +8,18 @@ enum FinderService {
     static func icon(_ path: String) -> Image { Image(nsImage: iconImage(path)) }
 
     static func iconImage(_ path: String) -> NSImage {
-        if let cached = icons.object(forKey: path as NSString) { return cached }
+        if let cached = iconCache.object(forKey: path as NSString) { return cached }
         let image = NSWorkspace.shared.icon(forFile: path)
-        icons.setObject(image, forKey: path as NSString)
+        iconCache.setObject(image, forKey: path as NSString)
         return image
     }
 
-    private static let icons: NSCache<NSString, NSImage> = {
+    private static let iconCache: NSCache<NSString, NSImage> = {
         let cache = NSCache<NSString, NSImage>()
         cache.countLimit = ScanConfig.iconCacheLimit
         return cache
     }()
+
     static func reveal(_ path: String) {
         NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)])
     }
@@ -35,6 +36,6 @@ enum FinderService {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = true
-        return panel.runModal() == .OK ? panel.urls.map { Paths.real($0.path) } : []
+        return panel.runModal() == .OK ? panel.urls.map { url in Paths.real(url.path) } : []
     }
 }

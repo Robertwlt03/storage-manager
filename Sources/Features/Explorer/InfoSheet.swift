@@ -6,91 +6,106 @@ struct InfoSheet: View {
     @Environment(\.dismiss) private var dismiss
     @State private var profile: FolderProfile?
 
+    private var path: String { entry.path ?? "" }
+
     var body: some View {
-        let path = entry.path ?? ""
         VStack(spacing: 0) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: Space.section) {
-                    UI.Card {
-                        UI.TitleRow(entry.name, subtitle: Paths.display(path), icon: .file(path))
-                            .padding(.vertical, Space.row)
-                        Divider()
-                        UI.Fields(basics(path))
-                    }
-                    if entry.isFolder { contents }
-                }
-                .padding(Space.page)
-            }
-            .background(Backdrop())
-            HStack {
-                UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(path) }
-                Spacer()
-                UI.ActionButton(TextKey.done.translated, .primary) { dismiss() }
-                    .keyboardShortcut(.defaultAction)
-            }
-            .padding(Space.card)
+            ScrollView { cards.padding(Space.page) }
+                .background(Backdrop())
+            buttons.padding(Space.card)
         }
         .frame(width: Layout.sheetWidth, height: Layout.sheetHeight)
         .task {
             guard entry.isFolder else { return }
+            let path = path
             profile = await Task.detached(priority: .utility) { ProfileService.profile(path) }.value
         }
     }
 
-    private func basics(_ path: String) -> [UI.Field?] {
-        let v = try? URL(fileURLWithPath: path)
+    private var cards: some View {
+        VStack(alignment: .leading, spacing: Space.section) {
+            UI.Card {
+                UI.TitleRow(entry.name, subtitle: Paths.display(path), icon: .file(path))
+                    .padding(.vertical, Space.row)
+                Divider()
+                UI.Fields(basicFields)
+            }
+            if entry.isFolder {
+                contentsCard
+                if let profile, let largestTypeBytes = profile.types.first?.bytes {
+                    fileTypesCard(profile, largestTypeBytes: largestTypeBytes)
+                }
+            }
+        }
+    }
+
+    private var buttons: some View {
+        HStack {
+            UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(path) }
+            Spacer()
+            UI.ActionButton(TextKey.done.translated, .primary) { dismiss() }
+                .keyboardShortcut(.defaultAction)
+        }
+    }
+
+    private var basicFields: [UI.Field?] {
+        let resources = try? URL(fileURLWithPath: path)
             .resourceValues(forKeys: [
-                .contentModificationDateKey, .creationDateKey,
-                .localizedTypeDescriptionKey,
+                .contentModificationDateKey, .creationDateKey, .localizedTypeDescriptionKey,
             ])
+        let modified = resources?.contentModificationDate
+        let created = resources?.creationDate
         return [
             UI.Field(.allocated, Format.bytes(entry.bytes)),
-            UI.Field(.kind, v?.localizedTypeDescription ?? "–"),
-            v?.contentModificationDate.map { UI.Field(.modified, Format.dateTime($0)) },
-            v?.creationDate.map { UI.Field(.created, Format.dateTime($0)) },
+            UI.Field(.kind, resources?.localizedTypeDescription ?? "–"),
+            modified.map { date in UI.Field(.modified, Format.dateTime(date)) },
+            created.map { date in UI.Field(.created, Format.dateTime(date)) },
         ]
     }
 
-    @ViewBuilder private var contents: some View {
+    private var contentsCard: some View {
         UI.Card(TextKey.contents.translated) {
-            if let p = profile {
+            if let profile {
                 UI.Fields([
-                    UI.Field(.files, Format.count(p.files)),
-                    UI.Field(.folders, Format.count(p.folders)),
-                    UI.Field(.packages, Format.count(p.packages)),
-                    p.oldest.flatMap { o in
-                        p.newest.map { n in
-                            UI.Field(
-                                .modifiedBetween,
-                                TextKey.dateRange.translated(
-                                    with: Format.dayShort(o), Format.dayShort(n)))
-                        }
-                    },
+                    UI.Field(.files, Format.count(profile.files)),
+                    UI.Field(.folders, Format.count(profile.folders)),
+                    UI.Field(.packages, Format.count(profile.packages)),
+                    modifiedBetweenField(profile),
                 ])
             } else {
                 UI.Note(TextKey.analyzing.translated, .working).padding(.vertical, Space.row)
             }
         }
-        if let p = profile, let top = p.types.first?.bytes {
-            UI.Card(TextKey.typesBySize.translated) {
-                UI.Rows(p.types.map { TypeRow(ext: $0.ext, bytes: $0.bytes, count: $0.count) }) {
-                    t in
-                    HStack(spacing: Space.item) {
-                        Text(t.ext).frame(maxWidth: .infinity, alignment: .leading)
-                        UI.ShareCell(t.bytes, of: top)
-                        UI.NumberCell(bytes: t.bytes).frame(width: Layout.sizeColumn.ideal)
-                        Text(TextKey.fileCount.translated(with: Format.count(t.count)))
-                            .textRole(.value)
-                    }
+    }
+
+    private func modifiedBetweenField(_ profile: FolderProfile) -> UI.Field? {
+        guard let oldest = profile.oldest, let newest = profile.newest else { return nil }
+        let dateRange = TextKey.dateRange.translated(
+            with: Format.dayShort(oldest), Format.dayShort(newest))
+        return UI.Field(.modifiedBetween, dateRange)
+    }
+
+    private func fileTypesCard(_ profile: FolderProfile, largestTypeBytes: Int64) -> some View {
+        let fileTypes = profile.types.map { fileType in
+            FileTypeRow(fileExtension: fileType.ext, bytes: fileType.bytes, count: fileType.count)
+        }
+        return UI.Card(TextKey.typesBySize.translated) {
+            UI.Rows(fileTypes) { fileType in
+                HStack(spacing: Space.item) {
+                    Text(fileType.fileExtension).frame(maxWidth: .infinity, alignment: .leading)
+                    UI.ShareCell(fileType.bytes, of: largestTypeBytes)
+                    UI.NumberCell(bytes: fileType.bytes).frame(width: Layout.sizeColumn.ideal)
+                    Text(TextKey.fileCount.translated(with: Format.count(fileType.count)))
+                        .textRole(.value)
                 }
             }
         }
     }
 
-    private struct TypeRow: Identifiable {
-        let ext: String
+    private struct FileTypeRow: Identifiable {
+        let fileExtension: String
         let bytes: Int64
         let count: Int
-        var id: String { ext }
+        var id: String { fileExtension }
     }
 }

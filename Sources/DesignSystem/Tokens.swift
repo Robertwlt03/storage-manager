@@ -8,7 +8,8 @@ enum UI {}
 enum Space {
     static let hairline: CGFloat = 2  // title and subtitle of one item
     static let extraSmall: CGFloat = 4  // headings to their card, tight groups
-    static let small: CGFloat = 8  // inside a row: icon to text, dot to label; row padding; card title to card
+    /// Inside a row: icon to text, dot to label; row padding; card title to card.
+    static let small: CGFloat = 8
     static let medium: CGFloat = 12  // between the parts of a row
     static let large: CGFloat = 16  // between cards and sections; inside cards
     static let extraLarge: CGFloat = 24  // page margins
@@ -29,7 +30,10 @@ enum IconSize: CGFloat {
 }
 
 enum Layout {
-    static let badgeRadiusShare: CGFloat = 0.23  // corner radius of coloured squares, relative to their size
+    /// Corner radius of coloured squares, relative to their size.
+    static let badgeRadiusShare: CGFloat = 0.23
+    /// The symbol or letter on a coloured square fills half of it.
+    static let badgeContentShare: CGFloat = 0.5
     static let cardRadius: CGFloat = 16
     static let storageBarHeight: CGFloat = 22
     static let storageBarRadius: CGFloat = 5
@@ -51,17 +55,33 @@ enum Layout {
     static let folderListHeight: CGFloat = 90
     static let settingsHeight: CGFloat = 330
     static let placeholderHeight: CGFloat = 320
-    static let backdropOpacity = 0.16
     static let gridTile: CGFloat = 170
     static let legendMax = 6
     static let legendColumns = 2
     static let chartHeight: CGFloat = 220
-    static let statTileMin: CGFloat = 150
     static let statColumns = 3
     static let statMinScale = 0.7
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
     static let fillShare = 0.72
+    static let cardBorderWidth: CGFloat = 0.5
+    /// Titles and labels that may wrap show at most this many lines.
+    static let maxWrappedLines = 2
+}
+
+/// How much of a view shows: fully, or not at all while it keeps its place.
+enum Opacity {
+    static let full = 1.0
+    static let hidden = 0.0
+}
+
+/// A share of a whole, from nothing to everything.
+enum Fraction {
+    static let nothing = 0.0
+    static let whole = 1.0
+
+    /// Keeps a share between nothing and the whole, as progress bars expect.
+    static func clamp(_ share: Double) -> Double { min(max(share, nothing), whole) }
 }
 
 /// SF Symbol names used across the app.
@@ -72,7 +92,6 @@ enum Symbols {
     static let settings = "gearshape"
     static let list = "list.bullet"
     static let grid = "square.grid.2x2"
-    static let trashApp = "trash"
     static let files = "doc.on.doc"
     static let speaker = "speaker.wave.2"
     static let summary = "text.bubble"
@@ -88,14 +107,12 @@ enum Symbols {
     static let chevron = "chevron.right"
     static let rest = "ellipsis.circle"
     static let info = "info.circle"
-    static let finder = "folder"
     static let measure = "gauge.with.dots.needle.33percent"
     static let search = "magnifyingglass"
     static let running = "play.circle.fill"
     static let stopped = "stop.circle"
     static let success = "checkmark.circle.fill"
     static let warning = "exclamationmark.triangle.fill"
-    static let unknownApp = "app.dashed"
     static let add = "plus"
     static let remove = "minus"
 }
@@ -121,6 +138,7 @@ enum TextRole {
 extension View {
     func textRole(_ role: TextRole) -> some View {
         font(role.font)
-            .foregroundStyle(role.isMuted ? AnyShapeStyle(Color.muted) : AnyShapeStyle(.primary))
+            .foregroundStyle(
+                role.isMuted ? AnyShapeStyle(Theme.muted.color) : AnyShapeStyle(.primary))
     }
 }

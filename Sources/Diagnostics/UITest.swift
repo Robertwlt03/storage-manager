@@ -6,130 +6,160 @@ import SwiftUI
 /// searches, checks the data after every step and saves a picture of the window. It never deletes, cleans up or
 /// moves anything to the Trash, prints only counts (no names) and restores the user's settings at the end.
 @MainActor enum UITest {
-    private static let settingKeys = [
+    private static let changedSettingKeys = [
         SettingsKey.layoutMode, SettingsKey.largeFileMB, SettingsKey.unusedDays,
     ]
+    private static let roundsDuringScan = 3
+    /// While the first scan runs, every fifth step also types a search.
+    private static let searchEveryNthStep = 5
+    private static let sampleQuery = "a"
+    private static let searchQueries = ["a", "lib", "zzzzqq", " ", "e", ""]
+    private static let folderDepth = 5
+    private static let cleanerRefreshes = 3
+    private static let scanTimeout: TimeInterval = 240
+    private static let scanPollInterval: Duration = .milliseconds(500)
+    private static let validFractions = 0.0...1.0
+    /// The main window; smaller windows such as the settings are not photographed.
+    private static let minimumPictureWidth = 600.0
+    private static let millisecondsPerSecond = 1000.0
+    private static let secondFractionDigits = 3
+    private static let timeFormat = Date.FormatStyle.dateTime.hour().minute().second()
+        .secondFraction(.fractional(secondFractionDigits))
+
+    /// How long each step waits for the app to settle, in seconds.
+    private enum Pause {
+        static let betweenSwitches = 0.25
+        static let afterCancel = 0.3
+        static let afterSecondCancel = 0.2
+        static let afterDoubleStart = 1.0
+        static let afterRestart = 0.5
+        static let afterScan = 1.0
+        static let perPage = 0.8
+        static let perFolder = 0.15
+        static let perSearch = 0.4
+        static let perSetting = 0.3
+        static let afterCleanerRefresh = 0.5
+        static let perPageDuringRescan = 0.3
+        static let atTheEnd = 1.0
+    }
+
     private static var problems: [String] = []
-    private static var steps = 0
-    private static var folder = URL(fileURLWithPath: NSTemporaryDirectory())
+    private static var stepCount = 0
+    private static var pictureFolder = URL(fileURLWithPath: NSTemporaryDirectory())
 
-    static func run(_ model: AppModel, into dir: String) async {
-        folder = URL(fileURLWithPath: dir)
-        try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
-        let saved = settingKeys.map {
-            (
-                $0,
-                UserDefaults.standard.persistentDomain(
-                    forName: Bundle.main.bundleIdentifier ?? "")?[$0]
-            )
-        }
-        defer { restore(saved) }
-        log("Start, Vollzugriff: \(model.hasFullDiskAccess)")
+    static func run(_ model: AppModel, into pictureFolderPath: String) async {
+        preparePictureFolder(at: pictureFolderPath)
+        let savedSettings = saveSettings()
+        defer { restore(savedSettings) }
+        log("Start, Full Disk Access: \(model.hasFullDiskAccess)")
 
-        await chaosDuringScan(model)
-        await cancelAndRestart(model)
+        await switchAroundDuringScan(model)
+        await checkScanControls(model)
         await waitForScan(model)
-        await visitEverything(model)
-        await digIntoFolders(model)
-        await search(model)
+        await visitEveryPage(model)
+        await browseFolders(model)
+        await searchEveryScope(model)
         await flipSettings(model)
         await rescanOnOverview(model)
 
-        log(
-            problems.isEmpty
-                ? "ERGEBNIS: keine Fehler in \(steps) Schritten"
-                : "ERGEBNIS: \(problems.count) Probleme")
-        problems.forEach { log("PROBLEM: \($0)") }
+        reportResult()
     }
 
     // MARK: Scenarios
 
     /// Jump between pages, layouts and searches while the first scan is still running.
-    private static func chaosDuringScan(_ model: AppModel) async {
+    private static func switchAroundDuringScan(_ model: AppModel) async {
         if !model.scanning { model.scan() }
-        for round in 0..<3 {
+        for round in 0..<roundsDuringScan {
             for pane in allPanes(model) {
                 model.pane = pane
-                set(SettingsKey.layoutMode, (round + steps) % 2)
-                model.searchText = steps % 5 == 0 ? "a" : ""
-                await step("Chaos \(round) \(pane.launchKey)", model, wait: 0.25, picture: false)
+                changeSetting(
+                    SettingsKey.layoutMode, to: (round + stepCount) % LayoutMode.allCases.count)
+                model.searchText = stepCount % searchEveryNthStep == 0 ? sampleQuery : ""
+                await step(
+                    "Chaos \(round) \(logName(of: pane))", model, wait: Pause.betweenSwitches,
+                    picture: false)
             }
         }
         model.searchText = ""
     }
 
     /// Cancel and restart scans in quick succession, also twice in a row.
-    private static func cancelAndRestart(_ model: AppModel) async {
+    private static func checkScanControls(_ model: AppModel) async {
         model.cancelScan()
-        await step("Abbruch", model, wait: 0.3)
+        await step("Cancel", model, wait: Pause.afterCancel)
         model.cancelScan()
-        await step("Doppelter Abbruch", model, wait: 0.2)
+        await step("Double cancel", model, wait: Pause.afterSecondCancel)
         model.scan()
         model.scan()
-        await step("Doppelter Start", model, wait: 1)
+        await step("Double start", model, wait: Pause.afterDoubleStart)
         model.cancelScan()
         model.scan()
-        await step("Abbruch und sofort neu", model, wait: 0.5)
-        check(model.scanning, "Messung läuft nach Neustart nicht")
+        await step("Cancel and restart at once", model, wait: Pause.afterRestart)
+        check(model.scanning, "Scan not running after restart")
     }
 
     private static func waitForScan(_ model: AppModel) async {
         let start = Date()
-        while model.scanning && Date().timeIntervalSince(start) < 240 {
-            try? await Task.sleep(for: .milliseconds(500))
+        while model.scanning && Date().timeIntervalSince(start) < scanTimeout {
+            try? await Task.sleep(for: scanPollInterval)
         }
-        check(!model.scanning, "Messung nach 4 Minuten nicht fertig")
+        check(!model.scanning, "Scan not finished after \(Int(scanTimeout)) s")
         log(
-            "Messung fertig nach \(Int(Date().timeIntervalSince(start))) s: \(model.root.fileCount) Dateien, \(model.categories.count) Kategorien"
+            "Scan finished after \(Int(Date().timeIntervalSince(start))) s:"
+                + " \(model.root.fileCount) files, \(model.categories.count) categories"
         )
-        await step("Nach der Messung", model, wait: 1)
+        await step("After the scan", model, wait: Pause.afterScan)
     }
 
     /// Every page in light and dark, as list and as grid, with a picture of each.
-    private static func visitEverything(_ model: AppModel) async {
+    private static func visitEveryPage(_ model: AppModel) async {
         for appearance in [NSAppearance(named: .aqua), NSAppearance(named: .darkAqua)] {
-            NSApp.appearance = appearance  // only for this test run; the app itself follows the system
+            // Only for this test run; the app itself follows the system.
+            NSApp.appearance = appearance
             for pane in allPanes(model) {
                 for layout in LayoutMode.allCases where layout == .list || pane.supportsGrid {
-                    set(SettingsKey.layoutMode, layout.rawValue)
+                    changeSetting(SettingsKey.layoutMode, to: layout.rawValue)
                     model.pane = pane
+                    let appearanceName = appearance?.name.rawValue ?? ""
                     await step(
-                        "Seite \(pane.launchKey) \(appearance?.name.rawValue ?? "") \(layout)",
-                        model, wait: 0.8)
+                        "Page \(logName(of: pane)) \(appearanceName) \(layout)", model,
+                        wait: Pause.perPage)
                 }
             }
         }
-        set(SettingsKey.layoutMode, LayoutMode.list.rawValue)
+        changeSetting(SettingsKey.layoutMode, to: LayoutMode.list.rawValue)
         NSApp.appearance = nil
     }
 
     /// Open every category, go five levels deep, back out, and repeat quickly.
-    private static func digIntoFolders(_ model: AppModel) async {
+    private static func browseFolders(_ model: AppModel) async {
         for category in model.categories {
             guard let node = category.node else { continue }
             model.open(node)
             var current = node
-            for _ in 0..<5 {
+            for _ in 0..<folderDepth {
                 guard let next = current.children.first else { break }
                 model.explorerPath.append(next)
                 current = next
-                await step("Ordner tiefer", model, wait: 0.15, picture: false)
+                await step("Folder deeper", model, wait: Pause.perFolder, picture: false)
             }
             while !model.explorerPath.isEmpty { model.explorerPath.removeLast() }
-            await step("Ordner zurück", model, wait: 0.15, picture: false)
+            await step("Folder back", model, wait: Pause.perFolder, picture: false)
         }
     }
 
-    private static func search(_ model: AppModel) async {
-        for query in ["a", "lib", "zzzzqq", " ", "e", ""] {
+    private static func searchEveryScope(_ model: AppModel) async {
+        for query in searchQueries {
             for scope in SearchScope.allCases {
                 model.searchScope = scope
                 model.searchText = query
-                await step("Suche", model, wait: 0.4, picture: false)
+                await step("Search", model, wait: Pause.perSearch, picture: false)
                 let hits = SearchService.search(query, scope: scope, in: model.root)
-                check(hits.count <= ScanConfig.searchLimit, "Suche liefert mehr als die Grenze")
+                check(hits.count <= ScanConfig.searchLimit, "Search returns more than the limit")
                 check(
-                    scope != .folders || hits.allSatisfy(\.isFolder), "Ordnersuche liefert Dateien")
+                    scope != .folders || hits.allSatisfy(\.isFolder),
+                    "Folder search returns files")
             }
         }
         model.searchText = ""
@@ -138,18 +168,18 @@ import SwiftUI
     /// Thresholds and day ranges, each on the page that shows it.
     private static func flipSettings(_ model: AppModel) async {
         model.pane = .largeFiles
-        for mb in LargeFileThreshold.optionsMB {
-            set(SettingsKey.largeFileMB, mb)
-            await step("Große Dateien \(mb)", model, wait: 0.3, picture: false)
+        for megabytes in LargeFileThreshold.optionsMB {
+            changeSetting(SettingsKey.largeFileMB, to: megabytes)
+            await step("Large files \(megabytes)", model, wait: Pause.perSetting, picture: false)
         }
         model.pane = .apps
         for days in CleanConfig.unusedDayOptions {
-            set(SettingsKey.unusedDays, days)
-            await step("Tage \(days)", model, wait: 0.3, picture: false)
+            changeSetting(SettingsKey.unusedDays, to: days)
+            await step("Days \(days)", model, wait: Pause.perSetting, picture: false)
         }
         model.pane = .cleaner
-        for _ in 0..<3 { model.refreshCleanItems() }
-        await step("Aufräumen neu suchen", model, wait: 0.5)
+        for _ in 0..<cleanerRefreshes { model.refreshCleanItems() }
+        await step("Cleaner refresh", model, wait: Pause.afterCleanerRefresh)
     }
 
     /// The scenario that crashed Swift Charts: rescan while the page with the chart is open, then switch around.
@@ -158,55 +188,83 @@ import SwiftUI
         model.scan()
         for pane in allPanes(model) + [.overview, .explorer, .overview] {
             model.pane = pane
-            await step("Neu messen \(pane.launchKey)", model, wait: 0.3, picture: false)
+            await step(
+                "Rescan \(logName(of: pane))", model, wait: Pause.perPageDuringRescan,
+                picture: false)
         }
         await waitForScan(model)
         model.pane = .overview
-        await step("Überblick am Ende", model, wait: 1)
+        await step("Overview at the end", model, wait: Pause.atTheEnd)
+    }
+
+    // MARK: Steps and checks
+
+    private static func step(
+        _ name: String, _ model: AppModel, wait seconds: Double, picture: Bool = true
+    ) async {
+        stepCount += 1
+        try? await Task.sleep(for: .milliseconds(Int(seconds * millisecondsPerSecond)))
+        checkData(model, name)
+        if picture { savePicture(named: String(format: "%03d", stepCount)) }
+        log("\(stepCount) \(name) ok")
+    }
+
+    /// Consistency of what every page shows.
+    private static func checkData(_ model: AppModel, _ name: String) {
+        let categories = model.categories
+        check(
+            zip(categories, categories.dropFirst())
+                .allSatisfy { larger, smaller in larger.bytes >= smaller.bytes },
+            "\(name): categories not sorted")
+        check(categories.allSatisfy { category in category.bytes >= 0 }, "\(name): negative size")
+        check(validFractions.contains(model.scanFraction), "\(name): progress outside 0–100 %")
+        check(model.root.bytes >= 0 && model.root.fileCount >= 0, "\(name): tree invalid")
+        if !model.explorerPath.isEmpty {
+            check(
+                zip(model.explorerPath, model.explorerPath.dropFirst())
+                    .allSatisfy { parent, child in child.path.hasPrefix(parent.path) },
+                "\(name): folder path does not fit together")
+        }
+    }
+
+    private static func check(_ isFine: Bool, _ problem: String) {
+        if !isFine { problems.append(problem) }
+    }
+
+    private static func reportResult() {
+        log(
+            problems.isEmpty
+                ? "RESULT: no problems in \(stepCount) steps"
+                : "RESULT: \(problems.count) problems")
+        for problem in problems { log("PROBLEM: \(problem)") }
     }
 
     // MARK: Helpers
 
     private static func allPanes(_ model: AppModel) -> [Pane] {
-        Pane.main + Pane.tidy + Pane.system
-            + model.volumes.filter { !$0.isRoot }.map { .volume($0.path) }
+        let otherVolumes = model.volumes.filter { volume in !volume.isRoot }
+        return Pane.main + Pane.tidy + Pane.system
+            + otherVolumes.map { volume in .volume(volume.path) }
     }
 
-    private static func step(
-        _ name: String, _ model: AppModel, wait seconds: Double, picture: Bool = true
-    ) async {
-        steps += 1
-        try? await Task.sleep(for: .milliseconds(Int(seconds * 1000)))
-        checkData(model, name)
-        if picture { snapshot(String(format: "%03d", steps)) }
-        log("\(steps) \(name) ok")
+    /// A volume's launch key is its mount point, so the log only says "volume" to keep names out of it.
+    private static func logName(of pane: Pane) -> String {
+        if case .volume = pane { return "volume" }
+        return pane.launchKey
     }
 
-    /// Consistency of what every page shows.
-    private static func checkData(_ model: AppModel, _ name: String) {
-        let cats = model.categories
-        check(
-            zip(cats, cats.dropFirst()).allSatisfy { $0.bytes >= $1.bytes },
-            "\(name): Kategorien nicht sortiert")
-        check(cats.allSatisfy { $0.bytes >= 0 }, "\(name): negative Größe")
-        check((0...1).contains(model.scanFraction), "\(name): Fortschritt außerhalb 0–100 %")
-        check(model.root.bytes >= 0 && model.root.fileCount >= 0, "\(name): Baum ungültig")
-        if !model.explorerPath.isEmpty {
-            check(
-                zip(model.explorerPath, model.explorerPath.dropFirst())
-                    .allSatisfy { $1.path.hasPrefix($0.path) },
-                "\(name): Ordnerpfad passt nicht zusammen")
-        }
-    }
-
-    private static func check(_ ok: Bool, _ message: String) { if !ok { problems.append(message) } }
-
-    private static func set(_ key: String, _ value: Any) {
+    private static func changeSetting(_ key: String, to value: Any) {
         UserDefaults.standard.set(value, forKey: key)
     }
 
-    private static func restore(_ saved: [(String, Any?)]) {
-        for (key, value) in saved {
+    private static func saveSettings() -> [(String, Any?)] {
+        let storedSettings = UserDefaults.standard.persistentDomain(
+            forName: Bundle.main.bundleIdentifier ?? "")
+        return changedSettingKeys.map { key in (key, storedSettings?[key]) }
+    }
+
+    private static func restore(_ savedSettings: [(String, Any?)]) {
+        for (key, value) in savedSettings {
             if let value {
                 UserDefaults.standard.set(value, forKey: key)
             } else {
@@ -215,21 +273,30 @@ import SwiftUI
         }
     }
 
-    private static func snapshot(_ name: String) {
-        guard
-            let view = NSApp.windows.first(where: { $0.isVisible && $0.frame.width > 600 })?
-                .contentView,
-            let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds)
+    private static func preparePictureFolder(at path: String) {
+        pictureFolder = URL(fileURLWithPath: path)
+        try? FileManager.default.createDirectory(
+            at: pictureFolder, withIntermediateDirectories: true)
+    }
+
+    private static func savePicture(named name: String) {
+        guard let view = pictureWindow?.contentView,
+            let bitmap = view.bitmapImageRepForCachingDisplay(in: view.bounds)
         else { return }
-        view.cacheDisplay(in: view.bounds, to: rep)
-        try? rep.representation(using: .png, properties: [:])?
-            .write(to: folder.appendingPathComponent(name + ".png"))
+        view.cacheDisplay(in: view.bounds, to: bitmap)
+        try? bitmap.representation(using: .png, properties: [:])?
+            .write(to: pictureFolder.appendingPathComponent(name + ".png"))
+    }
+
+    private static var pictureWindow: NSWindow? {
+        NSApp.windows.first { window in
+            window.isVisible && window.frame.width > minimumPictureWidth
+        }
     }
 
     private static func log(_ text: String) {
-        print(
-            "[UITest] \(Date().formatted(.dateTime.hour().minute().second().secondFraction(.fractional(3)))) \(text)"
-        )
+        let time = Date().formatted(timeFormat)
+        print("[UITest] \(time) \(text)")
         fflush(stdout)
     }
 }

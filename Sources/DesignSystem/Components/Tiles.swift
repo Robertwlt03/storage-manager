@@ -12,11 +12,12 @@ extension UI {
         var body: some View {
             VStack(spacing: Space.small) {
                 Icon(icon, size: .large)
-                Text(title).textRole(.section).lineLimit(2).multilineTextAlignment(.center)
+                Text(title).textRole(.section).lineLimit(Layout.maxWrappedLines)
+                    .multilineTextAlignment(.center)
                 Text(value).textRole(.value)
                 if let detail { Text(detail).textRole(.hint).lineLimit(1) }
                 if let share {
-                    ProgressView(value: min(max(share, 0), 1)).progressViewStyle(.linear)
+                    ProgressView(value: Fraction.clamp(share)).progressViewStyle(.linear)
                 }
             }
             .padding(Space.card)
@@ -33,7 +34,7 @@ extension UI {
         let value: String
         let label: String
         let symbol: String
-        var loading = false
+        var isLoading = false
         var action: (() -> Void)?
 
         init(
@@ -43,7 +44,7 @@ extension UI {
             self.value = value
             self.label = label
             self.symbol = symbol
-            self.loading = loading
+            self.isLoading = loading
             self.action = action
         }
 
@@ -57,8 +58,9 @@ extension UI {
                             .padding(.bottom, Space.extraSmall)
                         Text(value).textRole(.figure).contentTransition(.numericText())
                             .lineLimit(1).minimumScaleFactor(Layout.statMinScale)
-                            .calculating(loading)
-                        Text(label).foregroundStyle(.muted).lineLimit(2, reservesSpace: true)
+                            .calculating(isLoading)
+                        Text(label).foregroundStyle(.muted)
+                            .lineLimit(Layout.maxWrappedLines, reservesSpace: true)
                     }
                     Spacer(minLength: 0)
                     if action != nil { Chevron() }
@@ -69,7 +71,7 @@ extension UI {
             }
             .appButton(.content)
             .hoverLift()
-            .allowsHitTesting(action != nil && !loading)
+            .allowsHitTesting(action != nil && !isLoading)
             .accessibilityElement(children: .combine)
         }
     }
@@ -95,7 +97,7 @@ extension UI {
                 columns: [GridItem(.adaptive(minimum: minWidth), spacing: Space.section)],
                 spacing: Space.section
             ) {
-                ForEach(data) { tile($0) }
+                ForEach(data) { item in tile(item) }
             }
         }
     }

@@ -36,7 +36,7 @@ extension UI {
 
         var body: some View {
             HStack(spacing: Space.small) {
-                ProgressView(value: min(max(fraction, 0), 1)).progressViewStyle(.linear)
+                ProgressView(value: Fraction.clamp(fraction)).progressViewStyle(.linear)
                 Text(Format.percent(fraction)).monospacedDigit()
                     .frame(width: Layout.percentWidth, alignment: .trailing)
             }

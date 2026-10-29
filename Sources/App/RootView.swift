@@ -2,6 +2,9 @@ import AppKit
 import SwiftUI
 
 struct RootView: View {
+    /// The floating sidebar waits fully outside the window's left edge.
+    private static let hiddenSidebarOffset = -(Layout.sidebarIdeal + Space.large)
+
     @Environment(AppModel.self) private var model
     @Environment(\.openSettings) private var openSettings
 
@@ -10,60 +13,29 @@ struct RootView: View {
         NavigationSplitView(columnVisibility: $model.columns) {
             SidebarView()
         } detail: {
-            detail
-                .frame(minWidth: Layout.pageMinWidth)  // cards are never squeezed, also with the sidebar open
-                .overlay(alignment: .leading) {
-                    // Slid, never removed or faded (see ARCHITECTURE.md).
-                    if model.windowNarrow {
-                        SidebarOverlay()
-                            .offset(
-                                x: model.sidebarOverlay ? 0 : -(Layout.sidebarIdeal + Space.large)
-                            )
-                            .allowsHitTesting(model.sidebarOverlay)
-                            .accessibilityHidden(!model.sidebarOverlay)
-                    }
-                }
-                .smoothChanges(of: model.pane)
-                .smoothChanges(of: model.isSearching)
+            page
         }
-        .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
-        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didResizeNotification)) { _ in
-            model.windowResized()
-        }
+        // Replaced by `SidebarToggle`, see `AppModel.toggleSidebar`.
+        .toolbar(removing: .sidebarToggle)
         .searchable(
             text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar,
             prompt: TextKey.searchPrompt.translated
         )
         .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }
         .syncPreferences()
-        .onExitCommand {  // Escape closes the floating sidebar, otherwise it leaves the search
-            if model.sidebarOverlay {
-                model.closeSidebarOverlay()
-            } else if model.isSearching || model.searchPresented {
-                model.endSearch()
-            }
-        }
-        .onChange(of: model.pane) {  // picking a page leaves the search and closes the floating sidebar
-            if model.isSearching { model.endSearch() }
-            model.closeSidebarOverlay()
-        }
-        .onAppear {
-            model.windowResized()
-            if AppSettings.launchSettings { openSettings() }
-            model.launch()
-            if let dir = AppSettings.launchUITest {
-                Task {
-                    await UITest.run(model, into: dir)
-                    NSApp.terminate(nil)
-                }
-            }
-        }
-        .onReceive(
-            NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didMountNotification)
-        ) { _ in model.refreshVolumes() }
-        .onReceive(
-            NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didUnmountNotification)
-        ) { _ in model.refreshVolumes() }
+        .onExitCommand(perform: closeSidebarOrSearch)
+        .onChange(of: model.pane, leaveSearchAndSidebar)
+        .onAppear(perform: start)
+        .modifier(SystemEvents(model: model))
+    }
+
+    /// The page beside the sidebar; cards are never squeezed, also with the sidebar open.
+    private var page: some View {
+        detail
+            .frame(minWidth: Layout.pageMinWidth)
+            .overlay(alignment: .leading) { floatingSidebar }
+            .smoothChanges(of: model.pane)
+            .smoothChanges(of: model.isSearching)
     }
 
     @ViewBuilder private var detail: some View {
@@ -74,5 +46,66 @@ struct RootView: View {
                 .id(model.pane)
                 .fadeTransition()
         }
+    }
+
+    /// Slid, never removed or faded (see ARCHITECTURE.md).
+    @ViewBuilder private var floatingSidebar: some View {
+        if model.windowNarrow {
+            SidebarOverlay()
+                .offset(x: model.sidebarOverlay ? 0 : Self.hiddenSidebarOffset)
+                .allowsHitTesting(model.sidebarOverlay)
+                .accessibilityHidden(!model.sidebarOverlay)
+        }
+    }
+
+    /// Escape closes the floating sidebar, otherwise it leaves the search.
+    private func closeSidebarOrSearch() {
+        if model.sidebarOverlay {
+            model.closeSidebarOverlay()
+        } else if model.isSearching || model.searchPresented {
+            model.endSearch()
+        }
+    }
+
+    /// Picking a page leaves the search and closes the floating sidebar.
+    private func leaveSearchAndSidebar() {
+        if model.isSearching { model.endSearch() }
+        model.closeSidebarOverlay()
+    }
+
+    private func start() {
+        model.windowResized()
+        if AppSettings.launchSettings { openSettings() }
+        model.launch()
+        if let reportFolder = AppSettings.launchUITest {
+            Task {
+                await UITest.run(model, into: reportFolder)
+                NSApp.terminate(nil)
+            }
+        }
+    }
+}
+
+/// Follows the window's size and the drives that are connected or ejected.
+private struct SystemEvents: ViewModifier {
+    let model: AppModel
+
+    func body(content: Content) -> some View {
+        content
+            .onReceive(windowResizes) { _ in model.windowResized() }
+            .onReceive(drivesConnected) { _ in model.refreshVolumes() }
+            .onReceive(drivesEjected) { _ in model.refreshVolumes() }
+    }
+
+    private var windowResizes: NotificationCenter.Publisher {
+        NotificationCenter.default.publisher(for: NSWindow.didResizeNotification)
+    }
+
+    private var drivesConnected: NotificationCenter.Publisher {
+        NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didMountNotification)
+    }
+
+    private var drivesEjected: NotificationCenter.Publisher {
+        NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didUnmountNotification)
     }
 }

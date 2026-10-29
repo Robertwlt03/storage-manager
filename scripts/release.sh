@@ -30,7 +30,7 @@ codesign --force --sign "$IDENTITY" "$DMG"
 if [[ "$IDENTITY" == "Developer ID Application:"* && -n "${NOTARY_PROFILE:-}" ]]; then
   xcrun notarytool submit "$DMG" --keychain-profile "$NOTARY_PROFILE" --wait
   xcrun stapler staple "$DMG"
-  echo "Beglaubigt: macOS öffnet die App ohne Warnung."
+  echo "Notarized: macOS opens the app without a warning."
 fi
 rm -rf "$STAGE"
-echo "Fertig: $DMG"
+echo "Done: $DMG"

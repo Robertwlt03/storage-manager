@@ -12,8 +12,8 @@ private struct SurfaceModifier: ViewModifier {
             content.glassEffect(.regular, in: shape)
         } else {
             content
-                .background(Color(nsColor: .controlBackgroundColor), in: shape)
-                .overlay(shape.strokeBorder(.separator, lineWidth: 0.5))
+                .background(Theme.cardBackground, in: shape)
+                .overlay(shape.strokeBorder(.separator, lineWidth: Layout.cardBorderWidth))
         }
     }
 }
@@ -38,19 +38,24 @@ private struct AppButtonModifier: ViewModifier {
     let kind: ButtonKind
 
     func body(content: Content) -> some View {
-        if kind == .quiet {
-            content.buttonStyle(.borderless)
-        } else if kind == .content {
-            content.buttonStyle(.plain)
-        } else if let fill = kind.fill {
-            if #available(macOS 26.0, *) {
+        switch kind {
+        case .quiet: content.buttonStyle(.borderless)
+        case .content: content.buttonStyle(.plain)
+        case .normal, .primary, .confirm: framed(content)
+        }
+    }
+
+    /// Liquid Glass on macOS 26 and later, the classic bordered button before.
+    @ViewBuilder private func framed(_ content: Content) -> some View {
+        if #available(macOS 26.0, *) {
+            if let fill = kind.fill {
                 content.buttonStyle(.glassProminent).tint(fill.color)
             } else {
-                content.buttonStyle(.borderedProminent).tint(fill.color)
+                content.buttonStyle(.glass)
             }
         } else {
-            if #available(macOS 26.0, *) {
-                content.buttonStyle(.glass)
+            if let fill = kind.fill {
+                content.buttonStyle(.borderedProminent).tint(fill.color)
             } else {
                 content.buttonStyle(.bordered)
             }
@@ -60,7 +65,7 @@ private struct AppButtonModifier: ViewModifier {
 
 /// Plain window background behind pages, like other Apple apps.
 struct Backdrop: View {
-    var body: some View { Color(nsColor: .windowBackgroundColor).ignoresSafeArea() }
+    var body: some View { Theme.windowBackground.ignoresSafeArea() }
 }
 
 extension View {

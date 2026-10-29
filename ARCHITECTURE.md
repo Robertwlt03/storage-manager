@@ -14,7 +14,7 @@ temporären Ordner von macOS. Nach der Messung kommt jede Seite ohne weiteren Fe
 
 ## <img src="assets/icons/dataflow.svg" height="33" align="absmiddle" alt="">Der Weg der Daten
 
-1. `ScanService` läuft mit `FTS` einmal über einen Bereich der Festplatte, auf den sparsamen Kernen des Prozessors.
+1. `ScanService` läuft mit `FileTreeWalker` einmal über einen Bereich der Festplatte, auf den sparsamen Kernen des Prozessors.
 2. Daraus entsteht ein Baum aus `Node`. Ordner und Dateien unter einem Megabyte fasst jeder Ordner zu einer Zeile
    zusammen. Das hält den Baum klein.
 3. `AppModel` hält diesen Baum und alles, was daraus folgt: Kategorien, Kennzahlen, Aufräum-Vorschläge und Apps. Es
@@ -46,7 +46,7 @@ Animationen.
 **`Sources/Features`:** Jede Seite in einem eigenen Ordner. `Pages.swift` ordnet jeder Seite ihre Ansicht zu.
 `Shared` enthält die gemeinsame Tabelle und das gemeinsame Raster für Ordner, Suchergebnisse und große Dateien.
 
-**`Sources/Localization` und `Resources`:** `Loc` enthält alle Textschlüssel, die 20 Sprachordner enthalten die Texte.
+**`Sources/Localization` und `Resources`:** `TextKey` enthält alle englischen Textschlüssel, die 20 Sprachordner enthalten die Texte.
 
 **`Sources/Diagnostics`:** Die Prüfungen, die `build.sh` aufruft, dazu der Selbsttest und der Belastungstest.
 
@@ -105,6 +105,6 @@ Nebensächliches den Ton `muted` statt der Systemfarbe, die im hellen Modus daru
 
 <p align="center">
   <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
-  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
+  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
   <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
 </p>

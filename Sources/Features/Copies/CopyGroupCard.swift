@@ -6,109 +6,125 @@ struct CopyGroupCard: View {
     let group: CopyGroup
     @Environment(AppModel.self) private var model
     @State private var details: CopyDetails?
-    @State private var running = false
-    @State private var confirming = false
-    @State private var deleting = false
-    @State private var freed: Int64?
-    @State private var error: String?
+    @State private var isAppRunning = false
+    @State private var isConfirming = false
+    @State private var isDeleting = false
+    @State private var freedBytes: Int64?
+    @State private var errorMessage: String?
 
     var body: some View {
         UI.Card {
-            HStack {
-                UI.TitleRow(
-                    group.appName, subtitle: group.bundleID, icon: .file(group.appPath ?? ""))
-                Spacer()
-                running
-                    ? UI.Note(TextKey.running.translated, .warn(symbol: Symbols.running))
-                    : UI.Note(TextKey.stopped.translated, .good(symbol: Symbols.stopped))
-            }
-            .padding(.vertical, Space.row)
+            header.padding(.vertical, Space.row)
             Divider()
             UI.Fields(fields)
-            if let freed {
+            if let freedBytes {
                 Divider()
                 UI.Note(
-                    TextKey.freed.translated(with: Format.bytes(freed)),
+                    TextKey.freed.translated(with: Format.bytes(freedBytes)),
                     .good(symbol: Symbols.success)
                 )
                 .padding(.vertical, Space.row)
             }
-            if let error {
+            if let errorMessage {
                 Divider()
-                UI.Note(error, .bad(symbol: Symbols.warning)).padding(.vertical, Space.row)
+                UI.Note(errorMessage, .bad(symbol: Symbols.warning)).padding(.vertical, Space.row)
             }
             Divider()
             actions.padding(.vertical, Space.row)
         }
-        .task(id: group.id) {
-            running = CopyService.isRunning(group.bundleID)
-            let g = group
-            details = await Task.detached(priority: .utility) { CopyService.details(g) }.value
-        }
-        .onReceive(
-            NSWorkspace.shared.notificationCenter.publisher(
-                for: NSWorkspace.didLaunchApplicationNotification)
-        ) { _ in refreshRunning() }
-        .onReceive(
-            NSWorkspace.shared.notificationCenter.publisher(
-                for: NSWorkspace.didTerminateApplicationNotification)
-        ) { _ in refreshRunning() }
+        .task(id: group.id) { await loadDetails() }
+        .onReceive(appLaunches) { _ in refreshIsAppRunning() }
+        .onReceive(appTerminations) { _ in refreshIsAppRunning() }
         .confirmationDialog(
             TextKey.deleteTitle.translated(with: Format.count(details?.count ?? 0), group.appName),
-            isPresented: $confirming
+            isPresented: $isConfirming
         ) {
-            Button(TextKey.deleteForever.translated, role: .destructive) { Task { await delete() } }
+            Button(TextKey.deleteForever.translated, role: .destructive) {
+                Task { await deleteCopies() }
+            }
             Button(TextKey.cancel.translated, role: .cancel) {}
         } message: {
             Text(TextKey.deleteMessage.translated)
         }
     }
 
-    private var fields: [UI.Field?] {
-        var items: [UI.Field?] = [
-            UI.Field(.copiesLabel, details.map { Format.count($0.count) }),
+    private var header: some View {
+        HStack {
+            UI.TitleRow(group.appName, subtitle: group.bundleID, icon: .file(group.appPath ?? ""))
+            Spacer()
+            isAppRunning
+                ? UI.Note(TextKey.running.translated, .warn(symbol: Symbols.running))
+                : UI.Note(TextKey.stopped.translated, .good(symbol: Symbols.stopped))
+        }
+    }
+
+    private var fields: [UI.Field?] { summaryFields + versionFields + dayFields }
+
+    private var summaryFields: [UI.Field?] {
+        [
+            UI.Field(.copiesLabel, details.map { loaded in Format.count(loaded.count) }),
             UI.Field(.countedSize, Format.bytes(group.node.bytes)),
             UI.Field(.installedVersion, group.installedVersion ?? TextKey.notFound.translated),
         ]
-        for v in details?.versions ?? [] {
+    }
+
+    private var versionFields: [UI.Field?] {
+        let versions = details?.versions ?? []
+        return versions.map { version, count in
             let state =
-                v.version == group.installedVersion
+                version == group.installedVersion
                 ? TextKey.current.translated : TextKey.old.translated
-            items.append(
-                UI.Field(
-                    TextKey.versionLabel.translated(with: v.version),
-                    Format.joined(Format.copies(v.count), state)))
+            return UI.Field(
+                TextKey.versionLabel.translated(with: version),
+                Format.joined(Format.copies(count), state))
         }
-        for d in details?.days ?? [] {
-            items.append(
-                UI.Field(
-                    TextKey.createdOn.translated(with: Format.day(d.day)), Format.copies(d.count)))
+    }
+
+    private var dayFields: [UI.Field?] {
+        let days = details?.days ?? []
+        return days.map { day, count in
+            UI.Field(TextKey.createdOn.translated(with: Format.day(day)), Format.copies(count))
         }
-        return items
     }
 
     private var actions: some View {
         HStack {
-            if running {
+            if isAppRunning {
                 Text(TextKey.quitToDelete.translated(with: group.appName)).foregroundStyle(.warn)
             }
             Spacer()
             UI.ActionButton(TextKey.openInExplorer.translated) { model.open(group.node) }
-            UI.ActionButton(TextKey.deleteAll.translated, role: .destructive) { confirming = true }
-                .disabled(running || deleting || details == nil)
+            UI.ActionButton(TextKey.deleteAll.translated, role: .destructive) {
+                isConfirming = true
+            }
+            .disabled(isAppRunning || isDeleting || details == nil)
         }
     }
 
-    private func refreshRunning() { running = CopyService.isRunning(group.bundleID) }
+    private var workspaceEvents: NotificationCenter { NSWorkspace.shared.notificationCenter }
+    private var appLaunches: NotificationCenter.Publisher {
+        workspaceEvents.publisher(for: NSWorkspace.didLaunchApplicationNotification)
+    }
+    private var appTerminations: NotificationCenter.Publisher {
+        workspaceEvents.publisher(for: NSWorkspace.didTerminateApplicationNotification)
+    }
 
-    private func delete() async {
-        refreshRunning()  // checked again at the last moment
-        guard !running else { return }
-        deleting = true
-        error = nil
-        do { freed = try await model.delete(group) } catch {
-            self.error = TextKey.deleteError.translated(with: error.localizedDescription)
+    private func loadDetails() async {
+        refreshIsAppRunning()
+        let group = group
+        details = await Task.detached(priority: .utility) { CopyService.details(group) }.value
+    }
+
+    private func refreshIsAppRunning() { isAppRunning = CopyService.isRunning(group.bundleID) }
+
+    private func deleteCopies() async {
+        refreshIsAppRunning()  // checked again at the last moment
+        guard !isAppRunning else { return }
+        isDeleting = true
+        errorMessage = nil
+        do { freedBytes = try await model.delete(group) } catch {
+            errorMessage = TextKey.deleteError.translated(with: error.localizedDescription)
         }
-        deleting = false
+        isDeleting = false
     }
 }

@@ -8,6 +8,7 @@ enum CleanerService {
     private static let trashFolder = Paths.home + "/.Trash"
     private static var tempFolder: String { Paths.tempArea + "/" + TempPart.t.rawValue }
     private static let systemPrefix = "com.apple."
+    private static let secondsPerDay: TimeInterval = 86_400
     private static let developerFolders = [
         "~/Library/Developer/Xcode/DerivedData", "~/Library/Developer/CoreSimulator/Caches",
         "~/.npm/_cacache", "~/.gradle/caches", "~/.cache",
@@ -18,7 +19,8 @@ enum CleanerService {
     static func candidates(size: (String) -> Int64) -> [CleanItem] {
         CleanKind.allCases.map { kind in
             let paths = paths(for: kind)
-            return CleanItem(kind: kind, paths: paths, bytes: paths.reduce(0) { $0 + size($1) })
+            let bytes = paths.reduce(0) { total, path in total + size(path) }
+            return CleanItem(kind: kind, paths: paths, bytes: bytes)
         }
     }
 
@@ -34,35 +36,40 @@ enum CleanerService {
     private static func paths(for kind: CleanKind) -> [String] {
         switch kind {
         case .caches:
-            let running = Set(NSWorkspace.shared.runningApplications.compactMap(\.bundleIdentifier))
-            let own = Bundle.main.bundleIdentifier ?? ""
-            return entries(of: cachesFolder)
-                .filter { path in
-                    let name = (path as NSString).lastPathComponent
-                    return !name.hasPrefix(systemPrefix) && !running.contains(name) && name != own
-                }
+            return removableCaches()
         case .developer:
             return developerFolders.map(Paths.expand).filter(Paths.exists)
         case .logs:
-            return entries(of: logsFolder).filter { olderThan($0, days: CleanConfig.logMinAgeDays) }
+            return entries(of: logsFolder)
+                .filter { path in isOlder(path, thanDays: CleanConfig.logMinAgeDays) }
         case .temp:
             return entries(of: tempFolder)
-                .filter { olderThan($0, days: CleanConfig.tempMinAgeDays) }
+                .filter { path in isOlder(path, thanDays: CleanConfig.tempMinAgeDays) }
         case .trash:
             return entries(of: trashFolder)
         }
     }
 
-    private static func entries(of folder: String) -> [String] {
-        ((try? FileManager.default.contentsOfDirectory(atPath: folder)) ?? [])
-            .map { folder + "/" + $0 }
+    private static func removableCaches() -> [String] {
+        let runningApps = NSWorkspace.shared.runningApplications
+        let runningBundleIDs = Set(runningApps.compactMap(\.bundleIdentifier))
+        let ownBundleID = Bundle.main.bundleIdentifier ?? ""
+        return entries(of: cachesFolder)
+            .filter { path in
+                let name = (path as NSString).lastPathComponent
+                return !name.hasPrefix(systemPrefix) && !runningBundleIDs.contains(name)
+                    && name != ownBundleID
+            }
     }
 
-    private static func olderThan(_ path: String, days: Int) -> Bool {
-        guard
-            let date = (try? FileManager.default.attributesOfItem(atPath: path))?[.modificationDate]
-                as? Date
-        else { return false }
-        return date < Date().addingTimeInterval(-Double(days) * 86_400)
+    private static func entries(of folder: String) -> [String] {
+        ((try? FileManager.default.contentsOfDirectory(atPath: folder)) ?? [])
+            .map { name in folder + "/" + name }
+    }
+
+    private static func isOlder(_ path: String, thanDays days: Int) -> Bool {
+        let attributes = try? FileManager.default.attributesOfItem(atPath: path)
+        guard let modified = attributes?[.modificationDate] as? Date else { return false }
+        return modified < Date().addingTimeInterval(-Double(days) * secondsPerDay)
     }
 }

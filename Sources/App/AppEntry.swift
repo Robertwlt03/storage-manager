@@ -5,20 +5,37 @@ import SwiftUI
 enum AppEntry {
     @MainActor static func main() {
         AppSettings.registerDefaults()
-        let args = CommandLine.arguments
-        if args.contains(LaunchCommand.checkContrast.rawValue) { exit(Checks.contrast() ? 0 : 1) }
-        if args.contains(LaunchCommand.checkStrings.rawValue) { exit(Checks.strings() ? 0 : 1) }
-        if args.contains(LaunchCommand.selfTest.rawValue) {
-            Task.detached {
-                SelfTest.run()
-                exit(0)
-            }
-            dispatchMain()
+        let arguments = CommandLine.arguments
+        if arguments.contains(LaunchCommand.checkContrast.rawValue) {
+            finish(succeeded: Checks.contrast())
         }
-        if let i = args.firstIndex(of: LaunchCommand.renderIcon.rawValue), i + 1 < args.count {
-            exit(Checks.renderIcon(to: args[i + 1]) ? 0 : 1)
+        if arguments.contains(LaunchCommand.checkStrings.rawValue) {
+            finish(succeeded: Checks.strings())
+        }
+        if arguments.contains(LaunchCommand.selfTest.rawValue) { runSelfTest() }
+        if let iconFile = value(after: .renderIcon, in: arguments) {
+            finish(succeeded: Checks.renderIcon(to: iconFile))
         }
         SpeicherExplorerApp.main()
+    }
+
+    private static func finish(succeeded: Bool) -> Never {
+        exit(succeeded ? EXIT_SUCCESS : EXIT_FAILURE)
+    }
+
+    private static func runSelfTest() -> Never {
+        Task.detached {
+            SelfTest.run()
+            exit(EXIT_SUCCESS)
+        }
+        dispatchMain()
+    }
+
+    /// The value given after a launch command, such as the file the icon is rendered into.
+    private static func value(after command: LaunchCommand, in arguments: [String]) -> String? {
+        guard let index = arguments.firstIndex(of: command.rawValue), index + 1 < arguments.count
+        else { return nil }
+        return arguments[index + 1]
     }
 }
 
@@ -33,7 +50,8 @@ struct SpeicherExplorerApp: App {
         }
         .commands {
             LayoutCommands()
-            CommandGroup(replacing: .sidebar) {  // the system item would use the jerky AppKit toggle
+            // The system item would use the jerky AppKit toggle.
+            CommandGroup(replacing: .sidebar) {
                 Button(
                     model.sidebarShown
                         ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
@@ -66,14 +84,16 @@ extension View {
 
 /// "View" menu entries like Finder's: ⌘1 shows lists, ⌘2 shows tiles.
 private struct LayoutCommands: Commands {
-    @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
+    @AppStorage(SettingsKey.layoutMode) private var layoutMode = LayoutMode.list
 
     var body: some Commands {
         CommandGroup(before: .sidebar) {
             ForEach(LayoutMode.allCases) { mode in
                 Toggle(
                     mode.title.translated,
-                    isOn: Binding(get: { layout == mode }, set: { if $0 { layout = mode } })
+                    isOn: Binding(
+                        get: { layoutMode == mode },
+                        set: { isOn in if isOn { layoutMode = mode } })
                 )
                 .keyboardShortcut(mode == .list ? "1" : "2")
             }

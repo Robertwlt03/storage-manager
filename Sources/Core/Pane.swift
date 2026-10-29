@@ -8,9 +8,6 @@ enum Pane: Hashable {
     static let tidy: [Pane] = [.cleaner, .apps]
     static let system: [Pane] = [.temp, .copies]
 
-    /// Pages built from a table rather than a scrolling page (they need the scan banner above them).
-    var showsTable: Bool { [.explorer, .largeFiles].contains(self) }
-
     /// Pages whose contents can be shown as a list or as a grid.
     var supportsGrid: Bool { [.overview, .explorer, .largeFiles, .apps].contains(self) }
 
@@ -19,11 +16,11 @@ enum Pane: Hashable {
             self = .volume(launchKey)
             return
         }
-        guard
-            let p = (Self.main + Self.tidy + Self.system)
-                .first(where: { $0.launchKey == launchKey })
-        else { return nil }
-        self = p
+        let everyPage = Self.main + Self.tidy + Self.system
+        guard let page = everyPage.first(where: { page in page.launchKey == launchKey }) else {
+            return nil
+        }
+        self = page
     }
 
     var launchKey: String { details.key }

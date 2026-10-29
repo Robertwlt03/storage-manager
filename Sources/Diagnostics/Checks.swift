@@ -3,82 +3,129 @@ import SwiftUI
 
 /// Checks run by build.sh; each prints its findings and returns false on failure.
 enum Checks {
-    static let minContrast = 4.5
+    private static let minimumContrast = 4.5
+    private static let whiteText: UInt32 = 0xFFFFFF
+    private static let hexadecimal = 16
+    /// Returned by the bundle instead of a text when a key is missing.
+    private static let missingTextMarker = "\u{0}"
+
+    // MARK: Contrast
 
     /// Every text tone against every light and dark surface reaches WCAG AA.
     static func contrast() -> Bool {
-        var ok = true
-        for (dark, surfaces) in [(false, Theme.lightSurfaces), (true, Theme.darkSurfaces)] {
+        let textTonesPass = checkTextTones()
+        let fillsPass = checkFills()
+        return textTonesPass && fillsPass
+    }
+
+    private static func checkTextTones() -> Bool {
+        var allPass = true
+        for (isDark, surfaces) in [(false, Theme.lightSurfaces), (true, Theme.darkSurfaces)] {
             for (name, tone) in Theme.textTones {
-                for s in surfaces {
-                    let r = Theme.ratio(dark ? tone.dark : tone.light, s)
-                    ok = ok && r >= minContrast
-                    print(
-                        "\(r >= minContrast ? "ok  " : "FAIL") \(String(format: "%5.2f", r)):1  \(name) / #\(String(s, radix: 16))"
-                    )
+                for surface in surfaces {
+                    let ratio = Theme.ratio(isDark ? tone.dark : tone.light, surface)
+                    let label = "\(name) / #\(String(surface, radix: hexadecimal))"
+                    allPass = report(ratio, label) && allPass
                 }
             }
         }
+        return allPass
+    }
+
+    private static func checkFills() -> Bool {
+        var allPass = true
         for (name, fill) in Theme.fills {
-            for hex in [fill.light, fill.dark] {
-                let r = Theme.ratio(0xFFFFFF, hex)
-                ok = ok && r >= minContrast
-                print(
-                    "\(r >= minContrast ? "ok  " : "FAIL") \(String(format: "%5.2f", r)):1  white / \(name) #\(String(hex, radix: 16))"
-                )
+            for colour in [fill.light, fill.dark] {
+                let ratio = Theme.ratio(whiteText, colour)
+                let label = "white / \(name) #\(String(colour, radix: hexadecimal))"
+                allPass = report(ratio, label) && allPass
             }
         }
-        return ok
+        return allPass
     }
+
+    /// Prints one pair of colours and tells whether it reaches the minimum contrast.
+    private static func report(_ ratio: Double, _ label: String) -> Bool {
+        let passes = ratio >= minimumContrast
+        let verdict = passes ? "ok  " : "FAIL"
+        print("\(verdict) \(String(format: "%5.2f", ratio)):1  \(label)")
+        return passes
+    }
+
+    // MARK: Texts
 
     /// Every `TextKey` key exists in every language, with the same number of placeholders.
     static func strings() -> Bool {
-        var ok = true
-        let bundles = AppLanguage.allCases.map { ($0.rawValue, Localizer.bundle(for: $0.rawValue)) }
+        let bundles = AppLanguage.allCases.map { language in
+            (code: language.rawValue, bundle: Localizer.bundle(for: language.rawValue))
+        }
+        let everyKeyExists = checkEveryKeyExists(in: bundles)
+        let placeholdersMatch = checkPlaceholdersMatch(in: bundles.compactMap(\.bundle))
+        let languagesMatch = checkLanguageMatching()
+        let allPass = everyKeyExists && placeholdersMatch && languagesMatch
+        print(
+            "\(TextKey.allCases.count) texts checked in \(bundles.count) languages: "
+                + (allPass ? "ok" : "errors"))
+        return allPass
+    }
+
+    private static func checkEveryKeyExists(in bundles: [(code: String, bundle: Bundle?)]) -> Bool {
+        var allPass = true
         for (code, bundle) in bundles {
             guard let bundle else {
-                print("FAIL \(code).lproj fehlt")
-                ok = false
+                print("FAIL \(code).lproj is missing")
+                allPass = false
                 continue
             }
-            for key in TextKey.allCases {
-                let text = bundle.localizedString(forKey: key.rawValue, value: "\u{0}", table: nil)
-                if text == "\u{0}" {
-                    print("FAIL \(code): \(key.rawValue) fehlt")
-                    ok = false
-                }
+            for key in TextKey.allCases where isMissing(key, in: bundle) {
+                print("FAIL \(code): \(key.rawValue) is missing")
+                allPass = false
             }
         }
-        let reference = bundles.compactMap(\.1)
+        return allPass
+    }
+
+    private static func isMissing(_ key: TextKey, in bundle: Bundle) -> Bool {
+        let text = bundle.localizedString(
+            forKey: key.rawValue, value: missingTextMarker, table: nil)
+        return text == missingTextMarker
+    }
+
+    private static func checkPlaceholdersMatch(in bundles: [Bundle]) -> Bool {
+        var allPass = true
         for key in TextKey.allCases {
-            let counts = Set(
-                reference.map {
-                    $0.localizedString(forKey: key.rawValue, value: nil, table: nil)
+            let placeholderCounts = Set(
+                bundles.map { bundle in
+                    bundle.localizedString(forKey: key.rawValue, value: nil, table: nil)
                         .components(separatedBy: "%").count
                 })
-            if counts.count > 1 {
-                print("FAIL Platzhalter in \(key.rawValue) unterscheiden sich")
-                ok = false
+            if placeholderCounts.count > 1 {
+                print("FAIL placeholders in \(key.rawValue) differ")
+                allPass = false
             }
         }
-        // System languages map to the shipped ones, including script and regional variants.
+        return allPass
+    }
+
+    /// System languages map to the shipped ones, including script and regional variants.
+    private static func checkLanguageMatching() -> Bool {
         let expected: [(String, AppLanguage?)] = [
             ("de-DE", .de), ("en-GB", .en), ("zh-TW", .zhHant), ("zh-Hans-CN", .zhHans),
             ("zh-HK", .zhHant), ("pt-PT", .ptBR), ("no", .nb), ("nb-NO", .nb), ("xx", nil),
         ]
-        for (id, language) in expected where AppLanguage.match(id) != language {
-            print("FAIL Sprache \(id) wird falsch zugeordnet")
-            ok = false
+        var allPass = true
+        for (identifier, language) in expected where AppLanguage.match(identifier) != language {
+            print("FAIL language \(identifier) is matched to the wrong one")
+            allPass = false
         }
-        print(
-            "\(TextKey.allCases.count) Texte in \(bundles.count) Sprachen geprüft: \(ok ? "ok" : "Fehler")"
-        )
-        return ok
+        return allPass
     }
 
+    // MARK: Icon
+
     @MainActor static func renderIcon(to path: String) -> Bool {
-        guard let cg = ImageRenderer(content: AppIconView()).cgImage,
-            let png = NSBitmapImageRep(cgImage: cg).representation(using: .png, properties: [:])
+        guard let image = ImageRenderer(content: AppIconView()).cgImage,
+            let png = NSBitmapImageRep(cgImage: image).representation(using: .png, properties: [:])
         else { return false }
         return (try? png.write(to: URL(fileURLWithPath: path))) != nil
     }

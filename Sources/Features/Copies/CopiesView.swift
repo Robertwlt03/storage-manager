@@ -5,17 +5,18 @@ struct CopiesView: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        let groups = model.copyGroups
+        let copyGroups = model.copyGroups
         UI.Page(.copies) {
-            if !model.hasData || (model.scanning && groups.isEmpty) {  // the temporary area is measured last
+            // The temporary area is measured last.
+            if !model.hasData || (model.scanning && copyGroups.isEmpty) {
                 UI.Placeholder(.notMeasured, in: .page)
-            } else if groups.isEmpty {
+            } else if copyGroups.isEmpty {
                 UI.Placeholder(
                     .empty(
                         title: TextKey.noCopies.translated, symbol: Symbols.copies,
                         detail: TextKey.noCopiesDetail.translated), in: .page)
             }
-            ForEach(groups) { CopyGroupCard(group: $0) }
+            ForEach(copyGroups) { group in CopyGroupCard(group: group) }
         }
     }
 }

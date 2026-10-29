@@ -31,7 +31,7 @@ if [ "${1:-}" = "--install" ]; then
   mkdir -p ~/Applications
   rm -rf ~/Applications/Speicher-Explorer.app
   cp -R "$APP" ~/Applications/
-  echo "Installiert: ~/Applications/Speicher-Explorer.app"
+  echo "Installed: ~/Applications/Speicher-Explorer.app"
 else
-  echo "Fertig: $APP"
+  echo "Done: $APP"
 fi

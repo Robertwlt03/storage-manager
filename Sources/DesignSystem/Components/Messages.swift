@@ -128,10 +128,12 @@ private struct Unavailable<Actions: View>: View {
 extension View {
     /// A value still being calculated keeps its place but shows a small spinner, like "Calculating…" in Finder's
     /// Info window, and cannot be clicked, selected or read aloud until it is final.
-    func calculating(_ active: Bool, alignment: Alignment = .leading) -> some View {
-        opacity(active ? 0 : 1)
-            .overlay(alignment: alignment) { if active { ProgressView().controlSize(.small) } }
-            .disabled(active)
-            .accessibilityHidden(active)
+    func calculating(_ isCalculating: Bool, alignment: Alignment = .leading) -> some View {
+        opacity(isCalculating ? Opacity.hidden : Opacity.full)
+            .overlay(alignment: alignment) {
+                if isCalculating { ProgressView().controlSize(.small) }
+            }
+            .disabled(isCalculating)
+            .accessibilityHidden(isCalculating)
     }
 }

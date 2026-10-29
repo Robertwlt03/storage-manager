@@ -205,8 +205,8 @@ Der Code ist in kleine Teile gegliedert, und jede Datei hat genau eine Aufgabe:
 
 Der Speicher-Explorer ist Open Source. Jeder kann den Code ansehen, verbessern und eigene Ideen einbringen. Fehler und
 Wünsche kannst du in den [Issues](../../issues) melden, und Verbesserungen nehme ich gern als Pull Request entgegen.
-Wie du anfängst, steht in der [Anleitung zum Mitmachen](CONTRIBUTING.md), und wo du was im Code findest, in der
-[Architektur-Beschreibung](ARCHITECTURE.md). Für den Umgang miteinander gelten die [Verhaltensregeln](CODE_OF_CONDUCT.md).
+Wie du anfängst, steht in der [Anleitung zum Mitmachen](CONTRIBUTING.md), wo du was im Code findest, in der
+[Architektur-Beschreibung](ARCHITECTURE.md), und wie wir Code schreiben, in den [Code-Regeln](CODE_STYLE.md). Für den Umgang miteinander gelten die [Verhaltensregeln](CODE_OF_CONDUCT.md).
 Neue Texte legst du bitte in allen Sprachen an, denn die Prüfung beim Bauen meldet sonst, was fehlt. Die meisten
 Übersetzungen sind maschinell entstanden, deshalb freue ich mich besonders über Verbesserungen von Muttersprachlern.
 
@@ -218,6 +218,6 @@ Neue Texte legst du bitte in allen Sprachen an, denn die Prüfung beim Bauen mel
 
 <p align="center">
   <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
-  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
+  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
   <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
 </p>

@@ -41,7 +41,15 @@ SIGN_IDENTITY="Speicher-Explorer Dev" ./build.sh
 
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">Prüfungen vor jedem Beitrag
 
-`build.sh` bricht ab, sobald eine Prüfung fehlschlägt. Es prüft, ob jeder Text in allen 20 Sprachen vorhanden ist und
+Zuerst startest du die Code-Inspektion. Sie prüft die Form, baut die App mit Warnungen als Fehler und kontrolliert die
+[Code-Regeln](CODE_STYLE.md), also Namen, Zahlen, Farben, Texte und toten Code. Sie darf keinen einzigen Fehler und keine
+einzige Warnung melden.
+
+```bash
+scripts/inspect.py
+```
+
+Danach baust du die App. `build.sh` bricht ab, sobald eine Prüfung fehlschlägt. Es prüft, ob jeder Text in allen 20 Sprachen vorhanden ist und
 gleich viele Platzhalter hat, und ob jede Textfarbe in hellem und dunklem Erscheinungsbild einen Kontrast von
 mindestens 4,5 zu 1 erreicht.
 
@@ -63,14 +71,13 @@ open -n build/Speicher-Explorer.app --args -uiTest "$TMPDIR/speicher-test"
   Anzahlen und Größen. Was auf der Festplatte liegt, ist privat.
 - **Nichts löschen ohne Rückfrage:** Die App entfernt nur nach einer Bestätigung etwas, und Kopien einer App nur, wenn
   diese App nicht läuft. Tests löschen nie etwas.
-- **Texte in allen Sprachen:** Jeder neue Text bekommt einen Schlüssel in `Loc` und eine Zeile in allen 20 Dateien
-  unter `Resources`. Deutsch und Englisch sind die Vorlage. Bei den übrigen Sprachen freuen wir uns besonders über
+- **Texte in allen Sprachen:** Jeder neue Text bekommt einen englischen Schlüssel in `TextKey` und eine Zeile in allen
+  20 Dateien unter `Resources`. Deutsch und Englisch sind die Vorlage. Bei den übrigen Sprachen freuen wir uns besonders über
   Verbesserungen von Muttersprachlern.
 - **Code auf Englisch, Dokumentation auf Deutsch:** Namen, Kommentare und Commit-Nachrichten schreibst du auf Englisch,
   Anleitungen wie diese auf Deutsch.
-- **Gute Namen statt Kommentare:** Ein Name soll sagen, was etwas tut. Kommentare bleiben für Regeln, die man im Code
-  nicht sieht. Geschichten, wie ein Fehler entstanden ist, gehören in die Commit-Nachricht oder in die
-  Architektur-Beschreibung.
+- **Lesbarer Code:** Ausgeschriebene Namen in Alltagssprache, keine Zahlen ohne Namen, Farben nur aus `Theme` und
+  kleine, klar getrennte Schritte. Die Einzelheiten stehen in den [Code-Regeln](CODE_STYLE.md).
 
 ## <img src="assets/icons/newpage.svg" height="33" align="absmiddle" alt="">Eine neue Seite hinzufügen
 
@@ -116,6 +123,6 @@ Wir gehen freundlich und respektvoll miteinander um. Die Einzelheiten stehen in 
 
 <p align="center">
   <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
-  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
+  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
   <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
 </p>

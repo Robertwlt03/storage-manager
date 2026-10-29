@@ -9,9 +9,9 @@ enum Paths {
 
     /// Per-user area under /private/var/folders/… with the subfolders T, C, X and 0.
     static let tempArea: String = {
-        var buf = [CChar](repeating: 0, count: Int(PATH_MAX))
-        confstr(_CS_DARWIN_USER_TEMP_DIR, &buf, buf.count)
-        return real((String(cString: buf) as NSString).deletingLastPathComponent)
+        var buffer = [CChar](repeating: 0, count: Int(PATH_MAX))
+        confstr(_CS_DARWIN_USER_TEMP_DIR, &buffer, buffer.count)
+        return real((String(cString: buffer) as NSString).deletingLastPathComponent)
     }()
 
     static var tempCopies: String { tempArea + "/" + TempPart.x.rawValue }
@@ -28,9 +28,9 @@ enum Paths {
 
     /// Resolves symlinks like `pwd -P` (URL.resolvingSymlinksInPath would drop the /private prefix).
     static func real(_ path: String) -> String {
-        guard let r = realpath(path, nil) else { return path }
-        defer { free(r) }
-        return String(cString: r)
+        guard let resolvedPath = realpath(path, nil) else { return path }
+        defer { free(resolvedPath) }
+        return String(cString: resolvedPath)
     }
 
     static func display(_ path: String) -> String {

@@ -4,7 +4,8 @@ import SwiftUI
 enum IconKind {
     case symbol(String)
     case dot(Color)
-    case badge(symbol: String, colorIndex: Int)  // white symbol on a coloured square, like System Settings
+    /// A white symbol on a coloured square, like System Settings.
+    case badge(symbol: String, colorIndex: Int)
     case letter(String)  // a short code on a neutral square: T, C, X, 0
     case file(String)  // the Finder icon of a path
     case preview(String)  // the Quick Look thumbnail of a path, the Finder icon until it is ready
@@ -23,6 +24,7 @@ extension UI {
 
         var body: some View {
             let side = size.rawValue
+            let badgeContent = side * Layout.badgeContentShare
             let square = RoundedRectangle(
                 cornerRadius: side * Layout.badgeRadiusShare, style: .continuous)
             switch kind {
@@ -32,12 +34,12 @@ extension UI {
                 Circle().fill(color).frame(width: side, height: side)
             case .badge(let name, let index):
                 Image(systemName: name).resizable().scaledToFit().fontWeight(.semibold)
-                    .foregroundStyle(.white)
-                    .frame(width: side / 2, height: side / 2)
+                    .foregroundStyle(Theme.badgeSymbol)
+                    .frame(width: badgeContent, height: badgeContent)
                     .frame(width: side, height: side)
                     .background(Theme.color(index).gradient, in: square)
             case .letter(let text):
-                Text(text).font(.system(size: side / 2, weight: .semibold, design: .monospaced))
+                Text(text).font(.system(size: badgeContent, weight: .semibold, design: .monospaced))
                     .frame(width: side, height: side).background(.quaternary, in: square)
             case .file(let path):
                 FinderService.icon(path).resizable().frame(width: side, height: side)

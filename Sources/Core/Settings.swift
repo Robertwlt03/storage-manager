@@ -11,29 +11,31 @@ enum SettingsKey {
     static let lastScanFiles = "lastScanFiles"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let launchSettings = "openSettings"  // `open … --args -openSettings YES`
-    static let launchSkipAccess = "skipAccessSheet"  // `open … --args -skipAccessSheet YES` (screenshots, tests)
+    /// `open … --args -skipAccessSheet YES` (screenshots, tests)
+    static let launchSkipAccessSheet = "skipAccessSheet"
     static let launchUITest = "uiTest"  // `open … --args -uiTest <folder>` runs the stress test
 }
 
 enum AppSettings {
-    private static var d: UserDefaults { .standard }
+    private static var defaults: UserDefaults { .standard }
 
     static func registerDefaults() {
-        d.register(defaults: [
+        defaults.register(defaults: [
             SettingsKey.autoScan: true, SettingsKey.largeFileMB: LargeFileThreshold.defaultMB,
             SettingsKey.unusedDays: CleanConfig.defaultUnusedDays,
         ])
     }
 
-    static var autoScan: Bool { d.bool(forKey: SettingsKey.autoScan) }
-    static var unusedDays: Int { d.integer(forKey: SettingsKey.unusedDays) }
-    static var largeFileMB: Int { d.integer(forKey: SettingsKey.largeFileMB) }
+    static var autoScan: Bool { defaults.bool(forKey: SettingsKey.autoScan) }
+    static var largeFileMB: Int { defaults.integer(forKey: SettingsKey.largeFileMB) }
     static var launchPane: Pane? {
-        d.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:))
+        defaults.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:))
     }
-    static var launchSettings: Bool { d.bool(forKey: SettingsKey.launchSettings) }
-    static var launchSkipAccess: Bool { d.bool(forKey: SettingsKey.launchSkipAccess) }
-    static var launchUITest: String? { d.string(forKey: SettingsKey.launchUITest) }
+    static var launchSettings: Bool { defaults.bool(forKey: SettingsKey.launchSettings) }
+    static var shouldSkipAccessSheet: Bool {
+        defaults.bool(forKey: SettingsKey.launchSkipAccessSheet)
+    }
+    static var launchUITest: String? { defaults.string(forKey: SettingsKey.launchUITest) }
 
     /// Extra folders are stored as one string, one path per line (AppStorage cannot hold arrays).
     static func folders(from stored: String) -> [String] {
@@ -41,7 +43,7 @@ enum AppSettings {
     }
     static func store(_ folders: [String]) -> String { folders.joined(separator: "\n") }
     static var extraFolders: [String] {
-        folders(from: d.string(forKey: SettingsKey.extraFolders) ?? "")
+        folders(from: defaults.string(forKey: SettingsKey.extraFolders) ?? "")
     }
 }
 
@@ -78,5 +80,4 @@ enum LayoutMode: Int, CaseIterable, Identifiable {
     case list, grid
     var id: Self { self }
     var title: TextKey { self == .list ? .layoutList : .layoutGrid }
-    var symbol: String { self == .list ? Symbols.list : Symbols.grid }
 }

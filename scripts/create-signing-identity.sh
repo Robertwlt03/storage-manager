@@ -6,7 +6,7 @@ set -euo pipefail
 NAME="${1:-Speicher-Explorer Dev}"
 
 if security find-identity -p codesigning | grep -q "\"$NAME\""; then
-  echo "Signatur-Identität „$NAME“ ist schon vorhanden."
+  echo "Signing identity \"$NAME\" already exists."
   exit 0
 fi
 
@@ -31,4 +31,4 @@ PASS=$(uuidgen)
 /usr/bin/openssl pkcs12 -export -inkey "$TMP/key.pem" -in "$TMP/cert.pem" -name "$NAME" \
   -out "$TMP/identity.p12" -passout pass:"$PASS"
 security import "$TMP/identity.p12" -k "$HOME/Library/Keychains/login.keychain-db" -P "$PASS" -T /usr/bin/codesign > /dev/null
-echo "Signatur-Identität „$NAME“ angelegt."
+echo "Signing identity \"$NAME\" created."

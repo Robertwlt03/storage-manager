@@ -102,28 +102,34 @@ extension UI.Page where Options == EmptyView {
 private struct HeaderBar<Options: View>: View {
     let info: TextKey
     @ViewBuilder let options: Options
-    @State private var showInfo = false
+    @State private var isShowingInfo = false
 
     var body: some View {
         HStack(spacing: Space.item) {
             options
             Spacer(minLength: 0)
-            Button {
-                showInfo.toggle()
-            } label: {
-                Label(TextKey.aboutPage.translated, systemImage: Symbols.info)
-            }
-            .labelStyle(.iconOnly)
-            .appButton(.quiet)
-            .font(.title3)
-            .help(TextKey.aboutPage.translated)
-            .popover(isPresented: $showInfo, arrowEdge: .bottom) {
-                Text(info.translated)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(Space.card)
-                    .frame(width: Layout.popoverWidth, alignment: .leading)
-            }
+            infoButton
         }
         .frame(minHeight: Layout.headerHeight)
+    }
+
+    private var infoButton: some View {
+        Button {
+            isShowingInfo.toggle()
+        } label: {
+            Label(TextKey.aboutPage.translated, systemImage: Symbols.info)
+        }
+        .labelStyle(.iconOnly)
+        .appButton(.quiet)
+        .font(.title3)
+        .help(TextKey.aboutPage.translated)
+        .popover(isPresented: $isShowingInfo, arrowEdge: .bottom) { infoText }
+    }
+
+    private var infoText: some View {
+        Text(info.translated)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(Space.card)
+            .frame(width: Layout.popoverWidth, alignment: .leading)
     }
 }

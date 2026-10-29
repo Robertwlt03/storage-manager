@@ -6,39 +6,48 @@ struct SummaryCard: View {
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
     private var speech: SpeechService { SpeechService.shared }
 
+    private var summary: String {
+        let cleanableBytes = model.cleanItems?.reduce(0) { total, item in total + item.bytes }
+        let copiesBytes = model.copyGroups.reduce(0) { total, group in total + group.node.bytes }
+        let unusedApps = model.apps.filter { app in
+            AppUsageService.isUnused(app, days: unusedDays)
+        }
+        let facts = SummaryService.Input(
+            volume: model.startupVolume, categories: model.scanning ? [] : model.categories,
+            cleanable: cleanableBytes, copies: copiesBytes, unusedApps: unusedApps.count)
+        return SummaryService.text(facts)
+    }
+
     var body: some View {
-        let text = SummaryService.text(
-            .init(
-                volume: model.startupVolume, categories: model.scanning ? [] : model.categories,
-                cleanable: model.cleanItems?.reduce(0) { $0 + $1.bytes },
-                copies: model.copyGroups.reduce(0) { $0 + $1.node.bytes },
-                unusedApps: model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }
-                    .count))
-        let loading = model.scanning
+        let summary = summary
+        let isLoading = model.scanning
         UI.Card(TextKey.summaryTitle.translated) {
             VStack(alignment: .leading, spacing: Space.item) {
-                if loading {
+                if isLoading {
                     UI.Placeholder(
                         .loading(
                             title: .loadingSummaryTitle, detail: .loadingSummaryDetail,
                             symbol: Symbols.summary))
                 } else {
-                    Text(text).fixedSize(horizontal: false, vertical: true).textSelection(.enabled)
+                    Text(summary).fixedSize(horizontal: false, vertical: true)
+                        .textSelection(.enabled)
                 }
-                Button {
-                    speech.toggle(text)
-                } label: {
-                    Label(
-                        speech.isSpeaking
-                            ? TextKey.stopReading.translated : TextKey.readAloud.translated,
-                        systemImage: Symbols.speaker
-                    )
-                    .symbolEffect(.variableColor.iterative, isActive: speech.isSpeaking)  // only while speaking
-                }
-                .appButton()
-                .disabled(loading)
+                readAloudButton(summary).disabled(isLoading)
             }
             .padding(.vertical, Space.row)
         }
+    }
+
+    private func readAloudButton(_ summary: String) -> some View {
+        Button {
+            speech.toggle(summary)
+        } label: {
+            Label(
+                speech.isSpeaking ? TextKey.stopReading.translated : TextKey.readAloud.translated,
+                systemImage: Symbols.speaker
+            )
+            .symbolEffect(.variableColor.iterative, isActive: speech.isSpeaking)
+        }
+        .appButton()
     }
 }

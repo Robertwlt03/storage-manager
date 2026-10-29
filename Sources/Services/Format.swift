@@ -2,30 +2,33 @@ import Foundation
 
 /// Number, size and date formatting in the app's language.
 enum Format {
+    private static let wholePercentFractionDigits = 0
     private static var locale: Locale { Localizer.shared.locale }
 
-    static func bytes(_ b: Int64) -> String {
-        b.formatted(.byteCount(style: .file).locale(locale))  // like Finder
+    static func bytes(_ bytes: Int64) -> String {
+        bytes.formatted(.byteCount(style: .file).locale(locale))  // like Finder
     }
 
-    static func count(_ n: Int) -> String { n.formatted(.number.locale(locale)) }
-    static func percent(_ v: Double) -> String {
-        v.formatted(.percent.precision(.fractionLength(0)).locale(locale))
+    static func count(_ number: Int) -> String { number.formatted(.number.locale(locale)) }
+    static func percent(_ fraction: Double) -> String {
+        fraction.formatted(
+            .percent.precision(.fractionLength(wholePercentFractionDigits)).locale(locale))
     }
-    static func day(_ d: Date) -> String {
-        d.formatted(Date.FormatStyle(date: .abbreviated, time: .omitted).locale(locale))
+    static func day(_ date: Date) -> String {
+        date.formatted(Date.FormatStyle(date: .abbreviated, time: .omitted).locale(locale))
     }
-    static func dayShort(_ d: Date) -> String {
-        d.formatted(Date.FormatStyle(date: .numeric, time: .omitted).locale(locale))
+    static func dayShort(_ date: Date) -> String {
+        date.formatted(Date.FormatStyle(date: .numeric, time: .omitted).locale(locale))
     }
-    static func dateTime(_ d: Date) -> String {
-        d.formatted(Date.FormatStyle(date: .abbreviated, time: .shortened).locale(locale))
+    static func dateTime(_ date: Date) -> String {
+        date.formatted(Date.FormatStyle(date: .abbreviated, time: .shortened).locale(locale))
     }
-    static func time(_ d: Date) -> String {
-        d.formatted(Date.FormatStyle(date: .omitted, time: .shortened).locale(locale))
+    static func time(_ date: Date) -> String {
+        date.formatted(Date.FormatStyle(date: .omitted, time: .shortened).locale(locale))
     }
-    static func copies(_ n: Int) -> String {
-        n == 1 ? TextKey.copiesOne.translated : TextKey.copiesMany.translated(with: count(n))
+    static func copies(_ copyCount: Int) -> String {
+        copyCount == 1
+            ? TextKey.copiesOne.translated : TextKey.copiesMany.translated(with: count(copyCount))
     }
 
     /// "a · b", the separator used in subtitles.

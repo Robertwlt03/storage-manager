@@ -60,13 +60,17 @@ enum SizeBucket: CaseIterable, Identifiable {
     case under1MB, to10MB, to100MB, to1GB, over1GB
     var id: Self { self }
 
+    private static let tenMegabytes: Int64 = 10_000_000
+    private static let hundredMegabytes: Int64 = 100_000_000
+    private static let oneGigabyte: Int64 = 1_000_000_000
+
     /// Upper bound in bytes (exclusive); nil for the last bucket.
     var limit: Int64? {
         switch self {
         case .under1MB: ScanConfig.keepBytes
-        case .to10MB: 10_000_000
-        case .to100MB: 100_000_000
-        case .to1GB: 1_000_000_000
+        case .to10MB: Self.tenMegabytes
+        case .to100MB: Self.hundredMegabytes
+        case .to1GB: Self.oneGigabyte
         case .over1GB: nil
         }
     }

@@ -6,9 +6,12 @@ final class Node: Identifiable, Hashable {
     private(set) weak var parent: Node?
     private(set) var bytes: Int64 = 0
     private(set) var fileCount = 0
-    private(set) var children: [Node] = []  // folders of at least `ScanConfig.keepBytes`, biggest first
-    private(set) var files: [FileItem] = []  // files of at least `ScanConfig.keepBytes`, biggest first
-    private(set) var restBytes: Int64 = 0  // smaller files and folders directly inside, folded into one row
+    /// Folders of at least `ScanConfig.keepBytes`, biggest first.
+    private(set) var children: [Node] = []
+    /// Files of at least `ScanConfig.keepBytes`, biggest first.
+    private(set) var files: [FileItem] = []
+    /// Smaller files and folders directly inside, folded into one row.
+    private(set) var restBytes: Int64 = 0
     private(set) var restCount = 0
 
     init(name: String, parent: Node?) {
@@ -21,20 +24,23 @@ final class Node: Identifiable, Hashable {
     var isVirtual: Bool { parent == nil && name.isEmpty }
     var isScanRoot: Bool { parent?.isVirtual == true }
     /// Scan roots carry their absolute path as name.
-    var path: String { parent.map { $0.isVirtual ? name : $0.path + "/" + name } ?? name }
+    var path: String {
+        guard let parent else { return name }
+        return parent.isVirtual ? name : parent.path + "/" + name
+    }
     var displayName: String { isScanRoot ? Paths.display(name) : name }
 
-    func child(named n: String) -> Node? { children.first { $0.name == n } }
+    func child(named name: String) -> Node? { children.first { child in child.name == name } }
 
     /// The chain from the scan root down to this node (for the explorer's navigation path).
     var chain: [Node] {
-        var out: [Node] = []
-        var n: Node? = self
-        while let x = n, !x.isVirtual {
-            out.insert(x, at: 0)
-            n = x.parent
+        var chainFromRoot: [Node] = []
+        var current: Node? = self
+        while let node = current, !node.isVirtual {
+            chainFromRoot.insert(node, at: 0)
+            current = node.parent
         }
-        return out
+        return chainFromRoot
     }
 
     // MARK: Building (used by ScanService while walking)
@@ -62,29 +68,29 @@ final class Node: Identifiable, Hashable {
     }
 
     func finish() {
-        children.sort { $0.bytes > $1.bytes }
-        files.sort { $0.bytes > $1.bytes }
+        children.sort { left, right in left.bytes > right.bytes }
+        files.sort { left, right in left.bytes > right.bytes }
     }
 
     // MARK: Changing the finished tree
 
-    func attach(to p: Node) {
-        parent = p
-        p.children.append(self)
-        p.bytes += bytes
-        p.fileCount += fileCount
-        p.finish()
+    func attach(to newParent: Node) {
+        parent = newParent
+        newParent.children.append(self)
+        newParent.bytes += bytes
+        newParent.fileCount += fileCount
+        newParent.finish()
     }
 
     /// Removes this folder from the tree and subtracts its size from every ancestor.
     func detach() {
-        var p = parent
-        while let a = p {
-            a.bytes -= bytes
-            a.fileCount -= fileCount
-            p = a.parent
+        var nextAncestor = parent
+        while let ancestor = nextAncestor {
+            ancestor.bytes -= bytes
+            ancestor.fileCount -= fileCount
+            nextAncestor = ancestor.parent
         }
-        parent?.children.removeAll { $0 === self }
+        parent?.children.removeAll { child in child === self }
     }
 
     func removeAll() {
@@ -95,19 +101,20 @@ final class Node: Identifiable, Hashable {
 
     /// Finds a folder by absolute path inside this (virtual) root.
     func descendant(at path: String) -> Node? {
-        for r in children where path == r.name || path.hasPrefix(r.name + "/") {
-            var n = r
-            for c in path.dropFirst(r.name.count).split(separator: "/") {
-                guard let next = n.child(named: String(c)) else { return nil }
-                n = next
+        for scanRoot in children where path == scanRoot.name || path.hasPrefix(scanRoot.name + "/")
+        {
+            var node = scanRoot
+            for folderName in path.dropFirst(scanRoot.name.count).split(separator: "/") {
+                guard let next = node.child(named: String(folderName)) else { return nil }
+                node = next
             }
-            return n
+            return node
         }
         return nil
     }
 
-    static func == (a: Node, b: Node) -> Bool { a === b }
-    func hash(into h: inout Hasher) { h.combine(ObjectIdentifier(self)) }
+    static func == (left: Node, right: Node) -> Bool { left === right }
+    func hash(into hasher: inout Hasher) { hasher.combine(ObjectIdentifier(self)) }
 }
 
 struct FileItem: Identifiable, Hashable {

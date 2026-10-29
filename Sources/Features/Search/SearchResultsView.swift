@@ -7,10 +7,15 @@ struct SearchResultsView: View {
     @State private var results: [Entry] = []
     @State private var resultsKey = ""  // query and scope the results belong to
 
+    /// The query and scope as they are now.
+    private var searchKey: String { "\(model.searchText)|\(model.searchScope)" }
+
     var body: some View {
         @Bindable var model = model
         EntryBrowser(
-            entries: results, total: results.reduce(0) { $0 + $1.bytes }, showLocation: true,
+            entries: results,
+            total: results.reduce(0) { total, result in total + result.bytes },
+            showLocation: true,
             emptyTitle: TextKey.noResults.translated(with: model.searchQuery),
             emptyDetail: TextKey.searchNote.translated,
             contentKey: resultsKey
@@ -19,18 +24,21 @@ struct SearchResultsView: View {
         .safeAreaInset(edge: .top, spacing: 0) {
             UI.PageHeader(.searchNote) {
                 UI.SegmentPicker(selection: $model.searchScope) {
-                    ForEach(SearchScope.allCases) { Text($0.title.translated).tag($0) }
+                    ForEach(SearchScope.allCases) { scope in
+                        Text(scope.title.translated).tag(scope)
+                    }
                 }
                 UI.ActionButton(TextKey.cancel.translated) { model.endSearch() }
                     .keyboardShortcut(.cancelAction)
             }
         }
-        .task(id: "\(model.searchText)|\(model.searchScope)|\(model.revision)") {
-            try? await Task.sleep(for: ScanConfig.searchDebounce)  // wait until typing pauses
-            guard !Task.isCancelled else { return }
-            results = SearchService.search(
-                model.searchText, scope: model.searchScope, in: model.root)
-            resultsKey = "\(model.searchText)|\(model.searchScope)"
-        }
+        .task(id: "\(searchKey)|\(model.revision)") { await searchOnceTypingPauses() }
+    }
+
+    private func searchOnceTypingPauses() async {
+        try? await Task.sleep(for: ScanConfig.searchDebounce)
+        guard !Task.isCancelled else { return }
+        results = SearchService.search(model.searchText, scope: model.searchScope, in: model.root)
+        resultsKey = searchKey
     }
 }

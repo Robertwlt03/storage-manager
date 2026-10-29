@@ -4,39 +4,48 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage(SettingsKey.autoScan) private var autoScan = true
     @AppStorage(SettingsKey.extraFolders) private var extraFolders = ""
-    @State private var selected: String?
+    @State private var selectedFolder: String?
 
     var body: some View {
-        let folders = AppSettings.folders(from: extraFolders)
         Form {
             Toggle(TextKey.autoScan.translated, isOn: $autoScan)
             LabeledContent(TextKey.extraFolders.translated) {
-                VStack(alignment: .leading, spacing: Space.small) {
-                    List(folders, id: \.self, selection: $selected) {
-                        Text(Paths.display($0)).lineLimit(1).truncationMode(.middle)
-                    }
-                    .frame(height: Layout.folderListHeight)
-                    .overlay {
-                        if folders.isEmpty { Text(TextKey.none.translated).textRole(.hint) }
-                    }
-                    HStack(spacing: Space.extraSmall) {
-                        Button(TextKey.add.translated, systemImage: Symbols.add) {
-                            extraFolders = AppSettings.store(
-                                Array(NSOrderedSet(array: folders + FinderService.chooseFolders()))
-                                    .compactMap { $0 as? String })
-                        }
-                        Button(TextKey.remove.translated, systemImage: Symbols.remove) {
-                            extraFolders = AppSettings.store(folders.filter { $0 != selected })
-                        }
-                        .disabled(selected == nil)
-                    }
-                    .labelStyle(.iconOnly)
-                }
+                folderEditor(AppSettings.folders(from: extraFolders))
             }
             Text(TextKey.settingsSystemNote.translated).textRole(.hint)
         }
         .formStyle(.grouped)
         .frame(width: Layout.settingsWidth, height: Layout.settingsHeight)
         .syncPreferences()
+    }
+
+    private func folderEditor(_ folders: [String]) -> some View {
+        VStack(alignment: .leading, spacing: Space.small) {
+            List(folders, id: \.self, selection: $selectedFolder) { folder in
+                Text(Paths.display(folder)).lineLimit(1).truncationMode(.middle)
+            }
+            .frame(height: Layout.folderListHeight)
+            .overlay {
+                if folders.isEmpty { Text(TextKey.none.translated).textRole(.hint) }
+            }
+            HStack(spacing: Space.extraSmall) {
+                Button(TextKey.add.translated, systemImage: Symbols.add) {
+                    addChosenFolders(to: folders)
+                }
+                Button(TextKey.remove.translated, systemImage: Symbols.remove) {
+                    let remaining = folders.filter { folder in folder != selectedFolder }
+                    extraFolders = AppSettings.store(remaining)
+                }
+                .disabled(selectedFolder == nil)
+            }
+            .labelStyle(.iconOnly)
+        }
+    }
+
+    /// Adds the folders picked in the open panel; a folder already in the list stays once.
+    private func addChosenFolders(to folders: [String]) {
+        let allFolders = NSOrderedSet(array: folders + FinderService.chooseFolders())
+        let withoutDuplicates = allFolders.array.compactMap { folder in folder as? String }
+        extraFolders = AppSettings.store(withoutDuplicates)
     }
 }

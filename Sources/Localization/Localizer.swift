@@ -8,9 +8,9 @@ final class Localizer {
     private let bundle: Bundle
 
     private init() {
-        let code = AppLanguage.current.rawValue
-        locale = Locale(identifier: code)
-        bundle = Self.bundle(for: code) ?? .main
+        let languageCode = AppLanguage.current.rawValue
+        locale = Locale(identifier: languageCode)
+        bundle = Self.bundle(for: languageCode) ?? .main
     }
 
     func string(_ key: String) -> String {

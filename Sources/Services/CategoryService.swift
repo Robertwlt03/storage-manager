@@ -82,29 +82,45 @@ enum CategoryService {
     /// Sums the tree into categories. With a volume it adds what macOS can purge and the remainder
     /// ("System & Other"); without one (while scanning) the remainder would be misleading.
     static func compute(root: Node, volume: VolumeInfo?) -> [Category] {
-        var byPath: [String: CategoryKind] = [:]
-        for kind in CategoryKind.allCases { for p in kind.paths { byPath[Paths.expand(p)] = kind } }
-        var cats = CategoryKind.allCases.map { Category(kind: $0) }
+        let kindByPath = kindsByExpandedPath()
+        var categories = CategoryKind.allCases.map { kind in Category(kind: kind) }
 
-        func walk(_ n: Node, _ path: String, _ inherited: CategoryKind) {
-            let hit = byPath[path]
-            let kind = hit ?? inherited
-            if hit != nil && cats[kind.rawValue].node == nil { cats[kind.rawValue].node = n }
-            var own = n.bytes
-            for ch in n.children {
-                walk(ch, path + "/" + ch.name, kind)
-                own -= ch.bytes
+        func addBytes(of node: Node, at path: String, inheritedKind: CategoryKind) {
+            let matchedKind = kindByPath[path]
+            let kind = matchedKind ?? inheritedKind
+            if matchedKind != nil && categories[kind.rawValue].node == nil {
+                categories[kind.rawValue].node = node
             }
-            cats[kind.rawValue].bytes += own
+            var ownBytes = node.bytes
+            for child in node.children {
+                addBytes(of: child, at: path + "/" + child.name, inheritedKind: kind)
+                ownBytes -= child.bytes
+            }
+            categories[kind.rawValue].bytes += ownBytes
         }
-        for r in root.children { walk(r, r.name, .other) }
+        for scanRoot in root.children {
+            addBytes(of: scanRoot, at: scanRoot.name, inheritedKind: .other)
+        }
 
-        if let v = volume {
-            let scanned = cats.reduce(0) { $0 + $1.bytes }
-            cats[CategoryKind.purgeable.rawValue].bytes = v.purgeable
-            // Clones count in full while scanning, so this can go below zero; then it stays empty.
-            cats[CategoryKind.system.rawValue].bytes = max(0, v.used - v.purgeable - scanned)
+        if let volume { addEstimatedKinds(from: volume, to: &categories) }
+        return categories.filter { category in category.bytes > 0 }
+            .sorted { left, right in left.bytes > right.bytes }
+    }
+
+    private static func kindsByExpandedPath() -> [String: CategoryKind] {
+        var kindByPath: [String: CategoryKind] = [:]
+        for kind in CategoryKind.allCases {
+            for path in kind.paths { kindByPath[Paths.expand(path)] = kind }
         }
-        return cats.filter { $0.bytes > 0 }.sorted { $0.bytes > $1.bytes }
+        return kindByPath
+    }
+
+    private static func addEstimatedKinds(from volume: VolumeInfo, to categories: inout [Category])
+    {
+        let scannedBytes = categories.reduce(0) { total, category in total + category.bytes }
+        categories[CategoryKind.purgeable.rawValue].bytes = volume.purgeable
+        // Clones count in full while scanning, so this can go below zero; then it stays empty.
+        categories[CategoryKind.system.rawValue].bytes = max(
+            0, volume.used - volume.purgeable - scannedBytes)
     }
 }

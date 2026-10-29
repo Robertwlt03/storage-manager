@@ -14,29 +14,34 @@ struct Entry: Identifiable {
     let items: Int
     let kind: Kind
 
-    var node: Node? { if case .folder(let n) = kind { n } else { nil } }
+    var node: Node? { if case .folder(let folderNode) = kind { folderNode } else { nil } }
     var isFolder: Bool { node != nil }
 
-    static func folder(_ n: Node) -> Entry {
+    static func folder(_ node: Node) -> Entry {
         Entry(
-            id: n.path, name: n.displayName, path: n.path, bytes: n.bytes, items: n.fileCount,
-            kind: .folder(n))
+            id: node.path, name: node.displayName, path: node.path, bytes: node.bytes,
+            items: node.fileCount, kind: .folder(node))
     }
 
-    static func file(_ f: FileItem) -> Entry {
-        Entry(id: f.path, name: f.name, path: f.path, bytes: f.bytes, items: 1, kind: .file)
+    static func file(_ file: FileItem) -> Entry {
+        Entry(
+            id: file.path, name: file.name, path: file.path, bytes: file.bytes, items: 1,
+            kind: .file)
     }
 
-    static func rest(of n: Node) -> Entry {
+    static func rest(of node: Node) -> Entry {
         Entry(
-            id: n.path + "/\u{0}rest",
-            name: TextKey.smallerItems.translated(with: Format.count(n.restCount)), path: nil,
-            bytes: n.restBytes, items: n.restCount, kind: .rest)
+            id: node.path + "/\u{0}rest",
+            name: TextKey.smallerItems.translated(with: Format.count(node.restCount)), path: nil,
+            bytes: node.restBytes, items: node.restCount, kind: .rest)
     }
 
     /// Everything directly inside a folder.
-    static func contents(of n: Node) -> [Entry] {
-        n.children.map(folder) + n.files.map(file) + (n.restCount > 0 ? [rest(of: n)] : [])
+    static func contents(of node: Node) -> [Entry] {
+        let folders = node.children.map(folder)
+        let files = node.files.map(file)
+        let smallerItems = node.restCount > 0 ? [rest(of: node)] : []
+        return folders + files + smallerItems
     }
 }
 

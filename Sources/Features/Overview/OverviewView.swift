@@ -7,105 +7,111 @@ struct OverviewView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
-    @AppStorage(SettingsKey.largeFileMB) private var largeFileMB = LargeFileThreshold.defaultMB
+    @AppStorage(SettingsKey.largeFileMB) private var largeFileMegabytes =
+        LargeFileThreshold.defaultMB
+
+    /// Statistics exist already or are being made by the running scan.
+    private var hasStatistics: Bool { model.scanning || model.stats != nil }
 
     var body: some View {
         UI.Page(.overview) {
-            if model.scanning || model.stats != nil { tiles }
-            if let v = model.startupVolume {
-                UI.Card {
-                    UI.VolumeSummary(v, segments: segments, canSelect: { node(for: $0) != nil }) {
-                        node(for: $0).map(model.open)
-                    }
-                }
-            }
+            if hasStatistics { keyFigures }
+            if let startupVolume = model.startupVolume { startupDiskCard(startupVolume) }
             SummaryCard()
-            if model.scanning || model.stats != nil {
-                UI.Card(TextKey.sizeClassesTitle.translated) {
-                    UI.Note(TextKey.sizeClassesCaption.translated).padding(.top, Space.row)
-                    // Swift Charts must not redraw while a scan changes its data, so the chart waits for the scan.
-                    if let stats = model.stats, !model.scanning {
-                        sizeChart(stats).padding(.vertical, Space.row)
-                    } else {
-                        UI.Placeholder(
-                            .loading(
-                                title: .loadingSizesTitle, detail: .loadingSizesDetail,
-                                symbol: Symbols.overview)
-                        )
-                        .frame(minHeight: Layout.chartHeight).padding(.vertical, Space.row)
-                    }
-                }
-            }
-            if model.categories.isEmpty {
-                UI.Card(TextKey.categories.translated) { UI.Placeholder(.notMeasured, in: .card) }
-            } else if layout == .grid {
-                Text(TextKey.categories.translated).textRole(.section)
-                    .padding(.leading, Space.extraSmall)
-                UI.TileGrid(model.categories) { c in
-                    UI.Tile(
-                        icon: badge(c), title: c.kind.title.translated, value: Format.bytes(c.bytes)
-                    )
-                    .onTapGesture { c.node.map(model.open) }
-                }
-            } else {
-                UI.Card(TextKey.categories.translated) {
-                    UI.Rows(model.categories) { c in
-                        UI.NavRow(
-                            c.kind.title.translated, icon: badge(c), value: Format.bytes(c.bytes),
-                            action: c.node.map { n in { model.open(n) } })
-                    }
-                }
-            }
+            if hasStatistics { sizeClassesCard }
+            categories
         }
         .smoothChanges(of: layout)
         .smoothChanges(of: model.categories.isEmpty)
-        .onChange(of: largeFileMB) { if !model.scanning { model.refreshStats() } }
+        .onChange(of: largeFileMegabytes) { if !model.scanning { model.refreshStats() } }
     }
 
     // MARK: Key figures
 
+    private var isLoadingFigures: Bool { model.scanning || model.stats == nil }
+
     /// Each figure leads to the page with the details; the used space is already in the disk card below.
-    private var tiles: some View {
-        let unused = model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count
-        let loading = model.scanning || model.stats == nil
-        func figure(_ n: Int?) -> String {
-            loading ? StandInText.figure : n.map(Format.count) ?? StandInText.figure
+    private var keyFigures: some View {
+        let unusedApps = model.apps.filter { app in
+            AppUsageService.isUnused(app, days: unusedDays)
         }
+        let largeFileThreshold = Format.bytes(LargeFileThreshold.bytes(largeFileMegabytes))
         return UI.FixedGrid(columns: Layout.statColumns) {
             UI.KeyFigure(
-                figure(model.stats?.files), TextKey.figureFiles.translated, symbol: Symbols.files,
-                loading: loading
+                figureText(model.stats?.files), TextKey.figureFiles.translated,
+                symbol: Symbols.files, loading: isLoadingFigures
             ) { model.pane = .explorer }
             UI.KeyFigure(
-                figure(model.stats?.largeFiles),
-                TextKey.figureLargeFilesFrom.translated(
-                    with: Format.bytes(LargeFileThreshold.bytes(largeFileMB))),
-                symbol: Symbols.largeFiles, loading: loading
+                figureText(model.stats?.largeFiles),
+                TextKey.figureLargeFilesFrom.translated(with: largeFileThreshold),
+                symbol: Symbols.largeFiles, loading: isLoadingFigures
             ) { model.pane = .largeFiles }
             UI.KeyFigure(
-                figure(unused), TextKey.figureUnusedApps.translated, symbol: Symbols.apps,
-                loading: loading
+                figureText(unusedApps.count), TextKey.figureUnusedApps.translated,
+                symbol: Symbols.apps, loading: isLoadingFigures
             ) { model.pane = .apps }
         }
     }
 
+    private func figureText(_ count: Int?) -> String {
+        guard !isLoadingFigures, let count else { return StandInText.figure }
+        return Format.count(count)
+    }
+
+    // MARK: Disk
+
+    private func startupDiskCard(_ startupVolume: VolumeInfo) -> some View {
+        UI.Card {
+            UI.VolumeSummary(
+                startupVolume, segments: segments, canSelect: canOpen, onSelect: open)
+        }
+    }
+
+    private var segments: [StorageSegment] {
+        model.categories.map { category in
+            StorageSegment(
+                id: "\(category.kind)", title: category.kind.title.translated,
+                bytes: category.bytes, colorIndex: category.kind.rawValue)
+        }
+    }
+
+    private func node(for segment: StorageSegment) -> Node? {
+        model.categories.first { category in "\(category.kind)" == segment.id }?.node
+    }
+
+    private func canOpen(_ segment: StorageSegment) -> Bool { node(for: segment) != nil }
+
+    private func open(_ segment: StorageSegment) { node(for: segment).map(model.open) }
+
     // MARK: Size classes
+
+    private var sizeClassesCard: some View {
+        UI.Card(TextKey.sizeClassesTitle.translated) {
+            UI.Note(TextKey.sizeClassesCaption.translated).padding(.top, Space.row)
+            // Swift Charts must not redraw while a scan changes its data, so the chart waits for the scan.
+            if let stats = model.stats, !model.scanning {
+                sizeChart(stats).padding(.vertical, Space.row)
+            } else {
+                UI.Placeholder(
+                    .loading(
+                        title: .loadingSizesTitle, detail: .loadingSizesDetail,
+                        symbol: Symbols.overview)
+                )
+                .frame(minHeight: Layout.chartHeight).padding(.vertical, Space.row)
+            }
+        }
+    }
 
     /// Space per size class, with the number of files: few big files usually take more room than many small ones.
     private func sizeChart(_ stats: Statistics) -> some View {
-        Chart(stats.buckets, id: \.bucket) { b in
+        Chart(stats.buckets, id: \.bucket) { sizeClass in
             BarMark(
-                x: .value(TextKey.columnSize.translated, b.bucket.title.translated),
-                y: .value(TextKey.columnSize.translated, b.bytes)
+                x: .value(TextKey.columnSize.translated, sizeClass.bucket.title.translated),
+                y: .value(TextKey.columnSize.translated, sizeClass.bytes)
             )
             .foregroundStyle(Theme.color(CategoryKind.media.rawValue))
             .annotation(position: .top) {
-                Text(
-                    TextKey.bucketValue.translated(
-                        with: Format.bytes(b.bytes), Format.count(b.count))
-                )
-                .font(.caption).foregroundStyle(.muted)
-                .multilineTextAlignment(.center)
+                barLabel(bytes: sizeClass.bytes, fileCount: sizeClass.count)
             }
         }
         .chartYAxis(.hidden)
@@ -114,21 +120,41 @@ struct OverviewView: View {
         .frame(height: Layout.chartHeight)
     }
 
+    private func barLabel(bytes: Int64, fileCount: Int) -> some View {
+        Text(TextKey.bucketValue.translated(with: Format.bytes(bytes), Format.count(fileCount)))
+            .font(.caption)
+            .foregroundStyle(.muted)
+            .multilineTextAlignment(.center)
+    }
+
     // MARK: Categories
 
-    private func node(for segment: StorageSegment) -> Node? {
-        model.categories.first { "\($0.kind)" == segment.id }?.node
-    }
-
-    private func badge(_ c: Category) -> IconKind {
-        .badge(symbol: c.kind.symbol, colorIndex: c.kind.rawValue)
-    }
-
-    private var segments: [StorageSegment] {
-        model.categories.map {
-            StorageSegment(
-                id: "\($0.kind)", title: $0.kind.title.translated, bytes: $0.bytes,
-                colorIndex: $0.kind.rawValue)
+    @ViewBuilder private var categories: some View {
+        if model.categories.isEmpty {
+            UI.Card(TextKey.categories.translated) { UI.Placeholder(.notMeasured, in: .card) }
+        } else if layout == .grid {
+            Text(TextKey.categories.translated).textRole(.section)
+                .padding(.leading, Space.extraSmall)
+            UI.TileGrid(model.categories) { category in
+                UI.Tile(
+                    icon: badge(category), title: category.kind.title.translated,
+                    value: Format.bytes(category.bytes)
+                )
+                .onTapGesture { category.node.map(model.open) }
+            }
+        } else {
+            UI.Card(TextKey.categories.translated) {
+                UI.Rows(model.categories) { category in
+                    UI.NavRow(
+                        category.kind.title.translated, icon: badge(category),
+                        value: Format.bytes(category.bytes),
+                        action: category.node.map { node in { model.open(node) } })
+                }
+            }
         }
+    }
+
+    private func badge(_ category: Category) -> IconKind {
+        .badge(symbol: category.kind.symbol, colorIndex: category.kind.rawValue)
     }
 }

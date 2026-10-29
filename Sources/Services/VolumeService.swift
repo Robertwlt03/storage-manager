@@ -1,7 +1,7 @@
 import Foundation
 
 enum VolumeService {
-    private static let keys: [URLResourceKey] = [
+    private static let volumeKeys: [URLResourceKey] = [
         .volumeNameKey, .volumeLocalizedFormatDescriptionKey, .volumeTotalCapacityKey,
         .volumeAvailableCapacityKey,
         .volumeAvailableCapacityForImportantUsageKey, .volumeIsInternalKey,
@@ -12,22 +12,27 @@ enum VolumeService {
     static func all() -> [VolumeInfo] {
         let urls =
             FileManager.default.mountedVolumeURLs(
-                includingResourceValuesForKeys: keys, options: [.skipHiddenVolumes]) ?? []
-        return urls.compactMap(info)
-            .sorted { ($0.isRoot ? 0 : 1, $0.name) < ($1.isRoot ? 0 : 1, $1.name) }
+                includingResourceValuesForKeys: volumeKeys, options: [.skipHiddenVolumes]) ?? []
+        return urls.compactMap(volumeInfo).sorted(by: isListedBefore)
     }
 
-    static func startup() -> VolumeInfo? { all().first { $0.isRoot } }
+    static func startup() -> VolumeInfo? { all().first { volume in volume.isRoot } }
 
-    private static func info(_ url: URL) -> VolumeInfo? {
-        guard let v = try? url.resourceValues(forKeys: Set(keys)),
-            let total = v.volumeTotalCapacity, total > 0
+    private static func isListedBefore(_ left: VolumeInfo, _ right: VolumeInfo) -> Bool {
+        if left.isRoot != right.isRoot { return left.isRoot }
+        return left.name < right.name
+    }
+
+    private static func volumeInfo(at url: URL) -> VolumeInfo? {
+        guard let values = try? url.resourceValues(forKeys: Set(volumeKeys)),
+            let total = values.volumeTotalCapacity, total > 0
         else { return nil }
-        let free = Int64(v.volumeAvailableCapacity ?? 0)
+        let free = Int64(values.volumeAvailableCapacity ?? 0)
         return VolumeInfo(
-            path: url.path, name: v.volumeName ?? url.lastPathComponent,
-            format: v.volumeLocalizedFormatDescription ?? "", total: Int64(total), free: free,
-            available: max(free, v.volumeAvailableCapacityForImportantUsage ?? 0),
-            isInternal: v.volumeIsInternal ?? false, isRoot: v.volumeIsRootFileSystem ?? false)
+            path: url.path, name: values.volumeName ?? url.lastPathComponent,
+            format: values.volumeLocalizedFormatDescription ?? "", total: Int64(total), free: free,
+            available: max(free, values.volumeAvailableCapacityForImportantUsage ?? 0),
+            isInternal: values.volumeIsInternal ?? false,
+            isRoot: values.volumeIsRootFileSystem ?? false)
     }
 }

@@ -9,12 +9,12 @@ enum PermissionService {
     private static let probeFolders = [
         "/Library/Safari", "/Library/Mail", "/Library/Messages", "/Library/Cookies",
     ]
-    .map { Paths.home + $0 }
+    .map { folder in Paths.home + folder }
 
     static var hasFullDiskAccess: Bool {
         probeFolders.contains { path in
-            guard let dir = opendir(path) else { return false }
-            closedir(dir)
+            guard let folderStream = opendir(path) else { return false }
+            closedir(folderStream)
             return true
         }
     }

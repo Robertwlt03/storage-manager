@@ -12,25 +12,15 @@ struct EntryBrowser: View {
     var contentKey = ""
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
-    @State private var info: Entry?
+    @State private var infoEntry: Entry?
+
+    private static let clicksToOpen = 2
 
     var body: some View {
         Group {
             if layout == .grid {
-                ScrollView {
-                    UI.TileGrid(entries.sorted { $0.bytes > $1.bytes }) { e in
-                        UI.Tile(
-                            icon: e.path.map { .preview($0) } ?? .letter("…"), title: e.name,
-                            value: Format.bytes(e.bytes),
-                            detail: showLocation ? e.location : nil,
-                            share: Double(e.bytes) / Double(max(total, 1))
-                        )
-                        .onTapGesture(count: 2) { model.activate(e) }
-                        .contextMenu { EntryMenu(entry: e, info: $info) }
-                    }
-                    .padding(Space.page)
-                }
-                .background(Backdrop())
+                ScrollView { tiles.padding(Space.page) }
+                    .background(Backdrop())
             } else {
                 EntryTable(entries: entries, total: total, showLocation: showLocation)
                     .id(contentKey)
@@ -42,22 +32,36 @@ struct EntryBrowser: View {
                     .emptyAfterScan(title: emptyTitle, symbol: Symbols.search, detail: emptyDetail))
             }
         }
-        .sheet(item: $info) { InfoSheet(entry: $0) }
+        .sheet(item: $infoEntry) { entry in InfoSheet(entry: entry) }
         .smoothChanges(of: layout)
+    }
+
+    private var tiles: some View {
+        let largestFirst = entries.sorted { first, second in first.bytes > second.bytes }
+        return UI.TileGrid(largestFirst) { entry in
+            UI.Tile(
+                icon: entry.path.map(IconKind.preview) ?? .letter("…"), title: entry.name,
+                value: Format.bytes(entry.bytes),
+                detail: showLocation ? entry.location : nil,
+                share: Double(entry.bytes) / Double(max(total, 1))
+            )
+            .onTapGesture(count: Self.clicksToOpen) { model.activate(entry) }
+            .contextMenu { EntryMenu(entry: entry, infoEntry: $infoEntry) }
+        }
     }
 }
 
 /// The context menu of a row or tile, the same everywhere.
 struct EntryMenu: View {
     let entry: Entry
-    @Binding var info: Entry?
+    @Binding var infoEntry: Entry?
     @Environment(AppModel.self) private var model
 
     var body: some View {
         if let path = entry.path {
             if let node = entry.node { Button(TextKey.open.translated) { model.open(node) } }
             Button(TextKey.showInFinder.translated) { FinderService.reveal(path) }
-            Button(TextKey.info.translated) { info = entry }
+            Button(TextKey.info.translated) { infoEntry = entry }
             Divider()
             Button(TextKey.copyPath.translated) { FinderService.copyPath(path) }
         }

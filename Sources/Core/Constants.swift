@@ -7,12 +7,9 @@ enum ScanConfig {
     static let keepBytes: Int64 = 1 << 20
     static let progressInterval: TimeInterval = 0.5
     static let cancelCheckMask = 0xFFF  // check cancellation and progress every 4096 entries
-    static let deleteSettleDelay: Duration = .seconds(2)  // APFS reports freed blocks with a short delay
     static let searchDebounce: Duration = .milliseconds(250)
     static let searchLimit = 500
     static let iconCacheLimit = 2_000
-    static let selfTestTolerance = 0.02
-    static let maxEstimatedFraction = 0.99  // an estimate never claims "done" before the scan really is
 }
 
 /// What the cleaner may remove and how old things must be.
@@ -26,7 +23,9 @@ enum CleanConfig {
 enum LargeFileThreshold {
     static let optionsMB = [10, 50, 100, 250, 500, 1000, 5000]
     static let defaultMB = 500
-    static func bytes(_ mb: Int) -> Int64 { Int64(mb) * 1_000_000 }
+    private static let bytesPerMegabyte: Int64 = 1_000_000
+
+    static func bytes(_ megabytes: Int) -> Int64 { Int64(megabytes) * bytesPerMegabyte }
 }
 
 /// Hidden stand-in text that keeps the space of a value still being calculated; it is never shown or read.
@@ -39,6 +38,9 @@ enum WindowID {
 }
 
 enum SystemLinks {
-    static let fullDiskAccess = URL(
-        string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!
+    static let fullDiskAccess: URL = {
+        let address = "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+        guard let link = URL(string: address) else { preconditionFailure("invalid settings link") }
+        return link
+    }()
 }

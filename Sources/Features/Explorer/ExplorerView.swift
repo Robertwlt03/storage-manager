@@ -7,36 +7,40 @@ struct ExplorerView: View {
         @Bindable var model = model
         NavigationStack(path: $model.explorerPath) {
             FolderView(node: model.root)
-                .navigationDestination(for: Node.self) { FolderView(node: $0) }
+                .navigationDestination(for: Node.self) { node in FolderView(node: node) }
         }
     }
 }
 
 /// One folder of the scanned tree; the virtual root lists the measured areas.
-struct FolderView: View {
+private struct FolderView: View {
     let node: Node
     @Environment(AppModel.self) private var model
-    @State private var info: Entry?
+    @State private var infoEntry: Entry?
+
+    private var entries: [Entry] {
+        _ = model.revision
+        return Entry.contents(of: node)
+    }
 
     var body: some View {
-        let _ = model.revision
         EntryBrowser(
-            entries: Entry.contents(of: node), total: node.bytes,
+            entries: entries, total: node.bytes,
             emptyTitle: TextKey.emptyFolder.translated, contentKey: node.path
         )
         .navigationTitle(node.isVirtual ? TextKey.paneExplorer.translated : node.displayName)
         .navigationSubtitle(subtitle)
         .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(Pane.explorer.info) {
-                if !node.isVirtual {
-                    UI.ActionButton(TextKey.showInFinder.translated) {
-                        FinderService.reveal(node.path)
-                    }
-                    UI.ActionButton(TextKey.info.translated) { info = .folder(node) }
-                }
-            }
+            UI.PageHeader(Pane.explorer.info) { folderActions }
         }
-        .sheet(item: $info) { InfoSheet(entry: $0) }
+        .sheet(item: $infoEntry) { entry in InfoSheet(entry: entry) }
+    }
+
+    @ViewBuilder private var folderActions: some View {
+        if !node.isVirtual {
+            UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(node.path) }
+            UI.ActionButton(TextKey.info.translated) { infoEntry = .folder(node) }
+        }
     }
 
     private var subtitle: String {
