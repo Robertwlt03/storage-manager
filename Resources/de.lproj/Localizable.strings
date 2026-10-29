@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Eine Freigabe statt vieler Abfragen";
-"accessDetail" = "Ohne Festplattenvollzugriff fragt macOS einzeln nach Schreibtisch, Dokumenten, Downloads, iCloud Drive, den Daten anderer Apps und externen Datenträgern. Mit einem einzigen Schalter in den Systemeinstellungen entfallen alle diese Abfragen. Die App liest nur Größen und schickt nichts weg.";
+"accessDetail" = "Ohne Festplattenvollzugriff fragt macOS einzeln nach Schreibtisch, Dokumenten, Downloads, iCloud Drive, den Daten anderer Apps und externen Datenträgern. Mit einem einzigen Schalter in den Systemeinstellungen entfallen alle diese Abfragen. Die App liest nur Namen, Größen und Datumsangaben, nie den Inhalt deiner Dokumente, und schickt nichts weg.";
 "accessOneSwitch" = "Datenschutz & Sicherheit › Festplattenvollzugriff";
 "accessOpenSettings" = "Systemeinstellungen öffnen";
 "accessContinue" = "Ohne Vollzugriff fortfahren";
 "accessGranted" = "Erteilt";
 "accessRestart" = "App neu starten";
-"accessRestartHint" = "Schalter eingeschaltet? macOS gibt den Zugriff erst nach einem Neustart der App frei. Wirkt er danach immer noch nicht, stammt der Eintrag von einem früheren Build: dann in den Systemeinstellungen mit „–“ entfernen und neu hinzufügen.";
+"accessRestartHint" = "Schalter eingeschaltet? macOS gibt den Zugriff erst frei, wenn die App neu gestartet wurde. Klicke dazu auf „App neu starten“ oder lass macOS die App beenden und neu öffnen. Wirkt er danach immer noch nicht, entferne den Eintrag in den Systemeinstellungen mit „–“ und füge die App neu hinzu.";
 "fullDiskAccess" = "Festplattenvollzugriff";
 
 /* Settings */

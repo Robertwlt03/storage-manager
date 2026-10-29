@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Eén toestemming in plaats van veel vragen";
-"accessDetail" = "Zonder volledige schijftoegang vraagt macOS apart om toegang tot het bureaublad, Documenten, Downloads, iCloud Drive, de gegevens van andere apps en externe volumes. Eén enkele schakelaar in Systeeminstellingen vervangt al deze vragen. De app leest alleen groottes en verstuurt niets.";
+"accessDetail" = "Zonder volledige schijftoegang vraagt macOS apart om toegang tot het bureaublad, Documenten, Downloads, iCloud Drive, de gegevens van andere apps en externe volumes. Eén enkele schakelaar in Systeeminstellingen vervangt al deze vragen. De app leest alleen namen, groottes en datums, nooit de inhoud van je documenten, en verstuurt niets.";
 "accessOneSwitch" = "Privacy en beveiliging › Volledige schijftoegang";
 "accessOpenSettings" = "Open Systeeminstellingen";
 "accessContinue" = "Doorgaan zonder volledige schijftoegang";
 "accessGranted" = "Toegestaan";
 "accessRestart" = "App herstarten";
-"accessRestartHint" = "Schakelaar aangezet? macOS geeft pas toegang nadat de app is herstart. Werkt het daarna nog steeds niet, dan hoort het item bij een eerdere build: verwijder het met “–” in Systeeminstellingen en voeg het opnieuw toe.";
+"accessRestartHint" = "Schakelaar aangezet? macOS geeft pas toegang nadat de app is herstart. Klik op “App herstarten” of laat macOS de app stoppen en opnieuw openen. Werkt het daarna nog steeds niet, verwijder dan het item met “–” in Systeeminstellingen en voeg de app opnieuw toe.";
 "fullDiskAccess" = "Volledige schijftoegang";
 
 /* Settings */

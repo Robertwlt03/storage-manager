@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "一次授權，取代多次詢問";
-"accessDetail" = "沒有完整磁碟取用權限時，macOS 會分別詢問桌面、文件、下載項目、iCloud Drive、其他 App 的資料以及外接磁碟機的取用權限。在「系統設定」中打開一個開關，就可以省去所有這些詢問。本 App 只讀取大小，不會向任何地方傳送任何內容。";
+"accessDetail" = "沒有完整磁碟取用權限時，macOS 會分別詢問桌面、文件、下載項目、iCloud Drive、其他 App 的資料以及外接磁碟機的取用權限。在「系統設定」中打開一個開關，就可以省去所有這些詢問。本 App 只讀取名稱、大小和日期，從不讀取你的文件內容，也不會向任何地方傳送任何內容。";
 "accessOneSwitch" = "隱私權與安全性 › 完整磁碟取用權限";
 "accessOpenSettings" = "打開「系統設定」";
 "accessContinue" = "不使用完整磁碟取用權限，繼續";
 "accessGranted" = "已授權";
 "accessRestart" = "重新啟動 App";
-"accessRestartHint" = "已打開開關？macOS 要在 App 重新啟動後才會授予取用權限。如果之後仍然無效，表示該項目屬於較早的建置版本：請在「系統設定」中用「–」將其移除，然後重新加入。";
+"accessRestartHint" = "已打開開關？macOS 要在 App 重新啟動後才會授予取用權限。請按一下「重新啟動 App」，或讓 macOS 結束並重新打開它。如果之後仍然無效，請在「系統設定」中用「–」移除該項目，然後重新加入 App。";
 "fullDiskAccess" = "完整磁碟取用權限";
 
 /* Settings */

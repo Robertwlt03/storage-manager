@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Én tilladelse i stedet for mange spørgsmål";
-"accessDetail" = "Uden fuld diskadgang spørger macOS enkeltvis om Skrivebord, Dokumenter, Downloads, iCloud Drive, andre apps' data og eksterne diske. Med én enkelt kontakt i Systemindstillinger forsvinder alle disse spørgsmål. Appen læser kun størrelser og sender ikke noget nogen steder hen.";
+"accessDetail" = "Uden fuld diskadgang spørger macOS enkeltvis om Skrivebord, Dokumenter, Downloads, iCloud Drive, andre apps' data og eksterne diske. Med én enkelt kontakt i Systemindstillinger forsvinder alle disse spørgsmål. Appen læser kun navne, størrelser og datoer, aldrig indholdet af dine dokumenter, og sender ikke noget nogen steder hen.";
 "accessOneSwitch" = "Anonymitet og sikkerhed › Fuld diskadgang";
 "accessOpenSettings" = "Åbn Systemindstillinger";
 "accessContinue" = "Fortsæt uden fuld diskadgang";
 "accessGranted" = "Givet";
 "accessRestart" = "Genstart appen";
-"accessRestartHint" = "Har du slået kontakten til? macOS giver først adgang, når appen er genstartet. Virker det stadig ikke, hører posten til en tidligere build: Fjern den med »–« i Systemindstillinger, og tilføj den igen.";
+"accessRestartHint" = "Har du slået kontakten til? macOS giver først adgang, når appen er genstartet. Klik på »Genstart appen«, eller lad macOS afslutte og genåbne den. Virker det stadig ikke, så fjern posten med »–« i Systemindstillinger, og tilføj appen igen.";
 "fullDiskAccess" = "Fuld diskadgang";
 
 /* Settings */

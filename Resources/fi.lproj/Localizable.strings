@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Yksi lupa monen kysymyksen sijaan";
-"accessDetail" = "Ilman täyttä levyn käyttöoikeutta macOS kysyy erikseen Työpöydästä, Dokumenteista, Latauksista, iCloud Drivesta, muiden appien tiedoista ja ulkoisista taltioista. Yksi kytkin Järjestelmäasetuksissa poistaa kaikki nämä kysymykset. App lukee vain kokoja eikä lähetä mitään minnekään.";
+"accessDetail" = "Ilman täyttä levyn käyttöoikeutta macOS kysyy erikseen Työpöydästä, Dokumenteista, Latauksista, iCloud Drivesta, muiden appien tiedoista ja ulkoisista taltioista. Yksi kytkin Järjestelmäasetuksissa poistaa kaikki nämä kysymykset. App lukee vain nimiä, kokoja ja päivämääriä, ei koskaan dokumenttiesi sisältöä, eikä lähetä mitään minnekään.";
 "accessOneSwitch" = "Tietosuoja ja turvallisuus › Täysi levyn käyttöoikeus";
 "accessOpenSettings" = "Avaa Järjestelmäasetukset";
 "accessContinue" = "Jatka ilman täyttä levyn käyttöoikeutta";
 "accessGranted" = "Myönnetty";
 "accessRestart" = "Käynnistä app uudelleen";
-"accessRestartHint" = "Onko kytkin päällä? macOS antaa käyttöoikeuden vasta, kun app on käynnistetty uudelleen. Jos se ei vieläkään toimi, merkintä kuuluu aiemmalle versiolle: poista se Järjestelmäasetuksissa ”–”-painikkeella ja lisää se uudelleen.";
+"accessRestartHint" = "Onko kytkin päällä? macOS antaa käyttöoikeuden vasta, kun app on käynnistetty uudelleen. Valitse ”Käynnistä app uudelleen” tai anna macOS:n lopettaa ja avata se uudelleen. Jos se ei vieläkään toimi, poista merkintä Järjestelmäasetuksissa ”–”-painikkeella ja lisää app uudelleen.";
 "fullDiskAccess" = "Täysi levyn käyttöoikeus";
 
 /* Settings */

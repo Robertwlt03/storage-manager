@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "一次授权，取代多次询问";
-"accessDetail" = "没有完全磁盘访问权限时，macOS 会分别询问桌面、文稿、下载、iCloud Drive、其他 App 的数据以及外置宗卷的访问权限。在“系统设置”中打开一个开关，就可以省去所有这些询问。本 App 只读取大小，不会向任何地方发送任何内容。";
+"accessDetail" = "没有完全磁盘访问权限时，macOS 会分别询问桌面、文稿、下载、iCloud Drive、其他 App 的数据以及外置宗卷的访问权限。在“系统设置”中打开一个开关，就可以省去所有这些询问。本 App 只读取名称、大小和日期，从不读取你的文稿内容，也不会向任何地方发送任何内容。";
 "accessOneSwitch" = "隐私与安全性 › 完全磁盘访问权限";
 "accessOpenSettings" = "打开“系统设置”";
 "accessContinue" = "不使用完全磁盘访问权限，继续";
 "accessGranted" = "已授权";
 "accessRestart" = "重新启动 App";
-"accessRestartHint" = "已打开开关？macOS 要在 App 重新启动后才会授予访问权限。如果之后仍然无效，说明该条目属于较早的构建版本：请在“系统设置”中用“–”将其移除，然后重新添加。";
+"accessRestartHint" = "已打开开关？macOS 要在 App 重新启动后才会授予访问权限。请点按“重新启动 App”，或者让 macOS 退出并重新打开它。如果之后仍然无效，请在“系统设置”中用“–”移除该条目，然后重新添加 App。";
 "fullDiskAccess" = "完全磁盘访问权限";
 
 /* Settings */

@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Çok Sayıda İstem Yerine Tek İzin";
-"accessDetail" = "Tam Disk Erişimi olmadan macOS; Masaüstü, Belgeler, İndirilenler, iCloud Drive, diğer uygulamaların verileri ve harici birimler için ayrı ayrı sorar. Sistem Ayarları'ndaki tek bir anahtar bu istemlerin hepsinin yerini alır. Uygulama yalnızca boyutları okur ve hiçbir yere bir şey göndermez.";
+"accessDetail" = "Tam Disk Erişimi olmadan macOS; Masaüstü, Belgeler, İndirilenler, iCloud Drive, diğer uygulamaların verileri ve harici birimler için ayrı ayrı sorar. Sistem Ayarları'ndaki tek bir anahtar bu istemlerin hepsinin yerini alır. Uygulama yalnızca adları, boyutları ve tarihleri okur, belgelerinizin içeriğini asla okumaz ve hiçbir yere bir şey göndermez.";
 "accessOneSwitch" = "Gizlilik ve Güvenlik › Tam Disk Erişimi";
 "accessOpenSettings" = "Sistem Ayarları'nı Aç";
 "accessContinue" = "Tam Disk Erişimi Olmadan Devam Et";
 "accessGranted" = "İzin Verildi";
 "accessRestart" = "Uygulamayı Yeniden Başlat";
-"accessRestartHint" = "Anahtarı açtınız mı? macOS erişimi ancak uygulama yeniden başladıktan sonra verir. Yine de çalışmıyorsa, giriş daha eski bir derlemeye aittir: Sistem Ayarları'nda “–” ile kaldırın ve yeniden ekleyin.";
+"accessRestartHint" = "Anahtarı açtınız mı? macOS erişimi ancak uygulama yeniden başladıktan sonra verir. “Uygulamayı Yeniden Başlat”ı tıklayın ya da macOS'in uygulamayı kapatıp yeniden açmasına izin verin. Yine de çalışmıyorsa girişi Sistem Ayarları'nda “–” ile kaldırın ve uygulamayı yeniden ekleyin.";
 "fullDiskAccess" = "Tam Disk Erişimi";
 
 /* Settings */

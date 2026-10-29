@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Un solo permesso invece di tante richieste";
-"accessDetail" = "Senza l’accesso completo al disco, macOS chiede separatamente per Scrivania, Documenti, Download, iCloud Drive, i dati di altre app e i volumi esterni. Un unico interruttore in Impostazioni di Sistema sostituisce tutte queste richieste. L’app legge soltanto le dimensioni e non invia nulla da nessuna parte.";
+"accessDetail" = "Senza l’accesso completo al disco, macOS chiede separatamente per Scrivania, Documenti, Download, iCloud Drive, i dati di altre app e i volumi esterni. Un unico interruttore in Impostazioni di Sistema sostituisce tutte queste richieste. L’app legge soltanto nomi, dimensioni e date, mai il contenuto dei tuoi documenti, e non invia nulla da nessuna parte.";
 "accessOneSwitch" = "Privacy e sicurezza › Accesso completo al disco";
 "accessOpenSettings" = "Apri Impostazioni di Sistema";
 "accessContinue" = "Continua senza accesso completo al disco";
 "accessGranted" = "Concesso";
 "accessRestart" = "Riavvia l’app";
-"accessRestartHint" = "Interruttore attivato? macOS concede l’accesso solo dopo il riavvio dell’app. Se continua a non funzionare, la voce appartiene a una build precedente: rimuovila con “–” in Impostazioni di Sistema e aggiungila di nuovo.";
+"accessRestartHint" = "Interruttore attivato? macOS concede l’accesso solo dopo il riavvio dell’app. Fai clic su “Riavvia l’app” oppure lascia che macOS la chiuda e la riapra. Se continua a non funzionare, rimuovi la voce con “–” in Impostazioni di Sistema e aggiungi di nuovo l’app.";
 "fullDiskAccess" = "Accesso completo al disco";
 
 /* Settings */

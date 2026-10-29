@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "One Permission Instead of Many Prompts";
-"accessDetail" = "Without Full Disk Access, macOS asks separately for Desktop, Documents, Downloads, iCloud Drive, other apps' data and external volumes. A single switch in System Settings replaces all of these prompts. The app only reads sizes and sends nothing anywhere.";
+"accessDetail" = "Without Full Disk Access, macOS asks separately for Desktop, Documents, Downloads, iCloud Drive, other apps' data and external volumes. A single switch in System Settings replaces all of these prompts. The app only reads names, sizes and dates, never the contents of your documents, and sends nothing anywhere.";
 "accessOneSwitch" = "Privacy & Security › Full Disk Access";
 "accessOpenSettings" = "Open System Settings";
 "accessContinue" = "Continue Without Full Disk Access";
 "accessGranted" = "Granted";
 "accessRestart" = "Restart App";
-"accessRestartHint" = "Switch turned on? macOS only grants access after the app restarts. If it still does not work, the entry belongs to an earlier build: remove it with “–” in System Settings and add it again.";
+"accessRestartHint" = "Switch turned on? macOS only grants access once the app has restarted. Click “Restart App” or let macOS quit and reopen it. If it still does not work, remove the entry with “–” in System Settings and add the app again.";
 "fullDiskAccess" = "Full Disk Access";
 
 /* Settings */

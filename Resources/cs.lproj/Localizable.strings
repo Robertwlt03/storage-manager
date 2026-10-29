@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Jedno oprávnění místo mnoha dotazů";
-"accessDetail" = "Bez plného přístupu k disku se vás macOS ptá zvlášť na Plochu, Dokumenty, Stažené soubory, iCloud Drive, data jiných aplikací a externí disky. Jediný přepínač v Nastavení systému všechny tyto dotazy nahradí. Aplikace čte pouze velikosti a nic nikam neodesílá.";
+"accessDetail" = "Bez plného přístupu k disku se vás macOS ptá zvlášť na Plochu, Dokumenty, Stažené soubory, iCloud Drive, data jiných aplikací a externí disky. Jediný přepínač v Nastavení systému všechny tyto dotazy nahradí. Aplikace čte pouze názvy, velikosti a data, nikdy obsah vašich dokumentů, a nic nikam neodesílá.";
 "accessOneSwitch" = "Soukromí a zabezpečení › Plný přístup k disku";
 "accessOpenSettings" = "Otevřít Nastavení systému";
 "accessContinue" = "Pokračovat bez plného přístupu k disku";
 "accessGranted" = "Uděleno";
 "accessRestart" = "Restartovat aplikaci";
-"accessRestartHint" = "Přepínač zapnut? macOS udělí přístup až po restartu aplikace. Pokud to pak stále nefunguje, patří záznam k dřívější verzi sestavení: odeberte ho v Nastavení systému tlačítkem „–“ a přidejte znovu.";
+"accessRestartHint" = "Přepínač zapnut? macOS udělí přístup až po restartu aplikace. Klikněte na „Restartovat aplikaci“, nebo nechte macOS aplikaci ukončit a znovu otevřít. Pokud to pak stále nefunguje, odeberte záznam v Nastavení systému tlačítkem „–“ a přidejte aplikaci znovu.";
 "fullDiskAccess" = "Plný přístup k disku";
 
 /* Settings */

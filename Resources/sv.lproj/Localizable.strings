@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "En behörighet i stället för många frågor";
-"accessDetail" = "Utan full skivåtkomst frågar macOS separat efter Skrivbord, Dokument, Hämtade filer, iCloud Drive, andra appars data och externa volymer. Med ett enda reglage i Systeminställningar försvinner alla dessa frågor. Appen läser bara storlekar och skickar ingenting någonstans.";
+"accessDetail" = "Utan full skivåtkomst frågar macOS separat efter Skrivbord, Dokument, Hämtade filer, iCloud Drive, andra appars data och externa volymer. Med ett enda reglage i Systeminställningar försvinner alla dessa frågor. Appen läser bara namn, storlekar och datum, aldrig innehållet i dina dokument, och skickar ingenting någonstans.";
 "accessOneSwitch" = "Integritet och säkerhet › Full skivåtkomst";
 "accessOpenSettings" = "Öppna Systeminställningar";
 "accessContinue" = "Fortsätt utan full skivåtkomst";
 "accessGranted" = "Beviljad";
 "accessRestart" = "Starta om appen";
-"accessRestartHint" = "Har du aktiverat reglaget? macOS ger åtkomst först när appen har startats om. Om det fortfarande inte fungerar hör posten till ett tidigare bygge: ta bort den med ”–” i Systeminställningar och lägg till den igen.";
+"accessRestartHint" = "Har du aktiverat reglaget? macOS ger åtkomst först när appen har startats om. Klicka på ”Starta om appen” eller låt macOS avsluta och öppna den igen. Om det fortfarande inte fungerar tar du bort posten med ”–” i Systeminställningar och lägger till appen igen.";
 "fullDiskAccess" = "Full skivåtkomst";
 
 /* Settings */

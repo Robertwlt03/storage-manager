@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Uma única permissão em vez de várias solicitações";
-"accessDetail" = "Sem o Acesso Total ao Disco, o macOS pergunta separadamente sobre a Mesa, Documentos, Downloads, iCloud Drive, os dados de outros apps e os volumes externos. Um único interruptor nos Ajustes do Sistema substitui todas essas solicitações. O app só lê tamanhos e não envia nada para lugar nenhum.";
+"accessDetail" = "Sem o Acesso Total ao Disco, o macOS pergunta separadamente sobre a Mesa, Documentos, Downloads, iCloud Drive, os dados de outros apps e os volumes externos. Um único interruptor nos Ajustes do Sistema substitui todas essas solicitações. O app só lê nomes, tamanhos e datas, nunca o conteúdo dos seus documentos, e não envia nada para lugar nenhum.";
 "accessOneSwitch" = "Privacidade e Segurança › Acesso Total ao Disco";
 "accessOpenSettings" = "Abrir Ajustes do Sistema";
 "accessContinue" = "Continuar sem Acesso Total ao Disco";
 "accessGranted" = "Concedido";
 "accessRestart" = "Reiniciar o app";
-"accessRestartHint" = "Ligou o interruptor? O macOS só concede o acesso depois que o app for reiniciado. Se mesmo assim não funcionar, a entrada pertence a uma versão anterior: remova-a com “–” nos Ajustes do Sistema e adicione-a novamente.";
+"accessRestartHint" = "Ligou o interruptor? O macOS só concede o acesso depois que o app for reiniciado. Clique em “Reiniciar o app” ou deixe o macOS encerrá-lo e abri-lo novamente. Se mesmo assim não funcionar, remova a entrada com “–” nos Ajustes do Sistema e adicione o app novamente.";
 "fullDiskAccess" = "Acesso Total ao Disco";
 
 /* Settings */

@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Jedno zezwolenie zamiast wielu pytań";
-"accessDetail" = "Bez pełnego dostępu do dysku macOS pyta osobno o Biurko, Dokumenty, Pobrane, iCloud Drive, dane innych aplikacji i woluminy zewnętrzne. Jeden przełącznik w Ustawieniach systemowych zastępuje wszystkie te pytania. Aplikacja odczytuje tylko rozmiary i niczego nigdzie nie wysyła.";
+"accessDetail" = "Bez pełnego dostępu do dysku macOS pyta osobno o Biurko, Dokumenty, Pobrane, iCloud Drive, dane innych aplikacji i woluminy zewnętrzne. Jeden przełącznik w Ustawieniach systemowych zastępuje wszystkie te pytania. Aplikacja odczytuje tylko nazwy, rozmiary i daty, nigdy zawartość twoich dokumentów, i niczego nigdzie nie wysyła.";
 "accessOneSwitch" = "Prywatność i ochrona › Pełny dostęp do dysku";
 "accessOpenSettings" = "Otwórz Ustawienia systemowe";
 "accessContinue" = "Kontynuuj bez pełnego dostępu do dysku";
 "accessGranted" = "Przyznano";
 "accessRestart" = "Uruchom aplikację ponownie";
-"accessRestartHint" = "Przełącznik jest włączony? macOS przyznaje dostęp dopiero po ponownym uruchomieniu aplikacji. Jeśli nadal nie działa, wpis pochodzi z wcześniejszej kompilacji: usuń go przyciskiem „–” w Ustawieniach systemowych i dodaj ponownie.";
+"accessRestartHint" = "Przełącznik jest włączony? macOS przyznaje dostęp dopiero po ponownym uruchomieniu aplikacji. Kliknij „Uruchom aplikację ponownie” albo pozwól macOS zamknąć ją i otworzyć ponownie. Jeśli nadal nie działa, usuń wpis przyciskiem „–” w Ustawieniach systemowych i dodaj aplikację ponownie.";
 "fullDiskAccess" = "Pełny dostęp do dysku";
 
 /* Settings */

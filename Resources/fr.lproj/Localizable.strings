@@ -146,13 +146,13 @@
 
 /* Full Disk Access */
 "accessTitle" = "Une seule autorisation au lieu de nombreuses demandes";
-"accessDetail" = "Sans l’accès complet au disque, macOS demande séparément l’accès au Bureau, aux Documents, aux Téléchargements, à iCloud Drive, aux données des autres apps et aux volumes externes. Un seul interrupteur dans Réglages Système remplace toutes ces demandes. L’app lit uniquement les tailles et n’envoie rien nulle part.";
+"accessDetail" = "Sans l’accès complet au disque, macOS demande séparément l’accès au Bureau, aux Documents, aux Téléchargements, à iCloud Drive, aux données des autres apps et aux volumes externes. Un seul interrupteur dans Réglages Système remplace toutes ces demandes. L’app lit uniquement les noms, les tailles et les dates, jamais le contenu de vos documents, et n’envoie rien nulle part.";
 "accessOneSwitch" = "Confidentialité et sécurité › Accès complet au disque";
 "accessOpenSettings" = "Ouvrir Réglages Système";
 "accessContinue" = "Continuer sans l’accès complet au disque";
 "accessGranted" = "Accordé";
 "accessRestart" = "Redémarrer l’app";
-"accessRestartHint" = "Interrupteur activé ? macOS n’accorde l’accès qu’après le redémarrage de l’app. Si cela ne fonctionne toujours pas, l’entrée appartient à une version antérieure : supprimez-la avec « – » dans Réglages Système, puis ajoutez-la à nouveau.";
+"accessRestartHint" = "Interrupteur activé ? macOS n’accorde l’accès qu’après le redémarrage de l’app. Cliquez sur « Redémarrer l’app » ou laissez macOS la quitter et la rouvrir. Si cela ne fonctionne toujours pas, supprimez l’entrée avec « – » dans Réglages Système, puis ajoutez de nouveau l’app.";
 "fullDiskAccess" = "Accès complet au disque";
 
 /* Settings */
