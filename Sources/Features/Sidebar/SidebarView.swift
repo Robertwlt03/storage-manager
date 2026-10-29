@@ -6,11 +6,18 @@ struct SidebarView: View {
         SidebarList()
             .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
             .toolbar {
-                // Like Apple's own toggle: always in the same place next to the window buttons, whether the sidebar
-                // is open or closed (macOS keeps a sidebar's toolbar items there while it is closed). It never moves,
-                // so nothing is faded over. No spacer or padding: both made it shift between the two states or
-                // pushed the symbol off the middle of its glass circle.
-                ToolbarItem { SidebarToggle() }
+                // Where Apple's own SwiftUI toggle sits: at the trailing edge of the open sidebar (a flexible spacer
+                // pushes it there), next to the window buttons while it is closed (macOS keeps a sidebar's toolbar
+                // items there). macOS fades the button from one place to the other, as it does with Apple's own.
+                if #available(macOS 26.0, *) { ToolbarSpacer(.flexible) }
+                if #available(macOS 26.0, *) {
+                    // Its own glass circle instead of the toolbar's shared background: macOS faded that background
+                    // separately when the button changed places, leaving an empty glass circle behind for a moment.
+                    ToolbarItem { SidebarToggle().buttonStyle(.glass).buttonBorderShape(.circle) }
+                        .sharedBackgroundVisibility(.hidden)
+                } else {
+                    ToolbarItem { SidebarToggle() }
+                }
             }
             // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
             // animation, which made the reopening sidebar jump.
@@ -52,8 +59,8 @@ struct SidebarList: View {
 }
 
 
-/// The button that shows and hides the sidebar, always next to the window buttons like Apple's own. A button that
-/// changed places with the sidebar was faded over by macOS on every change and left an empty glass button behind.
+/// The button that shows and hides the sidebar, placed like Apple's own: at the open sidebar's trailing edge, next to
+/// the window buttons while it is closed.
 struct SidebarToggle: View {
     @Environment(AppModel.self) private var model
 
