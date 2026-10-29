@@ -75,8 +75,9 @@ make run
 Ohne weitere Angaben wird die App nur behelfsmäßig signiert. Dann fragt macOS nach jedem Bauen erneut nach dem
 Festplattenvollzugriff. Wenn dich das stört, legst du einmalig ein eigenes Zertifikat an. `make identity` erzeugt es in
 einem eigenen kleinen Schlüsselbund nur für dieses Projekt und trägt alles Nötige in die Datei `local.mk` ein, die Git
-ignoriert. Beim Bauen entsperrt `build.sh` diesen Schlüsselbund selbst. Dein Anmeldepasswort und dein normaler
-Schlüsselbund werden dabei nie gebraucht. Nach dem nächsten `make run` setzt du den Festplattenvollzugriff ein letztes
+ignoriert. Damit macOS den Festplattenvollzugriff über alle Builds behält, bittet macOS dabei einmal in einem normalen Dialog um
+dein Passwort, um dem Zertifikat für das Signieren zu vertrauen. Beim Bauen entsperrt `build.sh` den Schlüsselbund
+selbst, dein Passwort wird danach nie wieder gebraucht. Nach dem nächsten `make run` setzt du den Festplattenvollzugriff ein letztes
 Mal, danach bleibt er bei jedem Bauen erhalten.
 
 ```bash

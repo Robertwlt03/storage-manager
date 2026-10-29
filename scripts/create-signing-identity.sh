@@ -11,15 +11,32 @@ NAME="Speicher-Explorer Dev"
 KEYCHAIN="$HOME/Library/Keychains/speicher-explorer-signing.keychain-db"
 SETTINGS=local.mk
 
+TMP=$(mktemp -d)
+trap 'rm -rf "$TMP"' EXIT
+
+# Newer macOS keeps Full Disk Access across rebuilds only for a certificate it trusts for code
+# signing; without that trust it ties the grant to each build's exact contents. Trusting it asks
+# for the password once, in a regular macOS dialog.
+trust_for_code_signing() {
+  local certificate="$TMP/certificate.pem"
+  security find-certificate -c "$NAME" -p "$KEYCHAIN" > "$certificate"
+  if security verify-cert -c "$certificate" -p codeSign > /dev/null 2>&1; then
+    echo "macOS already trusts \"$NAME\" for code signing."
+    return
+  fi
+  echo "macOS now asks once for your password to trust \"$NAME\" for code signing."
+  security add-trusted-cert -r trustRoot -p codeSign -k "$KEYCHAIN" "$certificate"
+}
+
 if [ -f "$KEYCHAIN" ]; then
   echo "The signing keychain already exists: $KEYCHAIN"
-  echo "To start over, delete it in Keychain Access and run this again."
+  PASSWORD=$(sed -n 's/^SIGNING_KEYCHAIN_PASSWORD *= *//p' "$SETTINGS")
+  security unlock-keychain -p "$PASSWORD" "$KEYCHAIN"
+  trust_for_code_signing
   exit 0
 fi
 
 PASSWORD=$(uuidgen)
-TMP=$(mktemp -d)
-trap 'rm -rf "$TMP"' EXIT
 
 # A keychain only for this project, which does not lock itself after a while.
 security create-keychain -p "$PASSWORD" "$KEYCHAIN"
@@ -59,4 +76,5 @@ grep -v -E '^(SIGN_IDENTITY|SIGNING_KEYCHAIN|SIGNING_KEYCHAIN_PASSWORD) *=' "$SE
 } > "$SETTINGS"
 
 echo "Signing identity \"$NAME\" created in its own keychain; local.mk now signs with it."
+trust_for_code_signing
 echo "Grant Full Disk Access to the app once after the next make run."
