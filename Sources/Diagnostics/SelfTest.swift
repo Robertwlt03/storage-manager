@@ -13,7 +13,16 @@ enum SelfTest {
     /// `du -k` counts in blocks of this many bytes.
     private static let bytesPerKilobyte: Int64 = 1024
 
-    static func run() {
+    /// Stops before touching a single protected folder when Full Disk Access is missing: without
+    /// it, macOS would ask once for every app's data folder. `make selftest` therefore starts the
+    /// built app, which holds the access, instead of the bare program.
+    static func run() -> Bool {
+        guard PermissionService.hasFullDiskAccess else {
+            print(
+                "Full Disk Access is missing, so the self test stops before macOS asks per folder.")
+            print("Grant it to Speicher-Explorer in System Settings, then run make selftest.")
+            return false
+        }
         let root = Node.virtualRoot()
         measureEveryArea(into: root)
         checkCategories(of: root)
@@ -21,6 +30,7 @@ enum SelfTest {
         reportLargeFiles(in: root)
         reportCopies(in: root)
         reportVolumes()
+        return true
     }
 
     private static func measureEveryArea(into root: Node) {

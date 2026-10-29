@@ -46,7 +46,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | `make test` | startet nur die Tests |
 | `make coverage` | zeigt, wie viel des Codes die Tests je Ordner erreichen |
 | `make format` | bringt alle Swift-Dateien in die gemeinsame Form |
-| `make selftest` | misst echte Ordner und vergleicht mit dem Befehl `du` |
+| `make selftest` | startet die gebaute App als Selbsttest, misst echte Ordner und vergleicht mit `du` |
 | `make stress` | öffnet eine zweite App, die so schnell wie möglich durch alle Seiten klickt |
 | `make identity` | legt einmalig dein eigenes Zertifikat zum Signieren an |
 | `make release` | erstellt die DMG zum Weitergeben im Ordner `dist` |
@@ -96,6 +96,11 @@ ist.
 Zwei weitere Prüfungen startest du bei Bedarf selbst. Der Selbsttest misst echte Ordner und vergleicht das Ergebnis
 mit dem Befehl `du`. Der Belastungstest bedient die laufende App wie ein sehr schneller Mensch und versucht, Fehler
 auszulösen. Beide geben nur Anzahlen und Größen aus, niemals Datei- oder Ordnernamen.
+
+Beide laufen als die gebaute App und nutzen deren Festplattenvollzugriff. Fehlt er, brechen sie sofort ab, bevor
+macOS für jeden geschützten Ordner einzeln nachfragt. Baue die App deshalb vorher mit deinem eigenen Zertifikat, damit
+der Vollzugriff über alle Builds erhalten bleibt, und starte den Selbsttest nie als nacktes Programm aus
+`.build/release`, denn dann fragt macOS hunderte Male.
 
 ```bash
 make selftest

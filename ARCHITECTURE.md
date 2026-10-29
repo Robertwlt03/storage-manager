@@ -99,6 +99,11 @@ die App-Kopien, ist mit `nonisolated` markiert. Der Compiler prüft dann, dass k
 verändert werden. Den Ordnerbaum baut eine Messung im Hintergrund und übergibt ihn danach als Ganzes, deshalb darf
 `Node` die Seite wechseln.
 
+**Selbsttest und Belastungstest nur mit Vollzugriff:** Beide messen echte Ordner. Ohne Festplattenvollzugriff würde
+macOS dabei für jeden geschützten Ordner und für die Daten jeder anderen App einzeln fragen, oft hunderte Male. Deshalb
+prüfen beide zuerst den Vollzugriff und hören ohne ihn sofort auf, und `make selftest` startet die gebaute App statt
+des nackten Programms, damit macOS den Vollzugriff der App anrechnet.
+
 **Energie:** Keine Animation läuft im Ruhezustand. Die Messung läuft mit niedriger Priorität, und der Fortschritt
 meldet sich höchstens zweimal pro Sekunde.
 

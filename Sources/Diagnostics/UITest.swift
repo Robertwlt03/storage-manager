@@ -49,6 +49,11 @@ enum UITest {
     private static var pictureFolder = URL(fileURLWithPath: NSTemporaryDirectory())
 
     static func run(_ model: AppModel, into pictureFolderPath: String) async {
+        // Without Full Disk Access every scan would make macOS ask once per protected folder.
+        guard model.hasFullDiskAccess else {
+            log("STOP: Full Disk Access is missing; grant it to Speicher-Explorer and start again")
+            return
+        }
         preparePictureFolder(at: pictureFolderPath)
         let savedSettings = saveSettings()
         defer { restore(savedSettings) }

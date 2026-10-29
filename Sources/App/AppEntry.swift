@@ -18,10 +18,7 @@ enum AppEntry {
     }
 
     private static func runSelfTest() -> Never {
-        Task {
-            SelfTest.run()
-            exit(EXIT_SUCCESS)
-        }
+        Task { finish(succeeded: SelfTest.run()) }
         dispatchMain()
     }
 

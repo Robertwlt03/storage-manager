@@ -9,6 +9,7 @@ export BUILD_DIR SIGN_IDENTITY
 APP := $(BUILD_DIR)/Speicher-Explorer.app
 PROCESS := SpeicherExplorer
 STRESS_TEST_FOLDER := $(TMPDIR)speicher-test
+SELFTEST_REPORT := $(TMPDIR)speicher-selftest.txt
 SECONDS_BETWEEN_QUIT_CHECKS := 0.2
 
 .DEFAULT_GOAL := help
@@ -41,8 +42,10 @@ format: ## Bring every Swift file into the shared form
 	swift format --in-place --recursive Sources Tests
 
 selftest: ## Measure real folders and compare with du (prints only counts and sizes)
-	swift build -c release
-	.build/release/$(PROCESS) --selftest
+	@# Started as the app, so macOS uses the app's Full Disk Access instead of asking per folder.
+	@rm -f "$(SELFTEST_REPORT)"
+	open -n -W --stdout "$(SELFTEST_REPORT)" "$(APP)" --args --selftest
+	@cat "$(SELFTEST_REPORT)"
 
 stress: ## Open a second app that clicks through every page as fast as it can
 	open -n "$(APP)" --args -uiTest "$(STRESS_TEST_FOLDER)"
