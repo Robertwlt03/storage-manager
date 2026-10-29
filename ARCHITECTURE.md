@@ -1,16 +1,18 @@
-# Architektur
+<p align="center">
+  <img src="assets/banner-architektur.svg" alt="Architektur des Speicher-Explorers. Wo im Code was liegt und warum." width="100%">
+</p>
 
 Diese Beschreibung hilft dir herauszufinden, wo eine Änderung hingehört. Sie nennt Dateien und Typen beim Namen,
 damit du sie mit der Suche deines Editors findest. Wie du baust und prüfst, steht in der
 [Anleitung zum Mitmachen](CONTRIBUTING.md).
 
-## Worum es geht
+## <img src="assets/icons/about.svg" height="33" align="absmiddle" alt="">Worum es geht
 
 Der Speicher-Explorer misst einmal, wie viel Platz die Ordner des Macs belegen, und zeigt das Ergebnis auf mehreren
 Seiten: als Überblick, als Ordnerbaum, als Liste großer Dateien, beim Aufräumen und in versteckten Bereichen wie dem
 temporären Ordner von macOS. Nach der Messung kommt jede Seite ohne weiteren Festplattenzugriff aus.
 
-## Der Weg der Daten
+## <img src="assets/icons/dataflow.svg" height="33" align="absmiddle" alt="">Der Weg der Daten
 
 1. `ScanService` läuft mit `FTS` einmal über einen Bereich der Festplatte, auf den sparsamen Kernen des Prozessors.
 2. Daraus entsteht ein Baum aus `Node`. Ordner und Dateien unter einem Megabyte fasst jeder Ordner zu einer Zeile
@@ -19,7 +21,7 @@ temporären Ordner von macOS. Nach der Messung kommt jede Seite ohne weiteren Fe
    erhöht `revision`, sobald sich der Baum ändert.
 4. Die Seiten lesen nur aus `AppModel` und rechnen mit den Services. Selbst greifen sie nie auf die Festplatte zu.
 
-## Code-Karte
+## <img src="assets/icons/codemap.svg" height="33" align="absmiddle" alt="">Code-Karte
 
 **`Sources/App`:** Der Start der App mit Fenster, Menüs und `RootView`. `RootView` hält die Seitenleiste, die Suche und
 die gerade gewählte Seite zusammen.
@@ -48,7 +50,7 @@ Animationen.
 
 **`Sources/Diagnostics`:** Die Prüfungen, die `build.sh` aufruft, dazu der Selbsttest und der Belastungstest.
 
-## Absichtliche Regeln
+## <img src="assets/icons/rules.svg" height="33" align="absmiddle" alt="">Absichtliche Regeln
 
 Diese Regeln sieht man dem Code nicht an. Bitte brich sie nur, wenn du den Grund kennst und ihn hier anpasst.
 
@@ -96,3 +98,13 @@ keine eigenen Schalter.
 
 **Kontrast:** Jede Textfarbe erreicht in beiden Erscheinungsbildern mindestens 4,5 zu 1. Deshalb nutzt Text für
 Nebensächliches den Ton `muted` statt der Systemfarbe, die im hellen Modus darunter bleibt.
+
+<p align="center">
+  <img src="assets/banner-footer.svg" alt="" width="480">
+</p>
+
+<p align="center">
+  <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
+  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
+  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
+</p>
