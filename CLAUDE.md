@@ -22,8 +22,9 @@ checked). Read the last two before changing code; do not repeat their content he
 - Never delete, clean or move anything on the user's disk, not even in tests. Never press "Aufräumen", "Löschen" or
   "In den Papierkorb" in the app.
 - No keychain access and no signing with the user's certificate. The user builds signed builds themselves
-  (`make run` with `SIGN_IDENTITY` in the git-ignored `local.mk`). Your builds go to the scratchpad:
-  `make build BUILD_DIR=<scratchpad>/build` (ad hoc signed); never overwrite `build/`.
+  (`make run`, with the identity from `make identity` in the git-ignored `local.mk`). Your builds go to the
+  scratchpad and must switch the identity off, because `local.mk` applies to every make call:
+  `make build BUILD_DIR=<scratchpad>/build SIGN_IDENTITY=-`. Never overwrite `build/`.
 - Your ad hoc builds never have Full Disk Access, so any scan in them makes macOS ask once per protected folder
   (hundreds of prompts). Start test windows with `-autoScan NO` and never trigger a scan there. Never run
   `.build/release/SpeicherExplorer --selftest` from the shell; the self test runs only as `make selftest` on the user's
@@ -48,7 +49,7 @@ checked). Read the last two before changing code; do not repeat their content he
 - `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, house rules, design
   rules, dead code, plutil, shell scripts). It must end with "No errors and no warnings." before every commit.
 - `make test`, `make coverage`, `make format`, single steps with `scripts/inspect.py <step>`.
-- `make build BUILD_DIR=<scratchpad>/build` for your own builds.
+- `make build BUILD_DIR=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
 
 ## Working on code
 

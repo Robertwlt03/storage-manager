@@ -56,7 +56,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | `make format` | bringt alle Swift-Dateien in die gemeinsame Form |
 | `make selftest` | startet die gebaute App als Selbsttest, misst echte Ordner und vergleicht mit `du` |
 | `make stress` | öffnet eine zweite App, die so schnell wie möglich durch alle Seiten klickt |
-| `make identity` | legt einmalig dein eigenes Zertifikat an und erlaubt dem Signieren den Zugriff ohne Rückfrage |
+| `make identity` | legt einmalig dein eigenes Zertifikat in einem eigenen Schlüsselbund an |
 | `make release` | erstellt die DMG zum Weitergeben im Ordner `dist` |
 | `make clean` | löscht alles, was beim Bauen entsteht |
 
@@ -73,18 +73,14 @@ make run
 ```
 
 Ohne weitere Angaben wird die App nur behelfsmäßig signiert. Dann fragt macOS nach jedem Bauen erneut nach dem
-Festplattenvollzugriff. Wenn dich das stört, legst du einmalig ein eigenes Zertifikat an. Danach schreibst du dessen
-Namen in eine Datei `local.mk` im Projektordner. Git ignoriert diese Datei, und alle Befehle signieren ab dann
-damit. `make identity` fragt dabei einmal nach deinem Anmeldepasswort, damit das Signieren später nicht bei jedem Bauen
-nach dem Schlüsselbund fragt. Hast du das Zertifikat schon früher angelegt und kommt die Abfrage trotzdem jedes Mal,
-startest du `make identity` einfach noch einmal.
+Festplattenvollzugriff. Wenn dich das stört, legst du einmalig ein eigenes Zertifikat an. `make identity` erzeugt es in
+einem eigenen kleinen Schlüsselbund nur für dieses Projekt und trägt alles Nötige in die Datei `local.mk` ein, die Git
+ignoriert. Beim Bauen entsperrt `build.sh` diesen Schlüsselbund selbst. Dein Anmeldepasswort und dein normaler
+Schlüsselbund werden dabei nie gebraucht. Nach dem nächsten `make run` setzt du den Festplattenvollzugriff ein letztes
+Mal, danach bleibt er bei jedem Bauen erhalten.
 
 ```bash
 make identity
-```
-
-```bash
-echo 'SIGN_IDENTITY = Speicher-Explorer Dev' > local.mk
 ```
 
 ## <img src="assets/icons/demo.svg" height="33" align="absmiddle" alt="">Vorführmodus

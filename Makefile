@@ -1,10 +1,9 @@
 # Short commands for everyday work, like npm scripts. `make` alone lists them all.
-# Your own signing identity goes into local.mk (ignored by git), for example:
-#   SIGN_IDENTITY = Speicher-Explorer Dev
+# Your own signing identity lives in local.mk (ignored by git); make identity writes it there.
 -include local.mk
 
 BUILD_DIR ?= build
-export BUILD_DIR SIGN_IDENTITY BUNDLE_ID
+export BUILD_DIR SIGN_IDENTITY BUNDLE_ID SIGNING_KEYCHAIN SIGNING_KEYCHAIN_PASSWORD
 
 APP := $(BUILD_DIR)/Speicher-Explorer.app
 DEMO_BUILD_DIR := $(BUILD_DIR)/demo

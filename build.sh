@@ -33,8 +33,13 @@ for s in 16 32 128 256 512; do
 done
 iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/AppIcon.icns"
 # With a fixed identity macOS keeps granted permissions across rebuilds; ad hoc it asks again after every build.
-# Create one with scripts/create-signing-identity.sh and pass it: SIGN_IDENTITY="Speicher-Explorer Dev" ./build.sh
-codesign --force --sign "${SIGN_IDENTITY:--}" "$APP"
+# make identity creates one in a keychain of its own and writes SIGN_IDENTITY and SIGNING_KEYCHAIN to local.mk.
+SIGN_ARGUMENTS=(--force --sign "${SIGN_IDENTITY:--}")
+if [ -n "${SIGNING_KEYCHAIN:-}" ] && [ "${SIGN_IDENTITY:--}" != "-" ]; then
+  security unlock-keychain -p "$SIGNING_KEYCHAIN_PASSWORD" "$SIGNING_KEYCHAIN"
+  SIGN_ARGUMENTS+=(--keychain "$SIGNING_KEYCHAIN")
+fi
+codesign "${SIGN_ARGUMENTS[@]}" "$APP"
 
 if [ "${1:-}" = "--install" ]; then
   mkdir -p ~/Applications

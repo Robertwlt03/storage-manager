@@ -25,7 +25,11 @@ ln -s /Applications "$STAGE/Programme"
 cp -R docs/anleitung/. "$STAGE/Anleitung/"
 
 hdiutil create -volname "$NAME" -srcfolder "$STAGE" -format UDZO -ov "$DMG" > /dev/null
-codesign --force --sign "$IDENTITY" "$DMG"
+if [ -n "${SIGNING_KEYCHAIN:-}" ]; then
+  codesign --force --sign "$IDENTITY" --keychain "$SIGNING_KEYCHAIN" "$DMG"
+else
+  codesign --force --sign "$IDENTITY" "$DMG"
+fi
 
 if [[ "$IDENTITY" == "Developer ID Application:"* && -n "${NOTARY_PROFILE:-}" ]]; then
   xcrun notarytool submit "$DMG" --keychain-profile "$NOTARY_PROFILE" --wait
