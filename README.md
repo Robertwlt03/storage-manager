@@ -191,8 +191,8 @@ Der Code ist in kleine Teile gegliedert, und jede Datei hat genau eine Aufgabe:
 
 | Ordner | Inhalt |
 | --- | --- |
-| `Sources/Features` | Für jede Seite der App ein eigener Ordner, zum Beispiel Überblick, Ordner und Aufräumen. |
-| `Sources/DesignSystem` | Alle Bausteine der Oberfläche an einer Stelle (`UI`) und die Farben. |
+| `Sources/Features` | Für jede Seite der App ein eigener Ordner, zum Beispiel Überblick, Ordner und Aufräumen. `Pages.swift` ordnet jeder Seite ihre Ansicht zu. |
+| `Sources/DesignSystem` | Alle Bausteine der Oberfläche im Namensraum `UI`, mit festen Varianten, dazu Abstände, Schriften und Farben. |
 | `Sources/Services` | Messen, Kategorien, Aufräumen, Apps, Suche, Zusammenfassung und Vorlesen. |
 | `Sources/State` | Der Zustand der App, der die Services zusammenführt. |
 | `Sources/Core` | Konstanten und feste Auswahlwerte wie Seiten und Einstellungen. |
@@ -205,6 +205,8 @@ Der Code ist in kleine Teile gegliedert, und jede Datei hat genau eine Aufgabe:
 
 Der Speicher-Explorer ist Open Source. Jeder kann den Code ansehen, verbessern und eigene Ideen einbringen. Fehler und
 Wünsche kannst du in den [Issues](../../issues) melden, und Verbesserungen nehme ich gern als Pull Request entgegen.
+Wie du anfängst, steht in der [Anleitung zum Mitmachen](CONTRIBUTING.md), und wo du was im Code findest, in der
+[Architektur-Beschreibung](ARCHITECTURE.md). Für den Umgang miteinander gelten die [Verhaltensregeln](CODE_OF_CONDUCT.md).
 Neue Texte legst du bitte in allen Sprachen an, denn die Prüfung beim Bauen meldet sonst, was fehlt. Die meisten
 Übersetzungen sind maschinell entstanden, deshalb freue ich mich besonders über Verbesserungen von Muttersprachlern.
 
