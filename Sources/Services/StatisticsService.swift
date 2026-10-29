@@ -5,7 +5,7 @@ import Foundation
 enum StatisticsService {
     /// Files of at least `largeFileBytes` count as large.
     static func compute(root: Node, largeFileBytes: Int64) -> Statistics {
-        var statistics = Statistics(fileCount: root.fileCount, bytes: root.bytes)
+        var statistics = Statistics(fileCount: root.fileCount)
         var filesPerBucket: [SizeBucket: Int] = [:]
         var bytesPerBucket: [SizeBucket: Int64] = [:]
         var keptFiles = 0
