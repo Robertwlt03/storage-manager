@@ -130,3 +130,9 @@ private struct OptionalHover: ViewModifier {
         if active { content.hoverHighlight() } else { content }
     }
 }
+
+extension Image {
+    /// Small symbols side by side (the sidebar's footer) get one square box: drawn at the same font size, a wide
+    /// grid, a round arrow and a gear still looked different in size.
+    func smallIcon() -> some View { resizable().scaledToFit().frame(width: Layout.smallIcon, height: Layout.smallIcon) }
+}
