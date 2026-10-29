@@ -14,11 +14,7 @@ enum FinderService {
         return image
     }
 
-    private static let iconCache: NSCache<NSString, NSImage> = {
-        let cache = NSCache<NSString, NSImage>()
-        cache.countLimit = ScanLimits.iconCacheLimit
-        return cache
-    }()
+    private static let iconCache: NSCache<NSString, NSImage> = .images()
 
     static func reveal(_ path: String) {
         NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)])

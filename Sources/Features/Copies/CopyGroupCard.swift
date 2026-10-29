@@ -19,11 +19,7 @@ struct CopyGroupCard: View {
             UI.Fields(fields)
             if let freedBytes {
                 Divider()
-                UI.Note(
-                    TextKey.freed.translated(with: Format.bytes(freedBytes)),
-                    .good(symbol: Symbols.success)
-                )
-                .padding(.vertical, Space.row)
+                UI.Note.freed(freedBytes).padding(.vertical, Space.row)
             }
             if let errorMessage {
                 Divider()
@@ -35,17 +31,12 @@ struct CopyGroupCard: View {
         .task(id: group.id) { await loadDetails() }
         .onReceive(appLaunches) { _ in refreshIsAppRunning() }
         .onReceive(appTerminations) { _ in refreshIsAppRunning() }
-        .confirmationDialog(
+        .confirmRemoval(
             TextKey.deleteTitle.translated(
                 with: Format.count(details?.copyCount ?? 0), group.appName),
-            isPresented: $isConfirming
+            isPresented: $isConfirming, button: .deleteForever, message: .deleteMessage
         ) {
-            Button(TextKey.deleteForever.translated, role: .destructive) {
-                Task { await deleteCopies() }
-            }
-            Button(TextKey.cancel.translated, role: .cancel) {}
-        } message: {
-            Text(TextKey.deleteMessage.translated)
+            Task { await deleteCopies() }
         }
     }
 

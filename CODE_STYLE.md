@@ -53,7 +53,7 @@ Jeder Name hat einen festen Ort:
 Jede Farbe der App kommt aus `Theme.swift`. Dort ist sie einmal für das helle und einmal für das dunkle Erscheinungsbild
 festgelegt und erreicht in beiden einen Kontrast von mindestens 4,5 zu 1. Alle anderen Dateien verwenden nur diese
 Namen und legen nie selbst eine Farbe an, auch kein `.white` oder `Color(red:green:blue:)`. Wer eine neue Farbe braucht,
-ergänzt sie in `Theme.swift`, und die Kontrastprüfung beim Bauen kontrolliert sie mit.
+ergänzt sie in `Theme.swift` und in der Liste der Kontrast-Tests in `DesignTests.swift`.
 
 ## <img src="assets/icons/design.svg" height="33" align="absmiddle" alt="">Gestaltung aus einem Guss
 
@@ -110,7 +110,8 @@ die [Architektur-Beschreibung](ARCHITECTURE.md).
 Die Tests liegen in `Tests/SpeicherExplorerTests` und nutzen Apples Test-Framework Swift Testing. Jeder Test hat einen
 Namen, der als ganzer Satz sagt, was gelten soll, zum Beispiel „Only emptying the Trash needs a deliberate click in
 the cleaner“. Getestet wird alles, was ohne Bildschirm eine feste Antwort hat: der Ordnerbaum, die Suche, die
-Seitenliste, die Gestaltungswerte, der Kontrast und die Übersetzungen.
+Seitenliste, die Kategorien, die Größenklassen, die Legende, die Zusammenfassung, die Gestaltungswerte, der Kontrast
+und die Übersetzungen.
 
 Tests greifen nie auf die echte Festplatte zu und benutzen keine echten Datei- oder Ordnernamen. Einen Ordnerbaum baut
 ein Test deshalb von Hand auf, mit erfundenen Namen wie `film.mov`. In Tests dürfen Beispielwerte als Zahl dastehen,
@@ -140,8 +141,8 @@ Das Skript führt acht Prüfungen nacheinander aus:
 7. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
 8. **Skripte:** `bash -n` prüft die Shell-Skripte auf Schreibfehler.
 
-Danach baust du die App mit `make build`. Das prüft zusätzlich, ob jeder Text in allen 20 Sprachen vorhanden ist und ob
-jede Farbe den Kontrast erreicht.
+Ob jeder Text in allen 20 Sprachen vorhanden ist und ob jede Farbe den Kontrast erreicht, prüfen die Tests im dritten
+Schritt. Wie viel des Codes die Tests erreichen, zeigt `make coverage` je Ordner an.
 
 Auf GitHub läuft dieselbe Prüfung bei jedem Pull Request von selbst, beschrieben in
 `.github/workflows/checks.yml`. Meldet sie auch nur einen Fund, wird der Pull Request rot, und der Beitrag muss

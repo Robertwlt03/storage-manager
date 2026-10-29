@@ -81,18 +81,16 @@ extension UI {
         let title: String
         let subtitle: String
         let icon: IconKind
-        var size = IconSize.large
 
-        init(_ title: String, subtitle: String, icon: IconKind, size: IconSize = .large) {
+        init(_ title: String, subtitle: String, icon: IconKind) {
             self.title = title
             self.subtitle = subtitle
             self.icon = icon
-            self.size = size
         }
 
         var body: some View {
             HStack(spacing: Space.item) {
-                Icon(icon, size: size)
+                Icon(icon, size: .large)
                 VStack(alignment: .leading, spacing: Space.hairline) {
                     Text(title).textRole(.title).lineLimit(Layout.maxWrappedLines)
                     Text(subtitle).foregroundStyle(.muted).lineLimit(Layout.maxWrappedLines)

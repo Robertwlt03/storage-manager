@@ -20,13 +20,17 @@ nonisolated enum ScanService {
     @MainActor static func defaultRoots() -> [String] {
         let wantedFolders = Paths.defaultScanRoots + AppSettings.extraFolders
         let existingFolders = wantedFolders.map(Paths.withoutSymlinks).filter(Paths.exists)
+        return withoutDuplicatesOrNesting(existingFolders)
+    }
 
+    /// Keeps each folder once, in its order, and drops folders that lie inside another one.
+    static func withoutDuplicatesOrNesting(_ folders: [String]) -> [String] {
         func liesInsideAnother(_ folder: String) -> Bool {
-            existingFolders.contains { other in other != folder && folder.hasPrefix(other + "/") }
+            folders.contains { other in other != folder && folder.hasPrefix(other + "/") }
         }
-        return existingFolders.enumerated()
+        return folders.enumerated()
             .filter { index, folder in
-                existingFolders.firstIndex(of: folder) == index && !liesInsideAnother(folder)
+                folders.firstIndex(of: folder) == index && !liesInsideAnother(folder)
             }
             .map(\.element)
     }

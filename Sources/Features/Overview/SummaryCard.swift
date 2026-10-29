@@ -10,9 +10,7 @@ struct SummaryCard: View {
     private var summary: String {
         let cleanableBytes = model.cleanItems?.reduce(0) { total, item in total + item.bytes }
         let copiesBytes = model.copyGroups.reduce(0) { total, group in total + group.node.bytes }
-        let unusedApps = model.apps.filter { app in
-            AppUsageService.isUnused(app, days: unusedDays)
-        }
+        let unusedApps = AppUsageService.unused(model.apps, days: unusedDays)
         let facts = SummaryService.Input(
             volume: model.startupVolume, categories: model.isScanning ? [] : model.categories,
             cleanable: cleanableBytes, copies: copiesBytes, unusedApps: unusedApps.count)

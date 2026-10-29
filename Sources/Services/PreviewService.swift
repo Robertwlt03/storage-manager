@@ -6,11 +6,7 @@ import QuickLookThumbnailing
 /// in memory.
 enum PreviewService {
     private static let fallbackScreenScale: CGFloat = 2
-    private static let cache: NSCache<NSString, NSImage> = {
-        let cache = NSCache<NSString, NSImage>()
-        cache.countLimit = ScanLimits.iconCacheLimit
-        return cache
-    }()
+    private static let cache: NSCache<NSString, NSImage> = .images()
 
     /// nil when there is no real preview (folders, unknown types); the caller keeps the Finder icon
     /// then.
@@ -27,5 +23,15 @@ enum PreviewService {
         else { return nil }
         cache.setObject(image, forKey: key)
         return image
+    }
+}
+
+extension NSCache where KeyType == NSString, ObjectType == NSImage {
+    /// Icons and thumbnails stay in memory up to a limit; macOS empties the cache when memory gets
+    /// tight.
+    static func images() -> NSCache<NSString, NSImage> {
+        let cache = NSCache<NSString, NSImage>()
+        cache.countLimit = ScanLimits.iconCacheLimit
+        return cache
     }
 }

@@ -127,7 +127,27 @@ private struct Unavailable<Actions: View>: View {
     }
 }
 
+extension UI.Note {
+    /// How much space a removal really freed.
+    static func freed(_ bytes: Int64) -> UI.Note {
+        UI.Note(TextKey.freed.translated(with: Format.bytes(bytes)), .good(symbol: Symbols.success))
+    }
+}
+
 extension View {
+    /// Nothing is removed without this question: a destructive button, Cancel and an explanation.
+    func confirmRemoval(
+        _ title: String, isPresented: Binding<Bool>, button: TextKey, message: TextKey,
+        action: @escaping () -> Void
+    ) -> some View {
+        confirmationDialog(title, isPresented: isPresented) {
+            Button(button.translated, role: .destructive, action: action)
+            Button(TextKey.cancel.translated, role: .cancel) {}
+        } message: {
+            Text(message.translated)
+        }
+    }
+
     /// A value still being calculated keeps its place but shows a small spinner, like
     /// "Calculating…" in Finder's Info window, and cannot be clicked, selected or read aloud until
     /// it is final.

@@ -5,7 +5,6 @@ import Foundation
 /// records it anyway; the app itself tracks nothing.
 enum AppUsageService {
     private static let appSuffix = ".app"
-    private static let secondsPerDay: TimeInterval = 86_400
     private static var folders: [String] { [Paths.applications, Paths.home + "/Applications"] }
 
     /// Apps in the Applications folders and one level of subfolders; sizes come from the scanned
@@ -20,9 +19,16 @@ enum AppUsageService {
             }
     }
 
-    static func isUnused(_ app: AppUsage, days: Int) -> Bool {
-        guard let lastUsed = app.lastUsed else { return false }
-        return lastUsed < Date().addingTimeInterval(-Double(days) * secondsPerDay)
+    /// Apps not opened for `days`, the longest unused first. Apps without a date are left out,
+    /// because Spotlight simply may not know them yet.
+    static func unused(_ apps: [AppUsage], days: Int, now: Date = Date()) -> [AppUsage] {
+        let cutoff = FileSystem.date(daysBefore: days, now)
+        return
+            apps
+            .filter { app in app.lastUsed.map { lastUsed in lastUsed < cutoff } ?? false }
+            .sorted { first, second in
+                (first.lastUsed ?? .distantPast) < (second.lastUsed ?? .distantPast)
+            }
     }
 
     static func isRunning(_ app: AppUsage) -> Bool {
@@ -38,7 +44,7 @@ enum AppUsageService {
     private static func appPaths() -> [String] {
         var paths: [String] = []
         for folder in folders {
-            for name in contents(of: folder) {
+            for name in FileSystem.names(in: folder) {
                 let path = folder + "/" + name
                 if name.hasSuffix(appSuffix) {
                     paths.append(path)
@@ -51,13 +57,9 @@ enum AppUsageService {
     }
 
     private static func appPaths(directlyIn folder: String) -> [String] {
-        contents(of: folder)
+        FileSystem.names(in: folder)
             .filter { name in name.hasSuffix(appSuffix) }
             .map { name in folder + "/" + name }
-    }
-
-    private static func contents(of folder: String) -> [String] {
-        (try? FileManager.default.contentsOfDirectory(atPath: folder)) ?? []
     }
 
     private static func isFolder(_ path: String) -> Bool {

@@ -4,10 +4,8 @@ import SwiftUI
 /// Card background. On macOS 26 and later it is Liquid Glass, which follows the system's own
 /// setting (clear or tinted, System Settings › Appearance); earlier systems get a classic card.
 private struct SurfaceModifier: ViewModifier {
-    let radius: CGFloat
-
     func body(content: Content) -> some View {
-        let shape = RoundedRectangle(cornerRadius: radius, style: .continuous)
+        let shape = RoundedRectangle(cornerRadius: Layout.cardRadius, style: .continuous)
         if #available(macOS 26.0, *) {
             content.glassEffect(.regular, in: shape)
         } else {
@@ -69,9 +67,7 @@ struct Backdrop: View {
 }
 
 extension View {
-    func surface(radius: CGFloat = Layout.cardRadius) -> some View {
-        modifier(SurfaceModifier(radius: radius))
-    }
+    func surface() -> some View { modifier(SurfaceModifier()) }
     func appButton(_ kind: ButtonKind = .normal) -> some View {
         modifier(AppButtonModifier(kind: kind))
     }

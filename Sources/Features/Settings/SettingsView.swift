@@ -17,7 +17,7 @@ struct SettingsView: View {
         }
         .formStyle(.grouped)
         .frame(width: Layout.settingsWidth, height: Layout.settingsHeight)
-        .syncPreferences()
+        .appLocale()
     }
 
     private func folderEditor(_ folders: [String]) -> some View {

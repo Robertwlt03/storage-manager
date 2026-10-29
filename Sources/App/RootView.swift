@@ -22,7 +22,7 @@ struct RootView: View {
             prompt: TextKey.searchPrompt.translated
         )
         .sheet(isPresented: $model.isShowingAccessSheet) { AccessSheet() }
-        .syncPreferences()
+        .appLocale()
         .onExitCommand(perform: closeSidebarOrSearch)
         .onChange(of: model.pane, leaveSearchAndSidebar)
         .onAppear(perform: start)

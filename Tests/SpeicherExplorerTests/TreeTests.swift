@@ -87,4 +87,21 @@ struct TreeTests {
         #expect(SearchService.largeFiles(atLeast: Self.bigFile, in: root).count == 1)
         #expect(SearchService.largeFiles(atLeast: Self.bigFile + 1, in: root).isEmpty)
     }
+
+    @Test("Attaching a folder adds its size to the new parent, clearing empties the tree")
+    func attachAndClear() {
+        let root = Node.virtualRoot()
+        let scanRoot = TestTree.folder("/other", in: root)
+        #expect(root.bytes == scanRoot.bytes)
+        #expect(root.children == [scanRoot])
+        root.removeAll()
+        #expect(root.bytes == 0)
+        #expect(root.children.isEmpty)
+    }
+
+    @Test("A path with ~ points into the home folder")
+    func expandHome() {
+        #expect(Paths.expand("~/Downloads") == Paths.home + "/Downloads")
+        #expect(Paths.expand("/Applications") == "/Applications")
+    }
 }

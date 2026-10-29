@@ -21,5 +21,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Code inspection (format, compiler, tests, rules, design, dead code)
         run: make check
-      - name: Build the app (translations, contrast, icon)
+      - name: Build the app and its icon
         run: make build

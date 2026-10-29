@@ -5,7 +5,6 @@ cd "$(dirname "$0")"
 
 swift build -c release
 BIN=.build/release/SpeicherExplorer
-"$BIN" --check-contrast > /dev/null || { "$BIN" --check-contrast | grep FAIL; exit 1; }
 
 BUILD_DIR="${BUILD_DIR:-build}"
 APP="$BUILD_DIR/Speicher-Explorer.app"
@@ -15,7 +14,6 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$ICONSET"
 cp "$BIN" "$APP/Contents/MacOS/"
 cp Info.plist "$APP/Contents/"
 cp -R Resources/*.lproj "$APP/Contents/Resources/"
-"$APP/Contents/MacOS/SpeicherExplorer" --check-strings
 
 "$BIN" --render-icon "$BUILD_DIR/icon.png"
 for s in 16 32 128 256 512; do

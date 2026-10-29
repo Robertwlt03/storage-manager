@@ -41,9 +41,10 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | --- | --- |
 | `make run` | baut die App, schließt sie, falls sie offen ist, und öffnet die neue |
 | `make restart` | schließt die App, falls sie offen ist, und öffnet sie neu, ohne zu bauen |
-| `make build` | baut die App und prüft dabei Texte, Kontrast und App-Symbol |
+| `make build` | baut die App und zeichnet ihr Symbol |
 | `make check` | startet die ganze Prüfkette, genau wie auf GitHub |
 | `make test` | startet nur die Tests |
+| `make coverage` | zeigt, wie viel des Codes die Tests je Ordner erreichen |
 | `make format` | bringt alle Swift-Dateien in die gemeinsame Form |
 | `make selftest` | misst echte Ordner und vergleicht mit dem Befehl `du` |
 | `make stress` | öffnet eine zweite App, die so schnell wie möglich durch alle Seiten klickt |
@@ -87,8 +88,10 @@ Pull Request von selbst und markiert ihn rot, solange noch etwas zu verbessern i
 make check
 ```
 
-Beim Bauen prüft `build.sh` zusätzlich, ob jeder Text in allen 20 Sprachen vorhanden ist und gleich viele Platzhalter
-hat, und ob jede Textfarbe in hellem und dunklem Erscheinungsbild einen Kontrast von mindestens 4,5 zu 1 erreicht.
+Die Tests in der Prüfkette kontrollieren auch, ob jeder Text in allen 20 Sprachen vorhanden ist und gleich viele
+Platzhalter hat, und ob jede Textfarbe in hellem und dunklem Erscheinungsbild einen Kontrast von mindestens 4,5 zu 1
+erreicht. Wenn du eine Regel änderst, ergänzt du den passenden Test, und `make coverage` zeigt dir, was noch ungetestet
+ist.
 
 Zwei weitere Prüfungen startest du bei Bedarf selbst. Der Selbsttest misst echte Ordner und vergleicht das Ergebnis
 mit dem Befehl `du`. Der Belastungstest bedient die laufende App wie ein sehr schneller Mensch und versucht, Fehler

@@ -84,8 +84,6 @@ enum SearchScope: CaseIterable, Identifiable {
 
 /// Command-line switches of the binary (used by build.sh and for checks).
 enum LaunchCommand: String {
-    case checkContrast = "--check-contrast"
-    case checkStrings = "--check-strings"
     case selfTest = "--selftest"
     case renderIcon = "--render-icon"
 }

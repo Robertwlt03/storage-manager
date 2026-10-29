@@ -10,7 +10,7 @@ struct EntryTable: View {
     @Environment(AppModel.self) private var model
     @State private var selection: Set<Entry.ID> = []
     @State private var sortOrder = [KeyPathComparator(\Entry.bytes, order: .reverse)]
-    @State private var infoEntry: Entry?
+    @Binding var infoEntry: Entry?
 
     var body: some View {
         let rows = entries.sorted(using: sortOrder)
@@ -39,7 +39,6 @@ struct EntryTable: View {
         } primaryAction: { selectedIDs in
             firstEntry(in: rows, with: selectedIDs).map(model.activate)
         }
-        .sheet(item: $infoEntry) { entry in InfoSheet(entry: entry) }
     }
 
     private func firstEntry(in rows: [Entry], with selectedIDs: Set<Entry.ID>) -> Entry? {

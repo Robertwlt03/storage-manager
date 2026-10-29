@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 /// App icon for build.sh: 1024 px canvas, 824 px rounded square as in Apple's macOS icon grid.
@@ -52,5 +53,15 @@ struct AppIconView: View {
                     .rotationEffect(Self.twelveOClock)
             }
         }
+    }
+}
+
+extension AppIconView {
+    /// Writes the icon as a PNG for build.sh, which turns it into the app's icon set.
+    static func render(to path: String) -> Bool {
+        guard let image = ImageRenderer(content: AppIconView()).cgImage,
+            let png = NSBitmapImageRep(cgImage: image).representation(using: .png, properties: [:])
+        else { return false }
+        return (try? png.write(to: URL(fileURLWithPath: path))) != nil
     }
 }

@@ -23,16 +23,11 @@ struct CleanerView: View {
     var body: some View {
         UI.Page(.cleaner, options: { refreshButton }, content)
             .task { if items == nil && !model.isScanning { model.refreshCleanItems() } }
-            .confirmationDialog(
+            .confirmRemoval(
                 TextKey.cleanConfirmTitle.translated(with: Format.bytes(chosenBytes)),
-                isPresented: $isConfirming
+                isPresented: $isConfirming, button: .deleteForever, message: .cleanConfirmMessage
             ) {
-                Button(TextKey.deleteForever.translated, role: .destructive) {
-                    Task { await clean() }
-                }
-                Button(TextKey.cancel.translated, role: .cancel) {}
-            } message: {
-                Text(TextKey.cleanConfirmMessage.translated)
+                Task { await clean() }
             }
     }
 
@@ -84,9 +79,7 @@ struct CleanerView: View {
     }
 
     @ViewBuilder private func resultNotes(_ result: (freed: Int64, failed: Int)) -> some View {
-        UI.Note(
-            TextKey.freed.translated(with: Format.bytes(result.freed)),
-            .good(symbol: Symbols.success))
+        UI.Note.freed(result.freed)
         if result.failed > 0 {
             UI.Note(
                 TextKey.cleanFailed.translated(with: Format.count(result.failed)),

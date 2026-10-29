@@ -6,15 +6,9 @@ enum AppEntry {
     static func main() {
         AppSettings.registerDefaults()
         let arguments = CommandLine.arguments
-        if arguments.contains(LaunchCommand.checkContrast.rawValue) {
-            finish(succeeded: Checks.contrast())
-        }
-        if arguments.contains(LaunchCommand.checkStrings.rawValue) {
-            finish(succeeded: Checks.strings())
-        }
         if arguments.contains(LaunchCommand.selfTest.rawValue) { runSelfTest() }
         if let iconFile = value(after: .renderIcon, in: arguments) {
-            finish(succeeded: Checks.renderIcon(to: iconFile))
+            finish(succeeded: AppIconView.render(to: iconFile))
         }
         SpeicherExplorerApp.main()
     }
@@ -71,16 +65,9 @@ struct SpeicherExplorerApp: App {
     }
 }
 
-/// Gives every window the app's locale for dates and numbers; used by every window so none can
-/// forget it.
-private struct PreferenceSync: ViewModifier {
-    func body(content: Content) -> some View {
-        content.environment(\.locale, Localizer.shared.locale)
-    }
-}
-
 extension View {
-    func syncPreferences() -> some View { modifier(PreferenceSync()) }
+    /// Gives a window the app's locale for dates and numbers; every window calls it.
+    func appLocale() -> some View { environment(\.locale, Localizer.shared.locale) }
 }
 
 /// "View" menu entries like Finder's: ⌘1 shows lists, ⌘2 shows tiles.

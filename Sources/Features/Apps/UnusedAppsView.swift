@@ -9,26 +9,15 @@ struct UnusedAppsView: View {
     @State private var appToTrash: AppUsage?
     @State private var errorMessage: String?
 
-    /// The apps unused for the longest time come first.
-    private var unusedApps: [AppUsage] {
-        let unused = model.apps.filter { app in AppUsageService.isUnused(app, days: unusedDays) }
-        return unused.sorted { first, second in
-            (first.lastUsed ?? .distantPast) < (second.lastUsed ?? .distantPast)
-        }
-    }
+    private var unusedApps: [AppUsage] { AppUsageService.unused(model.apps, days: unusedDays) }
 
     var body: some View {
         UI.Page(.apps, options: { unusedSincePicker }, content)
-            .confirmationDialog(
+            .confirmRemoval(
                 TextKey.trashAppTitle.translated(with: appToTrash?.name ?? ""),
-                isPresented: isConfirmingTrash
+                isPresented: isConfirmingTrash, button: .moveToTrash, message: .trashAppMessage
             ) {
-                Button(TextKey.moveToTrash.translated, role: .destructive) {
-                    if let appToTrash { moveToTrash(appToTrash) }
-                }
-                Button(TextKey.cancel.translated, role: .cancel) {}
-            } message: {
-                Text(TextKey.trashAppMessage.translated)
+                if let appToTrash { moveToTrash(appToTrash) }
             }
             .smoothChanges(of: layout)
     }

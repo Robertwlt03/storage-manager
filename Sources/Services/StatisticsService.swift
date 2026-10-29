@@ -3,7 +3,8 @@ import Foundation
 /// Key figures and size classes for the start page, all taken from the scanned tree (no extra disk
 /// access).
 enum StatisticsService {
-    static func compute(root: Node) -> Statistics {
+    /// Files of at least `largeFileBytes` count as large.
+    static func compute(root: Node, largeFileBytes: Int64) -> Statistics {
         var statistics = Statistics(fileCount: root.fileCount, bytes: root.bytes)
         var filesPerBucket: [SizeBucket: Int] = [:]
         var bytesPerBucket: [SizeBucket: Int64] = [:]
@@ -17,6 +18,7 @@ enum StatisticsService {
                 let sizeBucket = bucket(for: file.bytes)
                 filesPerBucket[sizeBucket, default: 0] += 1
                 bytesPerBucket[sizeBucket, default: 0] += file.bytes
+                if file.bytes >= largeFileBytes { statistics.largeFiles += 1 }
             }
             folder.children.forEach(countKeptFiles)
         }
@@ -25,8 +27,6 @@ enum StatisticsService {
         // Files under 1 MB are folded during the scan; they are everything that was not kept.
         filesPerBucket[.under1MB] = max(0, root.fileCount - keptFiles)
         bytesPerBucket[.under1MB] = max(0, root.bytes - keptBytes)
-        let largeFileBytes = LargeFileThreshold.bytes(AppSettings.largeFileMegabytes)
-        statistics.largeFiles = SearchService.largeFiles(atLeast: largeFileBytes, in: root).count
         statistics.sizeClasses = SizeBucket.allCases.map { sizeBucket in
             (sizeBucket, filesPerBucket[sizeBucket] ?? 0, bytesPerBucket[sizeBucket] ?? 0)
         }

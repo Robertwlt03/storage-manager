@@ -17,28 +17,16 @@ struct Tone {
 
 enum Theme {
     // Secondary and status text. The system's secondary label colour reaches only about 4:1 in
-    // light mode, so text uses these tones; surfaces and controls stay native.
+    // light mode, so text uses these tones; surfaces and controls stay native. DesignTests checks
+    // every tone and fill against light and dark surfaces.
     static let muted = Tone(light: 0x55555A, dark: 0xB4B4BC)
     static let good = Tone(light: 0x166B2D, dark: 0x5FD07A)
     static let warning = Tone(light: 0x984200, dark: 0xFFA552)
     static let bad = Tone(light: 0xB3141F, dark: 0xFF8C8C)
-    static let textTones: [(name: String, tone: Tone)] = [
-        ("muted", muted), ("good", good), ("warning", warning), ("bad", bad),
-    ]
 
     // Button fills with white text on top.
     static let primaryFill = Tone(light: 0x0A5BC4, dark: 0x1F6FD0)
     static let confirmFill = Tone(light: 0x1B7332, dark: 0x1B7332)
-    static let fills: [(name: String, tone: Tone)] = [
-        ("primaryFill", primaryFill), ("confirmFill", confirmFill),
-    ]
-
-    /// Approximations of the system surfaces (content, window, grouped rows, sidebar, glass over
-    /// the backdrop).
-    static let lightSurfaces: [UInt32] = [0xFFFFFF, 0xF5F5F7, 0xECECEC, 0xE3E3E3, 0xDDE3EE]
-    static let darkSurfaces: [UInt32] = [
-        0x1E1E1E, 0x262626, 0x2D2D2D, 0x323232, 0x3A3A3A, 0x28303E,
-    ]
 
     // Native surfaces, which follow light and dark mode by themselves.
     static let cardBackground = Color(nsColor: .controlBackgroundColor)
@@ -68,39 +56,6 @@ enum Theme {
 
     static func categoryColor(_ index: Int) -> Color {
         categoryColors[index % categoryColors.count]
-    }
-
-    /// WCAG contrast ratio of two sRGB colours.
-    static func contrastRatio(_ first: UInt32, _ second: UInt32) -> Double {
-        let firstLuminance = relativeLuminance(of: first)
-        let secondLuminance = relativeLuminance(of: second)
-        let lighter = max(firstLuminance, secondLuminance)
-        let darker = min(firstLuminance, secondLuminance)
-        return (lighter + flare) / (darker + flare)
-    }
-
-    // The WCAG 2 formula for relative luminance and contrast.
-    private static let flare = 0.05
-    private static let redWeight = 0.2126
-    private static let greenWeight = 0.7152
-    private static let blueWeight = 0.0722
-    private static let linearLimit = 0.03928
-    private static let linearSlope = 12.92
-    private static let gammaOffset = 0.055
-    private static let gammaScale = 1.055
-    private static let gamma = 2.4
-
-    private static func relativeLuminance(of hex: UInt32) -> Double {
-        let channels = HexChannels(hex)
-        let red = redWeight * linear(channels.red)
-        let green = greenWeight * linear(channels.green)
-        let blue = blueWeight * linear(channels.blue)
-        return red + green + blue
-    }
-
-    private static func linear(_ channel: Double) -> Double {
-        guard channel > linearLimit else { return channel / linearSlope }
-        return pow((channel + gammaOffset) / gammaScale, gamma)
     }
 }
 

@@ -8,6 +8,24 @@ struct StorageSegment: Identifiable {
 
     static let usedID = "used"  // used space no category covers yet
     static let otherID = "other"
+    /// When the legend is full, the last place goes to the entry that groups the rest.
+    private static let namedEntryLimit = Layout.legendMaxEntries - 1
+
+    /// The legend's rows: at most a few categories by name, the smaller ones grouped as "other",
+    /// then free space and used space that no category covers.
+    static func legend(of segments: [StorageSegment]) -> [StorageSegment] {
+        let named = segments.filter { segment in !segment.isListedLast }
+        let listedLast = segments.filter(\.isListedLast)
+        guard named.count > Layout.legendMaxEntries else { return named + listedLast }
+        let rest = named.dropFirst(namedEntryLimit)
+        let other = StorageSegment(
+            id: otherID, title: TextKey.otherCategories.translated,
+            bytes: rest.reduce(0) { total, segment in total + segment.bytes },
+            colorIndex: rest.first?.colorIndex)
+        return Array(named.prefix(namedEntryLimit)) + [other] + listedLast
+    }
+
+    private var isListedLast: Bool { colorIndex == nil || id == Self.usedID }
 }
 
 extension UI {
@@ -113,14 +131,11 @@ private struct StorageLegend: View {
     var onSelect: ((StorageSegment) -> Void)?
     var canSelect: (StorageSegment) -> Bool
 
-    /// When the legend is full, the last place goes to the entry that groups the rest.
-    private static let namedEntryLimit = Layout.legendMaxEntries - 1
-
     var body: some View {
         let columns = Array(
             repeating: GridItem(.flexible(), alignment: .leading), count: Layout.legendColumns)
         LazyVGrid(columns: columns, alignment: .leading, spacing: Space.small) {
-            ForEach(entries) { segment in entry(for: segment) }
+            ForEach(StorageSegment.legend(of: segments)) { segment in entry(for: segment) }
         }
     }
 
@@ -151,20 +166,4 @@ private struct StorageLegend: View {
         return onSelect != nil && isCategory && canSelect(segment)
     }
 
-    private var entries: [StorageSegment] {
-        let named = segments.filter { segment in !isListedLast(segment) }
-        let listedLast = segments.filter(isListedLast)
-        guard named.count > Layout.legendMaxEntries else { return named + listedLast }
-        let rest = named.dropFirst(Self.namedEntryLimit)
-        let other = StorageSegment(
-            id: StorageSegment.otherID, title: TextKey.otherCategories.translated,
-            bytes: rest.reduce(0) { total, segment in total + segment.bytes },
-            colorIndex: rest.first?.colorIndex)
-        return Array(named.prefix(Self.namedEntryLimit)) + [other] + listedLast
-    }
-
-    /// Free space and used space no category covers come after the categories.
-    private func isListedLast(_ segment: StorageSegment) -> Bool {
-        segment.colorIndex == nil || segment.id == StorageSegment.usedID
-    }
 }

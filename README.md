@@ -198,8 +198,8 @@ Der Code ist in kleine Teile gegliedert, und jede Datei hat genau eine Aufgabe:
 | `Sources/State` | Der Zustand der App, der die Services zusammenführt. |
 | `Sources/Core` | Konstanten und feste Auswahlwerte wie Seiten und Einstellungen. |
 | `Sources/Localization` und `Resources` | Alle Texte in 20 Sprachen, mit Deutsch und Englisch als Vorlage. |
-| `Sources/Diagnostics` | Prüfungen für Kontrast und Texte und ein Selbsttest mit echten Daten. |
-| `Tests` | Die Tests für Ordnerbaum, Suche, Gestaltung, Kontrast und Übersetzungen. |
+| `Sources/Diagnostics` | Ein Selbsttest mit echten Daten und ein Belastungstest für die laufende App. |
+| `Tests` | Die Tests für Ordnerbaum, Kategorien, Suche, Gestaltung, Kontrast und Übersetzungen. |
 | `scripts` | Die Code-Inspektion, das eigene Zertifikat zum Signieren und das Erstellen der DMG. |
 
 </details>

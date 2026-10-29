@@ -17,7 +17,7 @@ nonisolated final class Localizer: Sendable {
         bundle.localizedString(forKey: key, value: nil, table: nil)
     }
 
-    static func bundle(for code: String) -> Bundle? {
+    private static func bundle(for code: String) -> Bundle? {
         Bundle.main.path(forResource: code, ofType: "lproj").flatMap(Bundle.init(path:))
     }
 }

@@ -12,12 +12,12 @@ STRESS_TEST_FOLDER := $(TMPDIR)speicher-test
 SECONDS_BETWEEN_QUIT_CHECKS := 0.2
 
 .DEFAULT_GOAL := help
-.PHONY: help build run restart check test format selftest stress release identity clean
+.PHONY: help build run restart check test coverage format selftest stress release identity clean
 
 help: ## List every command
 	@grep -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  make %-9s %s\n", $$1, $$2 }'
 
-build: ## Build the app (texts, contrast and icon are checked on the way)
+build: ## Build the app and render its icon
 	./build.sh
 
 run: build restart ## Build the app, then quit the running one and open the new one
@@ -33,6 +33,9 @@ check: ## Run the whole check pipeline, as on GitHub
 
 test: ## Run only the unit tests
 	scripts/inspect.py tests
+
+coverage: ## Show how much of each source folder the tests reach
+	scripts/inspect.py coverage
 
 format: ## Bring every Swift file into the shared form
 	swift format --in-place --recursive Sources Tests

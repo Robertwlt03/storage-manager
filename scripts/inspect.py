@@ -115,8 +115,8 @@ def compiler_findings() -> list[str]:
     return findings
 
 
-def test_findings() -> list[str]:
-    command = ["swift", "test", "--scratch-path", BUILD_FOLDER]
+def swift_test_command(*options: str) -> list[str]:
+    command = ["swift", "test", "--scratch-path", BUILD_FOLDER, *options]
     if subprocess.run(["xcode-select", "-p"], capture_output=True, text=True).stdout.strip() == str(
         COMMAND_LINE_TOOLS.parent.parent
     ):
@@ -124,11 +124,38 @@ def test_findings() -> list[str]:
         command += ["-Xswiftc", "-F", "-Xswiftc", frameworks]
         for library_folder in [frameworks, str(COMMAND_LINE_TOOLS / "usr" / "lib")]:
             command += ["-Xlinker", "-rpath", "-Xlinker", library_folder]
-    status, output = run(command)
+    return command
+
+
+def test_findings() -> list[str]:
+    status, output = run(swift_test_command())
     failures = [line.strip() for line in output.splitlines() if "✘" in line or ": error:" in line]
     if status != 0 and not failures:
         failures = [output.strip().splitlines()[-1]]
     return failures
+
+
+def coverage_report() -> list[str]:
+    """Runs the tests with coverage and prints how much of each source folder they reach."""
+    status, output = run(swift_test_command("--enable-code-coverage"))
+    if status != 0:
+        return [output.strip().splitlines()[-1]]
+    _, report_path = run(["swift", "test", "--scratch-path", BUILD_FOLDER, "--show-codecov-path"])
+    report = json.loads(Path(report_path.strip().splitlines()[-1]).read_text())
+    covered_per_folder = Counter()
+    lines_per_folder = Counter()
+    for source in report["data"][0]["files"]:
+        if f"{SOURCES}/" not in source["filename"]:
+            continue
+        folder = source["filename"].split(f"{SOURCES}/", 1)[1].split("/", 1)[0]
+        covered_per_folder[folder] += source["summary"]["lines"]["covered"]
+        lines_per_folder[folder] += source["summary"]["lines"]["count"]
+    for folder in sorted(lines_per_folder):
+        share = covered_per_folder[folder] / lines_per_folder[folder]
+        print(f"  {folder:<14} {share:6.1%}  ({covered_per_folder[folder]} of {lines_per_folder[folder]} lines)")
+    total_share = sum(covered_per_folder.values()) / sum(lines_per_folder.values())
+    print(f"  {'all':<14} {total_share:6.1%}")
+    return []
 
 
 def design_findings() -> list[str]:
@@ -250,18 +277,22 @@ STEPS = [
     ("plists", "Translation files and Info.plist (plutil)", property_list_findings),
     ("scripts", "Shell scripts and Makefile (bash -n, make -n)", shell_script_findings),
 ]
+# Reports that only run when asked for by name, like `scripts/inspect.py coverage`.
+EXTRA_STEPS = [
+    ("coverage", "Test coverage per folder", coverage_report),
+]
 
 
 def main() -> int:
     """Without arguments every step runs; `scripts/inspect.py tests rules` runs only those."""
     chosen = sys.argv[1:] or [key for key, _, _ in STEPS]
-    known = [key for key, _, _ in STEPS]
+    known = [key for key, _, _ in STEPS + EXTRA_STEPS]
     unknown = [key for key in chosen if key not in known]
     if unknown:
         print(f"Unknown step: {', '.join(unknown)}. Steps: {', '.join(known)}")
         return 2
     total = 0
-    for key, title, check in STEPS:
+    for key, title, check in STEPS + EXTRA_STEPS:
         if key not in chosen:
             continue
         findings = check()

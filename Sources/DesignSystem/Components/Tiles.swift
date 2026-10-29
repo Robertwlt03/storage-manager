@@ -34,12 +34,12 @@ extension UI {
         let value: String
         let label: String
         let symbol: String
-        var isLoading = false
-        var action: (() -> Void)?
+        let isLoading: Bool
+        let action: () -> Void
 
         init(
-            _ value: String, _ label: String, symbol: String, isLoading: Bool = false,
-            action: (() -> Void)? = nil
+            _ value: String, _ label: String, symbol: String, isLoading: Bool,
+            action: @escaping () -> Void
         ) {
             self.value = value
             self.label = label
@@ -49,9 +49,7 @@ extension UI {
         }
 
         var body: some View {
-            Button {
-                action?()
-            } label: {
+            Button(action: action) {
                 HStack(spacing: Space.item) {
                     VStack(alignment: .leading, spacing: Space.hairline) {
                         Icon(.symbol(symbol), size: .small).foregroundStyle(.tint)
@@ -63,7 +61,7 @@ extension UI {
                             .lineLimit(Layout.maxWrappedLines, reservesSpace: true)
                     }
                     Spacer(minLength: 0)
-                    if action != nil { Chevron() }
+                    Chevron()
                 }
                 .padding(Space.card)
                 .surface()
@@ -71,7 +69,7 @@ extension UI {
             }
             .appButton(.content)
             .hoverLift()
-            .allowsHitTesting(action != nil && !isLoading)
+            .allowsHitTesting(!isLoading)
             .accessibilityElement(children: .combine)
         }
     }
@@ -80,21 +78,18 @@ extension UI {
     struct TileGrid<Data: RandomAccessCollection, Content: View>: View
     where Data.Element: Identifiable {
         let data: Data
-        var minWidth = Layout.gridTileSize
         @ViewBuilder let tile: (Data.Element) -> Content
 
-        init(
-            _ data: Data, minWidth: CGFloat = Layout.gridTileSize,
-            @ViewBuilder _ tile: @escaping (Data.Element) -> Content
-        ) {
+        init(_ data: Data, @ViewBuilder _ tile: @escaping (Data.Element) -> Content) {
             self.data = data
-            self.minWidth = minWidth
             self.tile = tile
         }
 
         var body: some View {
             LazyVGrid(
-                columns: [GridItem(.adaptive(minimum: minWidth), spacing: Space.section)],
+                columns: [
+                    GridItem(.adaptive(minimum: Layout.gridTileSize), spacing: Space.section)
+                ],
                 spacing: Space.section
             ) {
                 ForEach(data) { item in tile(item) }

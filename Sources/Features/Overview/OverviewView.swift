@@ -33,9 +33,7 @@ struct OverviewView: View {
     /// Each figure leads to the page with the details; the used space is already in the disk card
     /// below.
     private var keyFigures: some View {
-        let unusedApps = model.apps.filter { app in
-            AppUsageService.isUnused(app, days: unusedDays)
-        }
+        let unusedApps = AppUsageService.unused(model.apps, days: unusedDays)
         let largeFileThreshold = Format.bytes(LargeFileThreshold.bytes(largeFileMegabytes))
         return UI.FixedGrid(columns: Layout.keyFigureColumns) {
             UI.KeyFigure(

@@ -23,8 +23,11 @@ struct EntryBrowser: View {
                 ScrollView { tiles.padding(Space.page) }
                     .background(Backdrop())
             } else {
-                EntryTable(entries: entries, total: total, showLocation: showLocation)
-                    .id(contentKey)
+                EntryTable(
+                    entries: entries, total: total, showLocation: showLocation,
+                    infoEntry: $infoEntry
+                )
+                .id(contentKey)
             }
         }
         .overlay {

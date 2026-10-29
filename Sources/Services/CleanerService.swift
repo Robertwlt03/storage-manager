@@ -10,7 +10,6 @@ nonisolated enum CleanerService {
         Paths.tempArea + "/" + TempPart.temporaryFiles.rawValue
     }
     private static let systemPrefix = "com.apple."
-    private static let secondsPerDay: TimeInterval = 86_400
     private static let developerFolders = [
         "~/Library/Developer/Xcode/DerivedData", "~/Library/Developer/CoreSimulator/Caches",
         "~/.npm/_cacache", "~/.gradle/caches", "~/.cache",
@@ -66,13 +65,12 @@ nonisolated enum CleanerService {
     }
 
     private static func entries(of folder: String) -> [String] {
-        ((try? FileManager.default.contentsOfDirectory(atPath: folder)) ?? [])
-            .map { name in folder + "/" + name }
+        FileSystem.names(in: folder).map { name in folder + "/" + name }
     }
 
     private static func isOlder(_ path: String, thanDays days: Int) -> Bool {
         let attributes = try? FileManager.default.attributesOfItem(atPath: path)
         guard let modified = attributes?[.modificationDate] as? Date else { return false }
-        return modified < Date().addingTimeInterval(-Double(days) * secondsPerDay)
+        return modified < FileSystem.date(daysBefore: days)
     }
 }

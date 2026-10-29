@@ -44,17 +44,48 @@ struct DesignTests {
         #expect(Motion.quickDuration < Motion.standardDuration)
     }
 
-    @Test("Every text colour reaches 4.5:1 in light and dark mode")
+    /// Approximations of the system surfaces: content, window, grouped rows, sidebar and glass
+    /// over the backdrop.
+    private static let lightSurfaces: [UInt32] = [0xFFFFFF, 0xF5F5F7, 0xECECEC, 0xE3E3E3, 0xDDE3EE]
+    private static let darkSurfaces: [UInt32] = [
+        0x1E1E1E, 0x262626, 0x2D2D2D, 0x323232, 0x3A3A3A, 0x28303E,
+    ]
+    private static let whiteText: UInt32 = 0xFFFFFF
+
+    @Test("Every text colour reaches 4.5:1 on every light and dark surface")
     func textContrast() {
-        #expect(Checks.contrast())
+        let textTones = [
+            ("muted", Theme.muted), ("good", Theme.good), ("warning", Theme.warning),
+            ("bad", Theme.bad),
+        ]
+        for (name, tone) in textTones {
+            for surface in Self.lightSurfaces {
+                let ratio = Contrast.ratio(tone.light, surface)
+                #expect(ratio >= Self.minimumContrast, "\(name) light on \(surface): \(ratio)")
+            }
+            for surface in Self.darkSurfaces {
+                let ratio = Contrast.ratio(tone.dark, surface)
+                #expect(ratio >= Self.minimumContrast, "\(name) dark on \(surface): \(ratio)")
+            }
+        }
+    }
+
+    @Test("White button text reaches 4.5:1 on every button fill")
+    func buttonContrast() {
+        for (name, fill) in [("primary", Theme.primaryFill), ("confirm", Theme.confirmFill)] {
+            for colour in [fill.light, fill.dark] {
+                let ratio = Contrast.ratio(Self.whiteText, colour)
+                #expect(ratio >= Self.minimumContrast, "\(name) \(colour): \(ratio)")
+            }
+        }
     }
 
     @Test("The contrast formula gives the known WCAG values")
     func contrastFormula() {
-        let blackOnWhite = Theme.contrastRatio(0xFFFFFF, 0x000000)
+        let blackOnWhite = Contrast.ratio(0xFFFFFF, 0x000000)
         #expect(abs(blackOnWhite - Self.blackAndWhiteContrast) < Self.allowedRoundingError)
-        #expect(Theme.contrastRatio(0x777777, 0x777777) == Self.sameColourContrast)
-        #expect(Theme.contrastRatio(0x000000, 0xFFFFFF) == blackOnWhite)
+        #expect(Contrast.ratio(0x777777, 0x777777) == Self.sameColourContrast)
+        #expect(Contrast.ratio(0x000000, 0xFFFFFF) == blackOnWhite)
     }
 
     @Test("Category colours repeat instead of running out")

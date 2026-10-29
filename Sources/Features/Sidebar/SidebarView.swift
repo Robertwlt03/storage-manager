@@ -66,7 +66,7 @@ private struct SidebarList: View {
     }
 
     private var unusedAppCount: Int {
-        model.apps.filter { app in AppUsageService.isUnused(app, days: unusedDays) }.count
+        AppUsageService.unused(model.apps, days: unusedDays).count
     }
 }
 

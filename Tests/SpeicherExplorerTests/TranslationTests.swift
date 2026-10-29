@@ -12,29 +12,38 @@ struct TranslationTests {
         .deletingLastPathComponent()
         .appendingPathComponent("Resources")
 
-    private static func bundle(for code: String) -> Bundle? {
-        Bundle(url: resources.appendingPathComponent(code + ".lproj"))
+    private static func texts(of language: AppLanguage) -> [String: String]? {
+        let file = resources.appendingPathComponent(
+            language.rawValue + ".lproj/Localizable.strings")
+        return NSDictionary(contentsOf: file) as? [String: String]
     }
 
-    @Test("Every text exists in every language, with the same placeholders")
-    func everyTextIsTranslated() {
-        #expect(Checks.strings(bundleForLanguage: Self.bundle))
+    private static func placeholderCount(_ text: String) -> Int {
+        text.components(separatedBy: "%").count
+    }
+
+    @Test("Every text has as many placeholders as in English", arguments: AppLanguage.allCases)
+    func placeholdersMatch(language: AppLanguage) throws {
+        let english = try #require(Self.texts(of: .en))
+        let translated = try #require(Self.texts(of: language))
+        for (key, englishText) in english {
+            let translatedText = translated[key] ?? ""
+            #expect(
+                Self.placeholderCount(translatedText) == Self.placeholderCount(englishText),
+                "\(language.rawValue): \(key)")
+        }
     }
 
     @Test("Every translation file is readable", arguments: AppLanguage.allCases)
     func fileIsReadable(language: AppLanguage) {
-        let file = Self.resources.appendingPathComponent(
-            language.rawValue + ".lproj/Localizable.strings")
-        #expect(NSDictionary(contentsOf: file) != nil, "\(language.rawValue)")
+        #expect(Self.texts(of: language) != nil, "\(language.rawValue)")
     }
 
     @Test(
         "Every translation file holds exactly the keys the app uses",
         arguments: AppLanguage.allCases)
     func noLeftoverTexts(language: AppLanguage) throws {
-        let file = Self.resources.appendingPathComponent(
-            language.rawValue + ".lproj/Localizable.strings")
-        let texts = try #require(NSDictionary(contentsOf: file) as? [String: String])
+        let texts = try #require(Self.texts(of: language))
         let usedKeys = Set(TextKey.allCases.map(\.rawValue))
         #expect(Set(texts.keys) == usedKeys, "\(language.rawValue)")
     }

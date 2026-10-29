@@ -36,6 +36,8 @@ import SwiftUI
     private(set) var apps: [AppUsage] = []
     private(set) var cleanItems: [CleanItem]?
     private(set) var statistics: Statistics?  // key figures of the last finished scan
+    /// Found once per tree change: each group asks Launch Services and reads an Info.plist.
+    private(set) var copyGroups: [CopyGroup] = []
     private var scanTask: Task<Void, Never>?
     private var scanID = UUID()  // the current scan; older, cancelled runs check it and step aside
 
@@ -98,10 +100,6 @@ import SwiftUI
         searchText = ""
         isSearchPresented = false
     }
-    var copyGroups: [CopyGroup] {
-        _ = revision
-        return CopyService.groups(in: root.descendant(at: Paths.tempCopies))
-    }
 
     // MARK: Launch
 
@@ -158,6 +156,7 @@ import SwiftUI
 
     private func forgetPreviousScan() {
         root.removeAll()
+        copyGroups = []
         unreadableCount = 0
         explorerPath = []
     }
@@ -243,7 +242,10 @@ import SwiftUI
     }
 
     /// Also when the large-file threshold changes, which one of the figures depends on.
-    func refreshStatistics() { statistics = StatisticsService.compute(root: root) }
+    func refreshStatistics() {
+        let largeFileBytes = LargeFileThreshold.bytes(AppSettings.largeFileMegabytes)
+        statistics = StatisticsService.compute(root: root, largeFileBytes: largeFileBytes)
+    }
 
     /// What the cleaner could remove; computed once after each scan and shared by the overview and
     /// the cleaner.
@@ -273,10 +275,10 @@ import SwiftUI
 
     /// Removes the chosen items, measures what really got free, then measures everything again.
     func clean(_ items: [CleanItem]) async -> (freed: Int64, failed: Int) {
-        let freeBefore = VolumeService.startup()?.freeBytes ?? 0
-        let failed = await Task.detached(priority: .utility) { CleanerService.clean(items) }.value
-        try? await Task.sleep(for: Self.waitForFreedSpace)
-        let freed = (VolumeService.startup()?.freeBytes ?? freeBefore) - freeBefore
+        var failed = 0
+        let freed = await freeSpaceGained {
+            failed = await Task.detached(priority: .utility) { CleanerService.clean(items) }.value
+        }
         scan()
         return (freed, failed)
     }
@@ -291,12 +293,19 @@ import SwiftUI
 
     /// Deletes all copies of one app and returns how much free space really grew.
     func delete(_ group: CopyGroup) async throws -> Int64 {
-        let freeBefore = VolumeService.startup()?.freeBytes ?? 0
-        try await CopyService.delete(group)
-        try? await Task.sleep(for: Self.waitForFreedSpace)
+        let freed = try await freeSpaceGained { try await CopyService.delete(group) }
         group.node.detach()
         treeChanged()
-        return (startupVolume?.freeBytes ?? freeBefore) - freeBefore
+        return freed
+    }
+
+    /// Runs the removal, waits until APFS reports the freed blocks and returns how much free space
+    /// really grew.
+    private func freeSpaceGained(by removal: () async throws -> Void) async rethrows -> Int64 {
+        let freeBefore = VolumeService.startup()?.freeBytes ?? 0
+        try await removal()
+        try? await Task.sleep(for: Self.waitForFreedSpace)
+        return (VolumeService.startup()?.freeBytes ?? freeBefore) - freeBefore
     }
 
     private func treeChanged() {
@@ -307,6 +316,7 @@ import SwiftUI
         Motion.animate { categories = measuredCategories }
         // Figures only from complete data, so they never jump.
         if !isScanning { refreshStatistics() }
+        copyGroups = CopyService.groups(in: root.descendant(at: Paths.tempCopies))
         // Drives the tables, which must not update inside an animation (NSTableView reentrancy).
         revision += 1
     }
