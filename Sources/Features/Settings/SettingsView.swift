@@ -9,18 +9,23 @@ struct SettingsView: View {
     var body: some View {
         let folders = AppSettings.folders(from: extraFolders)
         Form {
-            Toggle(Loc.autoScan.s, isOn: $autoScan)
-            LabeledContent(Loc.extraFolders.s) {
-                VStack(alignment: .leading, spacing: Space.s) {
-                    List(folders, id: \.self, selection: $selected) { Text(Paths.display($0)).lineLimit(1).truncationMode(.middle) }
-                        .frame(height: Layout.folderListHeight)
-                        .overlay { if folders.isEmpty { Text(Loc.none.s).textRole(.hint) } }
-                    HStack(spacing: Space.xs) {
-                        Button(Loc.add.s, systemImage: Symbols.add) {
-                            extraFolders = AppSettings.store(Array(NSOrderedSet(array: folders + FinderService.chooseFolders()))
-                                .compactMap { $0 as? String })
+            Toggle(TextKey.autoScan.translated, isOn: $autoScan)
+            LabeledContent(TextKey.extraFolders.translated) {
+                VStack(alignment: .leading, spacing: Space.small) {
+                    List(folders, id: \.self, selection: $selected) {
+                        Text(Paths.display($0)).lineLimit(1).truncationMode(.middle)
+                    }
+                    .frame(height: Layout.folderListHeight)
+                    .overlay {
+                        if folders.isEmpty { Text(TextKey.none.translated).textRole(.hint) }
+                    }
+                    HStack(spacing: Space.extraSmall) {
+                        Button(TextKey.add.translated, systemImage: Symbols.add) {
+                            extraFolders = AppSettings.store(
+                                Array(NSOrderedSet(array: folders + FinderService.chooseFolders()))
+                                    .compactMap { $0 as? String })
                         }
-                        Button(Loc.remove.s, systemImage: Symbols.remove) {
+                        Button(TextKey.remove.translated, systemImage: Symbols.remove) {
                             extraFolders = AppSettings.store(folders.filter { $0 != selected })
                         }
                         .disabled(selected == nil)
@@ -28,7 +33,7 @@ struct SettingsView: View {
                     .labelStyle(.iconOnly)
                 }
             }
-            Text(Loc.settingsSystemNote.s).textRole(.hint)
+            Text(TextKey.settingsSystemNote.translated).textRole(.hint)
         }
         .formStyle(.grouped)
         .frame(width: Layout.settingsWidth, height: Layout.settingsHeight)

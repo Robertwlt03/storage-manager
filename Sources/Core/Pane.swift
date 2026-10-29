@@ -19,16 +19,19 @@ enum Pane: Hashable {
             self = .volume(launchKey)
             return
         }
-        guard let p = (Self.main + Self.tidy + Self.system).first(where: { $0.launchKey == launchKey }) else { return nil }
+        guard
+            let p = (Self.main + Self.tidy + Self.system)
+                .first(where: { $0.launchKey == launchKey })
+        else { return nil }
         self = p
     }
 
     var launchKey: String { details.key }
-    var title: Loc { details.title }
-    var info: Loc { details.info }  // what the page is for, shown by its info button
+    var title: TextKey { details.title }
+    var info: TextKey { details.info }  // what the page is for, shown by its info button
     var symbol: String { details.symbol }
 
-    private var details: (key: String, title: Loc, info: Loc, symbol: String) {
+    private var details: (key: String, title: TextKey, info: TextKey, symbol: String) {
         switch self {
         case .overview: ("overview", .paneOverview, .infoOverview, Symbols.overview)
         case .explorer: ("explorer", .paneExplorer, .infoExplorer, Symbols.explorer)
@@ -44,24 +47,27 @@ enum Pane: Hashable {
 
 /// The four subfolders of the per-user temporary area.
 enum TempPart: String, CaseIterable, Identifiable {
-    case t = "T", c = "C", x = "X", zero = "0"
+    case t = "T"
+    case c = "C"
+    case x = "X"
+    case zero = "0"
     var id: Self { self }
 
-    var title: Loc {
+    var title: TextKey {
         switch self {
-        case .t: .tempT
-        case .c: .tempC
-        case .x: .tempX
-        case .zero: .temp0
+        case .t: .tempFolderT
+        case .c: .tempFolderC
+        case .x: .tempFolderX
+        case .zero: .tempFolder0
         }
     }
 
-    var detail: Loc {
+    var detail: TextKey {
         switch self {
-        case .t: .tempTDetail
-        case .c: .tempCDetail
-        case .x: .tempXDetail
-        case .zero: .temp0Detail
+        case .t: .tempFolderTDetail
+        case .c: .tempFolderCDetail
+        case .x: .tempFolderXDetail
+        case .zero: .tempFolder0Detail
         }
     }
 }
@@ -70,7 +76,7 @@ enum SearchScope: CaseIterable, Identifiable {
     case all, folders, files
     var id: Self { self }
 
-    var title: Loc {
+    var title: TextKey {
         switch self {
         case .all: .scopeAll
         case .folders: .scopeFolders

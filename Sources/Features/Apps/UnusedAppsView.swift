@@ -9,28 +9,42 @@ struct UnusedAppsView: View {
     @State private var error: String?
 
     private var unused: [AppUsage] {
-        model.apps.filter { AppUsageService.isUnused($0, days: days) }.sorted { ($0.lastUsed ?? .distantPast) < ($1.lastUsed ?? .distantPast) }
+        model.apps.filter { AppUsageService.isUnused($0, days: days) }
+            .sorted { ($0.lastUsed ?? .distantPast) < ($1.lastUsed ?? .distantPast) }
     }
 
     var body: some View {
-        UI.Page(.apps, options: {
-            UI.MenuPicker(.unusedSince, selection: $days) {
-                ForEach(CleanConfig.unusedDayOptions, id: \.self) { Text(Loc.daysOption.f(Fmt.count($0))).tag($0) }
+        UI.Page(
+            .apps,
+            options: {
+                UI.MenuPicker(.unusedSince, selection: $days) {
+                    ForEach(CleanConfig.unusedDayOptions, id: \.self) {
+                        Text(TextKey.daysOption.translated(with: Format.count($0))).tag($0)
+                    }
+                }
             }
-        }) {
+        ) {
             if let error { UI.Note(error, .bad(symbol: Symbols.warning)) }
             if !model.hasData || model.apps.isEmpty {
                 UI.Placeholder(.notMeasured, in: .page)
             } else if model.scanning {  // a running scan is about to replace sizes and dates
                 UI.Card {
-                    UI.Placeholder(.loading(title: .loadingAppsTitle, detail: .loadingAppsDetail, symbol: Symbols.apps), in: .card)
+                    UI.Placeholder(
+                        .loading(
+                            title: .loadingAppsTitle, detail: .loadingAppsDetail,
+                            symbol: Symbols.apps), in: .card)
                 }
             } else if unused.isEmpty {
-                UI.Placeholder(.empty(title: Loc.appsNoneUnused.s, symbol: Symbols.success), in: .page)
+                UI.Placeholder(
+                    .empty(title: TextKey.appsNoneUnused.translated, symbol: Symbols.success),
+                    in: .page)
             } else if layout == .grid {
                 UI.TileGrid(unused) { app in
-                    UI.Tile(icon: .file(app.path), title: app.name, value: Fmt.bytes(app.bytes), detail: lastUsed(app))
-                        .contextMenu { menu(app) }
+                    UI.Tile(
+                        icon: .file(app.path), title: app.name, value: Format.bytes(app.bytes),
+                        detail: lastUsed(app)
+                    )
+                    .contextMenu { menu(app) }
                 }
             } else {
                 UI.Card {
@@ -42,37 +56,48 @@ struct UnusedAppsView: View {
                                 Text(lastUsed(app)).textRole(.hint)
                             }
                             Spacer(minLength: Space.item)
-                            Text(Fmt.bytes(app.bytes)).textRole(.value)
-                            UI.ActionButton(Loc.showInFinder.s) { FinderService.reveal(app.path) }
-                            UI.ActionButton(Loc.moveToTrash.s, role: .destructive) { pending = app }
-                                .disabled(AppUsageService.isRunning(app))
+                            Text(Format.bytes(app.bytes)).textRole(.value)
+                            UI.ActionButton(TextKey.showInFinder.translated) {
+                                FinderService.reveal(app.path)
+                            }
+                            UI.ActionButton(TextKey.moveToTrash.translated, role: .destructive) {
+                                pending = app
+                            }
+                            .disabled(AppUsageService.isRunning(app))
                         }
                         .contextMenu { menu(app) }
                     }
                 }
             }
         }
-        .confirmationDialog(Loc.trashAppTitle.f(pending?.name ?? ""), isPresented: Binding(get: { pending != nil }, set: { if !$0 { pending = nil } })) {
-            Button(Loc.moveToTrash.s, role: .destructive) { pending.map(trash) }
-            Button(Loc.cancel.s, role: .cancel) {}
+        .confirmationDialog(
+            TextKey.trashAppTitle.translated(with: pending?.name ?? ""),
+            isPresented: Binding(get: { pending != nil }, set: { if !$0 { pending = nil } })
+        ) {
+            Button(TextKey.moveToTrash.translated, role: .destructive) { pending.map(trash) }
+            Button(TextKey.cancel.translated, role: .cancel) {}
         } message: {
-            Text(Loc.trashAppMessage.s)
+            Text(TextKey.trashAppMessage.translated)
         }
         .smoothChanges(of: layout)
     }
 
     @ViewBuilder private func menu(_ app: AppUsage) -> some View {
-        Button(Loc.showInFinder.s) { FinderService.reveal(app.path) }
-        Button(Loc.moveToTrash.s) { pending = app }.disabled(AppUsageService.isRunning(app))
+        Button(TextKey.showInFinder.translated) { FinderService.reveal(app.path) }
+        Button(TextKey.moveToTrash.translated) { pending = app }
+            .disabled(AppUsageService.isRunning(app))
     }
 
     private func lastUsed(_ app: AppUsage) -> String {
-        app.lastUsed.map { Loc.lastOpened.f(Fmt.day($0)) } ?? Loc.unknown.s
+        app.lastUsed.map { TextKey.lastOpened.translated(with: Format.day($0)) }
+            ?? TextKey.unknown.translated
     }
 
     private func trash(_ app: AppUsage) {
         error = nil
-        do { try model.moveToTrash(app) } catch { self.error = Loc.trashAppFailed.f(app.name) }
+        do { try model.moveToTrash(app) } catch {
+            self.error = TextKey.trashAppFailed.translated(with: app.name)
+        }
         pending = nil
     }
 }

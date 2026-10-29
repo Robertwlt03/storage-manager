@@ -36,22 +36,22 @@
 "categories" = "Kategoriler";
 "freeSpace" = "Boş";
 "tempAreaName" = "Geçici Sistem Alanı";
-"catApps" = "Uygulamalar";
-"catDocuments" = "Belgeler ve Masaüstü";
-"catDownloads" = "İndirilenler";
-"catMedia" = "Fotoğraflar, Müzik ve Filmler";
-"catICloud" = "iCloud Drive";
-"catMail" = "Mail ve Mesajlar";
-"catDeveloper" = "Geliştirici";
-"catCaches" = "Önbellekler";
-"catAppData" = "Uygulama Verileri";
-"catTrash" = "Çöp Sepeti";
-"catTemp" = "Geçici Dosyalar";
-"catUser" = "Diğer Kullanıcı Verileri";
-"catLibrary" = "Paylaşılan Uygulama Verileri";
-"catOther" = "Diğer Klasörler";
-"catPurgeable" = "macOS Tarafından Temizlenebilir";
-"catSystem" = "Sistem ve Diğer";
+"categoryApps" = "Uygulamalar";
+"categoryDocuments" = "Belgeler ve Masaüstü";
+"categoryDownloads" = "İndirilenler";
+"categoryMedia" = "Fotoğraflar, Müzik ve Filmler";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail ve Mesajlar";
+"categoryDeveloper" = "Geliştirici";
+"categoryCaches" = "Önbellekler";
+"categoryAppData" = "Uygulama Verileri";
+"categoryTrash" = "Çöp Sepeti";
+"categoryTemp" = "Geçici Dosyalar";
+"categoryUser" = "Diğer Kullanıcı Verileri";
+"categoryLibrary" = "Paylaşılan Uygulama Verileri";
+"categoryOther" = "Diğer Klasörler";
+"categoryPurgeable" = "macOS Tarafından Temizlenebilir";
+"categorySystem" = "Sistem ve Diğer";
 
 /* Explorer, tables and info sheet */
 "columnName" = "Ad";
@@ -82,7 +82,7 @@
 "noExtension" = "uzantısız";
 
 /* Large files */
-"minSize" = "Minimum Boyut";
+"minimumSize" = "Minimum Boyut";
 "fromSize" = "%@ ve üzeri";
 "noFilesFrom" = "%@ ve üzeri dosya yok";
 "filesTotal" = "%@ dosya · toplam %@";
@@ -92,14 +92,14 @@
 "total" = "Toplam";
 "subfolders" = "Alt Klasörler";
 "viewCopies" = "Uygulama Kopyalarını Göster …";
-"tempT" = "Geçici Dosyalar";
-"tempTDetail" = "Çoğunlukla yeniden başlatmada boşaltılır.";
-"tempC" = "Önbellekler";
-"tempCDetail" = "Uygulamaların ve sistem hizmetlerinin önbellekleri.";
-"tempX" = "Uygulama Kopyaları";
-"tempXDetail" = "macOS'un imzaları kontrol ederken oluşturduğu kopyalar.";
-"temp0" = "Sistem Hizmetleri";
-"temp0Detail" = "Arka plan hizmetlerinin verileri.";
+"tempFolderT" = "Geçici Dosyalar";
+"tempFolderTDetail" = "Çoğunlukla yeniden başlatmada boşaltılır.";
+"tempFolderC" = "Önbellekler";
+"tempFolderCDetail" = "Uygulamaların ve sistem hizmetlerinin önbellekleri.";
+"tempFolderX" = "Uygulama Kopyaları";
+"tempFolderXDetail" = "macOS'un imzaları kontrol ederken oluşturduğu kopyalar.";
+"tempFolder0" = "Sistem Hizmetleri";
+"tempFolder0Detail" = "Arka plan hizmetlerinin verileri.";
 
 /* Signature copies */
 "noCopies" = "Uygulama Kopyası Yok";
@@ -197,8 +197,8 @@
 "moveToTrash" = "Çöp Sepeti'ne Taşı";
 "lastOpened" = "Son açılış: %@";
 "trashAppFailed" = "“%@” taşınamadı. Finder'da parolanızla çalışır.";
-"statFiles" = "Dosyalar";
-"statUnusedApps" = "kullanılmayan uygulama";
+"figureFiles" = "Dosyalar";
+"figureUnusedApps" = "kullanılmayan uygulama";
 "bucketUnder1MB" = "1 MB altı";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "Okumayı Durdur";
 
 /* Statistics in plain words */
-"statSizesTitle" = "Dosyalarınız ne kadar büyük?";
-"statSizesCaption" = "Her boyut sınıfının ne kadar yer kapladığı ve içinde kaç dosya olduğu. Birkaç büyük dosya genellikle çok sayıda küçük dosyadan daha fazla yer kaplar.";
-"statLargeFilesFrom" = "%@ ve üzeri büyük dosyalar";
+"sizeClassesTitle" = "Dosyalarınız ne kadar büyük?";
+"sizeClassesCaption" = "Her boyut sınıfının ne kadar yer kapladığı ve içinde kaç dosya olduğu. Birkaç büyük dosya genellikle çok sayıda küçük dosyadan daha fazla yer kaplar.";
+"figureLargeFilesFrom" = "%@ ve üzeri büyük dosyalar";
 "bucketValue" = "%@
 %@ dosya";
 "settingsSystemNote" = "Görünüm, dil ve birimler Sistem Ayarları'ndan alınır. Bu uygulama için ayrı bir dil, orada Genel › Dil ve Bölge › Uygulamalar altında ayarlanır.";

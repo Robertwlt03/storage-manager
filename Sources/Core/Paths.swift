@@ -17,10 +17,14 @@ enum Paths {
     static var tempCopies: String { tempArea + "/" + TempPart.x.rawValue }
 
     /// Areas measured on every Mac; missing ones are skipped.
-    static var defaultScanRoots: [String] { [home, applications, library, opt, usrLocal, tempArea] }
+    static var defaultScanRoots: [String] {
+        [home, applications, library, opt, usrLocal, tempArea]
+    }
 
     /// `~/…` to an absolute path.
-    static func expand(_ path: String) -> String { path.hasPrefix("~") ? home + path.dropFirst() : path }
+    static func expand(_ path: String) -> String {
+        path.hasPrefix("~") ? home + path.dropFirst() : path
+    }
 
     /// Resolves symlinks like `pwd -P` (URL.resolvingSymlinksInPath would drop the /private prefix).
     static func real(_ path: String) -> String {
@@ -30,7 +34,7 @@ enum Paths {
     }
 
     static func display(_ path: String) -> String {
-        if path == tempArea { return Loc.tempAreaName.s }
+        if path == tempArea { return TextKey.tempAreaName.translated }
         return path.hasPrefix(home) ? "~" + path.dropFirst(home.count) : path
     }
 

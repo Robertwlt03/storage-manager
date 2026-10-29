@@ -14,9 +14,13 @@ enum PreviewService {
     @MainActor static func thumbnail(_ path: String, size: CGFloat) async -> NSImage? {
         let key = "\(path)|\(Int(size))" as NSString
         if let cached = cache.object(forKey: key) { return cached }
-        let request = QLThumbnailGenerator.Request(fileAt: URL(fileURLWithPath: path), size: CGSize(width: size, height: size),
-                                                   scale: NSScreen.main?.backingScaleFactor ?? 2, representationTypes: .thumbnail)
-        guard let image = try? await QLThumbnailGenerator.shared.generateBestRepresentation(for: request).nsImage else { return nil }
+        let request = QLThumbnailGenerator.Request(
+            fileAt: URL(fileURLWithPath: path), size: CGSize(width: size, height: size),
+            scale: NSScreen.main?.backingScaleFactor ?? 2, representationTypes: .thumbnail)
+        guard
+            let image = try? await QLThumbnailGenerator.shared
+                .generateBestRepresentation(for: request).nsImage
+        else { return nil }
         cache.setObject(image, forKey: key)
         return image
     }

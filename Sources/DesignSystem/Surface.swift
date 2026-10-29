@@ -43,10 +43,17 @@ private struct AppButtonModifier: ViewModifier {
         } else if kind == .content {
             content.buttonStyle(.plain)
         } else if let fill = kind.fill {
-            if #available(macOS 26.0, *) { content.buttonStyle(.glassProminent).tint(fill.color) }
-            else { content.buttonStyle(.borderedProminent).tint(fill.color) }
+            if #available(macOS 26.0, *) {
+                content.buttonStyle(.glassProminent).tint(fill.color)
+            } else {
+                content.buttonStyle(.borderedProminent).tint(fill.color)
+            }
         } else {
-            if #available(macOS 26.0, *) { content.buttonStyle(.glass) } else { content.buttonStyle(.bordered) }
+            if #available(macOS 26.0, *) {
+                content.buttonStyle(.glass)
+            } else {
+                content.buttonStyle(.bordered)
+            }
         }
     }
 }
@@ -57,6 +64,10 @@ struct Backdrop: View {
 }
 
 extension View {
-    func surface(radius: CGFloat = Layout.cardRadius) -> some View { modifier(SurfaceModifier(radius: radius)) }
-    func appButton(_ kind: ButtonKind = .normal) -> some View { modifier(AppButtonModifier(kind: kind)) }
+    func surface(radius: CGFloat = Layout.cardRadius) -> some View {
+        modifier(SurfaceModifier(radius: radius))
+    }
+    func appButton(_ kind: ButtonKind = .normal) -> some View {
+        modifier(AppButtonModifier(kind: kind))
+    }
 }

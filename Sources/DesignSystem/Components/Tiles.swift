@@ -10,12 +10,14 @@ extension UI {
         var share: Double?
 
         var body: some View {
-            VStack(spacing: Space.s) {
+            VStack(spacing: Space.small) {
                 Icon(icon, size: .large)
                 Text(title).textRole(.section).lineLimit(2).multilineTextAlignment(.center)
                 Text(value).textRole(.value)
                 if let detail { Text(detail).textRole(.hint).lineLimit(1) }
-                if let share { ProgressView(value: min(max(share, 0), 1)).progressViewStyle(.linear) }
+                if let share {
+                    ProgressView(value: min(max(share, 0), 1)).progressViewStyle(.linear)
+                }
             }
             .padding(Space.card)
             .frame(maxWidth: .infinity, minHeight: Layout.gridTile)
@@ -34,7 +36,10 @@ extension UI {
         var loading = false
         var action: (() -> Void)?
 
-        init(_ value: String, _ label: String, symbol: String, loading: Bool = false, action: (() -> Void)? = nil) {
+        init(
+            _ value: String, _ label: String, symbol: String, loading: Bool = false,
+            action: (() -> Void)? = nil
+        ) {
             self.value = value
             self.label = label
             self.symbol = symbol
@@ -43,10 +48,13 @@ extension UI {
         }
 
         var body: some View {
-            Button { action?() } label: {
+            Button {
+                action?()
+            } label: {
                 HStack(spacing: Space.item) {
                     VStack(alignment: .leading, spacing: Space.hairline) {
-                        Icon(.symbol(symbol), size: .small).foregroundStyle(.tint).padding(.bottom, Space.xs)
+                        Icon(.symbol(symbol), size: .small).foregroundStyle(.tint)
+                            .padding(.bottom, Space.extraSmall)
                         Text(value).textRole(.figure).contentTransition(.numericText())
                             .lineLimit(1).minimumScaleFactor(Layout.statMinScale)
                             .calculating(loading)
@@ -67,19 +75,26 @@ extension UI {
     }
 
     /// As many tiles per row as fit.
-    struct TileGrid<Data: RandomAccessCollection, Content: View>: View where Data.Element: Identifiable {
+    struct TileGrid<Data: RandomAccessCollection, Content: View>: View
+    where Data.Element: Identifiable {
         let data: Data
         var minWidth = Layout.gridTile
         @ViewBuilder let tile: (Data.Element) -> Content
 
-        init(_ data: Data, minWidth: CGFloat = Layout.gridTile, @ViewBuilder _ tile: @escaping (Data.Element) -> Content) {
+        init(
+            _ data: Data, minWidth: CGFloat = Layout.gridTile,
+            @ViewBuilder _ tile: @escaping (Data.Element) -> Content
+        ) {
             self.data = data
             self.minWidth = minWidth
             self.tile = tile
         }
 
         var body: some View {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: minWidth), spacing: Space.section)], spacing: Space.section) {
+            LazyVGrid(
+                columns: [GridItem(.adaptive(minimum: minWidth), spacing: Space.section)],
+                spacing: Space.section
+            ) {
                 ForEach(data) { tile($0) }
             }
         }
@@ -96,8 +111,11 @@ extension UI {
         }
 
         var body: some View {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Space.section), count: columns),
-                      spacing: Space.section) { content }
+            LazyVGrid(
+                columns: Array(
+                    repeating: GridItem(.flexible(), spacing: Space.section), count: columns),
+                spacing: Space.section
+            ) { content }
         }
     }
 }

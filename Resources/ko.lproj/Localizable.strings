@@ -36,22 +36,22 @@
 "categories" = "카테고리";
 "freeSpace" = "여유 공간";
 "tempAreaName" = "임시 시스템 영역";
-"catApps" = "응용 프로그램";
-"catDocuments" = "문서 및 데스크탑";
-"catDownloads" = "다운로드";
-"catMedia" = "사진, 음악 및 영화";
-"catICloud" = "iCloud Drive";
-"catMail" = "메일 및 메시지";
-"catDeveloper" = "개발";
-"catCaches" = "캐시";
-"catAppData" = "앱 데이터";
-"catTrash" = "휴지통";
-"catTemp" = "임시 파일";
-"catUser" = "기타 사용자 데이터";
-"catLibrary" = "공유 앱 데이터";
-"catOther" = "기타 폴더";
-"catPurgeable" = "macOS에서 삭제 가능";
-"catSystem" = "시스템 및 기타";
+"categoryApps" = "응용 프로그램";
+"categoryDocuments" = "문서 및 데스크탑";
+"categoryDownloads" = "다운로드";
+"categoryMedia" = "사진, 음악 및 영화";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "메일 및 메시지";
+"categoryDeveloper" = "개발";
+"categoryCaches" = "캐시";
+"categoryAppData" = "앱 데이터";
+"categoryTrash" = "휴지통";
+"categoryTemp" = "임시 파일";
+"categoryUser" = "기타 사용자 데이터";
+"categoryLibrary" = "공유 앱 데이터";
+"categoryOther" = "기타 폴더";
+"categoryPurgeable" = "macOS에서 삭제 가능";
+"categorySystem" = "시스템 및 기타";
 
 /* Explorer, tables and info sheet */
 "columnName" = "이름";
@@ -82,7 +82,7 @@
 "noExtension" = "확장자 없음";
 
 /* Large files */
-"minSize" = "최소 크기";
+"minimumSize" = "최소 크기";
 "fromSize" = "%@ 이상";
 "noFilesFrom" = "%@ 이상인 파일 없음";
 "filesTotal" = "파일 %@개 · 총 %@";
@@ -92,14 +92,14 @@
 "total" = "합계";
 "subfolders" = "하위 폴더";
 "viewCopies" = "앱 사본 보기…";
-"tempT" = "임시 파일";
-"tempTDetail" = "대부분 재시동할 때 비워집니다.";
-"tempC" = "캐시";
-"tempCDetail" = "앱 및 시스템 서비스의 캐시입니다.";
-"tempX" = "앱 사본";
-"tempXDetail" = "macOS가 서명을 확인할 때 만드는 사본입니다.";
-"temp0" = "시스템 서비스";
-"temp0Detail" = "백그라운드 서비스의 데이터입니다.";
+"tempFolderT" = "임시 파일";
+"tempFolderTDetail" = "대부분 재시동할 때 비워집니다.";
+"tempFolderC" = "캐시";
+"tempFolderCDetail" = "앱 및 시스템 서비스의 캐시입니다.";
+"tempFolderX" = "앱 사본";
+"tempFolderXDetail" = "macOS가 서명을 확인할 때 만드는 사본입니다.";
+"tempFolder0" = "시스템 서비스";
+"tempFolder0Detail" = "백그라운드 서비스의 데이터입니다.";
 
 /* Signature copies */
 "noCopies" = "앱 사본 없음";
@@ -197,8 +197,8 @@
 "moveToTrash" = "휴지통으로 이동";
 "lastOpened" = "마지막으로 연 날짜: %@";
 "trashAppFailed" = "“%@” 앱을 이동하지 못했습니다. Finder에서는 암호를 입력하면 이동할 수 있습니다.";
-"statFiles" = "파일";
-"statUnusedApps" = "사용하지 않는 앱";
+"figureFiles" = "파일";
+"figureUnusedApps" = "사용하지 않는 앱";
 "bucketUnder1MB" = "1MB 미만";
 "bucketTo10MB" = "1~10MB";
 "bucketTo100MB" = "10~100MB";
@@ -236,9 +236,9 @@
 "stopReading" = "읽기 중단";
 
 /* Statistics in plain words */
-"statSizesTitle" = "파일은 얼마나 큰가요?";
-"statSizesCaption" = "각 크기 구간이 차지하는 공간과 그 구간에 있는 파일 수입니다. 보통은 작은 파일이 많은 것보다 큰 파일 몇 개가 더 많은 공간을 차지합니다.";
-"statLargeFilesFrom" = "%@ 이상의 큰 파일";
+"sizeClassesTitle" = "파일은 얼마나 큰가요?";
+"sizeClassesCaption" = "각 크기 구간이 차지하는 공간과 그 구간에 있는 파일 수입니다. 보통은 작은 파일이 많은 것보다 큰 파일 몇 개가 더 많은 공간을 차지합니다.";
+"figureLargeFilesFrom" = "%@ 이상의 큰 파일";
 "bucketValue" = "%@
 파일 %@개";
 "settingsSystemNote" = "화면 모드, 언어, 단위는 시스템 설정의 값을 따릅니다. 이 앱만의 언어는 시스템 설정의 일반 › 언어 및 지역 › 응용 프로그램에서 설정할 수 있습니다.";

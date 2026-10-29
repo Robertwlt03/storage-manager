@@ -18,8 +18,11 @@ extension UI {
         var canSelect: (StorageSegment) -> Bool
         var onSelect: ((StorageSegment) -> Void)?
 
-        init(_ volume: VolumeInfo, segments: [StorageSegment], canSelect: @escaping (StorageSegment) -> Bool = { _ in false },
-             onSelect: ((StorageSegment) -> Void)? = nil) {
+        init(
+            _ volume: VolumeInfo, segments: [StorageSegment],
+            canSelect: @escaping (StorageSegment) -> Bool = { _ in false },
+            onSelect: ((StorageSegment) -> Void)? = nil
+        ) {
             self.volume = volume
             self.segments = segments
             self.canSelect = canSelect
@@ -28,9 +31,17 @@ extension UI {
 
         var body: some View {
             VStack(alignment: .leading, spacing: Space.section) {
-                TitleRow(volume.name, subtitle: Loc.availableOf.f(Fmt.bytes(volume.available), Fmt.bytes(volume.total)),
-                         icon: .file(volume.path))
-                let all = withUncoveredSpace + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)]
+                TitleRow(
+                    volume.name,
+                    subtitle: TextKey.availableOf.translated(
+                        with: Format.bytes(volume.available), Format.bytes(volume.total)),
+                    icon: .file(volume.path))
+                let all =
+                    withUncoveredSpace + [
+                        StorageSegment(
+                            id: "free", title: TextKey.freeSpace.translated, bytes: volume.free,
+                            colorIndex: nil)
+                    ]
                 StorageBar(segments: all, total: volume.total)
                 StorageLegend(segments: all, onSelect: onSelect, canSelect: canSelect)
             }
@@ -41,8 +52,11 @@ extension UI {
         private var withUncoveredSpace: [StorageSegment] {
             let rest = volume.used - segments.reduce(0) { $0 + $1.bytes }
             guard rest > 0 else { return segments }
-            return segments + [StorageSegment(id: StorageSegment.usedID, title: Loc.used.s, bytes: rest,
-                                              colorIndex: CategoryKind.system.rawValue)]
+            return segments + [
+                StorageSegment(
+                    id: StorageSegment.usedID, title: TextKey.used.translated, bytes: rest,
+                    colorIndex: CategoryKind.system.rawValue)
+            ]
         }
     }
 }
@@ -62,7 +76,7 @@ private struct StorageBar: View {
                         .frame(width: geo.size.width * CGFloat(max(s.bytes, 0)) / sum)
                         .accessibilityElement()
                         .accessibilityLabel(s.title)
-                        .accessibilityValue(Fmt.bytes(s.bytes))
+                        .accessibilityValue(Format.bytes(s.bytes))
                 }
             }
         }
@@ -79,15 +93,25 @@ private struct StorageLegend: View {
     var canSelect: (StorageSegment) -> Bool
 
     var body: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), alignment: .leading), count: Layout.legendColumns),
-                  alignment: .leading, spacing: Space.s) {
+        LazyVGrid(
+            columns: Array(
+                repeating: GridItem(.flexible(), alignment: .leading), count: Layout.legendColumns),
+            alignment: .leading, spacing: Space.small
+        ) {
             ForEach(entries) { s in
-                let leadsSomewhere = onSelect != nil && s.colorIndex != nil && s.id != StorageSegment.otherID && canSelect(s)
-                Button { onSelect?(s) } label: {
-                    HStack(spacing: Space.s) {
-                        UI.Icon(.dot(s.colorIndex.map { Theme.color($0) } ?? Theme.freeSegment), size: .extraSmall)
+                let leadsSomewhere =
+                    onSelect != nil && s.colorIndex != nil && s.id != StorageSegment.otherID
+                    && canSelect(s)
+                Button {
+                    onSelect?(s)
+                } label: {
+                    HStack(spacing: Space.small) {
+                        UI.Icon(
+                            .dot(s.colorIndex.map { Theme.color($0) } ?? Theme.freeSegment),
+                            size: .extraSmall)
                         Text(s.title).lineLimit(1)
-                        Text(Fmt.bytes(s.bytes)).foregroundStyle(.muted).monospacedDigit().lineLimit(1)
+                        Text(Format.bytes(s.bytes)).foregroundStyle(.muted).monospacedDigit()
+                            .lineLimit(1)
                             .contentTransition(.numericText())
                         if leadsSomewhere { UI.Chevron() }
                     }
@@ -106,8 +130,10 @@ private struct StorageLegend: View {
         let atTheEnd = segments.filter { $0.colorIndex == nil || $0.id == StorageSegment.usedID }
         guard named.count > Layout.legendMax else { return named + atTheEnd }
         let rest = named.dropFirst(Layout.legendMax - 1)
-        let other = StorageSegment(id: StorageSegment.otherID, title: Loc.otherCategories.s, bytes: rest.reduce(0) { $0 + $1.bytes },
-                                   colorIndex: rest.first?.colorIndex)
+        let other = StorageSegment(
+            id: StorageSegment.otherID, title: TextKey.otherCategories.translated,
+            bytes: rest.reduce(0) { $0 + $1.bytes },
+            colorIndex: rest.first?.colorIndex)
         return Array(named.prefix(Layout.legendMax - 1)) + [other] + atTheEnd
     }
 }

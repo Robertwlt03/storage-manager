@@ -42,7 +42,9 @@ final class Node: Identifiable, Hashable {
     func addFile(_ size: Int64, name: () -> String) {
         bytes += size
         fileCount += 1
-        if size >= ScanConfig.keepBytes { files.append(FileItem(path: path + "/" + name(), bytes: size)) } else {
+        if size >= ScanConfig.keepBytes {
+            files.append(FileItem(path: path + "/" + name(), bytes: size))
+        } else {
             restBytes += size
             restCount += 1
         }
@@ -51,7 +53,9 @@ final class Node: Identifiable, Hashable {
     func adopt(_ child: Node) {
         bytes += child.bytes
         fileCount += child.fileCount
-        if child.bytes >= ScanConfig.keepBytes { children.append(child) } else {
+        if child.bytes >= ScanConfig.keepBytes {
+            children.append(child)
+        } else {
             restBytes += child.bytes
             restCount += 1
         }

@@ -3,7 +3,12 @@ import SwiftUI
 extension UI {
     /// One line that informs: an explanation, something in progress, or a result.
     struct Note: View {
-        enum Style { case hint, working, good(symbol: String), warn(symbol: String), bad(symbol: String) }
+        enum Style {
+            case hint, working
+            case good(symbol: String)
+            case warn(symbol: String)
+            case bad(symbol: String)
+        }
         let text: String
         var style = Style.hint
 
@@ -17,7 +22,7 @@ extension UI {
             case .hint:
                 Text(text).textRole(.hint).fixedSize(horizontal: false, vertical: true)
             case .working:
-                HStack(spacing: Space.s) {
+                HStack(spacing: Space.small) {
                     ProgressView().controlSize(.small)
                     Text(text).foregroundStyle(.muted)
                 }
@@ -28,7 +33,8 @@ extension UI {
         }
 
         private func result(_ symbol: String, _ color: Color) -> some View {
-            Label(text, systemImage: symbol).foregroundStyle(color).contentTransition(.symbolEffect(.replace))
+            Label(text, systemImage: symbol).foregroundStyle(color)
+                .contentTransition(.symbolEffect(.replace))
         }
     }
 
@@ -36,7 +42,7 @@ extension UI {
     struct Placeholder: View {
         enum Kind {
             case empty(title: String, symbol: String, detail: String? = nil)
-            case loading(title: Loc, detail: Loc, symbol: String)
+            case loading(title: TextKey, detail: TextKey, symbol: String)
             case notMeasured
             case emptyAfterScan(title: String, symbol: String, detail: String? = nil)
         }
@@ -58,7 +64,9 @@ extension UI {
             case .page:
                 content
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .containerRelativeFrame(.vertical, alignment: .center) { height, _ in height * Layout.fillShare }
+                    .containerRelativeFrame(.vertical, alignment: .center) { height, _ in
+                        height * Layout.fillShare
+                    }
             }
         }
 
@@ -67,21 +75,32 @@ extension UI {
             case .empty(let title, let symbol, let detail):
                 Unavailable(title: title, symbol: symbol, detail: detail) { EmptyView() }
             case .loading(let title, let detail, let symbol):
-                Unavailable(title: title.s, symbol: symbol, detail: detail.s) { ProgressView().controlSize(.small) }
+                Unavailable(title: title.translated, symbol: symbol, detail: detail.translated) {
+                    ProgressView().controlSize(.small)
+                }
             case .notMeasured:
                 notMeasured
             case .emptyAfterScan(let title, let symbol, let detail):
-                if model.scanning || !model.hasData { notMeasured } else {
+                if model.scanning || !model.hasData {
+                    notMeasured
+                } else {
                     Unavailable(title: title, symbol: symbol, detail: detail) { EmptyView() }
                 }
             }
         }
 
         private var notMeasured: some View {
-            Unavailable(title: model.scanning ? Loc.scanningTitle.s : Loc.notMeasuredTitle.s, symbol: Symbols.measure,
-                        detail: model.scanning ? Loc.scanningDetail.s : Loc.notMeasuredDetail.s) {
-                if model.scanning { ProgressView().controlSize(.small) } else {
-                    Button(Loc.scanNow.s) { model.scan() }.appButton(.primary)
+            Unavailable(
+                title: model.scanning
+                    ? TextKey.scanningTitle.translated : TextKey.notMeasuredTitle.translated,
+                symbol: Symbols.measure,
+                detail: model.scanning
+                    ? TextKey.scanningDetail.translated : TextKey.notMeasuredDetail.translated
+            ) {
+                if model.scanning {
+                    ProgressView().controlSize(.small)
+                } else {
+                    Button(TextKey.scanNow.translated) { model.scan() }.appButton(.primary)
                 }
             }
         }

@@ -36,22 +36,22 @@
 "categories" = "Categorias";
 "freeSpace" = "Livre";
 "tempAreaName" = "Área temporária do sistema";
-"catApps" = "Aplicativos";
-"catDocuments" = "Documentos e Mesa";
-"catDownloads" = "Downloads";
-"catMedia" = "Fotos, música e filmes";
-"catICloud" = "iCloud Drive";
-"catMail" = "Mail e Mensagens";
-"catDeveloper" = "Desenvolvimento";
-"catCaches" = "Caches";
-"catAppData" = "Dados de apps";
-"catTrash" = "Lixo";
-"catTemp" = "Arquivos temporários";
-"catUser" = "Outros dados do usuário";
-"catLibrary" = "Dados de apps compartilhados";
-"catOther" = "Outras pastas";
-"catPurgeable" = "Removível pelo macOS";
-"catSystem" = "Sistema e outros";
+"categoryApps" = "Aplicativos";
+"categoryDocuments" = "Documentos e Mesa";
+"categoryDownloads" = "Downloads";
+"categoryMedia" = "Fotos, música e filmes";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail e Mensagens";
+"categoryDeveloper" = "Desenvolvimento";
+"categoryCaches" = "Caches";
+"categoryAppData" = "Dados de apps";
+"categoryTrash" = "Lixo";
+"categoryTemp" = "Arquivos temporários";
+"categoryUser" = "Outros dados do usuário";
+"categoryLibrary" = "Dados de apps compartilhados";
+"categoryOther" = "Outras pastas";
+"categoryPurgeable" = "Removível pelo macOS";
+"categorySystem" = "Sistema e outros";
 
 /* Explorer, tables and info sheet */
 "columnName" = "Nome";
@@ -82,7 +82,7 @@
 "noExtension" = "sem extensão";
 
 /* Large files */
-"minSize" = "Tamanho mínimo";
+"minimumSize" = "Tamanho mínimo";
 "fromSize" = "a partir de %@";
 "noFilesFrom" = "Nenhum arquivo a partir de %@";
 "filesTotal" = "%@ arquivos · %@ no total";
@@ -92,14 +92,14 @@
 "total" = "Total";
 "subfolders" = "Subpastas";
 "viewCopies" = "Ver cópias de apps …";
-"tempT" = "Arquivos temporários";
-"tempTDetail" = "Na maior parte, são esvaziados ao reiniciar.";
-"tempC" = "Caches";
-"tempCDetail" = "Caches de apps e serviços do sistema.";
-"tempX" = "Cópias de apps";
-"tempXDetail" = "Cópias que o macOS cria ao verificar assinaturas.";
-"temp0" = "Serviços do sistema";
-"temp0Detail" = "Dados de serviços em segundo plano.";
+"tempFolderT" = "Arquivos temporários";
+"tempFolderTDetail" = "Na maior parte, são esvaziados ao reiniciar.";
+"tempFolderC" = "Caches";
+"tempFolderCDetail" = "Caches de apps e serviços do sistema.";
+"tempFolderX" = "Cópias de apps";
+"tempFolderXDetail" = "Cópias que o macOS cria ao verificar assinaturas.";
+"tempFolder0" = "Serviços do sistema";
+"tempFolder0Detail" = "Dados de serviços em segundo plano.";
 
 /* Signature copies */
 "noCopies" = "Nenhuma cópia de app";
@@ -197,8 +197,8 @@
 "moveToTrash" = "Mover para o Lixo";
 "lastOpened" = "Última abertura em %@";
 "trashAppFailed" = "Não foi possível mover “%@”. No Finder, isso funciona com a sua senha.";
-"statFiles" = "Arquivos";
-"statUnusedApps" = "apps não usados";
+"figureFiles" = "Arquivos";
+"figureUnusedApps" = "apps não usados";
 "bucketUnder1MB" = "menos de 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "Parar leitura";
 
 /* Statistics in plain words */
-"statSizesTitle" = "Qual é o tamanho dos seus arquivos?";
-"statSizesCaption" = "Quanto espaço cada faixa de tamanho ocupa e quantos arquivos há nela. Poucos arquivos grandes costumam ocupar mais espaço do que muitos pequenos.";
-"statLargeFilesFrom" = "arquivos grandes a partir de %@";
+"sizeClassesTitle" = "Qual é o tamanho dos seus arquivos?";
+"sizeClassesCaption" = "Quanto espaço cada faixa de tamanho ocupa e quantos arquivos há nela. Poucos arquivos grandes costumam ocupar mais espaço do que muitos pequenos.";
+"figureLargeFilesFrom" = "arquivos grandes a partir de %@";
 "bucketValue" = "%@
 %@ arquivos";
 "settingsSystemNote" = "Aparência, idioma e unidades vêm dos Ajustes do Sistema. Um idioma separado para este app é definido lá, em Geral › Idioma e Região › Apps.";

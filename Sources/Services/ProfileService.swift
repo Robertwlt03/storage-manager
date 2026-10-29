@@ -7,8 +7,10 @@ enum ProfileService {
 
     static func profile(_ path: String) -> FolderProfile {
         var r = FolderProfile()
-        var bytes: [String: Int64] = [:], counts: [String: Int] = [:]
-        var oldest = Int.max, newest = 0
+        var bytes: [String: Int64] = [:]
+        var counts: [String: Int] = [:]
+        var oldest = Int.max
+        var newest = 0
         var counter = 0
 
         FTS.walk(path) { ent in
@@ -23,7 +25,7 @@ enum ProfileService {
                 guard let st = ent.pointee.fts_statp?.pointee else { return true }
                 r.files += 1
                 let ext = (FTS.name(ent) as NSString).pathExtension.lowercased()
-                let key = ext.isEmpty ? Loc.noExtension.s : "." + ext
+                let key = ext.isEmpty ? TextKey.noExtension.translated : "." + ext
                 bytes[key, default: 0] += FTS.allocated(st)
                 counts[key, default: 0] += 1
                 oldest = min(oldest, st.st_mtimespec.tv_sec)
@@ -38,7 +40,8 @@ enum ProfileService {
             r.newest = Date(timeIntervalSince1970: TimeInterval(newest))
         }
         r.folders = max(0, r.folders - 1)  // without the folder itself
-        r.types = bytes.sorted { $0.value > $1.value }.prefix(topTypes).map { ($0.key, $0.value, counts[$0.key] ?? 0) }
+        r.types = bytes.sorted { $0.value > $1.value }.prefix(topTypes)
+            .map { ($0.key, $0.value, counts[$0.key] ?? 0) }
         return r
     }
 }

@@ -36,22 +36,22 @@
 "categories" = "Категорії";
 "freeSpace" = "Вільно";
 "tempAreaName" = "Тимчасова системна область";
-"catApps" = "Програми";
-"catDocuments" = "Документи й робочий стіл";
-"catDownloads" = "Завантаження";
-"catMedia" = "Фото, музика й фільми";
-"catICloud" = "iCloud Drive";
-"catMail" = "Пошта й повідомлення";
-"catDeveloper" = "Розробка";
-"catCaches" = "Кеші";
-"catAppData" = "Дані програм";
-"catTrash" = "Смітник";
-"catTemp" = "Тимчасові файли";
-"catUser" = "Інші дані користувача";
-"catLibrary" = "Спільні дані програм";
-"catOther" = "Інші папки";
-"catPurgeable" = "Може бути видалено macOS";
-"catSystem" = "Система й інше";
+"categoryApps" = "Програми";
+"categoryDocuments" = "Документи й робочий стіл";
+"categoryDownloads" = "Завантаження";
+"categoryMedia" = "Фото, музика й фільми";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Пошта й повідомлення";
+"categoryDeveloper" = "Розробка";
+"categoryCaches" = "Кеші";
+"categoryAppData" = "Дані програм";
+"categoryTrash" = "Смітник";
+"categoryTemp" = "Тимчасові файли";
+"categoryUser" = "Інші дані користувача";
+"categoryLibrary" = "Спільні дані програм";
+"categoryOther" = "Інші папки";
+"categoryPurgeable" = "Може бути видалено macOS";
+"categorySystem" = "Система й інше";
 
 /* Explorer, tables and info sheet */
 "columnName" = "Ім’я";
@@ -82,7 +82,7 @@
 "noExtension" = "без розширення";
 
 /* Large files */
-"minSize" = "Мінімальний розмір";
+"minimumSize" = "Мінімальний розмір";
 "fromSize" = "від %@";
 "noFilesFrom" = "Немає файлів від %@";
 "filesTotal" = "Файлів: %@ · разом %@";
@@ -92,14 +92,14 @@
 "total" = "Разом";
 "subfolders" = "Вкладені папки";
 "viewCopies" = "Показати копії програм …";
-"tempT" = "Тимчасові файли";
-"tempTDetail" = "Здебільшого очищаються під час перезапуску.";
-"tempC" = "Кеші";
-"tempCDetail" = "Кеші програм і системних служб.";
-"tempX" = "Копії програм";
-"tempXDetail" = "Копії, які macOS створює під час перевірки підписів.";
-"temp0" = "Системні служби";
-"temp0Detail" = "Дані фонових служб.";
+"tempFolderT" = "Тимчасові файли";
+"tempFolderTDetail" = "Здебільшого очищаються під час перезапуску.";
+"tempFolderC" = "Кеші";
+"tempFolderCDetail" = "Кеші програм і системних служб.";
+"tempFolderX" = "Копії програм";
+"tempFolderXDetail" = "Копії, які macOS створює під час перевірки підписів.";
+"tempFolder0" = "Системні служби";
+"tempFolder0Detail" = "Дані фонових служб.";
 
 /* Signature copies */
 "noCopies" = "Немає копій програм";
@@ -197,8 +197,8 @@
 "moveToTrash" = "Перемістити до Смітника";
 "lastOpened" = "Востаннє відкрито %@";
 "trashAppFailed" = "Не вдалося перемістити «%@». У Finder це вдасться після введення пароля.";
-"statFiles" = "Файли";
-"statUnusedApps" = "невикористовувані програми";
+"figureFiles" = "Файли";
+"figureUnusedApps" = "невикористовувані програми";
 "bucketUnder1MB" = "менше ніж 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "Зупинити читання";
 
 /* Statistics in plain words */
-"statSizesTitle" = "Наскільки великі ваші файли?";
-"statSizesCaption" = "Скільки місця займає кожен клас розміру і скільки файлів у ньому. Кілька великих файлів зазвичай займають більше місця, ніж багато маленьких.";
-"statLargeFilesFrom" = "великі файли від %@";
+"sizeClassesTitle" = "Наскільки великі ваші файли?";
+"sizeClassesCaption" = "Скільки місця займає кожен клас розміру і скільки файлів у ньому. Кілька великих файлів зазвичай займають більше місця, ніж багато маленьких.";
+"figureLargeFilesFrom" = "великі файли від %@";
 "bucketValue" = "%@
 Файлів: %@";
 "settingsSystemNote" = "Вигляд, мову й одиниці програма бере із Системних параметрів. Окрему мову для цієї програми там задають у розділі «Загальні › Мова та регіон › Програми».";

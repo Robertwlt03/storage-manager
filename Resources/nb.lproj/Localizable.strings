@@ -36,22 +36,22 @@
 "categories" = "Kategorier";
 "freeSpace" = "Ledig";
 "tempAreaName" = "Midlertidig systemområde";
-"catApps" = "Programmer";
-"catDocuments" = "Dokumenter og Skrivebord";
-"catDownloads" = "Nedlastinger";
-"catMedia" = "Bilder, musikk og filmer";
-"catICloud" = "iCloud Drive";
-"catMail" = "Mail og meldinger";
-"catDeveloper" = "Utvikling";
-"catCaches" = "Hurtigbuffere";
-"catAppData" = "Appdata";
-"catTrash" = "Papirkurv";
-"catTemp" = "Midlertidige filer";
-"catUser" = "Andre brukerdata";
-"catLibrary" = "Delte appdata";
-"catOther" = "Andre mapper";
-"catPurgeable" = "Kan ryddes av macOS";
-"catSystem" = "System og annet";
+"categoryApps" = "Programmer";
+"categoryDocuments" = "Dokumenter og Skrivebord";
+"categoryDownloads" = "Nedlastinger";
+"categoryMedia" = "Bilder, musikk og filmer";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail og meldinger";
+"categoryDeveloper" = "Utvikling";
+"categoryCaches" = "Hurtigbuffere";
+"categoryAppData" = "Appdata";
+"categoryTrash" = "Papirkurv";
+"categoryTemp" = "Midlertidige filer";
+"categoryUser" = "Andre brukerdata";
+"categoryLibrary" = "Delte appdata";
+"categoryOther" = "Andre mapper";
+"categoryPurgeable" = "Kan ryddes av macOS";
+"categorySystem" = "System og annet";
 
 /* Explorer, tables and info sheet */
 "columnName" = "Navn";
@@ -82,7 +82,7 @@
 "noExtension" = "uten filtype";
 
 /* Large files */
-"minSize" = "Minstestørrelse";
+"minimumSize" = "Minstestørrelse";
 "fromSize" = "fra %@";
 "noFilesFrom" = "Ingen filer fra %@";
 "filesTotal" = "%@ filer · %@ totalt";
@@ -92,14 +92,14 @@
 "total" = "Totalt";
 "subfolders" = "Undermapper";
 "viewCopies" = "Vis appkopier …";
-"tempT" = "Midlertidige filer";
-"tempTDetail" = "Tømmes stort sett ved omstart.";
-"tempC" = "Hurtigbuffere";
-"tempCDetail" = "Hurtigbuffere fra apper og systemtjenester.";
-"tempX" = "Appkopier";
-"tempXDetail" = "Kopier som macOS oppretter når signaturer kontrolleres.";
-"temp0" = "Systemtjenester";
-"temp0Detail" = "Data fra bakgrunnstjenester.";
+"tempFolderT" = "Midlertidige filer";
+"tempFolderTDetail" = "Tømmes stort sett ved omstart.";
+"tempFolderC" = "Hurtigbuffere";
+"tempFolderCDetail" = "Hurtigbuffere fra apper og systemtjenester.";
+"tempFolderX" = "Appkopier";
+"tempFolderXDetail" = "Kopier som macOS oppretter når signaturer kontrolleres.";
+"tempFolder0" = "Systemtjenester";
+"tempFolder0Detail" = "Data fra bakgrunnstjenester.";
 
 /* Signature copies */
 "noCopies" = "Ingen appkopier";
@@ -197,8 +197,8 @@
 "moveToTrash" = "Flytt til papirkurven";
 "lastOpened" = "Sist åpnet %@";
 "trashAppFailed" = "«%@» kunne ikke flyttes. I Finder fungerer det med passordet ditt.";
-"statFiles" = "Filer";
-"statUnusedApps" = "ubrukte apper";
+"figureFiles" = "Filer";
+"figureUnusedApps" = "ubrukte apper";
 "bucketUnder1MB" = "under 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "Stopp opplesing";
 
 /* Statistics in plain words */
-"statSizesTitle" = "Hvor store er filene dine?";
-"statSizesCaption" = "Hvor mye plass hver størrelsesklasse tar, og hvor mange filer som ligger i den. Noen få store filer tar vanligvis mer plass enn mange små.";
-"statLargeFilesFrom" = "store filer fra %@";
+"sizeClassesTitle" = "Hvor store er filene dine?";
+"sizeClassesCaption" = "Hvor mye plass hver størrelsesklasse tar, og hvor mange filer som ligger i den. Noen få store filer tar vanligvis mer plass enn mange små.";
+"figureLargeFilesFrom" = "store filer fra %@";
 "bucketValue" = "%@
 %@ filer";
 "settingsSystemNote" = "Utseende, språk og enheter henter appen fra Systeminnstillinger. Et eget språk for denne appen stiller du inn der under Generelt › Språk og region › Programmer.";

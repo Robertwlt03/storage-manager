@@ -8,7 +8,9 @@ enum SearchService {
 
         func walk(_ n: Node) {
             for child in n.children {
-                if scope != .files && child.name.localizedStandardContains(q) { hits.append(.folder(child)) }
+                if scope != .files && child.name.localizedStandardContains(q) {
+                    hits.append(.folder(child))
+                }
                 walk(child)
             }
             if scope != .folders {

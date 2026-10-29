@@ -2,7 +2,10 @@ import Foundation
 
 /// One row in a folder table or search result: a folder, a file or the folded rest of a folder.
 struct Entry: Identifiable {
-    enum Kind { case folder(Node), file, rest }
+    enum Kind {
+        case folder(Node)
+        case file, rest
+    }
 
     let id: String
     let name: String
@@ -15,7 +18,9 @@ struct Entry: Identifiable {
     var isFolder: Bool { node != nil }
 
     static func folder(_ n: Node) -> Entry {
-        Entry(id: n.path, name: n.displayName, path: n.path, bytes: n.bytes, items: n.fileCount, kind: .folder(n))
+        Entry(
+            id: n.path, name: n.displayName, path: n.path, bytes: n.bytes, items: n.fileCount,
+            kind: .folder(n))
     }
 
     static func file(_ f: FileItem) -> Entry {
@@ -23,8 +28,10 @@ struct Entry: Identifiable {
     }
 
     static func rest(of n: Node) -> Entry {
-        Entry(id: n.path + "/\u{0}rest", name: Loc.smallerItems.f(Fmt.count(n.restCount)), path: nil,
-              bytes: n.restBytes, items: n.restCount, kind: .rest)
+        Entry(
+            id: n.path + "/\u{0}rest",
+            name: TextKey.smallerItems.translated(with: Format.count(n.restCount)), path: nil,
+            bytes: n.restBytes, items: n.restCount, kind: .rest)
     }
 
     /// Everything directly inside a folder.

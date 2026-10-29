@@ -15,15 +15,28 @@ struct CopyGroupCard: View {
     var body: some View {
         UI.Card {
             HStack {
-                UI.TitleRow(group.appName, subtitle: group.bundleID, icon: .file(group.appPath ?? ""))
+                UI.TitleRow(
+                    group.appName, subtitle: group.bundleID, icon: .file(group.appPath ?? ""))
                 Spacer()
-                running ? UI.Note(Loc.running.s, .warn(symbol: Symbols.running)) : UI.Note(Loc.stopped.s, .good(symbol: Symbols.stopped))
+                running
+                    ? UI.Note(TextKey.running.translated, .warn(symbol: Symbols.running))
+                    : UI.Note(TextKey.stopped.translated, .good(symbol: Symbols.stopped))
             }
             .padding(.vertical, Space.row)
             Divider()
             UI.Fields(fields)
-            if let freed { Divider(); UI.Note(Loc.freed.f(Fmt.bytes(freed)), .good(symbol: Symbols.success)).padding(.vertical, Space.row) }
-            if let error { Divider(); UI.Note(error, .bad(symbol: Symbols.warning)).padding(.vertical, Space.row) }
+            if let freed {
+                Divider()
+                UI.Note(
+                    TextKey.freed.translated(with: Format.bytes(freed)),
+                    .good(symbol: Symbols.success)
+                )
+                .padding(.vertical, Space.row)
+            }
+            if let error {
+                Divider()
+                UI.Note(error, .bad(symbol: Symbols.warning)).padding(.vertical, Space.row)
+            }
             Divider()
             actions.padding(.vertical, Space.row)
         }
@@ -32,34 +45,57 @@ struct CopyGroupCard: View {
             let g = group
             details = await Task.detached(priority: .utility) { CopyService.details(g) }.value
         }
-        .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didLaunchApplicationNotification)) { _ in refreshRunning() }
-        .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didTerminateApplicationNotification)) { _ in refreshRunning() }
-        .confirmationDialog(Loc.deleteTitle.f(Fmt.count(details?.count ?? 0), group.appName), isPresented: $confirming) {
-            Button(Loc.deleteForever.s, role: .destructive) { Task { await delete() } }
-            Button(Loc.cancel.s, role: .cancel) {}
+        .onReceive(
+            NSWorkspace.shared.notificationCenter.publisher(
+                for: NSWorkspace.didLaunchApplicationNotification)
+        ) { _ in refreshRunning() }
+        .onReceive(
+            NSWorkspace.shared.notificationCenter.publisher(
+                for: NSWorkspace.didTerminateApplicationNotification)
+        ) { _ in refreshRunning() }
+        .confirmationDialog(
+            TextKey.deleteTitle.translated(with: Format.count(details?.count ?? 0), group.appName),
+            isPresented: $confirming
+        ) {
+            Button(TextKey.deleteForever.translated, role: .destructive) { Task { await delete() } }
+            Button(TextKey.cancel.translated, role: .cancel) {}
         } message: {
-            Text(Loc.deleteMessage.s)
+            Text(TextKey.deleteMessage.translated)
         }
     }
 
     private var fields: [UI.Field?] {
-        var items: [UI.Field?] = [UI.Field(.copiesLabel, details.map { Fmt.count($0.count) }),
-                                   UI.Field(.countedSize, Fmt.bytes(group.node.bytes)),
-                                   UI.Field(.installedVersion, group.installedVersion ?? Loc.notFound.s)]
+        var items: [UI.Field?] = [
+            UI.Field(.copiesLabel, details.map { Format.count($0.count) }),
+            UI.Field(.countedSize, Format.bytes(group.node.bytes)),
+            UI.Field(.installedVersion, group.installedVersion ?? TextKey.notFound.translated),
+        ]
         for v in details?.versions ?? [] {
-            let state = v.version == group.installedVersion ? Loc.current.s : Loc.old.s
-            items.append(UI.Field(Loc.versionLabel.f(v.version), Fmt.joined(Fmt.copies(v.count), state)))
+            let state =
+                v.version == group.installedVersion
+                ? TextKey.current.translated : TextKey.old.translated
+            items.append(
+                UI.Field(
+                    TextKey.versionLabel.translated(with: v.version),
+                    Format.joined(Format.copies(v.count), state)))
         }
-        for d in details?.days ?? [] { items.append(UI.Field(Loc.createdOn.f(Fmt.day(d.day)), Fmt.copies(d.count))) }
+        for d in details?.days ?? [] {
+            items.append(
+                UI.Field(
+                    TextKey.createdOn.translated(with: Format.day(d.day)), Format.copies(d.count)))
+        }
         return items
     }
 
     private var actions: some View {
         HStack {
-            if running { Text(Loc.quitToDelete.f(group.appName)).foregroundStyle(.warn) }
+            if running {
+                Text(TextKey.quitToDelete.translated(with: group.appName)).foregroundStyle(.warn)
+            }
             Spacer()
-            UI.ActionButton(Loc.openInExplorer.s) { model.open(group.node) }
-            UI.ActionButton(Loc.deleteAll.s, role: .destructive) { confirming = true }.disabled(running || deleting || details == nil)
+            UI.ActionButton(TextKey.openInExplorer.translated) { model.open(group.node) }
+            UI.ActionButton(TextKey.deleteAll.translated, role: .destructive) { confirming = true }
+                .disabled(running || deleting || details == nil)
         }
     }
 
@@ -70,7 +106,9 @@ struct CopyGroupCard: View {
         guard !running else { return }
         deleting = true
         error = nil
-        do { freed = try await model.delete(group) } catch { self.error = Loc.deleteError.f(error.localizedDescription) }
+        do { freed = try await model.delete(group) } catch {
+            self.error = TextKey.deleteError.translated(with: error.localizedDescription)
+        }
         deleting = false
     }
 }

@@ -39,5 +39,6 @@ enum WindowID {
 }
 
 enum SystemLinks {
-    static let fullDiskAccess = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!
+    static let fullDiskAccess = URL(
+        string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles")!
 }

@@ -36,22 +36,22 @@
 "categories" = "类别";
 "freeSpace" = "可用";
 "tempAreaName" = "临时系统区域";
-"catApps" = "应用程序";
-"catDocuments" = "文稿与桌面";
-"catDownloads" = "下载";
-"catMedia" = "照片、音乐与影片";
-"catICloud" = "iCloud Drive";
-"catMail" = "邮件与信息";
-"catDeveloper" = "开发";
-"catCaches" = "缓存";
-"catAppData" = "App 数据";
-"catTrash" = "废纸篓";
-"catTemp" = "临时文件";
-"catUser" = "其他用户数据";
-"catLibrary" = "共享 App 数据";
-"catOther" = "其他文件夹";
-"catPurgeable" = "可由 macOS 清除";
-"catSystem" = "系统与其他";
+"categoryApps" = "应用程序";
+"categoryDocuments" = "文稿与桌面";
+"categoryDownloads" = "下载";
+"categoryMedia" = "照片、音乐与影片";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "邮件与信息";
+"categoryDeveloper" = "开发";
+"categoryCaches" = "缓存";
+"categoryAppData" = "App 数据";
+"categoryTrash" = "废纸篓";
+"categoryTemp" = "临时文件";
+"categoryUser" = "其他用户数据";
+"categoryLibrary" = "共享 App 数据";
+"categoryOther" = "其他文件夹";
+"categoryPurgeable" = "可由 macOS 清除";
+"categorySystem" = "系统与其他";
 
 /* Explorer, tables and info sheet */
 "columnName" = "名称";
@@ -82,7 +82,7 @@
 "noExtension" = "无扩展名";
 
 /* Large files */
-"minSize" = "最小大小";
+"minimumSize" = "最小大小";
 "fromSize" = "%@ 起";
 "noFilesFrom" = "没有 %@ 以上的文件";
 "filesTotal" = "%@ 个文件 · 共 %@";
@@ -92,14 +92,14 @@
 "total" = "总计";
 "subfolders" = "子文件夹";
 "viewCopies" = "查看 App 副本…";
-"tempT" = "临时文件";
-"tempTDetail" = "大部分会在重新启动时清空。";
-"tempC" = "缓存";
-"tempCDetail" = "App 和系统服务的缓存。";
-"tempX" = "App 副本";
-"tempXDetail" = "macOS 在检查签名时创建的副本。";
-"temp0" = "系统服务";
-"temp0Detail" = "后台服务的数据。";
+"tempFolderT" = "临时文件";
+"tempFolderTDetail" = "大部分会在重新启动时清空。";
+"tempFolderC" = "缓存";
+"tempFolderCDetail" = "App 和系统服务的缓存。";
+"tempFolderX" = "App 副本";
+"tempFolderXDetail" = "macOS 在检查签名时创建的副本。";
+"tempFolder0" = "系统服务";
+"tempFolder0Detail" = "后台服务的数据。";
 
 /* Signature copies */
 "noCopies" = "没有 App 副本";
@@ -197,8 +197,8 @@
 "moveToTrash" = "移到废纸篓";
 "lastOpened" = "上次打开时间：%@";
 "trashAppFailed" = "无法移动“%@”。在访达中，输入你的密码即可移动。";
-"statFiles" = "文件";
-"statUnusedApps" = "未使用的 App";
+"figureFiles" = "文件";
+"figureUnusedApps" = "未使用的 App";
 "bucketUnder1MB" = "小于 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "停止朗读";
 
 /* Statistics in plain words */
-"statSizesTitle" = "你的文件有多大？";
-"statSizesCaption" = "每个大小区间占用多少空间，其中有多少个文件。通常，少数大文件比许多小文件占用的空间更多。";
-"statLargeFilesFrom" = "%@ 以上的大文件";
+"sizeClassesTitle" = "你的文件有多大？";
+"sizeClassesCaption" = "每个大小区间占用多少空间，其中有多少个文件。通常，少数大文件比许多小文件占用的空间更多。";
+"figureLargeFilesFrom" = "%@ 以上的大文件";
 "bucketValue" = "%@
 %@ 个文件";
 "settingsSystemNote" = "外观、语言和单位由“系统设置”决定。你可以在“系统设置”的“通用 › 语言与地区 › 应用程序”中，为本 App 单独设置语言。";

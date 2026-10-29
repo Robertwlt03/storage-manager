@@ -5,7 +5,9 @@ enum ScanService {
     struct Progress {
         var files = 0
         var bytes: Int64 = 0
-        static func + (a: Progress, b: Progress) -> Progress { Progress(files: a.files + b.files, bytes: a.bytes + b.bytes) }
+        static func + (a: Progress, b: Progress) -> Progress {
+            Progress(files: a.files + b.files, bytes: a.bytes + b.bytes)
+        }
     }
 
     struct Result {
@@ -16,10 +18,13 @@ enum ScanService {
     /// Roots measured by "Rescan": the default areas plus the folders from the settings, without duplicates
     /// and without folders that lie inside another root (nothing counts twice).
     static func defaultRoots() -> [String] {
-        let all = (Paths.defaultScanRoots + AppSettings.extraFolders).map(Paths.real).filter(Paths.exists)
-        return all.enumerated().filter { i, p in
-            all.firstIndex(of: p) == i && !all.contains { $0 != p && p.hasPrefix($0 + "/") }
-        }.map(\.element)
+        let all = (Paths.defaultScanRoots + AppSettings.extraFolders).map(Paths.real)
+            .filter(Paths.exists)
+        return all.enumerated()
+            .filter { i, p in
+                all.firstIndex(of: p) == i && !all.contains { $0 != p && p.hasPrefix($0 + "/") }
+            }
+            .map(\.element)
     }
 
     /// Runs on the caller's thread; call it from a low-priority task. Nil when cancelled.

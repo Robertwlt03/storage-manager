@@ -20,10 +20,12 @@ extension UI {
     struct NumberCell: View {
         let text: String
 
-        init(bytes: Int64) { text = Fmt.bytes(bytes) }
-        init(count: Int) { text = Fmt.count(count) }
+        init(bytes: Int64) { text = Format.bytes(bytes) }
+        init(count: Int) { text = Format.count(count) }
 
-        var body: some View { Text(text).monospacedDigit().frame(maxWidth: .infinity, alignment: .trailing) }
+        var body: some View {
+            Text(text).monospacedDigit().frame(maxWidth: .infinity, alignment: .trailing)
+        }
     }
 
     /// A share of a whole, as a bar with the percentage.
@@ -33,9 +35,10 @@ extension UI {
         init(_ part: Int64, of whole: Int64) { fraction = Double(part) / Double(max(whole, 1)) }
 
         var body: some View {
-            HStack(spacing: Space.s) {
+            HStack(spacing: Space.small) {
                 ProgressView(value: min(max(fraction, 0), 1)).progressViewStyle(.linear)
-                Text(Fmt.percent(fraction)).monospacedDigit().frame(width: Layout.percentWidth, alignment: .trailing)
+                Text(Format.percent(fraction)).monospacedDigit()
+                    .frame(width: Layout.percentWidth, alignment: .trailing)
             }
         }
     }

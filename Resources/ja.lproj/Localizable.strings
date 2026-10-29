@@ -36,22 +36,22 @@
 "categories" = "カテゴリ";
 "freeSpace" = "空き";
 "tempAreaName" = "一時システム領域";
-"catApps" = "アプリケーション";
-"catDocuments" = "書類とデスクトップ";
-"catDownloads" = "ダウンロード";
-"catMedia" = "写真、ミュージック、ムービー";
-"catICloud" = "iCloud Drive";
-"catMail" = "メールとメッセージ";
-"catDeveloper" = "開発";
-"catCaches" = "キャッシュ";
-"catAppData" = "Appのデータ";
-"catTrash" = "ゴミ箱";
-"catTemp" = "一時ファイル";
-"catUser" = "その他のユーザデータ";
-"catLibrary" = "共有のAppデータ";
-"catOther" = "その他のフォルダ";
-"catPurgeable" = "macOSが削除可能";
-"catSystem" = "システムとその他";
+"categoryApps" = "アプリケーション";
+"categoryDocuments" = "書類とデスクトップ";
+"categoryDownloads" = "ダウンロード";
+"categoryMedia" = "写真、ミュージック、ムービー";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "メールとメッセージ";
+"categoryDeveloper" = "開発";
+"categoryCaches" = "キャッシュ";
+"categoryAppData" = "Appのデータ";
+"categoryTrash" = "ゴミ箱";
+"categoryTemp" = "一時ファイル";
+"categoryUser" = "その他のユーザデータ";
+"categoryLibrary" = "共有のAppデータ";
+"categoryOther" = "その他のフォルダ";
+"categoryPurgeable" = "macOSが削除可能";
+"categorySystem" = "システムとその他";
 
 /* Explorer, tables and info sheet */
 "columnName" = "名前";
@@ -82,7 +82,7 @@
 "noExtension" = "拡張子なし";
 
 /* Large files */
-"minSize" = "最小サイズ";
+"minimumSize" = "最小サイズ";
 "fromSize" = "%@以上";
 "noFilesFrom" = "%@以上のファイルはありません";
 "filesTotal" = "%@個のファイル · 合計%@";
@@ -92,14 +92,14 @@
 "total" = "合計";
 "subfolders" = "サブフォルダ";
 "viewCopies" = "Appのコピーを表示…";
-"tempT" = "一時ファイル";
-"tempTDetail" = "多くは再起動時に空になります。";
-"tempC" = "キャッシュ";
-"tempCDetail" = "Appおよびシステムサービスのキャッシュです。";
-"tempX" = "Appのコピー";
-"tempXDetail" = "macOSが署名を確認するときに作成するコピーです。";
-"temp0" = "システムサービス";
-"temp0Detail" = "バックグラウンドサービスのデータです。";
+"tempFolderT" = "一時ファイル";
+"tempFolderTDetail" = "多くは再起動時に空になります。";
+"tempFolderC" = "キャッシュ";
+"tempFolderCDetail" = "Appおよびシステムサービスのキャッシュです。";
+"tempFolderX" = "Appのコピー";
+"tempFolderXDetail" = "macOSが署名を確認するときに作成するコピーです。";
+"tempFolder0" = "システムサービス";
+"tempFolder0Detail" = "バックグラウンドサービスのデータです。";
 
 /* Signature copies */
 "noCopies" = "Appのコピーはありません";
@@ -197,8 +197,8 @@
 "moveToTrash" = "ゴミ箱に入れる";
 "lastOpened" = "最後に開いた日: %@";
 "trashAppFailed" = "「%@」を移動できませんでした。Finderでは、パスワードを入力すれば移動できます。";
-"statFiles" = "ファイル";
-"statUnusedApps" = "未使用のApp";
+"figureFiles" = "ファイル";
+"figureUnusedApps" = "未使用のApp";
 "bucketUnder1MB" = "1 MB未満";
 "bucketTo10MB" = "1～10 MB";
 "bucketTo100MB" = "10～100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "読み上げを停止";
 
 /* Statistics in plain words */
-"statSizesTitle" = "ファイルの大きさはどのくらいですか?";
-"statSizesCaption" = "各サイズ区分が使っている容量と、その区分に含まれるファイルの数です。多くの場合、小さなファイルがたくさんあるより、大きなファイルが少しあるほうが多くの容量を使います。";
-"statLargeFilesFrom" = "%@以上の大きなファイル";
+"sizeClassesTitle" = "ファイルの大きさはどのくらいですか?";
+"sizeClassesCaption" = "各サイズ区分が使っている容量と、その区分に含まれるファイルの数です。多くの場合、小さなファイルがたくさんあるより、大きなファイルが少しあるほうが多くの容量を使います。";
+"figureLargeFilesFrom" = "%@以上の大きなファイル";
 "bucketValue" = "%@
 %@個のファイル";
 "settingsSystemNote" = "外観、言語、単位はシステム設定の内容が使われます。このApp専用の言語は、システム設定の「一般 › 言語と地域 › アプリケーション」で設定できます。";

@@ -30,13 +30,17 @@ struct SidebarList: View {
         @Bindable var model = model
         List(selection: $model.pane) {
             Section { ForEach(Pane.main, id: \.self, content: row) }
-            Section(Loc.sectionTidy.s) { ForEach(Pane.tidy, id: \.self, content: row) }
-            Section(Loc.sectionSystem.s) { ForEach(Pane.system, id: \.self, content: row) }
+            Section(TextKey.sectionTidy.translated) { ForEach(Pane.tidy, id: \.self, content: row) }
+            Section(TextKey.sectionSystem.translated) {
+                ForEach(Pane.system, id: \.self, content: row)
+            }
             // The startup disk is the overview; only other volumes (USB sticks, external drives) get their own page.
             let external = model.volumes.filter { !$0.isRoot }
             if !external.isEmpty {
-                Section(Loc.sectionVolumes.s) {
-                    ForEach(external) { v in Label(v.name, systemImage: v.symbol).tag(Pane.volume(v.path)) }
+                Section(TextKey.sectionVolumes.translated) {
+                    ForEach(external) { v in
+                        Label(v.name, systemImage: v.symbol).tag(Pane.volume(v.path))
+                    }
                 }
             }
         }
@@ -48,12 +52,14 @@ struct SidebarList: View {
 
     /// The apps row shows how many apps were not opened for a while, as a gentle reminder.
     private func row(_ pane: Pane) -> some View {
-        Label(pane.title.s, systemImage: pane.symbol)
-            .badge(pane == .apps ? model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count : 0)
+        Label(pane.title.translated, systemImage: pane.symbol)
+            .badge(
+                pane == .apps
+                    ? model.apps.filter { AppUsageService.isUnused($0, days: unusedDays) }.count : 0
+            )
             .tag(pane)
     }
 }
-
 
 /// The button that shows and hides the sidebar, placed like Apple's own: at the open sidebar's trailing edge, next to
 /// the window buttons while it is closed.
@@ -61,9 +67,14 @@ struct SidebarToggle: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        let title = model.sidebarShown ? Loc.hideSidebar.s : Loc.showSidebar.s
-        Button { model.toggleSidebar() } label: { Label(title, systemImage: Symbols.sidebar) }
-            .help(title)
+        let title =
+            model.sidebarShown ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
+        Button {
+            model.toggleSidebar()
+        } label: {
+            Label(title, systemImage: Symbols.sidebar)
+        }
+        .help(title)
     }
 }
 
@@ -79,7 +90,7 @@ struct SidebarOverlay: View {
                 .scrollContentBackground(.hidden)
                 .frame(width: Layout.sidebarIdeal)
                 .surface()
-                .padding(Space.s)
+                .padding(Space.small)
         }
     }
 }

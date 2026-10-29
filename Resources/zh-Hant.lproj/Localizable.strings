@@ -36,22 +36,22 @@
 "categories" = "類別";
 "freeSpace" = "可用";
 "tempAreaName" = "暫存系統區域";
-"catApps" = "應用程式";
-"catDocuments" = "文件與桌面";
-"catDownloads" = "下載項目";
-"catMedia" = "照片、音樂與影片";
-"catICloud" = "iCloud Drive";
-"catMail" = "郵件與訊息";
-"catDeveloper" = "開發";
-"catCaches" = "快取";
-"catAppData" = "App 資料";
-"catTrash" = "垃圾桶";
-"catTemp" = "暫存檔案";
-"catUser" = "其他使用者資料";
-"catLibrary" = "共享 App 資料";
-"catOther" = "其他檔案夾";
-"catPurgeable" = "可由 macOS 清除";
-"catSystem" = "系統與其他";
+"categoryApps" = "應用程式";
+"categoryDocuments" = "文件與桌面";
+"categoryDownloads" = "下載項目";
+"categoryMedia" = "照片、音樂與影片";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "郵件與訊息";
+"categoryDeveloper" = "開發";
+"categoryCaches" = "快取";
+"categoryAppData" = "App 資料";
+"categoryTrash" = "垃圾桶";
+"categoryTemp" = "暫存檔案";
+"categoryUser" = "其他使用者資料";
+"categoryLibrary" = "共享 App 資料";
+"categoryOther" = "其他檔案夾";
+"categoryPurgeable" = "可由 macOS 清除";
+"categorySystem" = "系統與其他";
 
 /* Explorer, tables and info sheet */
 "columnName" = "名稱";
@@ -82,7 +82,7 @@
 "noExtension" = "無副檔名";
 
 /* Large files */
-"minSize" = "最小大小";
+"minimumSize" = "最小大小";
 "fromSize" = "%@ 起";
 "noFilesFrom" = "沒有 %@ 以上的檔案";
 "filesTotal" = "%@ 個檔案 · 共 %@";
@@ -92,14 +92,14 @@
 "total" = "總計";
 "subfolders" = "子檔案夾";
 "viewCopies" = "檢視 App 拷貝⋯";
-"tempT" = "暫存檔案";
-"tempTDetail" = "大部分會在重新啟動時清空。";
-"tempC" = "快取";
-"tempCDetail" = "App 和系統服務的快取。";
-"tempX" = "App 拷貝";
-"tempXDetail" = "macOS 在檢查簽名時建立的拷貝。";
-"temp0" = "系統服務";
-"temp0Detail" = "背景服務的資料。";
+"tempFolderT" = "暫存檔案";
+"tempFolderTDetail" = "大部分會在重新啟動時清空。";
+"tempFolderC" = "快取";
+"tempFolderCDetail" = "App 和系統服務的快取。";
+"tempFolderX" = "App 拷貝";
+"tempFolderXDetail" = "macOS 在檢查簽名時建立的拷貝。";
+"tempFolder0" = "系統服務";
+"tempFolder0Detail" = "背景服務的資料。";
 
 /* Signature copies */
 "noCopies" = "沒有 App 拷貝";
@@ -197,8 +197,8 @@
 "moveToTrash" = "移到垃圾桶";
 "lastOpened" = "上次打開時間：%@";
 "trashAppFailed" = "無法移動「%@」。在 Finder 中，輸入你的密碼即可移動。";
-"statFiles" = "檔案";
-"statUnusedApps" = "未使用的 App";
+"figureFiles" = "檔案";
+"figureUnusedApps" = "未使用的 App";
 "bucketUnder1MB" = "小於 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "停止朗讀";
 
 /* Statistics in plain words */
-"statSizesTitle" = "你的檔案有多大？";
-"statSizesCaption" = "每個大小區間佔用多少空間，其中有多少個檔案。通常，少數大型檔案比許多小型檔案佔用的空間更多。";
-"statLargeFilesFrom" = "%@ 以上的大型檔案";
+"sizeClassesTitle" = "你的檔案有多大？";
+"sizeClassesCaption" = "每個大小區間佔用多少空間，其中有多少個檔案。通常，少數大型檔案比許多小型檔案佔用的空間更多。";
+"figureLargeFilesFrom" = "%@ 以上的大型檔案";
 "bucketValue" = "%@
 %@ 個檔案";
 "settingsSystemNote" = "外觀、語言和單位由「系統設定」決定。你可以在「系統設定」的「一般 › 語言與地區 › 應用程式」中，為本 App 單獨設定語言。";

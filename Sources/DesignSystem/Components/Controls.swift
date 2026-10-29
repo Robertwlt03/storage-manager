@@ -8,7 +8,10 @@ extension UI {
         var role: ButtonRole?
         let action: () -> Void
 
-        init(_ title: String, _ kind: ButtonKind = .normal, role: ButtonRole? = nil, action: @escaping () -> Void) {
+        init(
+            _ title: String, _ kind: ButtonKind = .normal, role: ButtonRole? = nil,
+            action: @escaping () -> Void
+        ) {
             self.title = title
             self.kind = kind
             self.role = role
@@ -20,18 +23,18 @@ extension UI {
 
     /// A menu that shows its current choice next to its name.
     struct MenuPicker<Value: Hashable, Items: View>: View {
-        let title: Loc
+        let title: TextKey
         @Binding var selection: Value
         @ViewBuilder let items: Items
 
-        init(_ title: Loc, selection: Binding<Value>, @ViewBuilder _ items: () -> Items) {
+        init(_ title: TextKey, selection: Binding<Value>, @ViewBuilder _ items: () -> Items) {
             self.title = title
             _selection = selection
             self.items = items()
         }
 
         var body: some View {
-            Picker(selection: $selection, content: { items }) { Text(title.s) }
+            Picker(selection: $selection, content: { items }) { Text(title.translated) }
                 .pickerStyle(.menu)
                 .fixedSize()
         }

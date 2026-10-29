@@ -23,9 +23,10 @@ struct InfoSheet: View {
             }
             .background(Backdrop())
             HStack {
-                UI.ActionButton(Loc.showInFinder.s) { FinderService.reveal(path) }
+                UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(path) }
                 Spacer()
-                UI.ActionButton(Loc.done.s, .primary) { dismiss() }.keyboardShortcut(.defaultAction)
+                UI.ActionButton(TextKey.done.translated, .primary) { dismiss() }
+                    .keyboardShortcut(.defaultAction)
             }
             .padding(Space.card)
         }
@@ -37,35 +38,49 @@ struct InfoSheet: View {
     }
 
     private func basics(_ path: String) -> [UI.Field?] {
-        let v = try? URL(fileURLWithPath: path).resourceValues(forKeys: [.contentModificationDateKey, .creationDateKey,
-                                                                       .localizedTypeDescriptionKey])
-        return [UI.Field(.allocated, Fmt.bytes(entry.bytes)),
-                UI.Field(.kind, v?.localizedTypeDescription ?? "–"),
-                v?.contentModificationDate.map { UI.Field(.modified, Fmt.dateTime($0)) },
-                v?.creationDate.map { UI.Field(.created, Fmt.dateTime($0)) }]
+        let v = try? URL(fileURLWithPath: path)
+            .resourceValues(forKeys: [
+                .contentModificationDateKey, .creationDateKey,
+                .localizedTypeDescriptionKey,
+            ])
+        return [
+            UI.Field(.allocated, Format.bytes(entry.bytes)),
+            UI.Field(.kind, v?.localizedTypeDescription ?? "–"),
+            v?.contentModificationDate.map { UI.Field(.modified, Format.dateTime($0)) },
+            v?.creationDate.map { UI.Field(.created, Format.dateTime($0)) },
+        ]
     }
 
     @ViewBuilder private var contents: some View {
-        UI.Card(Loc.contents.s) {
+        UI.Card(TextKey.contents.translated) {
             if let p = profile {
-                UI.Fields([UI.Field(.files, Fmt.count(p.files)),
-                           UI.Field(.folders, Fmt.count(p.folders)),
-                           UI.Field(.packages, Fmt.count(p.packages)),
-                           p.oldest.flatMap { o in p.newest.map { n in
-                               UI.Field(.modifiedBetween, Loc.dateRange.f(Fmt.dayShort(o), Fmt.dayShort(n)))
-                           } }])
+                UI.Fields([
+                    UI.Field(.files, Format.count(p.files)),
+                    UI.Field(.folders, Format.count(p.folders)),
+                    UI.Field(.packages, Format.count(p.packages)),
+                    p.oldest.flatMap { o in
+                        p.newest.map { n in
+                            UI.Field(
+                                .modifiedBetween,
+                                TextKey.dateRange.translated(
+                                    with: Format.dayShort(o), Format.dayShort(n)))
+                        }
+                    },
+                ])
             } else {
-                UI.Note(Loc.analyzing.s, .working).padding(.vertical, Space.row)
+                UI.Note(TextKey.analyzing.translated, .working).padding(.vertical, Space.row)
             }
         }
         if let p = profile, let top = p.types.first?.bytes {
-            UI.Card(Loc.typesBySize.s) {
-                UI.Rows(p.types.map { TypeRow(ext: $0.ext, bytes: $0.bytes, count: $0.count) }) { t in
+            UI.Card(TextKey.typesBySize.translated) {
+                UI.Rows(p.types.map { TypeRow(ext: $0.ext, bytes: $0.bytes, count: $0.count) }) {
+                    t in
                     HStack(spacing: Space.item) {
                         Text(t.ext).frame(maxWidth: .infinity, alignment: .leading)
                         UI.ShareCell(t.bytes, of: top)
                         UI.NumberCell(bytes: t.bytes).frame(width: Layout.sizeColumn.ideal)
-                        Text(Loc.fileCount.f(Fmt.count(t.count))).textRole(.value)
+                        Text(TextKey.fileCount.translated(with: Format.count(t.count)))
+                            .textRole(.value)
                     }
                 }
             }

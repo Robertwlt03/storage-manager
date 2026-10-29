@@ -6,7 +6,8 @@ enum LifecycleService {
     @MainActor static func relaunch() {
         let config = NSWorkspace.OpenConfiguration()
         config.createsNewApplicationInstance = true
-        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: config) { _, error in
+        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: config) {
+            _, error in
             guard error == nil else { return }
             DispatchQueue.main.async { exit(0) }
         }

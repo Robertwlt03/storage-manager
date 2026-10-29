@@ -7,7 +7,9 @@ enum FTS {
     static func walk(_ path: String, _ visit: (UnsafeMutablePointer<FTSENT>) -> Bool) -> Bool {
         var argv: [UnsafeMutablePointer<CChar>?] = [strdup(path), nil]
         defer { free(argv[0]) }
-        guard let fts = fts_open(&argv, FTS_PHYSICAL | FTS_NOCHDIR | FTS_XDEV, nil) else { return false }
+        guard let fts = fts_open(&argv, FTS_PHYSICAL | FTS_NOCHDIR | FTS_XDEV, nil) else {
+            return false
+        }
         defer { fts_close(fts) }
         while let ent = fts_read(fts) {
             if !visit(ent) { return false }
@@ -19,7 +21,9 @@ enum FTS {
 
     static func name(_ ent: UnsafeMutablePointer<FTSENT>) -> String {
         withUnsafePointer(to: &ent.pointee.fts_name) {
-            $0.withMemoryRebound(to: CChar.self, capacity: Int(ent.pointee.fts_namelen) + 1) { String(cString: $0) }
+            $0.withMemoryRebound(to: CChar.self, capacity: Int(ent.pointee.fts_namelen) + 1) {
+                String(cString: $0)
+            }
         }
     }
 

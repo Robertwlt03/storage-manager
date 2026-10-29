@@ -18,7 +18,6 @@ enum Motion {
     static var quick: Animation? { reduced ? nil : .smooth(duration: quickDuration) }
     static let quickDuration = 0.2
 
-
     /// Changes model state with the standard animation.
     static func animate(_ changes: () -> Void) {
         withAnimation(standard, changes)
@@ -43,8 +42,12 @@ private struct HoverHighlight: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .background(Color.primary.opacity(hovering ? Motion.hoverTint : 0),
-                        in: RoundedRectangle(cornerRadius: IconSize.medium.rawValue * Layout.badgeRadiusShare, style: .continuous))
+            .background(
+                Color.primary.opacity(hovering ? Motion.hoverTint : 0),
+                in: RoundedRectangle(
+                    cornerRadius: IconSize.medium.rawValue * Layout.badgeRadiusShare,
+                    style: .continuous)
+            )
             .animation(Motion.standard, value: hovering)
             .onHover { hovering = $0 }
     }
@@ -56,7 +59,11 @@ extension View {
     /// Turns an SF Symbol once whenever `value` changes; on macOS 14, which has no turning effect, it bounces.
     /// A one-off effect of the system: it costs nothing at rest and is left out with "Reduce motion".
     @ViewBuilder func turnOnce<V: Equatable>(value: V) -> some View {
-        if #available(macOS 15.0, *) { symbolEffect(.rotate, value: value) } else { symbolEffect(.bounce, value: value) }
+        if #available(macOS 15.0, *) {
+            symbolEffect(.rotate, value: value)
+        } else {
+            symbolEffect(.bounce, value: value)
+        }
     }
     func hoverHighlight() -> some View { modifier(HoverHighlight()) }
 
@@ -64,7 +71,9 @@ extension View {
     func staticChart() -> some View { transaction { $0.animation = nil } }
 
     /// Animates this view whenever `value` changes.
-    func smoothChanges<V: Equatable>(of value: V) -> some View { animation(Motion.standard, value: value) }
+    func smoothChanges<V: Equatable>(of value: V) -> some View {
+        animation(Motion.standard, value: value)
+    }
 
     /// Fades content in and out, the standard transition for appearing views.
     func fadeTransition() -> some View { transition(.opacity) }

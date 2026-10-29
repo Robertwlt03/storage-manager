@@ -9,24 +9,28 @@ struct SearchResultsView: View {
 
     var body: some View {
         @Bindable var model = model
-        EntryBrowser(entries: results, total: results.reduce(0) { $0 + $1.bytes }, showLocation: true,
-                     emptyTitle: Loc.noResults.f(model.searchQuery),
-                     emptyDetail: Loc.searchNote.s,
-                     contentKey: resultsKey)
-            .navigationTitle(Loc.searchResults.f(Fmt.count(results.count)))
-            .safeAreaInset(edge: .top, spacing: 0) {
-                UI.PageHeader(.searchNote) {
-                    UI.SegmentPicker(selection: $model.searchScope) {
-                        ForEach(SearchScope.allCases) { Text($0.title.s).tag($0) }
-                    }
-                    UI.ActionButton(Loc.cancel.s) { model.endSearch() }.keyboardShortcut(.cancelAction)
+        EntryBrowser(
+            entries: results, total: results.reduce(0) { $0 + $1.bytes }, showLocation: true,
+            emptyTitle: TextKey.noResults.translated(with: model.searchQuery),
+            emptyDetail: TextKey.searchNote.translated,
+            contentKey: resultsKey
+        )
+        .navigationTitle(TextKey.searchResults.translated(with: Format.count(results.count)))
+        .safeAreaInset(edge: .top, spacing: 0) {
+            UI.PageHeader(.searchNote) {
+                UI.SegmentPicker(selection: $model.searchScope) {
+                    ForEach(SearchScope.allCases) { Text($0.title.translated).tag($0) }
                 }
+                UI.ActionButton(TextKey.cancel.translated) { model.endSearch() }
+                    .keyboardShortcut(.cancelAction)
             }
-            .task(id: "\(model.searchText)|\(model.searchScope)|\(model.revision)") {
-                try? await Task.sleep(for: ScanConfig.searchDebounce)  // wait until typing pauses
-                guard !Task.isCancelled else { return }
-                results = SearchService.search(model.searchText, scope: model.searchScope, in: model.root)
-                resultsKey = "\(model.searchText)|\(model.searchScope)"
-            }
+        }
+        .task(id: "\(model.searchText)|\(model.searchScope)|\(model.revision)") {
+            try? await Task.sleep(for: ScanConfig.searchDebounce)  // wait until typing pauses
+            guard !Task.isCancelled else { return }
+            results = SearchService.search(
+                model.searchText, scope: model.searchScope, in: model.root)
+            resultsKey = "\(model.searchText)|\(model.searchScope)"
+        }
     }
 }

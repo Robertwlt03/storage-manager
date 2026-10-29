@@ -4,8 +4,10 @@ import Foundation
 enum StatsService {
     static func compute(root: Node) -> Statistics {
         var s = Statistics(files: root.fileCount, bytes: root.bytes)
-        var counts: [SizeBucket: Int] = [:], sizes: [SizeBucket: Int64] = [:]
-        var keptCount = 0, keptBytes: Int64 = 0
+        var counts: [SizeBucket: Int] = [:]
+        var sizes: [SizeBucket: Int64] = [:]
+        var keptCount = 0
+        var keptBytes: Int64 = 0
 
         func walk(_ n: Node) {
             for f in n.files {
@@ -22,7 +24,11 @@ enum StatsService {
         // Files under 1 MB are folded during the scan; they are everything that was not kept.
         counts[.under1MB] = max(0, root.fileCount - keptCount)
         sizes[.under1MB] = max(0, root.bytes - keptBytes)
-        s.largeFiles = SearchService.largeFiles(atLeast: LargeFileThreshold.bytes(AppSettings.largeFileMB), in: root).count
+        s.largeFiles =
+            SearchService.largeFiles(
+                atLeast: LargeFileThreshold.bytes(AppSettings.largeFileMB), in: root
+            )
+            .count
         s.buckets = SizeBucket.allCases.map { ($0, counts[$0] ?? 0, sizes[$0] ?? 0) }
         return s
     }

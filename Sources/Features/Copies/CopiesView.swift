@@ -10,7 +10,10 @@ struct CopiesView: View {
             if !model.hasData || (model.scanning && groups.isEmpty) {  // the temporary area is measured last
                 UI.Placeholder(.notMeasured, in: .page)
             } else if groups.isEmpty {
-                UI.Placeholder(.empty(title: Loc.noCopies.s, symbol: Symbols.copies, detail: Loc.noCopiesDetail.s), in: .page)
+                UI.Placeholder(
+                    .empty(
+                        title: TextKey.noCopies.translated, symbol: Symbols.copies,
+                        detail: TextKey.noCopiesDetail.translated), in: .page)
             }
             ForEach(groups) { CopyGroupCard(group: $0) }
         }

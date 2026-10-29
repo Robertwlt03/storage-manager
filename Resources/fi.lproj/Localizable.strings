@@ -36,22 +36,22 @@
 "categories" = "Luokat";
 "freeSpace" = "Vapaana";
 "tempAreaName" = "Tilapäinen järjestelmäalue";
-"catApps" = "Ohjelmat";
-"catDocuments" = "Dokumentit ja Työpöytä";
-"catDownloads" = "Lataukset";
-"catMedia" = "Kuvat, musiikki ja elokuvat";
-"catICloud" = "iCloud Drive";
-"catMail" = "Mail ja viestit";
-"catDeveloper" = "Kehitys";
-"catCaches" = "Välimuistit";
-"catAppData" = "Appien tiedot";
-"catTrash" = "Roskakori";
-"catTemp" = "Tilapäiset tiedostot";
-"catUser" = "Muut käyttäjätiedot";
-"catLibrary" = "Yhteiset appien tiedot";
-"catOther" = "Muut kansiot";
-"catPurgeable" = "macOS voi tyhjentää";
-"catSystem" = "Järjestelmä ja muu";
+"categoryApps" = "Ohjelmat";
+"categoryDocuments" = "Dokumentit ja Työpöytä";
+"categoryDownloads" = "Lataukset";
+"categoryMedia" = "Kuvat, musiikki ja elokuvat";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail ja viestit";
+"categoryDeveloper" = "Kehitys";
+"categoryCaches" = "Välimuistit";
+"categoryAppData" = "Appien tiedot";
+"categoryTrash" = "Roskakori";
+"categoryTemp" = "Tilapäiset tiedostot";
+"categoryUser" = "Muut käyttäjätiedot";
+"categoryLibrary" = "Yhteiset appien tiedot";
+"categoryOther" = "Muut kansiot";
+"categoryPurgeable" = "macOS voi tyhjentää";
+"categorySystem" = "Järjestelmä ja muu";
 
 /* Explorer, tables and info sheet */
 "columnName" = "Nimi";
@@ -82,7 +82,7 @@
 "noExtension" = "ei tiedostotunnistetta";
 
 /* Large files */
-"minSize" = "Vähimmäiskoko";
+"minimumSize" = "Vähimmäiskoko";
 "fromSize" = "vähintään %@";
 "noFilesFrom" = "Ei tiedostoja, jotka ovat vähintään %@";
 "filesTotal" = "%@ tiedostoa · yhteensä %@";
@@ -92,14 +92,14 @@
 "total" = "Yhteensä";
 "subfolders" = "Alikansiot";
 "viewCopies" = "Näytä appien kopiot …";
-"tempT" = "Tilapäiset tiedostot";
-"tempTDetail" = "Tyhjennetään enimmäkseen uudelleenkäynnistyksessä.";
-"tempC" = "Välimuistit";
-"tempCDetail" = "Appien ja järjestelmäpalvelujen välimuistit.";
-"tempX" = "Appien kopiot";
-"tempXDetail" = "Kopioita, jotka macOS luo allekirjoitusten tarkistuksen aikana.";
-"temp0" = "Järjestelmäpalvelut";
-"temp0Detail" = "Taustapalvelujen tiedot.";
+"tempFolderT" = "Tilapäiset tiedostot";
+"tempFolderTDetail" = "Tyhjennetään enimmäkseen uudelleenkäynnistyksessä.";
+"tempFolderC" = "Välimuistit";
+"tempFolderCDetail" = "Appien ja järjestelmäpalvelujen välimuistit.";
+"tempFolderX" = "Appien kopiot";
+"tempFolderXDetail" = "Kopioita, jotka macOS luo allekirjoitusten tarkistuksen aikana.";
+"tempFolder0" = "Järjestelmäpalvelut";
+"tempFolder0Detail" = "Taustapalvelujen tiedot.";
 
 /* Signature copies */
 "noCopies" = "Ei appien kopioita";
@@ -197,8 +197,8 @@
 "moveToTrash" = "Siirrä roskakoriin";
 "lastOpened" = "Viimeksi avattu %@";
 "trashAppFailed" = "Kohdetta ”%@” ei voitu siirtää. Finderissa se onnistuu salasanallasi.";
-"statFiles" = "Tiedostot";
-"statUnusedApps" = "käyttämätöntä appia";
+"figureFiles" = "Tiedostot";
+"figureUnusedApps" = "käyttämätöntä appia";
 "bucketUnder1MB" = "alle 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "Lopeta lukeminen";
 
 /* Statistics in plain words */
-"statSizesTitle" = "Kuinka suuria tiedostosi ovat?";
-"statSizesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
-"statLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
+"sizeClassesTitle" = "Kuinka suuria tiedostosi ovat?";
+"sizeClassesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
+"figureLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
 "bucketValue" = "%@
 %@ tiedostoa";
 "settingsSystemNote" = "Ulkoasu, kieli ja yksiköt tulevat Järjestelmäasetuksista. Tämän apin oman kielen voit asettaa siellä kohdassa Yleiset › Kieli ja alue › Apit.";

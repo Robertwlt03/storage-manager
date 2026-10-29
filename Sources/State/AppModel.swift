@@ -58,7 +58,9 @@ import SwiftUI
         withAnimation(Motion.standard) { sidebarOverlay = false }
     }
 
-    private var mainWindow: NSWindow? { NSApp.windows.first { $0.identifier?.rawValue == WindowID.main } }
+    private var mainWindow: NSWindow? {
+        NSApp.windows.first { $0.identifier?.rawValue == WindowID.main }
+    }
 
     /// A narrow window closes the sidebar, a wide one brings it back unless the user closed it, like Mail.
     /// Compares wanted and actual state on every resize, because macOS also closes it on its own (see ARCHITECTURE.md).
@@ -92,7 +94,11 @@ import SwiftUI
     /// then scans if the settings allow it.
     func launch() {
         refreshAccess()
-        if !hasFullDiskAccess && !AppSettings.launchSkipAccess { showAccessSheet = true } else { autoScanIfWanted() }
+        if !hasFullDiskAccess && !AppSettings.launchSkipAccess {
+            showAccessSheet = true
+        } else {
+            autoScanIfWanted()
+        }
     }
 
     func refreshAccess() { hasFullDiskAccess = PermissionService.hasFullDiskAccess }
@@ -128,7 +134,9 @@ import SwiftUI
             for (i, path) in todo.enumerated() {
                 scanStep = (i + 1, todo.count, path)
                 root.child(named: path)?.detach()
-                guard let result = await scanInBackground(path, base: progress, id: id), !Task.isCancelled, scanID == id else { break }
+                guard let result = await scanInBackground(path, base: progress, id: id),
+                    !Task.isCancelled, scanID == id
+                else { break }
                 result.root.attach(to: root)
                 unreadable += result.unreadable
                 // A home folder without any blocked folder proves Full Disk Access, whatever the quick check said.
@@ -141,7 +149,9 @@ import SwiftUI
             scanning = false
             if !Task.isCancelled {
                 lastScan = Date()
-                if reset { UserDefaults.standard.set(root.fileCount, forKey: SettingsKey.lastScanFiles) }
+                if reset {
+                    UserDefaults.standard.set(root.fileCount, forKey: SettingsKey.lastScanFiles)
+                }
             }
             treeChanged()
             refreshApps()
@@ -152,7 +162,8 @@ import SwiftUI
     /// How far the scan is, estimated from the file count of the last full scan; the first time from the used space.
     var scanFraction: Double {
         let lastFiles = UserDefaults.standard.integer(forKey: SettingsKey.lastScanFiles)
-        let raw = lastFiles > 0
+        let raw =
+            lastFiles > 0
             ? Double(progress.files) / Double(lastFiles)
             : Double(progress.bytes) / Double(max(startupVolume?.used ?? 1, 1))
         return min(raw, ScanConfig.maxEstimatedFraction)
@@ -164,13 +175,21 @@ import SwiftUI
         scanning = false
     }
 
-    private func scanInBackground(_ path: String, base: ScanService.Progress, id: UUID) async -> ScanService.Result? {
+    private func scanInBackground(_ path: String, base: ScanService.Progress, id: UUID) async
+        -> ScanService.Result?
+    {
         // Background QoS runs on the efficiency cores of Apple Silicon.
         let priority = TaskPriority.background
         let inner = Task.detached(priority: priority) {
-            ScanService.scan(path) { p in Task { @MainActor in if self.scanID == id { self.progress = base + p } } }
+            ScanService.scan(path) { p in
+                Task { @MainActor in if self.scanID == id { self.progress = base + p } }
+            }
         }
-        return await withTaskCancellationHandler { await inner.value } onCancel: { inner.cancel() }
+        return await withTaskCancellationHandler {
+            await inner.value
+        } onCancel: {
+            inner.cancel()
+        }
     }
 
     // MARK: Changes
@@ -186,13 +205,18 @@ import SwiftUI
     /// What the cleaner could remove; computed once after each scan and shared by the overview and the cleaner.
     func refreshCleanItems() {
         guard hasData else { return }
-        let found = CleanerService.candidates { [root] path in root.descendant(at: path)?.bytes ?? 0 }
+        let found = CleanerService.candidates { [root] path in root.descendant(at: path)?.bytes ?? 0
+        }
         Motion.animate { cleanItems = found }
     }
 
     /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
     func activate(_ entry: Entry) {
-        if let node = entry.node { open(node) } else if let path = entry.path { FinderService.reveal(path) }
+        if let node = entry.node {
+            open(node)
+        } else if let path = entry.path {
+            FinderService.reveal(path)
+        }
     }
 
     func moveToTrash(_ app: AppUsage) throws {

@@ -9,7 +9,10 @@ enum AppEntry {
         if args.contains(LaunchCommand.checkContrast.rawValue) { exit(Checks.contrast() ? 0 : 1) }
         if args.contains(LaunchCommand.checkStrings.rawValue) { exit(Checks.strings() ? 0 : 1) }
         if args.contains(LaunchCommand.selfTest.rawValue) {
-            Task.detached { SelfTest.run(); exit(0) }
+            Task.detached {
+                SelfTest.run()
+                exit(0)
+            }
             dispatchMain()
         }
         if let i = args.firstIndex(of: LaunchCommand.renderIcon.rawValue), i + 1 < args.count {
@@ -23,7 +26,7 @@ struct SpeicherExplorerApp: App {
     @State private var model = AppModel()
 
     var body: some Scene {
-        Window(Loc.appName.s, id: WindowID.main) {
+        Window(TextKey.appName.translated, id: WindowID.main) {
             RootView()
                 .environment(model)
                 .frame(minWidth: Layout.minWindowWidth, minHeight: Layout.minWindowHeight)
@@ -31,12 +34,17 @@ struct SpeicherExplorerApp: App {
         .commands {
             LayoutCommands()
             CommandGroup(replacing: .sidebar) {  // the system item would use the jerky AppKit toggle
-                Button(model.sidebarShown ? Loc.hideSidebar.s : Loc.showSidebar.s) { model.toggleSidebar() }
-                    .keyboardShortcut("s", modifiers: [.control, .command])
+                Button(
+                    model.sidebarShown
+                        ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
+                ) { model.toggleSidebar() }
+                .keyboardShortcut("s", modifiers: [.control, .command])
             }
             CommandGroup(after: .newItem) {
-                Button(Loc.rescan.s) { model.scan() }.keyboardShortcut("r").disabled(model.scanning)
-                Button(Loc.cancelScan.s) { model.cancelScan() }.keyboardShortcut(".").disabled(!model.scanning)
+                Button(TextKey.rescan.translated) { model.scan() }.keyboardShortcut("r")
+                    .disabled(model.scanning)
+                Button(TextKey.cancelScan.translated) { model.cancelScan() }.keyboardShortcut(".")
+                    .disabled(!model.scanning)
             }
         }
         Settings {
@@ -47,7 +55,9 @@ struct SpeicherExplorerApp: App {
 
 /// Gives every window the app's locale for dates and numbers; used by every window so none can forget it.
 private struct PreferenceSync: ViewModifier {
-    func body(content: Content) -> some View { content.environment(\.locale, Localizer.shared.locale) }
+    func body(content: Content) -> some View {
+        content.environment(\.locale, Localizer.shared.locale)
+    }
 }
 
 extension View {
@@ -61,8 +71,11 @@ private struct LayoutCommands: Commands {
     var body: some Commands {
         CommandGroup(before: .sidebar) {
             ForEach(LayoutMode.allCases) { mode in
-                Toggle(mode.title.s, isOn: Binding(get: { layout == mode }, set: { if $0 { layout = mode } }))
-                    .keyboardShortcut(mode == .list ? "1" : "2")
+                Toggle(
+                    mode.title.translated,
+                    isOn: Binding(get: { layout == mode }, set: { if $0 { layout = mode } })
+                )
+                .keyboardShortcut(mode == .list ? "1" : "2")
             }
             Divider()
         }

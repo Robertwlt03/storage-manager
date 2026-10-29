@@ -36,22 +36,22 @@
 "categories" = "Kategorie";
 "freeSpace" = "Volné";
 "tempAreaName" = "Dočasná systémová oblast";
-"catApps" = "Aplikace";
-"catDocuments" = "Dokumenty a Plocha";
-"catDownloads" = "Stažené soubory";
-"catMedia" = "Fotky, hudba a filmy";
-"catICloud" = "iCloud Drive";
-"catMail" = "Mail a Zprávy";
-"catDeveloper" = "Vývoj";
-"catCaches" = "Mezipaměti";
-"catAppData" = "Data aplikací";
-"catTrash" = "Koš";
-"catTemp" = "Dočasné soubory";
-"catUser" = "Další uživatelská data";
-"catLibrary" = "Sdílená data aplikací";
-"catOther" = "Další složky";
-"catPurgeable" = "Odstranitelné systémem macOS";
-"catSystem" = "Systém a ostatní";
+"categoryApps" = "Aplikace";
+"categoryDocuments" = "Dokumenty a Plocha";
+"categoryDownloads" = "Stažené soubory";
+"categoryMedia" = "Fotky, hudba a filmy";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail a Zprávy";
+"categoryDeveloper" = "Vývoj";
+"categoryCaches" = "Mezipaměti";
+"categoryAppData" = "Data aplikací";
+"categoryTrash" = "Koš";
+"categoryTemp" = "Dočasné soubory";
+"categoryUser" = "Další uživatelská data";
+"categoryLibrary" = "Sdílená data aplikací";
+"categoryOther" = "Další složky";
+"categoryPurgeable" = "Odstranitelné systémem macOS";
+"categorySystem" = "Systém a ostatní";
 
 /* Explorer, tables and info sheet */
 "columnName" = "Název";
@@ -82,7 +82,7 @@
 "noExtension" = "bez přípony";
 
 /* Large files */
-"minSize" = "Minimální velikost";
+"minimumSize" = "Minimální velikost";
 "fromSize" = "od %@";
 "noFilesFrom" = "Žádné soubory od %@";
 "filesTotal" = "Souborů: %@ · celkem %@";
@@ -92,14 +92,14 @@
 "total" = "Celkem";
 "subfolders" = "Podsložky";
 "viewCopies" = "Zobrazit kopie aplikací …";
-"tempT" = "Dočasné soubory";
-"tempTDetail" = "Většinou se vyprázdní při restartu.";
-"tempC" = "Mezipaměti";
-"tempCDetail" = "Mezipaměti aplikací a systémových služeb.";
-"tempX" = "Kopie aplikací";
-"tempXDetail" = "Kopie, které macOS vytváří při kontrole podpisů.";
-"temp0" = "Systémové služby";
-"temp0Detail" = "Data služeb běžících na pozadí.";
+"tempFolderT" = "Dočasné soubory";
+"tempFolderTDetail" = "Většinou se vyprázdní při restartu.";
+"tempFolderC" = "Mezipaměti";
+"tempFolderCDetail" = "Mezipaměti aplikací a systémových služeb.";
+"tempFolderX" = "Kopie aplikací";
+"tempFolderXDetail" = "Kopie, které macOS vytváří při kontrole podpisů.";
+"tempFolder0" = "Systémové služby";
+"tempFolder0Detail" = "Data služeb běžících na pozadí.";
 
 /* Signature copies */
 "noCopies" = "Žádné kopie aplikací";
@@ -197,8 +197,8 @@
 "moveToTrash" = "Přesunout do Koše";
 "lastOpened" = "Naposledy otevřeno %@";
 "trashAppFailed" = "Aplikaci „%@“ se nepodařilo přesunout. Ve Finderu to půjde po zadání hesla.";
-"statFiles" = "Soubory";
-"statUnusedApps" = "nepoužívané aplikace";
+"figureFiles" = "Soubory";
+"figureUnusedApps" = "nepoužívané aplikace";
 "bucketUnder1MB" = "do 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "Zastavit čtení";
 
 /* Statistics in plain words */
-"statSizesTitle" = "Jak velké jsou vaše soubory?";
-"statSizesCaption" = "Kolik místa zabírá každá velikostní třída a kolik souborů v ní je. Několik velkých souborů obvykle zabírá víc než mnoho malých.";
-"statLargeFilesFrom" = "velké soubory od %@";
+"sizeClassesTitle" = "Jak velké jsou vaše soubory?";
+"sizeClassesCaption" = "Kolik místa zabírá každá velikostní třída a kolik souborů v ní je. Několik velkých souborů obvykle zabírá víc než mnoho malých.";
+"figureLargeFilesFrom" = "velké soubory od %@";
 "bucketValue" = "%@
 Souborů: %@";
 "settingsSystemNote" = "Vzhled, jazyk a jednotky aplikace přebírá z Nastavení systému. Vlastní jazyk pro tuto aplikaci tam nastavíte v části Obecné › Jazyk a region › Aplikace.";

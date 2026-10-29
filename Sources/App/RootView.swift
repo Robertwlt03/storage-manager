@@ -16,7 +16,9 @@ struct RootView: View {
                     // Slid, never removed or faded (see ARCHITECTURE.md).
                     if model.windowNarrow {
                         SidebarOverlay()
-                            .offset(x: model.sidebarOverlay ? 0 : -(Layout.sidebarIdeal + Space.l))
+                            .offset(
+                                x: model.sidebarOverlay ? 0 : -(Layout.sidebarIdeal + Space.large)
+                            )
                             .allowsHitTesting(model.sidebarOverlay)
                             .accessibilityHidden(!model.sidebarOverlay)
                     }
@@ -25,12 +27,21 @@ struct RootView: View {
                 .smoothChanges(of: model.isSearching)
         }
         .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
-        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didResizeNotification)) { _ in model.windowResized() }
-        .searchable(text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar, prompt: Loc.searchPrompt.s)
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didResizeNotification)) { _ in
+            model.windowResized()
+        }
+        .searchable(
+            text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar,
+            prompt: TextKey.searchPrompt.translated
+        )
         .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }
         .syncPreferences()
         .onExitCommand {  // Escape closes the floating sidebar, otherwise it leaves the search
-            if model.sidebarOverlay { model.closeSidebarOverlay() } else if model.isSearching || model.searchPresented { model.endSearch() }
+            if model.sidebarOverlay {
+                model.closeSidebarOverlay()
+            } else if model.isSearching || model.searchPresented {
+                model.endSearch()
+            }
         }
         .onChange(of: model.pane) {  // picking a page leaves the search and closes the floating sidebar
             if model.isSearching { model.endSearch() }
@@ -47,8 +58,12 @@ struct RootView: View {
                 }
             }
         }
-        .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didMountNotification)) { _ in model.refreshVolumes() }
-        .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didUnmountNotification)) { _ in model.refreshVolumes() }
+        .onReceive(
+            NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didMountNotification)
+        ) { _ in model.refreshVolumes() }
+        .onReceive(
+            NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didUnmountNotification)
+        ) { _ in model.refreshVolumes() }
     }
 
     @ViewBuilder private var detail: some View {

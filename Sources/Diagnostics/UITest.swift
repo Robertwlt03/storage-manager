@@ -6,7 +6,9 @@ import SwiftUI
 /// searches, checks the data after every step and saves a picture of the window. It never deletes, cleans up or
 /// moves anything to the Trash, prints only counts (no names) and restores the user's settings at the end.
 @MainActor enum UITest {
-    private static let settingKeys = [SettingsKey.layoutMode, SettingsKey.largeFileMB, SettingsKey.unusedDays]
+    private static let settingKeys = [
+        SettingsKey.layoutMode, SettingsKey.largeFileMB, SettingsKey.unusedDays,
+    ]
     private static var problems: [String] = []
     private static var steps = 0
     private static var folder = URL(fileURLWithPath: NSTemporaryDirectory())
@@ -14,7 +16,13 @@ import SwiftUI
     static func run(_ model: AppModel, into dir: String) async {
         folder = URL(fileURLWithPath: dir)
         try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
-        let saved = settingKeys.map { ($0, UserDefaults.standard.persistentDomain(forName: Bundle.main.bundleIdentifier ?? "")?[$0]) }
+        let saved = settingKeys.map {
+            (
+                $0,
+                UserDefaults.standard.persistentDomain(
+                    forName: Bundle.main.bundleIdentifier ?? "")?[$0]
+            )
+        }
         defer { restore(saved) }
         log("Start, Vollzugriff: \(model.hasFullDiskAccess)")
 
@@ -27,7 +35,10 @@ import SwiftUI
         await flipSettings(model)
         await rescanOnOverview(model)
 
-        log(problems.isEmpty ? "ERGEBNIS: keine Fehler in \(steps) Schritten" : "ERGEBNIS: \(problems.count) Probleme")
+        log(
+            problems.isEmpty
+                ? "ERGEBNIS: keine Fehler in \(steps) Schritten"
+                : "ERGEBNIS: \(problems.count) Probleme")
         problems.forEach { log("PROBLEM: \($0)") }
     }
 
@@ -49,18 +60,28 @@ import SwiftUI
 
     /// Cancel and restart scans in quick succession, also twice in a row.
     private static func cancelAndRestart(_ model: AppModel) async {
-        model.cancelScan(); await step("Abbruch", model, wait: 0.3)
-        model.cancelScan(); await step("Doppelter Abbruch", model, wait: 0.2)
-        model.scan(); model.scan(); await step("Doppelter Start", model, wait: 1)
-        model.cancelScan(); model.scan(); await step("Abbruch und sofort neu", model, wait: 0.5)
+        model.cancelScan()
+        await step("Abbruch", model, wait: 0.3)
+        model.cancelScan()
+        await step("Doppelter Abbruch", model, wait: 0.2)
+        model.scan()
+        model.scan()
+        await step("Doppelter Start", model, wait: 1)
+        model.cancelScan()
+        model.scan()
+        await step("Abbruch und sofort neu", model, wait: 0.5)
         check(model.scanning, "Messung läuft nach Neustart nicht")
     }
 
     private static func waitForScan(_ model: AppModel) async {
         let start = Date()
-        while model.scanning && Date().timeIntervalSince(start) < 240 { try? await Task.sleep(for: .milliseconds(500)) }
+        while model.scanning && Date().timeIntervalSince(start) < 240 {
+            try? await Task.sleep(for: .milliseconds(500))
+        }
         check(!model.scanning, "Messung nach 4 Minuten nicht fertig")
-        log("Messung fertig nach \(Int(Date().timeIntervalSince(start))) s: \(model.root.fileCount) Dateien, \(model.categories.count) Kategorien")
+        log(
+            "Messung fertig nach \(Int(Date().timeIntervalSince(start))) s: \(model.root.fileCount) Dateien, \(model.categories.count) Kategorien"
+        )
         await step("Nach der Messung", model, wait: 1)
     }
 
@@ -72,7 +93,9 @@ import SwiftUI
                 for layout in LayoutMode.allCases where layout == .list || pane.supportsGrid {
                     set(SettingsKey.layoutMode, layout.rawValue)
                     model.pane = pane
-                    await step("Seite \(pane.launchKey) \(appearance?.name.rawValue ?? "") \(layout)", model, wait: 0.8)
+                    await step(
+                        "Seite \(pane.launchKey) \(appearance?.name.rawValue ?? "") \(layout)",
+                        model, wait: 0.8)
                 }
             }
         }
@@ -105,7 +128,8 @@ import SwiftUI
                 await step("Suche", model, wait: 0.4, picture: false)
                 let hits = SearchService.search(query, scope: scope, in: model.root)
                 check(hits.count <= ScanConfig.searchLimit, "Suche liefert mehr als die Grenze")
-                check(scope != .folders || hits.allSatisfy(\.isFolder), "Ordnersuche liefert Dateien")
+                check(
+                    scope != .folders || hits.allSatisfy(\.isFolder), "Ordnersuche liefert Dateien")
             }
         }
         model.searchText = ""
@@ -144,10 +168,13 @@ import SwiftUI
     // MARK: Helpers
 
     private static func allPanes(_ model: AppModel) -> [Pane] {
-        Pane.main + Pane.tidy + Pane.system + model.volumes.filter { !$0.isRoot }.map { .volume($0.path) }
+        Pane.main + Pane.tidy + Pane.system
+            + model.volumes.filter { !$0.isRoot }.map { .volume($0.path) }
     }
 
-    private static func step(_ name: String, _ model: AppModel, wait seconds: Double, picture: Bool = true) async {
+    private static func step(
+        _ name: String, _ model: AppModel, wait seconds: Double, picture: Bool = true
+    ) async {
         steps += 1
         try? await Task.sleep(for: .milliseconds(Int(seconds * 1000)))
         checkData(model, name)
@@ -158,35 +185,51 @@ import SwiftUI
     /// Consistency of what every page shows.
     private static func checkData(_ model: AppModel, _ name: String) {
         let cats = model.categories
-        check(zip(cats, cats.dropFirst()).allSatisfy { $0.bytes >= $1.bytes }, "\(name): Kategorien nicht sortiert")
+        check(
+            zip(cats, cats.dropFirst()).allSatisfy { $0.bytes >= $1.bytes },
+            "\(name): Kategorien nicht sortiert")
         check(cats.allSatisfy { $0.bytes >= 0 }, "\(name): negative Größe")
         check((0...1).contains(model.scanFraction), "\(name): Fortschritt außerhalb 0–100 %")
         check(model.root.bytes >= 0 && model.root.fileCount >= 0, "\(name): Baum ungültig")
         if !model.explorerPath.isEmpty {
-            check(zip(model.explorerPath, model.explorerPath.dropFirst()).allSatisfy { $1.path.hasPrefix($0.path) },
-                  "\(name): Ordnerpfad passt nicht zusammen")
+            check(
+                zip(model.explorerPath, model.explorerPath.dropFirst())
+                    .allSatisfy { $1.path.hasPrefix($0.path) },
+                "\(name): Ordnerpfad passt nicht zusammen")
         }
     }
 
     private static func check(_ ok: Bool, _ message: String) { if !ok { problems.append(message) } }
 
-    private static func set(_ key: String, _ value: Any) { UserDefaults.standard.set(value, forKey: key) }
+    private static func set(_ key: String, _ value: Any) {
+        UserDefaults.standard.set(value, forKey: key)
+    }
 
     private static func restore(_ saved: [(String, Any?)]) {
         for (key, value) in saved {
-            if let value { UserDefaults.standard.set(value, forKey: key) } else { UserDefaults.standard.removeObject(forKey: key) }
+            if let value {
+                UserDefaults.standard.set(value, forKey: key)
+            } else {
+                UserDefaults.standard.removeObject(forKey: key)
+            }
         }
     }
 
     private static func snapshot(_ name: String) {
-        guard let view = NSApp.windows.first(where: { $0.isVisible && $0.frame.width > 600 })?.contentView,
-              let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { return }
+        guard
+            let view = NSApp.windows.first(where: { $0.isVisible && $0.frame.width > 600 })?
+                .contentView,
+            let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds)
+        else { return }
         view.cacheDisplay(in: view.bounds, to: rep)
-        try? rep.representation(using: .png, properties: [:])?.write(to: folder.appendingPathComponent(name + ".png"))
+        try? rep.representation(using: .png, properties: [:])?
+            .write(to: folder.appendingPathComponent(name + ".png"))
     }
 
     private static func log(_ text: String) {
-        print("[UITest] \(Date().formatted(.dateTime.hour().minute().second().secondFraction(.fractional(3)))) \(text)")
+        print(
+            "[UITest] \(Date().formatted(.dateTime.hour().minute().second().secondFraction(.fractional(3)))) \(text)"
+        )
         fflush(stdout)
     }
 }

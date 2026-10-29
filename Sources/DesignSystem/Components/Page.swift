@@ -4,12 +4,15 @@ extension UI {
     /// A scrolling page: its header with options and info button, then the content.
     struct Page<Options: View, Content: View>: View {
         let title: String
-        let info: Loc
+        let info: TextKey
         @ViewBuilder let options: Options
         @ViewBuilder let content: Content
 
-        init(_ pane: Pane, title: String? = nil, @ViewBuilder options: () -> Options, @ViewBuilder _ content: () -> Content) {
-            self.title = title ?? pane.title.s
+        init(
+            _ pane: Pane, title: String? = nil, @ViewBuilder options: () -> Options,
+            @ViewBuilder _ content: () -> Content
+        ) {
+            self.title = title ?? pane.title.translated
             info = pane.info
             self.options = options()
             self.content = content()
@@ -33,10 +36,10 @@ extension UI {
 
     /// The page header on its own, above tables, which scroll by themselves.
     struct PageHeader<Options: View>: View {
-        let info: Loc
+        let info: TextKey
         @ViewBuilder let options: Options
 
-        init(_ info: Loc, @ViewBuilder options: () -> Options) {
+        init(_ info: TextKey, @ViewBuilder options: () -> Options) {
             self.info = info
             self.options = options()
         }
@@ -59,11 +62,11 @@ extension UI {
         }
 
         var body: some View {
-            VStack(alignment: .leading, spacing: Space.s) {
-                if let title { Text(title).textRole(.section).padding(.leading, Space.xs) }
+            VStack(alignment: .leading, spacing: Space.small) {
+                if let title { Text(title).textRole(.section).padding(.leading, Space.extraSmall) }
                 VStack(alignment: .leading, spacing: 0) { content }
                     .padding(.horizontal, Space.card)
-                    .padding(.vertical, Space.s)
+                    .padding(.vertical, Space.small)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .surface()
             }
@@ -97,7 +100,7 @@ extension UI.Page where Options == EmptyView {
 
 /// The page's options on the left, a button explaining the page on the right.
 private struct HeaderBar<Options: View>: View {
-    let info: Loc
+    let info: TextKey
     @ViewBuilder let options: Options
     @State private var showInfo = false
 
@@ -105,17 +108,21 @@ private struct HeaderBar<Options: View>: View {
         HStack(spacing: Space.item) {
             options
             Spacer(minLength: 0)
-            Button { showInfo.toggle() } label: { Label(Loc.aboutPage.s, systemImage: Symbols.info) }
-                .labelStyle(.iconOnly)
-                .appButton(.quiet)
-                .font(.title3)
-                .help(Loc.aboutPage.s)
-                .popover(isPresented: $showInfo, arrowEdge: .bottom) {
-                    Text(info.s)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(Space.card)
-                        .frame(width: Layout.popoverWidth, alignment: .leading)
-                }
+            Button {
+                showInfo.toggle()
+            } label: {
+                Label(TextKey.aboutPage.translated, systemImage: Symbols.info)
+            }
+            .labelStyle(.iconOnly)
+            .appButton(.quiet)
+            .font(.title3)
+            .help(TextKey.aboutPage.translated)
+            .popover(isPresented: $showInfo, arrowEdge: .bottom) {
+                Text(info.translated)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(Space.card)
+                    .frame(width: Layout.popoverWidth, alignment: .leading)
+            }
         }
         .frame(minHeight: Layout.headerHeight)
     }

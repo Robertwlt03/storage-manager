@@ -22,12 +22,12 @@ final class Localizer {
     }
 }
 
-extension Loc {
+extension TextKey {
     /// The text in the current language.
-    var s: String { Localizer.shared.string(rawValue) }
+    var translated: String { Localizer.shared.string(rawValue) }
 
     /// The text with `%@` placeholders filled in.
-    func f(_ args: CVarArg...) -> String {
-        String(format: s, locale: Localizer.shared.locale, arguments: args)
+    func translated(with values: CVarArg...) -> String {
+        String(format: translated, locale: Localizer.shared.locale, arguments: values)
     }
 }

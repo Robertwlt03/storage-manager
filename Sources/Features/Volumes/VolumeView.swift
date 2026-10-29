@@ -9,28 +9,39 @@ struct VolumeView: View {
         if let v = model.volumes.first(where: { $0.path == path }) {
             UI.Page(.volume(path), title: v.name, options: { action(v) }) {
                 UI.Card {
-                    UI.VolumeSummary(v, segments: [
-                        StorageSegment(id: StorageSegment.usedID, title: Loc.used.s, bytes: v.used - v.purgeable, colorIndex: CategoryKind.apps.rawValue),
-                        StorageSegment(id: "purgeable", title: Loc.purgeable.s, bytes: v.purgeable, colorIndex: CategoryKind.purgeable.rawValue),
-                    ])
+                    UI.VolumeSummary(
+                        v,
+                        segments: [
+                            StorageSegment(
+                                id: StorageSegment.usedID, title: TextKey.used.translated,
+                                bytes: v.used - v.purgeable, colorIndex: CategoryKind.apps.rawValue),
+                            StorageSegment(
+                                id: "purgeable", title: TextKey.purgeable.translated,
+                                bytes: v.purgeable, colorIndex: CategoryKind.purgeable.rawValue),
+                        ])
                     Divider()
-                    UI.Fields([UI.Field(.capacity, Fmt.bytes(v.total)), UI.Field(.used, Fmt.bytes(v.used - v.purgeable)),
-                               UI.Field(.purgeable, Fmt.bytes(v.purgeable)), UI.Field(.freeSpace, Fmt.bytes(v.free)),
-                               UI.Field(.available, Fmt.bytes(v.available)), UI.Field(.kind, v.format)])
+                    UI.Fields([
+                        UI.Field(.capacity, Format.bytes(v.total)),
+                        UI.Field(.used, Format.bytes(v.used - v.purgeable)),
+                        UI.Field(.purgeable, Format.bytes(v.purgeable)),
+                        UI.Field(.freeSpace, Format.bytes(v.free)),
+                        UI.Field(.available, Format.bytes(v.available)), UI.Field(.kind, v.format),
+                    ])
                 }
             }
         } else {
-            UI.Placeholder(.empty(title: Loc.volumeGone.s, symbol: Symbols.volumeGone), in: .page)
+            UI.Placeholder(
+                .empty(title: TextKey.volumeGone.translated, symbol: Symbols.volumeGone), in: .page)
         }
     }
 
     @ViewBuilder private func action(_ v: VolumeInfo) -> some View {
         if v.isRoot {
-            UI.ActionButton(Loc.toOverview.s) { model.pane = .overview }
+            UI.ActionButton(TextKey.toOverview.translated) { model.pane = .overview }
         } else if let node = model.root.descendant(at: v.path) {
-            UI.ActionButton(Loc.exploreContents.s) { model.open(node) }
+            UI.ActionButton(TextKey.exploreContents.translated) { model.open(node) }
         } else {
-            UI.ActionButton(Loc.scanAndExplore.s, .primary) {
+            UI.ActionButton(TextKey.scanAndExplore.translated, .primary) {
                 model.scan([v.path], reset: false)
                 model.pane = .explorer
             }

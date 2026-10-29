@@ -36,22 +36,22 @@
 "categories" = "Categorieën";
 "freeSpace" = "Vrij";
 "tempAreaName" = "Tijdelijk systeemgebied";
-"catApps" = "Apps";
-"catDocuments" = "Documenten en bureaublad";
-"catDownloads" = "Downloads";
-"catMedia" = "Foto’s, muziek en films";
-"catICloud" = "iCloud Drive";
-"catMail" = "Mail en Berichten";
-"catDeveloper" = "Ontwikkeling";
-"catCaches" = "Caches";
-"catAppData" = "Appgegevens";
-"catTrash" = "Prullenmand";
-"catTemp" = "Tijdelijke bestanden";
-"catUser" = "Overige gebruikersgegevens";
-"catLibrary" = "Gedeelde appgegevens";
-"catOther" = "Overige mappen";
-"catPurgeable" = "Door macOS te wissen";
-"catSystem" = "Systeem en overig";
+"categoryApps" = "Apps";
+"categoryDocuments" = "Documenten en bureaublad";
+"categoryDownloads" = "Downloads";
+"categoryMedia" = "Foto’s, muziek en films";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail en Berichten";
+"categoryDeveloper" = "Ontwikkeling";
+"categoryCaches" = "Caches";
+"categoryAppData" = "Appgegevens";
+"categoryTrash" = "Prullenmand";
+"categoryTemp" = "Tijdelijke bestanden";
+"categoryUser" = "Overige gebruikersgegevens";
+"categoryLibrary" = "Gedeelde appgegevens";
+"categoryOther" = "Overige mappen";
+"categoryPurgeable" = "Door macOS te wissen";
+"categorySystem" = "Systeem en overig";
 
 /* Explorer, tables and info sheet */
 "columnName" = "Naam";
@@ -82,7 +82,7 @@
 "noExtension" = "zonder extensie";
 
 /* Large files */
-"minSize" = "Minimale grootte";
+"minimumSize" = "Minimale grootte";
 "fromSize" = "vanaf %@";
 "noFilesFrom" = "Geen bestanden vanaf %@";
 "filesTotal" = "%@ bestanden · %@ in totaal";
@@ -92,14 +92,14 @@
 "total" = "Totaal";
 "subfolders" = "Submappen";
 "viewCopies" = "App-kopieën bekijken …";
-"tempT" = "Tijdelijke bestanden";
-"tempTDetail" = "Wordt meestal bij het herstarten geleegd.";
-"tempC" = "Caches";
-"tempCDetail" = "Caches van apps en systeemdiensten.";
-"tempX" = "App-kopieën";
-"tempXDetail" = "Kopieën die macOS maakt bij het controleren van handtekeningen.";
-"temp0" = "Systeemdiensten";
-"temp0Detail" = "Gegevens van achtergronddiensten.";
+"tempFolderT" = "Tijdelijke bestanden";
+"tempFolderTDetail" = "Wordt meestal bij het herstarten geleegd.";
+"tempFolderC" = "Caches";
+"tempFolderCDetail" = "Caches van apps en systeemdiensten.";
+"tempFolderX" = "App-kopieën";
+"tempFolderXDetail" = "Kopieën die macOS maakt bij het controleren van handtekeningen.";
+"tempFolder0" = "Systeemdiensten";
+"tempFolder0Detail" = "Gegevens van achtergronddiensten.";
 
 /* Signature copies */
 "noCopies" = "Geen app-kopieën";
@@ -197,8 +197,8 @@
 "moveToTrash" = "Verplaats naar prullenmand";
 "lastOpened" = "Laatst geopend op %@";
 "trashAppFailed" = "“%@” kon niet worden verplaatst. In de Finder lukt het met je wachtwoord.";
-"statFiles" = "Bestanden";
-"statUnusedApps" = "ongebruikte apps";
+"figureFiles" = "Bestanden";
+"figureUnusedApps" = "ongebruikte apps";
 "bucketUnder1MB" = "onder 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -236,9 +236,9 @@
 "stopReading" = "Stop met voorlezen";
 
 /* Statistics in plain words */
-"statSizesTitle" = "Hoe groot zijn je bestanden?";
-"statSizesCaption" = "Hoeveel ruimte elke groottecategorie inneemt en hoeveel bestanden erin zitten. Een paar grote bestanden nemen meestal meer ruimte in dan veel kleine.";
-"statLargeFilesFrom" = "grote bestanden vanaf %@";
+"sizeClassesTitle" = "Hoe groot zijn je bestanden?";
+"sizeClassesCaption" = "Hoeveel ruimte elke groottecategorie inneemt en hoeveel bestanden erin zitten. Een paar grote bestanden nemen meestal meer ruimte in dan veel kleine.";
+"figureLargeFilesFrom" = "grote bestanden vanaf %@";
 "bucketValue" = "%@
 %@ bestanden";
 "settingsSystemNote" = "Weergave, taal en eenheden neemt de app over uit Systeeminstellingen. Een aparte taal voor deze app stel je daar in onder Algemeen › Taal en regio › Apps.";

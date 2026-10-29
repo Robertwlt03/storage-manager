@@ -19,29 +19,40 @@ enum AppSettings {
     private static var d: UserDefaults { .standard }
 
     static func registerDefaults() {
-        d.register(defaults: [SettingsKey.autoScan: true, SettingsKey.largeFileMB: LargeFileThreshold.defaultMB,
-                              SettingsKey.unusedDays: CleanConfig.defaultUnusedDays])
+        d.register(defaults: [
+            SettingsKey.autoScan: true, SettingsKey.largeFileMB: LargeFileThreshold.defaultMB,
+            SettingsKey.unusedDays: CleanConfig.defaultUnusedDays,
+        ])
     }
 
     static var autoScan: Bool { d.bool(forKey: SettingsKey.autoScan) }
     static var unusedDays: Int { d.integer(forKey: SettingsKey.unusedDays) }
     static var largeFileMB: Int { d.integer(forKey: SettingsKey.largeFileMB) }
-    static var launchPane: Pane? { d.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:)) }
+    static var launchPane: Pane? {
+        d.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:))
+    }
     static var launchSettings: Bool { d.bool(forKey: SettingsKey.launchSettings) }
     static var launchSkipAccess: Bool { d.bool(forKey: SettingsKey.launchSkipAccess) }
     static var launchUITest: String? { d.string(forKey: SettingsKey.launchUITest) }
 
     /// Extra folders are stored as one string, one path per line (AppStorage cannot hold arrays).
-    static func folders(from stored: String) -> [String] { stored.split(separator: "\n").map(String.init) }
+    static func folders(from stored: String) -> [String] {
+        stored.split(separator: "\n").map(String.init)
+    }
     static func store(_ folders: [String]) -> String { folders.joined(separator: "\n") }
-    static var extraFolders: [String] { folders(from: d.string(forKey: SettingsKey.extraFolders) ?? "") }
+    static var extraFolders: [String] {
+        folders(from: d.string(forKey: SettingsKey.extraFolders) ?? "")
+    }
 }
 
 /// Languages the app ships; the raw value is the name of the `.lproj` folder. Which one is used comes from macOS,
 /// which also allows a language per app (System Settings › General › Language & Region › Applications).
 enum AppLanguage: String, CaseIterable {
-    case de, en, fr, es, it, nl, ptBR = "pt-BR", sv, da, nb, fi, pl, cs, tr, ru, uk, ja, ko
-    case zhHans = "zh-Hans", zhHant = "zh-Hant"
+    case de, en, fr, es, it, nl
+    case ptBR = "pt-BR"
+    case sv, da, nb, fi, pl, cs, tr, ru, uk, ja, ko
+    case zhHans = "zh-Hans"
+    case zhHant = "zh-Hant"
 
     static let fallback = AppLanguage.en
 
@@ -66,6 +77,6 @@ enum AppLanguage: String, CaseIterable {
 enum LayoutMode: Int, CaseIterable, Identifiable {
     case list, grid
     var id: Self { self }
-    var title: Loc { self == .list ? .layoutList : .layoutGrid }
+    var title: TextKey { self == .list ? .layoutList : .layoutGrid }
     var symbol: String { self == .list ? Symbols.list : Symbols.grid }
 }

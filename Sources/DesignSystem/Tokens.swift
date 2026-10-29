@@ -7,17 +7,17 @@ enum UI {}
 /// and each kind of gap always uses the same step.
 enum Space {
     static let hairline: CGFloat = 2  // title and subtitle of one item
-    static let xs: CGFloat = 4  // headings to their card, tight groups
-    static let s: CGFloat = 8  // inside a row: icon to text, dot to label; row padding; card title to card
-    static let m: CGFloat = 12  // between the parts of a row
-    static let l: CGFloat = 16  // between cards and sections; inside cards
-    static let xl: CGFloat = 24  // page margins
+    static let extraSmall: CGFloat = 4  // headings to their card, tight groups
+    static let small: CGFloat = 8  // inside a row: icon to text, dot to label; row padding; card title to card
+    static let medium: CGFloat = 12  // between the parts of a row
+    static let large: CGFloat = 16  // between cards and sections; inside cards
+    static let extraLarge: CGFloat = 24  // page margins
 
-    static let page = xl
-    static let section = l
-    static let card = l
-    static let row = s
-    static let item = m
+    static let page = extraLarge
+    static let section = large
+    static let card = large
+    static let row = small
+    static let item = medium
 }
 
 /// One icon size per role, so icons of the same role always match.
@@ -120,6 +120,7 @@ enum TextRole {
 
 extension View {
     func textRole(_ role: TextRole) -> some View {
-        font(role.font).foregroundStyle(role.isMuted ? AnyShapeStyle(Color.muted) : AnyShapeStyle(.primary))
+        font(role.font)
+            .foregroundStyle(role.isMuted ? AnyShapeStyle(Color.muted) : AnyShapeStyle(.primary))
     }
 }

@@ -5,7 +5,7 @@ enum CleanKind: String, CaseIterable, Identifiable {
     case caches, developer, logs, temp, trash
     var id: Self { self }
 
-    var title: Loc {
+    var title: TextKey {
         switch self {
         case .caches: .cleanCaches
         case .developer: .cleanDeveloper
@@ -15,7 +15,7 @@ enum CleanKind: String, CaseIterable, Identifiable {
         }
     }
 
-    var detail: Loc {
+    var detail: TextKey {
         switch self {
         case .caches: .cleanCachesDetail
         case .developer: .cleanDeveloperDetail
@@ -71,7 +71,7 @@ enum SizeBucket: CaseIterable, Identifiable {
         }
     }
 
-    var title: Loc {
+    var title: TextKey {
         switch self {
         case .under1MB: .bucketUnder1MB
         case .to10MB: .bucketTo10MB

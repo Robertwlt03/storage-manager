@@ -1,30 +1,31 @@
 /// Storage categories like in System Settings › Storage. Each kind owns its folders; the most specific folder wins.
 /// Folders that do not exist on a Mac simply stay empty, so the same rules work everywhere.
 enum CategoryKind: Int, CaseIterable {
-    case apps, documents, downloads, media, iCloud, mail, developer, caches, appData, trash, temp, user, library
+    case apps, documents, downloads, media, iCloud, mail, developer, caches, appData, trash, temp,
+        user, library
     case other, purgeable, system
 
     /// Kinds that come from what macOS reports, not from the scan.
     static let estimated: Set<CategoryKind> = [.purgeable, .system]
 
-    var title: Loc {
+    var title: TextKey {
         switch self {
-        case .apps: .catApps
-        case .documents: .catDocuments
-        case .downloads: .catDownloads
-        case .media: .catMedia
-        case .iCloud: .catICloud
-        case .mail: .catMail
-        case .developer: .catDeveloper
-        case .caches: .catCaches
-        case .appData: .catAppData
-        case .trash: .catTrash
-        case .temp: .catTemp
-        case .user: .catUser
-        case .library: .catLibrary
-        case .other: .catOther
-        case .purgeable: .catPurgeable
-        case .system: .catSystem
+        case .apps: .categoryApps
+        case .documents: .categoryDocuments
+        case .downloads: .categoryDownloads
+        case .media: .categoryMedia
+        case .iCloud: .categoryICloud
+        case .mail: .categoryMail
+        case .developer: .categoryDeveloper
+        case .caches: .categoryCaches
+        case .appData: .categoryAppData
+        case .trash: .categoryTrash
+        case .temp: .categoryTemp
+        case .user: .categoryUser
+        case .library: .categoryLibrary
+        case .other: .categoryOther
+        case .purgeable: .categoryPurgeable
+        case .system: .categorySystem
         }
     }
 
@@ -58,11 +59,16 @@ enum CategoryKind: Int, CaseIterable {
         case .media: ["~/Pictures", "~/Music", "~/Movies"]
         case .iCloud: ["~/Library/Mobile Documents"]
         case .mail: ["~/Library/Mail", "~/Library/Messages"]
-        case .developer: ["~/Library/Developer", "~/.npm", "~/.cache", "~/.docker", "~/.gradle", "~/.m2", "~/.cargo",
-                          "~/.rustup", "~/go", "~/.pub-cache", "~/.composer", "~/.local",
-                          "~/Library/Containers/com.docker.docker", Paths.opt, Paths.usrLocal]
+        case .developer:
+            [
+                "~/Library/Developer", "~/.npm", "~/.cache", "~/.docker", "~/.gradle", "~/.m2",
+                "~/.cargo",
+                "~/.rustup", "~/go", "~/.pub-cache", "~/.composer", "~/.local",
+                "~/Library/Containers/com.docker.docker", Paths.opt, Paths.usrLocal,
+            ]
         case .caches: ["~/Library/Caches"]
-        case .appData: ["~/Library/Application Support", "~/Library/Containers", "~/Library/Group Containers"]
+        case .appData:
+            ["~/Library/Application Support", "~/Library/Containers", "~/Library/Group Containers"]
         case .trash: ["~/.Trash"]
         case .temp: [Paths.tempArea]
         case .user: [Paths.home]

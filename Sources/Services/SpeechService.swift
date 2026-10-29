@@ -36,8 +36,14 @@ import Observation
 
     private static let siriMarker = "siri"
 
-    nonisolated func speechSynthesizer(_ s: AVSpeechSynthesizer, didFinish u: AVSpeechUtterance) { done() }
-    nonisolated func speechSynthesizer(_ s: AVSpeechSynthesizer, didCancel u: AVSpeechUtterance) { done() }
+    nonisolated func speechSynthesizer(_ s: AVSpeechSynthesizer, didFinish u: AVSpeechUtterance) {
+        done()
+    }
+    nonisolated func speechSynthesizer(_ s: AVSpeechSynthesizer, didCancel u: AVSpeechUtterance) {
+        done()
+    }
 
-    private nonisolated func done() { Task { @MainActor in SpeechService.shared.isSpeaking = false } }
+    private nonisolated func done() {
+        Task { @MainActor in SpeechService.shared.isSpeaking = false }
+    }
 }

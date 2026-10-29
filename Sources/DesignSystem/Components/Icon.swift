@@ -23,16 +23,19 @@ extension UI {
 
         var body: some View {
             let side = size.rawValue
-            let square = RoundedRectangle(cornerRadius: side * Layout.badgeRadiusShare, style: .continuous)
+            let square = RoundedRectangle(
+                cornerRadius: side * Layout.badgeRadiusShare, style: .continuous)
             switch kind {
             case .symbol(let name):
                 Image(systemName: name).resizable().scaledToFit().frame(width: side, height: side)
             case .dot(let color):
                 Circle().fill(color).frame(width: side, height: side)
             case .badge(let name, let index):
-                Image(systemName: name).resizable().scaledToFit().fontWeight(.semibold).foregroundStyle(.white)
+                Image(systemName: name).resizable().scaledToFit().fontWeight(.semibold)
+                    .foregroundStyle(.white)
                     .frame(width: side / 2, height: side / 2)
-                    .frame(width: side, height: side).background(Theme.color(index).gradient, in: square)
+                    .frame(width: side, height: side)
+                    .background(Theme.color(index).gradient, in: square)
             case .letter(let text):
                 Text(text).font(.system(size: side / 2, weight: .semibold, design: .monospaced))
                     .frame(width: side, height: side).background(.quaternary, in: square)
@@ -47,7 +50,8 @@ extension UI {
     /// The small arrow at the end of anything that leads somewhere.
     struct Chevron: View {
         var body: some View {
-            Icon(.symbol(Symbols.chevron), size: .extraSmall).fontWeight(.semibold).foregroundStyle(.muted)
+            Icon(.symbol(Symbols.chevron), size: .extraSmall).fontWeight(.semibold)
+                .foregroundStyle(.muted)
         }
     }
 }

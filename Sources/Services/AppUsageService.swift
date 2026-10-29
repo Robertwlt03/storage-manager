@@ -14,15 +14,23 @@ enum AppUsageService {
         for folder in folders {
             for name in (try? fm.contentsOfDirectory(atPath: folder)) ?? [] {
                 let path = folder + "/" + name
-                if name.hasSuffix(appSuffix) { paths.append(path); continue }
+                if name.hasSuffix(appSuffix) {
+                    paths.append(path)
+                    continue
+                }
                 var isDir: ObjCBool = false
-                guard fm.fileExists(atPath: path, isDirectory: &isDir), isDir.boolValue else { continue }
-                paths += ((try? fm.contentsOfDirectory(atPath: path)) ?? []).filter { $0.hasSuffix(appSuffix) }.map { path + "/" + $0 }
+                guard fm.fileExists(atPath: path, isDirectory: &isDir), isDir.boolValue else {
+                    continue
+                }
+                paths += ((try? fm.contentsOfDirectory(atPath: path)) ?? [])
+                    .filter { $0.hasSuffix(appSuffix) }.map { path + "/" + $0 }
             }
         }
         return paths.map { path in
-            AppUsage(path: path, name: fm.displayName(atPath: path), bundleID: Bundle(path: path)?.bundleIdentifier,
-                     lastUsed: lastUsed(path), bytes: root.descendant(at: path)?.bytes ?? 0)
+            AppUsage(
+                path: path, name: fm.displayName(atPath: path),
+                bundleID: Bundle(path: path)?.bundleIdentifier,
+                lastUsed: lastUsed(path), bytes: root.descendant(at: path)?.bytes ?? 0)
         }
     }
 

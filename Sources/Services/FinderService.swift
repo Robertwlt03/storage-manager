@@ -19,7 +19,9 @@ enum FinderService {
         cache.countLimit = ScanConfig.iconCacheLimit
         return cache
     }()
-    static func reveal(_ path: String) { NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)]) }
+    static func reveal(_ path: String) {
+        NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)])
+    }
 
     static func copyPath(_ path: String) {
         NSPasteboard.general.clearContents()

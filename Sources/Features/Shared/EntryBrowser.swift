@@ -19,19 +19,29 @@ struct EntryBrowser: View {
             if layout == .grid {
                 ScrollView {
                     UI.TileGrid(entries.sorted { $0.bytes > $1.bytes }) { e in
-                        UI.Tile(icon: e.path.map { .preview($0) } ?? .letter("…"), title: e.name, value: Fmt.bytes(e.bytes),
-                                detail: showLocation ? e.location : nil, share: Double(e.bytes) / Double(max(total, 1)))
-                            .onTapGesture(count: 2) { model.activate(e) }
-                            .contextMenu { EntryMenu(entry: e, info: $info) }
+                        UI.Tile(
+                            icon: e.path.map { .preview($0) } ?? .letter("…"), title: e.name,
+                            value: Format.bytes(e.bytes),
+                            detail: showLocation ? e.location : nil,
+                            share: Double(e.bytes) / Double(max(total, 1))
+                        )
+                        .onTapGesture(count: 2) { model.activate(e) }
+                        .contextMenu { EntryMenu(entry: e, info: $info) }
                     }
                     .padding(Space.page)
                 }
                 .background(Backdrop())
             } else {
-                EntryTable(entries: entries, total: total, showLocation: showLocation).id(contentKey)
+                EntryTable(entries: entries, total: total, showLocation: showLocation)
+                    .id(contentKey)
             }
         }
-        .overlay { if entries.isEmpty { UI.Placeholder(.emptyAfterScan(title: emptyTitle, symbol: Symbols.search, detail: emptyDetail)) } }
+        .overlay {
+            if entries.isEmpty {
+                UI.Placeholder(
+                    .emptyAfterScan(title: emptyTitle, symbol: Symbols.search, detail: emptyDetail))
+            }
+        }
         .sheet(item: $info) { InfoSheet(entry: $0) }
         .smoothChanges(of: layout)
     }
@@ -45,11 +55,11 @@ struct EntryMenu: View {
 
     var body: some View {
         if let path = entry.path {
-            if let node = entry.node { Button(Loc.open.s) { model.open(node) } }
-            Button(Loc.showInFinder.s) { FinderService.reveal(path) }
-            Button(Loc.info.s) { info = entry }
+            if let node = entry.node { Button(TextKey.open.translated) { model.open(node) } }
+            Button(TextKey.showInFinder.translated) { FinderService.reveal(path) }
+            Button(TextKey.info.translated) { info = entry }
             Divider()
-            Button(Loc.copyPath.s) { FinderService.copyPath(path) }
+            Button(TextKey.copyPath.translated) { FinderService.copyPath(path) }
         }
     }
 }

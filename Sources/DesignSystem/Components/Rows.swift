@@ -9,7 +9,10 @@ extension UI {
         var value: String?
         var action: (() -> Void)?
 
-        init(_ title: String, icon: IconKind? = nil, detail: String? = nil, value: String? = nil, action: (() -> Void)? = nil) {
+        init(
+            _ title: String, icon: IconKind? = nil, detail: String? = nil, value: String? = nil,
+            action: (() -> Void)? = nil
+        ) {
             self.title = title
             self.icon = icon
             self.detail = detail
@@ -18,7 +21,9 @@ extension UI {
         }
 
         var body: some View {
-            Button { action?() } label: {
+            Button {
+                action?()
+            } label: {
                 HStack(spacing: Space.item) {
                     if let icon { Icon(icon) }
                     VStack(alignment: .leading, spacing: Space.hairline) {
@@ -31,9 +36,9 @@ extension UI {
                 }
                 .contentShape(Rectangle())
                 // The highlight reaches a little beyond the row without changing its layout.
-                .padding(.horizontal, Space.s).padding(.vertical, Space.xs)
+                .padding(.horizontal, Space.small).padding(.vertical, Space.extraSmall)
                 .modifier(OptionalHover(active: action != nil))
-                .padding(.horizontal, -Space.s).padding(.vertical, -Space.xs)
+                .padding(.horizontal, -Space.small).padding(.vertical, -Space.extraSmall)
             }
             .appButton(.content)
             .allowsHitTesting(action != nil)  // not .disabled, which would dim the text below 4.5:1
@@ -47,7 +52,7 @@ extension UI {
         let value: String?
         var id: String { label }
 
-        init(_ label: Loc, _ value: String?) { self.init(label.s, value) }
+        init(_ label: TextKey, _ value: String?) { self.init(label.translated, value) }
         init(_ label: String, _ value: String?) {
             self.label = label
             self.value = value
@@ -65,7 +70,8 @@ extension UI {
                 HStack(alignment: .firstTextBaseline, spacing: Space.item) {
                     Text(field.label)
                     Spacer(minLength: Space.item)
-                    Text(field.value ?? StandInText.figure).textRole(.value).multilineTextAlignment(.trailing)
+                    Text(field.value ?? StandInText.figure).textRole(.value)
+                        .multilineTextAlignment(.trailing)
                         .textSelection(.enabled)
                         .calculating(field.value == nil, alignment: .trailing)
                 }
