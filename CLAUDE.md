@@ -1,9 +1,10 @@
 # Speicher-Explorer – working notes for Claude
 
 Native macOS app (SwiftUI, Swift 6.4, SwiftPM, no Xcode project) that shows where disk space goes. Requires macOS 27 on
-Apple silicon. MIT, public on GitHub. The human-facing guides are German: README.md, CONTRIBUTING.md (setup, commands,
-editors), ARCHITECTURE.md (data path, code map, deliberate rules) and CODE_STYLE.md (code rules and how they are
-checked). Read the last two before changing code; do not repeat their content here or in comments.
+Apple silicon. MIT, public on GitHub. The human-facing guides are German (with English twins `*.en.md`):
+README.md, CONTRIBUTING.md (setup, commands, editors), ARCHITECTURE.md (data path, code map, deliberate rules)
+and CODE_STYLE.md (code rules and how they are checked). Read the last two before changing code; do not repeat their
+content here or in comments.
 
 ## Talking to the user
 
@@ -104,7 +105,8 @@ with the access sheet open were checked):
 
 ## Documentation
 
-- Guides stay German; code, comments and commit messages are English.
+- Guides are German, each with an English twin (`README.en.md`, …) in British spelling; a change to one goes into
+  both. Both carry the Deutsch · English line under the banner. Code, comments and commit messages are English.
 - Every guide follows the README's layout: banner at the top (`assets/banner-*.svg`), an icon in front of every `##`
   heading (`<img src="assets/icons/<name>.svg" height="33" align="absmiddle" alt="">`), and the shared footer with the
   small banner, the navigation line to all guides and the licence line.

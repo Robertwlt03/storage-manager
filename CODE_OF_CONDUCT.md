@@ -2,6 +2,8 @@
   <img src="assets/banner-verhaltensregeln.svg" alt="Verhaltensregeln des Speicher-Explorers. Wie wir freundlich miteinander arbeiten." width="100%">
 </p>
 
+<p align="center"><a href="CODE_OF_CONDUCT.md">Deutsch</a> · <a href="CODE_OF_CONDUCT.en.md">English</a></p>
+
 Der Speicher-Explorer soll ein Ort sein, an dem alle gern mitmachen, egal wie viel Erfahrung sie haben, woher sie
 kommen oder welche Sprache sie sprechen.
 

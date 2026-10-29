@@ -2,6 +2,8 @@
   <img src="assets/banner-code-regeln.svg" alt="Code-Regeln des Speicher-Explorers. So schreiben wir Code, den jeder lesen kann." width="100%">
 </p>
 
+<p align="center"><a href="CODE_STYLE.md">Deutsch</a> · <a href="CODE_STYLE.en.md">English</a></p>
+
 Code wird viel öfter gelesen als geschrieben. Deshalb soll sich der Code des Speicher-Explorers fast wie ein Text
 lesen lassen, auch für Menschen, die nicht jeden Winkel von Swift kennen. Diese Regeln gelten für jede Zeile, und das
 Prüfskript am Ende dieser Seite kontrolliert die meisten davon automatisch.

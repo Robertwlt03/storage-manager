@@ -2,6 +2,8 @@
   <img src="assets/banner-mitmachen.svg" alt="Mitmachen beim Speicher-Explorer. So baust, prüfst und erweiterst du die App." width="100%">
 </p>
 
+<p align="center"><a href="CONTRIBUTING.md">Deutsch</a> · <a href="CONTRIBUTING.en.md">English</a></p>
+
 Schön, dass du mithelfen möchtest. Diese Anleitung erklärt, wie du die App baust, wo du was findest und worauf du
 achten solltest. Wie der Code aufgebaut ist und welche Regeln absichtlich gelten, steht in der
 [Architektur-Beschreibung](ARCHITECTURE.md).
@@ -142,8 +144,9 @@ make stress
 - **Texte in allen Sprachen:** Jeder neue Text bekommt einen englischen Schlüssel in `TextKey` und eine Zeile in allen
   20 Dateien unter `Resources`. Deutsch und Englisch sind die Vorlage. Bei den übrigen Sprachen freuen wir uns besonders über
   Verbesserungen von Muttersprachlern.
-- **Code auf Englisch, Dokumentation auf Deutsch:** Namen, Kommentare und Commit-Nachrichten schreibst du auf Englisch,
-  Anleitungen wie diese auf Deutsch.
+- **Code auf Englisch, Anleitungen auf Deutsch und Englisch:** Namen, Kommentare und Commit-Nachrichten schreibst du auf
+  Englisch. Anleitungen entstehen auf Deutsch, und jede hat einen englischen Zwilling (`*.en.md`), der mit ihr
+  geändert wird.
 - **Lesbarer Code:** Ausgeschriebene Namen in Alltagssprache, keine Zahlen ohne Namen, Farben nur aus `Theme` und
   kleine, klar getrennte Schritte. Die Einzelheiten stehen in den [Code-Regeln](CODE_STYLE.md).
 

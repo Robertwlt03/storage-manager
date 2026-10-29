@@ -2,6 +2,8 @@
   <img src="assets/banner-architektur.svg" alt="Architektur des Speicher-Explorers. Wo im Code was liegt und warum." width="100%">
 </p>
 
+<p align="center"><a href="ARCHITECTURE.md">Deutsch</a> · <a href="ARCHITECTURE.en.md">English</a></p>
+
 Diese Beschreibung hilft dir herauszufinden, wo eine Änderung hingehört. Sie nennt Dateien und Typen beim Namen,
 damit du sie mit der Suche deines Editors findest. Wie du baust und prüfst, steht in der
 [Anleitung zum Mitmachen](CONTRIBUTING.md).

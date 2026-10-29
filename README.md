@@ -2,6 +2,8 @@
   <img src="assets/banner.svg" alt="Speicher-Explorer. Sieh auf einen Blick, wo dein Speicher steckt." width="100%">
 </p>
 
+<p align="center"><a href="README.md">Deutsch</a> · <a href="README.en.md">English</a></p>
+
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-27%20oder%20neuer-1D1D1F?style=flat-square&logo=apple&logoColor=white" alt="macOS 27 oder neuer">
   <img src="https://img.shields.io/badge/-SwiftUI-1D1D1F?style=flat-square&logo=swift&logoColor=F05138" alt="SwiftUI">

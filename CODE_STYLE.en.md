@@ -1,0 +1,166 @@
+<p align="center">
+  <img src="assets/banner-code-rules.svg" alt="Code rules of Speicher-Explorer. How we write code anyone can read." width="100%">
+</p>
+
+<p align="center"><a href="CODE_STYLE.md">Deutsch</a> · <a href="CODE_STYLE.en.md">English</a></p>
+
+Code is read far more often than it is written. That is why the code of Speicher-Explorer should read almost like
+prose, even for people who do not know every corner of Swift. These rules apply to every line, and the check script
+at the end of this page checks most of them automatically.
+
+## <img src="assets/icons/format.svg" height="33" align="absmiddle" alt="">Short lines and a uniform layout
+
+No line is longer than 100 characters, and indentation is four spaces. The layout is not something everyone decides
+for themselves; the tool `swift format` sets it, with the settings file `.swift-format`. It wraps long calls and puts
+every step of a long chain on its own line. How many lines that produces does not matter, because a short line is
+quicker to read than a long one.
+
+```bash
+make format
+```
+
+## <img src="assets/icons/names.svg" height="33" align="absmiddle" alt="">Names in everyday language
+
+Names are in English and spelled out. We choose words people know from everyday life and no abbreviations, because
+everyone understands `category`, whereas `cat` sounds like the animal. A name says what something is or does:
+
+- **Values** are named after what they hold, for example `largeFiles` instead of `list` or `result`.
+- **Functions** start with a verb, for example `scan()`, `openSettings()` or `refreshStatistics()`.
+- **Booleans** read like a question, for example `isEmpty`, `hasFullDiskAccess` or `canSelect`.
+- **Closure parameters** get a name too. We write `{ file in file.bytes }` and not `{ $0.bytes }`, so nobody has to
+  guess what `$0` is.
+
+There are no names of one or two letters. The only ones allowed are `id`, and `x` and `y` for coordinates, because
+everyone knows these words.
+
+## <img src="assets/icons/numbers.svg" height="33" align="absmiddle" alt="">No numbers without names
+
+A number in the middle of the code does not tell you what it means. That is why every number gets a name, and the
+code then reads like a sentence: `.padding(Space.card)` instead of `.padding(16)`. Only `0` and `1` may stand without
+a name when they simply count, that is for “nothing” or “one more”. If they mean something specific, such as full
+opacity or a finished scan, they get a name too.
+
+Every name has a fixed home:
+
+| What for | Where |
+| --- | --- |
+| Spacing, icon sizes, measurements and symbol names | `Sources/DesignSystem/Tokens.swift` |
+| Colours | `Sources/DesignSystem/Theme.swift` |
+| Duration and kind of animations | `Sources/DesignSystem/Motion.swift` |
+| Limits of the scan, the cleanup and the search | `Sources/Core/Constants.swift` |
+| Values that only a single type needs | as `private static let` directly in that type |
+
+## <img src="assets/icons/palette.svg" height="33" align="absmiddle" alt="">Colours in one place
+
+Every colour of the app comes from `Theme.swift`. There it is defined once for the light and once for the dark
+appearance, and reaches a contrast of at least 4.5 to 1 in both. All other files only use these names and never
+create a colour themselves, not even `.white` or `Color(red:green:blue:)`. If you need a new colour, add it to
+`Theme.swift` and to the list of contrast tests in `DesignTests.swift`.
+
+## <img src="assets/icons/design.svg" height="33" align="absmiddle" alt="">A consistent design
+
+So that the same things look the same everywhere, every design decision has exactly one home, and the pages only
+use its names:
+
+- **Fonts** come via `.textRole(...)` from `TextRole`, for example `.textRole(.hint)`, and never directly via
+  `.font(...)`.
+- **Symbols** are listed by name in `Symbols` in `Tokens.swift`, for example `Symbols.trash`, and never appear as a
+  string on a page.
+- **Liquid Glass** only comes via `.surface()` for cards and `.appButton(...)` for buttons. No page creates its own
+  glass, materials or backgrounds under cards.
+- **Animations** come from `Motion`, for example `Motion.standard`, so that “Reduce motion” takes effect everywhere.
+- **Output** with `print` only exists in `Sources/Diagnostics`, because any other output could show private file or
+  folder names.
+
+## <img src="assets/icons/translations.svg" height="33" align="absmiddle" alt="">Texts only through translations
+
+The code contains no text that you read in the app. Every visible text has an English key in `TextKey.swift`, for
+example `TextKey.categories.translated`, and the texts themselves live in the 20 files under `Resources`. That is
+why German words appear nowhere in the code. Output for developers, for example from the self test, is in English.
+
+## <img src="assets/icons/steps.svg" height="33" align="absmiddle" alt="">Small, clearly separated steps
+
+A function that drives a sequence reads like a list. Every step is a function of its own with a meaningful name, and
+the driving function only decides which step may run when:
+
+```swift
+func run() async {
+    await scanEveryArea()
+    await visitEveryPage()
+    guard hasFullDiskAccess else { return }
+    await cleanUpWithoutDeleting()
+}
+```
+
+We split long chains of many calls in a row into named intermediate steps. A function stays under 40 lines and under
+ten branches; above that, SwiftLint speaks up. In SwiftUI we group modifiers that belong together into a property or
+modifier of their own, so that a view does not turn into a long staircase.
+
+## <img src="assets/icons/deadcode.svg" height="33" align="absmiddle" alt="">No dead code
+
+Whatever is not used gets deleted, not commented out. Dead code makes the app bigger and is misleading, because
+people take it for something important. If you need it again later, you will find it in the Git history. The same
+goes for texts: a key the app shows nowhere disappears along with its translations.
+
+## <img src="assets/icons/comments.svg" height="33" align="absmiddle" alt="">Comments only for what you cannot see
+
+A good name replaces a comment. Comments are kept for rules you cannot see in the code, such as why a chart draws
+without animation. The story of how a bug came about belongs in the commit message or in the
+[architecture description](ARCHITECTURE.en.md).
+
+## <img src="assets/icons/tests.svg" height="33" align="absmiddle" alt="">Tests
+
+The tests live in `Tests/SpeicherExplorerTests` and use Apple’s test framework Swift Testing. Every test has a name
+that says, as a full sentence, what should hold, for example “Only emptying the Trash needs a deliberate click in
+the cleaner”. We test everything that has a fixed answer without a screen: the folder tree, the search, the page
+list, the categories, the size classes, the legend, the summary, the design values, the contrast and the
+translations.
+
+Tests never touch the real disk and use no real file or folder names. That is why a test builds a folder tree by
+hand, with made-up names such as `film.mov`. In tests, example values may stand as plain numbers, because there they
+are the explanation themselves. If you change or add a rule in the code, write or update the matching test along
+with it.
+
+## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">How to check your code
+
+Before every contribution you run the check chain. It must not report a single error or a single warning. Behind it
+is the script `scripts/inspect.py`. You run individual steps by their names, for example
+`scripts/inspect.py tests rules`.
+
+```bash
+make check
+```
+
+The script runs nine checks one after another:
+
+1. **Layout:** `swift format lint --strict` reports every deviation from the uniform layout.
+2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
+   function and types nested too deeply. The limits are in `.swiftlint.yml`.
+3. **Compiler:** The app is built with `-warnings-as-errors`, so even a single warning counts as an error.
+4. **Tests:** `swift test` runs all tests from `Tests/SpeicherExplorerTests`.
+5. **House rules:** Numbers without names, colours outside `Theme.swift`, German text in the code, `$0`, names of one
+   or two letters, lines over 100 characters and forgotten temporary debug lines.
+6. **Design:** Fonts without a text role, symbol names outside `Symbols`, custom glass or custom backgrounds,
+   animations outside `Motion`, hard-coded texts on screen and output outside the diagnostics.
+7. **Dead code:** every function, value and text that is created but used nowhere.
+8. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
+9. **Scripts:** `bash -n` and `make -n` check the shell scripts and the `Makefile` for typos.
+
+Whether every text exists in all 20 languages and whether every colour reaches the contrast is checked by the tests
+in the fourth step. How much of the code the tests reach is shown per folder by `make coverage`.
+
+On GitHub the same check runs by itself on every pull request, as described in
+`.github/workflows/checks.yml`. If it reports even a single finding, the pull request turns red, and the
+contribution has to be improved before it is merged. Whether names are understandable and whether a step is cut
+well, no script can judge, and only the eye can see what the glass looks like: for that, open the changed pages with
+`make demo`. We pay attention to these things when we read a contribution.
+
+<p align="center">
+  <img src="assets/banner-footer-en.svg" alt="" width="480">
+</p>
+
+<p align="center">
+  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <sub><a href="README.en.md">Overview</a> · <a href="CONTRIBUTING.en.md">Contributing</a> · <a href="ARCHITECTURE.en.md">Architecture</a> · <a href="CODE_STYLE.en.md">Code rules</a> · <a href="CODE_OF_CONDUCT.en.md">Code of conduct</a></sub><br>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT licence</a> · For macOS 27 on Macs with Apple silicon</sub>
+</p>
