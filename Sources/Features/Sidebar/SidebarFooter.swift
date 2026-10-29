@@ -6,6 +6,7 @@ struct SidebarFooter: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
     @State private var showDetails = false
+    @State private var scanStarts = 0  // turns the rescan symbol once per scan, also for ⌘R and the launch scan
 
     var body: some View {
         VStack(alignment: .leading, spacing: Space.row) {
@@ -29,29 +30,33 @@ struct SidebarFooter: View {
                 .help(layout == .list ? Loc.layoutGrid.s : Loc.layoutList.s)
                 .accessibilityLabel(layout == .list ? Loc.layoutGrid.s : Loc.layoutList.s)
                 Spacer()
-                Button { model.scan() } label: { Image(systemName: Symbols.rescan) }
+                Button { model.scan() } label: { Image(systemName: Symbols.rescan).turnOnce(value: scanStarts) }
                     .buttonStyle(.borderless)
                     .disabled(model.scanning)
                     .help(Loc.rescanHelp.s)
-                SettingsLink { Image(systemName: Symbols.settings) }
+                SettingsLink { HoverTurn(symbol: Symbols.settings) }
                     .buttonStyle(.borderless)
                     .help(Loc.settings.s)
             }
         }
         .padding(Space.item)
+        .onChange(of: model.scanning) { if model.scanning { scanStarts += 1 } }
     }
 
     /// One short line: spinner and percent while scanning, otherwise when it was measured.
     private var status: some View {
         HStack(spacing: Space.s) {
             if model.scanning {
-                ProgressView().controlSize(.small)
+                // No spinner here: the progress bar right below already moves, and Apple prefers one determinate
+                // indicator over a second endless one.
+                Image(systemName: Symbols.measure).foregroundStyle(.tint)
                 Text(Loc.scanningPercent.f(Fmt.percent(model.scanFraction))).monospacedDigit()
                     .contentTransition(.numericText(value: model.scanFraction))
                     .animation(Motion.quick, value: model.scanFraction)
             } else if let t = model.lastScan {
                 Image(systemName: model.unreadable > 0 && !model.hasFullDiskAccess ? Symbols.warning : Symbols.success)
                     .contentTransition(.symbolEffect(.replace))
+                    .symbolEffect(.bounce, value: t)  // a small nod when a scan has finished
                     .foregroundStyle(model.unreadable > 0 && !model.hasFullDiskAccess ? .warn : .good)
                 Text(Loc.measuredAt.f(Fmt.time(t)))
             } else {

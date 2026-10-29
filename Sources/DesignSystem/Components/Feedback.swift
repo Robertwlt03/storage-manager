@@ -30,6 +30,7 @@ struct StatusLabel: View {
 
     var body: some View {
         Label(text, systemImage: symbol).foregroundStyle(kind == .good ? .good : kind == .warn ? .warn : .bad)
+            .contentTransition(.symbolEffect(.replace))  // e.g. "running" turning into "quit" morphs its symbol
     }
 }
 

@@ -51,8 +51,26 @@ private struct HoverHighlight: ViewModifier {
     }
 }
 
+/// A symbol that turns once when the mouse comes over it, a small sign that it reacts (the settings gear).
+struct HoverTurn: View {
+    let symbol: String
+    @State private var hovers = 0
+
+    var body: some View {
+        Image(systemName: symbol)
+            .turnOnce(value: hovers)
+            .onHover { if $0 { hovers += 1 } }
+    }
+}
+
 extension View {
     func hoverLift() -> some View { modifier(HoverLift()) }
+
+    /// Turns an SF Symbol once whenever `value` changes; on macOS 14, which has no turning effect, it bounces.
+    /// A one-off effect of the system: it costs nothing at rest and is left out with "Reduce motion".
+    @ViewBuilder func turnOnce<V: Equatable>(value: V) -> some View {
+        if #available(macOS 15.0, *) { symbolEffect(.rotate, value: value) } else { symbolEffect(.bounce, value: value) }
+    }
     func hoverHighlight() -> some View { modifier(HoverHighlight()) }
 
     /// Charts redraw without animation: Swift Charts crashed while animating between changing datasets during a scan,
