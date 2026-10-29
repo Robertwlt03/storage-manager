@@ -13,12 +13,12 @@ enum Motion {
     /// For content appearing, pages switching, list and grid swapping.
     static var standard: Animation? { reduced ? nil : .smooth(duration: duration) }
 
-    /// Shorter, for changes that follow the user's own movement, like the sidebar while the window edge is dragged.
+    /// Shorter, for changes that follow the user's own movement, like the sidebar while the window edge is dragged,
+    /// and for each step of the progress bar: a step glides for a moment and then rests until the next one. (A
+    /// glide as long as the update interval kept the bar moving, and redrawing, for the whole scan.)
     static var quick: Animation? { reduced ? nil : .smooth(duration: quickDuration) }
     static let quickDuration = 0.2
 
-    /// The progress bar glides from one update to the next instead of jumping.
-    static var progress: Animation? { reduced ? nil : .linear(duration: ScanConfig.progressInterval) }
 
     /// Changes model state with the standard animation.
     static func animate(_ changes: () -> Void) {

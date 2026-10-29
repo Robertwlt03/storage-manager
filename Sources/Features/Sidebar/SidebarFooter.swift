@@ -15,7 +15,7 @@ struct SidebarFooter: View {
                 .popover(isPresented: $showDetails, arrowEdge: .trailing) { ScanDetails() }
             if model.scanning {
                 ProgressView(value: model.scanFraction).progressViewStyle(.linear).controlSize(.small)
-                    .animation(Motion.progress, value: model.scanFraction)
+                    .animation(Motion.quick, value: model.scanFraction)
                     .fadeTransition()
             }
             Divider()
@@ -48,7 +48,7 @@ struct SidebarFooter: View {
                 ProgressView().controlSize(.small)
                 Text(Loc.scanningPercent.f(Fmt.percent(model.scanFraction))).monospacedDigit()
                     .contentTransition(.numericText(value: model.scanFraction))
-                    .animation(Motion.progress, value: model.scanFraction)
+                    .animation(Motion.quick, value: model.scanFraction)
             } else if let t = model.lastScan {
                 Image(systemName: model.unreadable > 0 && !model.hasFullDiskAccess ? Symbols.warning : Symbols.success)
                     .contentTransition(.symbolEffect(.replace))
@@ -75,7 +75,7 @@ struct ScanDetails: View {
             Text(model.scanning ? Loc.scanningTitle.s : Loc.scanDetails.s).font(.headline)
             if model.scanning {
                 ProgressView(value: model.scanFraction).progressViewStyle(.linear)
-                    .animation(Motion.progress, value: model.scanFraction)
+                    .animation(Motion.quick, value: model.scanFraction)
                 UI.fields([FieldItem(.scanProgress, Fmt.percent(model.scanFraction)),
                            FieldItem(.scanArea, Loc.scanningArea.f(Fmt.count(model.scanStep.index), Fmt.count(model.scanStep.count),
                                                                       Paths.display(model.scanStep.path))),

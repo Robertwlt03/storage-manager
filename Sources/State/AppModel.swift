@@ -12,7 +12,7 @@ import SwiftUI
     var searchScope = SearchScope.all
     var showAccessSheet = false
     var columns = NavigationSplitViewVisibility.all  // whether the sidebar is shown
-    private var sidebarHiddenByWidth = false  // closed because the window got narrow, not by the user
+    private var sidebarClosedByUser = false  // the user's choice; only they open it again
     private(set) var windowNarrow = false
 
     let root = Node.virtualRoot()
@@ -50,7 +50,7 @@ import SwiftUI
             withAnimation(Motion.standard) { sidebarOverlay.toggle() }
             return
         }
-        sidebarHiddenByWidth = false  // the user's choice wins until the window crosses the width again
+        sidebarClosedByUser = sidebarVisible  // closing it now, or opening it again
         withAnimation(Motion.standard) { columns = sidebarVisible ? .detailOnly : .all }
     }
 
@@ -64,19 +64,20 @@ import SwiftUI
 
     /// Like Mail, as Apple's guidelines suggest: a narrow window closes the sidebar to make room for the page, and
     /// widening it again brings the sidebar back, unless the user closed it themselves; a floating sidebar settles
-    /// into its column then. Called only when the window crosses `Layout.sidebarCollapseWidth`.
-    /// It reads the window's own width: SwiftUI's layout width flickers past the limit while the sidebar moves.
+    /// into its column then. It reads the window's own width: SwiftUI's layout width flickers past the limit while
+    /// the sidebar moves.
+    ///
+    /// It compares the wanted state with the actual one on every resize instead of reacting only when the limit is
+    /// crossed: at the limit macOS closes the sidebar by itself as well, sometimes before this runs, and then the
+    /// sidebar did not come back when the window was widened again. Both changes run once and only when the state
+    /// differs, never on every resize event of a drag.
     func windowResized() {
         guard let width = mainWindow?.frame.width else { return }
-        let narrow = width < Layout.sidebarCollapseWidth
-        guard narrow != windowNarrow else { return }
-        windowNarrow = narrow
-        // A short animation: the window edge is moving already. It runs once per crossing, never while dragging.
-        if narrow && sidebarVisible {
-            sidebarHiddenByWidth = true
+        windowNarrow = width < Layout.sidebarCollapseWidth
+        if windowNarrow && sidebarVisible {
             withAnimation(Motion.quick) { columns = .detailOnly }
-        } else if !narrow && (sidebarHiddenByWidth || sidebarOverlay) {
-            sidebarHiddenByWidth = false
+        } else if !windowNarrow && !sidebarVisible && (!sidebarClosedByUser || sidebarOverlay) {
+            sidebarClosedByUser = false
             withAnimation(Motion.quick) {
                 sidebarOverlay = false
                 columns = .all
