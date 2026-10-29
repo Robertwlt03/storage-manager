@@ -56,7 +56,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | `make format` | bringt alle Swift-Dateien in die gemeinsame Form |
 | `make selftest` | startet die gebaute App als Selbsttest, misst echte Ordner und vergleicht mit `du` |
 | `make stress` | öffnet eine zweite App, die so schnell wie möglich durch alle Seiten klickt |
-| `make identity` | legt einmalig dein eigenes Zertifikat zum Signieren an |
+| `make identity` | legt einmalig dein eigenes Zertifikat an und erlaubt dem Signieren den Zugriff ohne Rückfrage |
 | `make release` | erstellt die DMG zum Weitergeben im Ordner `dist` |
 | `make clean` | löscht alles, was beim Bauen entsteht |
 
@@ -75,7 +75,9 @@ make run
 Ohne weitere Angaben wird die App nur behelfsmäßig signiert. Dann fragt macOS nach jedem Bauen erneut nach dem
 Festplattenvollzugriff. Wenn dich das stört, legst du einmalig ein eigenes Zertifikat an. Danach schreibst du dessen
 Namen in eine Datei `local.mk` im Projektordner. Git ignoriert diese Datei, und alle Befehle signieren ab dann
-damit.
+damit. `make identity` fragt dabei einmal nach deinem Anmeldepasswort, damit das Signieren später nicht bei jedem Bauen
+nach dem Schlüsselbund fragt. Hast du das Zertifikat schon früher angelegt und kommt die Abfrage trotzdem jedes Mal,
+startest du `make identity` einfach noch einmal.
 
 ```bash
 make identity

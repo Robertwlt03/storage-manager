@@ -19,6 +19,11 @@ rm -rf "$APP" "$ICONSET"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$ICONSET"
 cp "$BIN" "$APP/Contents/MacOS/"
 cp Info.plist "$APP/Contents/"
+# A build with another bundle identifier (the demo) gets its own permissions and settings, so it
+# never takes over the Full Disk Access of the signed app.
+if [ -n "${BUNDLE_ID:-}" ]; then
+  /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier $BUNDLE_ID" "$APP/Contents/Info.plist"
+fi
 cp -R Resources/*.lproj "$APP/Contents/Resources/"
 
 "$BIN" --render-icon "$BUILD_DIR/icon.png"

@@ -4,7 +4,7 @@
 -include local.mk
 
 BUILD_DIR ?= build
-export BUILD_DIR SIGN_IDENTITY
+export BUILD_DIR SIGN_IDENTITY BUNDLE_ID
 
 APP := $(BUILD_DIR)/Speicher-Explorer.app
 DEMO_BUILD_DIR := $(BUILD_DIR)/demo
@@ -31,9 +31,9 @@ restart: ## Quit the app if it is open, then open the built one
 	open "$(APP)"
 
 demo: ## Build without your certificate, then open the app with made-up data (no scan)
-	@# The demo reads nothing, so it needs no Full Disk Access and no signing identity; its own
-	@# folder keeps the signed app and its access untouched.
-	$(MAKE) build BUILD_DIR="$(DEMO_BUILD_DIR)" SIGN_IDENTITY=-
+	@# The demo reads nothing, so it needs no Full Disk Access and no signing identity. Its own
+	@# folder and bundle identifier keep the signed app and its access untouched.
+	$(MAKE) build BUILD_DIR="$(DEMO_BUILD_DIR)" SIGN_IDENTITY=- BUNDLE_ID=local.speicher-explorer.demo
 	open -n "$(DEMO_BUILD_DIR)/Speicher-Explorer.app" --args -demo YES
 
 check: ## Run the whole check pipeline, as on GitHub

@@ -4,9 +4,18 @@
 # instead of asking again after each build. The certificate never leaves this Mac.
 set -euo pipefail
 NAME="${1:-Speicher-Explorer Dev}"
+KEYCHAIN="$HOME/Library/Keychains/login.keychain-db"
+
+# Lets codesign use the key without asking for the keychain password on every build. Newer macOS
+# versions need this partition list in addition to the access list; it asks for the password once.
+allow_codesign() {
+  echo "Allowing codesign to use \"$NAME\" without asking each time (enter your login password once):"
+  security set-key-partition-list -S apple-tool:,apple:,codesign: -s -l "$NAME" "$KEYCHAIN" > /dev/null
+}
 
 if security find-identity -p codesigning | grep -q "\"$NAME\""; then
   echo "Signing identity \"$NAME\" already exists."
+  allow_codesign
   exit 0
 fi
 
@@ -30,5 +39,6 @@ CNF
 PASS=$(uuidgen)
 /usr/bin/openssl pkcs12 -export -inkey "$TMP/key.pem" -in "$TMP/cert.pem" -name "$NAME" \
   -out "$TMP/identity.p12" -passout pass:"$PASS"
-security import "$TMP/identity.p12" -k "$HOME/Library/Keychains/login.keychain-db" -P "$PASS" -T /usr/bin/codesign > /dev/null
+security import "$TMP/identity.p12" -k "$KEYCHAIN" -P "$PASS" -T /usr/bin/codesign > /dev/null
 echo "Signing identity \"$NAME\" created."
+allow_codesign
