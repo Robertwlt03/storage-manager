@@ -1,15 +1,10 @@
 import SwiftUI
 
-/// The sidebar column with its toolbar button.
+/// The sidebar column.
 struct SidebarView: View {
     var body: some View {
         SidebarList()
             .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
-            .toolbar {
-                // A flexible spacer first puts the button at the sidebar's trailing edge, where the system keeps its own.
-                if #available(macOS 26.0, *) { ToolbarSpacer(.flexible) }
-                ToolbarItem { SidebarToggle() }
-            }
             // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
             // animation, which made the reopening sidebar jump.
             .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
@@ -50,8 +45,10 @@ struct SidebarList: View {
 }
 
 
-/// The button that shows and hides the sidebar, next to the window buttons like the system's own. It belongs to the
-/// sidebar's toolbar, which macOS keeps visible while the sidebar is closed, so one button serves both states.
+/// The button that shows and hides the sidebar. It belongs to the page's toolbar, at its leading edge: right beside
+/// the open sidebar, next to the window buttons while it is closed. In the sidebar's own toolbar it had to change
+/// toolbar sections whenever the sidebar opened or closed, and macOS faded it over, leaving an empty glass button
+/// behind for a moment.
 struct SidebarToggle: View {
     @Environment(AppModel.self) private var model
 

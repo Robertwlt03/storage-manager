@@ -71,15 +71,14 @@ import SwiftUI
         let narrow = width < Layout.sidebarCollapseWidth
         guard narrow != windowNarrow else { return }
         windowNarrow = narrow
+        // Not animated: the window edge is moving already, and Mail switches at once here too.
         if narrow && sidebarVisible {
             sidebarHiddenByWidth = true
-            withAnimation(Motion.standard) { columns = .detailOnly }
+            columns = .detailOnly
         } else if !narrow && (sidebarHiddenByWidth || sidebarOverlay) {
             sidebarHiddenByWidth = false
-            withAnimation(Motion.standard) {
-                sidebarOverlay = false
-                columns = .all
-            }
+            sidebarOverlay = false
+            columns = .all
         }
     }
 

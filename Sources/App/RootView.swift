@@ -12,6 +12,7 @@ struct RootView: View {
         } detail: {
             detail
                 .frame(minWidth: Layout.pageMinWidth)  // cards are never squeezed, also with the sidebar open
+                .toolbar { ToolbarItem(placement: .navigation) { SidebarToggle() } }
                 .overlay(alignment: .leading) {
                     // Always there in narrow windows and only slid in and out: removing it closed abruptly, because
                     // the list inside (an AppKit table) left at once instead of taking part in the transition.
