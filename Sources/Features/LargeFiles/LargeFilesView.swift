@@ -5,8 +5,7 @@ struct LargeFilesView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.largeFileMB) private var minMB = LargeFileThreshold.defaultMB
     var body: some View {
-        // Computed right away (a quick walk over the tree), so the table is created with its rows instead of
-        // starting empty and being diffed into thousands of rows a moment later.
+        // Computed right away, so the table starts with its rows instead of diffing thousands in later.
         let _ = model.revision
         let entries = SearchService.largeFiles(atLeast: LargeFileThreshold.bytes(minMB), in: model.root)
         let sum = entries.reduce(0) { $0 + $1.bytes }

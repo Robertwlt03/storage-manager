@@ -6,21 +6,17 @@ struct SidebarView: View {
         SidebarList()
             .toolbar(removing: .sidebarToggle)  // replaced by `SidebarToggle`, see `AppModel.toggleSidebar`
             .toolbar {
-                // Where Apple's own SwiftUI toggle sits: at the trailing edge of the open sidebar (a flexible spacer
-                // pushes it there), next to the window buttons while it is closed (macOS keeps a sidebar's toolbar
-                // items there). macOS fades the button from one place to the other, as it does with Apple's own.
+                // Where Apple puts it: trailing edge of the open sidebar, next to the window buttons when closed.
                 if #available(macOS 26.0, *) { ToolbarSpacer(.flexible) }
                 if #available(macOS 26.0, *) {
-                    // Its own glass circle instead of the toolbar's shared background: macOS faded that background
-                    // separately when the button changed places, leaving an empty glass circle behind for a moment.
+                    // Own glass circle, so no empty background stays behind when it moves (see ARCHITECTURE.md).
                     ToolbarItem { SidebarToggle().buttonStyle(.glass).buttonBorderShape(.circle) }
                         .sharedBackgroundVisibility(.hidden)
                 } else {
                     ToolbarItem { SidebarToggle() }
                 }
             }
-            // A fixed width: with only min and ideal, the column renegotiated its width at the end of the reveal
-            // animation, which made the reopening sidebar jump.
+            // Fixed: a flexible width jumped at the end of the reveal animation.
             .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
     }
 }

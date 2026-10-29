@@ -42,9 +42,7 @@ import SwiftUI
     private(set) var sidebarOverlay = false
     var sidebarShown: Bool { sidebarVisible || sidebarOverlay }
 
-    /// Shows or hides the sidebar with SwiftUI's animation. The system's own toggle lets AppKit slide the column
-    /// while the page jumps to its new width without any frames in between, which looked jerky when showing it.
-    /// A window too narrow for both keeps its size: the sidebar then floats above the page until it is dismissed.
+    /// Animated by SwiftUI, not AppKit (see ARCHITECTURE.md). In a narrow window the sidebar floats above the page.
     func toggleSidebar() {
         if windowNarrow && !sidebarVisible {
             withAnimation(Motion.standard) { sidebarOverlay.toggle() }
@@ -62,15 +60,8 @@ import SwiftUI
 
     private var mainWindow: NSWindow? { NSApp.windows.first { $0.identifier?.rawValue == WindowID.main } }
 
-    /// Like Mail, as Apple's guidelines suggest: a narrow window closes the sidebar to make room for the page, and
-    /// widening it again brings the sidebar back, unless the user closed it themselves; a floating sidebar settles
-    /// into its column then. It reads the window's own width: SwiftUI's layout width flickers past the limit while
-    /// the sidebar moves.
-    ///
-    /// It compares the wanted state with the actual one on every resize instead of reacting only when the limit is
-    /// crossed: at the limit macOS closes the sidebar by itself as well, sometimes before this runs, and then the
-    /// sidebar did not come back when the window was widened again. Both changes run once and only when the state
-    /// differs, never on every resize event of a drag.
+    /// A narrow window closes the sidebar, a wide one brings it back unless the user closed it, like Mail.
+    /// Compares wanted and actual state on every resize, because macOS also closes it on its own (see ARCHITECTURE.md).
     func windowResized() {
         guard let width = mainWindow?.frame.width else { return }
         windowNarrow = width < Layout.sidebarCollapseWidth
@@ -129,8 +120,7 @@ import SwiftUI
             unreadable = 0
             explorerPath = []
         }
-        // Not animated: the scan at launch starts before the window's first frame, and an animation here would let
-        // every card grow out of the top-left corner. Waiting states and results simply take their place.
+        // Not animated: the launch scan starts before the first frame (see ARCHITECTURE.md).
         scanning = true
         progress = .init(files: root.fileCount, bytes: root.bytes)
         let todo = paths ?? ScanService.defaultRoots()

@@ -13,9 +13,8 @@ enum Motion {
     /// For content appearing, pages switching, list and grid swapping.
     static var standard: Animation? { reduced ? nil : .smooth(duration: duration) }
 
-    /// Shorter, for changes that follow the user's own movement, like the sidebar while the window edge is dragged,
-    /// and for each step of the progress bar: a step glides for a moment and then rests until the next one. (A
-    /// glide as long as the update interval kept the bar moving, and redrawing, for the whole scan.)
+    /// For changes that follow the user's own movement, and for each step of the progress bar, which then rests
+    /// until the next step instead of redrawing for the whole scan.
     static var quick: Animation? { reduced ? nil : .smooth(duration: quickDuration) }
     static let quickDuration = 0.2
 
@@ -61,8 +60,7 @@ extension View {
     }
     func hoverHighlight() -> some View { modifier(HoverHighlight()) }
 
-    /// Charts redraw without animation: Swift Charts crashed while animating between changing datasets during a scan,
-    /// and redrawing once is also cheaper.
+    /// Charts redraw without animation: animating between changing datasets crashed Swift Charts.
     func staticChart() -> some View { transaction { $0.animation = nil } }
 
     /// Animates this view whenever `value` changes.

@@ -13,9 +13,7 @@ struct RootView: View {
             detail
                 .frame(minWidth: Layout.pageMinWidth)  // cards are never squeezed, also with the sidebar open
                 .overlay(alignment: .leading) {
-                    // Always there in narrow windows and only slid in and out: removing it closed abruptly, because
-                    // the list inside (an AppKit table) left at once instead of taking part in the transition.
-                    // No fading: the glass is see-through already, fading it on top would spoil the effect.
+                    // Slid, never removed or faded (see ARCHITECTURE.md).
                     if model.windowNarrow {
                         SidebarOverlay()
                             .offset(x: model.sidebarOverlay ? 0 : -(Layout.sidebarIdeal + Space.l))

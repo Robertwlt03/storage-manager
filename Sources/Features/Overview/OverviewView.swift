@@ -2,8 +2,7 @@ import Charts
 import SwiftUI
 
 /// The start page: key figures, the disk split, a short summary, the size classes and every category.
-/// Figures and the chart come from the last finished scan; while a scan runs their cards stay in place with a
-/// spinner where the values go, so nothing jumps around and nothing stale can be clicked.
+/// Figures and the chart come from the last finished scan.
 struct OverviewView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list

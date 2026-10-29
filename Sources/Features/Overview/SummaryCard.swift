@@ -1,7 +1,6 @@
 import SwiftUI
 
-/// "In short": how the storage looks in a few sentences, with a button to hear it. While a scan runs the text
-/// would be rewritten several times, so it says what it is waiting for and the button waits until the text is final.
+/// "In short": the storage in a few sentences, read aloud on request; both wait until the scan is done.
 struct SummaryCard: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
