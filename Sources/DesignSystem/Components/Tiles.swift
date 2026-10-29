@@ -2,7 +2,7 @@ import SwiftUI
 
 /// A tile for the grid view: large icon, name, size and an optional share bar.
 struct Tile: View {
-    let icon: RowIcon
+    let icon: Icon
     let title: String
     let value: String
     var detail: String?
@@ -10,7 +10,7 @@ struct Tile: View {
 
     var body: some View {
         VStack(spacing: Space.s) {
-            RowIconView(icon: icon, size: Layout.gridIcon)
+            IconView(icon: icon, size: .large)
             Text(title).font(.headline).lineLimit(2).multilineTextAlignment(.center)
             Text(value).monospacedDigit().foregroundStyle(.muted)
             if let detail { Text(detail).font(.callout).foregroundStyle(.muted).lineLimit(1) }
@@ -38,20 +38,20 @@ struct StatTile: View {
             HStack(spacing: Space.item) {
                 // The symbol sits above the figure, so number and label get the tile's whole width even when narrow.
                 VStack(alignment: .leading, spacing: Space.hairline) {
-                    Image(systemName: symbol).font(.title3).foregroundStyle(.tint).padding(.bottom, Space.xs)
+                    IconView(icon: .symbol(symbol), size: .small).foregroundStyle(.tint).padding(.bottom, Space.xs)
                     Text(value).font(.title2.weight(.semibold)).monospacedDigit().contentTransition(.numericText())
                         .lineLimit(1).minimumScaleFactor(Layout.statMinScale)  // a number never breaks
                         .calculating(loading)
                     Text(label).foregroundStyle(.muted).lineLimit(2, reservesSpace: true)  // same height in every tile
                 }
                 Spacer(minLength: 0)
-                if action != nil { Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted) }
+                if action != nil { Chevron() }
             }
             .padding(Space.card)
             .surface()
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .appButton(.content)
         .hoverLift()
         .allowsHitTesting(action != nil && !loading)
         .accessibilityElement(children: .combine)

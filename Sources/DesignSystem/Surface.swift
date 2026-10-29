@@ -19,13 +19,15 @@ private struct SurfaceModifier: ViewModifier {
 }
 
 /// Button roles with their own colour, so several buttons side by side stay distinguishable.
+/// `quiet` is a bare symbol button (sidebar footer, info button); `content` makes a whole row, tile or legend entry
+/// clickable without drawing a button around it.
 enum ButtonKind {
-    case normal, primary, confirm
+    case normal, primary, confirm, quiet, content
 
-    /// Fill behind white text; nil = neutral system button.
+    /// Fill behind white text; nil = no fill.
     var fill: Tone? {
         switch self {
-        case .normal: nil
+        case .normal, .quiet, .content: nil
         case .primary: Theme.primaryFill
         case .confirm: Theme.confirmFill
         }
@@ -36,7 +38,11 @@ private struct AppButtonModifier: ViewModifier {
     let kind: ButtonKind
 
     func body(content: Content) -> some View {
-        if let fill = kind.fill {
+        if kind == .quiet {
+            content.buttonStyle(.borderless)
+        } else if kind == .content {
+            content.buttonStyle(.plain)
+        } else if let fill = kind.fill {
             if #available(macOS 26.0, *) { content.buttonStyle(.glassProminent).tint(fill.color) }
             else { content.buttonStyle(.borderedProminent).tint(fill.color) }
         } else {

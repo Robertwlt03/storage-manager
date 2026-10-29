@@ -36,7 +36,7 @@ struct UnusedAppsView: View {
                 UI.card {
                     UI.rows(unused) { app in
                         HStack(spacing: Space.item) {
-                            RowIconView(icon: .file(app.path))
+                            IconView(icon: .file(app.path))
                             VStack(alignment: .leading, spacing: Space.hairline) {
                                 Text(app.name)
                                 Text(lastUsed(app)).font(.callout).foregroundStyle(.muted)

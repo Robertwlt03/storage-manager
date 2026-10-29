@@ -35,7 +35,7 @@ struct PageHeader<Options: View>: View {
             Spacer(minLength: 0)
             Button { showInfo.toggle() } label: { Label(Loc.aboutPage.s, systemImage: Symbols.info) }
                 .labelStyle(.iconOnly)
-                .buttonStyle(.borderless)
+                .appButton(.quiet)
                 .font(.title3)
                 .help(Loc.aboutPage.s)
                 .popover(isPresented: $showInfo, arrowEdge: .bottom) {

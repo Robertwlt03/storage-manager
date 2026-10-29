@@ -87,7 +87,7 @@ struct OverviewView: View {
 
     private func node(for segment: StorageSegment) -> Node? { model.categories.first { "\($0.kind)" == segment.id }?.node }
 
-    private func badge(_ c: Category) -> RowIcon { .badge(symbol: c.kind.symbol, colorIndex: c.kind.rawValue) }
+    private func badge(_ c: Category) -> Icon { .badge(symbol: c.kind.symbol, colorIndex: c.kind.rawValue) }
 
     private var segments: [StorageSegment] {
         model.categories.map { StorageSegment(id: "\($0.kind)", title: $0.kind.title.s, bytes: $0.bytes, colorIndex: $0.kind.rawValue) }

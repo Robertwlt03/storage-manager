@@ -11,7 +11,7 @@ struct SidebarFooter: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Space.row) {
             Button { showDetails.toggle() } label: { status }
-                .buttonStyle(.plain)
+                .appButton(.content)
                 .help(Loc.scanDetails.s)
                 .popover(isPresented: $showDetails, arrowEdge: .trailing) { ScanDetails() }
             if model.scanning {
@@ -23,19 +23,19 @@ struct SidebarFooter: View {
             HStack(spacing: Space.m) {
                 // One quiet button like the two next to it; the symbol shows what a click switches to.
                 Button { layout = layout == .list ? .grid : .list } label: {
-                    Image(systemName: layout == .list ? Symbols.grid : Symbols.list).smallIcon().contentTransition(.symbolEffect(.replace))
+                    IconView(icon: .symbol(layout == .list ? Symbols.grid : Symbols.list), size: .small).contentTransition(.symbolEffect(.replace))
                 }
-                .buttonStyle(.borderless)
+                .appButton(.quiet)
                 .disabled(!(model.pane ?? .overview).supportsGrid || model.isSearching)
                 .help(layout == .list ? Loc.layoutGrid.s : Loc.layoutList.s)
                 .accessibilityLabel(layout == .list ? Loc.layoutGrid.s : Loc.layoutList.s)
                 Spacer()
-                Button { model.scan() } label: { Image(systemName: Symbols.rescan).smallIcon().turnOnce(value: scanStarts) }
-                    .buttonStyle(.borderless)
+                Button { model.scan() } label: { IconView(icon: .symbol(Symbols.rescan), size: .small).turnOnce(value: scanStarts) }
+                    .appButton(.quiet)
                     .disabled(model.scanning)
                     .help(Loc.rescanHelp.s)
-                SettingsLink { Image(systemName: Symbols.settings).smallIcon() }
-                    .buttonStyle(.borderless)
+                SettingsLink { IconView(icon: .symbol(Symbols.settings), size: .small) }
+                    .appButton(.quiet)
                     .help(Loc.settings.s)
             }
         }
@@ -49,23 +49,23 @@ struct SidebarFooter: View {
             if model.scanning {
                 // No spinner here: the progress bar right below already moves, and Apple prefers one determinate
                 // indicator over a second endless one.
-                Image(systemName: Symbols.measure).smallIcon().foregroundStyle(.tint)
+                IconView(icon: .symbol(Symbols.measure), size: .small).foregroundStyle(.tint)
                 Text(Loc.scanningPercent.f(Fmt.percent(model.scanFraction))).monospacedDigit()
                     .contentTransition(.numericText(value: model.scanFraction))
                     .animation(Motion.quick, value: model.scanFraction)
             } else if let t = model.lastScan {
-                Image(systemName: model.unreadable > 0 && !model.hasFullDiskAccess ? Symbols.warning : Symbols.success)
-                    .smallIcon()
+                IconView(icon: .symbol(model.unreadable > 0 && !model.hasFullDiskAccess ? Symbols.warning : Symbols.success),
+                         size: .small)
                     .contentTransition(.symbolEffect(.replace))
                     .symbolEffect(.bounce, value: t)  // a small nod when a scan has finished
                     .foregroundStyle(model.unreadable > 0 && !model.hasFullDiskAccess ? .warn : .good)
                 Text(Loc.measuredAt.f(Fmt.time(t)))
             } else {
-                Image(systemName: Symbols.measure).smallIcon().foregroundStyle(.muted)
+                IconView(icon: .symbol(Symbols.measure), size: .small).foregroundStyle(.muted)
                 Text(Loc.notMeasuredTitle.s)
             }
             Spacer(minLength: 0)
-            Image(systemName: Symbols.info).smallIcon().foregroundStyle(.muted)
+            IconView(icon: .symbol(Symbols.info), size: .small).foregroundStyle(.muted)
         }
         .font(.callout)
         .contentShape(Rectangle())

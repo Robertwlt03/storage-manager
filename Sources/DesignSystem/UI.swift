@@ -43,7 +43,7 @@ enum UI {
         DividedRows(data: data, row: row)
     }
 
-    static func navRow(_ title: String, icon: RowIcon? = nil, detail: String? = nil, value: String? = nil,
+    static func navRow(_ title: String, icon: Icon? = nil, detail: String? = nil, value: String? = nil,
                        action: (() -> Void)? = nil) -> some View {
         NavRow(icon: icon, title: title, detail: detail, value: value, action: action)
     }
@@ -53,7 +53,7 @@ enum UI {
         DividedRows(data: items.compactMap { $0 }) { FieldRow(label: $0.label, value: $0.value) }
     }
 
-    static func header(_ title: String, subtitle: String, icon: RowIcon, size: CGFloat = Layout.headerIcon) -> some View {
+    static func header(_ title: String, subtitle: String, icon: Icon, size: IconSize = .large) -> some View {
         HeaderRow(icon: icon, title: title, subtitle: subtitle, iconSize: size)
     }
 
@@ -75,7 +75,7 @@ enum UI {
     }
 
     // Grid
-    static func tile(icon: RowIcon, title: String, value: String, detail: String? = nil, share: Double? = nil) -> some View {
+    static func tile(icon: Icon, title: String, value: String, detail: String? = nil, share: Double? = nil) -> some View {
         Tile(icon: icon, title: title, value: value, detail: detail, share: share)
     }
     static func grid<D: RandomAccessCollection, C: View>(_ data: D, minWidth: CGFloat = Layout.gridTile,

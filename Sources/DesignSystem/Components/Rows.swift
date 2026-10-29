@@ -1,30 +1,37 @@
 import SwiftUI
 
-/// What sits at the start of a row.
-enum RowIcon {
+/// Every icon of the app: what it shows. How big it is comes from `IconSize`, so all icons of one size look alike.
+enum Icon {
+    case symbol(String)  // an SF Symbol in the surrounding colour
     case badge(symbol: String, colorIndex: Int)  // white symbol on a coloured square, like System Settings
     case letter(String)  // a short code on a neutral square (T, C, X, 0)
     case file(String)  // the Finder icon of a path
     case preview(String)  // a Quick Look thumbnail of a path, the Finder icon until it is ready or if there is none
 }
 
-struct RowIconView: View {
-    let icon: RowIcon
-    var size = Layout.badgeSize
+/// One component for all icons: each kind fills the same square of its size. SF Symbols differ in shape (a wide grid,
+/// a round arrow, a gear), so they are fitted into the square instead of being drawn at a font size.
+struct IconView: View {
+    let icon: Icon
+    var size = IconSize.medium
 
     var body: some View {
-        let shape = RoundedRectangle(cornerRadius: Layout.badgeRadius, style: .continuous)
+        let side = size.rawValue
+        let shape = RoundedRectangle(cornerRadius: side * Layout.badgeRadiusShare, style: .continuous)
         switch icon {
+        case .symbol(let symbol):
+            Image(systemName: symbol).resizable().scaledToFit().frame(width: side, height: side)
         case .badge(let symbol, let index):
-            Image(systemName: symbol).font(.system(size: size / 2, weight: .semibold)).foregroundStyle(.white)
-                .frame(width: size, height: size).background(Theme.color(index).gradient, in: shape)
+            Image(systemName: symbol).resizable().scaledToFit().fontWeight(.semibold).foregroundStyle(.white)
+                .frame(width: side / 2, height: side / 2)
+                .frame(width: side, height: side).background(Theme.color(index).gradient, in: shape)
         case .letter(let text):
-            Text(text).font(.system(.body, design: .monospaced).weight(.semibold))
-                .frame(width: size, height: size).background(.quaternary, in: shape)
+            Text(text).font(.system(size: side / 2, weight: .semibold, design: .monospaced))
+                .frame(width: side, height: side).background(.quaternary, in: shape)
         case .file(let path):
-            FinderService.icon(path).resizable().frame(width: size, height: size)
+            FinderService.icon(path).resizable().frame(width: side, height: side)
         case .preview(let path):
-            PreviewIcon(path: path, size: size)
+            PreviewIcon(path: path, size: side)
         }
     }
 }
@@ -46,7 +53,7 @@ private struct PreviewIcon: View {
 
 /// Icon, title, optional detail line, value and – if there is an action – a chevron.
 struct NavRow: View {
-    let icon: RowIcon?
+    let icon: Icon?
     let title: String
     var detail: String?
     var value: String?
@@ -55,14 +62,14 @@ struct NavRow: View {
     var body: some View {
         Button { action?() } label: {
             HStack(spacing: Space.item) {
-                if let icon { RowIconView(icon: icon) }
+                if let icon { IconView(icon: icon) }
                 VStack(alignment: .leading, spacing: Space.hairline) {
                     Text(title)
                     if let detail { Text(detail).font(.callout).foregroundStyle(.muted) }
                 }
                 Spacer(minLength: Space.item)
                 if let value { Text(value).monospacedDigit().foregroundStyle(.muted).contentTransition(.numericText()) }
-                Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted)
+                Chevron()
                     .opacity(action == nil ? 0 : 1)
             }
             .contentShape(Rectangle())
@@ -71,7 +78,7 @@ struct NavRow: View {
             .modifier(OptionalHover(active: action != nil))
             .padding(.horizontal, -Space.s).padding(.vertical, -Space.xs)
         }
-        .buttonStyle(.plain)
+        .appButton(.content)
         .allowsHitTesting(action != nil)  // not .disabled: that would dim the text below 4.5:1
         .accessibilityElement(children: .combine)
     }
@@ -107,14 +114,14 @@ struct FieldRow: View {
 
 /// Large icon with title and subtitle, used at the top of volume cards and the info sheet.
 struct HeaderRow: View {
-    let icon: RowIcon
+    let icon: Icon
     let title: String
     let subtitle: String
-    var iconSize = Layout.headerIcon
+    var iconSize = IconSize.large
 
     var body: some View {
         HStack(spacing: Space.item) {
-            RowIconView(icon: icon, size: iconSize)
+            IconView(icon: icon, size: iconSize)
             VStack(alignment: .leading, spacing: Space.hairline) {
                 Text(title).font(.title2.weight(.semibold)).lineLimit(2)
                 Text(subtitle).foregroundStyle(.muted).lineLimit(2).textSelection(.enabled)
@@ -131,8 +138,7 @@ private struct OptionalHover: ViewModifier {
     }
 }
 
-extension Image {
-    /// Small symbols side by side (the sidebar's footer) get one square box: drawn at the same font size, a wide
-    /// grid, a round arrow and a gear still looked different in size.
-    func smallIcon() -> some View { resizable().scaledToFit().frame(width: Layout.smallIcon, height: Layout.smallIcon) }
+/// The small arrow at the end of anything that leads somewhere: rows, tiles and legend entries.
+struct Chevron: View {
+    var body: some View { Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted) }
 }

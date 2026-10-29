@@ -55,13 +55,16 @@ enum WindowID {
     static let main = "main"
 }
 
+/// The three icon sizes of the app; every icon picks one, so icons of the same role always match.
+enum IconSize: CGFloat {
+    case small = 16  // beside text: sidebar footer, table cells, key figures
+    case medium = 26  // at the start of a row: categories, cleaner, apps
+    case large = 52  // headers, sheets and tiles in the grid view
+}
+
 enum Layout {
+    static let badgeRadiusShare: CGFloat = 0.23  // corner radius of coloured squares, relative to their size
     static let cardRadius: CGFloat = 16
-    static let badgeRadius: CGFloat = 6
-    static let badgeSize: CGFloat = 26
-    static let headerIcon: CGFloat = 48
-    static let sheetIcon: CGFloat = 56
-    static let listIcon: CGFloat = 16
     static let storageBarHeight: CGFloat = 22
     static let storageBarRadius: CGFloat = 5
     static let maxContentWidth: CGFloat = 900
@@ -84,14 +87,12 @@ enum Layout {
     static let placeholderHeight: CGFloat = 320
     static let backdropOpacity = 0.16
     static let gridTile: CGFloat = 170
-    static let gridIcon: CGFloat = 52
     static let legendDot: CGFloat = 10
     static let legendMax = 6
     static let legendColumns = 2
     static let chartHeight: CGFloat = 220
     static let statTileMin: CGFloat = 150
     static let statColumns = 3
-    static let smallIcon: CGFloat = 16  // symbols in the sidebar footer
     static let statMinScale = 0.7
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28

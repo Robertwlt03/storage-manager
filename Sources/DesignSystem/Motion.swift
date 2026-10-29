@@ -45,7 +45,7 @@ private struct HoverHighlight: ViewModifier {
     func body(content: Content) -> some View {
         content
             .background(Color.primary.opacity(hovering ? Motion.hoverTint : 0),
-                        in: RoundedRectangle(cornerRadius: Layout.badgeRadius, style: .continuous))
+                        in: RoundedRectangle(cornerRadius: IconSize.medium.rawValue * Layout.badgeRadiusShare, style: .continuous))
             .animation(Motion.standard, value: hovering)
             .onHover { hovering = $0 }
     }

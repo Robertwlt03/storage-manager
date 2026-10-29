@@ -12,7 +12,7 @@ struct InfoSheet: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: Space.section) {
                     UI.card {
-                        UI.header(entry.name, subtitle: Paths.display(path), icon: .file(path), size: Layout.sheetIcon)
+                        UI.header(entry.name, subtitle: Paths.display(path), icon: .file(path))
                             .padding(.vertical, Space.row)
                         Divider()
                         UI.fields(basics(path))

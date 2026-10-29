@@ -83,11 +83,11 @@ struct StorageLegend: View {
                         Text(s.title).lineLimit(1)
                         Text(Fmt.bytes(s.bytes)).foregroundStyle(.muted).monospacedDigit().lineLimit(1)
                             .contentTransition(.numericText())
-                        if target { Image(systemName: Symbols.chevron).font(.caption2.weight(.semibold)).foregroundStyle(.muted) }
+                        if target { Chevron() }
                     }
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .appButton(.content)
                 .allowsHitTesting(target)
                 .font(.callout)
                 .accessibilityElement(children: .combine)
@@ -130,8 +130,7 @@ struct FileCell: View {
         Label {
             Text(name).lineLimit(1).truncationMode(.middle)
         } icon: {
-            if let path { FinderService.icon(path).resizable().frame(width: Layout.listIcon, height: Layout.listIcon) }
-            else { Image(systemName: Symbols.rest) }
+            IconView(icon: path.map(Icon.file) ?? .symbol(Symbols.rest), size: .small)
         }
     }
 }
