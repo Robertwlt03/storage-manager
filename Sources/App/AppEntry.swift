@@ -45,7 +45,7 @@ struct SpeicherExplorerApp: App {
             // The system item would use the jerky AppKit toggle.
             CommandGroup(replacing: .sidebar) {
                 Button(
-                    model.isSidebarShown
+                    model.sidebar.isShown
                         ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
                 ) { model.toggleSidebar() }
                 .keyboardShortcut("s", modifiers: [.control, .command])

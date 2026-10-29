@@ -73,7 +73,7 @@ private struct SidebarToggle: View {
 
     var body: some View {
         let title =
-            model.isSidebarShown ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
+            model.sidebar.isShown ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
         Button {
             model.toggleSidebar()
         } label: {

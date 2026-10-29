@@ -81,8 +81,8 @@ nicht animiert.
 **Seitenleiste:** Den Knopf und den Menübefehl des Systems ersetzt die App durch eigene, denn beim Einblenden über
 AppKit sprang die Seite ohne Zwischenbilder auf ihre neue Breite. SwiftUI animiert sie stattdessen gleichmäßig. Der
 Knopf zeichnet seinen Glaskreis selbst, damit macOS beim Platzwechsel keinen leeren Kreis zurücklässt. Bei jeder
-Größenänderung des Fensters vergleicht `AppModel`, ob die Seitenleiste offen sein sollte, denn an der Grenze schließt
-macOS sie manchmal selbst. Die Breite liest es dafür direkt vom Fenster, weil die Breite aus SwiftUI während der
+Größenänderung des Fensters vergleicht `SidebarState`, ob die Seitenleiste offen sein sollte, denn an der Grenze schließt
+macOS sie manchmal selbst. Die Breite liest `AppModel` dafür direkt vom Fenster, weil die Breite aus SwiftUI während der
 Bewegung kurz über die Grenze springt.
 
 **Schwebende Seitenleiste:** In schmalen Fenstern schwebt die Seitenleiste über der Seite. Sie wird nur hinein- und

@@ -18,9 +18,7 @@ import SwiftUI
     var isSearchPresented = false
     var searchScope = SearchScope.all
     var isShowingAccessSheet = false
-    var sidebarVisibility = NavigationSplitViewVisibility.all  // whether the sidebar is shown
-    private var wasSidebarClosedByUser = false  // the user's choice; only they open it again
-    private(set) var isWindowNarrow = false
+    var sidebar = SidebarState()
 
     let root = Node.virtualRoot()
     private(set) var revision = 0  // bumped whenever the tree changes; views read it to refresh
@@ -53,52 +51,26 @@ import SwiftUI
     var isSearching: Bool { !searchQuery.isEmpty }
     var searchQuery: String { searchText.trimmingCharacters(in: .whitespaces) }
 
-    private var isSidebarVisible: Bool { sidebarVisibility != .detailOnly }
-    /// In a narrow window the sidebar floats above the page for a moment instead of taking room
-    /// beside it.
-    private(set) var isSidebarFloating = false
-    var isSidebarShown: Bool { isSidebarVisible || isSidebarFloating }
-
-    /// Animated by SwiftUI, not AppKit (see ARCHITECTURE.md). In a narrow window the sidebar floats
-    /// above the page.
+    /// Animated by SwiftUI, not AppKit (see ARCHITECTURE.md).
     func toggleSidebar() {
-        if isWindowNarrow && !isSidebarVisible {
-            withAnimation(Motion.standard) { isSidebarFloating.toggle() }
-            return
-        }
-        wasSidebarClosedByUser = isSidebarVisible  // closing it now, or opening it again
-        withAnimation(Motion.standard) { sidebarVisibility = isSidebarVisible ? .detailOnly : .all }
+        withAnimation(Motion.standard) { sidebar.toggle() }
     }
 
-    /// Picking a page, clicking beside the floating sidebar or pressing Escape closes it.
     func closeSidebarOverlay() {
-        guard isSidebarFloating else { return }
-        withAnimation(Motion.standard) { isSidebarFloating = false }
+        guard sidebar.isFloating else { return }
+        withAnimation(Motion.standard) { sidebar.closeFloating() }
     }
 
     private var mainWindow: NSWindow? {
         NSApp.windows.first { window in window.identifier?.rawValue == WindowID.main }
     }
 
-    /// A narrow window closes the sidebar, a wide one brings it back unless the user closed it,
-    /// like Mail. Compares wanted and actual state on every resize, because macOS also closes it on
-    /// its own (see ARCHITECTURE.md).
+    /// Reads the width from the window, because SwiftUI's width jumps across the limit for a
+    /// moment while the window moves (see ARCHITECTURE.md).
     func windowResized() {
         guard let width = mainWindow?.frame.width else { return }
-        isWindowNarrow = width < Layout.sidebarCollapseWidth
-        if isWindowNarrow && isSidebarVisible {
-            withAnimation(Motion.quick) { sidebarVisibility = .detailOnly }
-        } else if shouldBringSidebarBack {
-            wasSidebarClosedByUser = false
-            withAnimation(Motion.quick) {
-                isSidebarFloating = false
-                sidebarVisibility = .all
-            }
-        }
-    }
-
-    private var shouldBringSidebarBack: Bool {
-        !isWindowNarrow && !isSidebarVisible && (!wasSidebarClosedByUser || isSidebarFloating)
+        sidebar.measure(windowWidth: width)
+        withAnimation(Motion.quick) { sidebar.fitToWindow() }
     }
 
     /// Leaves the search: clears the field and closes it (Cancel button, Escape, or picking a page

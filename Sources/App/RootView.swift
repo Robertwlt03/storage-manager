@@ -10,7 +10,7 @@ struct RootView: View {
 
     var body: some View {
         @Bindable var model = model
-        NavigationSplitView(columnVisibility: $model.sidebarVisibility) {
+        NavigationSplitView(columnVisibility: $model.sidebar.visibility) {
             SidebarView()
         } detail: {
             page
@@ -50,17 +50,17 @@ struct RootView: View {
 
     /// Slid, never removed or faded (see ARCHITECTURE.md).
     @ViewBuilder private var floatingSidebar: some View {
-        if model.isWindowNarrow {
+        if model.sidebar.isWindowNarrow {
             SidebarOverlay()
-                .offset(x: model.isSidebarFloating ? 0 : Self.hiddenSidebarOffset)
-                .allowsHitTesting(model.isSidebarFloating)
-                .accessibilityHidden(!model.isSidebarFloating)
+                .offset(x: model.sidebar.isFloating ? 0 : Self.hiddenSidebarOffset)
+                .allowsHitTesting(model.sidebar.isFloating)
+                .accessibilityHidden(!model.sidebar.isFloating)
         }
     }
 
     /// Escape closes the floating sidebar, otherwise it leaves the search.
     private func closeSidebarOrSearch() {
-        if model.isSidebarFloating {
+        if model.sidebar.isFloating {
             model.closeSidebarOverlay()
         } else if model.isSearching || model.isSearchPresented {
             model.endSearch()
