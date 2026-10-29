@@ -47,7 +47,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | Befehl | Was er tut |
 | --- | --- |
 | `make run` | baut die App, schließt sie, falls sie offen ist, und öffnet die neue |
-| `make demo` | baut die App und öffnet sie im Vorführmodus mit erfundenen Daten |
+| `make demo` | baut die App ohne Zertifikat und öffnet sie im Vorführmodus mit erfundenen Daten |
 | `make restart` | schließt die App, falls sie offen ist, und öffnet sie neu, ohne zu bauen |
 | `make build` | baut die App und zeichnet ihr Symbol |
 | `make check` | startet die ganze Prüfkette, genau wie auf GitHub |
@@ -89,8 +89,9 @@ echo 'SIGN_IDENTITY = Speicher-Explorer Dev' > local.mk
 
 Im Vorführmodus zeigt die App jede Seite mit erfundenen Daten: einen ausgedachten Ordnerbaum, einen festen
 Datenträger, ein paar Apps und Kopien. Sie misst dabei nichts, liest keine eigenen Dateien und kann nichts löschen,
-denn alle Knöpfe zum Aufräumen und Löschen bleiben wirkungslos. Deshalb brauchst du dafür keinen
-Festplattenvollzugriff, und auf dem Bildschirm erscheinen keine privaten Namen.
+denn alle Knöpfe zum Aufräumen und Löschen bleiben wirkungslos. Deshalb brauchst du dafür weder den
+Festplattenvollzugriff noch dein Zertifikat, und auf dem Bildschirm erscheinen keine privaten Namen. `make demo` baut
+die App dafür in einen eigenen Ordner, sodass deine signierte App unberührt bleibt.
 
 ```bash
 make demo
