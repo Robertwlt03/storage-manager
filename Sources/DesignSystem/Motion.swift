@@ -51,18 +51,6 @@ private struct HoverHighlight: ViewModifier {
     }
 }
 
-/// A symbol that turns once when the mouse comes over it, a small sign that it reacts (the settings gear).
-struct HoverTurn: View {
-    let symbol: String
-    @State private var hovers = 0
-
-    var body: some View {
-        Image(systemName: symbol)
-            .turnOnce(value: hovers)
-            .onHover { if $0 { hovers += 1 } }
-    }
-}
-
 extension View {
     func hoverLift() -> some View { modifier(HoverLift()) }
 

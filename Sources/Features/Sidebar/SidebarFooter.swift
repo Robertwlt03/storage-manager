@@ -6,7 +6,7 @@ struct SidebarFooter: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
     @State private var showDetails = false
-    @State private var scanStarts = 0  // turns the rescan symbol once per scan, also for ⌘R and the launch scan
+    @State private var scanStarts = 0  // turns the rescan symbol once when a scan starts (button or ⌘R; not at launch)
 
     var body: some View {
         VStack(alignment: .leading, spacing: Space.row) {
@@ -34,7 +34,7 @@ struct SidebarFooter: View {
                     .buttonStyle(.borderless)
                     .disabled(model.scanning)
                     .help(Loc.rescanHelp.s)
-                SettingsLink { HoverTurn(symbol: Symbols.settings) }
+                SettingsLink { Image(systemName: Symbols.settings) }
                     .buttonStyle(.borderless)
                     .help(Loc.settings.s)
             }
