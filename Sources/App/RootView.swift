@@ -15,10 +15,10 @@ struct RootView: View {
                 .overlay(alignment: .leading) {
                     // Always there in narrow windows and only slid in and out: removing it closed abruptly, because
                     // the list inside (an AppKit table) left at once instead of taking part in the transition.
+                    // No fading: the glass is see-through already, fading it on top would spoil the effect.
                     if model.windowNarrow {
                         SidebarOverlay()
                             .offset(x: model.sidebarOverlay ? 0 : -(Layout.sidebarIdeal + Space.l))
-                            .opacity(model.sidebarOverlay ? 1 : 0)
                             .allowsHitTesting(model.sidebarOverlay)
                             .accessibilityHidden(!model.sidebarOverlay)
                     }
