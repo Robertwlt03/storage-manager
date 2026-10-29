@@ -12,7 +12,6 @@
 "cancelScan" = "Скасувати сканування";
 
 /* Scan status and placeholders */
-"scanning" = "Сканування …";
 "cancel" = "Скасувати";
 "filesAndSize" = "Файлів: %@ · %@";
 "measuredAt" = "Проскановано о %@";

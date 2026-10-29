@@ -34,8 +34,8 @@ enum SummaryService {
 
     private static func diskSentence(_ volume: VolumeInfo) -> String {
         TextKey.summaryDisk.translated(
-            with: volume.name, Format.bytes(volume.used), Format.bytes(volume.total),
-            Format.bytes(volume.available))
+            with: volume.name, Format.bytes(volume.usedBytes), Format.bytes(volume.totalBytes),
+            Format.bytes(volume.availableBytes))
     }
 
     private static func largestCategoriesSentence(_ categories: [Category]) -> String? {

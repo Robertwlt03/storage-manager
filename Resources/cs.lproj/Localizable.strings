@@ -12,7 +12,6 @@
 "cancelScan" = "Zrušit skenování";
 
 /* Scan status and placeholders */
-"scanning" = "Skenování …";
 "cancel" = "Zrušit";
 "filesAndSize" = "Souborů: %@ · %@";
 "measuredAt" = "Naskenováno v %@";

@@ -27,7 +27,7 @@ enum CopyService {
         for copyFolder in contents(of: group.node.url) {
             let values = try? copyFolder.resourceValues(forKeys: copyKeys)
             guard values?.isDirectory == true else { continue }
-            details.count += 1
+            details.copyCount += 1
             if let modified = values?.contentModificationDate {
                 copiesPerDay[Calendar.current.startOfDay(for: modified), default: 0] += 1
             }

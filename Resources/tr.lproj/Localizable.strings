@@ -12,7 +12,6 @@
 "cancelScan" = "Taramayı İptal Et";
 
 /* Scan status and placeholders */
-"scanning" = "Taranıyor …";
 "cancel" = "İptal";
 "filesAndSize" = "%@ dosya · %@";
 "measuredAt" = "%@ saatinde tarandı";

@@ -53,16 +53,16 @@ struct SpeicherExplorerApp: App {
             // The system item would use the jerky AppKit toggle.
             CommandGroup(replacing: .sidebar) {
                 Button(
-                    model.sidebarShown
+                    model.isSidebarShown
                         ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
                 ) { model.toggleSidebar() }
                 .keyboardShortcut("s", modifiers: [.control, .command])
             }
             CommandGroup(after: .newItem) {
                 Button(TextKey.rescan.translated) { model.scan() }.keyboardShortcut("r")
-                    .disabled(model.scanning)
+                    .disabled(model.isScanning)
                 Button(TextKey.cancelScan.translated) { model.cancelScan() }.keyboardShortcut(".")
-                    .disabled(!model.scanning)
+                    .disabled(!model.isScanning)
             }
         }
         Settings {
@@ -71,7 +71,8 @@ struct SpeicherExplorerApp: App {
     }
 }
 
-/// Gives every window the app's locale for dates and numbers; used by every window so none can forget it.
+/// Gives every window the app's locale for dates and numbers; used by every window so none can
+/// forget it.
 private struct PreferenceSync: ViewModifier {
     func body(content: Content) -> some View {
         content.environment(\.locale, Localizer.shared.locale)

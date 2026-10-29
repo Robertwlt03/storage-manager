@@ -41,29 +41,31 @@ enum Layout {
     static let sizeColumn = (min: CGFloat(70), ideal: CGFloat(90), max: CGFloat(120))
     static let shareColumn = (min: CGFloat(90), ideal: CGFloat(150))
     static let countColumn = (min: CGFloat(60), ideal: CGFloat(80), max: CGFloat(110))
-    static let percentWidth: CGFloat = 38
-    /// The page never gets narrower than this; a narrower window shows the sidebar floating above the page.
+    static let percentColumnWidth: CGFloat = 38
+    /// The page never gets narrower than this; a narrower window shows the sidebar floating above
+    /// the page.
     static let pageMinWidth: CGFloat = 600
     static let minWindowWidth: CGFloat = pageMinWidth
-    /// Room for the sidebar and the page side by side; below it the sidebar closes by itself, like in Mail.
-    static let sidebarCollapseWidth: CGFloat = sidebarIdeal + pageMinWidth
+    /// Room for the sidebar and the page side by side; below it the sidebar closes by itself, like
+    /// in Mail.
+    static let sidebarCollapseWidth: CGFloat = sidebarIdealWidth + pageMinWidth
     static let minWindowHeight: CGFloat = 560
-    static let sidebarIdeal: CGFloat = 230
+    static let sidebarIdealWidth: CGFloat = 230
     static let settingsWidth: CGFloat = 520
     static let sheetWidth: CGFloat = 560
     static let sheetHeight: CGFloat = 600
     static let folderListHeight: CGFloat = 90
     static let settingsHeight: CGFloat = 330
     static let placeholderHeight: CGFloat = 320
-    static let gridTile: CGFloat = 170
-    static let legendMax = 6
+    static let gridTileSize: CGFloat = 170
+    static let legendMaxEntries = 6
     static let legendColumns = 2
     static let chartHeight: CGFloat = 220
-    static let statColumns = 3
-    static let statMinScale = 0.7
+    static let keyFigureColumns = 3
+    static let keyFigureMinimumScale = 0.7
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
-    static let fillShare = 0.72
+    static let placeholderPageShare = 0.72
     static let cardBorderWidth: CGFloat = 0.5
     /// Titles and labels that may wrap show at most this many lines.
     static let maxWrappedLines = 2
@@ -98,14 +100,14 @@ enum Symbols {
     static let sidebar = "sidebar.left"
     static let explorer = "folder"
     static let largeFiles = "doc.viewfinder"
-    static let temp = "hourglass"
+    static let temporaryArea = "hourglass"
     static let copies = "checkmark.seal"
     static let internalDrive = "internaldrive"
     static let externalDrive = "externaldrive"
     static let volumeGone = "externaldrive.badge.xmark"
     static let rescan = "arrow.clockwise"
     static let chevron = "chevron.right"
-    static let rest = "ellipsis.circle"
+    static let otherItems = "ellipsis.circle"
     static let info = "info.circle"
     static let measure = "gauge.with.dots.needle.33percent"
     static let search = "magnifyingglass"
@@ -117,7 +119,8 @@ enum Symbols {
     static let remove = "minus"
 }
 
-/// One text style per role, built on Apple's text styles so Dynamic Type and accessibility keep working.
+/// One text style per role, built on Apple's text styles so Dynamic Type and accessibility keep
+/// working.
 enum TextRole {
     case title, figure, section, body, hint, value
 

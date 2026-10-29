@@ -12,7 +12,6 @@
 "cancelScan" = "검사 취소";
 
 /* Scan status and placeholders */
-"scanning" = "검사 중…";
 "cancel" = "취소";
 "filesAndSize" = "파일 %@개 · %@";
 "measuredAt" = "%@에 검사함";

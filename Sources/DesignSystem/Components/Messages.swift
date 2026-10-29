@@ -6,7 +6,7 @@ extension UI {
         enum Style {
             case hint, working
             case good(symbol: String)
-            case warn(symbol: String)
+            case warning(symbol: String)
             case bad(symbol: String)
         }
         let text: String
@@ -27,7 +27,7 @@ extension UI {
                     Text(text).foregroundStyle(.muted)
                 }
             case .good(let symbol): result(symbol, .good)
-            case .warn(let symbol): result(symbol, .warn)
+            case .warning(let symbol): result(symbol, .warning)
             case .bad(let symbol): result(symbol, .bad)
             }
         }
@@ -38,7 +38,8 @@ extension UI {
         }
     }
 
-    /// Stands in for missing content: nothing found, nothing measured yet, or still being worked out.
+    /// Stands in for missing content: nothing found, nothing measured yet, or still being worked
+    /// out.
     struct Placeholder: View {
         enum Kind {
             case empty(title: String, symbol: String, detail: String? = nil)
@@ -65,7 +66,7 @@ extension UI {
                 content
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .containerRelativeFrame(.vertical, alignment: .center) { height, _ in
-                        height * Layout.fillShare
+                        height * Layout.placeholderPageShare
                     }
             }
         }
@@ -81,7 +82,7 @@ extension UI {
             case .notMeasured:
                 notMeasured
             case .emptyAfterScan(let title, let symbol, let detail):
-                if model.scanning || !model.hasData {
+                if model.isScanning || !model.hasData {
                     notMeasured
                 } else {
                     Unavailable(title: title, symbol: symbol, detail: detail) { EmptyView() }
@@ -91,13 +92,13 @@ extension UI {
 
         private var notMeasured: some View {
             Unavailable(
-                title: model.scanning
+                title: model.isScanning
                     ? TextKey.scanningTitle.translated : TextKey.notMeasuredTitle.translated,
                 symbol: Symbols.measure,
-                detail: model.scanning
+                detail: model.isScanning
                     ? TextKey.scanningDetail.translated : TextKey.notMeasuredDetail.translated
             ) {
-                if model.scanning {
+                if model.isScanning {
                     ProgressView().controlSize(.small)
                 } else {
                     Button(TextKey.scanNow.translated) { model.scan() }.appButton(.primary)
@@ -107,7 +108,8 @@ extension UI {
     }
 }
 
-/// The system's empty state with a darker description: its secondary colour stays below 4.5:1 in light mode.
+/// The system's empty state with a darker description: its secondary colour stays below 4.5:1 in
+/// light mode.
 private struct Unavailable<Actions: View>: View {
     let title: String
     let symbol: String
@@ -126,8 +128,9 @@ private struct Unavailable<Actions: View>: View {
 }
 
 extension View {
-    /// A value still being calculated keeps its place but shows a small spinner, like "Calculating…" in Finder's
-    /// Info window, and cannot be clicked, selected or read aloud until it is final.
+    /// A value still being calculated keeps its place but shows a small spinner, like
+    /// "Calculating…" in Finder's Info window, and cannot be clicked, selected or read aloud until
+    /// it is final.
     func calculating(_ isCalculating: Bool, alignment: Alignment = .leading) -> some View {
         opacity(isCalculating ? Opacity.hidden : Opacity.full)
             .overlay(alignment: alignment) {

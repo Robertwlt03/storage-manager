@@ -1,7 +1,7 @@
 import Foundation
 
-/// `--selftest`: scans real data, compares every area with `du` and prints only counts, sizes and times –
-/// never file or folder names.
+/// `--selftest`: scans real data, compares every area with `du` and prints only counts, sizes and
+/// times – never file or folder names.
 enum SelfTest {
     private static let areas = [Paths.home, Paths.applications, Paths.tempArea]
     /// How far the scanner may differ from `du`, as a fraction.
@@ -67,14 +67,14 @@ enum SelfTest {
         precondition(folders.allSatisfy(\.isFolder) && files.allSatisfy { file in !file.isFolder })
         print(
             "Search: \(folders.count) folders, \(files.count) files"
-                + " (limit \(ScanConfig.searchLimit)), \(Int(millisecondsPerSearch)) ms per search"
+                + " (limit \(ScanLimits.searchLimit)), \(Int(millisecondsPerSearch)) ms per search"
         )
     }
 
     private static func reportLargeFiles(in root: Node) {
-        let threshold = LargeFileThreshold.bytes(LargeFileThreshold.defaultMB)
+        let threshold = LargeFileThreshold.bytes(LargeFileThreshold.defaultMegabytes)
         let largeFiles = SearchService.largeFiles(atLeast: threshold, in: root)
-        print("Large files from \(LargeFileThreshold.defaultMB) MB: \(largeFiles.count)")
+        print("Large files from \(LargeFileThreshold.defaultMegabytes) MB: \(largeFiles.count)")
     }
 
     private static func reportCopies(in root: Node) {

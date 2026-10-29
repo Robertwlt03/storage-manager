@@ -12,7 +12,6 @@
 "cancelScan" = "Keskeytä mittaus";
 
 /* Scan status and placeholders */
-"scanning" = "Mitataan …";
 "cancel" = "Keskeytä";
 "filesAndSize" = "%@ tiedostoa · %@";
 "measuredAt" = "Mitattu klo %@";

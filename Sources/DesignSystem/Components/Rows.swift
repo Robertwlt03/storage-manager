@@ -2,7 +2,7 @@ import SwiftUI
 
 extension UI {
     /// Icon, title, optional detail, value and, if it leads somewhere, a chevron.
-    struct NavRow: View {
+    struct NavigationRow: View {
         let title: String
         var icon: IconKind?
         var detail: String?
@@ -103,8 +103,8 @@ extension UI {
     }
 }
 
-/// Only rows that lead somewhere light up under the mouse. The highlight reaches a little beyond the row
-/// without changing its layout.
+/// Only rows that lead somewhere light up under the mouse. The highlight reaches a little beyond
+/// the row without changing its layout.
 private struct RowHighlight: ViewModifier {
     let isActive: Bool
 

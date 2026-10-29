@@ -12,7 +12,6 @@
 "cancelScan" = "スキャンを中止";
 
 /* Scan status and placeholders */
-"scanning" = "スキャン中…";
 "cancel" = "キャンセル";
 "filesAndSize" = "%@個のファイル · %@";
 "measuredAt" = "%@にスキャン";

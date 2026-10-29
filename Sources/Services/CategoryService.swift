@@ -1,5 +1,6 @@
-/// Storage categories like in System Settings › Storage. Each kind owns its folders; the most specific folder wins.
-/// Folders that do not exist on a Mac simply stay empty, so the same rules work everywhere.
+/// Storage categories like in System Settings › Storage. Each kind owns its folders; the most
+/// specific folder wins. Folders that do not exist on a Mac simply stay empty, so the same rules
+/// work everywhere.
 enum CategoryKind: Int, CaseIterable {
     case apps, documents, downloads, media, iCloud, mail, developer, caches, appData, trash, temp,
         user, library
@@ -118,9 +119,9 @@ enum CategoryService {
     private static func addEstimatedKinds(from volume: VolumeInfo, to categories: inout [Category])
     {
         let scannedBytes = categories.reduce(0) { total, category in total + category.bytes }
-        categories[CategoryKind.purgeable.rawValue].bytes = volume.purgeable
+        categories[CategoryKind.purgeable.rawValue].bytes = volume.purgeableBytes
         // Clones count in full while scanning, so this can go below zero; then it stays empty.
         categories[CategoryKind.system.rawValue].bytes = max(
-            0, volume.used - volume.purgeable - scannedBytes)
+            0, volume.usedBytes - volume.purgeableBytes - scannedBytes)
     }
 }

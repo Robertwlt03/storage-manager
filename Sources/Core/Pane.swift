@@ -1,5 +1,5 @@
-/// Every page of the app; the sidebar is built from it. A new page needs a case here, its line in `details` and
-/// its view in `Pane.page` (Features/Pages.swift).
+/// Every page of the app; the sidebar is built from it. A new page needs a case here, its line in
+/// `details` and its view in `Pane.page` (Features/Pages.swift).
 enum Pane: Hashable {
     case overview, explorer, largeFiles, cleaner, apps, temp, copies
     case volume(String)
@@ -35,7 +35,7 @@ enum Pane: Hashable {
         case .largeFiles: ("largeFiles", .paneLargeFiles, .infoLargeFiles, Symbols.largeFiles)
         case .cleaner: ("cleaner", .paneCleaner, .infoCleaner, Symbols.cleaner)
         case .apps: ("apps", .paneApps, .infoApps, Symbols.apps)
-        case .temp: ("temp", .paneTemp, .infoTemp, Symbols.temp)
+        case .temp: ("temp", .paneTemp, .infoTemp, Symbols.temporaryArea)
         case .copies: ("copies", .paneCopies, .infoCopies, Symbols.copies)
         case .volume(let path): (path, .sectionVolumes, .infoVolume, Symbols.internalDrive)
         }
@@ -44,27 +44,27 @@ enum Pane: Hashable {
 
 /// The four subfolders of the per-user temporary area.
 enum TempPart: String, CaseIterable, Identifiable {
-    case t = "T"
-    case c = "C"
-    case x = "X"
-    case zero = "0"
+    case temporaryFiles = "T"
+    case caches = "C"
+    case appCopies = "X"
+    case systemServices = "0"
     var id: Self { self }
 
     var title: TextKey {
         switch self {
-        case .t: .tempFolderT
-        case .c: .tempFolderC
-        case .x: .tempFolderX
-        case .zero: .tempFolder0
+        case .temporaryFiles: .tempFolderT
+        case .caches: .tempFolderC
+        case .appCopies: .tempFolderX
+        case .systemServices: .tempFolder0
         }
     }
 
     var detail: TextKey {
         switch self {
-        case .t: .tempFolderTDetail
-        case .c: .tempFolderCDetail
-        case .x: .tempFolderXDetail
-        case .zero: .tempFolder0Detail
+        case .temporaryFiles: .tempFolderTDetail
+        case .caches: .tempFolderCDetail
+        case .appCopies: .tempFolderXDetail
+        case .systemServices: .tempFolder0Detail
         }
     }
 }

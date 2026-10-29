@@ -1,9 +1,10 @@
 import SwiftUI
 
-/// "In short": the storage in a few sentences, read aloud on request; both wait until the scan is done.
+/// "In short": the storage in a few sentences, read aloud on request; both wait until the scan is
+/// done.
 struct SummaryCard: View {
     @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
+    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanUpRules.defaultUnusedDays
     private var speech: SpeechService { SpeechService.shared }
 
     private var summary: String {
@@ -13,14 +14,14 @@ struct SummaryCard: View {
             AppUsageService.isUnused(app, days: unusedDays)
         }
         let facts = SummaryService.Input(
-            volume: model.startupVolume, categories: model.scanning ? [] : model.categories,
+            volume: model.startupVolume, categories: model.isScanning ? [] : model.categories,
             cleanable: cleanableBytes, copies: copiesBytes, unusedApps: unusedApps.count)
         return SummaryService.text(facts)
     }
 
     var body: some View {
         let summary = summary
-        let isLoading = model.scanning
+        let isLoading = model.isScanning
         UI.Card(TextKey.summaryTitle.translated) {
             VStack(alignment: .leading, spacing: Space.item) {
                 if isLoading {

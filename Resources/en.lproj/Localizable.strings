@@ -12,7 +12,6 @@
 "cancelScan" = "Cancel Scan";
 
 /* Scan status and placeholders */
-"scanning" = "Scanning …";
 "cancel" = "Cancel";
 "filesAndSize" = "%@ files · %@";
 "measuredAt" = "Scanned at %@";

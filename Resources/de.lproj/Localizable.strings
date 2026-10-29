@@ -12,7 +12,6 @@
 "cancelScan" = "Messung abbrechen";
 
 /* Scan status and placeholders */
-"scanning" = "Messe …";
 "cancel" = "Abbrechen";
 "filesAndSize" = "%@ Dateien · %@";
 "measuredAt" = "Gemessen um %@";

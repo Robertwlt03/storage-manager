@@ -12,7 +12,6 @@
 "cancelScan" = "取消扫描";
 
 /* Scan status and placeholders */
-"scanning" = "正在扫描…";
 "cancel" = "取消";
 "filesAndSize" = "%@ 个文件 · %@";
 "measuredAt" = "扫描时间：%@";

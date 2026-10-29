@@ -15,11 +15,11 @@ enum ScanService {
         let unreadable: Int
     }
 
-    /// Roots measured by "Rescan": the default areas plus the folders from the settings, without duplicates
-    /// and without folders that lie inside another root (nothing counts twice).
+    /// Roots measured by "Rescan": the default areas plus the folders from the settings, without
+    /// duplicates and without folders that lie inside another root (nothing counts twice).
     static func defaultRoots() -> [String] {
         let wantedFolders = Paths.defaultScanRoots + AppSettings.extraFolders
-        let existingFolders = wantedFolders.map(Paths.real).filter(Paths.exists)
+        let existingFolders = wantedFolders.map(Paths.withoutSymlinks).filter(Paths.exists)
 
         func liesInsideAnother(_ folder: String) -> Bool {
             existingFolders.contains { other in other != folder && folder.hasPrefix(other + "/") }
@@ -39,9 +39,9 @@ enum ScanService {
 
         let isFinished = FileTreeWalker.walk(path) { entry in
             visitedEntries += 1
-            if visitedEntries & ScanConfig.cancelCheckMask == 0 {
+            if visitedEntries & ScanLimits.cancelCheckMask == 0 {
                 if Task.isCancelled { return false }
-                if Date().timeIntervalSince(lastReport) > ScanConfig.progressInterval {
+                if Date().timeIntervalSince(lastReport) > ScanLimits.progressInterval {
                     reportProgress(builder.progress)
                     lastReport = Date()
                 }

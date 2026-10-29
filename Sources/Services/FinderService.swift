@@ -3,8 +3,8 @@ import SwiftUI
 
 /// Everything that talks to Finder, the pasteboard or System Settings.
 enum FinderService {
-    /// Finder icons are looked up once per path: rows are rebuilt often (search, sorting, scrolling) and each lookup
-    /// asks Launch Services and the disk again.
+    /// Finder icons are looked up once per path: rows are rebuilt often (search, sorting,
+    /// scrolling) and each lookup asks Launch Services and the disk again.
     static func icon(_ path: String) -> Image { Image(nsImage: iconImage(path)) }
 
     static func iconImage(_ path: String) -> NSImage {
@@ -16,7 +16,7 @@ enum FinderService {
 
     private static let iconCache: NSCache<NSString, NSImage> = {
         let cache = NSCache<NSString, NSImage>()
-        cache.countLimit = ScanConfig.iconCacheLimit
+        cache.countLimit = ScanLimits.iconCacheLimit
         return cache
     }()
 
@@ -36,6 +36,7 @@ enum FinderService {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = true
-        return panel.runModal() == .OK ? panel.urls.map { url in Paths.real(url.path) } : []
+        return panel.runModal() == .OK
+            ? panel.urls.map { url in Paths.withoutSymlinks(url.path) } : []
     }
 }

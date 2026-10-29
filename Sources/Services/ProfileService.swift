@@ -1,6 +1,7 @@
 import Foundation
 
-/// File types, counts and date range below a folder, for the info sheet (a second fts pass on demand).
+/// File types, counts and date range below a folder, for the info sheet (a second fts pass on
+/// demand).
 enum ProfileService {
     private static let packageSuffixes = [".app", ".bundle", ".framework"]
     private static let shownTypeCount = 10
@@ -15,7 +16,7 @@ enum ProfileService {
 
         FileTreeWalker.walk(path) { entry in
             visitedEntries += 1
-            if visitedEntries & ScanConfig.cancelCheckMask == 0 && Task.isCancelled { return false }
+            if visitedEntries & ScanLimits.cancelCheckMask == 0 && Task.isCancelled { return false }
             switch FileTreeWalker.kind(of: entry) {
             case FTS_D:
                 profile.folders += 1
@@ -50,7 +51,7 @@ enum ProfileService {
 
     private static func largestTypes(
         bytesPerType: [String: Int64], filesPerType: [String: Int]
-    ) -> [(ext: String, bytes: Int64, count: Int)] {
+    ) -> [(fileExtension: String, bytes: Int64, count: Int)] {
         bytesPerType.sorted { left, right in left.value > right.value }
             .prefix(shownTypeCount)
             .map { fileType in (fileType.key, fileType.value, filesPerType[fileType.key] ?? 0) }

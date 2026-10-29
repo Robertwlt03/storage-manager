@@ -1,6 +1,7 @@
 import SwiftUI
 
-/// Only what macOS does not already cover: appearance, language and units come from System Settings.
+/// Only what macOS does not already cover: appearance, language and units come from System
+/// Settings.
 struct SettingsView: View {
     @AppStorage(SettingsKey.autoScan) private var autoScan = true
     @AppStorage(SettingsKey.extraFolders) private var extraFolders = ""
@@ -22,7 +23,7 @@ struct SettingsView: View {
     private func folderEditor(_ folders: [String]) -> some View {
         VStack(alignment: .leading, spacing: Space.small) {
             List(folders, id: \.self, selection: $selectedFolder) { folder in
-                Text(Paths.display(folder)).lineLimit(1).truncationMode(.middle)
+                Text(Paths.displayName(folder)).lineLimit(1).truncationMode(.middle)
             }
             .frame(height: Layout.folderListHeight)
             .overlay {

@@ -1,9 +1,10 @@
 import SwiftUI
 
-/// Apps not opened for a while, as a reminder that they still take up space; they can go to the Trash from here.
+/// Apps not opened for a while, as a reminder that they still take up space; they can go to the
+/// Trash from here.
 struct UnusedAppsView: View {
     @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
+    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanUpRules.defaultUnusedDays
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
     @State private var appToTrash: AppUsage?
     @State private var errorMessage: String?
@@ -34,7 +35,7 @@ struct UnusedAppsView: View {
 
     private var unusedSincePicker: some View {
         UI.MenuPicker(.unusedSince, selection: $unusedDays) {
-            ForEach(CleanConfig.unusedDayOptions, id: \.self) { days in
+            ForEach(CleanUpRules.unusedDayOptions, id: \.self) { days in
                 Text(TextKey.daysOption.translated(with: Format.count(days))).tag(days)
             }
         }
@@ -44,7 +45,7 @@ struct UnusedAppsView: View {
         if let errorMessage { UI.Note(errorMessage, .bad(symbol: Symbols.warning)) }
         if !model.hasData || model.apps.isEmpty {
             UI.Placeholder(.notMeasured, in: .page)
-        } else if model.scanning {
+        } else if model.isScanning {
             // A running scan is about to replace sizes and dates.
             UI.Card {
                 UI.Placeholder(

@@ -11,7 +11,7 @@ extension UI {
             Label {
                 Text(entry.name).lineLimit(1).truncationMode(.middle)
             } icon: {
-                Icon(entry.path.map(IconKind.file) ?? .symbol(Symbols.rest), size: .small)
+                Icon(entry.path.map(IconKind.file) ?? .symbol(Symbols.otherItems), size: .small)
             }
         }
     }
@@ -38,7 +38,7 @@ extension UI {
             HStack(spacing: Space.small) {
                 ProgressView(value: Fraction.clamp(fraction)).progressViewStyle(.linear)
                 Text(Format.percent(fraction)).monospacedDigit()
-                    .frame(width: Layout.percentWidth, alignment: .trailing)
+                    .frame(width: Layout.percentColumnWidth, alignment: .trailing)
             }
         }
     }

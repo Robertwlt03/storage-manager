@@ -6,9 +6,9 @@ final class Node: Identifiable, Hashable {
     private(set) weak var parent: Node?
     private(set) var bytes: Int64 = 0
     private(set) var fileCount = 0
-    /// Folders of at least `ScanConfig.keepBytes`, biggest first.
+    /// Folders of at least `ScanLimits.keepBytes`, biggest first.
     private(set) var children: [Node] = []
-    /// Files of at least `ScanConfig.keepBytes`, biggest first.
+    /// Files of at least `ScanLimits.keepBytes`, biggest first.
     private(set) var files: [FileItem] = []
     /// Smaller files and folders directly inside, folded into one row.
     private(set) var restBytes: Int64 = 0
@@ -28,12 +28,12 @@ final class Node: Identifiable, Hashable {
         guard let parent else { return name }
         return parent.isVirtual ? name : parent.path + "/" + name
     }
-    var displayName: String { isScanRoot ? Paths.display(name) : name }
+    var displayName: String { isScanRoot ? Paths.displayName(name) : name }
 
     func child(named name: String) -> Node? { children.first { child in child.name == name } }
 
     /// The chain from the scan root down to this node (for the explorer's navigation path).
-    var chain: [Node] {
+    var nodesFromRoot: [Node] {
         var chainFromRoot: [Node] = []
         var current: Node? = self
         while let node = current, !node.isVirtual {
@@ -48,7 +48,7 @@ final class Node: Identifiable, Hashable {
     func addFile(_ size: Int64, name: () -> String) {
         bytes += size
         fileCount += 1
-        if size >= ScanConfig.keepBytes {
+        if size >= ScanLimits.keepBytes {
             files.append(FileItem(path: path + "/" + name(), bytes: size))
         } else {
             restBytes += size
@@ -59,7 +59,7 @@ final class Node: Identifiable, Hashable {
     func adopt(_ child: Node) {
         bytes += child.bytes
         fileCount += child.fileCount
-        if child.bytes >= ScanConfig.keepBytes {
+        if child.bytes >= ScanLimits.keepBytes {
             children.append(child)
         } else {
             restBytes += child.bytes
@@ -122,5 +122,4 @@ struct FileItem: Identifiable, Hashable {
     let bytes: Int64
     var id: String { path }
     var name: String { (path as NSString).lastPathComponent }
-    var folder: String { (path as NSString).deletingLastPathComponent }
 }

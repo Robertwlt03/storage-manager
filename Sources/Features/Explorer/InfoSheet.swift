@@ -25,7 +25,7 @@ struct InfoSheet: View {
     private var cards: some View {
         VStack(alignment: .leading, spacing: Space.section) {
             UI.Card {
-                UI.TitleRow(entry.name, subtitle: Paths.display(path), icon: .file(path))
+                UI.TitleRow(entry.name, subtitle: Paths.displayName(path), icon: .file(path))
                     .padding(.vertical, Space.row)
                 Divider()
                 UI.Fields(basicFields)
@@ -81,13 +81,14 @@ struct InfoSheet: View {
     private func modifiedBetweenField(_ profile: FolderProfile) -> UI.Field? {
         guard let oldest = profile.oldest, let newest = profile.newest else { return nil }
         let dateRange = TextKey.dateRange.translated(
-            with: Format.dayShort(oldest), Format.dayShort(newest))
+            with: Format.numericDay(oldest), Format.numericDay(newest))
         return UI.Field(.modifiedBetween, dateRange)
     }
 
     private func fileTypesCard(_ profile: FolderProfile, largestTypeBytes: Int64) -> some View {
         let fileTypes = profile.types.map { fileType in
-            FileTypeRow(fileExtension: fileType.ext, bytes: fileType.bytes, count: fileType.count)
+            FileTypeRow(
+                fileExtension: fileType.fileExtension, bytes: fileType.bytes, count: fileType.count)
         }
         return UI.Card(TextKey.typesBySize.translated) {
             UI.Rows(fileTypes) { fileType in

@@ -8,7 +8,7 @@ struct CopiesView: View {
         let copyGroups = model.copyGroups
         UI.Page(.copies) {
             // The temporary area is measured last.
-            if !model.hasData || (model.scanning && copyGroups.isEmpty) {
+            if !model.hasData || (model.isScanning && copyGroups.isEmpty) {
                 UI.Placeholder(.notMeasured, in: .page)
             } else if copyGroups.isEmpty {
                 UI.Placeholder(

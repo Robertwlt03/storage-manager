@@ -1,14 +1,15 @@
 import CoreServices
 import Foundation
 
-/// Installed apps with the date macOS last opened them. The date comes from Spotlight, which records it anyway;
-/// the app itself tracks nothing.
+/// Installed apps with the date macOS last opened them. The date comes from Spotlight, which
+/// records it anyway; the app itself tracks nothing.
 enum AppUsageService {
     private static let appSuffix = ".app"
     private static let secondsPerDay: TimeInterval = 86_400
     private static var folders: [String] { [Paths.applications, Paths.home + "/Applications"] }
 
-    /// Apps in the Applications folders and one level of subfolders; sizes come from the scanned tree.
+    /// Apps in the Applications folders and one level of subfolders; sizes come from the scanned
+    /// tree.
     static func apps(in root: Node) -> [AppUsage] {
         appPaths()
             .map { path in

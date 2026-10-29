@@ -21,7 +21,7 @@ extension UI {
                 }
             }
             .padding(Space.card)
-            .frame(maxWidth: .infinity, minHeight: Layout.gridTile)
+            .frame(maxWidth: .infinity, minHeight: Layout.gridTileSize)
             .surface()
             .contentShape(Rectangle())
             .hoverLift()
@@ -38,13 +38,13 @@ extension UI {
         var action: (() -> Void)?
 
         init(
-            _ value: String, _ label: String, symbol: String, loading: Bool = false,
+            _ value: String, _ label: String, symbol: String, isLoading: Bool = false,
             action: (() -> Void)? = nil
         ) {
             self.value = value
             self.label = label
             self.symbol = symbol
-            self.isLoading = loading
+            self.isLoading = isLoading
             self.action = action
         }
 
@@ -57,7 +57,7 @@ extension UI {
                         Icon(.symbol(symbol), size: .small).foregroundStyle(.tint)
                             .padding(.bottom, Space.extraSmall)
                         Text(value).textRole(.figure).contentTransition(.numericText())
-                            .lineLimit(1).minimumScaleFactor(Layout.statMinScale)
+                            .lineLimit(1).minimumScaleFactor(Layout.keyFigureMinimumScale)
                             .calculating(isLoading)
                         Text(label).foregroundStyle(.muted)
                             .lineLimit(Layout.maxWrappedLines, reservesSpace: true)
@@ -80,11 +80,11 @@ extension UI {
     struct TileGrid<Data: RandomAccessCollection, Content: View>: View
     where Data.Element: Identifiable {
         let data: Data
-        var minWidth = Layout.gridTile
+        var minWidth = Layout.gridTileSize
         @ViewBuilder let tile: (Data.Element) -> Content
 
         init(
-            _ data: Data, minWidth: CGFloat = Layout.gridTile,
+            _ data: Data, minWidth: CGFloat = Layout.gridTileSize,
             @ViewBuilder _ tile: @escaping (Data.Element) -> Content
         ) {
             self.data = data

@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// The one table for folders, search results and large files: same columns, menu and double-click everywhere.
-/// The location column only exists where entries come from different folders. No column customisation (see
-/// ARCHITECTURE.md).
+/// The one table for folders, search results and large files: same columns, menu and double-click
+/// everywhere. The location column only exists where entries come from different folders. No column
+/// customisation (see ARCHITECTURE.md).
 struct EntryTable: View {
     let entries: [Entry]
     let total: Int64
@@ -72,8 +72,8 @@ struct EntryTable: View {
     }
 
     private var filesColumn: some TableColumnContent<Entry, KeyPathComparator<Entry>> {
-        TableColumn(TextKey.columnFiles.translated, value: \.items) { entry in
-            UI.NumberCell(count: entry.items)
+        TableColumn(TextKey.columnFiles.translated, value: \.itemCount) { entry in
+            UI.NumberCell(count: entry.itemCount)
         }
         .width(
             min: Layout.countColumn.min, ideal: Layout.countColumn.ideal,
@@ -85,6 +85,6 @@ extension Entry {
     /// The folder the entry lies in, as shown to the user.
     var location: String {
         guard let path else { return "" }
-        return Paths.display((path as NSString).deletingLastPathComponent)
+        return Paths.displayName((path as NSString).deletingLastPathComponent)
     }
 }

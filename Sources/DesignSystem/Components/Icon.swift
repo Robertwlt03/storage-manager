@@ -12,7 +12,8 @@ enum IconKind {
 }
 
 extension UI {
-    /// Every icon fills the same square for its size, so a wide grid symbol and a round arrow look equally big.
+    /// Every icon fills the same square for its size, so a wide grid symbol and a round arrow look
+    /// equally big.
     struct Icon: View {
         let kind: IconKind
         var size = IconSize.medium
@@ -37,7 +38,7 @@ extension UI {
                     .foregroundStyle(Theme.badgeSymbol)
                     .frame(width: badgeContent, height: badgeContent)
                     .frame(width: side, height: side)
-                    .background(Theme.color(index).gradient, in: square)
+                    .background(Theme.categoryColor(index).gradient, in: square)
             case .letter(let text):
                 Text(text).font(.system(size: badgeContent, weight: .semibold, design: .monospaced))
                     .frame(width: side, height: side).background(.quaternary, in: square)

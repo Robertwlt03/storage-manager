@@ -1,13 +1,14 @@
 import AppKit
 import SwiftUI
 
-/// `open … --args -uiTest <folder>`: drives the running app like a very fast user and tries to break it.
-/// It switches pages and views during scans, cancels and restarts scans, flips settings, digs into folders and
-/// searches, checks the data after every step and saves a picture of the window. It never deletes, cleans up or
-/// moves anything to the Trash, prints only counts (no names) and restores the user's settings at the end.
+/// `open … --args -uiTest <folder>`: drives the running app like a very fast user and tries to
+/// break it. It switches pages and views during scans, cancels and restarts scans, flips settings,
+/// digs into folders and searches, checks the data after every step and saves a picture of the
+/// window. It never deletes, cleans up or moves anything to the Trash, prints only counts (no
+/// names) and restores the user's settings at the end.
 @MainActor enum UITest {
     private static let changedSettingKeys = [
-        SettingsKey.layoutMode, SettingsKey.largeFileMB, SettingsKey.unusedDays,
+        SettingsKey.layoutMode, SettingsKey.largeFileMegabytes, SettingsKey.unusedDays,
     ]
     private static let roundsDuringScan = 3
     /// While the first scan runs, every fifth step also types a search.
@@ -69,7 +70,7 @@ import SwiftUI
 
     /// Jump between pages, layouts and searches while the first scan is still running.
     private static func switchAroundDuringScan(_ model: AppModel) async {
-        if !model.scanning { model.scan() }
+        if !model.isScanning { model.scan() }
         for round in 0..<roundsDuringScan {
             for pane in allPanes(model) {
                 model.pane = pane
@@ -96,15 +97,15 @@ import SwiftUI
         model.cancelScan()
         model.scan()
         await step("Cancel and restart at once", model, wait: Pause.afterRestart)
-        check(model.scanning, "Scan not running after restart")
+        check(model.isScanning, "Scan not running after restart")
     }
 
     private static func waitForScan(_ model: AppModel) async {
         let start = Date()
-        while model.scanning && Date().timeIntervalSince(start) < scanTimeout {
+        while model.isScanning && Date().timeIntervalSince(start) < scanTimeout {
             try? await Task.sleep(for: scanPollInterval)
         }
-        check(!model.scanning, "Scan not finished after \(Int(scanTimeout)) s")
+        check(!model.isScanning, "Scan not finished after \(Int(scanTimeout)) s")
         log(
             "Scan finished after \(Int(Date().timeIntervalSince(start))) s:"
                 + " \(model.root.fileCount) files, \(model.categories.count) categories"
@@ -156,7 +157,7 @@ import SwiftUI
                 model.searchText = query
                 await step("Search", model, wait: Pause.perSearch, picture: false)
                 let hits = SearchService.search(query, scope: scope, in: model.root)
-                check(hits.count <= ScanConfig.searchLimit, "Search returns more than the limit")
+                check(hits.count <= ScanLimits.searchLimit, "Search returns more than the limit")
                 check(
                     scope != .folders || hits.allSatisfy(\.isFolder),
                     "Folder search returns files")
@@ -168,12 +169,12 @@ import SwiftUI
     /// Thresholds and day ranges, each on the page that shows it.
     private static func flipSettings(_ model: AppModel) async {
         model.pane = .largeFiles
-        for megabytes in LargeFileThreshold.optionsMB {
-            changeSetting(SettingsKey.largeFileMB, to: megabytes)
+        for megabytes in LargeFileThreshold.megabyteOptions {
+            changeSetting(SettingsKey.largeFileMegabytes, to: megabytes)
             await step("Large files \(megabytes)", model, wait: Pause.perSetting, picture: false)
         }
         model.pane = .apps
-        for days in CleanConfig.unusedDayOptions {
+        for days in CleanUpRules.unusedDayOptions {
             changeSetting(SettingsKey.unusedDays, to: days)
             await step("Days \(days)", model, wait: Pause.perSetting, picture: false)
         }
@@ -182,7 +183,8 @@ import SwiftUI
         await step("Cleaner refresh", model, wait: Pause.afterCleanerRefresh)
     }
 
-    /// The scenario that crashed Swift Charts: rescan while the page with the chart is open, then switch around.
+    /// The scenario that crashed Swift Charts: rescan while the page with the chart is open, then
+    /// switch around.
     private static func rescanOnOverview(_ model: AppModel) async {
         model.pane = .overview
         model.scan()
@@ -247,7 +249,8 @@ import SwiftUI
             + otherVolumes.map { volume in .volume(volume.path) }
     }
 
-    /// A volume's launch key is its mount point, so the log only says "volume" to keep names out of it.
+    /// A volume's launch key is its mount point, so the log only says "volume" to keep names out of
+    /// it.
     private static func logName(of pane: Pane) -> String {
         if case .volume = pane { return "volume" }
         return pane.launchKey

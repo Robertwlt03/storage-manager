@@ -6,7 +6,9 @@ enum CleanerService {
     private static let cachesFolder = Paths.home + "/Library/Caches"
     private static let logsFolder = Paths.home + "/Library/Logs"
     private static let trashFolder = Paths.home + "/.Trash"
-    private static var tempFolder: String { Paths.tempArea + "/" + TempPart.t.rawValue }
+    private static var tempFolder: String {
+        Paths.tempArea + "/" + TempPart.temporaryFiles.rawValue
+    }
     private static let systemPrefix = "com.apple."
     private static let secondsPerDay: TimeInterval = 86_400
     private static let developerFolders = [
@@ -14,8 +16,9 @@ enum CleanerService {
         "~/.npm/_cacache", "~/.gradle/caches", "~/.cache",
     ]
 
-    /// Lists what could go; `size` comes from the scanned tree, so no second walk over the disk is needed.
-    /// Entries under 1 MB are folded in the tree and count as zero, which is negligible here.
+    /// Lists what could go; `size` comes from the scanned tree, so no second walk over the disk is
+    /// needed. Entries under 1 MB are folded in the tree and count as zero, which is negligible
+    /// here.
     static func candidates(size: (String) -> Int64) -> [CleanItem] {
         CleanKind.allCases.map { kind in
             let paths = paths(for: kind)
@@ -41,10 +44,10 @@ enum CleanerService {
             return developerFolders.map(Paths.expand).filter(Paths.exists)
         case .logs:
             return entries(of: logsFolder)
-                .filter { path in isOlder(path, thanDays: CleanConfig.logMinAgeDays) }
+                .filter { path in isOlder(path, thanDays: CleanUpRules.logMinAgeDays) }
         case .temp:
             return entries(of: tempFolder)
-                .filter { path in isOlder(path, thanDays: CleanConfig.tempMinAgeDays) }
+                .filter { path in isOlder(path, thanDays: CleanUpRules.tempMinAgeDays) }
         case .trash:
             return entries(of: trashFolder)
         }

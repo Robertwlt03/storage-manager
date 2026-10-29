@@ -11,7 +11,7 @@ struct Entry: Identifiable {
     let name: String
     let path: String?
     let bytes: Int64
-    let items: Int
+    let itemCount: Int
     let kind: Kind
 
     var node: Node? { if case .folder(let folderNode) = kind { folderNode } else { nil } }
@@ -20,12 +20,12 @@ struct Entry: Identifiable {
     static func folder(_ node: Node) -> Entry {
         Entry(
             id: node.path, name: node.displayName, path: node.path, bytes: node.bytes,
-            items: node.fileCount, kind: .folder(node))
+            itemCount: node.fileCount, kind: .folder(node))
     }
 
     static func file(_ file: FileItem) -> Entry {
         Entry(
-            id: file.path, name: file.name, path: file.path, bytes: file.bytes, items: 1,
+            id: file.path, name: file.name, path: file.path, bytes: file.bytes, itemCount: 1,
             kind: .file)
     }
 
@@ -33,7 +33,7 @@ struct Entry: Identifiable {
         Entry(
             id: node.path + "/\u{0}rest",
             name: TextKey.smallerItems.translated(with: Format.count(node.restCount)), path: nil,
-            bytes: node.restBytes, items: node.restCount, kind: .rest)
+            bytes: node.restBytes, itemCount: node.restCount, kind: .rest)
     }
 
     /// Everything directly inside a folder.
@@ -49,11 +49,12 @@ struct VolumeInfo: Identifiable, Hashable {
     let path: String
     let name: String
     let format: String
-    let total, free, available: Int64  // available = free + what macOS can purge on demand
+    /// `availableBytes` is `freeBytes` plus what macOS can purge on demand.
+    let totalBytes, freeBytes, availableBytes: Int64
     let isInternal, isRoot: Bool
     var id: String { path }
-    var purgeable: Int64 { max(0, available - free) }
-    var used: Int64 { max(0, total - free) }
+    var purgeableBytes: Int64 { max(0, availableBytes - freeBytes) }
+    var usedBytes: Int64 { max(0, totalBytes - freeBytes) }
     var symbol: String { isInternal ? Symbols.internalDrive : Symbols.externalDrive }
 }
 
@@ -64,7 +65,8 @@ struct Category: Identifiable {
     var id: CategoryKind { kind }
 }
 
-/// Folders like `X/com.google.Chrome.code_sign_clone` that macOS fills with copies of an app while checking it.
+/// Folders like `X/com.google.Chrome.code_sign_clone` that macOS fills with copies of an app while
+/// checking it.
 struct CopyGroup: Identifiable {
     let node: Node
     let bundleID: String
@@ -75,7 +77,7 @@ struct CopyGroup: Identifiable {
 }
 
 struct CopyDetails {
-    var count = 0
+    var copyCount = 0
     var versions: [(version: String, count: Int)] = []
     var days: [(day: Date, count: Int)] = []
 }
@@ -83,5 +85,5 @@ struct CopyDetails {
 struct FolderProfile {
     var files = 0, folders = 0, packages = 0
     var oldest: Date?, newest: Date?
-    var types: [(ext: String, bytes: Int64, count: Int)] = []
+    var types: [(fileExtension: String, bytes: Int64, count: Int)] = []
 }

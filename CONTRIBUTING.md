@@ -98,7 +98,7 @@ wenige feste Varianten, damit gleiche Dinge überall gleich aussehen:
 | --- | --- | --- |
 | `UI.Page` | eine scrollende Seite mit Kopfzeile | mit oder ohne Optionen |
 | `UI.Card` | eine abgerundete Fläche | mit oder ohne Überschrift |
-| `UI.Rows`, `UI.NavRow`, `UI.Fields` | Zeilen mit Trennlinien | Navigation oder Bezeichnung mit Wert |
+| `UI.Rows`, `UI.NavigationRow`, `UI.Fields` | Zeilen mit Trennlinien | Navigation oder Bezeichnung mit Wert |
 | `UI.Icon` | jedes Symbol und Bild | Art und Größe von sehr klein bis groß |
 | `UI.Note` | eine Zeile Information | Hinweis, in Arbeit, gut, Warnung, Fehler |
 | `UI.Placeholder` | Ersatz für fehlenden Inhalt | leer, lädt, nicht gemessen, auf einer Seite oder Karte |

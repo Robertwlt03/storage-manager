@@ -25,8 +25,9 @@ import Observation
         synthesizer.speak(utterance)
     }
 
-    /// A Siri voice of the app's language if macOS offers one, otherwise the best installed voice, otherwise the default.
-    /// More voices, including other Siri voices, can be added in System Settings › Accessibility › Spoken Content.
+    /// A Siri voice of the app's language if macOS offers one, otherwise the best installed voice,
+    /// otherwise the default. More voices, including other Siri voices, can be added in System
+    /// Settings › Accessibility › Spoken Content.
     private static func bestVoice(for locale: Locale) -> AVSpeechSynthesisVoice? {
         let languageCode = locale.language.languageCode?.identifier ?? AppLanguage.fallback.rawValue
         let voices = AVSpeechSynthesisVoice.speechVoices()

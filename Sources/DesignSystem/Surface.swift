@@ -1,8 +1,8 @@
 import AppKit
 import SwiftUI
 
-/// Card background. On macOS 26 and later it is Liquid Glass, which follows the system's own setting
-/// (clear or tinted, System Settings › Appearance); earlier systems get a classic card.
+/// Card background. On macOS 26 and later it is Liquid Glass, which follows the system's own
+/// setting (clear or tinted, System Settings › Appearance); earlier systems get a classic card.
 private struct SurfaceModifier: ViewModifier {
     let radius: CGFloat
 
@@ -19,8 +19,8 @@ private struct SurfaceModifier: ViewModifier {
 }
 
 /// Button roles with their own colour, so several buttons side by side stay distinguishable.
-/// `quiet` is a bare symbol button (sidebar footer, info button); `content` makes a whole row, tile or legend entry
-/// clickable without drawing a button around it.
+/// `quiet` is a bare symbol button (sidebar footer, info button); `content` makes a whole row, tile
+/// or legend entry clickable without drawing a button around it.
 enum ButtonKind {
     case normal, primary, confirm, quiet, content
 

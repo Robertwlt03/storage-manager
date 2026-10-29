@@ -8,7 +8,8 @@ struct EntryBrowser: View {
     var showLocation = false
     let emptyTitle: String
     var emptyDetail: String?
-    /// Changes when the whole content is replaced; the table is then rebuilt, not diffed (see ARCHITECTURE.md).
+    /// Changes when the whole content is replaced; the table is then rebuilt, not diffed (see
+    /// ARCHITECTURE.md).
     var contentKey = ""
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list

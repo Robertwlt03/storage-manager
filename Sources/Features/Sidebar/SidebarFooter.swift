@@ -12,7 +12,7 @@ struct SidebarFooter: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Space.row) {
             statusButton
-            if model.scanning {
+            if model.isScanning {
                 ProgressView(value: model.scanFraction).progressViewStyle(.linear)
                     .controlSize(.small)
                     .animation(Motion.quick, value: model.scanFraction)
@@ -29,7 +29,7 @@ struct SidebarFooter: View {
             }
         }
         .padding(Space.item)
-        .onChange(of: model.scanning) { if model.scanning { scanStarts += 1 } }
+        .onChange(of: model.isScanning) { if model.isScanning { scanStarts += 1 } }
     }
 
     private var statusButton: some View {
@@ -66,16 +66,16 @@ struct SidebarFooter: View {
             UI.Icon(.symbol(Symbols.rescan), size: .small).turnOnce(value: scanStarts)
         }
         .appButton(.quiet)
-        .disabled(model.scanning)
+        .disabled(model.isScanning)
         .help(TextKey.rescanHelp.translated)
     }
 
     /// One short line: spinner and percent while scanning, otherwise when it was measured.
     private var status: some View {
         HStack(spacing: Space.small) {
-            if model.scanning {
-                // No spinner here: the progress bar right below already moves, and Apple prefers one determinate
-                // indicator over a second endless one.
+            if model.isScanning {
+                // No spinner here: the progress bar right below already moves, and Apple prefers
+                // one determinate indicator over a second endless one.
                 UI.Icon(.symbol(Symbols.measure), size: .small).foregroundStyle(.tint)
                 Text(TextKey.scanningPercent.translated(with: Format.percent(model.scanFraction)))
                     .monospacedDigit()
@@ -100,7 +100,7 @@ struct SidebarFooter: View {
         UI.Icon(.symbol(isMissingFolders ? Symbols.warning : Symbols.success), size: .small)
             .contentTransition(.symbolEffect(.replace))
             .symbolEffect(.bounce, value: lastScan)  // a small nod when a scan has finished
-            .foregroundStyle(isMissingFolders ? .warn : .good)
+            .foregroundStyle(isMissingFolders ? .warning : .good)
     }
 }
 
@@ -110,9 +110,11 @@ private struct ScanDetails: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Space.item) {
-            Text(model.scanning ? TextKey.scanningTitle.translated : TextKey.scanDetails.translated)
-                .textRole(.section)
-            if model.scanning {
+            Text(
+                model.isScanning ? TextKey.scanningTitle.translated : TextKey.scanDetails.translated
+            )
+            .textRole(.section)
+            if model.isScanning {
                 runningScan
             } else {
                 finishedScan
@@ -132,7 +134,7 @@ private struct ScanDetails: View {
                 .scanArea,
                 TextKey.scanningArea.translated(
                     with: Format.count(step.index), Format.count(step.count),
-                    Paths.display(step.path))),
+                    Paths.displayName(step.path))),
             UI.Field(
                 .files,
                 TextKey.filesAndSize.translated(
@@ -154,7 +156,7 @@ private struct ScanDetails: View {
                     ? TextKey.accessGranted.translated : TextKey.accessMissingShort.translated),
         ])
         if model.hasUnreadableFoldersWithoutAccess {
-            UI.Note(TextKey.unreadable.translated(with: Format.count(model.unreadable)))
+            UI.Note(TextKey.unreadable.translated(with: Format.count(model.unreadableCount)))
             UI.ActionButton(TextKey.accessOpenSettings.translated, .primary) {
                 FinderService.openFullDiskAccessSettings()
             }
@@ -168,6 +170,6 @@ private struct ScanDetails: View {
 extension AppModel {
     /// The last scan could not read some folders, and Full Disk Access would let it.
     fileprivate var hasUnreadableFoldersWithoutAccess: Bool {
-        unreadable > 0 && !hasFullDiskAccess
+        unreadableCount > 0 && !hasFullDiskAccess
     }
 }

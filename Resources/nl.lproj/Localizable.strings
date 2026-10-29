@@ -12,7 +12,6 @@
 "cancelScan" = "Scan annuleren";
 
 /* Scan status and placeholders */
-"scanning" = "Bezig met scannen …";
 "cancel" = "Annuleer";
 "filesAndSize" = "%@ bestanden · %@";
 "measuredAt" = "Gescand om %@";

@@ -36,7 +36,8 @@ struct CopyGroupCard: View {
         .onReceive(appLaunches) { _ in refreshIsAppRunning() }
         .onReceive(appTerminations) { _ in refreshIsAppRunning() }
         .confirmationDialog(
-            TextKey.deleteTitle.translated(with: Format.count(details?.count ?? 0), group.appName),
+            TextKey.deleteTitle.translated(
+                with: Format.count(details?.copyCount ?? 0), group.appName),
             isPresented: $isConfirming
         ) {
             Button(TextKey.deleteForever.translated, role: .destructive) {
@@ -53,7 +54,7 @@ struct CopyGroupCard: View {
             UI.TitleRow(group.appName, subtitle: group.bundleID, icon: .file(group.appPath ?? ""))
             Spacer()
             isAppRunning
-                ? UI.Note(TextKey.running.translated, .warn(symbol: Symbols.running))
+                ? UI.Note(TextKey.running.translated, .warning(symbol: Symbols.running))
                 : UI.Note(TextKey.stopped.translated, .good(symbol: Symbols.stopped))
         }
     }
@@ -62,7 +63,7 @@ struct CopyGroupCard: View {
 
     private var summaryFields: [UI.Field?] {
         [
-            UI.Field(.copiesLabel, details.map { loaded in Format.count(loaded.count) }),
+            UI.Field(.copiesLabel, details.map { loaded in Format.count(loaded.copyCount) }),
             UI.Field(.countedSize, Format.bytes(group.node.bytes)),
             UI.Field(.installedVersion, group.installedVersion ?? TextKey.notFound.translated),
         ]
@@ -90,7 +91,7 @@ struct CopyGroupCard: View {
     private var actions: some View {
         HStack {
             if isAppRunning {
-                Text(TextKey.quitToDelete.translated(with: group.appName)).foregroundStyle(.warn)
+                Text(TextKey.quitToDelete.translated(with: group.appName)).foregroundStyle(.warning)
             }
             Spacer()
             UI.ActionButton(TextKey.openInExplorer.translated) { model.open(group.node) }

@@ -1,9 +1,10 @@
 import Foundation
 
-/// Key figures and size classes for the start page, all taken from the scanned tree (no extra disk access).
-enum StatsService {
+/// Key figures and size classes for the start page, all taken from the scanned tree (no extra disk
+/// access).
+enum StatisticsService {
     static func compute(root: Node) -> Statistics {
-        var statistics = Statistics(files: root.fileCount, bytes: root.bytes)
+        var statistics = Statistics(fileCount: root.fileCount, bytes: root.bytes)
         var filesPerBucket: [SizeBucket: Int] = [:]
         var bytesPerBucket: [SizeBucket: Int64] = [:]
         var keptFiles = 0
@@ -24,9 +25,9 @@ enum StatsService {
         // Files under 1 MB are folded during the scan; they are everything that was not kept.
         filesPerBucket[.under1MB] = max(0, root.fileCount - keptFiles)
         bytesPerBucket[.under1MB] = max(0, root.bytes - keptBytes)
-        let largeFileBytes = LargeFileThreshold.bytes(AppSettings.largeFileMB)
+        let largeFileBytes = LargeFileThreshold.bytes(AppSettings.largeFileMegabytes)
         statistics.largeFiles = SearchService.largeFiles(atLeast: largeFileBytes, in: root).count
-        statistics.buckets = SizeBucket.allCases.map { sizeBucket in
+        statistics.sizeClasses = SizeBucket.allCases.map { sizeBucket in
             (sizeBucket, filesPerBucket[sizeBucket] ?? 0, bytesPerBucket[sizeBucket] ?? 0)
         }
         return statistics

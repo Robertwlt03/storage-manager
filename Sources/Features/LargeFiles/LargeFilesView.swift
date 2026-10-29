@@ -3,9 +3,11 @@ import SwiftUI
 /// All files from a chosen size, straight from the last scan.
 struct LargeFilesView: View {
     @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.largeFileMB) private var minimumMegabytes = LargeFileThreshold.defaultMB
+    @AppStorage(SettingsKey.largeFileMegabytes) private var minimumMegabytes = LargeFileThreshold
+        .defaultMegabytes
 
-    /// Computed right away, so the table starts with its rows instead of diffing thousands in later.
+    /// Computed right away, so the table starts with its rows instead of diffing thousands in
+    /// later.
     private var largeFiles: [Entry] {
         _ = model.revision
         let minimumBytes = LargeFileThreshold.bytes(minimumMegabytes)
@@ -32,7 +34,7 @@ struct LargeFilesView: View {
 
     private var minimumSizePicker: some View {
         UI.MenuPicker(.minimumSize, selection: $minimumMegabytes) {
-            ForEach(LargeFileThreshold.optionsMB, id: \.self) { megabytes in
+            ForEach(LargeFileThreshold.megabyteOptions, id: \.self) { megabytes in
                 Text(TextKey.fromSize.translated(with: thresholdText(megabytes))).tag(megabytes)
             }
         }

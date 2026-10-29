@@ -1,9 +1,9 @@
 import Foundation
 
 /// Tunable numbers of the scan, in one place.
-enum ScanConfig {
-    /// ponytail: folders and files below 1 MB fold into one row per folder; keeps the tree small (memory, energy).
-    /// Lower it if someone needs to see tiny files.
+enum ScanLimits {
+    /// ponytail: folders and files below 1 MB fold into one row per folder; keeps the tree small
+    /// (memory, energy). Lower it if someone needs to see tiny files.
     static let keepBytes: Int64 = 1 << 20
     static let progressInterval: TimeInterval = 0.5
     static let cancelCheckMask = 0xFFF  // check cancellation and progress every 4096 entries
@@ -13,7 +13,7 @@ enum ScanConfig {
 }
 
 /// What the cleaner may remove and how old things must be.
-enum CleanConfig {
+enum CleanUpRules {
     static let tempMinAgeDays = 3
     static let logMinAgeDays = 7
     static let unusedDayOptions = [30, 90, 180, 365]
@@ -21,14 +21,15 @@ enum CleanConfig {
 }
 
 enum LargeFileThreshold {
-    static let optionsMB = [10, 50, 100, 250, 500, 1000, 5000]
-    static let defaultMB = 500
+    static let megabyteOptions = [10, 50, 100, 250, 500, 1000, 5000]
+    static let defaultMegabytes = 500
     private static let bytesPerMegabyte: Int64 = 1_000_000
 
     static func bytes(_ megabytes: Int) -> Int64 { Int64(megabytes) * bytesPerMegabyte }
 }
 
-/// Hidden stand-in text that keeps the space of a value still being calculated; it is never shown or read.
+/// Hidden stand-in text that keeps the space of a value still being calculated; it is never shown
+/// or read.
 enum StandInText {
     static let figure = "0.000.000"
 }

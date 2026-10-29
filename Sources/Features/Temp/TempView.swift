@@ -37,7 +37,7 @@ struct TempView: View {
 
     private func row(_ part: TempPart, in tempArea: Node) -> some View {
         let folder = tempArea.child(named: part.rawValue)
-        return UI.NavRow(
+        return UI.NavigationRow(
             part.title.translated, icon: .letter(part.rawValue),
             detail: part.detail.translated,
             value: folder.map { folder in Format.bytes(folder.bytes) } ?? "–",

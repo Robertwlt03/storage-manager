@@ -7,10 +7,12 @@ struct SidebarView: View {
             // Replaced by `SidebarToggle`, see `AppModel.toggleSidebar`.
             .toolbar(removing: .sidebarToggle)
             .toolbar {
-                // Where Apple puts it: trailing edge of the open sidebar, next to the window buttons when closed.
+                // Where Apple puts it: trailing edge of the open sidebar, next to the window
+                // buttons when closed.
                 if #available(macOS 26.0, *) {
                     ToolbarSpacer(.flexible)
-                    // Own glass circle, so no empty background stays behind when it moves (see ARCHITECTURE.md).
+                    // Own glass circle, so no empty background stays behind when it moves (see
+                    // ARCHITECTURE.md).
                     ToolbarItem { SidebarToggle().buttonStyle(.glass).buttonBorderShape(.circle) }
                         .sharedBackgroundVisibility(.hidden)
                 } else {
@@ -18,15 +20,16 @@ struct SidebarView: View {
                 }
             }
             // Fixed: a flexible width jumped at the end of the reveal animation.
-            .navigationSplitViewColumnWidth(Layout.sidebarIdeal)
+            .navigationSplitViewColumnWidth(Layout.sidebarIdealWidth)
     }
 }
 
-/// The pages, built from `Pane` and the mounted volumes so every page appears here automatically, with the scan
-/// status below. Used by the sidebar column and by the floating sidebar of narrow windows.
+/// The pages, built from `Pane` and the mounted volumes so every page appears here automatically,
+/// with the scan status below. Used by the sidebar column and by the floating sidebar of narrow
+/// windows.
 private struct SidebarList: View {
     @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
+    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanUpRules.defaultUnusedDays
 
     var body: some View {
         @Bindable var model = model
@@ -42,7 +45,8 @@ private struct SidebarList: View {
         .safeAreaInset(edge: .bottom, spacing: 0) { SidebarFooter() }
     }
 
-    /// The startup disk is the overview; only other volumes (USB sticks, external drives) get their own page.
+    /// The startup disk is the overview; only other volumes (USB sticks, external drives) get their
+    /// own page.
     @ViewBuilder private var volumesSection: some View {
         let externalVolumes = model.volumes.filter { volume in !volume.isRoot }
         if !externalVolumes.isEmpty {
@@ -66,14 +70,14 @@ private struct SidebarList: View {
     }
 }
 
-/// The button that shows and hides the sidebar, placed like Apple's own: at the open sidebar's trailing edge, next to
-/// the window buttons while it is closed.
+/// The button that shows and hides the sidebar, placed like Apple's own: at the open sidebar's
+/// trailing edge, next to the window buttons while it is closed.
 private struct SidebarToggle: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
         let title =
-            model.sidebarShown ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
+            model.isSidebarShown ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
         Button {
             model.toggleSidebar()
         } label: {
@@ -83,8 +87,9 @@ private struct SidebarToggle: View {
     }
 }
 
-/// In a window too narrow for sidebar and page side by side, the sidebar floats above the page like a popover and
-/// the window keeps its size. Picking a page, clicking beside it, the sidebar button again or Escape closes it.
+/// In a window too narrow for sidebar and page side by side, the sidebar floats above the page like
+/// a popover and the window keeps its size. Picking a page, clicking beside it, the sidebar button
+/// again or Escape closes it.
 struct SidebarOverlay: View {
     @Environment(AppModel.self) private var model
 
@@ -94,7 +99,7 @@ struct SidebarOverlay: View {
                 .onTapGesture { model.closeSidebarOverlay() }
             SidebarList()
                 .scrollContentBackground(.hidden)
-                .frame(width: Layout.sidebarIdeal)
+                .frame(width: Layout.sidebarIdealWidth)
                 .surface()
                 .padding(Space.small)
         }

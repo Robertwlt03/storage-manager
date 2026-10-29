@@ -3,14 +3,14 @@ import SwiftUI
 
 struct RootView: View {
     /// The floating sidebar waits fully outside the window's left edge.
-    private static let hiddenSidebarOffset = -(Layout.sidebarIdeal + Space.large)
+    private static let hiddenSidebarOffset = -(Layout.sidebarIdealWidth + Space.large)
 
     @Environment(AppModel.self) private var model
     @Environment(\.openSettings) private var openSettings
 
     var body: some View {
         @Bindable var model = model
-        NavigationSplitView(columnVisibility: $model.columns) {
+        NavigationSplitView(columnVisibility: $model.sidebarVisibility) {
             SidebarView()
         } detail: {
             page
@@ -18,10 +18,10 @@ struct RootView: View {
         // Replaced by `SidebarToggle`, see `AppModel.toggleSidebar`.
         .toolbar(removing: .sidebarToggle)
         .searchable(
-            text: $model.searchText, isPresented: $model.searchPresented, placement: .toolbar,
+            text: $model.searchText, isPresented: $model.isSearchPresented, placement: .toolbar,
             prompt: TextKey.searchPrompt.translated
         )
-        .sheet(isPresented: $model.showAccessSheet) { AccessSheet() }
+        .sheet(isPresented: $model.isShowingAccessSheet) { AccessSheet() }
         .syncPreferences()
         .onExitCommand(perform: closeSidebarOrSearch)
         .onChange(of: model.pane, leaveSearchAndSidebar)
@@ -50,19 +50,19 @@ struct RootView: View {
 
     /// Slid, never removed or faded (see ARCHITECTURE.md).
     @ViewBuilder private var floatingSidebar: some View {
-        if model.windowNarrow {
+        if model.isWindowNarrow {
             SidebarOverlay()
-                .offset(x: model.sidebarOverlay ? 0 : Self.hiddenSidebarOffset)
-                .allowsHitTesting(model.sidebarOverlay)
-                .accessibilityHidden(!model.sidebarOverlay)
+                .offset(x: model.isSidebarFloating ? 0 : Self.hiddenSidebarOffset)
+                .allowsHitTesting(model.isSidebarFloating)
+                .accessibilityHidden(!model.isSidebarFloating)
         }
     }
 
     /// Escape closes the floating sidebar, otherwise it leaves the search.
     private func closeSidebarOrSearch() {
-        if model.sidebarOverlay {
+        if model.isSidebarFloating {
             model.closeSidebarOverlay()
-        } else if model.isSearching || model.searchPresented {
+        } else if model.isSearching || model.isSearchPresented {
             model.endSearch()
         }
     }
@@ -75,9 +75,9 @@ struct RootView: View {
 
     private func start() {
         model.windowResized()
-        if AppSettings.launchSettings { openSettings() }
+        if AppSettings.opensSettingsAtLaunch { openSettings() }
         model.launch()
-        if let reportFolder = AppSettings.launchUITest {
+        if let reportFolder = AppSettings.uiTestReportFolder {
             Task {
                 await UITest.run(model, into: reportFolder)
                 NSApp.terminate(nil)

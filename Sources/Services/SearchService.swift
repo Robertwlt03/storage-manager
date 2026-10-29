@@ -1,5 +1,5 @@
 /// Searches folder and file names in the scanned tree. Instant and without disk access;
-/// files under `ScanConfig.keepBytes` are folded during the scan and therefore not searchable.
+/// files under `ScanLimits.keepBytes` are folded during the scan and therefore not searchable.
 enum SearchService {
     static func search(_ query: String, scope: SearchScope, in root: Node) -> [Entry] {
         let trimmedQuery = query.trimmingCharacters(in: .whitespaces)
@@ -21,7 +21,7 @@ enum SearchService {
         }
         collectMatches(in: root)
         let biggestFirst = matches.sorted { left, right in left.bytes > right.bytes }
-        return Array(biggestFirst.prefix(ScanConfig.searchLimit))
+        return Array(biggestFirst.prefix(ScanLimits.searchLimit))
     }
 
     static func largeFiles(atLeast minimumBytes: Int64, in root: Node) -> [Entry] {

@@ -16,14 +16,14 @@ struct Tone {
 }
 
 enum Theme {
-    // Secondary and status text. The system's secondary label colour reaches only about 4:1 in light mode,
-    // so text uses these tones; surfaces and controls stay native.
+    // Secondary and status text. The system's secondary label colour reaches only about 4:1 in
+    // light mode, so text uses these tones; surfaces and controls stay native.
     static let muted = Tone(light: 0x55555A, dark: 0xB4B4BC)
     static let good = Tone(light: 0x166B2D, dark: 0x5FD07A)
-    static let warn = Tone(light: 0x984200, dark: 0xFFA552)
+    static let warning = Tone(light: 0x984200, dark: 0xFFA552)
     static let bad = Tone(light: 0xB3141F, dark: 0xFF8C8C)
     static let textTones: [(name: String, tone: Tone)] = [
-        ("muted", muted), ("good", good), ("warn", warn), ("bad", bad),
+        ("muted", muted), ("good", good), ("warn", warning), ("bad", bad),
     ]
 
     // Button fills with white text on top.
@@ -33,7 +33,8 @@ enum Theme {
         ("primaryFill", primaryFill), ("confirmFill", confirmFill),
     ]
 
-    /// Approximations of the system surfaces (content, window, grouped rows, sidebar, glass over the backdrop).
+    /// Approximations of the system surfaces (content, window, grouped rows, sidebar, glass over
+    /// the backdrop).
     static let lightSurfaces: [UInt32] = [0xFFFFFF, 0xF5F5F7, 0xECECEC, 0xE3E3E3, 0xDDE3EE]
     static let darkSurfaces: [UInt32] = [
         0x1E1E1E, 0x262626, 0x2D2D2D, 0x323232, 0x3A3A3A, 0x28303E,
@@ -47,10 +48,11 @@ enum Theme {
     /// Invisible, but still catches clicks, for example beside the floating sidebar.
     static let clickCatcher = Color.clear
 
-    /// Category colours: Apple's dynamic system colours, which adapt to light, dark and increased contrast by themselves.
-    /// The white symbols on them are decorative (a text label always names the category), so the 3:1 rule for
-    /// meaningful graphics does not apply; all text keeps its 4.5:1 check.
-    static let colourful: [Color] = [
+    /// Category colours: Apple's dynamic system colours, which adapt to light, dark and increased
+    /// contrast by themselves. The white symbols on them are decorative (a text label always names
+    /// the category), so the 3:1 rule for meaningful graphics does not apply; all text keeps its
+    /// 4.5:1 check.
+    static let categoryColors: [Color] = [
         .blue, .purple, .pink, .orange, .yellow, .green, .teal, .indigo, .red, .brown, .mint,
         .cyan, .gray, .blue, .purple, .secondary,
     ]
@@ -64,10 +66,12 @@ enum Theme {
     static let appIconRing = Color.white
     static let appIconRingTrack = appIconRing.opacity(0.22)
 
-    static func color(_ index: Int) -> Color { colourful[index % colourful.count] }
+    static func categoryColor(_ index: Int) -> Color {
+        categoryColors[index % categoryColors.count]
+    }
 
     /// WCAG contrast ratio of two sRGB colours.
-    static func ratio(_ first: UInt32, _ second: UInt32) -> Double {
+    static func contrastRatio(_ first: UInt32, _ second: UInt32) -> Double {
         let firstLuminance = relativeLuminance(of: first)
         let secondLuminance = relativeLuminance(of: second)
         let lighter = max(firstLuminance, secondLuminance)
@@ -103,11 +107,12 @@ enum Theme {
 extension ShapeStyle where Self == Color {
     static var muted: Color { Theme.muted.color }
     static var good: Color { Theme.good.color }
-    static var warn: Color { Theme.warn.color }
+    static var warning: Color { Theme.warning.color }
     static var bad: Color { Theme.bad.color }
 }
 
-/// The red, green and blue parts of a colour written as one hex number such as 0x0A5BC4, each from 0 to 1.
+/// The red, green and blue parts of a colour written as one hex number such as 0x0A5BC4, each from
+/// 0 to 1.
 private struct HexChannels {
     private static let redShift: UInt32 = 16
     private static let greenShift: UInt32 = 8

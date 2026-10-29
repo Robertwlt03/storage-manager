@@ -12,7 +12,6 @@
 "cancelScan" = "Avbryt måling";
 
 /* Scan status and placeholders */
-"scanning" = "Måler …";
 "cancel" = "Avbryt";
 "filesAndSize" = "%@ filer · %@";
 "measuredAt" = "Målt kl. %@";

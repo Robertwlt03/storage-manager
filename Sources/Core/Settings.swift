@@ -5,15 +5,16 @@ import AppKit
 enum SettingsKey {
     static let autoScan = "autoScan"
     static let extraFolders = "extraFolders"
-    static let largeFileMB = "largeFileMB"
+    static let largeFileMegabytes = "largeFileMB"
     static let unusedDays = "unusedDays"
     static let layoutMode = "layoutMode"
     static let lastScanFiles = "lastScanFiles"
     static let launchPane = "pane"  // `open … --args -pane copies`
-    static let launchSettings = "openSettings"  // `open … --args -openSettings YES`
+    static let opensSettingsAtLaunch = "openSettings"  // `open … --args -openSettings YES`
     /// `open … --args -skipAccessSheet YES` (screenshots, tests)
     static let launchSkipAccessSheet = "skipAccessSheet"
-    static let launchUITest = "uiTest"  // `open … --args -uiTest <folder>` runs the stress test
+    /// `open … --args -uiTest <folder>` runs the stress test.
+    static let uiTestReportFolder = "uiTest"
 }
 
 enum AppSettings {
@@ -21,21 +22,26 @@ enum AppSettings {
 
     static func registerDefaults() {
         defaults.register(defaults: [
-            SettingsKey.autoScan: true, SettingsKey.largeFileMB: LargeFileThreshold.defaultMB,
-            SettingsKey.unusedDays: CleanConfig.defaultUnusedDays,
+            SettingsKey.autoScan: true,
+            SettingsKey.largeFileMegabytes: LargeFileThreshold.defaultMegabytes,
+            SettingsKey.unusedDays: CleanUpRules.defaultUnusedDays,
         ])
     }
 
     static var autoScan: Bool { defaults.bool(forKey: SettingsKey.autoScan) }
-    static var largeFileMB: Int { defaults.integer(forKey: SettingsKey.largeFileMB) }
+    static var largeFileMegabytes: Int { defaults.integer(forKey: SettingsKey.largeFileMegabytes) }
     static var launchPane: Pane? {
         defaults.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:))
     }
-    static var launchSettings: Bool { defaults.bool(forKey: SettingsKey.launchSettings) }
+    static var opensSettingsAtLaunch: Bool {
+        defaults.bool(forKey: SettingsKey.opensSettingsAtLaunch)
+    }
     static var shouldSkipAccessSheet: Bool {
         defaults.bool(forKey: SettingsKey.launchSkipAccessSheet)
     }
-    static var launchUITest: String? { defaults.string(forKey: SettingsKey.launchUITest) }
+    static var uiTestReportFolder: String? {
+        defaults.string(forKey: SettingsKey.uiTestReportFolder)
+    }
 
     /// Extra folders are stored as one string, one path per line (AppStorage cannot hold arrays).
     static func folders(from stored: String) -> [String] {
@@ -47,8 +53,9 @@ enum AppSettings {
     }
 }
 
-/// Languages the app ships; the raw value is the name of the `.lproj` folder. Which one is used comes from macOS,
-/// which also allows a language per app (System Settings › General › Language & Region › Applications).
+/// Languages the app ships; the raw value is the name of the `.lproj` folder. Which one is used
+/// comes from macOS, which also allows a language per app (System Settings › General › Language &
+/// Region › Applications).
 enum AppLanguage: String, CaseIterable {
     case de, en, fr, es, it, nl
     case ptBR = "pt-BR"

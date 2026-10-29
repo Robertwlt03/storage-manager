@@ -5,6 +5,7 @@ Run it from anywhere: scripts/inspect.py
 It exits with status 1 as soon as one finding is left, so it can guard a commit.
 """
 
+import json
 import os
 import re
 import subprocess
@@ -17,6 +18,8 @@ SOURCES = PROJECT / "Sources"
 BUILD_FOLDER = os.environ.get("INSPECT_BUILD_FOLDER", str(PROJECT / ".build" / "inspect"))
 
 THEME_FILE = "DesignSystem/Theme.swift"
+# swift format wraps code but not comments, so this check covers the comments.
+LINE_LENGTH = json.loads((PROJECT / ".swift-format").read_text())["lineLength"]
 ALLOWED_SHORT_NAMES = {"id", "x", "y"}
 # Names the system calls by itself, so they are used although no source line calls them.
 CALLED_BY_THE_SYSTEM = {
@@ -93,6 +96,8 @@ def rule_findings() -> list[str]:
         for number, line in enumerate(path.read_text().splitlines(), start=1):
             place = f"Sources/{relative}:{number}"
             code = strip_comments_and_strings(line)
+            if len(line) > LINE_LENGTH:
+                findings.append(f"{place}: line longer than {LINE_LENGTH} characters")
             if not NAMED_CONSTANT.match(code) and not AVAILABILITY.search(code):
                 for literal in NUMBER.findall(code):
                     if literal.replace("_", "") not in {"0", "1"}:

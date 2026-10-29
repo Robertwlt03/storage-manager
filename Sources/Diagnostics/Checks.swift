@@ -23,7 +23,7 @@ enum Checks {
         for (isDark, surfaces) in [(false, Theme.lightSurfaces), (true, Theme.darkSurfaces)] {
             for (name, tone) in Theme.textTones {
                 for surface in surfaces {
-                    let ratio = Theme.ratio(isDark ? tone.dark : tone.light, surface)
+                    let ratio = Theme.contrastRatio(isDark ? tone.dark : tone.light, surface)
                     let label = "\(name) / #\(String(surface, radix: hexadecimal))"
                     allPass = report(ratio, label) && allPass
                 }
@@ -36,7 +36,7 @@ enum Checks {
         var allPass = true
         for (name, fill) in Theme.fills {
             for colour in [fill.light, fill.dark] {
-                let ratio = Theme.ratio(whiteText, colour)
+                let ratio = Theme.contrastRatio(whiteText, colour)
                 let label = "white / \(name) #\(String(colour, radix: hexadecimal))"
                 allPass = report(ratio, label) && allPass
             }

@@ -30,8 +30,9 @@ enum VolumeService {
         let free = Int64(values.volumeAvailableCapacity ?? 0)
         return VolumeInfo(
             path: url.path, name: values.volumeName ?? url.lastPathComponent,
-            format: values.volumeLocalizedFormatDescription ?? "", total: Int64(total), free: free,
-            available: max(free, values.volumeAvailableCapacityForImportantUsage ?? 0),
+            format: values.volumeLocalizedFormatDescription ?? "", totalBytes: Int64(total),
+            freeBytes: free,
+            availableBytes: max(free, values.volumeAvailableCapacityForImportantUsage ?? 0),
             isInternal: values.volumeIsInternal ?? false,
             isRoot: values.volumeIsRootFileSystem ?? false)
     }

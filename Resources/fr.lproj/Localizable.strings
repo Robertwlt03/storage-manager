@@ -12,7 +12,6 @@
 "cancelScan" = "Annuler l’analyse";
 
 /* Scan status and placeholders */
-"scanning" = "Analyse en cours …";
 "cancel" = "Annuler";
 "filesAndSize" = "%@ fichiers · %@";
 "measuredAt" = "Analysé à %@";

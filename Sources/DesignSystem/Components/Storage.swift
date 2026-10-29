@@ -11,7 +11,8 @@ struct StorageSegment: Identifiable {
 }
 
 extension UI {
-    /// Volume name, available space, the stacked bar and its legend, like System Settings › Storage.
+    /// Volume name, available space, the stacked bar and its legend, like System Settings ›
+    /// Storage.
     struct VolumeSummary: View {
         let volume: VolumeInfo
         let segments: [StorageSegment]
@@ -34,9 +35,9 @@ extension UI {
                 TitleRow(
                     volume.name,
                     subtitle: TextKey.availableOf.translated(
-                        with: Format.bytes(volume.available), Format.bytes(volume.total)),
+                        with: Format.bytes(volume.availableBytes), Format.bytes(volume.totalBytes)),
                     icon: .file(volume.path))
-                StorageBar(segments: wholeVolume, total: volume.total)
+                StorageBar(segments: wholeVolume, total: volume.totalBytes)
                 StorageLegend(segments: wholeVolume, onSelect: onSelect, canSelect: canSelect)
             }
             .padding(.vertical, Space.row)
@@ -45,15 +46,17 @@ extension UI {
         /// Every part of the volume: the categories, used space they do not cover, and free space.
         private var wholeVolume: [StorageSegment] {
             let freeSpace = StorageSegment(
-                id: "free", title: TextKey.freeSpace.translated, bytes: volume.free, colorIndex: nil
+                id: "free", title: TextKey.freeSpace.translated, bytes: volume.freeBytes,
+                colorIndex: nil
             )
             return withUncoveredSpace + [freeSpace]
         }
 
-        /// Used space no category covers yet stays one piece, so the bar always spans the whole volume.
+        /// Used space no category covers yet stays one piece, so the bar always spans the whole
+        /// volume.
         private var withUncoveredSpace: [StorageSegment] {
             let covered = segments.reduce(0) { total, segment in total + segment.bytes }
-            let uncovered = volume.used - covered
+            let uncovered = volume.usedBytes - covered
             guard uncovered > 0 else { return segments }
             let uncoveredSpace = StorageSegment(
                 id: StorageSegment.usedID, title: TextKey.used.translated, bytes: uncovered,
@@ -63,7 +66,8 @@ extension UI {
     }
 }
 
-/// Plain shapes instead of a chart: they follow width changes frame by frame without redrawing a chart.
+/// Plain shapes instead of a chart: they follow width changes frame by frame without redrawing a
+/// chart.
 private struct StorageBar: View {
     let segments: [StorageSegment]
     let total: Int64
@@ -95,21 +99,22 @@ private struct StorageBar: View {
 
 extension StorageSegment {
     /// Free space is grey, every other part has its category colour.
-    fileprivate var color: Color { colorIndex.map(Theme.color) ?? Theme.freeSegment }
+    fileprivate var color: Color { colorIndex.map(Theme.categoryColor) ?? Theme.freeSegment }
 
     /// A negative size, which a measurement can briefly report, shows as nothing.
     fileprivate var shownBytes: CGFloat { CGFloat(max(bytes, 0)) }
 }
 
-/// The biggest parts by name, the rest grouped, free space last; in a fixed number of columns, because an adaptive
-/// grid jumped between two and three columns halfway through the sidebar animation.
+/// The biggest parts by name, the rest grouped, free space last; in a fixed number of columns,
+/// because an adaptive grid jumped between two and three columns halfway through the sidebar
+/// animation.
 private struct StorageLegend: View {
     let segments: [StorageSegment]
     var onSelect: ((StorageSegment) -> Void)?
     var canSelect: (StorageSegment) -> Bool
 
     /// When the legend is full, the last place goes to the entry that groups the rest.
-    private static let namedEntryLimit = Layout.legendMax - 1
+    private static let namedEntryLimit = Layout.legendMaxEntries - 1
 
     var body: some View {
         let columns = Array(
@@ -149,7 +154,7 @@ private struct StorageLegend: View {
     private var entries: [StorageSegment] {
         let named = segments.filter { segment in !isListedLast(segment) }
         let listedLast = segments.filter(isListedLast)
-        guard named.count > Layout.legendMax else { return named + listedLast }
+        guard named.count > Layout.legendMaxEntries else { return named + listedLast }
         let rest = named.dropFirst(Self.namedEntryLimit)
         let other = StorageSegment(
             id: StorageSegment.otherID, title: TextKey.otherCategories.translated,

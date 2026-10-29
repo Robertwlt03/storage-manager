@@ -1,7 +1,8 @@
 import AppKit
 import SwiftUI
 
-/// Shown at every launch until Full Disk Access works: one switch in System Settings instead of many single prompts.
+/// Shown at every launch until Full Disk Access works: one switch in System Settings instead of
+/// many single prompts.
 struct AccessSheet: View {
     @Environment(AppModel.self) private var model
     @State private var hasVisitedSettings = false
@@ -13,13 +14,14 @@ struct AccessSheet: View {
                 icon: .file(Bundle.main.bundlePath))
             UI.Note(TextKey.accessDetail.translated)
             if hasVisitedSettings {
-                UI.Note(TextKey.accessRestartHint.translated, .warn(symbol: Symbols.warning))
+                UI.Note(TextKey.accessRestartHint.translated, .warning(symbol: Symbols.warning))
             }
             buttons
         }
         .padding(Space.page)
         .frame(width: Layout.sheetWidth)
-        // Back from System Settings: close if access works already, otherwise the hint above explains the restart.
+        // Back from System Settings: close if access works already, otherwise the hint above
+        // explains the restart.
         .onReceive(
             NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)
         ) { _ in

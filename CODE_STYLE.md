@@ -23,7 +23,7 @@ Namen sind auf Englisch und ausgeschrieben. Wir wählen Wörter, die man aus dem
 denn `category` versteht jeder, `cat` dagegen klingt nach einer Katze. Ein Name sagt, was etwas ist oder tut:
 
 - **Werte** heißen nach ihrem Inhalt, zum Beispiel `largeFiles` statt `list` oder `result`.
-- **Funktionen** beginnen mit einem Verb, zum Beispiel `scan()`, `openSettings()` oder `refreshStats()`.
+- **Funktionen** beginnen mit einem Verb, zum Beispiel `scan()`, `openSettings()` oder `refreshStatistics()`.
 - **Wahrheitswerte** lesen sich wie eine Frage, zum Beispiel `isEmpty`, `hasFullDiskAccess` oder `canSelect`.
 - **Parameter in Closures** bekommen ebenfalls einen Namen. Wir schreiben `{ file in file.bytes }` und nicht
   `{ $0.bytes }`, damit man nicht raten muss, was `$0` ist.

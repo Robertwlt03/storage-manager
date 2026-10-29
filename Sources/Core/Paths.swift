@@ -11,10 +11,10 @@ enum Paths {
     static let tempArea: String = {
         var buffer = [CChar](repeating: 0, count: Int(PATH_MAX))
         confstr(_CS_DARWIN_USER_TEMP_DIR, &buffer, buffer.count)
-        return real((String(cString: buffer) as NSString).deletingLastPathComponent)
+        return withoutSymlinks((String(cString: buffer) as NSString).deletingLastPathComponent)
     }()
 
-    static var tempCopies: String { tempArea + "/" + TempPart.x.rawValue }
+    static var tempCopies: String { tempArea + "/" + TempPart.appCopies.rawValue }
 
     /// Areas measured on every Mac; missing ones are skipped.
     static var defaultScanRoots: [String] {
@@ -26,14 +26,15 @@ enum Paths {
         path.hasPrefix("~") ? home + path.dropFirst() : path
     }
 
-    /// Resolves symlinks like `pwd -P` (URL.resolvingSymlinksInPath would drop the /private prefix).
-    static func real(_ path: String) -> String {
+    /// Resolves symlinks like `pwd -P` (URL.resolvingSymlinksInPath would drop the /private
+    /// prefix).
+    static func withoutSymlinks(_ path: String) -> String {
         guard let resolvedPath = realpath(path, nil) else { return path }
         defer { free(resolvedPath) }
         return String(cString: resolvedPath)
     }
 
-    static func display(_ path: String) -> String {
+    static func displayName(_ path: String) -> String {
         if path == tempArea { return TextKey.tempAreaName.translated }
         return path.hasPrefix(home) ? "~" + path.dropFirst(home.count) : path
     }

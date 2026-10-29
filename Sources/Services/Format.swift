@@ -17,7 +17,7 @@ enum Format {
     static func day(_ date: Date) -> String {
         date.formatted(Date.FormatStyle(date: .abbreviated, time: .omitted).locale(locale))
     }
-    static func dayShort(_ date: Date) -> String {
+    static func numericDay(_ date: Date) -> String {
         date.formatted(Date.FormatStyle(date: .numeric, time: .omitted).locale(locale))
     }
     static func dateTime(_ date: Date) -> String {

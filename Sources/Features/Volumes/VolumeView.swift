@@ -27,7 +27,9 @@ struct VolumeView: View {
     }
 
     /// Used space without what macOS can purge on demand.
-    private func usedBytes(of volume: VolumeInfo) -> Int64 { volume.used - volume.purgeable }
+    private func usedBytes(of volume: VolumeInfo) -> Int64 {
+        volume.usedBytes - volume.purgeableBytes
+    }
 
     private func segments(of volume: VolumeInfo) -> [StorageSegment] {
         [
@@ -36,17 +38,17 @@ struct VolumeView: View {
                 bytes: usedBytes(of: volume), colorIndex: CategoryKind.apps.rawValue),
             StorageSegment(
                 id: "purgeable", title: TextKey.purgeable.translated,
-                bytes: volume.purgeable, colorIndex: CategoryKind.purgeable.rawValue),
+                bytes: volume.purgeableBytes, colorIndex: CategoryKind.purgeable.rawValue),
         ]
     }
 
     private func fields(of volume: VolumeInfo) -> [UI.Field?] {
         [
-            UI.Field(.capacity, Format.bytes(volume.total)),
+            UI.Field(.capacity, Format.bytes(volume.totalBytes)),
             UI.Field(.used, Format.bytes(usedBytes(of: volume))),
-            UI.Field(.purgeable, Format.bytes(volume.purgeable)),
-            UI.Field(.freeSpace, Format.bytes(volume.free)),
-            UI.Field(.available, Format.bytes(volume.available)),
+            UI.Field(.purgeable, Format.bytes(volume.purgeableBytes)),
+            UI.Field(.freeSpace, Format.bytes(volume.freeBytes)),
+            UI.Field(.available, Format.bytes(volume.availableBytes)),
             UI.Field(.kind, volume.format),
         ]
     }
@@ -61,7 +63,7 @@ struct VolumeView: View {
                 model.scan([volume.path], reset: false)
                 model.pane = .explorer
             }
-            .disabled(model.scanning)
+            .disabled(model.isScanning)
         }
     }
 }

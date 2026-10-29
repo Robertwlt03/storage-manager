@@ -1,5 +1,6 @@
-/// Every visible text of the app as a typed key. The texts live in `Resources/<code>.lproj/Localizable.strings`;
-/// `--check-strings` (run by build.sh) fails if a key is missing in one of the languages.
+/// Every visible text of the app as a typed key. The texts live in
+/// `Resources/<code>.lproj/Localizable.strings`; `--check-strings` (run by build.sh) fails if a key
+/// is missing in one of the languages.
 enum TextKey: String, CaseIterable {
     // App and sidebar
     case appName, paneOverview, paneExplorer, paneLargeFiles, paneTemp, paneCopies, sectionSystem,
@@ -7,7 +8,7 @@ enum TextKey: String, CaseIterable {
     case rescan, rescanHelp, cancelScan
 
     // Scan status and placeholders
-    case scanning, cancel, filesAndSize, measuredAt, scanNow, unreadable
+    case cancel, filesAndSize, measuredAt, scanNow, unreadable
     case notMeasuredTitle, notMeasuredDetail, scanningTitle, scanningDetail
     case loadingSummaryTitle, loadingSummaryDetail, loadingSizesTitle, loadingSizesDetail,
         loadingAppsTitle, loadingAppsDetail, showSidebar, hideSidebar

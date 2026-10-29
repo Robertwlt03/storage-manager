@@ -1,17 +1,17 @@
 import Charts
 import SwiftUI
 
-/// The start page: key figures, the disk split, a short summary, the size classes and every category.
-/// Figures and the chart come from the last finished scan.
+/// The start page: key figures, the disk split, a short summary, the size classes and every
+/// category. Figures and the chart come from the last finished scan.
 struct OverviewView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
-    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanConfig.defaultUnusedDays
-    @AppStorage(SettingsKey.largeFileMB) private var largeFileMegabytes =
-        LargeFileThreshold.defaultMB
+    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanUpRules.defaultUnusedDays
+    @AppStorage(SettingsKey.largeFileMegabytes) private var largeFileMegabytes =
+        LargeFileThreshold.defaultMegabytes
 
     /// Statistics exist already or are being made by the running scan.
-    private var hasStatistics: Bool { model.scanning || model.stats != nil }
+    private var hasStatistics: Bool { model.isScanning || model.statistics != nil }
 
     var body: some View {
         UI.Page(.overview) {
@@ -23,32 +23,33 @@ struct OverviewView: View {
         }
         .smoothChanges(of: layout)
         .smoothChanges(of: model.categories.isEmpty)
-        .onChange(of: largeFileMegabytes) { if !model.scanning { model.refreshStats() } }
+        .onChange(of: largeFileMegabytes) { if !model.isScanning { model.refreshStatistics() } }
     }
 
     // MARK: Key figures
 
-    private var isLoadingFigures: Bool { model.scanning || model.stats == nil }
+    private var isLoadingFigures: Bool { model.isScanning || model.statistics == nil }
 
-    /// Each figure leads to the page with the details; the used space is already in the disk card below.
+    /// Each figure leads to the page with the details; the used space is already in the disk card
+    /// below.
     private var keyFigures: some View {
         let unusedApps = model.apps.filter { app in
             AppUsageService.isUnused(app, days: unusedDays)
         }
         let largeFileThreshold = Format.bytes(LargeFileThreshold.bytes(largeFileMegabytes))
-        return UI.FixedGrid(columns: Layout.statColumns) {
+        return UI.FixedGrid(columns: Layout.keyFigureColumns) {
             UI.KeyFigure(
-                figureText(model.stats?.files), TextKey.figureFiles.translated,
-                symbol: Symbols.files, loading: isLoadingFigures
+                figureText(model.statistics?.fileCount), TextKey.figureFiles.translated,
+                symbol: Symbols.files, isLoading: isLoadingFigures
             ) { model.pane = .explorer }
             UI.KeyFigure(
-                figureText(model.stats?.largeFiles),
+                figureText(model.statistics?.largeFiles),
                 TextKey.figureLargeFilesFrom.translated(with: largeFileThreshold),
-                symbol: Symbols.largeFiles, loading: isLoadingFigures
+                symbol: Symbols.largeFiles, isLoading: isLoadingFigures
             ) { model.pane = .largeFiles }
             UI.KeyFigure(
                 figureText(unusedApps.count), TextKey.figureUnusedApps.translated,
-                symbol: Symbols.apps, loading: isLoadingFigures
+                symbol: Symbols.apps, isLoading: isLoadingFigures
             ) { model.pane = .apps }
         }
     }
@@ -88,9 +89,10 @@ struct OverviewView: View {
     private var sizeClassesCard: some View {
         UI.Card(TextKey.sizeClassesTitle.translated) {
             UI.Note(TextKey.sizeClassesCaption.translated).padding(.top, Space.row)
-            // Swift Charts must not redraw while a scan changes its data, so the chart waits for the scan.
-            if let stats = model.stats, !model.scanning {
-                sizeChart(stats).padding(.vertical, Space.row)
+            // Swift Charts must not redraw while a scan changes its data, so the chart waits for
+            // the scan.
+            if let statistics = model.statistics, !model.isScanning {
+                sizeChart(statistics).padding(.vertical, Space.row)
             } else {
                 UI.Placeholder(
                     .loading(
@@ -102,16 +104,17 @@ struct OverviewView: View {
         }
     }
 
-    /// Space per size class, with the number of files: few big files usually take more room than many small ones.
-    private func sizeChart(_ stats: Statistics) -> some View {
-        Chart(stats.buckets, id: \.bucket) { sizeClass in
+    /// Space per size class, with the number of files: few big files usually take more room than
+    /// many small ones.
+    private func sizeChart(_ statistics: Statistics) -> some View {
+        Chart(statistics.sizeClasses, id: \.sizeClass) { bar in
             BarMark(
-                x: .value(TextKey.columnSize.translated, sizeClass.bucket.title.translated),
-                y: .value(TextKey.columnSize.translated, sizeClass.bytes)
+                x: .value(TextKey.columnSize.translated, bar.sizeClass.title.translated),
+                y: .value(TextKey.columnSize.translated, bar.bytes)
             )
-            .foregroundStyle(Theme.color(CategoryKind.media.rawValue))
+            .foregroundStyle(Theme.categoryColor(CategoryKind.media.rawValue))
             .annotation(position: .top) {
-                barLabel(bytes: sizeClass.bytes, fileCount: sizeClass.count)
+                barLabel(bytes: bar.bytes, fileCount: bar.count)
             }
         }
         .chartYAxis(.hidden)
@@ -145,7 +148,7 @@ struct OverviewView: View {
         } else {
             UI.Card(TextKey.categories.translated) {
                 UI.Rows(model.categories) { category in
-                    UI.NavRow(
+                    UI.NavigationRow(
                         category.kind.title.translated, icon: badge(category),
                         value: Format.bytes(category.bytes),
                         action: category.node.map { node in { model.open(node) } })

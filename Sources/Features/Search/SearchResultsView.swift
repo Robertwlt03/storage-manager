@@ -36,7 +36,7 @@ struct SearchResultsView: View {
     }
 
     private func searchOnceTypingPauses() async {
-        try? await Task.sleep(for: ScanConfig.searchDebounce)
+        try? await Task.sleep(for: ScanLimits.searchDebounce)
         guard !Task.isCancelled else { return }
         results = SearchService.search(model.searchText, scope: model.searchScope, in: model.root)
         resultsKey = searchKey

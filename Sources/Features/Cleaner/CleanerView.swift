@@ -3,7 +3,7 @@ import SwiftUI
 /// Removes caches, old logs and temporary files and empties the Trash, after a confirmation.
 struct CleanerView: View {
     @Environment(AppModel.self) private var model
-    @State private var selectedKinds = Set(CleanKind.allCases.filter(\.preselected))
+    @State private var selectedKinds = Set(CleanKind.allCases.filter(\.isPreselected))
     @State private var isConfirming = false
     @State private var isCleaning = false
     @State private var result: (freed: Int64, failed: Int)?
@@ -14,7 +14,7 @@ struct CleanerView: View {
         items ?? CleanKind.allCases.map { kind in CleanItem(kind: kind, paths: [], bytes: 0) }
     }
     /// Sizes are still being found, or a scan is about to replace them.
-    private var isLoading: Bool { items == nil || model.scanning }
+    private var isLoading: Bool { items == nil || model.isScanning }
     private var chosenItems: [CleanItem] {
         (items ?? []).filter { item in selectedKinds.contains(item.kind) && item.bytes > 0 }
     }
@@ -22,7 +22,7 @@ struct CleanerView: View {
 
     var body: some View {
         UI.Page(.cleaner, options: { refreshButton }, content)
-            .task { if items == nil && !model.scanning { model.refreshCleanItems() } }
+            .task { if items == nil && !model.isScanning { model.refreshCleanItems() } }
             .confirmationDialog(
                 TextKey.cleanConfirmTitle.translated(with: Format.bytes(chosenBytes)),
                 isPresented: $isConfirming
@@ -42,7 +42,7 @@ struct CleanerView: View {
     }
 
     @ViewBuilder private func content() -> some View {
-        if !model.hasData && !model.scanning {
+        if !model.hasData && !model.isScanning {
             // Nothing to load: say so instead of spinning forever.
             UI.Placeholder(.notMeasured, in: .page)
         } else {
@@ -90,7 +90,7 @@ struct CleanerView: View {
         if result.failed > 0 {
             UI.Note(
                 TextKey.cleanFailed.translated(with: Format.count(result.failed)),
-                .warn(symbol: Symbols.warning))
+                .warning(symbol: Symbols.warning))
         }
     }
 

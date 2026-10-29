@@ -37,7 +37,7 @@ enum CleanKind: String, CaseIterable, Identifiable {
     }
 
     /// Selected by default; emptying the Trash stays a deliberate choice.
-    var preselected: Bool { self != .trash }
+    var isPreselected: Bool { self != .trash }
 }
 
 struct CleanItem: Identifiable {
@@ -67,7 +67,7 @@ enum SizeBucket: CaseIterable, Identifiable {
     /// Upper bound in bytes (exclusive); nil for the last bucket.
     var limit: Int64? {
         switch self {
-        case .under1MB: ScanConfig.keepBytes
+        case .under1MB: ScanLimits.keepBytes
         case .to10MB: Self.tenMegabytes
         case .to100MB: Self.hundredMegabytes
         case .to1GB: Self.oneGigabyte
@@ -87,8 +87,8 @@ enum SizeBucket: CaseIterable, Identifiable {
 }
 
 struct Statistics {
-    var files = 0
+    var fileCount = 0
     var bytes: Int64 = 0
     var largeFiles = 0
-    var buckets: [(bucket: SizeBucket, count: Int, bytes: Int64)] = []
+    var sizeClasses: [(sizeClass: SizeBucket, count: Int, bytes: Int64)] = []
 }
