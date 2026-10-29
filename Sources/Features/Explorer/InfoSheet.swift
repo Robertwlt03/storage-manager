@@ -4,6 +4,7 @@ import SwiftUI
 struct InfoSheet: View {
     let entry: Entry
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppModel.self) private var model
     @State private var profile: FolderProfile?
 
     private var path: String { entry.path ?? "" }
@@ -16,7 +17,8 @@ struct InfoSheet: View {
         }
         .frame(width: Layout.sheetWidth, height: Layout.sheetHeight)
         .task {
-            guard entry.isFolder else { return }
+            // The demo's paths are made up, so nothing is analysed on the disk.
+            guard entry.isFolder, !model.isDemo else { return }
             let path = path
             profile = await Task.detached(priority: .utility) { ProfileService.profile(path) }.value
         }

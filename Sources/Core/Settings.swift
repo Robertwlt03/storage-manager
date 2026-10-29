@@ -13,6 +13,8 @@ enum SettingsKey {
     static let opensSettingsAtLaunch = "openSettings"  // `open … --args -openSettings YES`
     /// `open … --args -skipAccessSheet YES` (screenshots, tests)
     static let launchSkipAccessSheet = "skipAccessSheet"
+    /// `open … --args -demo YES` shows made-up data instead of measuring (see DemoData).
+    static let launchDemo = "demo"
     /// `open … --args -uiTest <folder>` runs the stress test.
     static let uiTestReportFolder = "uiTest"
 }
@@ -39,6 +41,7 @@ enum AppSettings {
     static var shouldSkipAccessSheet: Bool {
         defaults.bool(forKey: SettingsKey.launchSkipAccessSheet)
     }
+    static var showsDemo: Bool { defaults.bool(forKey: SettingsKey.launchDemo) }
     static var uiTestReportFolder: String? {
         defaults.string(forKey: SettingsKey.uiTestReportFolder)
     }

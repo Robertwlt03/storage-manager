@@ -38,11 +38,18 @@ import SwiftUI
     private(set) var statistics: Statistics?  // key figures of the last finished scan
     /// Found once per tree change: each group asks Launch Services and reads an Info.plist.
     private(set) var copyGroups: [CopyGroup] = []
+    /// Made-up data instead of a scan: nothing is read from the disk and nothing can be removed.
+    private(set) var isDemo = false
     private var scanTask: Task<Void, Never>?
     private var scanID = UUID()  // the current scan; older, cancelled runs check it and step aside
 
     var startupVolume: VolumeInfo? { volumes.first { volume in volume.isRoot } }
-    var hasData: Bool { !root.children.isEmpty }
+    /// Reads `revision`, so views that ask this refresh when the tree changes (the tree itself is
+    /// not observed).
+    var hasData: Bool {
+        _ = revision
+        return !root.children.isEmpty
+    }
     var isSearching: Bool { !searchQuery.isEmpty }
     var searchQuery: String { searchText.trimmingCharacters(in: .whitespaces) }
 
@@ -106,6 +113,7 @@ import SwiftUI
     /// Asks for Full Disk Access on every launch until it works (one switch instead of many
     /// prompts), then scans if the settings allow it.
     func launch() {
+        if AppSettings.showsDemo { return showDemo() }
         refreshAccess()
         if !hasFullDiskAccess && !AppSettings.shouldSkipAccessSheet {
             isShowingAccessSheet = true
@@ -114,7 +122,22 @@ import SwiftUI
         }
     }
 
-    func refreshAccess() { hasFullDiskAccess = PermissionService.hasFullDiskAccess }
+    func refreshAccess() {
+        guard !isDemo else { return }
+        hasFullDiskAccess = PermissionService.hasFullDiskAccess
+    }
+
+    private func showDemo() {
+        isDemo = true
+        let demo = DemoData.make()
+        for scanRoot in demo.scanRoots { scanRoot.attach(to: root) }
+        volumes = [demo.volume]
+        hasFullDiskAccess = true
+        lastScan = Date()
+        apps = demo.apps
+        cleanItems = demo.cleanItems
+        treeChanged()
+    }
 
     func finishAccessSheet() {
         isShowingAccessSheet = false
@@ -132,6 +155,7 @@ import SwiftUI
 
     /// Measures `paths` one after another; with `reset` the tree starts empty.
     func scan(_ paths: [String]? = nil, reset: Bool = true) {
+        guard !isDemo else { return }
         let id = startNewScan()
         if reset { forgetPreviousScan() }
         // Not animated: the launch scan starts before the first frame (see ARCHITECTURE.md).
@@ -233,10 +257,13 @@ import SwiftUI
             measuring.cancel()
         }
     }
+}
 
+extension AppModel {
     // MARK: Changes
 
     func refreshApps() {
+        guard !isDemo else { return }
         let found = AppUsageService.apps(in: root)
         Motion.animate { apps = found }
     }
@@ -250,7 +277,7 @@ import SwiftUI
     /// What the cleaner could remove; computed once after each scan and shared by the overview and
     /// the cleaner.
     func refreshCleanItems() {
-        guard hasData else { return }
+        guard hasData, !isDemo else { return }
         let found = CleanerService.candidates { [root] path in
             root.descendant(at: path)?.bytes ?? 0
         }
@@ -267,6 +294,7 @@ import SwiftUI
     }
 
     func moveToTrash(_ app: AppUsage) throws {
+        guard !isDemo else { return }
         try AppUsageService.moveToTrash(app)
         root.descendant(at: app.path)?.detach()
         treeChanged()
@@ -275,6 +303,7 @@ import SwiftUI
 
     /// Removes the chosen items, measures what really got free, then measures everything again.
     func clean(_ items: [CleanItem]) async -> (freed: Int64, failed: Int) {
+        guard !isDemo else { return (0, 0) }
         var failed = 0
         let freed = await freeSpaceGained {
             failed = await Task.detached(priority: .utility) { CleanerService.clean(items) }.value
@@ -283,7 +312,10 @@ import SwiftUI
         return (freed, failed)
     }
 
-    func refreshVolumes() { volumes = VolumeService.all() }
+    func refreshVolumes() {
+        guard !isDemo else { return }
+        volumes = VolumeService.all()
+    }
 
     func open(_ node: Node) {
         explorerPath = node.nodesFromRoot
@@ -293,6 +325,7 @@ import SwiftUI
 
     /// Deletes all copies of one app and returns how much free space really grew.
     func delete(_ group: CopyGroup) async throws -> Int64 {
+        guard !isDemo else { return 0 }
         let freed = try await freeSpaceGained { try await CopyService.delete(group) }
         group.node.detach()
         treeChanged()

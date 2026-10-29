@@ -66,16 +66,17 @@ dark mode.
 
 ## Checking the look
 
-Launch your scratchpad build without a scan and photograph only its window:
+Use the demo mode: made-up data on every page, no scan, nothing read or removed, no private names, so every page may
+be photographed. Launch your scratchpad build and photograph only its window:
 
 ```bash
-open -n <scratchpad>/build/Speicher-Explorer.app --args -ApplePersistenceIgnoreState YES -autoScan NO \
-  -skipAccessSheet YES -pane overview -"NSWindow Frame main" "100 100 1100 760 0 0 2560 1440"
+open -n <scratchpad>/build/Speicher-Explorer.app --args -ApplePersistenceIgnoreState YES -demo YES \
+  -pane overview -"NSWindow Frame main" "100 100 1100 860 0 0 2560 1440"
 ```
 
 Find the window number with a small CoreGraphics script (`CGWindowListCopyWindowInfo`, filter by the app's PID and a
-width over 500) and capture it with `screencapture -x -o -l <window>`. Useful panes without file names: `overview`,
-`cleaner`, `temp`. For refactors, build the previous commit into a separate scratchpad folder and compare both captures
+width over 500) and capture it with `screencapture -x -o -l <window>`. Panes: `overview`, `explorer`, `largeFiles`,
+`cleaner`, `apps`, `temp`, `copies`; add `-AppleInterfaceStyle Dark` for the dark look. For refactors, build the previous commit into a separate scratchpad folder and compare both captures
 pixel by pixel; differences in free space and selection colour (window focus) are expected.
 
 ## Documentation

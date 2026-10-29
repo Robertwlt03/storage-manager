@@ -104,6 +104,10 @@ macOS dabei für jeden geschützten Ordner und für die Daten jeder anderen App 
 prüfen beide zuerst den Vollzugriff und hören ohne ihn sofort auf, und `make selftest` startet die gebaute App statt
 des nackten Programms, damit macOS den Vollzugriff der App anrechnet.
 
+**Vorführmodus:** Mit `-demo YES` füllt sich die App mit den erfundenen Daten aus `DemoData` statt zu messen. `AppModel`
+sperrt dann jeden Zugriff auf die Festplatte und jedes Entfernen, und auch das Info-Fenster analysiert nichts. Die Pfade
+der erfundenen Dateien und Aufräum-Einträge gibt es nicht, ein Test prüft das.
+
 **Energie:** Keine Animation läuft im Ruhezustand. Die Messung läuft mit niedriger Priorität, und der Fortschritt
 meldet sich höchstens zweimal pro Sekunde.
 

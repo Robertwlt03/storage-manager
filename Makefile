@@ -13,7 +13,7 @@ SELFTEST_REPORT := $(TMPDIR)speicher-selftest.txt
 SECONDS_BETWEEN_QUIT_CHECKS := 0.2
 
 .DEFAULT_GOAL := help
-.PHONY: help build run restart check test coverage format selftest stress release identity clean
+.PHONY: help build run restart demo check test coverage format selftest stress release identity clean
 
 help: ## List every command
 	@grep -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  make %-9s %s\n", $$1, $$2 }'
@@ -28,6 +28,9 @@ restart: ## Quit the app if it is open, then open the built one
 		while pgrep -x $(PROCESS) > /dev/null; do sleep $(SECONDS_BETWEEN_QUIT_CHECKS); done; \
 	fi
 	open "$(APP)"
+
+demo: ## Open the built app with made-up data: no scan, nothing read or removed
+	open -n "$(APP)" --args -demo YES
 
 check: ## Run the whole check pipeline, as on GitHub
 	scripts/inspect.py

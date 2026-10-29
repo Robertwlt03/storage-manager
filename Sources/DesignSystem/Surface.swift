@@ -54,6 +54,8 @@ struct Backdrop: View {
 
 extension View {
     func surface() -> some View { modifier(SurfaceModifier()) }
+    /// A round glass button for the toolbar, drawn by the button itself (see ARCHITECTURE.md).
+    func glassCircle() -> some View { buttonStyle(.glass).buttonBorderShape(.circle) }
     func appButton(_ kind: ButtonKind = .normal) -> some View {
         modifier(AppButtonModifier(kind: kind))
     }

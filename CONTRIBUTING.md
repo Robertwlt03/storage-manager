@@ -47,6 +47,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | Befehl | Was er tut |
 | --- | --- |
 | `make run` | baut die App, schließt sie, falls sie offen ist, und öffnet die neue |
+| `make demo` | öffnet die gebaute App im Vorführmodus mit erfundenen Daten |
 | `make restart` | schließt die App, falls sie offen ist, und öffnet sie neu, ohne zu bauen |
 | `make build` | baut die App und zeichnet ihr Symbol |
 | `make check` | startet die ganze Prüfkette, genau wie auf GitHub |
@@ -83,6 +84,21 @@ make identity
 ```bash
 echo 'SIGN_IDENTITY = Speicher-Explorer Dev' > local.mk
 ```
+
+## <img src="assets/icons/demo.svg" height="33" align="absmiddle" alt="">Vorführmodus
+
+Im Vorführmodus zeigt die App jede Seite mit erfundenen Daten: einen ausgedachten Ordnerbaum, einen festen
+Datenträger, ein paar Apps und Kopien. Sie misst dabei nichts, liest keine eigenen Dateien und kann nichts löschen,
+denn alle Knöpfe zum Aufräumen und Löschen bleiben wirkungslos. Deshalb brauchst du dafür keinen
+Festplattenvollzugriff, und auf dem Bildschirm erscheinen keine privaten Namen.
+
+```bash
+make demo
+```
+
+So prüfst du vor jedem Beitrag das Aussehen der Seiten, die du geändert hast, im hellen und im dunklen
+Erscheinungsbild. Auch die Bildschirmfotos für das README entstehen im Vorführmodus. Die erfundenen Daten stehen in
+`Sources/Diagnostics/DemoData.swift`.
 
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">Prüfungen vor jedem Beitrag
 

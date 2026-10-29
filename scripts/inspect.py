@@ -20,6 +20,8 @@ TESTS = PROJECT / "Tests"
 BUILD_FOLDER = os.environ.get("INSPECT_BUILD_FOLDER", str(PROJECT / ".build" / "inspect"))
 
 THEME_FILE = "DesignSystem/Theme.swift"
+# Made-up demo content may use plain example numbers, like the tests.
+DEMO_FILE = "Diagnostics/DemoData.swift"
 TOKENS_FILE = "DesignSystem/Tokens.swift"
 MOTION_FILE = "DesignSystem/Motion.swift"
 DESIGN_FOLDER = "DesignSystem/"
@@ -56,6 +58,10 @@ ANIMATION = re.compile(
 )
 WRITTEN_UI_TEXT = re.compile(r'\b(?:Text|Button|Label|Toggle|Picker|Section)\("[^"]|\.help\("[^"]')
 PRINT = re.compile(r"\bprint\(")
+# Liquid Glass, materials and button styles come only from the design system (surface, appButton).
+OWN_SURFACE = re.compile(
+    r"\.glassEffect\(|\.buttonStyle\(|Material\b|\.background\((?!Backdrop\(\)\))"
+)
 DECLARATION = re.compile(
     r"\b(?:func|var|let|case|struct|enum|class|protocol|typealias)\s+([A-Za-z_]\w*)"
 )
@@ -179,6 +185,8 @@ def design_findings() -> list[str]:
             findings.append(f"{place}: animation outside Motion.swift")
         if WRITTEN_UI_TEXT.search(line):
             findings.append(f"{place}: written-out text on screen, use TextKey")
+        if OWN_SURFACE.search(code) and not relative.startswith(DESIGN_FOLDER):
+            findings.append(f"{place}: own glass, material or background, use .surface()/.appButton()")
         if PRINT.search(code) and not relative.startswith(DIAGNOSTICS_FOLDER):
             findings.append(f"{place}: output outside Diagnostics could show private names")
     return findings
@@ -212,7 +220,8 @@ def rule_findings() -> list[str]:
         if len(line) > LINE_LENGTH:
             findings.append(f"{place}: line longer than {LINE_LENGTH} characters")
         # Tests may use plain example values; the app's code may not.
-        if not is_test and not NAMED_CONSTANT.match(code) and not AVAILABILITY.search(code):
+        uses_example_numbers = is_test or relative == DEMO_FILE
+        if not uses_example_numbers and not NAMED_CONSTANT.match(code) and not AVAILABILITY.search(code):
             for literal in NUMBER.findall(code):
                 if literal.replace("_", "") not in {"0", "1"}:
                     findings.append(f"{place}: number {literal} has no name")

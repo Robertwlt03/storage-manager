@@ -64,6 +64,8 @@ benutzen nur deren Namen:
   `.font(...)`.
 - **Symbole** stehen mit ihrem Namen in `Symbols` in `Tokens.swift`, zum Beispiel `Symbols.trash`, und nie als
   Zeichenkette auf einer Seite.
+- **Liquid Glass** kommt nur über `.surface()` für Karten und `.appButton(...)` für Knöpfe. Eigenes Glas, Materialien
+  oder Hintergründe unter Karten legt keine Seite selbst an.
 - **Animationen** kommen aus `Motion`, zum Beispiel `Motion.standard`, damit „Bewegung reduzieren“ überall greift.
 - **Ausgaben** mit `print` gibt es nur in `Sources/Diagnostics`, denn jede andere Ausgabe könnte private Datei- oder
   Ordnernamen zeigen.
@@ -138,8 +140,9 @@ Das Skript führt neun Prüfungen nacheinander aus:
 4. **Tests:** `swift test` startet alle Tests aus `Tests/SpeicherExplorerTests`.
 5. **Hausregeln:** Zahlen ohne Namen, Farben außerhalb von `Theme.swift`, deutscher Text im Code, `$0`, Namen aus ein
    oder zwei Buchstaben und Zeilen über 100 Zeichen.
-6. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, Animationen außerhalb von `Motion`,
-   ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb der Diagnose.
+6. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, eigenes Glas oder eigene
+   Hintergründe, Animationen außerhalb von `Motion`, ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb
+   der Diagnose.
 7. **Toter Code:** jede Funktion, jeder Wert und jeder Text, der zwar angelegt, aber nirgends benutzt wird.
 8. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
 9. **Skripte:** `bash -n` und `make -n` prüfen die Shell-Skripte und das `Makefile` auf Schreibfehler.
@@ -150,7 +153,8 @@ Schritt. Wie viel des Codes die Tests erreichen, zeigt `make coverage` je Ordner
 Auf GitHub läuft dieselbe Prüfung bei jedem Pull Request von selbst, beschrieben in
 `.github/workflows/checks.yml`. Meldet sie auch nur einen Fund, wird der Pull Request rot, und der Beitrag muss
 nachgebessert werden, bevor er übernommen wird. Ob Namen verständlich sind und ob ein Schritt gut
-geschnitten ist, kann kein Skript beurteilen. Darauf achten wir beim Lesen eines Beitrags.
+geschnitten ist, kann kein Skript beurteilen, und auch das Aussehen des Glases sieht nur das Auge: Dafür öffnest
+du die geänderten Seiten mit `make demo`. Darauf achten wir beim Lesen eines Beitrags.
 
 <p align="center">
   <img src="assets/banner-footer.svg" alt="" width="480">

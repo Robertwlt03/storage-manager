@@ -105,6 +105,11 @@ struct CopyGroupCard: View {
 
     private func loadDetails() async {
         refreshIsAppRunning()
+        // The demo's copies exist only in the made-up tree, so their details are made up too.
+        if model.isDemo {
+            details = DemoData.copyDetails()
+            return
+        }
         let group = group
         details = await Task.detached(priority: .utility) { CopyService.details(group) }.value
     }

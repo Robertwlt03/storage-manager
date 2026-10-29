@@ -12,7 +12,7 @@ struct SidebarView: View {
                 ToolbarSpacer(.flexible)
                 // Own glass circle, so no empty background stays behind when it moves (see
                 // ARCHITECTURE.md).
-                ToolbarItem { SidebarToggle().buttonStyle(.glass).buttonBorderShape(.circle) }
+                ToolbarItem { SidebarToggle().glassCircle() }
                     .sharedBackgroundVisibility(.hidden)
             }
             // Fixed: a flexible width jumped at the end of the reveal animation.
