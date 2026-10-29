@@ -266,6 +266,8 @@ def dead_code_findings() -> list[str]:
                 continue  # every case of a CaseIterable enum is used through allCases
             if re.match(r"\s*case\b.*:\s*$", line) or "@main" in lines[number - 2]:
                 continue  # a pattern in a switch, or the app's entry point that macOS starts
+            if "@NSApplicationDelegateAdaptor" in line:
+                continue  # SwiftUI creates and keeps the app delegate itself
             for match in DECLARATION.finditer(line):
                 name = match.group(1)
                 if words[name] == 1 and name not in CALLED_BY_THE_SYSTEM:
