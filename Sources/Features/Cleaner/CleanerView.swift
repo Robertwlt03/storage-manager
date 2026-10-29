@@ -18,8 +18,12 @@ struct CleanerView: View {
         UI.page(.cleaner, options: {
             UI.button(Loc.cleanerRefresh.s) { model.refreshCleanItems() }.disabled(cleaning || loading)
         }) {
-            UI.card {
-                UI.rows(items ?? CleanKind.allCases.map { CleanItem(kind: $0, paths: [], bytes: 0) }) { item in row(item) }
+            if !model.hasData && !model.scanning {  // nothing to load: say so instead of spinning forever
+                UI.notMeasured()
+            } else {
+                UI.card {
+                    UI.rows(items ?? CleanKind.allCases.map { CleanItem(kind: $0, paths: [], bytes: 0) }) { item in row(item) }
+                }
             }
             if let result {
                 UI.status(Loc.freed.f(Fmt.bytes(result.freed)), symbol: Symbols.success, .good)
@@ -49,7 +53,7 @@ struct CleanerView: View {
                 .toggleStyle(.checkbox)
                 .labelsHidden()
                 .disabled(item.bytes == 0 || cleaning || loading)
-            RowIconView(icon: .badge(symbol: item.kind.category.symbol, colorIndex: item.kind.category.rawValue))
+            IconView(icon: .badge(symbol: item.kind.category.symbol, colorIndex: item.kind.category.rawValue))
             VStack(alignment: .leading, spacing: Space.hairline) {
                 Text(item.kind.title.s)
                 Text(item.kind.detail.s).font(.callout).foregroundStyle(.muted).fixedSize(horizontal: false, vertical: true)
