@@ -1,6 +1,6 @@
 import Foundation
 
-enum Paths {
+nonisolated enum Paths {
     static let home = FileManager.default.homeDirectoryForCurrentUser.path
     static let applications = "/Applications"
     static let library = "/Library"
@@ -11,7 +11,8 @@ enum Paths {
     static let tempArea: String = {
         var buffer = [CChar](repeating: 0, count: Int(PATH_MAX))
         confstr(_CS_DARWIN_USER_TEMP_DIR, &buffer, buffer.count)
-        return withoutSymlinks((String(cString: buffer) as NSString).deletingLastPathComponent)
+        return withoutSymlinks(
+            ((String(utf8String: buffer) ?? "") as NSString).deletingLastPathComponent)
     }()
 
     static var tempCopies: String { tempArea + "/" + TempPart.appCopies.rawValue }

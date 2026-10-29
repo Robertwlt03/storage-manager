@@ -111,7 +111,7 @@ enum Checks {
 
     // MARK: Icon
 
-    @MainActor static func renderIcon(to path: String) -> Bool {
+    static func renderIcon(to path: String) -> Bool {
         guard let image = ImageRenderer(content: AppIconView()).cgImage,
             let png = NSBitmapImageRep(cgImage: image).representation(using: .png, properties: [:])
         else { return false }

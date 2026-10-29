@@ -1,7 +1,8 @@
 import AVFoundation
 import Observation
 
-/// Reads a text aloud with the system voice of the app's language.
+/// Reads a text aloud with the system voice of the app's language. As a speech delegate it counts
+/// as Sendable, which the main-actor default does not cover, so it says `@MainActor` itself.
 @MainActor @Observable final class SpeechService: NSObject, AVSpeechSynthesizerDelegate {
     static let shared = SpeechService()
     private static let siriMarker = "siri"

@@ -2,7 +2,7 @@ import AppKit
 
 /// Finds and removes files that regenerate by themselves (caches), are old (logs, temporary files)
 /// or already thrown away (Trash). Caches of running apps and of macOS itself are left alone.
-enum CleanerService {
+nonisolated enum CleanerService {
     private static let cachesFolder = Paths.home + "/Library/Caches"
     private static let logsFolder = Paths.home + "/Library/Logs"
     private static let trashFolder = Paths.home + "/.Trash"

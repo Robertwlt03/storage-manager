@@ -1,7 +1,7 @@
 import Foundation
 
 /// Tunable numbers of the scan, in one place.
-enum ScanLimits {
+nonisolated enum ScanLimits {
     /// ponytail: folders and files below 1 MB fold into one row per folder; keeps the tree small
     /// (memory, energy). Lower it if someone needs to see tiny files.
     static let keepBytes: Int64 = 1 << 20
@@ -13,7 +13,7 @@ enum ScanLimits {
 }
 
 /// What the cleaner may remove and how old things must be.
-enum CleanUpRules {
+nonisolated enum CleanUpRules {
     static let tempMinAgeDays = 3
     static let logMinAgeDays = 7
     static let unusedDayOptions = [30, 90, 180, 365]

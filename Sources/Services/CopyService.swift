@@ -1,7 +1,7 @@
 import AppKit
 
 /// Code-signature copies in the temporary folder X, for any app.
-enum CopyService {
+nonisolated enum CopyService {
     private static let folderSuffix = ".code_sign_clone"
     private static let appSuffixes = [".app", ".app.bundle"]
     private static let versionKey = "CFBundleShortVersionString"
@@ -75,6 +75,6 @@ enum CopyService {
     }
 }
 
-extension Node {
+nonisolated extension Node {
     fileprivate var url: URL { URL(fileURLWithPath: path) }
 }

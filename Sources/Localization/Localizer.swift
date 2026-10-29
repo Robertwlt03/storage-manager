@@ -1,7 +1,7 @@
 import Foundation
 
 /// Looks up texts in `Resources/<code>.lproj/Localizable.strings` for the system's language.
-final class Localizer {
+nonisolated final class Localizer: Sendable {
     static let shared = Localizer()
 
     let locale: Locale
@@ -22,7 +22,7 @@ final class Localizer {
     }
 }
 
-extension TextKey {
+nonisolated extension TextKey {
     /// The text in the current language.
     var translated: String { Localizer.shared.string(rawValue) }
 

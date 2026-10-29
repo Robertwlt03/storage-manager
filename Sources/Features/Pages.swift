@@ -2,7 +2,7 @@ import SwiftUI
 
 extension Pane {
     /// The view of each page.
-    @MainActor @ViewBuilder var page: some View {
+    @ViewBuilder var page: some View {
         switch self {
         case .overview: OverviewView()
         case .explorer: ExplorerView()

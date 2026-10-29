@@ -43,7 +43,7 @@ enum Pane: Hashable {
 }
 
 /// The four subfolders of the per-user temporary area.
-enum TempPart: String, CaseIterable, Identifiable {
+nonisolated enum TempPart: String, CaseIterable, Identifiable {
     case temporaryFiles = "T"
     case caches = "C"
     case appCopies = "X"

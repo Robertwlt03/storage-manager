@@ -1,7 +1,7 @@
 import Foundation
 
 /// What the cleaner can remove; each kind regenerates by itself or is already thrown away.
-enum CleanKind: String, CaseIterable, Identifiable {
+nonisolated enum CleanKind: String, CaseIterable, Identifiable {
     case caches, developer, logs, temp, trash
     var id: Self { self }
 
@@ -40,7 +40,7 @@ enum CleanKind: String, CaseIterable, Identifiable {
     var isPreselected: Bool { self != .trash }
 }
 
-struct CleanItem: Identifiable {
+nonisolated struct CleanItem: Identifiable {
     let kind: CleanKind
     let paths: [String]
     let bytes: Int64

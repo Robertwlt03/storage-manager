@@ -1,7 +1,7 @@
 import Foundation
 
 /// One row in a folder table or search result: a folder, a file or the folded rest of a folder.
-struct Entry: Identifiable {
+nonisolated struct Entry: Identifiable {
     enum Kind {
         case folder(Node)
         case file, rest
@@ -67,7 +67,7 @@ struct Category: Identifiable {
 
 /// Folders like `X/com.google.Chrome.code_sign_clone` that macOS fills with copies of an app while
 /// checking it.
-struct CopyGroup: Identifiable {
+nonisolated struct CopyGroup: Identifiable {
     let node: Node
     let bundleID: String
     let appPath: String?
@@ -76,13 +76,13 @@ struct CopyGroup: Identifiable {
     var id: String { node.path }
 }
 
-struct CopyDetails {
+nonisolated struct CopyDetails {
     var copyCount = 0
     var versions: [(version: String, count: Int)] = []
     var days: [(day: Date, count: Int)] = []
 }
 
-struct FolderProfile {
+nonisolated struct FolderProfile {
     var files = 0, folders = 0, packages = 0
     var oldest: Date?, newest: Date?
     var types: [(fileExtension: String, bytes: Int64, count: Int)] = []

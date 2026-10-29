@@ -1,7 +1,7 @@
 import Foundation
 
 /// Measures a folder in one fts pass and returns the folder tree.
-enum ScanService {
+nonisolated enum ScanService {
     struct Progress {
         var files = 0
         var bytes: Int64 = 0
@@ -17,7 +17,7 @@ enum ScanService {
 
     /// Roots measured by "Rescan": the default areas plus the folders from the settings, without
     /// duplicates and without folders that lie inside another root (nothing counts twice).
-    static func defaultRoots() -> [String] {
+    @MainActor static func defaultRoots() -> [String] {
         let wantedFolders = Paths.defaultScanRoots + AppSettings.extraFolders
         let existingFolders = wantedFolders.map(Paths.withoutSymlinks).filter(Paths.exists)
 
@@ -56,7 +56,7 @@ enum ScanService {
 }
 
 /// Builds the folder tree while fts walks the disk.
-private struct TreeBuilder {
+private nonisolated struct TreeBuilder {
     private var openFolders: [Node] = []
     /// Hard-linked files count once, like du.
     private var seenLinkedFiles = Set<UInt64>()

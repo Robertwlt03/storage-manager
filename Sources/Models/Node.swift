@@ -1,7 +1,9 @@
 import Foundation
 
 /// One folder in the scanned tree. Sizes are allocated bytes like `du` (APFS clones count in full).
-final class Node: Identifiable, Hashable {
+/// A scan builds the tree in the background and hands it over whole; from then on only the main
+/// actor changes it. That hand-over is why it may cross threads (`@unchecked Sendable`).
+nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
     let name: String
     private(set) weak var parent: Node?
     private(set) var bytes: Int64 = 0
@@ -117,7 +119,7 @@ final class Node: Identifiable, Hashable {
     func hash(into hasher: inout Hasher) { hasher.combine(ObjectIdentifier(self)) }
 }
 
-struct FileItem: Identifiable, Hashable {
+nonisolated struct FileItem: Identifiable, Hashable {
     let path: String
     let bytes: Int64
     var id: String { path }

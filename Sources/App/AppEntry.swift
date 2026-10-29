@@ -3,7 +3,7 @@ import SwiftUI
 
 @main
 enum AppEntry {
-    @MainActor static func main() {
+    static func main() {
         AppSettings.registerDefaults()
         let arguments = CommandLine.arguments
         if arguments.contains(LaunchCommand.checkContrast.rawValue) {
@@ -24,7 +24,7 @@ enum AppEntry {
     }
 
     private static func runSelfTest() -> Never {
-        Task.detached {
+        Task {
             SelfTest.run()
             exit(EXIT_SUCCESS)
         }

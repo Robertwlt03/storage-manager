@@ -6,7 +6,7 @@ import SwiftUI
 /// digs into folders and searches, checks the data after every step and saves a picture of the
 /// window. It never deletes, cleans up or moves anything to the Trash, prints only counts (no
 /// names) and restores the user's settings at the end.
-@MainActor enum UITest {
+enum UITest {
     private static let changedSettingKeys = [
         SettingsKey.layoutMode, SettingsKey.largeFileMegabytes, SettingsKey.unusedDays,
     ]

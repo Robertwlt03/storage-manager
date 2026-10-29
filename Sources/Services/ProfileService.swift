@@ -2,7 +2,7 @@ import Foundation
 
 /// File types, counts and date range below a folder, for the info sheet (a second fts pass on
 /// demand).
-enum ProfileService {
+nonisolated enum ProfileService {
     private static let packageSuffixes = [".app", ".bundle", ".framework"]
     private static let shownTypeCount = 10
 

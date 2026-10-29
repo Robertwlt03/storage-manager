@@ -8,8 +8,9 @@ achten solltest. Wie der Code aufgebaut ist und welche Regeln absichtlich gelten
 
 ## <img src="assets/icons/requirements.svg" height="33" align="absmiddle" alt="">Was du brauchst
 
-Du brauchst einen Mac mit macOS 14 oder neuer und die Command Line Tools von Apple. Die installierst du mit dem Befehl
-unten. Xcode selbst ist nicht nötig.
+Zum Bauen brauchst du einen Mac mit macOS 26 und die Command Line Tools von Apple ab Version 26, denn der Code nutzt
+Swift 6.2 und Liquid Glass. Die fertige App läuft trotzdem ab macOS 14. Die Command Line Tools installierst du mit dem
+Befehl unten. Xcode selbst ist nicht nötig.
 
 ```bash
 xcode-select --install

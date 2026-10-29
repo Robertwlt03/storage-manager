@@ -1,7 +1,7 @@
 import Foundation
 
 /// Number, size and date formatting in the app's language.
-enum Format {
+nonisolated enum Format {
     private static let wholePercentFractionDigits = 0
     private static var locale: Locale { Localizer.shared.locale }
 

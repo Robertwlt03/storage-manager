@@ -1,7 +1,7 @@
 import Foundation
 
 /// Thin wrapper around fts(3): physical walk, no chdir, stays on one volume.
-enum FileTreeWalker {
+nonisolated enum FileTreeWalker {
     private static let walkOptions = FTS_PHYSICAL | FTS_NOCHDIR | FTS_XDEV
     private static let bytesPerBlock: Int64 = 512
     private static let terminatingZeroLength = 1

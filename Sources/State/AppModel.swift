@@ -4,7 +4,7 @@ import SwiftUI
 
 /// App state: what is selected, the scanned tree and everything derived from it.
 /// The work itself happens in the services; this class only orchestrates them.
-@MainActor @Observable final class AppModel {
+@Observable final class AppModel {
     /// An estimate never claims "done" before the scan really is.
     private static let largestEstimatedFraction = 0.99
     /// APFS reports freed blocks with a short delay.

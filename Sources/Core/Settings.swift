@@ -56,7 +56,7 @@ enum AppSettings {
 /// Languages the app ships; the raw value is the name of the `.lproj` folder. Which one is used
 /// comes from macOS, which also allows a language per app (System Settings › General › Language &
 /// Region › Applications).
-enum AppLanguage: String, CaseIterable {
+nonisolated enum AppLanguage: String, CaseIterable {
     case de, en, fr, es, it, nl
     case ptBR = "pt-BR"
     case sv, da, nb, fi, pl, cs, tr, ru, uk, ja, ko

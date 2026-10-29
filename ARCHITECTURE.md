@@ -93,6 +93,12 @@ der Glaseffekt erhalten bleibt.
 Knöpfe, die sich auf diese Werte beziehen, warten, bis sie feststehen. Wo mehr Platz ist, zeigt `UI.Placeholder`, was
 gerade geladen wird.
 
+**Hauptthread als Standard:** Der Code ist in Swift 6 geschrieben, und alles läuft auf dem Hauptthread, solange es
+nichts anderes sagt. Nur was wirklich im Hintergrund arbeitet, also Messen, Aufräumen, die Analyse im Info-Fenster und
+die App-Kopien, ist mit `nonisolated` markiert. Der Compiler prüft dann, dass keine Daten gleichzeitig von zwei Stellen
+verändert werden. Den Ordnerbaum baut eine Messung im Hintergrund und übergibt ihn danach als Ganzes, deshalb darf
+`Node` die Seite wechseln.
+
 **Energie:** Keine Animation läuft im Ruhezustand. Die Messung läuft mit niedriger Priorität, und der Fortschritt
 meldet sich höchstens zweimal pro Sekunde.
 

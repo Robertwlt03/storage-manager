@@ -14,7 +14,7 @@ enum PreviewService {
 
     /// nil when there is no real preview (folders, unknown types); the caller keeps the Finder icon
     /// then.
-    @MainActor static func thumbnail(_ path: String, size: CGFloat) async -> NSImage? {
+    static func thumbnail(_ path: String, size: CGFloat) async -> NSImage? {
         let key = "\(path)|\(Int(size))" as NSString
         if let cached = cache.object(forKey: key) { return cached }
         let request = QLThumbnailGenerator.Request(
