@@ -13,7 +13,7 @@ import SwiftUI
     var showAccessSheet = false
     var columns = NavigationSplitViewVisibility.all  // whether the sidebar is shown
     private var sidebarHiddenByWidth = false  // closed because the window got narrow, not by the user
-    private var windowNarrow = false
+    private(set) var windowNarrow = false
 
     let root = Node.virtualRoot()
     private(set) var revision = 0  // bumped whenever the tree changes; views read it to refresh

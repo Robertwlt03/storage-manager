@@ -13,7 +13,15 @@ struct RootView: View {
             detail
                 .frame(minWidth: Layout.pageMinWidth)  // cards are never squeezed, also with the sidebar open
                 .overlay(alignment: .leading) {
-                    if model.sidebarOverlay { SidebarOverlay().transition(.move(edge: .leading).combined(with: .opacity)) }
+                    // Always there in narrow windows and only slid in and out: removing it closed abruptly, because
+                    // the list inside (an AppKit table) left at once instead of taking part in the transition.
+                    if model.windowNarrow {
+                        SidebarOverlay()
+                            .offset(x: model.sidebarOverlay ? 0 : -(Layout.sidebarIdeal + Space.l))
+                            .opacity(model.sidebarOverlay ? 1 : 0)
+                            .allowsHitTesting(model.sidebarOverlay)
+                            .accessibilityHidden(!model.sidebarOverlay)
+                    }
                 }
                 .smoothChanges(of: model.pane)
                 .smoothChanges(of: model.isSearching)
