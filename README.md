@@ -175,16 +175,17 @@ Du brauchst die Command Line Tools von Apple, die du mit `xcode-select --install
 nötig.
 
 ```bash
-./build.sh
+make run
 ```
 
-Für eine DMG zum Weitergeben gibt es ein eigenes Skript. Es signiert die App mit einem kostenlosen, eigenen
-Zertifikat, das du einmalig mit `scripts/create-signing-identity.sh` anlegst. Dadurch bleibt der Festplattenvollzugriff
+Alle kurzen Befehle zeigt dir `make`, und die [Anleitung zum Mitmachen](CONTRIBUTING.md) erklärt sie. Für eine DMG zum
+Weitergeben gibt es ein eigenes Skript. Es signiert die App mit einem kostenlosen, eigenen
+Zertifikat, das du einmalig mit `make identity` anlegst. Dadurch bleibt der Festplattenvollzugriff
 bei allen Updates erhalten. Mit einer Developer ID von Apple beglaubigt das Skript die DMG zusätzlich, und dann
 entfallen die Schritte 2 und 3 der Installation.
 
 ```bash
-scripts/release.sh
+make release
 ```
 
 Der Code ist in kleine Teile gegliedert, und jede Datei hat genau eine Aufgabe:

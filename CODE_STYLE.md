@@ -14,7 +14,7 @@ setzt jeden Schritt einer langen Kette in eine eigene Zeile. Wie viele Zeilen da
 kurze Zeile liest man schneller als eine lange.
 
 ```bash
-swift format --in-place --recursive Sources
+make format
 ```
 
 ## <img src="assets/icons/names.svg" height="33" align="absmiddle" alt="">Namen in Alltagssprache
@@ -119,10 +119,12 @@ passenden Test gleich mit.
 
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">So prüfst du deinen Code
 
-Vor jedem Beitrag startest du die Code-Inspektion. Sie darf keinen einzigen Fehler und keine einzige Warnung melden.
+Vor jedem Beitrag startest du die Prüfkette. Sie darf keinen einzigen Fehler und keine einzige Warnung melden.
+Dahinter steckt das Skript `scripts/inspect.py`. Einzelne Schritte startest du mit deren Namen, etwa
+`scripts/inspect.py tests rules`.
 
 ```bash
-scripts/inspect.py
+make check
 ```
 
 Das Skript führt acht Prüfungen nacheinander aus:
@@ -138,7 +140,7 @@ Das Skript führt acht Prüfungen nacheinander aus:
 7. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
 8. **Skripte:** `bash -n` prüft die Shell-Skripte auf Schreibfehler.
 
-Danach baust du die App mit `./build.sh`. Das prüft zusätzlich, ob jeder Text in allen 20 Sprachen vorhanden ist und ob
+Danach baust du die App mit `make build`. Das prüft zusätzlich, ob jeder Text in allen 20 Sprachen vorhanden ist und ob
 jede Farbe den Kontrast erreicht.
 
 Auf GitHub läuft dieselbe Prüfung bei jedem Pull Request von selbst, beschrieben in

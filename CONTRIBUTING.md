@@ -16,55 +16,90 @@ Befehl unten. Xcode selbst ist nicht nötig.
 xcode-select --install
 ```
 
+## <img src="assets/icons/editor.svg" height="33" align="absmiddle" alt="">Dein Editor
+
+Du kannst mit jedem Editor arbeiten, den du magst, denn das Projekt ist ein reines Swift-Paket mit einer
+`Package.swift`. Gebaut, getestet und geprüft wird immer über die Kommandozeile, und dort ist es egal, womit du den
+Code schreibst:
+
+- **Xcode** öffnet die `Package.swift` direkt, du brauchst kein eigenes Xcode-Projekt.
+- **VS Code, Cursor und Zed** verstehen Swift mit der offiziellen Swift-Erweiterung beziehungsweise von Haus aus.
+- **Neovim, Helix und andere Editoren** sprechen mit `sourcekit-lsp`. Dieser Sprachserver ist in den Command Line Tools
+  schon enthalten.
+- **JetBrains-IDEs wie PhpStorm** können die Dateien bearbeiten, bieten für Swift aber keine eigene Unterstützung mehr.
+  Bauen und prüfen läuft dort über das Terminal.
+
+Damit der Code trotzdem überall gleich aussieht, legt die Datei `.swift-format` die Form fest. Viele Editoren lesen sie
+beim Speichern von selbst, und sonst bringt `make format` alles in Form.
+
+## <img src="assets/icons/terminal.svg" height="33" align="absmiddle" alt="">Kurze Befehle
+
+Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jeder Ablauf als kurzer Befehl im
+`Makefile`, und `make` allein zeigt dir die Liste:
+
+| Befehl | Was er tut |
+| --- | --- |
+| `make run` | baut die App, schließt sie, falls sie offen ist, und öffnet die neue |
+| `make restart` | schließt die App, falls sie offen ist, und öffnet sie neu, ohne zu bauen |
+| `make build` | baut die App und prüft dabei Texte, Kontrast und App-Symbol |
+| `make check` | startet die ganze Prüfkette, genau wie auf GitHub |
+| `make test` | startet nur die Tests |
+| `make format` | bringt alle Swift-Dateien in die gemeinsame Form |
+| `make selftest` | misst echte Ordner und vergleicht mit dem Befehl `du` |
+| `make stress` | öffnet eine zweite App, die so schnell wie möglich durch alle Seiten klickt |
+| `make identity` | legt einmalig dein eigenes Zertifikat zum Signieren an |
+| `make release` | erstellt die DMG zum Weitergeben im Ordner `dist` |
+| `make clean` | löscht alles, was beim Bauen entsteht |
+
+Die Befehle rufen nur die Skripte auf, die ohnehin im Projekt liegen. Du kannst sie also auch weiterhin direkt
+benutzen, etwa `./build.sh` oder `scripts/inspect.py tests`.
+
 ## <img src="assets/icons/build.svg" height="33" align="absmiddle" alt="">Die App bauen und starten
 
-Das Skript `build.sh` baut die App, zeichnet das App-Symbol, prüft alle Texte und Farben und legt die fertige App in
-den Ordner `build`. Danach startest du sie wie jede andere App.
+Mit einem einzigen Befehl baust du die App und startest sie. `make run` legt sie in den Ordner `build`, schließt eine
+schon geöffnete App und öffnet danach die neue.
 
 ```bash
-./build.sh
-```
-
-```bash
-open build/Speicher-Explorer.app
+make run
 ```
 
 Ohne weitere Angaben wird die App nur behelfsmäßig signiert. Dann fragt macOS nach jedem Bauen erneut nach dem
-Festplattenvollzugriff. Wenn dich das stört, legst du einmalig ein eigenes Zertifikat an und baust mit diesem.
+Festplattenvollzugriff. Wenn dich das stört, legst du einmalig ein eigenes Zertifikat an. Danach schreibst du dessen
+Namen in eine Datei `local.mk` im Projektordner. Git ignoriert diese Datei, und alle Befehle signieren ab dann
+damit.
 
 ```bash
-scripts/create-signing-identity.sh
+make identity
 ```
 
 ```bash
-SIGN_IDENTITY="Speicher-Explorer Dev" ./build.sh
+echo 'SIGN_IDENTITY = Speicher-Explorer Dev' > local.mk
 ```
 
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">Prüfungen vor jedem Beitrag
 
-Zuerst startest du die Code-Inspektion. Sie prüft die Form, baut die App mit Warnungen als Fehler, startet alle Tests
-und kontrolliert die [Code-Regeln](CODE_STYLE.md), also Namen, Zahlen, Farben, Gestaltung, Texte und toten Code. Sie
-darf keinen einzigen Fehler und keine einzige Warnung melden. Auf GitHub läuft dieselbe Prüfung bei jedem Pull Request
-von selbst und markiert ihn rot, solange noch etwas zu verbessern ist.
+Vor jedem Beitrag startest du die Prüfkette. Sie prüft die Form, baut die App mit Warnungen als Fehler, startet alle
+Tests und kontrolliert die [Code-Regeln](CODE_STYLE.md), also Namen, Zahlen, Farben, Gestaltung, Texte und toten
+Code. Sie darf keinen einzigen Fehler und keine einzige Warnung melden. Auf GitHub läuft dieselbe Prüfung bei jedem
+Pull Request von selbst und markiert ihn rot, solange noch etwas zu verbessern ist.
 
 ```bash
-scripts/inspect.py
+make check
 ```
 
-Danach baust du die App. `build.sh` bricht ab, sobald eine Prüfung fehlschlägt. Es prüft, ob jeder Text in allen 20 Sprachen vorhanden ist und
-gleich viele Platzhalter hat, und ob jede Textfarbe in hellem und dunklem Erscheinungsbild einen Kontrast von
-mindestens 4,5 zu 1 erreicht.
+Beim Bauen prüft `build.sh` zusätzlich, ob jeder Text in allen 20 Sprachen vorhanden ist und gleich viele Platzhalter
+hat, und ob jede Textfarbe in hellem und dunklem Erscheinungsbild einen Kontrast von mindestens 4,5 zu 1 erreicht.
 
 Zwei weitere Prüfungen startest du bei Bedarf selbst. Der Selbsttest misst echte Ordner und vergleicht das Ergebnis
 mit dem Befehl `du`. Der Belastungstest bedient die laufende App wie ein sehr schneller Mensch und versucht, Fehler
 auszulösen. Beide geben nur Anzahlen und Größen aus, niemals Datei- oder Ordnernamen.
 
 ```bash
-.build/release/SpeicherExplorer --selftest
+make selftest
 ```
 
 ```bash
-open -n build/Speicher-Explorer.app --args -uiTest "$TMPDIR/speicher-test"
+make stress
 ```
 
 ## <img src="assets/icons/rules.svg" height="33" align="absmiddle" alt="">Regeln, die immer gelten

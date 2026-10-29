@@ -160,6 +160,11 @@ def shell_script_findings() -> list[str]:
         status, output = run(["bash", "-n", str(script)])
         if status != 0:
             findings.append(output.strip())
+    # A dry run reads every short command in the Makefile without running one.
+    targets = re.findall(r"^([a-z]+):", (PROJECT / "Makefile").read_text(), re.MULTILINE)
+    status, output = run(["make", "--dry-run", *targets])
+    if status != 0:
+        findings.append(output.strip().splitlines()[-1])
     return findings
 
 
@@ -235,19 +240,30 @@ def unused_text_findings(words: Counter) -> list[str]:
     return findings
 
 
+STEPS = [
+    ("format", "Formatting (swift format)", formatting_findings),
+    ("compiler", "Compiler warnings and errors", compiler_findings),
+    ("tests", "Unit tests (Swift Testing)", test_findings),
+    ("rules", "House rules", rule_findings),
+    ("design", "Design rules", design_findings),
+    ("deadcode", "Dead code", dead_code_findings),
+    ("plists", "Translation files and Info.plist (plutil)", property_list_findings),
+    ("scripts", "Shell scripts and Makefile (bash -n, make -n)", shell_script_findings),
+]
+
+
 def main() -> int:
-    sections = [
-        ("Formatting (swift format)", formatting_findings),
-        ("Compiler warnings and errors", compiler_findings),
-        ("Unit tests (Swift Testing)", test_findings),
-        ("House rules", rule_findings),
-        ("Design rules", design_findings),
-        ("Dead code", dead_code_findings),
-        ("Translation files and Info.plist (plutil)", property_list_findings),
-        ("Shell scripts (bash -n)", shell_script_findings),
-    ]
+    """Without arguments every step runs; `scripts/inspect.py tests rules` runs only those."""
+    chosen = sys.argv[1:] or [key for key, _, _ in STEPS]
+    known = [key for key, _, _ in STEPS]
+    unknown = [key for key in chosen if key not in known]
+    if unknown:
+        print(f"Unknown step: {', '.join(unknown)}. Steps: {', '.join(known)}")
+        return 2
     total = 0
-    for title, check in sections:
+    for key, title, check in STEPS:
+        if key not in chosen:
+            continue
         findings = check()
         total += len(findings)
         print(f"{title}: {len(findings)}")

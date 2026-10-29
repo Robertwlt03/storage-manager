@@ -20,6 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Code inspection (format, compiler, tests, rules, design, dead code)
-        run: python3 scripts/inspect.py
+        run: make check
       - name: Build the app (translations, contrast, icon)
-        run: ./build.sh
+        run: make build
