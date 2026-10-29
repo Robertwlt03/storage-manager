@@ -15,24 +15,24 @@ struct CleanerView: View {
     private var chosenBytes: Int64 { chosen.reduce(0) { $0 + $1.bytes } }
 
     var body: some View {
-        UI.page(.cleaner, options: {
-            UI.button(Loc.cleanerRefresh.s) { model.refreshCleanItems() }.disabled(cleaning || loading)
+        UI.Page(.cleaner, options: {
+            UI.ActionButton(Loc.cleanerRefresh.s) { model.refreshCleanItems() }.disabled(cleaning || loading)
         }) {
             if !model.hasData && !model.scanning {  // nothing to load: say so instead of spinning forever
-                UI.notMeasured()
+                UI.Placeholder(.notMeasured, in: .page)
             } else {
-                UI.card {
-                    UI.rows(items ?? CleanKind.allCases.map { CleanItem(kind: $0, paths: [], bytes: 0) }) { item in row(item) }
+                UI.Card {
+                    UI.Rows(items ?? CleanKind.allCases.map { CleanItem(kind: $0, paths: [], bytes: 0) }) { item in row(item) }
                 }
             }
             if let result {
-                UI.status(Loc.freed.f(Fmt.bytes(result.freed)), symbol: Symbols.success, .good)
-                if result.failed > 0 { UI.status(Loc.cleanFailed.f(Fmt.count(result.failed)), symbol: Symbols.warning, .warn) }
+                UI.Note(Loc.freed.f(Fmt.bytes(result.freed)), .good(symbol: Symbols.success))
+                if result.failed > 0 { UI.Note(Loc.cleanFailed.f(Fmt.count(result.failed)), .warn(symbol: Symbols.warning)) }
             }
             HStack {
-                if cleaning { UI.progress(Loc.cleaning.s) }
+                if cleaning { UI.Note(Loc.cleaning.s, .working) }
                 Spacer()
-                UI.button(Loc.cleanSelected.f(Fmt.bytes(chosenBytes)), .primary) { confirming = true }
+                UI.ActionButton(Loc.cleanSelected.f(Fmt.bytes(chosenBytes)), .primary) { confirming = true }
                     .disabled(chosen.isEmpty || cleaning || loading)
             }
         }
@@ -53,13 +53,13 @@ struct CleanerView: View {
                 .toggleStyle(.checkbox)
                 .labelsHidden()
                 .disabled(item.bytes == 0 || cleaning || loading)
-            IconView(icon: .badge(symbol: item.kind.category.symbol, colorIndex: item.kind.category.rawValue))
+            UI.Icon(.badge(symbol: item.kind.category.symbol, colorIndex: item.kind.category.rawValue))
             VStack(alignment: .leading, spacing: Space.hairline) {
                 Text(item.kind.title.s)
-                Text(item.kind.detail.s).font(.callout).foregroundStyle(.muted).fixedSize(horizontal: false, vertical: true)
+                Text(item.kind.detail.s).textRole(.hint).fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: Space.item)
-            Text(item.bytes > 0 ? Fmt.bytes(item.bytes) : Loc.emptyValue.s).monospacedDigit().foregroundStyle(.muted)
+            Text(item.bytes > 0 ? Fmt.bytes(item.bytes) : Loc.emptyValue.s).textRole(.value)
                 .calculating(loading, alignment: .trailing)
         }
     }

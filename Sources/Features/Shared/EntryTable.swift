@@ -41,21 +41,21 @@ struct EntryTable: View {
     }
 
     private var nameColumn: some TableColumnContent<Entry, KeyPathComparator<Entry>> {
-        TableColumn(Loc.columnName.s, value: \.name) { UI.fileCell($0) }
+        TableColumn(Loc.columnName.s, value: \.name) { UI.FileCell($0) }
     }
 
     private var sizeColumn: some TableColumnContent<Entry, KeyPathComparator<Entry>> {
-        TableColumn(Loc.columnSize.s, value: \.bytes) { UI.sizeCell($0.bytes) }
+        TableColumn(Loc.columnSize.s, value: \.bytes) { UI.NumberCell(bytes: $0.bytes) }
             .width(min: Layout.sizeColumn.min, ideal: Layout.sizeColumn.ideal, max: Layout.sizeColumn.max)
     }
 
     private var shareColumn: some TableColumnContent<Entry, KeyPathComparator<Entry>> {
-        TableColumn(Loc.columnShare.s, value: \.bytes) { UI.shareCell($0.bytes, of: total) }
+        TableColumn(Loc.columnShare.s, value: \.bytes) { UI.ShareCell($0.bytes, of: total) }
             .width(min: Layout.shareColumn.min, ideal: Layout.shareColumn.ideal)
     }
 
     private var filesColumn: some TableColumnContent<Entry, KeyPathComparator<Entry>> {
-        TableColumn(Loc.columnFiles.s, value: \.items) { UI.countCell($0.items) }
+        TableColumn(Loc.columnFiles.s, value: \.items) { UI.NumberCell(count: $0.items) }
             .width(min: Layout.countColumn.min, ideal: Layout.countColumn.ideal, max: Layout.countColumn.max)
     }
 }

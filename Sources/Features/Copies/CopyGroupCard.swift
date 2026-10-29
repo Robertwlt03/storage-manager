@@ -13,17 +13,17 @@ struct CopyGroupCard: View {
     @State private var error: String?
 
     var body: some View {
-        UI.card {
+        UI.Card {
             HStack {
-                UI.header(group.appName, subtitle: group.bundleID, icon: .file(group.appPath ?? ""))
+                UI.TitleRow(group.appName, subtitle: group.bundleID, icon: .file(group.appPath ?? ""))
                 Spacer()
-                running ? UI.status(Loc.running.s, symbol: Symbols.running, .warn) : UI.status(Loc.stopped.s, symbol: Symbols.stopped, .good)
+                running ? UI.Note(Loc.running.s, .warn(symbol: Symbols.running)) : UI.Note(Loc.stopped.s, .good(symbol: Symbols.stopped))
             }
             .padding(.vertical, Space.row)
             Divider()
-            UI.fields(fields)
-            if let freed { Divider(); UI.status(Loc.freed.f(Fmt.bytes(freed)), symbol: Symbols.success, .good).padding(.vertical, Space.row) }
-            if let error { Divider(); UI.status(error, symbol: Symbols.warning, .bad).padding(.vertical, Space.row) }
+            UI.Fields(fields)
+            if let freed { Divider(); UI.Note(Loc.freed.f(Fmt.bytes(freed)), .good(symbol: Symbols.success)).padding(.vertical, Space.row) }
+            if let error { Divider(); UI.Note(error, .bad(symbol: Symbols.warning)).padding(.vertical, Space.row) }
             Divider()
             actions.padding(.vertical, Space.row)
         }
@@ -42,15 +42,15 @@ struct CopyGroupCard: View {
         }
     }
 
-    private var fields: [FieldItem?] {
-        var items: [FieldItem?] = [FieldItem(.copiesLabel, details.map { Fmt.count($0.count) }),
-                                   FieldItem(.countedSize, Fmt.bytes(group.node.bytes)),
-                                   FieldItem(.installedVersion, group.installedVersion ?? Loc.notFound.s)]
+    private var fields: [UI.Field?] {
+        var items: [UI.Field?] = [UI.Field(.copiesLabel, details.map { Fmt.count($0.count) }),
+                                   UI.Field(.countedSize, Fmt.bytes(group.node.bytes)),
+                                   UI.Field(.installedVersion, group.installedVersion ?? Loc.notFound.s)]
         for v in details?.versions ?? [] {
             let state = v.version == group.installedVersion ? Loc.current.s : Loc.old.s
-            items.append(FieldItem(Loc.versionLabel.f(v.version), Fmt.joined(Fmt.copies(v.count), state)))
+            items.append(UI.Field(Loc.versionLabel.f(v.version), Fmt.joined(Fmt.copies(v.count), state)))
         }
-        for d in details?.days ?? [] { items.append(FieldItem(Loc.createdOn.f(Fmt.day(d.day)), Fmt.copies(d.count))) }
+        for d in details?.days ?? [] { items.append(UI.Field(Loc.createdOn.f(Fmt.day(d.day)), Fmt.copies(d.count))) }
         return items
     }
 
@@ -58,8 +58,8 @@ struct CopyGroupCard: View {
         HStack {
             if running { Text(Loc.quitToDelete.f(group.appName)).foregroundStyle(.warn) }
             Spacer()
-            UI.button(Loc.openInExplorer.s) { model.open(group.node) }
-            UI.button(Loc.deleteAll.s, role: .destructive) { confirming = true }.disabled(running || deleting || details == nil)
+            UI.ActionButton(Loc.openInExplorer.s) { model.open(group.node) }
+            UI.ActionButton(Loc.deleteAll.s, role: .destructive) { confirming = true }.disabled(running || deleting || details == nil)
         }
     }
 

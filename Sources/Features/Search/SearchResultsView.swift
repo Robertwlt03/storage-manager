@@ -15,11 +15,11 @@ struct SearchResultsView: View {
                      contentKey: resultsKey)
             .navigationTitle(Loc.searchResults.f(Fmt.count(results.count)))
             .safeAreaInset(edge: .top, spacing: 0) {
-                UI.header(.searchNote) {
-                    UI.segments(selection: $model.searchScope) {
+                UI.PageHeader(.searchNote) {
+                    UI.SegmentPicker(selection: $model.searchScope) {
                         ForEach(SearchScope.allCases) { Text($0.title.s).tag($0) }
                     }
-                    UI.button(Loc.cancel.s) { model.endSearch() }.keyboardShortcut(.cancelAction)
+                    UI.ActionButton(Loc.cancel.s) { model.endSearch() }.keyboardShortcut(.cancelAction)
                 }
             }
             .task(id: "\(model.searchText)|\(model.searchScope)|\(model.revision)") {

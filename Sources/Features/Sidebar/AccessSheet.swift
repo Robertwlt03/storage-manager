@@ -8,19 +8,19 @@ struct AccessSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Space.section) {
-            UI.header(Loc.accessTitle.s, subtitle: Loc.accessOneSwitch.s, icon: .file(Bundle.main.bundlePath))
-            UI.note(Loc.accessDetail.s)
-            if visitedSettings { UI.status(Loc.accessRestartHint.s, symbol: Symbols.warning, .warn) }
+            UI.TitleRow(Loc.accessTitle.s, subtitle: Loc.accessOneSwitch.s, icon: .file(Bundle.main.bundlePath))
+            UI.Note(Loc.accessDetail.s)
+            if visitedSettings { UI.Note(Loc.accessRestartHint.s, .warn(symbol: Symbols.warning)) }
             HStack {
-                UI.button(Loc.accessContinue.s) { model.finishAccessSheet() }
+                UI.ActionButton(Loc.accessContinue.s) { model.finishAccessSheet() }
                 Spacer()
-                UI.button(Loc.accessOpenSettings.s, .primary) {
+                UI.ActionButton(Loc.accessOpenSettings.s, .primary) {
                     visitedSettings = true
                     FinderService.openFullDiskAccessSettings()
                 }
                 .keyboardShortcut(visitedSettings ? nil : .defaultAction)
                 if visitedSettings {
-                    UI.button(Loc.accessRestart.s, .confirm) { LifecycleService.relaunch() }
+                    UI.ActionButton(Loc.accessRestart.s, .confirm) { LifecycleService.relaunch() }
                         .keyboardShortcut(.defaultAction)
                 }
             }

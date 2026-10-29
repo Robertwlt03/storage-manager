@@ -15,8 +15,8 @@ struct LargeFilesView: View {
             .navigationTitle(Loc.paneLargeFiles.s)
             .navigationSubtitle(Loc.filesTotal.f(Fmt.count(entries.count), Fmt.bytes(sum)))
             .safeAreaInset(edge: .top, spacing: 0) {
-                UI.header(Pane.largeFiles.info) {
-                    UI.menu(.minSize, selection: $minMB) {
+                UI.PageHeader(Pane.largeFiles.info) {
+                    UI.MenuPicker(.minSize, selection: $minMB) {
                         ForEach(LargeFileThreshold.optionsMB, id: \.self) { Text(Loc.fromSize.f(threshold($0))).tag($0) }
                     }
                 }

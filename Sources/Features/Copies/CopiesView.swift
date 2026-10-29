@@ -6,11 +6,11 @@ struct CopiesView: View {
 
     var body: some View {
         let groups = model.copyGroups
-        UI.page(.copies) {
+        UI.Page(.copies) {
             if !model.hasData || (model.scanning && groups.isEmpty) {  // the temporary area is measured last
-                UI.notMeasured()
+                UI.Placeholder(.notMeasured, in: .page)
             } else if groups.isEmpty {
-                UI.empty(Loc.noCopies.s, symbol: Symbols.copies, detail: Loc.noCopiesDetail.s)
+                UI.Placeholder(.empty(title: Loc.noCopies.s, symbol: Symbols.copies, detail: Loc.noCopiesDetail.s), in: .page)
             }
             ForEach(groups) { CopyGroupCard(group: $0) }
         }

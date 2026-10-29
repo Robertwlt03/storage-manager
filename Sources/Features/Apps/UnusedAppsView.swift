@@ -13,38 +13,38 @@ struct UnusedAppsView: View {
     }
 
     var body: some View {
-        UI.page(.apps, options: {
-            UI.menu(.unusedSince, selection: $days) {
+        UI.Page(.apps, options: {
+            UI.MenuPicker(.unusedSince, selection: $days) {
                 ForEach(CleanConfig.unusedDayOptions, id: \.self) { Text(Loc.daysOption.f(Fmt.count($0))).tag($0) }
             }
         }) {
-            if let error { UI.status(error, symbol: Symbols.warning, .bad) }
+            if let error { UI.Note(error, .bad(symbol: Symbols.warning)) }
             if !model.hasData || model.apps.isEmpty {
-                UI.notMeasured()
+                UI.Placeholder(.notMeasured, in: .page)
             } else if model.scanning {  // a running scan is about to replace sizes and dates
-                UI.card {
-                    UI.loading(.loadingAppsTitle, .loadingAppsDetail, symbol: Symbols.apps).frame(minHeight: Layout.placeholderHeight)
+                UI.Card {
+                    UI.Placeholder(.loading(title: .loadingAppsTitle, detail: .loadingAppsDetail, symbol: Symbols.apps), in: .card)
                 }
             } else if unused.isEmpty {
-                UI.empty(Loc.appsNoneUnused.s, symbol: Symbols.success)
+                UI.Placeholder(.empty(title: Loc.appsNoneUnused.s, symbol: Symbols.success), in: .page)
             } else if layout == .grid {
-                UI.grid(unused) { app in
-                    UI.tile(icon: .file(app.path), title: app.name, value: Fmt.bytes(app.bytes), detail: lastUsed(app))
+                UI.TileGrid(unused) { app in
+                    UI.Tile(icon: .file(app.path), title: app.name, value: Fmt.bytes(app.bytes), detail: lastUsed(app))
                         .contextMenu { menu(app) }
                 }
             } else {
-                UI.card {
-                    UI.rows(unused) { app in
+                UI.Card {
+                    UI.Rows(unused) { app in
                         HStack(spacing: Space.item) {
-                            IconView(icon: .file(app.path))
+                            UI.Icon(.file(app.path))
                             VStack(alignment: .leading, spacing: Space.hairline) {
                                 Text(app.name)
-                                Text(lastUsed(app)).font(.callout).foregroundStyle(.muted)
+                                Text(lastUsed(app)).textRole(.hint)
                             }
                             Spacer(minLength: Space.item)
-                            Text(Fmt.bytes(app.bytes)).monospacedDigit().foregroundStyle(.muted)
-                            UI.button(Loc.showInFinder.s) { FinderService.reveal(app.path) }
-                            UI.button(Loc.moveToTrash.s, role: .destructive) { pending = app }
+                            Text(Fmt.bytes(app.bytes)).textRole(.value)
+                            UI.ActionButton(Loc.showInFinder.s) { FinderService.reveal(app.path) }
+                            UI.ActionButton(Loc.moveToTrash.s, role: .destructive) { pending = app }
                                 .disabled(AppUsageService.isRunning(app))
                         }
                         .contextMenu { menu(app) }

@@ -14,7 +14,7 @@ struct SettingsView: View {
                 VStack(alignment: .leading, spacing: Space.s) {
                     List(folders, id: \.self, selection: $selected) { Text(Paths.display($0)).lineLimit(1).truncationMode(.middle) }
                         .frame(height: Layout.folderListHeight)
-                        .overlay { if folders.isEmpty { Text(Loc.none.s).foregroundStyle(.muted) } }
+                        .overlay { if folders.isEmpty { Text(Loc.none.s).textRole(.hint) } }
                     HStack(spacing: Space.xs) {
                         Button(Loc.add.s, systemImage: Symbols.add) {
                             extraFolders = AppSettings.store(Array(NSOrderedSet(array: folders + FinderService.chooseFolders()))
@@ -28,7 +28,7 @@ struct SettingsView: View {
                     .labelStyle(.iconOnly)
                 }
             }
-            Text(Loc.settingsSystemNote.s).foregroundStyle(.muted)
+            Text(Loc.settingsSystemNote.s).textRole(.hint)
         }
         .formStyle(.grouped)
         .frame(width: Layout.settingsWidth, height: Layout.settingsHeight)

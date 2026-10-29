@@ -11,11 +11,11 @@ struct InfoSheet: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: Space.section) {
-                    UI.card {
-                        UI.header(entry.name, subtitle: Paths.display(path), icon: .file(path))
+                    UI.Card {
+                        UI.TitleRow(entry.name, subtitle: Paths.display(path), icon: .file(path))
                             .padding(.vertical, Space.row)
                         Divider()
-                        UI.fields(basics(path))
+                        UI.Fields(basics(path))
                     }
                     if entry.isFolder { contents }
                 }
@@ -23,9 +23,9 @@ struct InfoSheet: View {
             }
             .background(Backdrop())
             HStack {
-                UI.button(Loc.showInFinder.s) { FinderService.reveal(path) }
+                UI.ActionButton(Loc.showInFinder.s) { FinderService.reveal(path) }
                 Spacer()
-                UI.button(Loc.done.s, .primary) { dismiss() }.keyboardShortcut(.defaultAction)
+                UI.ActionButton(Loc.done.s, .primary) { dismiss() }.keyboardShortcut(.defaultAction)
             }
             .padding(Space.card)
         }
@@ -36,36 +36,36 @@ struct InfoSheet: View {
         }
     }
 
-    private func basics(_ path: String) -> [FieldItem?] {
+    private func basics(_ path: String) -> [UI.Field?] {
         let v = try? URL(fileURLWithPath: path).resourceValues(forKeys: [.contentModificationDateKey, .creationDateKey,
                                                                        .localizedTypeDescriptionKey])
-        return [FieldItem(.allocated, Fmt.bytes(entry.bytes)),
-                FieldItem(.kind, v?.localizedTypeDescription ?? "–"),
-                v?.contentModificationDate.map { FieldItem(.modified, Fmt.dateTime($0)) },
-                v?.creationDate.map { FieldItem(.created, Fmt.dateTime($0)) }]
+        return [UI.Field(.allocated, Fmt.bytes(entry.bytes)),
+                UI.Field(.kind, v?.localizedTypeDescription ?? "–"),
+                v?.contentModificationDate.map { UI.Field(.modified, Fmt.dateTime($0)) },
+                v?.creationDate.map { UI.Field(.created, Fmt.dateTime($0)) }]
     }
 
     @ViewBuilder private var contents: some View {
-        UI.card(Loc.contents.s) {
+        UI.Card(Loc.contents.s) {
             if let p = profile {
-                UI.fields([FieldItem(.files, Fmt.count(p.files)),
-                           FieldItem(.folders, Fmt.count(p.folders)),
-                           FieldItem(.packages, Fmt.count(p.packages)),
+                UI.Fields([UI.Field(.files, Fmt.count(p.files)),
+                           UI.Field(.folders, Fmt.count(p.folders)),
+                           UI.Field(.packages, Fmt.count(p.packages)),
                            p.oldest.flatMap { o in p.newest.map { n in
-                               FieldItem(.modifiedBetween, Loc.dateRange.f(Fmt.dayShort(o), Fmt.dayShort(n)))
+                               UI.Field(.modifiedBetween, Loc.dateRange.f(Fmt.dayShort(o), Fmt.dayShort(n)))
                            } }])
             } else {
-                UI.progress(Loc.analyzing.s).padding(.vertical, Space.row)
+                UI.Note(Loc.analyzing.s, .working).padding(.vertical, Space.row)
             }
         }
         if let p = profile, let top = p.types.first?.bytes {
-            UI.card(Loc.typesBySize.s) {
-                UI.rows(p.types.map { TypeRow(ext: $0.ext, bytes: $0.bytes, count: $0.count) }) { t in
+            UI.Card(Loc.typesBySize.s) {
+                UI.Rows(p.types.map { TypeRow(ext: $0.ext, bytes: $0.bytes, count: $0.count) }) { t in
                     HStack(spacing: Space.item) {
                         Text(t.ext).frame(maxWidth: .infinity, alignment: .leading)
-                        UI.shareCell(t.bytes, of: top)
-                        UI.sizeCell(t.bytes).frame(width: Layout.sizeColumn.ideal)
-                        Text(Loc.fileCount.f(Fmt.count(t.count))).foregroundStyle(.muted).monospacedDigit()
+                        UI.ShareCell(t.bytes, of: top)
+                        UI.NumberCell(bytes: t.bytes).frame(width: Layout.sizeColumn.ideal)
+                        Text(Loc.fileCount.f(Fmt.count(t.count))).textRole(.value)
                     }
                 }
             }

@@ -20,8 +20,8 @@ struct EntryBrowser: View {
         Group {
             if layout == .grid {
                 ScrollView {
-                    TileGrid(data: entries.sorted { $0.bytes > $1.bytes }) { e in
-                        UI.tile(icon: e.path.map { .preview($0) } ?? .letter("…"), title: e.name, value: Fmt.bytes(e.bytes),
+                    UI.TileGrid(entries.sorted { $0.bytes > $1.bytes }) { e in
+                        UI.Tile(icon: e.path.map { .preview($0) } ?? .letter("…"), title: e.name, value: Fmt.bytes(e.bytes),
                                 detail: showLocation ? e.location : nil, share: Double(e.bytes) / Double(max(total, 1)))
                             .onTapGesture(count: 2) { model.activate(e) }
                             .contextMenu { EntryMenu(entry: e, info: $info) }
@@ -33,7 +33,7 @@ struct EntryBrowser: View {
                 EntryTable(entries: entries, total: total, showLocation: showLocation).id(contentKey)
             }
         }
-        .overlay { if entries.isEmpty { UI.emptyOrScanning(emptyTitle, symbol: Symbols.search, detail: emptyDetail) } }
+        .overlay { if entries.isEmpty { UI.Placeholder(.emptyAfterScan(title: emptyTitle, symbol: Symbols.search, detail: emptyDetail)) } }
         .sheet(item: $info) { InfoSheet(entry: $0) }
         .smoothChanges(of: layout)
     }

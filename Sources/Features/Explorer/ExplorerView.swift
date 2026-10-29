@@ -23,10 +23,10 @@ struct FolderView: View {
             .navigationTitle(node.isVirtual ? Loc.paneExplorer.s : node.displayName)
             .navigationSubtitle(subtitle)
             .safeAreaInset(edge: .top, spacing: 0) {
-                UI.header(Pane.explorer.info) {
+                UI.PageHeader(Pane.explorer.info) {
                     if !node.isVirtual {
-                        UI.button(Loc.showInFinder.s) { FinderService.reveal(node.path) }
-                        UI.button(Loc.info.s) { info = .folder(node) }
+                        UI.ActionButton(Loc.showInFinder.s) { FinderService.reveal(node.path) }
+                        UI.ActionButton(Loc.info.s) { info = .folder(node) }
                     }
                 }
             }
