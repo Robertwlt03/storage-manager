@@ -29,7 +29,7 @@ restart: ## Quit the app if it is open, then open the built one
 	fi
 	open "$(APP)"
 
-demo: ## Open the built app with made-up data: no scan, nothing read or removed
+demo: build ## Build, then open the app with made-up data: no scan, nothing read or removed
 	open -n "$(APP)" --args -demo YES
 
 check: ## Run the whole check pipeline, as on GitHub

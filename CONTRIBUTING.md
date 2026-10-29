@@ -47,7 +47,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | Befehl | Was er tut |
 | --- | --- |
 | `make run` | baut die App, schließt sie, falls sie offen ist, und öffnet die neue |
-| `make demo` | öffnet die gebaute App im Vorführmodus mit erfundenen Daten |
+| `make demo` | baut die App und öffnet sie im Vorführmodus mit erfundenen Daten |
 | `make restart` | schließt die App, falls sie offen ist, und öffnet sie neu, ohne zu bauen |
 | `make build` | baut die App und zeichnet ihr Symbol |
 | `make check` | startet die ganze Prüfkette, genau wie auf GitHub |
