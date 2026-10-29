@@ -99,7 +99,7 @@ Was nicht benutzt wird, wird gelöscht und nicht auskommentiert. Toter Code mach
 Irre, weil man ihn für wichtig hält. Wer ihn später wieder braucht, findet ihn in der Versionsgeschichte von Git. Das
 gilt auch für Texte: Ein Schlüssel, den die App nirgends zeigt, verschwindet samt seinen Übersetzungen.
 
-## <img src="assets/icons/issues.svg" height="33" align="absmiddle" alt="">Kommentare nur für das Unsichtbare
+## <img src="assets/icons/comments.svg" height="33" align="absmiddle" alt="">Kommentare nur für das Unsichtbare
 
 Ein guter Name ersetzt einen Kommentar. Kommentare bleiben für Regeln, die man im Code nicht sieht, etwa warum ein
 Diagramm ohne Animation zeichnet. Die Geschichte, wie ein Fehler entstanden ist, gehört in die Commit-Nachricht oder in
