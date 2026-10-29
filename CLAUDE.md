@@ -77,8 +77,30 @@ open -n <scratchpad>/build/Speicher-Explorer.app --args -ApplePersistenceIgnoreS
 
 Find the window number with a small CoreGraphics script (`CGWindowListCopyWindowInfo`, filter by the app's PID and a
 width over 500) and capture it with `screencapture -x -o -l <window>`. Panes: `overview`, `explorer`, `largeFiles`,
-`cleaner`, `apps`, `temp`, `copies`; add `-AppleInterfaceStyle Dark` for the dark look. For refactors, build the previous commit into a separate scratchpad folder and compare both captures
-pixel by pixel; differences in free space and selection colour (window focus) are expected.
+`cleaner`, `apps`, `temp`, `copies`; add `-AppleInterfaceStyle Dark` for the dark look. For refactors, build the
+previous commit into a separate scratchpad folder and compare both captures pixel by pixel; differences in free space
+and selection colour (window focus) are expected.
+
+## Testing app behaviour without new permissions
+
+Never send key presses or clicks through System Events or `osascript`: that needs Accessibility or Automation
+permission and makes macOS ask the user. Test the real app like this instead (this is how Cmd+Q and "Quit & Reopen"
+with the access sheet open were checked):
+
+1. Build a test copy with its own bundle identifier, so it has its own permissions and settings and never touches the
+   user's app: `make build BUILD_DIR=<scratchpad>/check SIGN_IDENTITY=- BUNDLE_ID=local.speicher-explorer.check`.
+   It has no Full Disk Access, so launched with `-autoScan NO` (and without `-skipAccessSheet`) it shows the access
+   sheet and never scans.
+2. Quit requests from macOS (System Settings' "Quit & Reopen", the Dock's Quit) are Apple events. Send the same one
+   with a tiny Swift script that needs no permission:
+   `NSRunningApplication.runningApplications(withBundleIdentifier: "local.speicher-explorer.check").forEach { app in _ = app.terminate() }`.
+3. Menu commands such as Cmd+Q: add a temporary line ending in `// DBG` to `AppDelegate.applicationDidFinishLaunching`
+   that, when an environment variable is set, performs the menu item after a few seconds, for example the app menu's
+   item whose `keyEquivalent` is `"q"` via `menu.performActionForItem(at:)`. Start it with
+   `open -n --env DBG_QUIT=1 --stderr <scratchpad>/err.txt <app>` and print what you need to `FileHandle.standardError`.
+4. Read the outcome without looking at the screen: `pgrep -f <scratchpad>/check/Speicher-Explorer.app` tells whether
+   it is still running; a photo of the window (see above) shows dialogs.
+5. Remove the debug lines with `sed -i '' '/\/\/ DBG$/d' <file>`; `make check` fails while one is left.
 
 ## Documentation
 

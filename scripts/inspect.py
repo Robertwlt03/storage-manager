@@ -229,6 +229,8 @@ def rule_findings() -> list[str]:
             findings.append(f"{place}: colour defined outside Theme.swift")
         if any(GERMAN_LETTER.search(text) for text in string_literals(line)):
             findings.append(f"{place}: German text in code, it belongs in the translations")
+        if line.rstrip().endswith("// DBG"):
+            findings.append(f"{place}: temporary debug line left in the code")
         if ANONYMOUS_PARAMETER.search(code):
             findings.append(f"{place}: $0 instead of a named closure parameter")
         for match in SHORT_CLOSURE_PARAMETERS.finditer(code):

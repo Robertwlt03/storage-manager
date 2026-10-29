@@ -139,7 +139,7 @@ Das Skript führt neun Prüfungen nacheinander aus:
 3. **Compiler:** Die App wird mit `-warnings-as-errors` gebaut, sodass schon eine Warnung als Fehler zählt.
 4. **Tests:** `swift test` startet alle Tests aus `Tests/SpeicherExplorerTests`.
 5. **Hausregeln:** Zahlen ohne Namen, Farben außerhalb von `Theme.swift`, deutscher Text im Code, `$0`, Namen aus ein
-   oder zwei Buchstaben und Zeilen über 100 Zeichen.
+   oder zwei Buchstaben, Zeilen über 100 Zeichen und vergessene vorübergehende Debug-Zeilen.
 6. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, eigenes Glas oder eigene
    Hintergründe, Animationen außerhalb von `Motion`, ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb
    der Diagnose.
