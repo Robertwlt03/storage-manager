@@ -153,6 +153,7 @@
 "accessGranted" = "Myönnetty";
 "accessRestart" = "Käynnistä app uudelleen";
 "accessRestartHint" = "Onko kytkin päällä? macOS antaa käyttöoikeuden vasta, kun app on käynnistetty uudelleen. Valitse ”Käynnistä app uudelleen” tai anna macOS:n lopettaa ja avata se uudelleen. Jos se ei vieläkään toimi, poista merkintä Järjestelmäasetuksissa ”–”-painikkeella ja lisää app uudelleen.";
+"quitApp" = "Lopeta %@";
 "fullDiskAccess" = "Täysi levyn käyttöoikeus";
 
 /* Settings */

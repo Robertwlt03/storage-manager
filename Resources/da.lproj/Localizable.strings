@@ -153,6 +153,7 @@
 "accessGranted" = "Givet";
 "accessRestart" = "Genstart appen";
 "accessRestartHint" = "Har du slået kontakten til? macOS giver først adgang, når appen er genstartet. Klik på »Genstart appen«, eller lad macOS afslutte og genåbne den. Virker det stadig ikke, så fjern posten med »–« i Systemindstillinger, og tilføj appen igen.";
+"quitApp" = "Afslut %@";
 "fullDiskAccess" = "Fuld diskadgang";
 
 /* Settings */

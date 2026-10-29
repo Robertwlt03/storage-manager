@@ -153,6 +153,7 @@
 "accessGranted" = "Granted";
 "accessRestart" = "Restart App";
 "accessRestartHint" = "Switch turned on? macOS only grants access once the app has restarted. Click “Restart App” or let macOS quit and reopen it. If it still does not work, remove the entry with “–” in System Settings and add the app again.";
+"quitApp" = "Quit %@";
 "fullDiskAccess" = "Full Disk Access";
 
 /* Settings */

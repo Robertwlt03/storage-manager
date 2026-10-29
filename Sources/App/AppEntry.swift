@@ -50,6 +50,13 @@ struct SpeicherExplorerApp: App {
                 ) { model.toggleSidebar() }
                 .keyboardShortcut("s", modifiers: [.control, .command])
             }
+            // The system item would only beep while the access sheet is open.
+            CommandGroup(replacing: .appTermination) {
+                Button(TextKey.quitApp.translated(with: TextKey.appName.translated)) {
+                    LifecycleService.quit()
+                }
+                .keyboardShortcut("q")
+            }
             CommandGroup(after: .newItem) {
                 Button(TextKey.rescan.translated) { model.scan() }.keyboardShortcut("r")
                     .disabled(model.isScanning)
@@ -88,9 +95,8 @@ private struct LayoutCommands: Commands {
     }
 }
 
-/// Accepts the quit request macOS sends after Full Disk Access is switched on ("Quit & Reopen").
-/// While a sheet such as the access sheet is open, AppKit refuses to terminate and only beeps, so
-/// the app then quits the way `LifecycleService.relaunch` does; macOS opens it again.
+/// Accepts the quit request macOS sends after Full Disk Access is switched on ("Quit & Reopen"),
+/// also while the access sheet is open; macOS then opens the app again.
 final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_: Notification) {
         NSAppleEventManager.shared()
@@ -101,8 +107,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func quit(_: NSAppleEventDescriptor, withReply _: NSAppleEventDescriptor) {
-        let hasOpenSheet = NSApp.windows.contains { window in window.attachedSheet != nil }
-        if hasOpenSheet { exit(EXIT_SUCCESS) }
-        NSApp.terminate(nil)
+        LifecycleService.quit()
     }
 }

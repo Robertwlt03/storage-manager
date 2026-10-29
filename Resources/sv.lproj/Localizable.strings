@@ -153,6 +153,7 @@
 "accessGranted" = "Beviljad";
 "accessRestart" = "Starta om appen";
 "accessRestartHint" = "Har du aktiverat reglaget? macOS ger åtkomst först när appen har startats om. Klicka på ”Starta om appen” eller låt macOS avsluta och öppna den igen. Om det fortfarande inte fungerar tar du bort posten med ”–” i Systeminställningar och lägger till appen igen.";
+"quitApp" = "Avsluta %@";
 "fullDiskAccess" = "Full skivåtkomst";
 
 /* Settings */

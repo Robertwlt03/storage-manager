@@ -52,7 +52,7 @@ nonisolated enum TextKey: String, CaseIterable {
 
     // Full Disk Access
     case accessTitle, accessDetail, accessOneSwitch, accessOpenSettings, accessContinue
-    case accessGranted, fullDiskAccess, accessRestart, accessRestartHint
+    case accessGranted, fullDiskAccess, accessRestart, accessRestartHint, quitApp
 
     // Key figures, cleaner, unused apps, layout
     case paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, emptyFolder,

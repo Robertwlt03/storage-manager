@@ -153,6 +153,7 @@
 "accessGranted" = "Accordé";
 "accessRestart" = "Redémarrer l’app";
 "accessRestartHint" = "Interrupteur activé ? macOS n’accorde l’accès qu’après le redémarrage de l’app. Cliquez sur « Redémarrer l’app » ou laissez macOS la quitter et la rouvrir. Si cela ne fonctionne toujours pas, supprimez l’entrée avec « – » dans Réglages Système, puis ajoutez de nouveau l’app.";
+"quitApp" = "Quitter %@";
 "fullDiskAccess" = "Accès complet au disque";
 
 /* Settings */

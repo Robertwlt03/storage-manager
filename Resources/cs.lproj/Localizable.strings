@@ -153,6 +153,7 @@
 "accessGranted" = "Uděleno";
 "accessRestart" = "Restartovat aplikaci";
 "accessRestartHint" = "Přepínač zapnut? macOS udělí přístup až po restartu aplikace. Klikněte na „Restartovat aplikaci“, nebo nechte macOS aplikaci ukončit a znovu otevřít. Pokud to pak stále nefunguje, odeberte záznam v Nastavení systému tlačítkem „–“ a přidejte aplikaci znovu.";
+"quitApp" = "Ukončit %@";
 "fullDiskAccess" = "Plný přístup k disku";
 
 /* Settings */

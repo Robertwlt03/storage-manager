@@ -153,6 +153,7 @@
 "accessGranted" = "Erteilt";
 "accessRestart" = "App neu starten";
 "accessRestartHint" = "Schalter eingeschaltet? macOS gibt den Zugriff erst frei, wenn die App neu gestartet wurde. Klicke dazu auf „App neu starten“ oder lass macOS die App beenden und neu öffnen. Wirkt er danach immer noch nicht, entferne den Eintrag in den Systemeinstellungen mit „–“ und füge die App neu hinzu.";
+"quitApp" = "%@ beenden";
 "fullDiskAccess" = "Festplattenvollzugriff";
 
 /* Settings */

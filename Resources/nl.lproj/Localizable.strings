@@ -153,6 +153,7 @@
 "accessGranted" = "Toegestaan";
 "accessRestart" = "App herstarten";
 "accessRestartHint" = "Schakelaar aangezet? macOS geeft pas toegang nadat de app is herstart. Klik op “App herstarten” of laat macOS de app stoppen en opnieuw openen. Werkt het daarna nog steeds niet, verwijder dan het item met “–” in Systeeminstellingen en voeg de app opnieuw toe.";
+"quitApp" = "Stop %@";
 "fullDiskAccess" = "Volledige schijftoegang";
 
 /* Settings */

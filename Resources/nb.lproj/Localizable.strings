@@ -153,6 +153,7 @@
 "accessGranted" = "Gitt";
 "accessRestart" = "Start appen på nytt";
 "accessRestartHint" = "Har du slått på bryteren? macOS gir først tilgang etter at appen er startet på nytt. Klikk på «Start appen på nytt», eller la macOS avslutte og åpne den igjen. Hvis det fortsatt ikke fungerer, fjerner du oppføringen med «–» i Systeminnstillinger og legger til appen igjen.";
+"quitApp" = "Avslutt %@";
 "fullDiskAccess" = "Full disktilgang";
 
 /* Settings */

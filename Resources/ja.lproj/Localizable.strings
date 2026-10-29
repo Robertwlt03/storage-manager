@@ -153,6 +153,7 @@
 "accessGranted" = "許可済み";
 "accessRestart" = "Appを再起動";
 "accessRestartHint" = "スイッチをオンにしましたか? macOSはAppを再起動してからアクセスを許可します。「Appを再起動」をクリックするか、macOSにAppを終了して開き直させてください。それでも動作しない場合は、システム設定で「–」を使って項目を削除し、Appをもう一度追加してください。";
+"quitApp" = "%@を終了";
 "fullDiskAccess" = "フルディスクアクセス";
 
 /* Settings */

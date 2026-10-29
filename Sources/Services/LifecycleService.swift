@@ -1,6 +1,14 @@
 import AppKit
 
 enum LifecycleService {
+    /// Quits the app. AppKit refuses to terminate while a sheet such as the access sheet is open
+    /// and only beeps, so the app then quits directly, as `relaunch` does.
+    static func quit() {
+        let hasOpenSheet = NSApp.windows.contains { window in window.attachedSheet != nil }
+        if hasOpenSheet { exit(EXIT_SUCCESS) }
+        NSApp.terminate(nil)
+    }
+
     /// Opens a new instance of the app, then quits this one; macOS applies a newly granted Full
     /// Disk Access only to a new process. Quitting with `exit` also works while a sheet is open,
     /// which blocks `terminate`.

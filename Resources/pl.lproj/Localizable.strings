@@ -153,6 +153,7 @@
 "accessGranted" = "Przyznano";
 "accessRestart" = "Uruchom aplikację ponownie";
 "accessRestartHint" = "Przełącznik jest włączony? macOS przyznaje dostęp dopiero po ponownym uruchomieniu aplikacji. Kliknij „Uruchom aplikację ponownie” albo pozwól macOS zamknąć ją i otworzyć ponownie. Jeśli nadal nie działa, usuń wpis przyciskiem „–” w Ustawieniach systemowych i dodaj aplikację ponownie.";
+"quitApp" = "Zakończ %@";
 "fullDiskAccess" = "Pełny dostęp do dysku";
 
 /* Settings */

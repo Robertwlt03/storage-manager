@@ -153,6 +153,7 @@
 "accessGranted" = "Concedido";
 "accessRestart" = "Reiniciar la app";
 "accessRestartHint" = "¿Interruptor activado? macOS solo concede el acceso después de reiniciar la app. Haz clic en “Reiniciar la app” o deja que macOS la cierre y la vuelva a abrir. Si aun así no funciona, elimina la entrada con “–” en Ajustes del Sistema y vuelve a añadir la app.";
+"quitApp" = "Salir de %@";
 "fullDiskAccess" = "Acceso total al disco";
 
 /* Settings */

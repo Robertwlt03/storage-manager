@@ -153,6 +153,7 @@
 "accessGranted" = "已授權";
 "accessRestart" = "重新啟動 App";
 "accessRestartHint" = "已打開開關？macOS 要在 App 重新啟動後才會授予取用權限。請按一下「重新啟動 App」，或讓 macOS 結束並重新打開它。如果之後仍然無效，請在「系統設定」中用「–」移除該項目，然後重新加入 App。";
+"quitApp" = "結束%@";
 "fullDiskAccess" = "完整磁碟取用權限";
 
 /* Settings */
