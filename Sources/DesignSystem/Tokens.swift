@@ -117,12 +117,28 @@ enum Symbols {
     static let warning = "exclamationmark.triangle.fill"
     static let add = "plus"
     static let remove = "minus"
+
+    // Storage categories; temporary files and the system reuse the symbols of their pages.
+    static let appCollection = "square.grid.2x2"
+    static let documents = "doc.text"
+    static let downloads = "arrow.down.circle"
+    static let media = "photo.on.rectangle"
+    static let iCloud = "icloud"
+    static let mail = "envelope"
+    static let developer = "hammer"
+    static let caches = "archivebox"
+    static let appData = "shippingbox"
+    static let trash = "trash"
+    static let user = "person.crop.circle"
+    static let library = "gearshape"
+    static let otherFiles = "folder"
+    static let purgeable = "arrow.3.trianglepath"
 }
 
 /// One text style per role, built on Apple's text styles so Dynamic Type and accessibility keep
 /// working.
 enum TextRole {
-    case title, figure, section, body, hint, value
+    case title, figure, section, body, label, hint, value, caption
 
     var font: Font {
         switch self {
@@ -130,12 +146,13 @@ enum TextRole {
         case .figure: .title2.weight(.semibold).monospacedDigit()
         case .section: .headline
         case .body: .body
-        case .hint: .callout
+        case .label, .hint: .callout
         case .value: .body.monospacedDigit()
+        case .caption: .caption
         }
     }
 
-    var isMuted: Bool { self == .hint || self == .value }
+    var isMuted: Bool { [.hint, .value, .caption].contains(self) }
 }
 
 extension View {

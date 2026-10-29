@@ -7,6 +7,7 @@ enum Pane: Hashable {
     static let main: [Pane] = [.overview, .explorer, .largeFiles]
     static let tidy: [Pane] = [.cleaner, .apps]
     static let system: [Pane] = [.temp, .copies]
+    static let everyPage = main + tidy + system
 
     /// Pages whose contents can be shown as a list or as a grid.
     var supportsGrid: Bool { [.overview, .explorer, .largeFiles, .apps].contains(self) }
@@ -16,8 +17,7 @@ enum Pane: Hashable {
             self = .volume(launchKey)
             return
         }
-        let everyPage = Self.main + Self.tidy + Self.system
-        guard let page = everyPage.first(where: { page in page.launchKey == launchKey }) else {
+        guard let page = Self.everyPage.first(where: { page in page.launchKey == launchKey }) else {
             return nil
         }
         self = page

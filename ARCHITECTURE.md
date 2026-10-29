@@ -50,6 +50,9 @@ Animationen.
 
 **`Sources/Diagnostics`:** Die Prüfungen, die `build.sh` aufruft, dazu der Selbsttest und der Belastungstest.
 
+**`Tests/SpeicherExplorerTests`:** Die Tests mit Swift Testing für Ordnerbaum, Suche, Seiten, Gestaltungswerte, Kontrast
+und Übersetzungen. Sie bauen ihre Ordnerbäume von Hand und greifen nie auf die Festplatte zu.
+
 ## <img src="assets/icons/rules.svg" height="33" align="absmiddle" alt="">Absichtliche Regeln
 
 Diese Regeln sieht man dem Code nicht an. Bitte brich sie nur, wenn du den Grund kennst und ihn hier anpasst.

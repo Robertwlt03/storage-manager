@@ -32,22 +32,22 @@ enum CategoryKind: Int, CaseIterable {
 
     var symbol: String {
         switch self {
-        case .apps: "square.grid.2x2"
-        case .documents: "doc.text"
-        case .downloads: "arrow.down.circle"
-        case .media: "photo.on.rectangle"
-        case .iCloud: "icloud"
-        case .mail: "envelope"
-        case .developer: "hammer"
-        case .caches: "archivebox"
-        case .appData: "shippingbox"
-        case .trash: "trash"
-        case .temp: "hourglass"
-        case .user: "person.crop.circle"
-        case .library: "gearshape"
-        case .other: "folder"
-        case .purgeable: "arrow.3.trianglepath"
-        case .system: "internaldrive"
+        case .apps: Symbols.appCollection
+        case .documents: Symbols.documents
+        case .downloads: Symbols.downloads
+        case .media: Symbols.media
+        case .iCloud: Symbols.iCloud
+        case .mail: Symbols.mail
+        case .developer: Symbols.developer
+        case .caches: Symbols.caches
+        case .appData: Symbols.appData
+        case .trash: Symbols.trash
+        case .temp: Symbols.temporaryArea
+        case .user: Symbols.user
+        case .library: Symbols.library
+        case .other: Symbols.otherFiles
+        case .purgeable: Symbols.purgeable
+        case .system: Symbols.internalDrive
         }
     }
 

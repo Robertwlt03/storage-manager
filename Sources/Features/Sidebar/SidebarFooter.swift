@@ -91,7 +91,7 @@ struct SidebarFooter: View {
             Spacer(minLength: 0)
             UI.Icon(.symbol(Symbols.info), size: .small).foregroundStyle(.muted)
         }
-        .font(.callout)
+        .textRole(.label)
         .contentShape(Rectangle())
     }
 

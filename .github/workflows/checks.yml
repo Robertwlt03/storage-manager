@@ -1,0 +1,25 @@
+# Runs the whole check pipeline on every pull request and on main. A pull request with one finding
+# turns red, so it has to be fixed before it can be merged.
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# A newer push replaces the run of an older one instead of using a second Mac.
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    # The app uses the macOS 26 SDK (Liquid Glass), which needs Xcode 26.
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Code inspection (format, compiler, tests, rules, design, dead code)
+        run: python3 scripts/inspect.py
+      - name: Build the app (translations, contrast, icon)
+        run: ./build.sh

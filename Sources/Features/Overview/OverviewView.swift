@@ -125,8 +125,7 @@ struct OverviewView: View {
 
     private func barLabel(bytes: Int64, fileCount: Int) -> some View {
         Text(TextKey.bucketValue.translated(with: Format.bytes(bytes), Format.count(fileCount)))
-            .font(.caption)
-            .foregroundStyle(.muted)
+            .textRole(.caption)
             .multilineTextAlignment(.center)
     }
 

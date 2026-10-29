@@ -23,7 +23,7 @@ enum Theme {
     static let warning = Tone(light: 0x984200, dark: 0xFFA552)
     static let bad = Tone(light: 0xB3141F, dark: 0xFF8C8C)
     static let textTones: [(name: String, tone: Tone)] = [
-        ("muted", muted), ("good", good), ("warn", warning), ("bad", bad),
+        ("muted", muted), ("good", good), ("warning", warning), ("bad", bad),
     ]
 
     // Button fills with white text on top.

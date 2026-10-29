@@ -55,14 +55,16 @@ enum Checks {
     // MARK: Texts
 
     /// Every `TextKey` key exists in every language, with the same number of placeholders.
-    static func strings() -> Bool {
+    /// The tests pass their own lookup, because they read the translations from `Resources`.
+    static func strings(
+        bundleForLanguage: (String) -> Bundle? = { code in Localizer.bundle(for: code) }
+    ) -> Bool {
         let bundles = AppLanguage.allCases.map { language in
-            (code: language.rawValue, bundle: Localizer.bundle(for: language.rawValue))
+            (code: language.rawValue, bundle: bundleForLanguage(language.rawValue))
         }
         let everyKeyExists = checkEveryKeyExists(in: bundles)
         let placeholdersMatch = checkPlaceholdersMatch(in: bundles.compactMap(\.bundle))
-        let languagesMatch = checkLanguageMatching()
-        let allPass = everyKeyExists && placeholdersMatch && languagesMatch
+        let allPass = everyKeyExists && placeholdersMatch
         print(
             "\(TextKey.allCases.count) texts checked in \(bundles.count) languages: "
                 + (allPass ? "ok" : "errors"))
@@ -103,20 +105,6 @@ enum Checks {
                 print("FAIL placeholders in \(key.rawValue) differ")
                 allPass = false
             }
-        }
-        return allPass
-    }
-
-    /// System languages map to the shipped ones, including script and regional variants.
-    private static func checkLanguageMatching() -> Bool {
-        let expected: [(String, AppLanguage?)] = [
-            ("de-DE", .de), ("en-GB", .en), ("zh-TW", .zhHant), ("zh-Hans-CN", .zhHans),
-            ("zh-HK", .zhHant), ("pt-PT", .ptBR), ("no", .nb), ("nb-NO", .nb), ("xx", nil),
-        ]
-        var allPass = true
-        for (identifier, language) in expected where AppLanguage.match(identifier) != language {
-            print("FAIL language \(identifier) is matched to the wrong one")
-            allPass = false
         }
         return allPass
     }

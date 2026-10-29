@@ -41,9 +41,10 @@ SIGN_IDENTITY="Speicher-Explorer Dev" ./build.sh
 
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">Prüfungen vor jedem Beitrag
 
-Zuerst startest du die Code-Inspektion. Sie prüft die Form, baut die App mit Warnungen als Fehler und kontrolliert die
-[Code-Regeln](CODE_STYLE.md), also Namen, Zahlen, Farben, Texte und toten Code. Sie darf keinen einzigen Fehler und keine
-einzige Warnung melden.
+Zuerst startest du die Code-Inspektion. Sie prüft die Form, baut die App mit Warnungen als Fehler, startet alle Tests
+und kontrolliert die [Code-Regeln](CODE_STYLE.md), also Namen, Zahlen, Farben, Gestaltung, Texte und toten Code. Sie
+darf keinen einzigen Fehler und keine einzige Warnung melden. Auf GitHub läuft dieselbe Prüfung bei jedem Pull Request
+von selbst und markiert ihn rot, solange noch etwas zu verbessern ist.
 
 ```bash
 scripts/inspect.py

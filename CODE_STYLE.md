@@ -55,6 +55,19 @@ festgelegt und erreicht in beiden einen Kontrast von mindestens 4,5 zu 1. Alle a
 Namen und legen nie selbst eine Farbe an, auch kein `.white` oder `Color(red:green:blue:)`. Wer eine neue Farbe braucht,
 ergänzt sie in `Theme.swift`, und die Kontrastprüfung beim Bauen kontrolliert sie mit.
 
+## <img src="assets/icons/design.svg" height="33" align="absmiddle" alt="">Gestaltung aus einem Guss
+
+Damit gleiche Dinge überall gleich aussehen, hat jede Gestaltungsentscheidung genau einen Ort, und die Seiten
+benutzen nur deren Namen:
+
+- **Schriften** kommen über `.textRole(...)` aus `TextRole`, zum Beispiel `.textRole(.hint)`, und nie direkt über
+  `.font(...)`.
+- **Symbole** stehen mit ihrem Namen in `Symbols` in `Tokens.swift`, zum Beispiel `Symbols.trash`, und nie als
+  Zeichenkette auf einer Seite.
+- **Animationen** kommen aus `Motion`, zum Beispiel `Motion.standard`, damit „Bewegung reduzieren“ überall greift.
+- **Ausgaben** mit `print` gibt es nur in `Sources/Diagnostics`, denn jede andere Ausgabe könnte private Datei- oder
+  Ordnernamen zeigen.
+
 ## <img src="assets/icons/translations.svg" height="33" align="absmiddle" alt="">Texte nur über Übersetzungen
 
 Im Code steht kein Text, den man in der App liest. Jeder sichtbare Text hat einen englischen Schlüssel in
@@ -92,6 +105,18 @@ Ein guter Name ersetzt einen Kommentar. Kommentare bleiben für Regeln, die man 
 Diagramm ohne Animation zeichnet. Die Geschichte, wie ein Fehler entstanden ist, gehört in die Commit-Nachricht oder in
 die [Architektur-Beschreibung](ARCHITECTURE.md).
 
+## <img src="assets/icons/tests.svg" height="33" align="absmiddle" alt="">Tests
+
+Die Tests liegen in `Tests/SpeicherExplorerTests` und nutzen Apples Test-Framework Swift Testing. Jeder Test hat einen
+Namen, der als ganzer Satz sagt, was gelten soll, zum Beispiel „Only emptying the Trash needs a deliberate click in
+the cleaner“. Getestet wird alles, was ohne Bildschirm eine feste Antwort hat: der Ordnerbaum, die Suche, die
+Seitenliste, die Gestaltungswerte, der Kontrast und die Übersetzungen.
+
+Tests greifen nie auf die echte Festplatte zu und benutzen keine echten Datei- oder Ordnernamen. Einen Ordnerbaum baut
+ein Test deshalb von Hand auf, mit erfundenen Namen wie `film.mov`. In Tests dürfen Beispielwerte als Zahl dastehen,
+weil sie dort selbst die Erklärung sind. Wer eine Regel im Code ändert oder ergänzt, schreibt oder ändert den
+passenden Test gleich mit.
+
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">So prüfst du deinen Code
 
 Vor jedem Beitrag startest du die Code-Inspektion. Sie darf keinen einzigen Fehler und keine einzige Warnung melden.
@@ -100,17 +125,26 @@ Vor jedem Beitrag startest du die Code-Inspektion. Sie darf keinen einzigen Fehl
 scripts/inspect.py
 ```
 
-Das Skript prüft vier Dinge nacheinander:
+Das Skript führt acht Prüfungen nacheinander aus:
 
 1. **Form:** `swift format lint --strict` meldet jede Abweichung von der einheitlichen Form.
 2. **Compiler:** Die App wird mit `-warnings-as-errors` gebaut, sodass schon eine Warnung als Fehler zählt.
-3. **Hausregeln:** Es sucht nach Zahlen ohne Namen, Farben außerhalb von `Theme.swift`, deutschem Text im Code,
-   `$0` und Namen aus ein oder zwei Buchstaben.
-4. **Toter Code:** Es meldet jede Funktion, jeden Wert und jeden Text, der zwar angelegt, aber nirgends benutzt wird.
+3. **Tests:** `swift test` startet alle Tests aus `Tests/SpeicherExplorerTests`.
+4. **Hausregeln:** Zahlen ohne Namen, Farben außerhalb von `Theme.swift`, deutscher Text im Code, `$0`, Namen aus ein
+   oder zwei Buchstaben und Zeilen über 100 Zeichen.
+5. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, Animationen außerhalb von `Motion`,
+   ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb der Diagnose.
+6. **Toter Code:** jede Funktion, jeder Wert und jeder Text, der zwar angelegt, aber nirgends benutzt wird.
+7. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
+8. **Skripte:** `bash -n` prüft die Shell-Skripte auf Schreibfehler.
 
 Danach baust du die App mit `./build.sh`. Das prüft zusätzlich, ob jeder Text in allen 20 Sprachen vorhanden ist und ob
-jede Farbe den Kontrast erreicht. Wie lange Ketten getrennt sind und ob Namen verständlich sind, kann kein Skript
-beurteilen. Darauf achten wir beim Lesen eines Beitrags.
+jede Farbe den Kontrast erreicht.
+
+Auf GitHub läuft dieselbe Prüfung bei jedem Pull Request von selbst, beschrieben in
+`.github/workflows/checks.yml`. Meldet sie auch nur einen Fund, wird der Pull Request rot, und der Beitrag muss
+nachgebessert werden, bevor er übernommen wird. Wie lange Ketten getrennt sind und ob Namen verständlich sind, kann
+kein Skript beurteilen. Darauf achten wir beim Lesen eines Beitrags.
 
 <p align="center">
   <img src="assets/banner-footer.svg" alt="" width="480">
