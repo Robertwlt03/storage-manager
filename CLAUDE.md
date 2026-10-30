@@ -40,10 +40,14 @@ content here or in comments.
 
 - Xcode 27 is required as a toolchain only (SwiftUI's `@State` macro plugin ships only with Xcode); the IDE is never
   needed and any editor works. `xcode-select --print-path` must point to `/Applications/Xcode.app/Contents/Developer`;
-  build.sh and the pipeline print a hint otherwise.
+  `make build` and the pipeline print a hint otherwise.
 - Swift 6 language mode with the main actor as default isolation: only background work (scan, cleaner, folder profile,
   app copies) and what it touches is `nonisolated`.
 - SwiftLint (Homebrew) runs as part of the pipeline; `swift format` comes with the toolchain.
+- Two languages only: Swift for the app and the two tools that need macOS frameworks (`scripts/snapshots.swift`,
+  `scripts/checks/unknown_words.swift`), Python 3.13 or newer for everything else (`scripts/`). No shell scripts:
+  the `Makefile` is only a menu whose lines hand over to Python, Swift or one macOS tool. `make` picks the newest
+  Python from 3.13 on by itself; `scripts/checks/__init__.py` stops older ones with a clear message.
 
 ## Everyday commands
 
@@ -57,9 +61,13 @@ content here or in comments.
   American spelling), English everywhere but the translations, no secrets in the repository, no way in for attackers (shells,
   hardened runtime, workflow permissions and pins), the disk only off the main thread, no unused
   media files, commit messages in the Conventional Commits form, scripts, every output through the shared
-  console (scripts/console.sh, checks/console.py, Console.swift), and the samples step that makes sure every check still finds its planted mistake). It must end with the
+  console (checks/console.py, Console.swift), and the samples step that makes sure every check still finds its planted mistake). It must end with the
   green frame "All … steps passed: no errors, no warnings" before every commit. A kind of symbol or declaration
   the checks do not know is reported, never skipped: decide it in `scripts/checks/` instead of silencing it.
+- Code Inspect before every commit: run the `/code-review` skill on exactly what the commit will contain (the staged
+  diff, or the working tree when nothing is staged yet), fix what it finds or say why a finding is wrong, and run
+  `make check` again afterwards. Only then commit, naming every file (`git add <files>`, never `git add -u` or `-A`),
+  so nothing the user is trying out slips into the commit.
 - `make test`, `make coverage` (the table per folder), `make format`, single steps with `scripts/check.py <step>`.
 - `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
 
@@ -71,8 +79,8 @@ content here or in comments.
    translations, no dead code, functions as lists of named steps. Scripts follow the same rules and one shared
    layout (CODE_STYLE.md, step 22): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
    named and explained (patterns in re.VERBOSE with a comment per part), small named steps, `MARK: Run` at the
-   bottom. Spelled-out names, no duplicated code (shared steps live in `scripts/require-xcode.sh` and
-   `scripts/sign.sh`), and no copies of lists the app already has (ask the app, as `--list-pages` does).
+   bottom. Spelled-out names, no duplicated code (shared steps live in `scripts/checks/project.py` and
+   `scripts/build.py`), and no copies of lists the app already has (ask the app, as `--list-pages` does).
 3. A new folder below `Sources` first gets its row in the layer table of `scripts/checks/architecture.py` (and a
    line in ARCHITECTURE.md). Never call network interfaces; deleting or trashing files stays in `CleanerService`,
    `CopyService` and `AppUsageService`, behind the user's confirmation.

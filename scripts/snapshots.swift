@@ -25,8 +25,9 @@ let channelTolerance = 24
 /// sidebar footer alone changes a few.
 let changedShareAllowed = 0.01
 
-/// Prints in the project's shared look (see console.sh); make starts this script in the project.
-let console = URL(filePath: "scripts/console.sh")
+/// Prints in the project's shared look through checks/console.py, with the Python make found
+/// (PYTHON, together with PYTHONPATH); make starts this script in the project.
+let python = ProcessInfo.processInfo.environment["PYTHON"] ?? ""
 
 let folder = URL(filePath: "snapshots")
 let referenceFolder = folder.appending(path: "reference")
@@ -63,10 +64,12 @@ func pictures(of app: URL) throws -> [Picture] {
 /// One piece of the shared look, such as show("passed", "home-light.png", "same").
 func show(_ piece: String, _ texts: String...) {
     let drawing = Process()
-    drawing.executableURL = console
-    drawing.arguments = [piece] + texts
+    drawing.executableURL = URL(filePath: python)
+    drawing.arguments = ["-m", "checks.console", piece] + texts
     // Without the console nothing can be reported, so the script stops and says why.
-    guard (try? drawing.run()) != nil else { fatalError("\(console.path) did not start") }
+    guard (try? drawing.run()) != nil else {
+        fatalError("no Python 3.13 or newer in PYTHON; install one, then run make snapshots")
+    }
     drawing.waitUntilExit()
 }
 

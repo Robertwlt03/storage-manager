@@ -8,12 +8,14 @@ themselves (see checks/samples.py).
 """
 
 import json
+import os
 import re
 import subprocess
 from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
 
+from checks import console
 from checks.index_store import IndexStore, Occurrence
 
 # MARK: Settings
@@ -21,13 +23,12 @@ from checks.index_store import IndexStore, Occurrence
 PROJECT = Path(__file__).resolve().parents[2]
 SCRIPTS = PROJECT / "scripts"
 SAMPLES = SCRIPTS / "checks" / "samples"
-HOOKS = SCRIPTS / "hooks"  # the git hooks, which make hooks switches on
 MAKEFILE = PROJECT / "Makefile"
 BUILD_FOLDER = PROJECT / ".build" / "check"
 
 # Building and testing share one configuration, so neither step rebuilds what the other built.
 BUILD_OPTIONS = (
-    "--scratch-path", str(BUILD_FOLDER),  # a build folder of its own, apart from build.sh
+    "--scratch-path", str(BUILD_FOLDER),  # a build folder of its own, apart from make build
     "--enable-index-store",  # the compiler's index, which several steps read
     "-Xswiftc", "-warnings-as-errors",  # a single warning already fails the build
     "--enable-code-coverage",  # the tests measure what they reach, for the coverage step
@@ -89,10 +90,9 @@ def app() -> Codebase:
         swift_sources=files(PROJECT / "Sources", "*.swift"),
         swift_tests=files(PROJECT / "Tests", "*.swift"),
         swift_scripts=files(SCRIPTS, "*.swift"),
-        python_scripts=files(SCRIPTS, "*.py"),
-        shell_scripts=(
-            PROJECT / "build.sh", *sorted(SCRIPTS.glob("*.sh")), *sorted(HOOKS.iterdir()),
-        ),
+        # The hooks are Python too; only what git knows, never a cache Python leaves beside them.
+        python_scripts=(*files(SCRIPTS, "*.py"), *tracked_files("scripts/hooks/*")),
+        shell_scripts=tracked_files("*.sh"),  # none: the tooling is Python (CLAUDE.md)
         makefiles=(MAKEFILE,),
         source_root=PROJECT / "Sources",
         guides=tracked_files("*.md"),
@@ -168,9 +168,15 @@ def run(command: list[str], given_input: str | None = None) -> ToolResult:
 
 
 def has_xcode() -> bool:
-    """SwiftUI's macros for macOS 27 ship only with Xcode; the shared script explains how."""
-    # Not through run(): the script's hint goes straight to the terminal, in its own colors.
-    return subprocess.run([str(SCRIPTS / "require-xcode.sh")], cwd=PROJECT).returncode == 0
+    """SwiftUI's macros for macOS 27 ship only with Xcode; without it, says how to switch."""
+    # DEVELOPER_DIR is Apple's name for a chosen Xcode; without it, xcode-select knows.
+    developer_folder = os.environ.get("DEVELOPER_DIR") or run(["xcode-select", "-p"]).output
+    if "Xcode" in developer_folder:
+        return True
+    console.failed("Xcode 27 is needed", "the developer tools point elsewhere")
+    console.note("Install it, then switch once:")
+    console.note("sudo xcode-select --switch /Applications/Xcode.app")
+    return False
 
 
 # MARK: The compiler's index

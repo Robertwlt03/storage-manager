@@ -3,7 +3,7 @@
 Start:  imported by scripts/check.py, not started on its own
 Needs:  nothing beyond Python
 The console draws headings, lines with marks, hints and frames the same way in every language:
-scripts/console.sh for the shell and make, checks/console.py for Python and Console.swift for
+checks/console.py for Python and make (python -m checks.console), and Console.swift for
 the app. Any other echo, printf or print is reported. Output that another program reads, not a
 person, says so in the head of its script (Output:) and stays plain; the app's own Swift code
 outside Diagnostics may not print at all, which the design rules check.
@@ -18,7 +18,7 @@ from checks.tools import HEAD_LINES
 
 # MARK: Settings
 
-CONSOLE_NAME = "console"  # console.sh, console.py and Console.swift draw the shared look
+CONSOLE_NAME = "console"  # console.py and Console.swift draw the shared look
 DATA_OUTPUT = "Output:"  # in a script's head: what it prints is data for another program
 SHELL_OUTPUT = re.compile(r"""
     ^ (?! \s* \# )                      # not a comment
@@ -38,7 +38,7 @@ SWIFT_OUTPUT = re.compile(r"""
          | \b FileHandle \. standard (?: Output | Error ) \b )     # or the terminal itself
 """, re.VERBOSE)
 MESSAGE = (
-    "prints past the shared console; use its pieces (scripts/console.sh, checks/console.py, "
+    "prints past the shared console; use its pieces (checks/console.py, "
     "Console.swift), or name data for another program in the head (Output:)"
 )
 

@@ -1,5 +1,5 @@
 /// Every visible text of the app as a typed key. The texts live in
-/// `Resources/<code>.lproj/Localizable.strings`; `--check-strings` (run by build.sh) fails if a key
+/// `Resources/<code>.lproj/Localizable.strings`; `--check-strings` fails if a key
 /// is missing in one of the languages.
 nonisolated enum TextKey: String, CaseIterable {
     // App and sidebar

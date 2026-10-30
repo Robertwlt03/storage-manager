@@ -202,13 +202,16 @@ The script runs twenty-three checks one after another:
 21. **Security:** The app holds Full Disk Access, so no other code may get into it. It is signed with the hardened
    runtime (`--options runtime`), so no library can be injected. No code starts a shell that reads text as
    commands, no script runs text as code or pipes a script from the internet straight into a shell, and nobody uses
-   fixed paths in the shared folder for temporary files. Every shell script starts with `set -euo pipefail`. Where
+   fixed paths in the shared folder for temporary files. A shell script, should one come back, starts with
+   `set -euo pipefail`. Where
    Swift switches off its safety, such as with `nonisolated(unsafe)` or `@unchecked Sendable`, a comment gives the
    reason. The GitHub workflow may only read, pins every action to a fixed commit, installs tools in a fixed version
    checked by checksum and never puts text from strangers' pull requests into a command
    (`scripts/checks/security.py`).
-22. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
-   shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
+22. **Scripts:** Two languages only: Swift for the app and the tools that need macOS frameworks, Python 3.13 or newer
+   for every other script, and the `Makefile` only as a menu whose lines hand over to them. The scripts and the
+   `Makefile` also stay under 100 characters per line, and each one opens with the shared head. `python3 -m
+   py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
 23. **One look for all output:** Everything a command writes to the console looks the same: one heading
    (`Speicher-Explorer · <command>` and a dimmed detail, `Ctrl-C cancels` when it asks something), lines with a mark
    (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints, and at the end one frame in the same shape
@@ -217,10 +220,10 @@ The script runs twenty-three checks one after another:
    others with ○, and yes or no is always `y/n`. What a command starts after its heading leaves its own heading out
    (`CONSOLE_HEADED`). Spacing follows one rule, so two blank lines never meet: only the heading starts with a blank
    line, and every block (heading, question, group of findings, frame) ends with one. Whatever takes longer than a
-   moment shows a turning wheel (⠋⠙⠹…) with its text in a terminal, so it never looks stuck: `console.running` in
-   Python, `console_wait` in the shell. The pieces exist once per language: `scripts/console.sh` for the shell and
-   the `Makefile`, `scripts/checks/console.py` for Python and `Sources/Diagnostics/Console.swift` for the app. Any
-   other `echo`, `printf` or `print` is reported. What another program reads instead of a person is named in the
+   moment shows a turning wheel (⠋⠙⠹…) with its text in a terminal, so it never looks stuck: `console.running` and
+   `console.wait`. The pieces exist once per language: `scripts/checks/console.py` for Python and the `Makefile`
+   (`python -m checks.console <piece>`), and `Sources/Diagnostics/Console.swift` for the app. Any other `echo`,
+   `printf` or `print` is reported. What another program reads instead of a person is named in the
    script's head with `Output:` and written plainly (`scripts/checks/console_output.py`).
 24. **Commit messages:** Every commit has a subject like `fix(scan): what changed`: a kind from Conventional Commits,
    maybe a part in brackets, then the change. A blank line and lines up to 100 characters follow, all in English with

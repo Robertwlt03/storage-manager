@@ -100,7 +100,7 @@ enum SearchScope: CaseIterable, Identifiable {
     }
 }
 
-/// Command-line switches of the binary (used by build.sh and for checks).
+/// Command-line switches of the binary (used by scripts/build.py and for checks).
 enum LaunchCommand: String {
     case selfTest = "--selftest"
     case renderIcon = "--render-icon"

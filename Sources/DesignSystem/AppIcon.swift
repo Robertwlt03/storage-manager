@@ -1,7 +1,8 @@
 import AppKit
 import SwiftUI
 
-/// App icon for build.sh: 1024 px canvas, 824 px rounded square as in Apple's macOS icon grid.
+/// App icon for scripts/build.py: a 1024 px canvas with an 824 px rounded square, as in
+/// Apple's macOS icon grid.
 struct AppIconView: View {
     /// A piece of the ring, from where it starts to where it ends as a share of the full circle.
     private struct RingSegment {
@@ -57,7 +58,7 @@ struct AppIconView: View {
 }
 
 extension AppIconView {
-    /// Writes the icon as a PNG for build.sh, which turns it into the app's icon set.
+    /// Writes the icon as a PNG for scripts/build.py, which turns it into the app's icon set.
     static func render(to path: String) -> Bool {
         guard let image = ImageRenderer(content: AppIconView()).cgImage,
             let png = NSBitmapImageRep(cgImage: image).representation(using: .png, properties: [:])

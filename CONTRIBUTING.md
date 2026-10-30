@@ -13,14 +13,16 @@ macOS 27. That is exactly how it later runs for everyone who uses it.
 
 To build, you also need Xcode 27 from the App Store. You never have to open Xcode, it only serves as a toolbox: the
 Command Line Tools alone are no longer enough, because SwiftUI for macOS 27 uses macros that only Xcode ships with.
-After installing it, switch the tools over to Xcode once. For the check chain you also need SwiftLint.
+After installing it, switch the tools over to Xcode once. For the check chain you also need SwiftLint, and the
+scripts behind the commands need Python 3.13 or newer. The Python that Xcode brings is older, so install a current
+one; `make` finds it by itself.
 
 ```bash
 sudo xcode-select --switch /Applications/Xcode.app
 ```
 
 ```bash
-brew install swiftlint
+brew install swiftlint python@3.14
 ```
 
 ## <img src="assets/icons/editor.svg" height="33" align="absmiddle" alt="">Your editor
@@ -62,8 +64,9 @@ You do not have to remember long commands. Just like npm scripts, every workflow
 | `make release` | creates the DMG to pass on, in the `dist` folder |
 | `make clean` | deletes everything the build produces |
 
-The commands only call the scripts that are in the project anyway. So you can keep using them directly as well, for
-example `./build.sh` or `scripts/check.py tests`.
+The commands only call the scripts that are in the project anyway, all of them written in Python. So you can keep
+using them directly as well, for example `scripts/check.py tests`, as long as `python3` is 3.13 or newer; otherwise
+start them with a newer one, such as `python3.14 scripts/check.py tests`.
 
 ## <img src="assets/icons/build.svg" height="33" align="absmiddle" alt="">Building and launching the app
 
@@ -77,7 +80,7 @@ make run
 Without further settings, the app is only signed ad hoc. macOS then asks for Full Disk Access again after every
 build. If that bothers you, create a certificate of your own once. `make identity` creates it in a small keychain
 just for this project and writes everything needed into the file `local.mk`, which Git ignores. So that macOS keeps Full Disk Access across all builds, macOS asks once for
-your password in a normal dialog, to trust the certificate for signing. During the build, `build.sh` unlocks the
+your password in a normal dialog, to trust the certificate for signing. During the build, `make build` unlocks the
 keychain by itself, and your password is never needed again after that. After the next `make run` you grant Full Disk Access one last
 time, and from then on it survives every build.
 

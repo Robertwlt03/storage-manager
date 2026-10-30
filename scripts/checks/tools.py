@@ -7,6 +7,7 @@ Needs:  Xcode 27 (swift, swift format, plutil) and SwiftLint (brew install swift
 import json
 import re
 import shutil
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -109,11 +110,16 @@ def long_lines(path: Path) -> list[str]:
     ]
 
 
+# Reads a Python script the way Python would, without running it and without leaving a cache
+# beside it (py_compile would), in the same Python that runs the checks.
+COMPILE_ONLY = "import sys; compile(open(sys.argv[1]).read(), sys.argv[1], 'exec')"
+
+
 def syntax_checks(codebase: Codebase) -> list[list[str]]:
     """Each tool reads a script without running it."""
     checks = [
         *(["bash", "-n", str(path)] for path in codebase.shell_scripts),
-        *(["python3", "-m", "py_compile", str(path)] for path in codebase.python_scripts),
+        *([sys.executable, "-c", COMPILE_ONLY, str(path)] for path in codebase.python_scripts),
         *(["swiftc", "-typecheck", str(path)] for path in codebase.swift_scripts),
     ]
     for makefile in codebase.makefiles:

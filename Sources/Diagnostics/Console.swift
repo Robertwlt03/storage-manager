@@ -1,7 +1,7 @@
 import Foundation
 
 /// The shared look of everything the app prints in a terminal (the self test, the stress test and
-/// the list of pages), the same pieces as scripts/console.sh and scripts/checks/console.py: a
+/// the list of pages), the same pieces as scripts/checks/console.py: a
 /// heading, lines with a mark (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints
 /// and a frame that sums up. Colors appear in a terminal; NO_COLOR turns them off and FORCE_COLOR
 /// turns them on (see no-color.org), as for `make selftest`, which writes into a file. Only the
@@ -20,7 +20,7 @@ enum Console {
     private static let failedMark = "✘"
     private static let stepMark = "›"
     private static let noteIndent = "   "
-    /// Set once a heading shows, the same name as in console.sh and console.py.
+    /// Set once a heading shows, the same name as in console.py.
     private static let headedVariable = "CONSOLE_HEADED"
     /// Space inside a frame, one character on each side of the longest line.
     private static let framePadding = 2

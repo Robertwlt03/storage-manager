@@ -1,10 +1,11 @@
 """The shared look of everything the project prints, so every command reads alike.
 
-Start:  imported by the Python scripts, not started on its own
+Start:  imported by the Python scripts; or one piece at a time, as make and the Swift scripts do:
+        python3 -m checks.console passed "Built" "build/…" (with scripts/ on PYTHONPATH)
 Needs:  nothing beyond Python
 A heading names the command; each result gets a line with a mark (✔ done, ✘ failed, › under way)
-and dimmed details; hints follow dimmed and a frame sums up at the end. scripts/console.sh and
-Sources/Diagnostics/Console.swift draw the same pieces for the shell scripts and for the app.
+and dimmed details; hints follow dimmed and a frame sums up at the end.
+Sources/Diagnostics/Console.swift draws the same pieces for the app.
 Colors appear in a terminal and on GitHub; NO_COLOR=1 turns them off and FORCE_COLOR=1 turns them
 on (see no-color.org). Spacing follows one rule, so two blank lines never meet: only the heading
 starts with a blank line, and every block (heading, question, group, frame) ends with one.
@@ -14,6 +15,7 @@ a line of text, or a list to walk with the arrow keys.
 
 import os
 import re
+import subprocess
 import sys
 import termios
 import threading
@@ -35,6 +37,8 @@ SUCCESS, FAILURE = GREEN, RED  # the colors of a frame
 
 PASSED_MARK = "✔"
 FAILED_MARK = "✘"
+STEP_MARK = "›"
+FRAME_COLORS = {"success": SUCCESS, "failure": FAILURE}  # the kinds of frame make can ask for
 # A wheel turns in front of a step while it runs, so a long step does not look stuck.
 SPINNER_FRAMES = "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
 SPINNER_SECONDS = 0.08
@@ -133,6 +137,33 @@ def passed(text: str, detail: str = "") -> None:
 
 def failed(text: str, detail: str = "") -> None:
     result_line(paint(FAILED_MARK, RED, BOLD), text, detail)
+
+
+def step(text: str, detail: str = "") -> None:
+    result_line(paint(STEP_MARK, CYAN, BOLD), text, detail)
+
+
+def wait(text: str, command: list[str], folder: str | os.PathLike | None = None) -> int:
+    """Runs a command (in a folder, if given) with the wheel turning in front of the text, then
+    shows what it printed and returns its status. In a log, on GitHub for instance, a step line
+    and the output as it comes."""
+    if not IN_TERMINAL:
+        step(text)
+        sys.stdout.flush()  # the step line before what the command prints itself
+        return subprocess.run(command, cwd=folder).returncode
+    running(text)
+    result = subprocess.run(
+        command, cwd=folder, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
+        errors="replace",  # a byte outside UTF-8 shows as a placeholder instead of stopping
+    )
+    relay(result.stdout)
+    return result.returncode
+
+
+def relay(text: str) -> None:
+    """What another program printed, as it printed it, after the wheel's line is gone."""
+    stop_running()
+    print(f"{CLEAR_LINE if IN_TERMINAL else ''}{text}", end="", flush=True)
 
 
 def result_line(mark: str, text: str, detail: str) -> None:
@@ -261,3 +292,31 @@ def keys_one_by_one() -> Iterator:
     finally:
         termios.tcsetattr(keyboard, termios.TCSADRAIN, saved)
         print(SHOW_CURSOR, end="", flush=True)
+
+
+# MARK: Run
+# make and the Swift scripts draw one piece at a time: python3 -m checks.console <piece> <text>…
+
+
+def main(arguments: list[str]) -> int:
+    # Each piece and how many texts it takes at most: a text and a detail, or a hint alone.
+    pieces = {"heading": (heading, 2), "passed": (passed, 2), "failed": (failed, 2),
+              "step": (step, 2), "note": (note, 1)}
+    match arguments:
+        case [piece, *texts] if piece in pieces and 1 <= len(texts) <= pieces[piece][1]:
+            pieces[piece][0](*texts)
+        case ["table"]:  # reads "name<tab>text" lines
+            table([line.rstrip("\n").partition("\t")[::2] for line in sys.stdin])
+        case ["frame", kind, outcome, *details] if kind in FRAME_COLORS:
+            frame(outcome, details, FRAME_COLORS[kind])
+        case ["wait", text, *command] if command:
+            return wait(text, command)
+        case _:
+            failed("Unknown piece", " ".join(arguments))
+            note("heading, passed, failed, step, note, table, frame <success|failure>, wait")
+            return 2
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
