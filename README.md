@@ -38,12 +38,14 @@ without a terminal, and that you can share with others without having to wait fo
     <td align="center"><sub>In <b>Clean Up</b> you choose what may go, shown here in dark appearance</sub></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" valign="top"><img src="assets/screenshots/scan.png" width="50%" alt="Scan with progress in the sidebar"></td>
+    <td colspan="2" align="center" valign="top"><img src="assets/screenshots/unused-apps.png" width="50%" alt="Unused Apps with the time since each app was last opened"></td>
   </tr>
   <tr>
-    <td colspan="2" align="center"><sub>During a <b>scan</b>, the bottom of the sidebar shows the progress</sub></td>
+    <td colspan="2" align="center"><sub><b>Unused Apps</b> lists the apps you have not opened for a long time</sub></td>
   </tr>
 </table>
+
+<sub>The pictures show the demo with made-up data, which `make demo` opens.</sub>
 
 ## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">What the app can do
 
