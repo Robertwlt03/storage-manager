@@ -5,14 +5,15 @@ Start:  make check, or scripts/check.py tests rules for single steps
 Needs:  Xcode 27 and SwiftLint (brew install swiftlint)
 It ends with status 1 as soon as one finding is left, so it guards every pull request. The steps
 live in scripts/checks/: project.py (folders, files, running tools), tools.py, house_rules.py,
-dead_code.py with index_store.py, and language.py with unknown_words.swift.
+dead_code.py with index_store.py, language.py with unknown_words.swift, and samples.py, which
+tests the checks themselves on planted mistakes.
 """
 
 import sys
 from dataclasses import dataclass
 from typing import Callable
 
-from checks import dead_code, house_rules, language, project, tools
+from checks import dead_code, house_rules, language, project, samples, tools
 
 # MARK: Settings
 
@@ -35,6 +36,7 @@ STEPS = [
     Step("language", "American English names and comments", language.language_findings),
     Step("plists", "Translation files and Info.plist (plutil)", tools.property_list_findings),
     Step("scripts", "Scripts and Makefile", tools.script_findings),
+    Step("samples", "Every planted mistake found (checks/samples)", samples.sample_findings),
 ]
 # Reports that only run when asked for by name, like `scripts/check.py coverage`.
 EXTRA_STEPS = [

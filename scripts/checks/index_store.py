@@ -91,6 +91,7 @@ class Occurrence:
     roles: Role
     path: Path
     line: int
+    column: int  # counted from 1, in UTF-8 bytes
     relations: tuple[Relation, ...]
 
     def related(self, role: Role) -> list[str]:
@@ -235,6 +236,7 @@ class IndexStore:
             roles=Role(self.library.occurrence_get_roles(occurrence) & ALL_NAMED_ROLES),
             path=path,
             line=line.value,
+            column=column.value,
             relations=self.relations(occurrence),
         )
 

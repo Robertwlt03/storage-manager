@@ -10,10 +10,7 @@ import shutil
 from collections import Counter
 from pathlib import Path
 
-from checks.project import (
-    BUILD_OPTIONS, LINE_LENGTH, MAKEFILE, PROJECT, SOURCES, all_scripts, lines_of, place,
-    python_scripts, run, shell_scripts, swift_scripts,
-)
+from checks.project import BUILD_OPTIONS, LINE_LENGTH, PROJECT, Codebase, app, lines_of, place, run
 
 # MARK: Settings
 
@@ -22,12 +19,15 @@ SCRIPT_HEAD = "Start:"
 
 # A rule name in the Makefile, such as "build:" at the start of a line.
 MAKE_RULE = re.compile(r"^([a-z]+):", re.MULTILINE)
+
 # How many lines at the top of a script count as its head.
 HEAD_LINES = 12
 
 # The coverage report's columns, in characters.
 FOLDER_COLUMN_WIDTH = 14
 PERCENT_WIDTH = 6
+
+SOURCE_FOLDER = PROJECT / "Sources"  # the coverage report sorts by the folders below it
 
 # A failed test in the output of Swift Testing.
 FAILED_TEST = "✘"
@@ -70,14 +70,19 @@ def property_list_findings() -> list[str]:
 
 def script_findings() -> list[str]:
     """The scripts keep the app's line length, open with the shared head and have no typos."""
-    findings = []
-    for path in all_scripts():
-        findings += long_lines(path)
-        if not any(SCRIPT_HEAD in line for line in lines_of(path)[:HEAD_LINES]):
-            findings.append(f"{place(path, 1)}: the head lacks '{SCRIPT_HEAD}' (see CODE_STYLE.md)")
-    for command in syntax_checks():
+    findings = script_layout_problems(app())
+    for command in syntax_checks(app()):
         findings += run(command).findings([])
     return findings
+
+
+def script_layout_problems(codebase: Codebase) -> list[str]:
+    problems = []
+    for path in codebase.all_scripts():
+        problems += long_lines(path)
+        if not any(SCRIPT_HEAD in line for line in lines_of(path)[:HEAD_LINES]):
+            problems.append(f"{place(path, 1)}: the head lacks '{SCRIPT_HEAD}' (see CODE_STYLE.md)")
+    return problems
 
 
 def long_lines(path: Path) -> list[str]:
@@ -88,15 +93,17 @@ def long_lines(path: Path) -> list[str]:
     ]
 
 
-def syntax_checks() -> list[list[str]]:
+def syntax_checks(codebase: Codebase) -> list[list[str]]:
     """Each tool reads a script without running it."""
-    make_rules = MAKE_RULE.findall(MAKEFILE.read_text())
-    return [
-        *(["bash", "-n", str(path)] for path in shell_scripts()),
-        *(["python3", "-m", "py_compile", str(path)] for path in python_scripts()),
-        *(["swiftc", "-typecheck", str(path)] for path in swift_scripts()),
-        ["make", "--dry-run", *make_rules],
+    checks = [
+        *(["bash", "-n", str(path)] for path in codebase.shell_scripts),
+        *(["python3", "-m", "py_compile", str(path)] for path in codebase.python_scripts),
+        *(["swiftc", "-typecheck", str(path)] for path in codebase.swift_scripts),
     ]
+    for makefile in codebase.makefiles:
+        rules = MAKE_RULE.findall(makefile.read_text())
+        checks.append(["make", "--dry-run", "--file", str(makefile), *rules])
+    return checks
 
 
 # MARK: Extra report
@@ -128,9 +135,9 @@ def lines_per_folder(report: dict) -> tuple[Counter, Counter]:
     covered_lines, all_lines = Counter(), Counter()
     for source in report["data"][0]["files"]:
         file_name = Path(source["filename"])
-        if not file_name.is_relative_to(SOURCES):
+        if not file_name.is_relative_to(SOURCE_FOLDER):
             continue
-        folder = file_name.relative_to(SOURCES).parts[0]
+        folder = file_name.relative_to(SOURCE_FOLDER).parts[0]
         covered_lines[folder] += source["summary"]["lines"]["covered"]
         all_lines[folder] += source["summary"]["lines"]["count"]
     return covered_lines, all_lines

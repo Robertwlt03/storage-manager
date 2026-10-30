@@ -7,8 +7,8 @@ Only uses in the app's own code count, so code that only the tests use is dead a
 
 import re
 
-from checks.index_store import IndexStore, Kind, Occurrence, Role
-from checks.project import BUILD_FOLDER, BUILD_OPTIONS, SOURCES, lines_of, place, run
+from checks.index_store import Kind, Occurrence, Role
+from checks.project import Codebase, app, compiler_index, lines_of, place
 
 # MARK: Settings
 
@@ -36,11 +36,15 @@ PROPERTY_KINDS = {
 
 
 def dead_code_findings() -> list[str]:
-    result = run(["swift", "build", *BUILD_OPTIONS])  # does nothing when the build is current
-    if not result.succeeded:
-        return result.findings([])
-    store_folder = next(BUILD_FOLDER.glob("**/index/store"))
-    return DeadCode(IndexStore(store_folder).occurrences(inside=SOURCES)).findings()
+    return dead_code_problems(app())
+
+
+def dead_code_problems(codebase: Codebase) -> list[str]:
+    index = compiler_index(codebase)
+    if index.build_problems:
+        return list(index.build_problems)
+    app_code = set(codebase.swift_sources)
+    return DeadCode([found for found in index.occurrences if found.path in app_code]).findings()
 
 
 # MARK: Judging each declaration

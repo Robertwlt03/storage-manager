@@ -131,7 +131,7 @@ is the script `scripts/check.py`. You run individual steps by their names, for e
 make check
 ```
 
-The script runs ten checks one after another:
+The script runs eleven checks one after another:
 
 1. **Layout:** `swift format lint --strict` reports every deviation from the uniform layout.
 2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
@@ -142,7 +142,9 @@ The script runs ten checks one after another:
    or two letters, lines over 100 characters and forgotten temporary debug lines. This also applies to the Swift
    scripts in the `scripts` folder.
 6. **Design:** Fonts without a text role, symbol names outside `Symbols`, custom glass or custom backgrounds,
-   animations outside `Motion`, hard-coded texts on screen and output outside the diagnostics.
+   animations outside `Motion`, hard-coded texts on screen and output outside the diagnostics. Hard-coded texts are
+   found through the compiler's index: every SwiftUI call whose first argument is a text in quotes, including
+   elements that do not exist yet.
 7. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
    is only written but never read. The check reads the index the compiler writes while building
    (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the tests use
@@ -150,11 +152,17 @@ The script runs ten checks one after another:
 8. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
    American English or a known technical term and never an abbreviation, so `temporary` instead of `temp` and
    `maximum` instead of `max`. Comments are read the same way. The macOS spell checker checks the words
-   (`scripts/checks/language.py`); allowed technical terms such as `macOS` or `plist` and the list of forbidden
-   abbreviations are in its settings.
+   (`scripts/checks/language.py`). Technical terms such as `plist` or `codesign` are in no list: known is what appears
+   in the names of the Apple and Python interfaces the code uses, what is installed as a command on the Mac, the
+   project's file endings and the app's name. Only the forbidden abbreviations remain a list, because no source
+   reliably tells whether a word is an abbreviation.
 9. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
 10. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
+11. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
+   never belongs to the app. Every bad line carries a note `expect:` with the finding the check must report there.
+   When a check no longer finds its mistake, or reports something nobody planted, this step fails. Whoever adds a
+   rule plants its mistake there, with a note.
 
 Every script is built the same way, so once you understand one, you understand them all. At the top, a head says in
 one sentence what the script does, with the lines `Start:` (how to start it) and `Needs:` (what it needs). The

@@ -51,7 +51,7 @@ content here or in comments.
 
 - `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, house rules, design
   rules, dead code from the compiler index, American English names and comments without abbreviations, plutil,
-  scripts). It must end with "No errors and no warnings." before
+  scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with "No errors and no warnings." before
   every commit.
 - `make test`, `make coverage`, `make format`, single steps with `scripts/check.py <step>`.
 - `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
@@ -68,7 +68,10 @@ content here or in comments.
    `scripts/sign.sh`), and no copies of lists the app already has (ask the app, as `--list-pages` does).
 3. New logic gets a test in `Tests/SpeicherExplorerTests` (hand-built `Node` trees via `TestTree`, never the real disk).
 4. Run `make check` until it is clean, then check the look in your own test window (see below) when views changed.
-5. Commit on the current branch with the footer above; do not push.
+5. A new or changed rule in `scripts/checks/` gets a planted mistake in `scripts/checks/samples` with an
+   `expect:` note on its line. Keep rules general, never a list of today's code: derive what you can from the
+   compiler's index, the platform or the project (as the known terms and screen texts do).
+6. Commit on the current branch with the footer above; do not push.
 
 Design wishes of the user: native Apple look (HIG, Liquid Glass), gentle and minimal animations as feedback only, no
 start animation, energy-saving behavior (nothing animates or polls at rest), text contrast at least 4.5:1 in light and

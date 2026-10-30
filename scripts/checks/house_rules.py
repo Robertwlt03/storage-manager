@@ -10,8 +10,9 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+from checks.index_store import Role
 from checks.project import (
-    LINE_LENGTH, lines_of, place, relative_path, swift_scripts, swift_sources, swift_tests,
+    LINE_LENGTH, Codebase, app, compiler_index, lines_of, place, relative_path,
 )
 
 # MARK: Settings
@@ -87,10 +88,14 @@ ANIMATION = re.compile(r"""
     | \.linear\(
 """, re.VERBOSE)
 MOTION_TOKEN = re.compile(r"\bMotion\.")
-WRITTEN_TEXT = re.compile(r'''
-    \b (?: Text | Button | Label | Toggle | Picker | Section ) \( "[^"]   # Text("Hello")
-    | \.help\( "[^"]                                                      # .help("Hello")
+# A call whose first argument is a written text: a name, its opening bracket and a quoted text of
+# two characters or more; a single character is a key, as in .keyboardShortcut("s"). Together with
+# the index this finds Text("Hello"), .help("Hello") and any future SwiftUI element.
+CALL_WITH_TEXT = re.compile(r'''
+    \w+ \( \s*            # the called name and its opening bracket
+    " [^"\\]{2,} "        # a text of at least two characters
 ''', re.VERBOSE)
+SWIFTUI = "s:7SwiftUI"  # how every unique name in the SwiftUI framework starts
 OUTPUT = re.compile(r"\bprint\(")
 OWN_SURFACE = re.compile(r"""
     \.glassEffect\( | \.buttonStyle\( | Material \b
@@ -143,8 +148,6 @@ DESIGN_RULES = [
     PatternRule(
         "animation outside Motion.swift", ANIMATION, allowed_in=(MOTION,), fine_when=MOTION_TOKEN),
     PatternRule(
-        "written-out text on screen, use TextKey", WRITTEN_TEXT, reads_comments_and_texts=True),
-    PatternRule(
         "own glass, material or background, use .surface()", OWN_SURFACE,
         allowed_in=(DESIGN_SYSTEM,)),
     PatternRule(
@@ -156,18 +159,46 @@ DESIGN_RULES = [
 
 
 def rule_findings() -> list[str]:
+    return house_rule_problems(app())
+
+
+def design_findings() -> list[str]:
+    return design_problems(app())
+
+
+def house_rule_problems(codebase: Codebase) -> list[str]:
     findings = []
-    for line in source_lines(swift_sources() + swift_tests() + swift_scripts()):
+    for line in source_lines(codebase.swift_files()):
         findings += broken_rules(line, HOUSE_RULES)
         findings += [f"{line.place}: {problem}" for problem in special_rule_problems(line)]
     return findings
 
 
-def design_findings() -> list[str]:
+def design_problems(codebase: Codebase) -> list[str]:
     findings = []
-    for line in source_lines(swift_sources()):
+    for line in source_lines(codebase.swift_sources):
         findings += broken_rules(line, DESIGN_RULES)
-    return findings
+    return findings + written_screen_texts(codebase)
+
+
+def written_screen_texts(codebase: Codebase) -> list[str]:
+    """Texts written straight into a SwiftUI call; every visible text comes from TextKey."""
+    index = compiler_index(codebase)
+    if index.build_problems:
+        return list(index.build_problems)
+    app_code = set(codebase.swift_sources)
+    places = set()
+    for found in index.occurrences:
+        is_swiftui_call = found.roles & Role.REFERENCE and found.unique_name.startswith(SWIFTUI)
+        if is_swiftui_call and found.path in app_code and has_text_argument(found):
+            places.add(place(found.path, found.line))
+    return [f"{where}: written-out text on screen, use TextKey" for where in sorted(places)]
+
+
+def has_text_argument(found) -> bool:
+    line = lines_of(found.path)[found.line - 1].encode()  # the index counts columns in bytes
+    rest_of_line = line[found.column - 1:].decode(errors="ignore")
+    return CALL_WITH_TEXT.match(rest_of_line) is not None
 
 
 def broken_rules(line: SourceLine, rules: list[PatternRule]) -> list[str]:

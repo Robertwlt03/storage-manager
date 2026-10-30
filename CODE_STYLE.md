@@ -133,7 +133,7 @@ Dahinter steckt das Skript `scripts/check.py`. Einzelne Schritte startest du mit
 make check
 ```
 
-Das Skript führt zehn Prüfungen nacheinander aus:
+Das Skript führt elf Prüfungen nacheinander aus:
 
 1. **Form:** `swift format lint --strict` meldet jede Abweichung von der einheitlichen Form.
 2. **Länge und Verschachtelung:** SwiftLint meldet Funktionen über 40 Zeilen, Closures über 30 Zeilen, zu viele
@@ -145,7 +145,8 @@ Das Skript führt zehn Prüfungen nacheinander aus:
    Swift-Skripte im Ordner `scripts`.
 6. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, eigenes Glas oder eigene
    Hintergründe, Animationen außerhalb von `Motion`, ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb
-   der Diagnose.
+   der Diagnose. Ausgeschriebene Texte findet die Prüfung über den Compiler-Index: jeden Aufruf von SwiftUI, dessen
+   erstes Argument ein Text in Anführungszeichen ist, also auch Elemente, die es heute noch nicht gibt.
 7. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
    jede Eigenschaft, die nur beschrieben, aber nie gelesen wird. Die Prüfung liest dafür den Index, den der Compiler
    beim Bauen anlegt (`scripts/checks/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und was nur die
@@ -153,12 +154,18 @@ Das Skript führt zehn Prüfungen nacheinander aus:
 8. **Sprache:** Jeder Name, den wir anlegen, wird in seine Wörter zerlegt (`fileCount`: file, count). Jedes Wort
    muss amerikanisches Englisch oder ein bekannter Fachbegriff sein und darf keine Abkürzung sein, also `temporary`
    statt `temp` und `maximum` statt `max`. Die Kommentare werden genauso gelesen. Die Wörter prüft die
-   Rechtschreibprüfung von macOS (`scripts/checks/language.py`); erlaubte Fachbegriffe wie `macOS` oder `plist` und
-   die Liste der verbotenen Abkürzungen stehen dort in den Einstellungen.
+   Rechtschreibprüfung von macOS (`scripts/checks/language.py`). Fachbegriffe wie `plist` oder `codesign` stehen in
+   keiner Liste: Als bekannt gilt, was in den Namen der benutzten Schnittstellen von Apple und Python vorkommt, was
+   als Befehl auf dem Mac installiert ist, die Dateiendungen des Projekts und der Name der App. Nur die verbotenen
+   Abkürzungen bleiben eine Liste, weil keine Quelle verlässlich sagt, ob ein Wort eine Abkürzung ist.
 9. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
 10. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
    gemeinsamen Kopf. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf
    Schreibfehler.
+11. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
+   zur App gehört. Jede schlechte Zeile trägt einen Vermerk `expect:` mit dem Fund, den die Prüfung dort melden muss.
+   Findet eine Prüfung ihren Fehler nicht mehr, oder meldet sie etwas, das niemand eingebaut hat, schlägt dieser
+   Schritt fehl. Wer eine Regel ergänzt, baut ihren Fehler mit Vermerk dort ein.
 
 Jedes Skript ist gleich aufgebaut, damit man nach dem ersten auch alle anderen versteht. Oben steht ein Kopf, der in
 einem Satz sagt, was das Skript tut, dazu die Zeilen `Start:` (wie man es startet) und `Needs:` (was es braucht).

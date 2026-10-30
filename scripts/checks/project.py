@@ -1,7 +1,10 @@
-"""What every check needs: the project's folders, its files and a way to run a tool.
+"""What every check needs: the files to read, the compiler's index and a way to run a tool.
 
 Start:  imported by scripts/check.py, not started on its own
-Needs:  nothing beyond Python
+Needs:  Xcode 27 for the index
+A Codebase names the files one run of the checks reads. The app is one codebase; the samples in
+checks/samples, which hold a mistake for every rule, are another, so the checks can test
+themselves (see checks/samples.py).
 """
 
 import json
@@ -11,21 +14,22 @@ from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
 
+from checks.index_store import IndexStore, Occurrence
+
 # MARK: Settings
 
 PROJECT = Path(__file__).resolve().parents[2]
-SOURCES = PROJECT / "Sources"
-TESTS = PROJECT / "Tests"
 SCRIPTS = PROJECT / "scripts"
+SAMPLES = SCRIPTS / "checks" / "samples"
 MAKEFILE = PROJECT / "Makefile"
 BUILD_FOLDER = PROJECT / ".build" / "check"
 
 # Building and testing share one configuration, so neither step rebuilds what the other built.
-BUILD_OPTIONS = [
+BUILD_OPTIONS = (
     "--scratch-path", str(BUILD_FOLDER),  # a build folder of its own, apart from build.sh
-    "--enable-index-store",  # the compiler's index, which the dead-code step reads
+    "--enable-index-store",  # the compiler's index, which several steps read
     "-Xswiftc", "-warnings-as-errors",  # a single warning already fails the build
-]
+)
 
 # The longest line allowed, in Swift code and in every script; swift format reads the same value.
 LINE_LENGTH = json.loads((PROJECT / ".swift-format").read_text())["lineLength"]
@@ -40,32 +44,51 @@ TERMINAL_FORMATTING = re.compile(r"""
 """, re.VERBOSE)
 
 
-# MARK: Files
+# MARK: Codebases
 
 
-def swift_sources() -> list[Path]:
-    return sorted(SOURCES.rglob("*.swift"))
+@dataclass(frozen=True)
+class Codebase:
+    """The files one run of the checks reads, and how to build its Swift code."""
+
+    package: Path  # the folder with Package.swift
+    build_folder: Path
+    build_options: tuple[str, ...]
+    swift_sources: tuple[Path, ...]  # the app's code: every rule applies
+    swift_tests: tuple[Path, ...] = ()
+    swift_scripts: tuple[Path, ...] = ()
+    python_scripts: tuple[Path, ...] = ()
+    shell_scripts: tuple[Path, ...] = ()
+    makefiles: tuple[Path, ...] = ()
+
+    def swift_files(self) -> tuple[Path, ...]:
+        return self.swift_sources + self.swift_tests + self.swift_scripts
+
+    def all_scripts(self) -> tuple[Path, ...]:
+        return self.shell_scripts + self.python_scripts + self.swift_scripts + self.makefiles
 
 
-def swift_tests() -> list[Path]:
-    return sorted(TESTS.rglob("*.swift"))
+def files(folder: Path, pattern: str) -> tuple[Path, ...]:
+    """The files below a folder, without the samples, which are not part of the project."""
+    return tuple(sorted(path for path in folder.rglob(pattern) if not path.is_relative_to(SAMPLES)))
 
 
-def swift_scripts() -> list[Path]:
-    return sorted(SCRIPTS.rglob("*.swift"))
+@cache
+def app() -> Codebase:
+    return Codebase(
+        package=PROJECT,
+        build_folder=BUILD_FOLDER,
+        build_options=("--build-tests", *BUILD_OPTIONS),
+        swift_sources=files(PROJECT / "Sources", "*.swift"),
+        swift_tests=files(PROJECT / "Tests", "*.swift"),
+        swift_scripts=files(SCRIPTS, "*.swift"),
+        python_scripts=files(SCRIPTS, "*.py"),
+        shell_scripts=(PROJECT / "build.sh", *sorted(SCRIPTS.glob("*.sh"))),
+        makefiles=(MAKEFILE,),
+    )
 
 
-def python_scripts() -> list[Path]:
-    return sorted(SCRIPTS.rglob("*.py"))
-
-
-def shell_scripts() -> list[Path]:
-    return [PROJECT / "build.sh", *sorted(SCRIPTS.glob("*.sh"))]
-
-
-def all_scripts() -> list[Path]:
-    """Every script and the Makefile."""
-    return [*shell_scripts(), *python_scripts(), *swift_scripts(), MAKEFILE]
+# MARK: Reading files
 
 
 @cache
@@ -113,3 +136,25 @@ def has_xcode() -> bool:
     if not result.succeeded:
         print(result.output.strip())
     return result.succeeded
+
+
+# MARK: The compiler's index
+
+
+@dataclass(frozen=True)
+class CompilerIndex:
+    """Every declaration and use in a codebase's files, or why its build failed."""
+
+    occurrences: tuple[Occurrence, ...]
+    build_problems: tuple[str, ...]
+
+
+@cache
+def compiler_index(codebase: Codebase) -> CompilerIndex:
+    """Builds the codebase (nothing happens when it is current) and reads the index once."""
+    command = ["swift", "build", "--package-path", str(codebase.package), *codebase.build_options]
+    result = run(command)
+    if not result.succeeded:
+        return CompilerIndex((), tuple(result.findings(result.diagnostics())))
+    store = IndexStore(next(codebase.build_folder.glob("**/index/store")))
+    return CompilerIndex(tuple(store.occurrences(inside=codebase.package)), ())

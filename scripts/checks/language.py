@@ -9,15 +9,17 @@ same way, apart from code in backticks, paths and links.
 
 import ast
 import io
+import plistlib
 import re
+import shutil
+import sys
 import tokenize
 from dataclasses import dataclass
 from pathlib import Path
 
-from checks.index_store import IndexStore, Kind, Role
+from checks.index_store import Kind, Role
 from checks.project import (
-    BUILD_FOLDER, BUILD_OPTIONS, MAKEFILE, PROJECT, SCRIPTS, lines_of, place, python_scripts, run,
-    shell_scripts, swift_scripts, swift_sources, swift_tests,
+    PROJECT, SCRIPTS, Codebase, CompilerIndex, app, compiler_index, lines_of, place, run,
 )
 
 # MARK: Settings
@@ -49,17 +51,6 @@ BRITISH_VARIANTS = {
     "whilst": "while", "amongst": "among",
 }
 
-# Words the dictionary does not know but every reader of this code does: names of products,
-# frameworks and tools, and the established short forms of the platform.
-KNOWN_TERMS = {
-    "app", "appkit", "apps", "async", "bool", "bundle", "cg", "codesign", "cpu", "css", "dmg",
-    "docstring", "docstrings", "fts", "github", "gzip", "hdiutil", "html", "http", "https",
-    "icns", "iconset", "id", "ids", "ios", "json", "lproj", "mac", "macos", "md",
-    "nonisolated", "npm", "ns", "os", "pdf", "pid", "plist", "png", "py", "rgb", "rgba", "sdk",
-    "sf", "sh", "sips", "speicher", "stdout", "svg", "swift", "swiftlint", "swiftpm",
-    "swiftui", "symlink", "symlinks", "tcc", "ui", "uikit", "url", "urls", "usr", "utf",
-    "uuid", "xcode", "xcrun", "yaml",
-}
 
 # Name parts: an acronym in the plural (selectedIDs: IDs), an acronym before a capitalized word
 # (NSWorkspace: NS), a capitalized or lower case word (fileCount: file, Count), or an acronym at
@@ -119,19 +110,21 @@ class CommentWord:
     place: str
 
 
-def declared_names(index_names: list[Name]) -> list[Name]:
-    names = index_names + swift_local_names() + python_names() + shell_names()
+def declared_names(codebase: Codebase, index: CompilerIndex) -> list[Name]:
+    names = (
+        swift_index_names(index) + swift_local_names(codebase) + python_names(codebase)
+        + shell_names(codebase)
+    )
     first = {}
     for name in names:
         first.setdefault(name.text, name)
     return list(first.values())
 
 
-def swift_index_names() -> list[Name]:
-    """Every declaration in Sources and Tests, with argument labels: scan(_:progress:)."""
-    store = IndexStore(next(BUILD_FOLDER.glob("**/index/store")))
+def swift_index_names(index: CompilerIndex) -> list[Name]:
+    """Every declaration in the Swift code, with argument labels: scan(_:progress:)."""
     names = []
-    for found in store.occurrences(inside=PROJECT):
+    for found in index.occurrences:
         is_ours = found.roles & Role.DEFINITION and not found.roles & Role.IMPLICIT
         if is_ours and not found.is_accessor() and found.kind in set(Kind):
             for part in re.split(r"[(:)]", found.name):
@@ -139,9 +132,9 @@ def swift_index_names() -> list[Name]:
     return [name for name in names if name.text not in ("", "_")]
 
 
-def swift_local_names() -> list[Name]:
+def swift_local_names(codebase: Codebase) -> list[Name]:
     names = []
-    for path in swift_sources() + swift_tests() + swift_scripts():
+    for path in codebase.swift_files():
         for number, line in enumerate(lines_of(path), start=1):
             code = line.split("//", 1)[0]
             for pattern in (SWIFT_LOCAL_NAME, SWIFT_DECLARATION):
@@ -152,9 +145,9 @@ def swift_local_names() -> list[Name]:
     return names
 
 
-def python_names() -> list[Name]:
+def python_names(codebase: Codebase) -> list[Name]:
     names = []
-    for path in python_scripts():
+    for path in codebase.python_scripts:
         for node in ast.walk(ast.parse(path.read_text())):
             text = declared_python_name(node)
             if text:
@@ -181,35 +174,35 @@ def is_python_special(name: str) -> bool:
     return name.startswith("__") and name.endswith("__")
 
 
-def shell_names() -> list[Name]:
+def shell_names(codebase: Codebase) -> list[Name]:
     names = []
-    for path in shell_scripts() + [MAKEFILE]:
-        pattern = MAKE_VARIABLE if path == MAKEFILE else SHELL_NAME
+    for path in codebase.shell_scripts + codebase.makefiles:
+        pattern = MAKE_VARIABLE if path in codebase.makefiles else SHELL_NAME
         for number, line in enumerate(lines_of(path), start=1):
             for match in pattern.finditer(line):
                 names += [Name(text, place(path, number)) for text in filter(None, match.groups())]
     return names
 
 
-def comment_words() -> list[CommentWord]:
+def comment_words(codebase: Codebase) -> list[CommentWord]:
     """Every prose word of every comment, so each place with a problem is named."""
     words = []
-    for path, number, comment in comments():
+    for path, number, comment in comments(codebase):
         for word in PLAIN_WORD.findall(NOT_PROSE.sub(" ", comment)):
             if not CODE_NAME.search(word):
                 words.append(CommentWord(word, place(path, number)))
     return words
 
 
-def comments():
+def comments(codebase: Codebase):
     """Each comment with its file and line: Swift //, Python # and docstrings, shell #."""
-    for path in swift_sources() + swift_tests() + swift_scripts():
+    for path in codebase.swift_files():
         for number, line in enumerate(lines_of(path), start=1):
             if "//" in line:
                 yield path, number, line.split("//", 1)[1]
-    for path in python_scripts():
+    for path in codebase.python_scripts:
         yield from python_comments(path)
-    for path in shell_scripts() + [MAKEFILE]:
+    for path in codebase.shell_scripts + codebase.makefiles:
         for number, line in enumerate(lines_of(path), start=1):
             match = SHELL_COMMENT.search(line)
             if match:
@@ -231,13 +224,54 @@ def python_comments(path: Path):
 # MARK: Judging words
 
 
-def name_words(name: Name) -> list[str]:
-    return [part.lower() for part in NAME_PART.findall(name.text) if len(part) > 1]
+def words_of(name: str) -> list[str]:
+    return [part.lower() for part in NAME_PART.findall(name) if len(part) > 1]
 
 
-def unknown_words(words: set[str]) -> dict[str, tuple[str, str]]:
+def known_terms(codebase: Codebase, index: CompilerIndex) -> set[str]:
+    """Words no dictionary has but every reader of this code knows, gathered from what the code
+    uses instead of from a list:
+    - the names of the platform's interfaces the Swift code calls (NSWorkspace gives "ns"),
+    - the names the Python scripts use from Python itself (ast.get_docstring gives "docstring"),
+    - the modules of Python's standard library, the app's name and the project's file endings.
+    Commands installed on this Mac, such as codesign, count as well (see is_known_term)."""
+    ours = {found.unique_name for found in index.occurrences if found.roles & Role.DEFINITION}
+    platform_names = {
+        found.name for found in index.occurrences
+        if found.roles & Role.REFERENCE and found.unique_name not in ours
+    }
+    platform_names |= python_used_names(codebase)
+    terms = {word for name in platform_names for word in words_of(name)}
+    terms |= {name.lower() for name in platform_names if name.isalpha()}  # SwiftUI as one word
+    terms |= set(sys.stdlib_module_names)
+    app_name = plistlib.loads((PROJECT / "Info.plist").read_bytes())["CFBundleName"]
+    terms |= set(words_of(app_name))
+    tracked_files = run(["git", "ls-files"]).output.splitlines()
+    return terms | {Path(file).suffix.lstrip(".").lower() for file in tracked_files}
+
+
+def python_used_names(codebase: Codebase) -> set[str]:
+    """Names the Python scripts use but do not declare, such as ctypes.c_char_p."""
+    used = set()
+    for path in codebase.python_scripts:
+        for node in ast.walk(ast.parse(path.read_text())):
+            if isinstance(node, ast.Attribute) and isinstance(node.ctx, ast.Load):
+                used.add(node.attr)
+            if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
+                used.add(node.id)
+    declared = {name.text for name in python_names(codebase)}
+    return used - declared
+
+
+def is_known_term(word: str, terms: set[str]) -> bool:
+    """A known term, its plural (docstrings), or a command installed on this Mac."""
+    singular = word.removesuffix("s")
+    return word in terms or singular in terms or shutil.which(word) is not None
+
+
+def unknown_words(words: set[str], terms: set[str]) -> dict[str, tuple[str, str]]:
     """Each word the American dictionary lacks: whether it is British, and the best guess."""
-    to_check = sorted(word for word in words if word not in KNOWN_TERMS)
+    to_check = sorted(word for word in words if not is_known_term(word, terms))
     result = run(["swift", str(SPELL_CHECKER)], given_input="\n".join(to_check))
     verdicts = {}
     for line in result.output.splitlines():
@@ -263,17 +297,21 @@ def problem(word: str, verdicts: dict, check_abbreviations: bool) -> str | None:
 
 
 def language_findings() -> list[str]:
-    result = run(["swift", "build", "--build-tests", *BUILD_OPTIONS])  # writes the index
-    if not result.succeeded:
-        return result.findings(result.diagnostics())
-    names = declared_names(swift_index_names())
-    words = comment_words()
-    all_words = {part for name in names for part in name_words(name)}
+    return language_problems(app())
+
+
+def language_problems(codebase: Codebase) -> list[str]:
+    index = compiler_index(codebase)
+    if index.build_problems:
+        return list(index.build_problems)
+    names = declared_names(codebase, index)
+    words = comment_words(codebase)
+    all_words = {part for name in names for part in words_of(name.text)}
     all_words |= {word.text.lower() for word in words}
-    verdicts = unknown_words(all_words)
+    verdicts = unknown_words(all_words, known_terms(codebase, index))
     findings = []
     for name in names:
-        for part in name_words(name):
+        for part in words_of(name.text):
             found = problem(part, verdicts, check_abbreviations=True)
             if found:
                 findings.append(f"{name.place}: '{part}' in {name.text} {found}")
