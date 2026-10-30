@@ -18,7 +18,7 @@ enum LifecycleService {
         let appURL = Bundle.main.bundleURL
         NSWorkspace.shared.openApplication(at: appURL, configuration: configuration) { _, error in
             guard error == nil else { return }
-            DispatchQueue.main.async { exit(EXIT_SUCCESS) }
+            Task { @MainActor in exit(EXIT_SUCCESS) }
         }
     }
 }

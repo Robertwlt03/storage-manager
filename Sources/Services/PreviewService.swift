@@ -6,7 +6,7 @@ import QuickLookThumbnailing
 /// PDF). Each is made once and kept in memory. It reads the disk, so it is free of the main thread.
 nonisolated enum PreviewService {
     // NSCache is safe to use from any thread (see its documentation), which the compiler cannot
-    // see on its own.
+    // see on its own: the macOS 27 SDK still does not mark it Sendable.
     nonisolated(unsafe) private static let thumbnails: NSCache<NSString, NSImage> = .images()
     nonisolated(unsafe) private static let finderIcons: NSCache<NSString, NSImage> = .images()
 
@@ -21,6 +21,7 @@ nonisolated enum PreviewService {
 
     /// nil when there is no real preview (folders, unknown types); the caller keeps the Finder icon
     /// then. The scale is the screen's, which only the view knows.
+    @concurrent
     static func thumbnail(_ path: String, size: CGFloat, scale: CGFloat) async -> NSImage? {
         let key = "\(path)|\(Int(size))" as NSString
         if let cached = thumbnails.object(forKey: key) { return cached }

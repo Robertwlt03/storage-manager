@@ -40,10 +40,10 @@ nonisolated enum CopyService {
         return details
     }
 
+    /// Off the main thread, as it reads and writes the disk.
+    @concurrent
     static func delete(_ group: CopyGroup) async throws {
-        let url = group.node.url
-        try await Task.detached(priority: .utility) { try FileManager.default.removeItem(at: url) }
-            .value
+        try FileManager.default.removeItem(at: group.node.url)
     }
 
     private static func group(_ node: Node) -> CopyGroup {

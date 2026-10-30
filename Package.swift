@@ -3,7 +3,13 @@ import PackageDescription
 
 // Swift 6 checks data races at compile time. Code runs on the main actor unless it says otherwise,
 // so only the work that really runs in the background (scanning, measuring) is marked as such.
-let mainActorByDefault: [SwiftSetting] = [.defaultIsolation(MainActor.self)]
+// The main actor by default, and Swift 6.2's approachable concurrency: an async function without
+// an actor runs where its caller runs, unless it says @concurrent.
+let mainActorByDefault: [SwiftSetting] = [
+    .defaultIsolation(MainActor.self),
+    .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+    .enableUpcomingFeature("InferIsolatedConformances"),
+]
 
 let package = Package(
     name: "SpeicherExplorer",
