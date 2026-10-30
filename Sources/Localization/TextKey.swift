@@ -55,7 +55,7 @@ nonisolated enum TextKey: String, CaseIterable {
     case accessGranted, fullDiskAccess, accessRestart, accessRestartHint, quitApp
 
     // Key figures, cleaner, unused apps, layout
-    case paneCleaner, paneApps, sectionTidy, layout, layoutList, layoutGrid, settings, emptyFolder,
+    case paneCleaner, paneApps, sectionTidy, layoutList, layoutGrid, settings, emptyFolder,
         otherCategories, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail,
         cleanLogs, cleanLogsDetail, cleanTemp, cleanTempDetail, cleanTrash, cleanTrashDetail,
         cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle,
