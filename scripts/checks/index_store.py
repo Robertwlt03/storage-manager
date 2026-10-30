@@ -133,6 +133,7 @@ TEXT = ctypes.c_char_p
 YES_OR_NO = ctypes.c_bool
 NUMBER = ctypes.c_uint64
 LINE_OR_COLUMN = ctypes.POINTER(ctypes.c_uint)
+TIME_PART = ctypes.POINTER(ctypes.c_int64)  # seconds or nanoseconds of a moment
 # The library hands each item to a function of ours; it returns True to go on.
 NAME_VISITOR = ctypes.CFUNCTYPE(YES_OR_NO, POINTER, CText)
 ITEM_VISITOR = ctypes.CFUNCTYPE(YES_OR_NO, POINTER, POINTER)
@@ -143,6 +144,7 @@ FUNCTIONS = {
     "store_units_apply_f": ([POINTER, ctypes.c_uint, POINTER, NAME_VISITOR], YES_OR_NO),
     "unit_reader_create": ([POINTER, TEXT, POINTER], POINTER),
     "unit_reader_dispose": ([POINTER], None),
+    "unit_reader_get_modification_time": ([POINTER, TIME_PART, TIME_PART], None),
     "unit_reader_dependencies_apply_f": ([POINTER, POINTER, ITEM_VISITOR], YES_OR_NO),
     "unit_dependency_get_kind": ([POINTER], ctypes.c_int),
     "unit_dependency_get_name": ([POINTER], CText),
@@ -200,20 +202,31 @@ class IndexStore:
         return found
 
     def records(self) -> dict[str, Path]:
-        """Each record and the source file it describes."""
-        records = {}
-
-        def note_record(_, dependency) -> bool:
-            if self.library.unit_dependency_get_kind(dependency) == RECORD:
-                name = self.library.unit_dependency_get_name(dependency).text()
-                records[name] = Path(self.library.unit_dependency_get_filepath(dependency).text())
-            return True
-
+        """The record of each source file, from the newest unit that compiled it. The store keeps
+        the units of earlier builds too, so after a module was renamed a file would else be read
+        twice, once with its symbols under the old name."""
+        newest: dict[Path, tuple[tuple[int, int], str]] = {}
         for unit in self.units():
             reader = self.library.unit_reader_create(self.store, unit.encode(), None)
-            self.library.unit_reader_dependencies_apply_f(reader, None, ITEM_VISITOR(note_record))
+            self.note_newest_records(reader, newest)
             self.library.unit_reader_dispose(reader)
-        return records
+        return {record: path for path, (_, record) in newest.items()}
+
+    def note_newest_records(self, reader, newest: dict[Path, tuple[tuple[int, int], str]]) -> None:
+        seconds, nanoseconds = ctypes.c_int64(), ctypes.c_int64()
+        self.library.unit_reader_get_modification_time(
+            reader, ctypes.byref(seconds), ctypes.byref(nanoseconds))
+        written = (seconds.value, nanoseconds.value)
+
+        def note_record(_, dependency) -> bool:
+            if self.library.unit_dependency_get_kind(dependency) != RECORD:
+                return True
+            path = Path(self.library.unit_dependency_get_filepath(dependency).text())
+            if path not in newest or newest[path][0] < written:
+                newest[path] = (written, self.library.unit_dependency_get_name(dependency).text())
+            return True
+
+        self.library.unit_reader_dependencies_apply_f(reader, None, ITEM_VISITOR(note_record))
 
     def units(self) -> list[str]:
         units = []
