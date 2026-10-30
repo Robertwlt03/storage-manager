@@ -57,7 +57,7 @@ PYTHON_RISKS = (
     FIXED_TEMPORARY_PATH,
 )
 SHELL_RISKS = (
-    Risk(re.compile(r"^ [^#]* \b eval \s", re.VERBOSE), CODE_FROM_TEXT),  # eval anywhere in code
+    Risk(re.compile(r"^ [^#]* \b eval \s", re.VERBOSE), CODE_FROM_TEXT),  # eval before any comment
     Risk(re.compile(r"\b (?: curl | wget ) \b .* \| \s* (?: sudo \s+ )? \w*sh \b", re.VERBOSE),
          "runs a script straight from the internet; download it, read it, then run it"),
     FIXED_TEMPORARY_PATH,
@@ -76,8 +76,14 @@ COMMENT_OR_BLANK = re.compile(r"^\s*(?:#.*)?$")
 
 # Signing: the hardened runtime keeps other code out of the app (no injected libraries, no
 # debugger), so nobody borrows its Full Disk Access.
-SIGNS = re.compile(r"--sign\b")
-HARDENED_RUNTIME = re.compile(r"(?:--options|-o)[ =]\S*runtime")
+# The scripts sign in a shell line or in a Python list of arguments, so both forms count.
+SIGNS = re.compile(r"""
+    (?: ^ | \s ) -- sign \b      # the option in a shell command, after a space
+    | ["'] -- sign ["']          # the option as a quoted item of a Python list
+""", re.VERBOSE)
+HARDENED_RUNTIME = re.compile(r"""
+    (?: -- options | -o ) [\s=",']+ \S* runtime   # --options runtime, or "--options", "runtime"
+""", re.VERBOSE)
 
 # Places where Swift's safety is switched off. Each needs a comment that says why it holds, on its
 # line or right above it (lines with the same kind of switch may stand in between).
@@ -133,11 +139,11 @@ def strict_mode_problems(shell_scripts: tuple[Path, ...]) -> list[str]:
     return problems
 
 
-def signing_problems(shell_scripts: tuple[Path, ...]) -> list[str]:
+def signing_problems(scripts: tuple[Path, ...]) -> list[str]:
     return [
         f"{place(path, number)}: signs without the hardened runtime, so other code can load into "
         "the app and use its Full Disk Access; add --options runtime"
-        for path, number, line in numbered_lines(shell_scripts)
+        for path, number, line in numbered_lines(scripts)
         if SIGNS.search(line) and not HARDENED_RUNTIME.search(line)
     ]
 
@@ -233,7 +239,7 @@ def security_problems(codebase: Codebase) -> list[str]:
         + risk_problems(codebase.python_scripts, PYTHON_RISKS)
         + risk_problems(codebase.shell_scripts, SHELL_RISKS)
         + strict_mode_problems(codebase.shell_scripts)
-        + signing_problems(codebase.shell_scripts)
+        + signing_problems(codebase.shell_scripts + codebase.python_scripts)
         + safety_switch_problems(swift_files)
         + workflow_problems(codebase.workflows)
     )

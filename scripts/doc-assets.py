@@ -23,10 +23,10 @@ from pathlib import Path
 from checks.console import (
     FAILURE, SUCCESS, ask_choice, ask_text, ask_yes_no, can_ask, frame, heading, note,
 )
+from checks.project import PROJECT, relative_path
 
 # MARK: Settings
 
-PROJECT = Path(__file__).resolve().parents[1]
 ASSETS = PROJECT / "assets"
 MAIN_BANNER = ASSETS / "banner.svg"  # holds the app icon; the single source of its shape
 FONT = (
@@ -62,7 +62,7 @@ COLORS = {
 
 # The banner, in pixels: the icon on the left, the three lines of text to its right.
 BANNER_WIDTH, BANNER_HEIGHT = 1280, 300
-ICON_SIZE = 168  # the icon is 240 on the main banner and is scaled down to this
+ICON_SIZE_ON_BANNER = 168
 ICON_SIZE_ON_MAIN_BANNER = 240
 ICON_LEFT, ICON_TOP = 96, 66
 ICON_ORIGIN_ON_MAIN_BANNER = "-96 -100"  # moves the copied icon back to the top left corner
@@ -127,7 +127,7 @@ def banner(file_name: str, title: str, subtitle: str, eyebrow: str, overwrite: b
 
 
 def banner_icon() -> str:
-    scale = ICON_SIZE / ICON_SIZE_ON_MAIN_BANNER
+    scale = ICON_SIZE_ON_BANNER / ICON_SIZE_ON_MAIN_BANNER
     shapes = APP_ICON_GROUP.search(MAIN_BANNER.read_text()).group(1)
     placement = f"translate({ICON_LEFT} {ICON_TOP}) scale({scale:.4f})"
     return (
@@ -152,7 +152,7 @@ def icon(name: str, color: str, glyph: str, overwrite: bool) -> Path:
 
 def write(path: Path, svg: str, overwrite: bool) -> Path:
     if path.exists() and not overwrite:
-        stop(f"{relative(path)} already exists",
+        stop(f"{relative_path(path)} already exists",
              "Add --overwrite to replace it, or pick it from the list of make banner.")
     path.write_text(svg)
     return path
@@ -160,10 +160,6 @@ def write(path: Path, svg: str, overwrite: bool) -> Path:
 
 def banner_path(file_name: str) -> Path:
     return ASSETS / f"banner-{file_name}.svg"
-
-
-def relative(path: Path) -> str:
-    return str(path.relative_to(PROJECT))
 
 
 def stop(problem: str, hint: str) -> None:
@@ -268,26 +264,26 @@ def command_line() -> argparse.ArgumentParser:
 
 def drawn_file() -> Path:
     parser = command_line()
-    chosen = parser.parse_args()
-    if chosen.command == "icon":
-        heading("Speicher-Explorer · icon", f"assets/icons/{chosen.name}.svg")
-        return icon(chosen.name, chosen.color, chosen.glyph, chosen.overwrite)
-    texts = [chosen.file_name, chosen.title, chosen.subtitle]
+    arguments = parser.parse_args()
+    if arguments.command == "icon":
+        heading("Speicher-Explorer · icon", f"assets/icons/{arguments.name}.svg")
+        return icon(arguments.name, arguments.color, arguments.glyph, arguments.overwrite)
+    texts = [arguments.file_name, arguments.title, arguments.subtitle]
     if not any(texts):
         return banner_by_questions()
     if not all(texts):
         parser.error("name the file, the title and the subtitle, or none of them to be asked")
     problems = [
-        name_problem(chosen.file_name),
-        too_long(EYEBROW_LIMIT)(chosen.eyebrow),
-        too_long(TITLE_LIMIT)(chosen.title),
-        too_long(SUBTITLE_LIMIT)(chosen.subtitle),
+        name_problem(arguments.file_name),
+        too_long(EYEBROW_LIMIT)(arguments.eyebrow),
+        too_long(TITLE_LIMIT)(arguments.title),
+        too_long(SUBTITLE_LIMIT)(arguments.subtitle),
     ]
     if problem := next((problem for problem in problems if problem), ""):
         parser.error(problem)
-    heading("Speicher-Explorer · banner", relative(banner_path(chosen.file_name)))
-    return banner(chosen.file_name, chosen.title, chosen.subtitle, chosen.eyebrow,
-                  chosen.overwrite)
+    heading("Speicher-Explorer · banner", relative_path(banner_path(arguments.file_name)))
+    return banner(arguments.file_name, arguments.title, arguments.subtitle, arguments.eyebrow,
+                  arguments.overwrite)
 
 
 def main() -> None:
@@ -296,7 +292,7 @@ def main() -> None:
     except (KeyboardInterrupt, EOFError):  # Ctrl-C or Ctrl-D while it asks; not a failure
         note("Cancelled, nothing written.")
         return
-    details = [relative(drawn)]
+    details = [relative_path(drawn)]
     guides = PROJECT.glob("*.md")
     if drawn.parent == ASSETS and not any(drawn.name in guide.read_text() for guide in guides):
         details.append("No guide shows it yet; put it at the top of one.")

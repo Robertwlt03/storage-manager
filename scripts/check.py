@@ -2,17 +2,17 @@
 """The check pipeline: every rule from CODE_STYLE.md that a tool can check, one step after another.
 
 Start:  make check, or scripts/check.py tests rules for single steps
-Needs:  Xcode 27 and SwiftLint (brew install swiftlint)
-It ends with status 1 as soon as one finding is left, so it guards every pull request. The steps
-live in scripts/checks/: project.py (folders, files, running tools), tools.py, house_rules.py,
-nesting.py, dead_code.py with index_store.py, language.py with unknown_words.swift, and
-samples.py, which tests the checks themselves on planted mistakes; report.py prints the results
-with the pieces of console.py.
+Needs:  Xcode 27 and SwiftLint (`brew install swiftlint`)
+It ends with status 1 as soon as one finding is left, so it guards every pull request. Each step
+lives in scripts/checks/; samples.py tests the checks themselves on planted mistakes, and
+report.py prints the results.
 """
 
 import sys
 import time
+import traceback
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Callable
 
 from checks import (
@@ -89,10 +89,25 @@ def run_steps(steps: list[Step]) -> list[tuple[str, int]]:
     for step in steps:
         console.running(step.title)
         started = time.monotonic()
-        findings = step.check()
+        findings = findings_of(step)
         report.step_finished(step.title, findings, time.monotonic() - started)
         results.append((step.title, len(findings)))
     return results
+
+
+def findings_of(step: Step) -> list[str]:
+    """The step's findings; a step that breaks down becomes one finding at the line where it
+    stopped, so the steps after it still run and the summary still counts it."""
+    try:
+        return step.check()
+    except Exception as error:
+        # The last place inside the project, as the error may come from the standard library.
+        ours = [
+            frame for frame in traceback.extract_tb(error.__traceback__)
+            if Path(frame.filename).is_relative_to(project.PROJECT)
+        ]
+        where = project.place(Path(ours[-1].filename), ours[-1].lineno or 0) if ours else "general"
+        return [f"{where}: the step stopped with {type(error).__name__}: {error}"]
 
 
 # MARK: Run

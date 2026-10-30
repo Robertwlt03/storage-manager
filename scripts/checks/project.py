@@ -113,9 +113,10 @@ def tracked_files(pattern: str) -> tuple[Path, ...]:
 
 
 def is_text(path: Path) -> bool:
-    """A file that reads as text; images, icons and other binary files do not."""
+    """A file that reads as text; images, icons and other binary files do not. The lines stay
+    cached, so the checks that read the file next do not read it again."""
     try:
-        path.read_text()
+        lines_of(path)
     except (UnicodeDecodeError, IsADirectoryError, FileNotFoundError):
         return False
     return True
@@ -157,8 +158,11 @@ class ToolResult:
     def findings(self, readable_findings: list[str]) -> list[str]:
         """The findings; when the tool failed without one, its last line tells why."""
         if not self.succeeded and not readable_findings:
-            return [self.output.strip().splitlines()[-1]]
+            return [self.last_line() or "the tool failed without saying why"]
         return readable_findings
+
+    def last_line(self) -> str:
+        return self.output.strip().rpartition("\n")[2]
 
 
 def run(command: list[str], given_input: str | None = None) -> ToolResult:

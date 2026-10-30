@@ -1,7 +1,7 @@
 """The steps that hand the work to a tool: formatting, SwiftLint, compiler, tests, plutil, scripts.
 
 Start:  imported by scripts/check.py, not started on its own
-Needs:  Xcode 27 (swift, swift format, plutil) and SwiftLint (brew install swiftlint)
+Needs:  Xcode 27 (swift, swift format, plutil) and SwiftLint (`brew install swiftlint`)
 """
 
 import json
@@ -180,8 +180,8 @@ def coverage_data() -> dict | list[str]:
     result = run(["swift", "test", *BUILD_OPTIONS])
     if not result.succeeded:
         return result.findings([])
-    report_path = run(["swift", "test", *BUILD_OPTIONS, "--show-codecov-path"]).output
-    return json.loads(Path(report_path.strip().splitlines()[-1]).read_text())
+    report_path = run(["swift", "test", *BUILD_OPTIONS, "--show-codecov-path"]).last_line()
+    return json.loads(Path(report_path).read_text())
 
 
 def coverage_report() -> list[str]:
@@ -199,8 +199,8 @@ def coverage_report() -> list[str]:
 
 
 def coverage_text(covered: int, lines: int) -> str:
-    """One row of the report, such as "84.2 %  (412 of 489 lines)"."""
-    percent = f"{covered / lines:.1%}"  # a share as percent with one decimal
+    """One row of the report, such as "84.2%  (412 of 489 lines)"."""
+    percent = f"{covered / lines:.1%}"
     lines_reached = console.paint(f"({covered} of {lines} lines)", console.DIM)
     return f"{percent.rjust(PERCENT_WIDTH)}  {lines_reached}"
 

@@ -1,4 +1,4 @@
-# Short commands for everyday work, like npm scripts. Each line hands over to Python (scripts/),
+# Short commands for everyday work. Each line hands over to Python (scripts/),
 # Swift or one macOS tool; the logic itself lives in the scripts.
 #
 # Start:  make (lists every command), make <command>
@@ -24,14 +24,15 @@ STRESS_TEST_FOLDER := $(TMPDIR)speicher-test
 PYTHON := $(or $(firstword $(foreach version,3.15 3.14 3.13,\
 	$(shell command -v python$(version) 2> /dev/null))),python3)
 export PYTHON
-# So python -m checks.console finds the shared code (no comment behind it: make keeps the spaces).
+# So python -m checks.console finds the shared code. No comment behind a value: make keeps the
+# spaces in front of it as part of the value.
 export PYTHONPATH := $(CURDIR)/scripts
-CONSOLE := $(PYTHON) -m checks.console  # prints in the shared look of every command
+# Prints in the shared look of every command.
+CONSOLE := $(PYTHON) -m checks.console
 # Every command opens with one heading: a script that draws its own gets none here. HEADED goes in
 # front of what a command starts after its heading, so that leaves its own heading out.
 HEADING := $(CONSOLE) heading
 HEADED := CONSOLE_HEADED=1
-# make snapshots RECORD=1 hands --record to the script; without RECORD it hands nothing.
 SNAPSHOT_MODE := $(if $(RECORD),--record)
 
 .DEFAULT_GOAL := help

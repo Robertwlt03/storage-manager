@@ -21,19 +21,19 @@ from checks.project import PROJECT
 
 # MARK: Settings
 
-NAME = "Speicher-Explorer"
+DISK_IMAGE_NAME = "Speicher-Explorer"
 RELEASE_FOLDER = PROJECT / "dist"
 APP_FOLDER = RELEASE_FOLDER / "app"
 CONTENTS = RELEASE_FOLDER / "contents"  # what the disk image shows, gathered before packing
-APPLE_IDENTITY_PREFIX = "Developer ID Application:"
+DEVELOPER_ID_PREFIX = "Developer ID Application:"
 
 
 # MARK: Steps
 
 
 def version() -> str:
-    with (PROJECT / "Info.plist").open("rb") as info:
-        return plistlib.load(info)["CFBundleShortVersionString"]
+    with (PROJECT / "Info.plist").open("rb") as info_plist:
+        return plistlib.load(info_plist)["CFBundleShortVersionString"]
 
 
 def build_signed_app(identity: str) -> None:
@@ -53,7 +53,7 @@ def gather_contents() -> None:
 def pack(disk_image: Path, identity: str) -> None:
     # UDZO: a compressed, read-only image, the usual format for sharing apps.
     status = console.wait("Packing the disk image", [
-        "hdiutil", "create", "-quiet", "-volname", NAME, "-srcfolder", str(CONTENTS),
+        "hdiutil", "create", "-quiet", "-volname", DISK_IMAGE_NAME, "-srcfolder", str(CONTENTS),
         "-format", "UDZO", "-ov", str(disk_image),
     ])
     shutil.rmtree(CONTENTS, ignore_errors=True)
@@ -64,7 +64,7 @@ def pack(disk_image: Path, identity: str) -> None:
 
 def notarize_when_possible(disk_image: Path, identity: str) -> None:
     profile = os.environ.get("NOTARY_PROFILE", "")
-    if not identity.startswith(APPLE_IDENTITY_PREFIX) or not profile:
+    if not identity.startswith(DEVELOPER_ID_PREFIX) or not profile:
         return
     status = console.wait("Waiting for Apple to notarize the disk image", [
         "xcrun", "notarytool", "submit", str(disk_image), "--keychain-profile", profile, "--wait",
@@ -86,7 +86,7 @@ def main() -> None:
         console.frame("No disk image", ["Create a signing identity first: make identity"],
                       console.FAILURE)
         sys.exit(1)
-    disk_image = RELEASE_FOLDER / f"{NAME}-{release_version}.dmg"
+    disk_image = RELEASE_FOLDER / f"{DISK_IMAGE_NAME}-{release_version}.dmg"
     build_signed_app(identity)
     gather_contents()
     pack(disk_image, identity)

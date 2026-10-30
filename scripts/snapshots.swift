@@ -29,14 +29,13 @@ let changedShareAllowed = 0.01
 /// (PYTHON, together with PYTHONPATH); make starts this script in the project.
 let python = ProcessInfo.processInfo.environment["PYTHON"] ?? ""
 
-let folder = URL(filePath: "snapshots")
-let referenceFolder = folder.appending(path: "reference")
-let currentFolder = folder.appending(path: "current")
-let differenceFolder = folder.appending(path: "difference")
+let snapshotsFolder = URL(filePath: "snapshots")
+let referenceFolder = snapshotsFolder.appending(path: "reference")
+let currentFolder = snapshotsFolder.appending(path: "current")
+let differenceFolder = snapshotsFolder.appending(path: "difference")
 
 // MARK: Pictures
 
-/// One picture: a page in one appearance.
 struct Picture {
     let page: String
     let appearance: String
@@ -198,7 +197,7 @@ struct Pixels {
 /// white), so the red stands out.
 let fadedShare = 4
 let fadedBase = Int(Pixels.fullChannel) - Int(Pixels.fullChannel) / fadedShare
-let changedColor: [UInt8] = [Pixels.fullChannel, 0, 0]  // red
+let changedColor: [UInt8] = [Pixels.fullChannel, 0, 0]
 
 /// The share of changed pixels, and a picture that shows them red over a faded original.
 func compare(_ reference: Pixels, _ current: Pixels) -> (share: Double, difference: Pixels) {

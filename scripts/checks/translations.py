@@ -13,12 +13,12 @@ import json
 import re
 from pathlib import Path
 
-from checks.project import SCRIPTS, Codebase, app, lines_of, place, run
+from checks.language import spell_checker_answers
+from checks.project import Codebase, app, lines_of, place, run
 
 # MARK: Settings
 
 SOURCE_LANGUAGE = "en"
-SPELL_CHECKER = SCRIPTS / "checks" / "unknown_words.swift"
 # A text the same in more than this share of the other languages is a shared term.
 SHARED_SHARE = 0.5
 SHARED_MINIMUM = 3  # and in at least this many, so two languages alone never make a term shared
@@ -68,8 +68,7 @@ def copied_texts(texts: dict[str, dict[str, str]]) -> dict[str, list[str]]:
 
 def unknown_in(language: str, words: set[str]) -> set[str]:
     dictionary = DICTIONARY_NAMES.get(language, language)
-    result = run(["swift", str(SPELL_CHECKER), dictionary], given_input="\n".join(sorted(words)))
-    return {line.split("\t")[0] for line in result.output.splitlines()}
+    return {line.split("\t")[0] for line in spell_checker_answers(words, dictionary)}
 
 
 # MARK: Step

@@ -43,7 +43,8 @@ SWIFT_NOISE = re.compile(r'''
 ''', re.VERBOSE | re.DOTALL)
 
 # In Python every statement with a body of its own opens a block (if, for, with, try, def, …),
-# so a statement Python adds later counts too.
+# so a statement Python adds later counts too. A `match` opens one block for all its cases, as a
+# Swift `switch` does with its braces.
 PYTHON_FUNCTIONS = (ast.FunctionDef, ast.AsyncFunctionDef)
 
 # Shell: a function starts with `name() {`; blocks open with these words and close with the
@@ -156,7 +157,7 @@ def braces_of(code: str):
             segment_start = position + 1
 
 
-def opened_brace(text_before: str, number: int, parent: Brace | None) -> Brace:
+def opened_brace(text_before: str, line: int, parent: Brace | None) -> Brace:
     """A type when a type keyword comes before the brace; a method when it opens directly in a
     type or at the top of the file; any other brace is a block."""
     if SWIFT_TYPE.search(text_before):
@@ -166,7 +167,7 @@ def opened_brace(text_before: str, number: int, parent: Brace | None) -> Brace:
     else:
         role = BLOCK
     is_function = role == METHOD or SWIFT_FUNCTION.search(text_before) is not None
-    return Brace(number, role, is_function, declared_name(text_before))
+    return Brace(line, role, is_function, declared_name(text_before))
 
 
 def declared_name(text_before: str) -> str:
@@ -184,7 +185,6 @@ def swift_code(path: Path) -> str:
         return re.sub(r"[^\n]", " ", match.group(0))
 
     return SWIFT_NOISE.sub(blank, path.read_text())
-
 
 
 # MARK: Python
@@ -225,7 +225,8 @@ def python_first_deep_place(node: ast.AST, depth: int, functions: int) -> tuple[
 def python_children(node: ast.AST, depth: int, functions: int):
     """Each child with its depth: a block that spans lines adds one, an `elif` does not."""
     for child in ast.iter_child_nodes(node):
-        has_body = isinstance(child, ast.stmt) and isinstance(getattr(child, "body", None), list)
+        has_body = isinstance(child, ast.Match) or (
+            isinstance(child, ast.stmt) and isinstance(getattr(child, "body", None), list))
         is_block = has_body and child.end_lineno > child.lineno
         is_elif = isinstance(node, ast.If) and isinstance(child, ast.If) and child in node.orelse
         adds_level = is_block and not is_elif

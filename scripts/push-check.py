@@ -16,6 +16,9 @@ from checks.project import PROJECT, SCRIPTS
 # MARK: Settings
 
 NO_COMMIT = "0" * 40  # what git hands over for a deleted branch
+# git writes one line per pushed branch or tag: local name, local commit, remote name, remote
+# commit.
+PUSHED_LINE_FIELDS = 4
 
 
 # MARK: Steps
@@ -33,10 +36,8 @@ def has_uncommitted_changes() -> bool:
 
 
 def pushes_other_commit(pushed: list[str]) -> bool:
-    """git writes one line per pushed branch or tag: its local name and commit, then the remote
-    ones."""
     head = git("rev-parse", "HEAD")
-    local_commits = [line.split()[1] for line in pushed if len(line.split()) == 4]
+    local_commits = [line.split()[1] for line in pushed if len(line.split()) == PUSHED_LINE_FIELDS]
     return any(
         commit != NO_COMMIT and git("rev-parse", f"{commit}^{{commit}}") != head
         for commit in local_commits

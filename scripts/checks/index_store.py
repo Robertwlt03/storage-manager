@@ -1,6 +1,6 @@
 """Reads the index the Swift compiler writes while building (`swift build --enable-index-store`).
 
-Start:  imported by checks/dead_code.py, not started on its own
+Start:  imported by checks/project.py, which reads the index for every check; not started on its own
 Needs:  Xcode 27, which ships the index reader libIndexStore
 The index knows every declaration and every place that uses it, with the exact symbol, so a
 property called `bytes` is never confused with another one of the same name. This module calls
@@ -113,7 +113,7 @@ class Occurrence:
         return [relation.unique_name for relation in self.relations if relation.roles & role]
 
     def is_accessor(self) -> bool:
-        return self.subkind in set(Accessor)
+        return self.subkind in Accessor
 
 
 # MARK: The C library
@@ -132,7 +132,7 @@ POINTER = ctypes.c_void_p
 TEXT = ctypes.c_char_p
 YES_OR_NO = ctypes.c_bool
 NUMBER = ctypes.c_uint64
-LINE = ctypes.POINTER(ctypes.c_uint)
+LINE_OR_COLUMN = ctypes.POINTER(ctypes.c_uint)
 # The library hands each item to a function of ours; it returns True to go on.
 NAME_VISITOR = ctypes.CFUNCTYPE(YES_OR_NO, POINTER, CText)
 ITEM_VISITOR = ctypes.CFUNCTYPE(YES_OR_NO, POINTER, POINTER)
@@ -152,7 +152,7 @@ FUNCTIONS = {
     "record_reader_occurrences_apply_f": ([POINTER, POINTER, ITEM_VISITOR], YES_OR_NO),
     "occurrence_get_symbol": ([POINTER], POINTER),
     "occurrence_get_roles": ([POINTER], NUMBER),
-    "occurrence_get_line_col": ([POINTER, LINE, LINE], None),
+    "occurrence_get_line_col": ([POINTER, LINE_OR_COLUMN, LINE_OR_COLUMN], None),
     "occurrence_relations_apply_f": ([POINTER, POINTER, ITEM_VISITOR], YES_OR_NO),
     "symbol_relation_get_roles": ([POINTER], NUMBER),
     "symbol_relation_get_symbol": ([POINTER], POINTER),

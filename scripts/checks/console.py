@@ -79,8 +79,7 @@ def visible_length(text: str) -> int:
 
 def show(text: str) -> None:
     """Every piece ends here; in a terminal it first stops the wheel and erases its line."""
-    stop_running()
-    print(f"{CLEAR_LINE if IN_TERMINAL else ''}{text}")
+    relay(f"{text}\n")
 
 
 # MARK: What a command prints

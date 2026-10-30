@@ -14,8 +14,7 @@ from checks.project import Codebase, app, compiler_index, place
 
 # MARK: Settings
 
-# Files that form a part of their own, by their path below the source folder: the design tokens
-# (sizes, symbols, motion) and the colors, which every layer may name.
+# Files that form a part of their own, by their path below the source folder.
 OWN_PARTS = {"DesignSystem/Tokens.swift": "Tokens", "DesignSystem/Theme.swift": "Tokens"}
 
 FOUNDATION = {"Core", "Localization", "Tokens"}
@@ -42,8 +41,8 @@ def part_of(path: Path, codebase: Codebase) -> str | None:
     if codebase.source_root is None or not path.is_relative_to(codebase.source_root):
         return None
     below = path.relative_to(codebase.source_root)
-    if below.as_posix() in OWN_PARTS:
-        return OWN_PARTS[below.as_posix()]
+    if own_part := OWN_PARTS.get(below.as_posix()):
+        return own_part
     return below.parts[0] if len(below.parts) > 1 else None
 
 

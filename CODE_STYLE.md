@@ -186,8 +186,8 @@ The script runs twenty-three checks one after another:
    American English or a known technical term and never an abbreviation, so `temporary` instead of `temp` and
    `maximum` instead of `max`. Comments are read the same way. The macOS spell checker checks the words
    (`scripts/checks/language.py`). Technical terms such as `plist` or `codesign` are in no list: known is what appears
-   in the names of the Apple and Python interfaces the code uses, what is installed as a command on the Mac, the
-   project's file endings and the app's name. Only the forbidden abbreviations remain a list, because no source
+   in the names of the Apple and Python interfaces the code uses, the commands macOS brings in its system folders
+   (such as `codesign`), the project's file endings and the app's name. Only the forbidden abbreviations remain a list, because no source
    reliably tells whether a word is an abbreviation.
 17. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
 18. **Complete translations:** A text that reads exactly like the English one in some language is reported when the

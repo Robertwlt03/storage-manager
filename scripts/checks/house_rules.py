@@ -10,7 +10,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from checks.index_store import Role
+from checks.index_store import Occurrence, Role
 from checks.project import (
     LINE_LENGTH, Codebase, app, compiler_index, lines_of, place, relative_path,
 )
@@ -31,9 +31,6 @@ DEBUG_MARK = "// DBG"  # ends a temporary line while debugging; it must never be
 
 
 # MARK: Patterns
-
-# Each pattern is written over several lines with a comment per part (re.VERBOSE ignores the
-# spaces), so it reads like the rule it stands for.
 
 STRING_LITERAL = re.compile(r'''
     "                   # opening quote
@@ -195,7 +192,7 @@ def written_screen_texts(codebase: Codebase) -> list[str]:
     return [f"{where}: written-out text on screen, use TextKey" for where in sorted(places)]
 
 
-def has_text_argument(found) -> bool:
+def has_text_argument(found: Occurrence) -> bool:
     line = lines_of(found.path)[found.line - 1].encode()  # the index counts columns in bytes
     rest_of_line = line[found.column - 1:].decode(errors="ignore")
     return CALL_WITH_TEXT.match(rest_of_line) is not None

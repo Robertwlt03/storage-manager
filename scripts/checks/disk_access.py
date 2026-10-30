@@ -9,7 +9,6 @@ started with `Task.detached`. The diagnostics, which test the app themselves, ar
 """
 
 import re
-from pathlib import Path
 
 from checks.index_store import Occurrence, Role
 from checks.nesting import braces_of, swift_code
@@ -38,6 +37,12 @@ DISK_INTERFACES = {
 OFF_THE_MAIN_THREAD = re.compile(r"""
     \b nonisolated \b (?! \s* \( \s* unsafe )     # nonisolated, but not nonisolated(unsafe)
     | \b Task\.detached \b                         # a task of its own
+""", re.VERBOSE)
+# The words that open a declaration. The text before a brace can start with earlier members of a
+# type, so only the line of the last such word on belongs to the brace's own declaration.
+DECLARATION = re.compile(r"""
+    \b (?: func | init | deinit | subscript | var | let       # a function or a property
+         | struct | class | enum | extension | actor | protocol ) \b   # or a type
 """, re.VERBOSE)
 LEFT_OUT = ("Sources/Diagnostics/",)
 
@@ -77,17 +82,26 @@ def disk_interface(found: Occurrence) -> str | None:
 
 
 def runs_off_the_main_thread(found: Occurrence) -> bool:
-    return any(OFF_THE_MAIN_THREAD.search(text) for text in enclosing_texts(found.path, found))
+    return any(OFF_THE_MAIN_THREAD.search(text) for text in enclosing_texts(found))
 
 
-def enclosing_texts(path: Path, found: Occurrence) -> list[str]:
+def enclosing_texts(found: Occurrence) -> list[str]:
     """The text before each brace that is still open where the call stands."""
     open_texts = []
-    for line, column, text_before, character in braces_of(swift_code(path)):
+    for line, column, text_before, character in braces_of(swift_code(found.path)):
         if (line, column) > (found.line, found.column):
             break
         if character == "{":
-            open_texts.append(text_before)
+            open_texts.append(own_declaration(text_before))
         elif open_texts:
             open_texts.pop()
     return open_texts
+
+
+def own_declaration(text_before: str) -> str:
+    """The text that belongs to a brace: from the line of its declaration on, so the
+    `nonisolated` of a property above does not count for the method below it."""
+    declarations = list(DECLARATION.finditer(text_before))
+    if not declarations:  # a closure, such as .task {: only its own line belongs to it
+        return text_before.rpartition("\n")[2]
+    return text_before[text_before.rfind("\n", 0, declarations[-1].start()) + 1:]

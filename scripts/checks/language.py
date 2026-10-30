@@ -25,6 +25,9 @@ from checks.project import (
 # MARK: Settings
 
 SPELL_CHECKER = SCRIPTS / "checks" / "unknown_words.swift"
+# Where macOS keeps its own commands, such as codesign; the same on every Mac, unlike the search
+# path, so a check gives the same answer on this Mac and on GitHub.
+SYSTEM_COMMAND_FOLDERS = "/usr/bin:/bin:/usr/sbin:/sbin"
 
 # Short forms to spell out, with the word to write instead.
 ABBREVIATIONS = {
@@ -52,9 +55,7 @@ BRITISH_VARIANTS = {
 }
 
 
-# Name parts: an acronym in the plural (selectedIDs: IDs), an acronym before a capitalized word
-# (NSWorkspace: NS), a capitalized or lower case word (fileCount: file, Count), or an acronym at
-# the end (macOS: OS).
+# The words inside a name: fileCount gives file and Count, NSWorkspace gives NS and Workspace.
 NAME_PART = re.compile(r"""
     [A-Z]{2,} s (?! [a-z] )     # an acronym in the plural: IDs
     | [A-Z]+ (?= [A-Z][a-z] )   # an acronym that a capitalized word follows
@@ -135,7 +136,7 @@ def swift_index_names(index: CompilerIndex) -> list[Name]:
 def is_written_definition(found) -> bool:
     """A declaration written in our code, not one a macro or the compiler adds, nor an accessor."""
     is_ours = found.roles & Role.DEFINITION and not found.roles & Role.IMPLICIT
-    return bool(is_ours) and not found.is_accessor() and found.kind in set(Kind)
+    return bool(is_ours) and not found.is_accessor() and found.kind in Kind
 
 
 def swift_local_names(codebase: Codebase) -> list[Name]:
@@ -219,11 +220,10 @@ def python_comments(path: Path):
     for token in tokenize.generate_tokens(io.StringIO(source).readline):
         if token.type == tokenize.COMMENT:
             yield path, token.start[0], token.string
+    documented = (ast.Module, ast.ClassDef, ast.FunctionDef)
     for node in ast.walk(ast.parse(source)):
-        documented = (ast.Module, ast.ClassDef, ast.FunctionDef)
-        if isinstance(node, documented) and ast.get_docstring(node):
-            line = node.body[0].lineno
-            yield path, line, ast.get_docstring(node)
+        if isinstance(node, documented) and (docstring := ast.get_docstring(node)):
+            yield path, node.body[0].lineno, docstring
 
 
 # MARK: Judging words
@@ -239,7 +239,7 @@ def known_terms(codebase: Codebase, index: CompilerIndex) -> set[str]:
     - the names of the platform's interfaces the Swift code calls (NSWorkspace gives "ns"),
     - the names the Python scripts use from Python itself (ast.get_docstring gives "docstring"),
     - the modules of Python's standard library, the app's name and the project's file endings.
-    Commands installed on this Mac, such as codesign, count as well (see is_known_term)."""
+    Commands macOS brings, such as codesign, count as well (see is_known_term)."""
     ours = {found.unique_name for found in index.occurrences if found.roles & Role.DEFINITION}
     platform_names = {
         found.name for found in index.occurrences
@@ -275,20 +275,30 @@ def loaded_python_name(node: ast.AST) -> str | None:
 
 
 def is_known_term(word: str, terms: set[str]) -> bool:
-    """A known term, its plural (docstrings), or a command installed on this Mac."""
+    """A known term, its plural (docstrings), or a command macOS itself brings."""
     singular = word.removesuffix("s")
-    return word in terms or singular in terms or shutil.which(word) is not None
+    is_command = shutil.which(word, path=SYSTEM_COMMAND_FOLDERS) is not None
+    return word in terms or singular in terms or is_command
 
 
 def unknown_words(words: set[str], terms: set[str]) -> dict[str, tuple[str, str]]:
     """Each word the American dictionary lacks: whether it is British, and the best guess."""
-    to_check = sorted(word for word in words if not is_known_term(word, terms))
-    result = run(["swift", str(SPELL_CHECKER)], given_input="\n".join(to_check))
+    to_check = {word for word in words if not is_known_term(word, terms)}
     verdicts = {}
-    for line in result.output.splitlines():
+    for line in spell_checker_answers(to_check):
         word, kind, guess = (line.split("\t") + ["", ""])[:3]
         verdicts[word] = (kind, guess)
     return verdicts
+
+
+def spell_checker_answers(words: set[str], *language: str) -> list[str]:
+    """The spell checker's line for each word it does not know (see unknown_words.swift). When it
+    cannot run, its output holds no verdicts, so the step stops instead of passing every word."""
+    command = ["swift", str(SPELL_CHECKER), *language]
+    result = run(command, given_input="\n".join(sorted(words)))
+    if not result.succeeded:
+        raise RuntimeError(f"the spell checker failed: {result.last_line()}")
+    return result.output.splitlines()
 
 
 def problem(word: str, verdicts: dict, check_abbreviations: bool) -> str | None:

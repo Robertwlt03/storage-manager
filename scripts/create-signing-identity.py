@@ -10,6 +10,7 @@ development certificate, and nothing leaves this Mac.
 
 import re
 import secrets
+import sys
 import tempfile
 from pathlib import Path
 
@@ -42,9 +43,21 @@ basicConstraints = critical, CA:false
 # MARK: Steps
 
 
-def unlock_existing_keychain() -> None:
-    saved = SAVED_PASSWORD.search(SETTINGS_FILE.read_text())
-    run(["security", "unlock-keychain", "-p", saved.group(1).strip() if saved else "", KEYCHAIN])
+def saved_settings() -> str:
+    return SETTINGS_FILE.read_text() if SETTINGS_FILE.exists() else ""
+
+
+def unlock_existing_keychain() -> str:
+    """Opens the keychain with the password local.mk keeps, and returns it."""
+    saved_password = SAVED_PASSWORD.search(saved_settings())
+    if not saved_password:
+        console.failed("local.mk holds no password for the signing keychain", str(KEYCHAIN))
+        console.note("Copy local.mk from the checkout that made it, or start over with:")
+        console.note(f"security delete-keychain {KEYCHAIN}")
+        sys.exit(1)
+    password = saved_password.group(1).strip()
+    run(["security", "unlock-keychain", "-p", password, KEYCHAIN])
+    return password
 
 
 def create_keychain(password: str) -> None:
@@ -76,8 +89,7 @@ def import_identity(identity: Path, password: str) -> None:
 def write_settings(password: str) -> None:
     """Keeps whatever else local.mk holds and replaces only the signing lines."""
     kept = [
-        line for line in (SETTINGS_FILE.read_text() if SETTINGS_FILE.exists() else "").splitlines()
-        if not SIGNING_SETTING.match(line)
+        line for line in saved_settings().splitlines() if not SIGNING_SETTING.match(line)
     ]
     signing = [
         f"SIGN_IDENTITY = {IDENTITY_NAME}",
@@ -86,6 +98,12 @@ def write_settings(password: str) -> None:
     ]
     SETTINGS_FILE.write_text("\n".join(kept + signing) + "\n")
     console.passed("Settings written", SETTINGS_FILE.name)
+
+
+def has_identity() -> bool:
+    """Whether the keychain holds the identity, which an earlier run may have left out."""
+    search = ["security", "find-certificate", "-c", IDENTITY_NAME, str(KEYCHAIN)]
+    return project.run(search).succeeded
 
 
 def trust_for_code_signing(work_folder: Path) -> None:
@@ -114,14 +132,14 @@ def main() -> None:
         work_folder = Path(folder)
         if KEYCHAIN.exists():
             console.step("The signing keychain already exists", str(KEYCHAIN))
-            unlock_existing_keychain()
-            trust_for_code_signing(work_folder)
-            return
-        password = secrets.token_hex(24)  # made for passwords, from the system's random source
-        create_keychain(password)
-        import_identity(create_identity(password, work_folder), password)
-        write_settings(password)
-        console.passed("Identity created", "in its own keychain")
+            password = unlock_existing_keychain()
+        else:
+            password = secrets.token_hex(24)  # made for passwords, from the system's random source
+            create_keychain(password)
+            write_settings(password)  # at once, so a later failure never loses the password
+        if not has_identity():
+            import_identity(create_identity(password, work_folder), password)
+            console.passed("Identity created", "in its own keychain")
         trust_for_code_signing(work_folder)
     console.frame("Signing identity ready", [
         "local.mk signs with it",

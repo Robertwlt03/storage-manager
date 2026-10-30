@@ -25,15 +25,14 @@ BINARY = PROJECT / ".build" / "release" / "SpeicherExplorer"
 # Retina screens.
 ICON_SIZES = (16, 32, 128, 256, 512)
 INSTALLED_APP = Path.home() / "Applications" / APP_NAME
-AD_HOC = "-"  # the identity that signs without a certificate (ad hoc)
+AD_HOC_IDENTITY = "-"  # signs without a certificate (ad hoc)
 
 
 # MARK: Steps
 
 
 def run(command: list[str | Path]) -> str:
-    """Runs a step's command in the project; when it fails, says which one and what it said, and
-    stops."""
+    """Runs a command in the project folder and stops the script when it fails."""
     result = project.run([str(part) for part in command])
     if not result.succeeded:
         console.failed("Failed", str(command[0]))
@@ -94,14 +93,14 @@ def sign(target: Path, identity: str) -> None:
     again after every build. make identity creates one and writes it to local.mk."""
     options = ["--force", "--options", "runtime", "--sign", identity]
     keychain = os.environ.get("SIGNING_KEYCHAIN", "")
-    if keychain and identity != AD_HOC:
+    if keychain and identity != AD_HOC_IDENTITY:
         password = os.environ.get("SIGNING_KEYCHAIN_PASSWORD", "")
         run(["security", "unlock-keychain", "-p", password, keychain])
         options += ["--keychain", keychain]
     # codesign talks even when it succeeds ("replacing existing signature"); run() shows it only
     # when it fails.
     run(["codesign", *options, target])
-    console.passed("Signed", "ad hoc" if identity == AD_HOC else identity)
+    console.passed("Signed", "ad hoc" if identity == AD_HOC_IDENTITY else identity)
 
 
 def build(build_folder: Path, identity: str, bundle_id: str = "") -> Path:
@@ -130,9 +129,8 @@ def install(app: Path) -> None:
 def main() -> None:
     build_folder = PROJECT / os.environ.get("BUILD_FOLDER", "build")
     console.heading("Speicher-Explorer · build", shown(build_folder / APP_NAME))
-    app = build(
-        build_folder, os.environ.get("SIGN_IDENTITY") or AD_HOC, os.environ.get("BUNDLE_ID", "")
-    )
+    identity = os.environ.get("SIGN_IDENTITY") or AD_HOC_IDENTITY
+    app = build(build_folder, identity, os.environ.get("BUNDLE_ID", ""))
     if os.environ.get("INSTALL_APP"):
         install(app)
         console.frame("Installed", [str(INSTALLED_APP)], console.SUCCESS)
