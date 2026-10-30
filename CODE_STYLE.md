@@ -200,13 +200,13 @@ The script runs twenty-three checks one after another:
 20. **Secrets:** No file git knows holds a private key, an access token or a password written out. Every settings
    file the `Makefile` reads, such as `local.mk`, must be ignored by git (`scripts/checks/secrets.py`).
 21. **Security:** The app holds Full Disk Access, so no other code may get into it. It is signed with the hardened
-   runtime (`--options runtime`), so no library can be injected. No code starts a shell that reads text as
-   commands, no script runs text as code or pipes a script from the internet straight into a shell, and nobody uses
-   fixed paths in the shared folder for temporary files. A shell script, should one come back, starts with
-   `set -euo pipefail`. Where
-   Swift switches off its safety, such as with `nonisolated(unsafe)` or `@unchecked Sendable`, a comment gives the
-   reason. The GitHub workflow may only read, pins every action to a fixed commit, installs tools in a fixed version
-   checked by checksum and never puts text from strangers' pull requests into a command
+   runtime (`--options runtime`), so no library can be injected. No code starts a shell that reads text as commands,
+   no script runs text as code or pipes a script from the internet straight into a shell, and nobody uses fixed paths
+   in the shared folder for temporary files. A shell script, should one come back, starts with `set -euo pipefail`.
+   Where Swift switches off its safety, such as with `nonisolated(unsafe)` or `@unchecked Sendable`, a comment gives
+   the reason. The GitHub workflow may only read, pins every action to a fixed commit, installs tools in a fixed
+   version checked by checksum, never puts text from strangers' pull requests into a command, and runs a job on the
+   maintainer's own Mac only for pushes and this repository's own pull requests, never for a fork's
    (`scripts/checks/security.py`).
 22. **Scripts:** Two languages only: Swift for the app and the tools that need macOS frameworks, Python 3.13 or newer
    for every other script, and the `Makefile` only as a menu whose lines hand over to them. The scripts and the

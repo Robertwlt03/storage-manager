@@ -10,3 +10,7 @@ jobs:
       - run: brew install swiftlint  # expect: whatever version is newest
       - run: |
           echo "${{ github.event.pull_request.title }}"  # expect: text a stranger chooses
+  own_machine:
+    runs-on: [self-hosted, xcode-27]  # expect: a pull request from a fork
+    steps:
+      - run: make check

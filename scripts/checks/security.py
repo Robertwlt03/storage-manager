@@ -106,6 +106,24 @@ COMMIT_NAME = re.compile(r"^[0-9a-f]{40}$")  # a commit's full name, which nobod
 # The trigger anywhere before a comment, also in a list such as on: [push, pull_request_target].
 STRANGERS_TRIGGER = re.compile(r"^ [^#]* \b pull_request_target \b", re.VERBOSE)
 RUN_BLOCK = re.compile(r"^(?P<indent>\s*)(?:-\s+)?run:")
+# The triggers under on: that run a pull request's code, also one from a stranger's fork.
+FORK_TRIGGER = re.compile(r"""
+    \b pull_request                                  # a pull request opened or updated,
+    (?: _target | _review | _review_comment )? \b    # or reviewed, or commented on
+""", re.VERBOSE)
+TOP_LEVEL_KEY = re.compile(r"^[\w-]+:")  # such as on: or jobs:, at the start of the line
+JOB_NAME = re.compile(r"^ {2}[\w-]+:\s*$")  # a job, one level below jobs:
+# A machine GitHub does not rent out, such as a runner on the maintainer's own Mac.
+OWN_MACHINE = re.compile(r"""
+    ^ \s* runs-on:                              # the machine a job runs on
+    (?! \s* (?: (?: ubuntu | macos | windows ) - # is none of GitHub's own images
+             | \$\{\{ ) )                         # and no expression, which may name them
+""", re.VERBOSE)
+# The condition that keeps pull requests from forks away from it.
+FORKS_KEPT_OUT = re.compile(r"""
+    github\.event\.pull_request\.head\.repo\.full_name   # where the pull request comes from
+    \s* == \s* github\.repository                       # is this repository
+""", re.VERBOSE)
 STRANGERS_TEXT = re.compile(r"\$\{\{[^}]*\b(?:github\.event\.|github\.head_ref)")
 # An install that takes whatever version is newest that day.
 NEWEST_VERSION_INSTALL = re.compile(r"""
@@ -178,8 +196,49 @@ def workflow_problems(workflows: tuple[Path, ...]) -> list[str]:
                 f"{place(workflow, 1)}: no permissions: block, so the job gets every right of "
                 "GitHub's token; start with 'permissions: contents: read'"
             )
-        problems += workflow_line_problems(workflow)
+        problems += workflow_line_problems(workflow) + own_machine_problems(workflow)
     return problems
+
+
+def own_machine_problems(workflow: Path) -> list[str]:
+    """A runner on one's own machine runs whatever code a pull request brings; each job there
+    must keep a fork's pull requests away. Comment lines do not count."""
+    lines = [
+        (number, line) for number, line in enumerate(lines_of(workflow), start=1)
+        if not line.lstrip().startswith("#")
+    ]
+    if not any(FORK_TRIGGER.search(line) for _, line in section(lines, "on")):
+        return []
+    return [
+        f"{place(workflow, number)}: runs on a machine of your own, and a pull request from a fork "
+        "would run its code there; start the job only for this repository's own pull requests "
+        "(github.event.pull_request.head.repo.full_name == github.repository)"
+        for job in jobs(section(lines, "jobs"))
+        if not FORKS_KEPT_OUT.search("\n".join(line for _, line in job))
+        for number, line in job if OWN_MACHINE.match(line)
+    ]
+
+
+def section(lines: list[tuple[int, str]], key: str) -> list[tuple[int, str]]:
+    """The lines of one top-level part, such as on:, from its own line to the next part."""
+    found, inside = [], False
+    for number, line in lines:
+        if TOP_LEVEL_KEY.match(line):
+            inside = line.startswith(f"{key}:")
+        if inside:
+            found.append((number, line))
+    return found
+
+
+def jobs(lines: list[tuple[int, str]]) -> list[list[tuple[int, str]]]:
+    """The jobs: section split into one list of lines per job."""
+    split: list[list[tuple[int, str]]] = []
+    for number, line in lines:
+        if JOB_NAME.match(line):
+            split.append([])
+        if split:
+            split[-1].append((number, line))
+    return split
 
 
 def workflow_line_problems(workflow: Path) -> list[str]:

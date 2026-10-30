@@ -18,8 +18,13 @@ concurrency:
 
 jobs:
   checks:
-    # The app needs macOS 27 and Xcode 27; this image runs both on Apple silicon.
-    runs-on: xcode-27
+    # The app needs macOS 27 and Xcode 27, which run on the maintainer's own Mac (a self-hosted
+    # runner). A pull request from a fork would run its own code there, so only pushes and pull
+    # requests from this repository start the job; a fork's changes are checked after review.
+    if: >-
+      github.event_name == 'push'
+      || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, xcode-27]
     timeout-minutes: 30
     steps:
       # Pinned to a commit, which nobody can move; for a newer version, pin its commit here.
