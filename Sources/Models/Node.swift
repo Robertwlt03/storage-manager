@@ -8,9 +8,9 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
     private(set) weak var parent: Node?
     private(set) var bytes: Int64 = 0
     private(set) var fileCount = 0
-    /// Folders of at least `ScanLimits.keepBytes`, biggest first.
+    /// Folders of at least `ScanLimits.smallestListedBytes`, biggest first.
     private(set) var children: [Node] = []
-    /// Files of at least `ScanLimits.keepBytes`, biggest first.
+    /// Files of at least `ScanLimits.smallestListedBytes`, biggest first.
     private(set) var files: [FileItem] = []
     /// Smaller files and folders directly inside, folded into one row.
     private(set) var restBytes: Int64 = 0
@@ -50,7 +50,7 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
     func addFile(_ size: Int64, name: () -> String) {
         bytes += size
         fileCount += 1
-        if size >= ScanLimits.keepBytes {
+        if size >= ScanLimits.smallestListedBytes {
             files.append(FileItem(path: path + "/" + name(), bytes: size))
         } else {
             restBytes += size
@@ -61,7 +61,7 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
     func adopt(_ child: Node) {
         bytes += child.bytes
         fileCount += child.fileCount
-        if child.bytes >= ScanLimits.keepBytes {
+        if child.bytes >= ScanLimits.smallestListedBytes {
             children.append(child)
         } else {
             restBytes += child.bytes
@@ -93,9 +93,12 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
             nextAncestor = ancestor.parent
         }
         parent?.children.removeAll { child in child === self }
+        // A node kept elsewhere, such as a copy group, can no longer change the tree.
+        parent = nil
     }
 
     func removeAll() {
+        for child in children { child.parent = nil }
         children = []
         bytes = 0
         fileCount = 0
@@ -113,6 +116,14 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
             return node
         }
         return nil
+    }
+
+    /// The size of a folder or listed file by absolute path; nil when it was folded or not
+    /// scanned.
+    func entryBytes(at path: String) -> Int64? {
+        if let folder = descendant(at: path) { return folder.bytes }
+        let folderPath = (path as NSString).deletingLastPathComponent
+        return descendant(at: folderPath)?.files.first { file in file.path == path }?.bytes
     }
 
     static func == (left: Node, right: Node) -> Bool { left === right }

@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// "Get Info" for a folder or file: basics right away, folder contents analyzed in the background.
-struct InfoSheet: View {
+struct InformationSheet: View {
     let entry: Entry
     @Environment(\.dismiss) private var dismiss
     @Environment(AppModel.self) private var model
@@ -16,11 +16,19 @@ struct InfoSheet: View {
             buttons.padding(Space.card)
         }
         .frame(width: Layout.sheetWidth, height: Layout.sheetHeight)
-        .task {
-            // The demo's paths are made up, so nothing is analyzed on the disk.
-            guard entry.isFolder, !model.isDemo else { return }
-            let path = path
-            profile = await Task.detached(priority: .utility) { ProfileService.profile(path) }.value
+        .task { await analyzeContents() }
+    }
+
+    /// Closing the sheet cancels the walk, which a detached task does not do by itself. The demo's
+    /// paths are made up, so nothing is analyzed on the disk.
+    private func analyzeContents() async {
+        guard entry.isFolder, !model.isDemo else { return }
+        let path = path
+        let analysis = Task.detached(priority: .utility) { ProfileService.profile(path) }
+        profile = await withTaskCancellationHandler {
+            await analysis.value
+        } onCancel: {
+            analysis.cancel()
         }
     }
 

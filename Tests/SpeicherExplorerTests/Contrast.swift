@@ -21,15 +21,15 @@ enum Contrast {
         return (lighter + flare) / (darker + flare)
     }
 
-    private static func relativeLuminance(of hex: UInt32) -> Double {
-        let red = linear(channel(hex, shift: 16))
-        let green = linear(channel(hex, shift: 8))
-        let blue = linear(channel(hex, shift: 0))
+    private static func relativeLuminance(of color: UInt32) -> Double {
+        let red = linear(channel(color, shift: 16))
+        let green = linear(channel(color, shift: 8))
+        let blue = linear(channel(color, shift: 0))
         return redWeight * red + greenWeight * green + blueWeight * blue
     }
 
-    private static func channel(_ hex: UInt32, shift: UInt32) -> Double {
-        Double((hex >> shift) & 0xFF) / channelMaximum
+    private static func channel(_ color: UInt32, shift: UInt32) -> Double {
+        Double((color >> shift) & 0xFF) / channelMaximum
     }
 
     private static func linear(_ channel: Double) -> Double {

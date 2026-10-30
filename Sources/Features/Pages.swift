@@ -1,7 +1,6 @@
 import SwiftUI
 
 extension Pane {
-    /// The view of each page.
     @ViewBuilder var page: some View {
         switch self {
         case .overview: OverviewView()

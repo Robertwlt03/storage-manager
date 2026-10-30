@@ -52,7 +52,7 @@ nonisolated struct AppUsage: Identifiable {
     let name: String
     let bundleID: String?
     let lastUsed: Date?
-    let bytes: Int64
+    var bytes: Int64 = 0
     var id: String { path }
 }
 
@@ -67,7 +67,7 @@ enum SizeBucket: CaseIterable, Identifiable {
     /// Upper bound in bytes (exclusive); nil for the last bucket.
     var limit: Int64? {
         switch self {
-        case .under1MB: ScanLimits.keepBytes
+        case .under1MB: ScanLimits.smallestListedBytes
         case .to10MB: Self.tenMegabytes
         case .to100MB: Self.hundredMegabytes
         case .to1GB: Self.oneGigabyte
@@ -88,6 +88,6 @@ enum SizeBucket: CaseIterable, Identifiable {
 
 struct Statistics {
     var fileCount = 0
-    var largeFiles = 0
+    var largeFileCount = 0
     var sizeClasses: [(sizeClass: SizeBucket, count: Int, bytes: Int64)] = []
 }

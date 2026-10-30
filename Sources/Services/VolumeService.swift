@@ -9,26 +9,28 @@ nonisolated enum VolumeService {
     ]
 
     /// All visible mounted volumes, the startup volume first.
-    static func all() -> [VolumeInfo] {
+    static func all() -> [VolumeInformation] {
         let urls =
             FileManager.default.mountedVolumeURLs(
                 includingResourceValuesForKeys: volumeKeys, options: [.skipHiddenVolumes]) ?? []
-        return urls.compactMap(volumeInfo).sorted(by: isListedBefore)
+        return urls.compactMap(volume).sorted(by: isListedBefore)
     }
 
-    static func startup() -> VolumeInfo? { all().first(where: \.isRoot) }
+    static func startup() -> VolumeInformation? { all().first(where: \.isRoot) }
 
-    private static func isListedBefore(_ left: VolumeInfo, _ right: VolumeInfo) -> Bool {
+    private static func isListedBefore(_ left: VolumeInformation, _ right: VolumeInformation)
+        -> Bool
+    {
         if left.isRoot != right.isRoot { return left.isRoot }
         return left.name < right.name
     }
 
-    private static func volumeInfo(at url: URL) -> VolumeInfo? {
+    private static func volume(at url: URL) -> VolumeInformation? {
         guard let values = try? url.resourceValues(forKeys: Set(volumeKeys)),
             let total = values.volumeTotalCapacity, total > 0
         else { return nil }
         let free = Int64(values.volumeAvailableCapacity ?? 0)
-        return VolumeInfo(
+        return VolumeInformation(
             path: url.path, name: values.volumeName ?? url.lastPathComponent,
             format: values.volumeLocalizedFormatDescription ?? "", totalBytes: Int64(total),
             freeBytes: free,

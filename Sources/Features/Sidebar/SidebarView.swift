@@ -1,21 +1,19 @@
 import SwiftUI
 
-/// The sidebar column.
 struct SidebarView: View {
     var body: some View {
         SidebarList()
             // Replaced by `SidebarToggle`, see `AppModel.toggleSidebar`.
             .toolbar(removing: .sidebarToggle)
             .toolbar {
-                // Where Apple puts it: trailing edge of the open sidebar, next to the window
-                // buttons when closed.
+                // Pushes the toggle to where Apple puts it (see `SidebarToggle`).
                 ToolbarSpacer(.flexible)
                 // Own glass circle, so no empty background stays behind when it moves (see
                 // ARCHITECTURE.md).
                 ToolbarItem { SidebarToggle().glassCircle() }
                     .sharedBackgroundVisibility(.hidden)
             }
-            // Fixed: a flexible width jumped at the end of the reveal animation.
+            // A fixed width, because a flexible one jumps at the end of the reveal animation.
             .navigationSplitViewColumnWidth(Layout.sidebarIdealWidth)
     }
 }
@@ -48,7 +46,7 @@ private struct SidebarList: View {
         if !externalVolumes.isEmpty { volumeRows(externalVolumes) }
     }
 
-    private func volumeRows(_ volumes: [VolumeInfo]) -> some View {
+    private func volumeRows(_ volumes: [VolumeInformation]) -> some View {
         Section(TextKey.sectionVolumes.translated) {
             ForEach(volumes) { volume in
                 Label(volume.name, systemImage: volume.symbol).tag(Pane.volume(volume.path))

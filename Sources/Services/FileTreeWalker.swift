@@ -6,8 +6,8 @@ nonisolated enum FileTreeWalker {
     private static let bytesPerBlock: Int64 = 512
     private static let terminatingZeroLength = 1
 
-    /// Calls `visit` for every entry; returning false stops the walk. Returns false if stopped or
-    /// not opened.
+    /// Calls `visit` for every entry; returning false stops the walk. Returns false if stopped, not
+    /// opened or ended early by an error.
     @discardableResult
     static func walk(_ path: String, _ visit: (UnsafeMutablePointer<FTSENT>) -> Bool) -> Bool {
         let pathCopy = strdup(path)
@@ -20,7 +20,8 @@ nonisolated enum FileTreeWalker {
         while let entry = fts_read(walkHandle) {
             if !visit(entry) { return false }
         }
-        return true
+        // fts_read sets errno to 0 at the regular end and to the error when it gives up early.
+        return errno == 0
     }
 
     static func kind(of entry: UnsafeMutablePointer<FTSENT>) -> Int32 {

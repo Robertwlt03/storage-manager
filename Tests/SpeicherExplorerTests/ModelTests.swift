@@ -16,7 +16,7 @@ struct ModelTests {
 
     @Test("Used and purgeable space never become negative")
     func volumeSpace() {
-        let volume = VolumeInfo(
+        let volume = VolumeInformation(
             path: "/", name: "Disk", format: "APFS", totalBytes: 10 * Self.gigabyte,
             freeBytes: 12 * Self.gigabyte, availableBytes: 11 * Self.gigabyte,
             isInternal: true, isRoot: true)
@@ -39,10 +39,5 @@ struct ModelTests {
     func largeFileThreshold() {
         #expect(LargeFileThreshold.bytes(1) == 1_000_000)
         #expect(LargeFileThreshold.megabyteOptions.contains(LargeFileThreshold.defaultMegabytes))
-    }
-
-    @Test("Subtitles join their parts with a middle dot")
-    func joinedParts() {
-        #expect(Format.joined("a", "b") == "a · b")
     }
 }

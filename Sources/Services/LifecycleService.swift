@@ -9,9 +9,8 @@ enum LifecycleService {
         NSApp.terminate(nil)
     }
 
-    /// Opens a new instance of the app, then quits this one; macOS applies a newly granted Full
-    /// Disk Access only to a new process. Quitting with `exit` also works while a sheet is open,
-    /// which blocks `terminate`.
+    /// Opens a new instance of the app, then quits this one with `exit`, as `quit` does with a
+    /// sheet open; macOS applies a newly granted Full Disk Access only to a new process.
     static func relaunch() {
         let configuration = NSWorkspace.OpenConfiguration()
         configuration.createsNewApplicationInstance = true

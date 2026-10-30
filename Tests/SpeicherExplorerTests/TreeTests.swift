@@ -6,8 +6,8 @@ import Testing
 /// The scanned tree, built by hand: no disk access, no real file names.
 @Suite("Scanned tree")
 struct TreeTests {
-    private static let bigFile = ScanLimits.keepBytes * 3
-    private static let smallFile = ScanLimits.keepBytes / 2
+    private static let bigFile = ScanLimits.smallestListedBytes * 3
+    private static let smallFile = ScanLimits.smallestListedBytes / 2
 
     private struct SampleTree {
         let root: Node
@@ -110,5 +110,29 @@ struct TreeTests {
     func expandHome() {
         #expect(Paths.expand("~/Downloads") == Paths.home + "/Downloads")
         #expect(Paths.expand("/Applications") == "/Applications")
+    }
+
+    @Test("Only the home folder itself and what lies inside it are shown with ~")
+    func homeShownWithTilde() {
+        #expect(Paths.displayName(Paths.home + "/Downloads") == "~/Downloads")
+        #expect(Paths.displayName(Paths.home + "-backup") == Paths.home + "-backup")
+    }
+
+    @Test("A folder or listed file has a size; a folded file has none")
+    func entrySizes() {
+        let tree = Self.sampleTree()
+        #expect(tree.root.entryBytes(at: "/scan/media") == tree.media.bytes)
+        #expect(tree.root.entryBytes(at: "/scan/media/film.mov") == Self.bigFile)
+        #expect(tree.root.entryBytes(at: "/scan/media/note.txt") == nil)
+    }
+
+    @Test("A detached folder no longer changes the tree it left")
+    func detachedFolderStaysOut() {
+        let tree = Self.sampleTree()
+        tree.media.detach()
+        let bytesAfterFirstDetach = tree.scanRoot.bytes
+        tree.media.detach()
+        #expect(tree.media.parent == nil)
+        #expect(tree.scanRoot.bytes == bytesAfterFirstDetach)
     }
 }

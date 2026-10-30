@@ -15,21 +15,19 @@ nonisolated enum CleanerService {
         "~/.npm/_cacache", "~/.gradle/caches", "~/.cache",
     ]
 
-    /// Lists what could go; `size` comes from the scanned tree, so no second walk over the disk is
-    /// needed. Entries under 1 MB are folded in the tree and count as zero, which is negligible
-    /// here.
-    static func candidates(size: (String) -> Int64) -> [CleanItem] {
-        CleanKind.allCases.map { kind in
-            let paths = paths(for: kind)
-            let bytes = paths.reduce(0) { total, path in total + size(path) }
-            return CleanItem(kind: kind, paths: paths, bytes: bytes)
-        }
+    /// What could go, per kind; the sizes come from the scanned tree, so there is no second walk.
+    static func removablePaths(
+        of kinds: [CleanKind] = CleanKind.allCases
+    ) -> [(kind: CleanKind, paths: [String])] {
+        kinds.map { kind in (kind, paths(for: kind)) }
     }
 
-    /// Removes everything listed; returns how many entries could not be removed.
+    /// Removes what is listed and still removable now: an app may have started or a temporary file
+    /// may have changed since the list was made. Returns how many entries could not be removed.
     static func clean(_ items: [CleanItem]) -> Int {
+        let stillRemovable = Set(removablePaths(of: items.map(\.kind)).flatMap(\.paths))
         var failed = 0
-        for path in items.flatMap(\.paths) {
+        for path in items.flatMap(\.paths) where stillRemovable.contains(path) {
             do { try FileManager.default.removeItem(atPath: path) } catch { failed += 1 }
         }
         return failed
@@ -68,9 +66,16 @@ nonisolated enum CleanerService {
         FileSystem.names(in: folder).map { name in folder + "/" + name }
     }
 
+    /// A folder counts as old only when nothing inside it changed either; the walk stops at the
+    /// first recent entry.
     private static func isOlder(_ path: String, thanDays days: Int) -> Bool {
-        let attributes = try? FileManager.default.attributesOfItem(atPath: path)
-        guard let modified = attributes?[.modificationDate] as? Date else { return false }
-        return modified < FileSystem.date(daysBefore: days)
+        let cutoff = Int(FileSystem.date(daysBefore: days).timeIntervalSince1970)
+        return FileTreeWalker.walk(path) { entry in
+            // An entry whose date cannot be read could be new, so it keeps the folder.
+            guard let fileStatus = entry.pointee.fts_statp?.pointee,
+                FileTreeWalker.kind(of: entry) != FTS_NS
+            else { return false }
+            return fileStatus.st_mtimespec.tv_sec < cutoff
+        }
     }
 }

@@ -7,7 +7,7 @@ struct CopiesView: View {
     var body: some View {
         let copyGroups = model.copyGroups
         UI.Page(.copies) {
-            // The temporary area is measured last.
+            // The temporary area is measured last, so copies show up only at the end of a scan.
             if !model.hasData || (model.isScanning && copyGroups.isEmpty) {
                 UI.Placeholder(.notMeasured, in: .page)
             } else if copyGroups.isEmpty {

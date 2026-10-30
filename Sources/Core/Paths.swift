@@ -6,6 +6,8 @@ nonisolated enum Paths {
     static let library = "/Library"
     static let opt = "/opt"
     static let usrLocal = "/usr/local"
+    /// Where macOS mounts every volume except the startup volume.
+    static let otherVolumes = "/Volumes"
 
     /// Per-user area under /private/var/folders/… with the subfolders T, C, X and 0.
     static let temporaryArea: String = {
@@ -39,7 +41,8 @@ nonisolated enum Paths {
 
     static func displayName(_ path: String) -> String {
         if path == temporaryArea { return TextKey.temporaryAreaName.translated }
-        return path.hasPrefix(home) ? "~" + path.dropFirst(home.count) : path
+        let isInHome = path == home || path.hasPrefix(home + "/")
+        return isInHome ? "~" + path.dropFirst(home.count) : path
     }
 
     static func exists(_ path: String) -> Bool { FileManager.default.fileExists(atPath: path) }

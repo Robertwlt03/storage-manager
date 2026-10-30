@@ -67,11 +67,14 @@ You cannot tell these rules from the code. Please only break one if you know the
 **Privacy:** No part of the program prints file or folder names. The app sends nothing to the network.
 
 **Deleting:** Deleting only happens after a confirmation. Copies of an app are only deleted when it is not running,
-and that is checked once more right before deleting.
+and that is checked once more right before deleting. Cleaning up works the same way: right before deleting, the list
+of what may go is made again, so a cache whose app has started since, or a folder with a fresh file inside, stays. A
+folder counts as old only when nothing inside it changed within the chosen days.
 
 **One scan, not a second:** Everything the pages show comes from the tree of the last scan. A second pass over the
-disk, for example for cleaning up, used to cost noticeable energy. Only a folder’s info window analyses it again in
-more detail on request.
+disk, for example for cleaning up, used to cost noticeable energy. The cleanup suggestions and the app list take their
+sizes from the tree; only the short lists of candidate folders and installed apps are read again, in the background.
+Only a folder’s information window analyzes it again in more detail on request.
 
 **Charts without animation:** Swift Charts crashed when a chart animated between changing data during a scan. That is
 why charts redraw without animation (`staticChart`) and wait until the scan has finished.

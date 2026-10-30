@@ -5,7 +5,7 @@ import Foundation
 /// invented; the paths of files and clean-up items do not exist.
 struct DemoData {
     let scanRoots: [Node]
-    let volume: VolumeInfo
+    let volume: VolumeInformation
     let apps: [AppUsage]
     let cleanItems: [CleanItem]
 
@@ -16,7 +16,7 @@ struct DemoData {
         let scanRoots = [home(), applications(), temporaryArea()]
         return DemoData(
             scanRoots: scanRoots,
-            volume: VolumeInfo(
+            volume: VolumeInformation(
                 path: "/", name: "Macintosh HD", format: "APFS", totalBytes: 494 * gigabyte,
                 freeBytes: 96 * gigabyte, availableBytes: 118 * gigabyte, isInternal: true,
                 isRoot: true),

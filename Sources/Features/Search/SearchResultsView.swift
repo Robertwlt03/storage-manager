@@ -14,7 +14,7 @@ struct SearchResultsView: View {
         EntryBrowser(
             entries: results,
             total: results.reduce(0) { total, result in total + result.bytes },
-            showLocation: true,
+            showsLocation: true,
             emptyTitle: TextKey.noResults.translated(with: model.searchQuery),
             emptyDetail: TextKey.searchNote.translated,
             contentKey: resultsKey

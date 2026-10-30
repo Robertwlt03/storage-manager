@@ -7,7 +7,7 @@ struct SidebarFooter: View {
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
     @State private var isShowingDetails = false
     /// Turns the rescan symbol once when a scan starts (button or ⌘R; not at launch).
-    @State private var scanStarts = 0
+    @State private var scanStartCount = 0
 
     var body: some View {
         VStack(alignment: .leading, spacing: Space.row) {
@@ -29,7 +29,7 @@ struct SidebarFooter: View {
             }
         }
         .padding(Space.item)
-        .onChange(of: model.isScanning) { if model.isScanning { scanStarts += 1 } }
+        .onChange(of: model.isScanning) { if model.isScanning { scanStartCount += 1 } }
     }
 
     private var statusButton: some View {
@@ -63,7 +63,7 @@ struct SidebarFooter: View {
         Button {
             model.scan()
         } label: {
-            UI.Icon(.symbol(Symbols.rescan), size: .small).turnOnce(value: scanStarts)
+            UI.Icon(.symbol(Symbols.rescan), size: .small).turnOnce(value: scanStartCount)
         }
         .appButton(.quiet)
         .disabled(model.isScanning)
@@ -89,7 +89,7 @@ struct SidebarFooter: View {
                 Text(TextKey.notMeasuredTitle.translated)
             }
             Spacer(minLength: 0)
-            UI.Icon(.symbol(Symbols.info), size: .small).foregroundStyle(.muted)
+            UI.Icon(.symbol(Symbols.information), size: .small).foregroundStyle(.muted)
         }
         .textRole(.label)
         .contentShape(Rectangle())
@@ -168,7 +168,6 @@ private struct ScanDetails: View {
 }
 
 extension AppModel {
-    /// The last scan could not read some folders, and Full Disk Access would let it.
     fileprivate var hasUnreadableFoldersWithoutAccess: Bool {
         unreadableCount > 0 && !hasFullDiskAccess
     }

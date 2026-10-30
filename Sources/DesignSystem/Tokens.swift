@@ -107,7 +107,7 @@ nonisolated enum Symbols {
     static let rescan = "arrow.clockwise"
     static let chevron = "chevron.right"
     static let otherItems = "ellipsis.circle"
-    static let info = "info.circle"
+    static let information = "info.circle"
     static let measure = "gauge.with.dots.needle.33percent"
     static let search = "magnifyingglass"
     static let running = "play.circle.fill"

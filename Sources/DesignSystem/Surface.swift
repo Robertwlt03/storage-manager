@@ -1,8 +1,8 @@
 import AppKit
 import SwiftUI
 
-/// Card background. On macOS 26 and later it is Liquid Glass, which follows the system's own
-/// setting (clear or tinted, System Settings › Appearance); earlier systems get a classic card.
+/// Card background: Liquid Glass, which follows the system's own setting (clear or tinted, System
+/// Settings › Appearance).
 private struct SurfaceModifier: ViewModifier {
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: Layout.cardRadius, style: .continuous)
@@ -11,12 +11,12 @@ private struct SurfaceModifier: ViewModifier {
 }
 
 /// Button roles with their own color, so several buttons side by side stay distinguishable.
-/// `quiet` is a bare symbol button (sidebar footer, info button); `content` makes a whole row, tile
-/// or legend entry clickable without drawing a button around it.
+/// `quiet` is a bare symbol button (sidebar footer, information button); `content` makes a
+/// whole row, tile or legend entry clickable without drawing a button around it.
 enum ButtonKind {
     case normal, primary, confirm, quiet, content
 
-    /// Fill behind white text; nil = no fill.
+    /// The fill behind white text, if the kind has one.
     var fill: Tone? {
         switch self {
         case .normal, .quiet, .content: nil
@@ -37,7 +37,6 @@ private struct AppButtonModifier: ViewModifier {
         }
     }
 
-    /// Liquid Glass, tinted when the button has a fill of its own.
     @ViewBuilder private func framed(_ content: Content) -> some View {
         if let fill = kind.fill {
             content.buttonStyle(.glassProminent).tint(fill.color)

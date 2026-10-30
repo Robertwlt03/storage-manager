@@ -18,7 +18,7 @@ enum StatisticsService {
                 let sizeBucket = bucket(for: file.bytes)
                 filesPerBucket[sizeBucket, default: 0] += 1
                 bytesPerBucket[sizeBucket, default: 0] += file.bytes
-                if file.bytes >= largeFileBytes { statistics.largeFiles += 1 }
+                if file.bytes >= largeFileBytes { statistics.largeFileCount += 1 }
             }
             folder.children.forEach(countKeptFiles)
         }

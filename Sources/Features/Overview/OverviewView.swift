@@ -41,7 +41,7 @@ struct OverviewView: View {
                 symbol: Symbols.files, isLoading: isLoadingFigures
             ) { model.pane = .explorer }
             UI.KeyFigure(
-                figureText(model.statistics?.largeFiles),
+                figureText(model.statistics?.largeFileCount),
                 TextKey.figureLargeFilesFrom.translated(with: largeFileThreshold),
                 symbol: Symbols.largeFiles, isLoading: isLoadingFigures
             ) { model.pane = .largeFiles }
@@ -59,7 +59,7 @@ struct OverviewView: View {
 
     // MARK: Disk
 
-    private func startupDiskCard(_ startupVolume: VolumeInfo) -> some View {
+    private func startupDiskCard(_ startupVolume: VolumeInformation) -> some View {
         UI.Card {
             UI.VolumeSummary(
                 startupVolume, segments: segments, canSelect: canOpen, onSelect: open)

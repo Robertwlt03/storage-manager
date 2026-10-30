@@ -168,7 +168,9 @@ enum UITest {
                 model.searchText = query
                 await step("Search", model, wait: Pause.perSearch, picture: false)
                 let hits = SearchService.search(query, scope: scope, in: model.root)
-                check(hits.count <= ScanLimits.searchLimit, "Search returns more than the limit")
+                check(
+                    hits.count <= ScanLimits.maximumSearchResults,
+                    "Search returns more than the limit")
                 check(
                     scope != .folders || hits.allSatisfy(\.isFolder),
                     "Folder search returns files")
@@ -251,7 +253,6 @@ enum UITest {
                 : "RESULT: \(problems.count) problems")
         for problem in problems { log("PROBLEM: \(problem)") }
     }
-
 }
 
 // MARK: Helpers

@@ -3,7 +3,7 @@ import AppKit
 /// UserDefaults keys; views bind them with @AppStorage, services read them through `AppSettings`.
 /// Appearance, language and units come from System Settings, so the app keeps no switches for them.
 enum SettingsKey {
-    static let autoScan = "autoScan"
+    static let scansAutomatically = "autoScan"
     static let extraFolders = "extraFolders"
     static let largeFileMegabytes = "largeFileMB"
     static let unusedDays = "unusedDays"
@@ -26,13 +26,13 @@ enum AppSettings {
 
     static func registerDefaults() {
         defaults.register(defaults: [
-            SettingsKey.autoScan: true,
+            SettingsKey.scansAutomatically: true,
             SettingsKey.largeFileMegabytes: LargeFileThreshold.defaultMegabytes,
             SettingsKey.unusedDays: CleanUpRules.defaultUnusedDays,
         ])
     }
 
-    static var autoScan: Bool { defaults.bool(forKey: SettingsKey.autoScan) }
+    static var scansAutomatically: Bool { defaults.bool(forKey: SettingsKey.scansAutomatically) }
     static var largeFileMegabytes: Int { defaults.integer(forKey: SettingsKey.largeFileMegabytes) }
     static var launchPane: Pane? {
         defaults.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:))

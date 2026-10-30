@@ -68,7 +68,7 @@ struct ServiceTests {
             uniqueKeysWithValues: statistics.sizeClasses.map { row in (row.sizeClass, row.count) })
         #expect(bySizeClass[.under1MB] == 1)
         #expect(bySizeClass[.over1GB] == 1)
-        #expect(statistics.largeFiles == 1)
+        #expect(statistics.largeFileCount == 1)
         #expect(statistics.fileCount == 2)
     }
 
@@ -97,11 +97,11 @@ struct ServiceTests {
     @Test("Without data the summary says so; with data it mentions only what there is to say")
     func summary() {
         let empty = SummaryService.Input(
-            volume: nil, categories: [], cleanable: nil, copies: 0, unusedApps: 0)
+            volume: nil, categories: [], cleanableBytes: nil, copyBytes: 0, unusedAppCount: 0)
         #expect(SummaryService.text(empty) == TextKey.summaryNotMeasured.translated)
         let full = SummaryService.Input(
             volume: TestTree.volume(totalBytes: 10, freeBytes: 4, availableBytes: 5),
-            categories: [], cleanable: 1, copies: 1, unusedApps: 1)
+            categories: [], cleanableBytes: 1, copyBytes: 1, unusedAppCount: 1)
         let sentences = SummaryService.text(full)
         for key in [TextKey.summaryDisk, .summaryClean, .summaryCopies, .summaryApps] {
             #expect(sentences.contains(key.translated), "\(key.rawValue)")

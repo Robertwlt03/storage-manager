@@ -3,13 +3,13 @@ import SwiftUI
 /// Only what macOS does not already cover: appearance, language and units come from System
 /// Settings.
 struct SettingsView: View {
-    @AppStorage(SettingsKey.autoScan) private var autoScan = true
+    @AppStorage(SettingsKey.scansAutomatically) private var scansAtLaunch = true
     @AppStorage(SettingsKey.extraFolders) private var extraFolders = ""
     @State private var selectedFolder: String?
 
     var body: some View {
         Form {
-            Toggle(TextKey.autoScan.translated, isOn: $autoScan)
+            Toggle(TextKey.autoScan.translated, isOn: $scansAtLaunch)
             LabeledContent(TextKey.extraFolders.translated) {
                 folderEditor(AppSettings.folders(from: extraFolders))
             }

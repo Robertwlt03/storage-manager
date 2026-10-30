@@ -40,10 +40,12 @@ import SwiftUI
     private(set) var isDemo = false
     private var scanTask: Task<Void, Never>?
     private var scanID = UUID()  // the current scan; older, canceled runs check it and step aside
+    // The newest background refresh of each list; an older one that finishes later steps aside.
+    private var appsRefreshID = UUID()
+    private var cleanItemsRefreshID = UUID()
 
-    var startupVolume: VolumeInfo? { volumes.first(where: \.isRoot) }
-    /// Reads `revision`, so views that ask this refresh when the tree changes (the tree itself is
-    /// not observed).
+    var startupVolume: VolumeInformation? { volumes.first(where: \.isRoot) }
+    /// Reads `revision`, because the tree itself is not observed.
     var hasData: Bool {
         _ = revision
         return !root.children.isEmpty
@@ -73,8 +75,6 @@ import SwiftUI
         withAnimation(Motion.quick) { sidebar.fitToWindow() }
     }
 
-    /// Leaves the search: clears the field and closes it (Cancel button, Escape, or picking a page
-    /// in the sidebar).
     func endSearch() {
         searchText = ""
         isSearchPresented = false
@@ -93,7 +93,7 @@ import SwiftUI
         if !hasFullDiskAccess && !AppSettings.shouldSkipAccessSheet {
             isShowingAccessSheet = true
         } else {
-            autoScanIfWanted()
+            scanAutomaticallyIfWanted()
         }
     }
 
@@ -116,13 +116,13 @@ import SwiftUI
 
     func finishAccessSheet() {
         isShowingAccessSheet = false
-        autoScanIfWanted()
+        scanAutomaticallyIfWanted()
     }
 
-    private func autoScanIfWanted() {
-        guard AppSettings.autoScan, lastScan == nil, !isScanning else { return }
-        // Follows the system's Low Power Mode.
-        if ProcessInfo.processInfo.isLowPowerModeEnabled { return }
+    private func scanAutomaticallyIfWanted() {
+        guard AppSettings.scansAutomatically, lastScan == nil, !isScanning,
+            !ProcessInfo.processInfo.isLowPowerModeEnabled
+        else { return }
         scan()
     }
 
@@ -177,10 +177,10 @@ import SwiftUI
 
     private func add(_ result: ScanService.Result, of area: String) {
         result.root.attach(to: root)
-        unreadableCount += result.unreadable
+        unreadableCount += result.unreadableCount
         // A home folder without any blocked folder proves Full Disk Access, whatever the quick
         // check said. (System folders in the temporary area stay blocked even with it.)
-        if area == Paths.home && result.unreadable == 0 { hasFullDiskAccess = true }
+        if area == Paths.home && result.unreadableCount == 0 { hasFullDiskAccess = true }
         progress = progressSoFar
         treeChanged()
     }
@@ -209,9 +209,9 @@ import SwiftUI
         return min(estimate, Self.largestEstimatedFraction)
     }
 
+    /// The canceled task still finishes the scan, so the figures match the partial tree.
     func cancelScan() {
         scanTask?.cancel()
-        scanID = UUID()
         isScanning = false
     }
 
@@ -247,26 +247,48 @@ extension AppModel {
         return await Task.detached(priority: .utility) { CopyService.details(group) }.value
     }
 
+    /// Spotlight and the apps' bundles are read in the background; the sizes come from the tree.
     func refreshApps() {
         guard !isDemo else { return }
-        let found = AppUsageService.apps(in: root)
-        Motion.animate { apps = found }
+        let refreshID = UUID()
+        appsRefreshID = refreshID
+        Task {
+            let listing = Task.detached(priority: .utility) { AppUsageService.installedApps() }
+            var found = await listing.value
+            guard appsRefreshID == refreshID else { return }
+            for index in found.indices {
+                found[index].bytes = root.descendant(at: found[index].path)?.bytes ?? 0
+            }
+            Motion.animate { apps = found }
+        }
     }
 
-    /// Also when the large-file threshold changes, which one of the figures depends on.
+    /// Also called when the large-file threshold changes, which one figure depends on.
     func refreshStatistics() {
         let largeFileBytes = LargeFileThreshold.bytes(AppSettings.largeFileMegabytes)
         statistics = StatisticsService.compute(root: root, largeFileBytes: largeFileBytes)
     }
 
     /// What the cleaner could remove; computed once after each scan and shared by the overview and
-    /// the cleaner.
+    /// the cleaner. The folders are listed in the background, the sizes come from the tree.
     func refreshCleanItems() {
         guard hasData, !isDemo else { return }
-        let found = CleanerService.candidates { [root] path in
-            root.descendant(at: path)?.bytes ?? 0
+        let refreshID = UUID()
+        cleanItemsRefreshID = refreshID
+        Task {
+            let listing = Task.detached(priority: .utility) { CleanerService.removablePaths() }
+            let listed = await listing.value
+            guard cleanItemsRefreshID == refreshID else { return }
+            let found = listed.map { kind, paths in
+                CleanItem(kind: kind, paths: paths, bytes: listedBytes(of: paths))
+            }
+            Motion.animate { cleanItems = found }
         }
-        Motion.animate { cleanItems = found }
+    }
+
+    /// Entries under 1 MB are folded in the tree and count as zero, which is negligible here.
+    private func listedBytes(of paths: [String]) -> Int64 {
+        paths.reduce(0) { total, path in total + (root.entryBytes(at: path) ?? 0) }
     }
 
     /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
@@ -283,7 +305,7 @@ extension AppModel {
         try AppUsageService.moveToTrash(app)
         root.descendant(at: app.path)?.detach()
         treeChanged()
-        refreshApps()
+        Motion.animate { apps.removeAll { listed in listed.path == app.path } }
     }
 
     /// Removes the chosen items, measures what really got free, then measures everything again.
@@ -317,8 +339,6 @@ extension AppModel {
         return freed
     }
 
-    /// Runs the removal, waits until APFS reports the freed blocks and returns how much free space
-    /// really grew.
     private func freeSpaceGained(by removal: () async throws -> Void) async rethrows -> Int64 {
         let freeBefore = VolumeService.startup()?.freeBytes ?? 0
         try await removal()

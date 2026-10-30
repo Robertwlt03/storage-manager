@@ -12,7 +12,7 @@ nonisolated enum ScanService {
 
     struct Result {
         let root: Node
-        let unreadable: Int
+        let unreadableCount: Int
     }
 
     /// Roots measured by "Rescan": the default areas plus the folders from the settings, without
@@ -41,9 +41,8 @@ nonisolated enum ScanService {
         var visitedEntries = 0
         var lastReport = Date()
 
-        let isFinished = FileTreeWalker.walk(path) { entry in
+        let isComplete = FileTreeWalker.walk(path) { entry in
             visitedEntries += 1
-            // Every few thousand entries: stop when canceled, and report progress when it is due.
             let isCheckpoint = visitedEntries & ScanLimits.cancelCheckMask == 0
             if isCheckpoint && Task.isCancelled { return false }
             if isCheckpoint && Date().timeIntervalSince(lastReport) > ScanLimits.progressInterval {
@@ -53,9 +52,11 @@ nonisolated enum ScanService {
             builder.add(entry, scanRoot: path)
             return true
         }
-        guard isFinished, let root = builder.root else { return nil }
+        if Task.isCancelled { return nil }
+        if !isComplete { builder.closeAfterError() }
+        guard let root = builder.root else { return nil }
         reportProgress(builder.progress)
-        return Result(root: root, unreadable: builder.unreadable)
+        return Result(root: root, unreadableCount: builder.unreadableCount)
     }
 }
 
@@ -66,7 +67,7 @@ private nonisolated struct TreeBuilder {
     private var seenLinkedFiles = Set<UInt64>()
     private(set) var root: Node?
     private(set) var progress = ScanService.Progress()
-    private(set) var unreadable = 0
+    private(set) var unreadableCount = 0
 
     mutating func add(_ entry: UnsafeMutablePointer<FTSENT>, scanRoot: String) {
         switch FileTreeWalker.kind(of: entry) {
@@ -76,17 +77,23 @@ private nonisolated struct TreeBuilder {
             leave()
         // An unreadable folder arrives as FTS_D first and as FTS_DNR instead of FTS_DP.
         case FTS_DNR:
-            unreadable += 1
+            unreadableCount += 1
             leave()
         case FTS_F, FTS_SL, FTS_SLNONE, FTS_DEFAULT:
             if let fileStatus = entry.pointee.fts_statp?.pointee {
                 addFile(fileStatus) { FileTreeWalker.name(of: entry) }
             }
         case FTS_ERR, FTS_NS:
-            unreadable += 1
+            unreadableCount += 1
         default:
             break
         }
+    }
+
+    /// An fts error ends the walk with folders still open; closing them keeps what was measured.
+    mutating func closeAfterError() {
+        unreadableCount += 1
+        while !openFolders.isEmpty { leave() }
     }
 
     private mutating func enter(_ name: String) {

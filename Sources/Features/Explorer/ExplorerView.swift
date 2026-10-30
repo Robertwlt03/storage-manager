@@ -16,7 +16,7 @@ struct ExplorerView: View {
 private struct FolderView: View {
     let node: Node
     @Environment(AppModel.self) private var model
-    @State private var infoEntry: Entry?
+    @State private var informationEntry: Entry?
 
     private var entries: [Entry] {
         _ = model.revision
@@ -31,15 +31,15 @@ private struct FolderView: View {
         .navigationTitle(node.isVirtual ? TextKey.paneExplorer.translated : node.displayName)
         .navigationSubtitle(subtitle)
         .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(Pane.explorer.info) { folderActions }
+            UI.PageHeader(Pane.explorer.information) { folderActions }
         }
-        .sheet(item: $infoEntry) { entry in InfoSheet(entry: entry) }
+        .sheet(item: $informationEntry) { entry in InformationSheet(entry: entry) }
     }
 
     @ViewBuilder private var folderActions: some View {
         if !node.isVirtual {
             UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(node.path) }
-            UI.ActionButton(TextKey.info.translated) { infoEntry = .folder(node) }
+            UI.ActionButton(TextKey.info.translated) { informationEntry = .folder(node) }
         }
     }
 

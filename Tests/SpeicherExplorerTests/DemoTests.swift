@@ -29,6 +29,17 @@ struct DemoTests {
         #expect(model.cleanItems?.count == CleanKind.allCases.count)
     }
 
+    @Test("Leaving the search clears it, and canceling without a running scan changes nothing")
+    func searchAndCancel() {
+        let model = Self.demoModel()
+        model.searchText = "report"
+        model.isSearchPresented = true
+        model.endSearch()
+        #expect(model.searchText.isEmpty && !model.isSearchPresented)
+        model.cancelScan()
+        #expect(!model.isScanning && model.hasData)
+    }
+
     @Test("Nothing is scanned or removed, and the demo's clean-up paths do not exist")
     func touchesNothing() async throws {
         let model = Self.demoModel()

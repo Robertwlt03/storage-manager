@@ -57,7 +57,7 @@ enum SelfTest {
                 "Area \(index + 1)",
                 "\(Format.count(result.root.fileCount)) files,"
                     + " \(Format.bytes(result.root.bytes)) (du \(Format.bytes(reference)),"
-                    + " deviation \(deviationText) %), \(result.unreadable) unreadable,"
+                    + " deviation \(deviationText) %), \(result.unreadableCount) unreadable,"
                     + " \(secondsText) s, CPU \(cpuText) s"
             )
             precondition(isClose, "scanner and du differ too much")
@@ -85,7 +85,8 @@ enum SelfTest {
         Console.passed(
             "Search",
             detail: "\(folders.count) folders, \(files.count) files"
-                + " (limit \(ScanLimits.searchLimit)), \(Int(millisecondsPerSearch)) ms per search"
+                + " (limit \(ScanLimits.maximumSearchResults)),"
+                + " \(Int(millisecondsPerSearch)) ms per search"
         )
     }
 

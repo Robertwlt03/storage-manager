@@ -11,13 +11,18 @@ struct FormatTests {
     private static let oneDay: TimeInterval = 86_400
     private static let firstDate = Date(timeIntervalSince1970: 1_700_000_000)
 
-    @Test("Sizes show a number and a unit, and grow with the bytes")
+    @Test("Sizes show a number and a unit, and a larger size a larger unit")
     func sizes() {
         let small = Format.bytes(1_000_000)
         let large = Format.bytes(3_000_000_000)
-        #expect(small.contains("MB"))
-        #expect(large.contains("GB"))
-        #expect(small != large)
+        let showsDigits = small.contains(where: \.isNumber)
+        #expect(showsDigits)
+        // Megabytes and gigabytes, in the letters of whatever language the system speaks.
+        #expect(unit(of: small) != unit(of: large))
+    }
+
+    private func unit(of size: String) -> String {
+        size.filter(\.isLetter)
     }
 
     @Test("Counts and shares keep their digits")

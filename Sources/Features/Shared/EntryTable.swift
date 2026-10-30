@@ -6,18 +6,18 @@ import SwiftUI
 struct EntryTable: View {
     let entries: [Entry]
     let total: Int64
-    var showLocation = false
+    var showsLocation = false
     @Environment(AppModel.self) private var model
     @State private var selection: Set<Entry.ID> = []
     @State private var sortOrder = [KeyPathComparator(\Entry.bytes, order: .reverse)]
-    @Binding var infoEntry: Entry?
+    @Binding var informationEntry: Entry?
 
     var body: some View {
         let rows = entries.sorted(using: sortOrder)
         table(rows)
             .contextMenu(forSelectionType: Entry.ID.self) { selectedIDs in
                 if let entry = firstEntry(in: rows, with: selectedIDs) {
-                    EntryMenu(entry: entry, infoEntry: $infoEntry)
+                    EntryMenu(entry: entry, informationEntry: $informationEntry)
                 }
             } primaryAction: { selectedIDs in
                 firstEntry(in: rows, with: selectedIDs).map(model.activate)
@@ -25,7 +25,7 @@ struct EntryTable: View {
     }
 
     @ViewBuilder private func table(_ rows: [Entry]) -> some View {
-        if showLocation {
+        if showsLocation {
             Table(rows, selection: $selection, sortOrder: $sortOrder) {
                 nameColumn
                 locationColumn

@@ -5,7 +5,7 @@ struct VolumeView: View {
     let path: String
     @Environment(AppModel.self) private var model
 
-    private var volume: VolumeInfo? { model.volumes.first { volume in volume.path == path } }
+    private var volume: VolumeInformation? { model.volumes.first { volume in volume.path == path } }
 
     var body: some View {
         if let volume {
@@ -18,7 +18,7 @@ struct VolumeView: View {
         }
     }
 
-    private func volumeCard(_ volume: VolumeInfo) -> some View {
+    private func volumeCard(_ volume: VolumeInformation) -> some View {
         UI.Card {
             UI.VolumeSummary(volume, segments: segments(of: volume))
             Divider()
@@ -27,11 +27,11 @@ struct VolumeView: View {
     }
 
     /// Used space without what macOS can purge on demand.
-    private func usedBytes(of volume: VolumeInfo) -> Int64 {
+    private func usedBytes(of volume: VolumeInformation) -> Int64 {
         volume.usedBytes - volume.purgeableBytes
     }
 
-    private func segments(of volume: VolumeInfo) -> [StorageSegment] {
+    private func segments(of volume: VolumeInformation) -> [StorageSegment] {
         [
             StorageSegment(
                 id: StorageSegment.usedID, title: TextKey.used.translated,
@@ -42,7 +42,7 @@ struct VolumeView: View {
         ]
     }
 
-    private func fields(of volume: VolumeInfo) -> [UI.Field?] {
+    private func fields(of volume: VolumeInformation) -> [UI.Field?] {
         [
             UI.Field(.capacity, Format.bytes(volume.totalBytes)),
             UI.Field(.used, Format.bytes(usedBytes(of: volume))),
@@ -53,7 +53,7 @@ struct VolumeView: View {
         ]
     }
 
-    @ViewBuilder private func primaryAction(_ volume: VolumeInfo) -> some View {
+    @ViewBuilder private func primaryAction(_ volume: VolumeInformation) -> some View {
         if volume.isRoot {
             UI.ActionButton(TextKey.toOverview.translated) { model.pane = .overview }
         } else if let node = model.root.descendant(at: volume.path) {

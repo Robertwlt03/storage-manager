@@ -1,10 +1,10 @@
 import SwiftUI
 
 extension UI {
-    /// A scrolling page: its header with options and info button, then the content.
+    /// A scrolling page: its header with options and information button, then the content.
     struct Page<Options: View, Content: View>: View {
         let title: String
-        let info: TextKey
+        let information: TextKey
         @ViewBuilder let options: Options
         @ViewBuilder let content: Content
 
@@ -13,7 +13,7 @@ extension UI {
             @ViewBuilder _ content: () -> Content
         ) {
             self.title = title ?? pane.title.translated
-            info = pane.info
+            information = pane.information
             self.options = options()
             self.content = content()
         }
@@ -21,7 +21,7 @@ extension UI {
         var body: some View {
             ScrollView {
                 VStack(alignment: .leading, spacing: Space.section) {
-                    HeaderBar(info: info) { options }
+                    HeaderBar(information: information) { options }
                     content
                 }
                 .padding(Space.page)
@@ -36,16 +36,16 @@ extension UI {
 
     /// The page header on its own, above tables, which scroll by themselves.
     struct PageHeader<Options: View>: View {
-        let info: TextKey
+        let information: TextKey
         @ViewBuilder let options: Options
 
-        init(_ info: TextKey, @ViewBuilder options: () -> Options) {
-            self.info = info
+        init(_ information: TextKey, @ViewBuilder options: () -> Options) {
+            self.information = information
             self.options = options()
         }
 
         var body: some View {
-            HeaderBar(info: info) { options }
+            HeaderBar(information: information) { options }
                 .padding(.horizontal, Space.page)
                 .padding(.vertical, Space.row)
         }
@@ -100,34 +100,34 @@ extension UI.Page where Options == EmptyView {
 
 /// The page's options on the left, a button explaining the page on the right.
 private struct HeaderBar<Options: View>: View {
-    let info: TextKey
+    let information: TextKey
     @ViewBuilder let options: Options
-    @State private var isShowingInfo = false
+    @State private var isShowingInformation = false
 
     var body: some View {
         HStack(spacing: Space.item) {
             options
             Spacer(minLength: 0)
-            infoButton
+            informationButton
         }
         .frame(minHeight: Layout.headerHeight)
     }
 
-    private var infoButton: some View {
+    private var informationButton: some View {
         Button {
-            isShowingInfo.toggle()
+            isShowingInformation.toggle()
         } label: {
-            Label(TextKey.aboutPage.translated, systemImage: Symbols.info)
+            Label(TextKey.aboutPage.translated, systemImage: Symbols.information)
         }
         .labelStyle(.iconOnly)
         .appButton(.quiet)
         .font(.title3)
         .help(TextKey.aboutPage.translated)
-        .popover(isPresented: $isShowingInfo, arrowEdge: .bottom) { infoText }
+        .popover(isPresented: $isShowingInformation, arrowEdge: .bottom) { informationText }
     }
 
-    private var infoText: some View {
-        Text(info.translated)
+    private var informationText: some View {
+        Text(information.translated)
             .fixedSize(horizontal: false, vertical: true)
             .padding(Space.card)
             .frame(width: Layout.popoverWidth, alignment: .leading)

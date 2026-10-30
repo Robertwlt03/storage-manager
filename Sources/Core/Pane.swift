@@ -9,7 +9,6 @@ enum Pane: Hashable {
     static let system: [Pane] = [.temporaryFiles, .copies]
     static let everyPage = main + tidy + system
 
-    /// Pages whose contents can be shown as a list or as a grid.
     var supportsGrid: Bool { [.overview, .explorer, .largeFiles, .apps].contains(self) }
 
     init?(launchKey: String) {
@@ -25,20 +24,21 @@ enum Pane: Hashable {
 
     var launchKey: String { details.key }
     var title: TextKey { details.title }
-    var info: TextKey { details.info }  // what the page is for, shown by its info button
+    /// What the page is for, shown by its information button.
+    var information: TextKey { details.information }
     var symbol: String { details.symbol }
 
-    /// One row of the page table: launch key, title, info text and symbol.
+    /// One row of the page table.
     private struct Details {
         let key: String
         let title: TextKey
-        let info: TextKey
+        let information: TextKey
         let symbol: String
 
-        init(_ key: String, _ title: TextKey, _ info: TextKey, _ symbol: String) {
+        init(_ key: String, _ title: TextKey, _ information: TextKey, _ symbol: String) {
             self.key = key
             self.title = title
-            self.info = info
+            self.information = information
             self.symbol = symbol
         }
     }

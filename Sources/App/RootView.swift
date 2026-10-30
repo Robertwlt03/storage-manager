@@ -72,7 +72,6 @@ struct RootView: View {
         }
     }
 
-    /// Picking a page leaves the search and closes the floating sidebar.
     private func leaveSearchAndSidebar() {
         if model.isSearching { model.endSearch() }
         model.closeSidebarOverlay()

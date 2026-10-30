@@ -7,15 +7,14 @@ nonisolated enum AppUsageService {
     private static let appSuffix = ".app"
     private static var folders: [String] { [Paths.applications, Paths.home + "/Applications"] }
 
-    /// Apps in the Applications folders and one level of subfolders; sizes come from the scanned
-    /// tree.
-    static func apps(in root: Node) -> [AppUsage] {
+    /// Apps in the Applications folders and one level of subfolders, without sizes: those come
+    /// from the scanned tree.
+    static func installedApps() -> [AppUsage] {
         appPaths()
             .map { path in
                 AppUsage(
                     path: path, name: FileManager.default.displayName(atPath: path),
-                    bundleID: Bundle(path: path)?.bundleIdentifier,
-                    lastUsed: lastUsed(path), bytes: root.descendant(at: path)?.bytes ?? 0)
+                    bundleID: Bundle(path: path)?.bundleIdentifier, lastUsed: lastUsed(path))
             }
     }
 

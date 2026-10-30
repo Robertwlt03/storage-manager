@@ -18,7 +18,7 @@ struct LargeFilesView: View {
         let files = largeFiles
         let totalBytes = files.reduce(0) { total, file in total + file.bytes }
         EntryBrowser(
-            entries: files, total: totalBytes, showLocation: true,
+            entries: files, total: totalBytes, showsLocation: true,
             emptyTitle: TextKey.noFilesFrom.translated(with: thresholdText(minimumMegabytes)),
             contentKey: "\(minimumMegabytes)"
         )
@@ -28,7 +28,7 @@ struct LargeFilesView: View {
                 with: Format.count(files.count), Format.bytes(totalBytes))
         )
         .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(Pane.largeFiles.info) { minimumSizePicker }
+            UI.PageHeader(Pane.largeFiles.information) { minimumSizePicker }
         }
     }
 

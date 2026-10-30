@@ -19,7 +19,6 @@ enum Motion {
     static var quick: Animation? { isReduced ? nil : .smooth(duration: quickDuration) }
     static let quickDuration = 0.2
 
-    /// Changes model state with the standard animation.
     static func animate(_ changes: () -> Void) {
         withAnimation(standard, changes)
     }
@@ -56,9 +55,8 @@ private struct HoverHighlight: ViewModifier {
 extension View {
     func hoverLift() -> some View { modifier(HoverLift()) }
 
-    /// Turns an SF Symbol once whenever `value` changes; on macOS 14, which has no turning effect,
-    /// it bounces. A one-off effect of the system: it costs nothing at rest and is left out with
-    /// "Reduce motion".
+    /// Turns an SF Symbol once whenever `value` changes. A one-off effect of the system: it costs
+    /// nothing at rest and is left out with "Reduce motion".
     func turnOnce<Value: Equatable>(value: Value) -> some View {
         symbolEffect(.rotate, value: value)
     }
@@ -67,11 +65,9 @@ extension View {
     /// Charts redraw without animation: animating between changing datasets crashed Swift Charts.
     func staticChart() -> some View { transaction { transaction in transaction.animation = nil } }
 
-    /// Animates this view whenever `value` changes.
     func smoothChanges<Value: Equatable>(of value: Value) -> some View {
         animation(Motion.standard, value: value)
     }
 
-    /// Fades content in and out, the standard transition for appearing views.
     func fadeTransition() -> some View { transition(.opacity) }
 }

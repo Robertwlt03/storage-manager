@@ -3,7 +3,7 @@ import QuickLookThumbnailing
 
 /// The pictures of files: Finder's icon, and Quick Look thumbnails, the same pictures Finder shows
 /// in its icon view (the image itself for photos, the first frame of a video, the first page of a
-/// PDF). Each is made once and kept in memory. It reads the disk, so it is free of the main thread.
+/// PDF). It reads the disk, so it is free of the main thread.
 nonisolated enum PreviewService {
     // NSCache is safe to use from any thread (see its documentation), which the compiler cannot
     // see on its own: the macOS 27 SDK still does not mark it Sendable.
@@ -42,7 +42,7 @@ nonisolated extension NSCache where KeyType == NSString, ObjectType == NSImage {
     /// tight.
     static func images() -> NSCache<NSString, NSImage> {
         let cache = NSCache<NSString, NSImage>()
-        cache.countLimit = ScanLimits.iconCacheLimit
+        cache.countLimit = ScanLimits.maximumCachedImages
         return cache
     }
 }

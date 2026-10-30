@@ -5,11 +5,11 @@ enum SummaryService {
     private static let largestCategoryCount = 2
 
     struct Input {
-        let volume: VolumeInfo?
+        let volume: VolumeInformation?
         let categories: [Category]
-        let cleanable: Int64?
-        let copies: Int64
-        let unusedApps: Int
+        let cleanableBytes: Int64?
+        let copyBytes: Int64
+        let unusedAppCount: Int
     }
 
     static func text(_ input: Input) -> String {
@@ -20,19 +20,20 @@ enum SummaryService {
         if let categoriesSentence = largestCategoriesSentence(input.categories) {
             sentences.append(categoriesSentence)
         }
-        if let cleanableBytes = input.cleanable, cleanableBytes > 0 {
+        if let cleanableBytes = input.cleanableBytes, cleanableBytes > 0 {
             sentences.append(TextKey.summaryClean.translated(with: Format.bytes(cleanableBytes)))
         }
-        if input.copies > 0 {
-            sentences.append(TextKey.summaryCopies.translated(with: Format.bytes(input.copies)))
+        if input.copyBytes > 0 {
+            sentences.append(TextKey.summaryCopies.translated(with: Format.bytes(input.copyBytes)))
         }
-        if input.unusedApps > 0 {
-            sentences.append(TextKey.summaryApps.translated(with: Format.count(input.unusedApps)))
+        if input.unusedAppCount > 0 {
+            sentences.append(
+                TextKey.summaryApps.translated(with: Format.count(input.unusedAppCount)))
         }
         return sentences.joined(separator: " ")
     }
 
-    private static func diskSentence(_ volume: VolumeInfo) -> String {
+    private static func diskSentence(_ volume: VolumeInformation) -> String {
         TextKey.summaryDisk.translated(
             with: volume.name, Format.bytes(volume.usedBytes), Format.bytes(volume.totalBytes),
             Format.bytes(volume.availableBytes))

@@ -5,7 +5,7 @@ import SwiftUI
 struct EntryBrowser: View {
     let entries: [Entry]
     let total: Int64
-    var showLocation = false
+    var showsLocation = false
     let emptyTitle: String
     var emptyDetail: String?
     /// Changes when the whole content is replaced; the table is then rebuilt, not diffed (see
@@ -13,7 +13,7 @@ struct EntryBrowser: View {
     var contentKey = ""
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
-    @State private var infoEntry: Entry?
+    @State private var informationEntry: Entry?
 
     private static let clicksToOpen = 2
 
@@ -24,8 +24,8 @@ struct EntryBrowser: View {
                     .background(Backdrop())
             } else {
                 EntryTable(
-                    entries: entries, total: total, showLocation: showLocation,
-                    infoEntry: $infoEntry
+                    entries: entries, total: total, showsLocation: showsLocation,
+                    informationEntry: $informationEntry
                 )
                 .id(contentKey)
             }
@@ -36,7 +36,7 @@ struct EntryBrowser: View {
                     .emptyAfterScan(title: emptyTitle, symbol: Symbols.search, detail: emptyDetail))
             }
         }
-        .sheet(item: $infoEntry) { entry in InfoSheet(entry: entry) }
+        .sheet(item: $informationEntry) { entry in InformationSheet(entry: entry) }
         .smoothChanges(of: layout)
     }
 
@@ -46,11 +46,11 @@ struct EntryBrowser: View {
             UI.Tile(
                 icon: entry.path.map(IconKind.preview) ?? .letter("…"), title: entry.name,
                 value: Format.bytes(entry.bytes),
-                detail: showLocation ? entry.location : nil,
+                detail: showsLocation ? entry.location : nil,
                 share: Double(entry.bytes) / Double(max(total, 1))
             )
             .onTapGesture(count: Self.clicksToOpen) { model.activate(entry) }
-            .contextMenu { EntryMenu(entry: entry, infoEntry: $infoEntry) }
+            .contextMenu { EntryMenu(entry: entry, informationEntry: $informationEntry) }
         }
     }
 }
@@ -58,14 +58,14 @@ struct EntryBrowser: View {
 /// The context menu of a row or tile, the same everywhere.
 struct EntryMenu: View {
     let entry: Entry
-    @Binding var infoEntry: Entry?
+    @Binding var informationEntry: Entry?
     @Environment(AppModel.self) private var model
 
     var body: some View {
         if let path = entry.path {
             if let node = entry.node { Button(TextKey.open.translated) { model.open(node) } }
             Button(TextKey.showInFinder.translated) { FinderService.reveal(path) }
-            Button(TextKey.info.translated) { infoEntry = entry }
+            Button(TextKey.info.translated) { informationEntry = entry }
             Divider()
             Button(TextKey.copyPath.translated) { FinderService.copyPath(path) }
         }

@@ -83,7 +83,7 @@ enum CategoryKind: Int, CaseIterable {
 enum CategoryService {
     /// Sums the tree into categories. With a volume it adds what macOS can purge and the remainder
     /// ("System & Other"); without one (while scanning) the remainder would be misleading.
-    static func compute(root: Node, volume: VolumeInfo?) -> [Category] {
+    static func compute(root: Node, volume: VolumeInformation?) -> [Category] {
         let kindByPath = kindsByExpandedPath()
         var categories = CategoryKind.allCases.map { kind in Category(kind: kind) }
 
@@ -100,7 +100,8 @@ enum CategoryService {
             }
             categories[kind.rawValue].bytes += ownBytes
         }
-        for scanRoot in root.children {
+        // A volume measured on its own page belongs to that volume, not to the startup disk.
+        for scanRoot in root.children where !scanRoot.name.hasPrefix(Paths.otherVolumes + "/") {
             addBytes(of: scanRoot, at: scanRoot.name, inheritedKind: .other)
         }
 
@@ -117,8 +118,9 @@ enum CategoryService {
         return kindByPath
     }
 
-    private static func addEstimatedKinds(from volume: VolumeInfo, to categories: inout [Category])
-    {
+    private static func addEstimatedKinds(
+        from volume: VolumeInformation, to categories: inout [Category]
+    ) {
         let scannedBytes = categories.reduce(0) { total, category in total + category.bytes }
         categories[CategoryKind.purgeable.rawValue].bytes = volume.purgeableBytes
         // Clones count in full while scanning, so this can go below zero; then it stays empty.

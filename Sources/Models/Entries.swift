@@ -45,7 +45,7 @@ nonisolated struct Entry: Identifiable {
     }
 }
 
-nonisolated struct VolumeInfo: Identifiable, Hashable {
+nonisolated struct VolumeInformation: Identifiable, Hashable {
     let path: String
     let name: String
     let format: String

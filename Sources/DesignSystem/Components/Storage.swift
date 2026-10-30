@@ -4,7 +4,7 @@ struct StorageSegment: Identifiable {
     let id: String
     let title: String
     let bytes: Int64
-    let colorIndex: Int?  // nil = free space
+    let colorIndex: Int?  // nil for free space
 
     static let usedID = "used"  // used space no category covers yet
     static let otherID = "other"
@@ -32,13 +32,13 @@ extension UI {
     /// Volume name, available space, the stacked bar and its legend, like System Settings ›
     /// Storage.
     struct VolumeSummary: View {
-        let volume: VolumeInfo
+        let volume: VolumeInformation
         let segments: [StorageSegment]
         var canSelect: (StorageSegment) -> Bool
         var onSelect: ((StorageSegment) -> Void)?
 
         init(
-            _ volume: VolumeInfo, segments: [StorageSegment],
+            _ volume: VolumeInformation, segments: [StorageSegment],
             canSelect: @escaping (StorageSegment) -> Bool = { _ in false },
             onSelect: ((StorageSegment) -> Void)? = nil
         ) {
@@ -128,8 +128,7 @@ extension StorageSegment {
 }
 
 /// The biggest parts by name, the rest grouped, free space last; in a fixed number of columns,
-/// because an adaptive grid jumped between two and three columns halfway through the sidebar
-/// animation.
+/// because an adaptive grid jumps between two and three columns during the sidebar animation.
 private struct StorageLegend: View {
     let segments: [StorageSegment]
     var onSelect: ((StorageSegment) -> Void)?
@@ -169,5 +168,4 @@ private struct StorageLegend: View {
         let isCategory = segment.colorIndex != nil && segment.id != StorageSegment.otherID
         return onSelect != nil && isCategory && canSelect(segment)
     }
-
 }

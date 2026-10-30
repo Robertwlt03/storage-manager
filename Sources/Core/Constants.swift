@@ -4,12 +4,12 @@ import Foundation
 nonisolated enum ScanLimits {
     /// ponytail: folders and files below 1 MB fold into one row per folder; keeps the tree small
     /// (memory, energy). Lower it if someone needs to see tiny files.
-    static let keepBytes: Int64 = 1 << 20
+    static let smallestListedBytes: Int64 = 1 << 20
     static let progressInterval: TimeInterval = 0.5
     static let cancelCheckMask = 0xFFF  // check cancellation and progress every 4096 entries
     static let searchDebounce: Duration = .milliseconds(250)
-    static let searchLimit = 500
-    static let iconCacheLimit = 2_000
+    static let maximumSearchResults = 500
+    static let maximumCachedImages = 2_000
 }
 
 /// What the cleaner may remove and how old things must be.
