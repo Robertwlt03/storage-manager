@@ -131,6 +131,12 @@ is the script `scripts/check.py`. You run individual steps by their names, for e
 make check
 ```
 
+The output is laid out to be read at a glance. Every step gets one line with a green check mark ✔ or a red cross
+✘, its number of findings and how long it took. Below a step with findings, they follow sorted by file, each with
+its line number and what is wrong. At the end a frame sums up: green when every step passed, otherwise red with the
+steps and their findings. Colors appear in the terminal and on GitHub, where every finding also stands right beside
+its line in the pull request. `NO_COLOR=1` turns the colors off.
+
 The script runs twelve checks one after another:
 
 1. **Layout:** `swift format lint --strict` reports every deviation from the uniform layout.
@@ -148,11 +154,14 @@ The script runs twelve checks one after another:
 7. **Flat methods:** At most two blocks may sit inside each other in a method, such as a loop and an `if` in it.
    A block is anything that spans lines: `if`, `else`, `switch`, loops, closures and inner functions. A deeper part
    belongs in a method of its own with a telling name, and there is no function inside a function inside a
-   function. This applies to Swift, Python and shell (`scripts/checks/nesting.py`).
+   function. This applies to Swift, Python and shell (`scripts/checks/nesting.py`). The check tells a method by
+   its place, not by a keyword: everything opened directly inside a type counts as a method, even a kind of
+   declaration Swift adds later. In Python every statement with a block of its own counts.
 8. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
    is only written but never read. The check reads the index the compiler writes while building
-   (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the tests use
-   counts as dead as well.
+   (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the
+   tests use counts as dead as well. For every kind of symbol it is settled whether it is judged or why not. When a
+   kind shows up that nobody has decided on yet, the check reports it instead of skipping it.
 9. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
    American English or a known technical term and never an abbreviation, so `temporary` instead of `temp` and
    `maximum` instead of `max`. Comments are read the same way. The macOS spell checker checks the words

@@ -10,6 +10,6 @@ enum SampleApp {
         statistics.fileCount += 1
         _ = (statistics.fileCount, TextKey.shown, Model().shownValue, BindingSample())
         _ = (RuleSamples(), ruleSamples(), probe(cfgValue: initialCount))
-        _ = (deeplyNested(values: []), outerFunction())
+        _ = (deeplyNested(values: []), outerFunction(), Statistics.wrappedSignature(values: []))
     }
 }

@@ -218,9 +218,7 @@ import SwiftUI
         // Background QoS runs on the efficiency cores of Apple Silicon.
         let measuring = Task.detached(priority: .background) {
             ScanService.scan(area) { areaProgress in
-                Task { @MainActor in
-                    if self.scanID == id { self.progress = earlierProgress + areaProgress }
-                }
+                Task { @MainActor in self.showProgress(earlierProgress + areaProgress, ofScan: id) }
             }
         }
         return await withTaskCancellationHandler {
@@ -228,6 +226,11 @@ import SwiftUI
         } onCancel: {
             measuring.cancel()
         }
+    }
+
+    /// Shows a scan's progress, unless a newer scan started meanwhile.
+    private func showProgress(_ newProgress: ScanService.Progress, ofScan id: UUID) {
+        if scanID == id { progress = newProgress }
     }
 }
 

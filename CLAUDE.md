@@ -52,8 +52,9 @@ content here or in comments.
 - `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, house rules, design
   rules, flat methods (at most two blocks inside each other), dead code from the compiler index, American English
   names and comments without abbreviations, plutil,
-  scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with "No errors and no warnings." before
-  every commit.
+  scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with the
+  green frame "All … steps passed: no errors, no warnings" before every commit. A kind of symbol or declaration
+  the checks do not know is reported, never skipped: decide it in `scripts/checks/` instead of silencing it.
 - `make test`, `make coverage`, `make format`, single steps with `scripts/check.py <step>`.
 - `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
 

@@ -21,13 +21,18 @@ MAXIMUM_BLOCK_DEPTH = 2
 # A function may hold a helper function, but that helper may not hold another one.
 MAXIMUM_FUNCTION_NESTING = 1
 
-# The text before a Swift brace that opens the body of a function-like declaration: a function,
-# an initializer, a subscript, an accessor or a computed property such as `var body: some View`.
-SWIFT_BODY = re.compile(r"""
-    \b (?: func | init | deinit | subscript | get | set | willSet | didSet ) \b
-    | \b var \s+ \w+ \s* : [^=]* $          # a computed property: a type, but no value
+# The text before a Swift brace that opens a type. Everything opened directly inside a type, or
+# at the top of a file, counts as a method, whatever keyword it uses, so even a kind of
+# declaration Swift adds later is measured.
+SWIFT_TYPE = re.compile(r"""
+    \b (?: struct | class | enum | extension | actor | protocol ) \s+
+    (?! (?: func | var | let | subscript | init ) \b )   # not `class func` or `class var`
+    [A-Za-z_]                                          # the type's name
 """, re.VERBOSE)
-SWIFT_FUNCTION_NAME = re.compile(r"\b(?:func|var)\s+(\w+)|\b(init|subscript)\b")
+SWIFT_FUNCTION = re.compile(r"\bfunc\b")  # a function inside a method, for the function nesting
+# The name a declaration gives, for the report: `func scan`, `var body`, `init`.
+SWIFT_DECLARED_NAME = re.compile(r"\b(?:func|var|let|case|subscript|init|deinit)\b\s*(\w*)")
+LONGEST_NAME_IN_REPORT = 40
 
 # Comments and texts, longest forms first: """…""", "…", /* … */ and // to the end of the line.
 SWIFT_NOISE = re.compile(r'''
@@ -37,11 +42,8 @@ SWIFT_NOISE = re.compile(r'''
     | // [^\n]*                 # a line comment
 ''', re.VERBOSE | re.DOTALL)
 
-# Python statements that open a block.
-PYTHON_BLOCKS = (
-    ast.If, ast.For, ast.AsyncFor, ast.While, ast.With, ast.AsyncWith, ast.Try, ast.Match,
-    ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef,
-)
+# In Python every statement with a body of its own opens a block (if, for, with, try, def, …),
+# so a statement Python adds later counts too.
 PYTHON_FUNCTIONS = (ast.FunctionDef, ast.AsyncFunctionDef)
 
 # Shell: a function starts with `name() {`; blocks open with these words and close with the
@@ -96,27 +98,31 @@ def nesting_problems(codebase: Codebase) -> list[str]:
 # MARK: Swift
 
 
+TYPE, METHOD, BLOCK = "type", "method", "block"
+
+
 @dataclass
 class Brace:
-    """An opened brace: its line, and whether it opens the body of a function-like declaration."""
+    """An opened brace: its line, what it opens and the name of what it belongs to."""
 
     line: int
-    is_body: bool
+    role: str  # TYPE, METHOD or BLOCK
+    is_function: bool  # a method, or a function declared inside one
     name: str
 
 
 def swift_deep_places(path: Path) -> list[DeepPlace]:
     places = {}
     for brace, enclosing in swift_blocks(path):
-        bodies = [index for index, outer in enumerate(enclosing) if outer.is_body]
-        if not bodies:
-            continue  # not inside a method, such as a type's own braces
-        method = enclosing[bodies[0]]
-        depth = len(enclosing) - bodies[0]  # this block and the blocks around it in the method
-        functions = len(bodies) + brace.is_body - 1
+        methods = [index for index, outer in enumerate(enclosing) if outer.role == METHOD]
+        if not methods:
+            continue  # a method itself, or a type's own braces
+        method = enclosing[methods[0]]
+        depth = len(enclosing) - methods[0]  # this block and the blocks around it in the method
+        functions = sum(outer.is_function for outer in enclosing[methods[0]:]) + brace.is_function
         problem = None
-        if functions > MAXIMUM_FUNCTION_NESTING:
-            problem = too_nested(functions + 1)
+        if functions > MAXIMUM_FUNCTION_NESTING + 1:
+            problem = too_nested(functions)
         elif depth > MAXIMUM_BLOCK_DEPTH:
             problem = too_deep(depth)
         if problem and (path, method.line) not in places:
@@ -125,37 +131,49 @@ def swift_deep_places(path: Path) -> list[DeepPlace]:
 
 
 def swift_blocks(path: Path):
-    """Each block that spans lines, with the open blocks around it, outermost first."""
+    """Each block that spans lines, with the open blocks around it, outermost first. An opening
+    brace is noted with the text before it; a closing one ends the latest block."""
     open_braces: list[Brace] = []
-    for number, line in enumerate(swift_code(path).splitlines(), start=1):
-        yield from closed_blocks(line, number, open_braces)
-
-
-def closed_blocks(line: str, number: int, open_braces: list[Brace]):
-    """Follows the braces of one line: an opening one is noted with the text before it, a
-    closing one ends the latest block, which counts when it began on an earlier line."""
-    for segment_start, column, character in braces_of(line):
+    for line, text_before, character in braces_of(swift_code(path)):
         if character == "{":
-            open_braces.append(opened_brace(line[segment_start:column], number))
+            parent = open_braces[-1] if open_braces else None
+            open_braces.append(opened_brace(text_before, line, parent))
             continue
         closed = open_braces.pop() if open_braces else None
-        if closed and closed.line != number:
+        if closed and closed.line != line:
             yield closed, list(open_braces)
 
 
-def braces_of(line: str):
-    """Each brace with its column and where the text before it starts (after the last brace)."""
-    segment_start = 0
-    for column, character in enumerate(line):
+def braces_of(code: str):
+    """Each brace with its line and the text since the brace before it, across lines, so a
+    signature that wraps still shows its `func`."""
+    line, segment_start = 1, 0
+    for position, character in enumerate(code):
+        line += character == "\n"
         if character in "{}":
-            yield segment_start, column, character
-            segment_start = column + 1
+            yield line, code[segment_start:position], character
+            segment_start = position + 1
 
 
-def opened_brace(text_before: str, number: int) -> Brace:
-    name_match = SWIFT_FUNCTION_NAME.search(text_before)
-    name = next(filter(None, name_match.groups()), "") if name_match else ""
-    return Brace(number, SWIFT_BODY.search(text_before) is not None, name)
+def opened_brace(text_before: str, number: int, parent: Brace | None) -> Brace:
+    """A type when a type keyword comes before the brace; a method when it opens directly in a
+    type or at the top of the file; any other brace is a block."""
+    if SWIFT_TYPE.search(text_before):
+        role = TYPE
+    elif parent is None or parent.role == TYPE:
+        role = METHOD
+    else:
+        role = BLOCK
+    is_function = role == METHOD or SWIFT_FUNCTION.search(text_before) is not None
+    return Brace(number, role, is_function, declared_name(text_before))
+
+
+def declared_name(text_before: str) -> str:
+    """The last declared name before the brace; the text may start with earlier properties."""
+    matches = list(SWIFT_DECLARED_NAME.finditer(text_before))
+    if matches:
+        return matches[-1].group(1) or matches[-1].group(0).strip()
+    return " ".join(text_before.split())[:LONGEST_NAME_IN_REPORT] or "a block"
 
 
 def swift_code(path: Path) -> str:
@@ -206,7 +224,8 @@ def python_first_deep_place(node: ast.AST, depth: int, functions: int) -> tuple[
 def python_children(node: ast.AST, depth: int, functions: int):
     """Each child with its depth: a block that spans lines adds one, an `elif` does not."""
     for child in ast.iter_child_nodes(node):
-        is_block = isinstance(child, PYTHON_BLOCKS) and child.end_lineno > child.lineno
+        has_body = isinstance(child, ast.stmt) and isinstance(getattr(child, "body", None), list)
+        is_block = has_body and child.end_lineno > child.lineno
         is_elif = isinstance(node, ast.If) and isinstance(child, ast.If) and child in node.orelse
         adds_level = is_block and not is_elif
         is_function = isinstance(child, PYTHON_FUNCTIONS)

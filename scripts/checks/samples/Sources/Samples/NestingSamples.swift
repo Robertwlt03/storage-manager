@@ -21,3 +21,19 @@ func outerFunction() -> Int {
     }
     return innerFunction()
 }
+
+extension Statistics {
+    static func wrappedSignature(
+        values: [Int]
+    ) -> Int {
+        var total = 0
+        for value in values {
+            if value > 0 {
+                if value != 1 {  // expect: of its own in wrappedSignature
+                    total += value
+                }
+            }
+        }
+        return total
+    }
+}

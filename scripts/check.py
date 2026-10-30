@@ -6,14 +6,15 @@ Needs:  Xcode 27 and SwiftLint (brew install swiftlint)
 It ends with status 1 as soon as one finding is left, so it guards every pull request. The steps
 live in scripts/checks/: project.py (folders, files, running tools), tools.py, house_rules.py,
 nesting.py, dead_code.py with index_store.py, language.py with unknown_words.swift, and
-samples.py, which tests the checks themselves on planted mistakes.
+samples.py, which tests the checks themselves on planted mistakes; report.py prints the results.
 """
 
 import sys
+import time
 from dataclasses import dataclass
 from typing import Callable
 
-from checks import dead_code, house_rules, language, nesting, project, samples, tools
+from checks import dead_code, house_rules, language, nesting, project, report, samples, tools
 
 # MARK: Settings
 
@@ -32,7 +33,7 @@ STEPS = [
     Step("tests", "Unit tests (Swift Testing)", tools.test_findings),
     Step("rules", "House rules", house_rules.rule_findings),
     Step("design", "Design rules", house_rules.design_findings),
-    Step("nesting", "Flat methods: at most two blocks inside each other", nesting.nesting_findings),
+    Step("nesting", "Flat methods (two blocks deep at most)", nesting.nesting_findings),
     Step("deadcode", "Dead code (compiler index)", dead_code.dead_code_findings),
     Step("language", "American English names and comments", language.language_findings),
     Step("plists", "Translation files and Info.plist (plutil)", tools.property_list_findings),
@@ -60,16 +61,16 @@ def chosen_steps(names: list[str]) -> list[Step] | None:
     return [known[name] for name in names] if names else STEPS
 
 
-def run_steps(steps: list[Step]) -> int:
-    """Runs each step, prints its findings and returns how many there were."""
-    total = 0
+def run_steps(steps: list[Step]) -> list[tuple[str, int]]:
+    """Runs each step and prints its result; returns each step's title and number of findings."""
+    results = []
     for step in steps:
+        report.step_started(step.title)
+        started = time.monotonic()
         findings = step.check()
-        total += len(findings)
-        print(f"{step.title}: {len(findings)}")
-        for finding in findings:
-            print(f"  {finding}")
-    return total
+        report.step_finished(step.title, findings, time.monotonic() - started)
+        results.append((step.title, len(findings)))
+    return results
 
 
 # MARK: Run
@@ -81,9 +82,10 @@ def main() -> int:
         return UNKNOWN_STEP
     if not project.has_xcode():
         return FAILED
-    total = run_steps(steps)
-    print(f"\n{total} findings" if total else "\nNo errors and no warnings.")
-    return FAILED if total else PASSED
+    report.header(len(steps))
+    results = run_steps(steps)
+    report.summary(results)
+    return FAILED if any(count for _, count in results) else PASSED
 
 
 if __name__ == "__main__":

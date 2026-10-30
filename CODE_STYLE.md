@@ -133,6 +133,13 @@ Dahinter steckt das Skript `scripts/check.py`. Einzelne Schritte startest du mit
 make check
 ```
 
+Die Ausgabe ist so gegliedert, dass man sie auf einen Blick liest. Jeder Schritt bekommt eine Zeile mit einem
+grünen Haken ✔ oder einem roten Kreuz ✘, der Zahl seiner Funde und seiner Dauer. Unter einem Schritt mit Funden
+stehen diese nach Datei geordnet, jeweils mit der Zeilennummer und dem, was falsch ist. Am Ende fasst ein Rahmen
+zusammen: grün, wenn alle Schritte bestanden sind, sonst rot mit den Schritten und ihren Funden. Farben erscheinen
+im Terminal und auf GitHub, und dort steht jeder Fund zusätzlich direkt an seiner Zeile im Pull Request.
+`NO_COLOR=1` schaltet die Farben ab.
+
 Das Skript führt zwölf Prüfungen nacheinander aus:
 
 1. **Form:** `swift format lint --strict` meldet jede Abweichung von der einheitlichen Form.
@@ -151,11 +158,15 @@ Das Skript führt zwölf Prüfungen nacheinander aus:
    und darin ein `if`. Als Block zählt alles, was über mehrere Zeilen geht: `if`, `else`, `switch`, Schleifen,
    Closures und innere Funktionen. Ein tieferer Teil gehört in eine eigene Methode mit sprechendem Namen, und eine
    Funktion in einer Funktion in einer Funktion gibt es nicht. Das gilt für Swift, Python und Shell
-   (`scripts/checks/nesting.py`).
+   (`scripts/checks/nesting.py`). Was eine Methode ist, liest die Prüfung an ihrem Platz ab und nicht an einem
+   Schlüsselwort: Alles, was direkt in einem Typ geöffnet wird, zählt als Methode, auch eine Art von Deklaration,
+   die Swift erst später einführt. In Python zählt jede Anweisung mit eigenem Block.
 8. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
    jede Eigenschaft, die nur beschrieben, aber nie gelesen wird. Die Prüfung liest dafür den Index, den der Compiler
-   beim Bauen anlegt (`scripts/checks/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und was nur die
-   Tests benutzen, zählt ebenfalls als tot.
+   beim Bauen anlegt (`scripts/checks/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und
+   was nur die Tests benutzen, zählt ebenfalls als tot. Für jede Art von Symbol ist festgelegt, ob sie geprüft wird
+   oder aus welchem Grund nicht. Taucht eine Art auf, für die das noch niemand entschieden hat, meldet die Prüfung
+   sie, statt sie zu überspringen.
 9. **Sprache:** Jeder Name, den wir anlegen, wird in seine Wörter zerlegt (`fileCount`: file, count). Jedes Wort
    muss amerikanisches Englisch oder ein bekannter Fachbegriff sein und darf keine Abkürzung sein, also `temporary`
    statt `temp` und `maximum` statt `max`. Die Kommentare werden genauso gelesen. Die Wörter prüft die

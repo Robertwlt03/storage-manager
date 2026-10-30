@@ -25,8 +25,18 @@ TEXT_KEYS = "TextKey"
 # A property wrapper such as @Binding passes every write on, so writing alone is a use.
 PROPERTY_WRAPPER = re.compile(r"^\s*@[A-Z]\w*")  # an attribute with a capital letter: @State
 
-# The index holds where parameters are declared but not where they are used, so they are left out.
-DECLARATION_KINDS = set(Kind) - {Kind.PARAMETER}
+# Every kind of symbol our code declares is either judged or left out for a reason. A kind in
+# neither list is new to the checks and is reported, so nobody can slip past them unnoticed.
+JUDGED_KINDS = {
+    Kind.ENUM, Kind.STRUCT, Kind.CLASS, Kind.PROTOCOL, Kind.TYPE_ALIAS, Kind.FUNCTION,
+    Kind.VARIABLE, Kind.ENUM_CASE, Kind.INSTANCE_METHOD, Kind.CLASS_METHOD, Kind.STATIC_METHOD,
+    Kind.INSTANCE_PROPERTY, Kind.CLASS_PROPERTY, Kind.STATIC_PROPERTY, Kind.INITIALIZER,
+}
+LEFT_OUT_KINDS = {
+    Kind.EXTENSION: "it adds to a type, which is judged itself",
+    Kind.PARAMETER: "the index records where a parameter is declared, not where it is used",
+    Kind.DESTRUCTOR: "the system calls it (`deinit`)",
+}
 PROPERTY_KINDS = {
     Kind.VARIABLE, Kind.INSTANCE_PROPERTY, Kind.CLASS_PROPERTY, Kind.STATIC_PROPERTY,
 }
@@ -44,7 +54,22 @@ def dead_code_problems(codebase: Codebase) -> list[str]:
     if index.build_problems:
         return list(index.build_problems)
     app_code = set(codebase.swift_sources)
-    return DeadCode([found for found in index.occurrences if found.path in app_code]).findings()
+    occurrences = [found for found in index.occurrences if found.path in app_code]
+    return unknown_kinds(occurrences) + DeadCode(occurrences).findings()
+
+
+def unknown_kinds(occurrences: list[Occurrence]) -> list[str]:
+    """One finding per kind of symbol that is neither judged nor left out on purpose."""
+    first_of_kind = {}
+    for found in occurrences:
+        is_new = found.kind not in JUDGED_KINDS and found.kind not in LEFT_OUT_KINDS
+        if found.roles & Role.DEFINITION and is_new:
+            first_of_kind.setdefault(found.kind, found)
+    return [
+        f"{place(found.path, found.line)}: '{found.name}' is a kind of symbol the checks do not "
+        f"know yet ({found.kind}); decide in checks/dead_code.py whether to judge it"
+        for found in first_of_kind.values()
+    ]
 
 
 # MARK: Judging each declaration
@@ -128,7 +153,7 @@ def is_written_declaration(definition: Occurrence) -> bool:
     """A declaration written in our code; accessors, generated code and the fulfillment of a
     protocol requirement (which the system calls) are left out."""
     return (
-        definition.kind in DECLARATION_KINDS
+        definition.kind in JUDGED_KINDS
         and not definition.is_accessor()
         and not definition.roles & Role.IMPLICIT
         and not definition.related(Role.OVERRIDE_OF)

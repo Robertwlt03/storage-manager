@@ -32,15 +32,24 @@ ALL_NAMED_ROLES = sum(Role)  # roles this module does not name are dropped
 
 
 class Kind(IntEnum):
-    """What a symbol is; only the kinds this project asks about."""
+    """What a symbol is: every kind the library names. A number outside this list is a kind a
+    newer Xcode added; the checks report it instead of skipping it (see checks/dead_code.py)."""
 
+    UNKNOWN = 0
+    MODULE = 1
+    NAMESPACE = 2
+    NAMESPACE_ALIAS = 3
+    MACRO = 4
     ENUM = 5
     STRUCT = 6
     CLASS = 7
     PROTOCOL = 8
+    EXTENSION = 9
+    UNION = 10
     TYPE_ALIAS = 11
     FUNCTION = 12
     VARIABLE = 13
+    FIELD = 14
     ENUM_CASE = 15
     INSTANCE_METHOD = 16
     CLASS_METHOD = 17
@@ -49,7 +58,12 @@ class Kind(IntEnum):
     CLASS_PROPERTY = 20
     STATIC_PROPERTY = 21
     INITIALIZER = 22
+    DESTRUCTOR = 23  # `deinit` in Swift
+    CONVERSION_FUNCTION = 24
     PARAMETER = 25
+    USING = 26
+    CONCEPT = 27
+    COMMENT_TAG = 1000
 
 
 class Accessor(IntEnum):
