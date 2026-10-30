@@ -76,11 +76,6 @@ struct SpeicherExplorerApp: App {
     }
 }
 
-extension View {
-    /// Gives a window the app's locale for dates and numbers; every window calls it.
-    func appLocale() -> some View { environment(\.locale, Localizer.shared.locale) }
-}
-
 /// "View" menu entries like Finder's: ⌘1 shows lists, ⌘2 shows tiles.
 private struct LayoutCommands: Commands {
     @AppStorage(SettingsKey.layoutMode) private var layoutMode = LayoutMode.list

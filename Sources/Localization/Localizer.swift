@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 /// Looks up texts in `Resources/<code>.lproj/Localizable.strings` for the system's language.
 nonisolated final class Localizer: Sendable {
@@ -30,4 +30,9 @@ nonisolated extension TextKey {
     func translated(with values: CVarArg...) -> String {
         String(format: translated, locale: Localizer.shared.locale, arguments: values)
     }
+}
+
+extension View {
+    /// Gives a window the app's locale for dates and numbers; every window calls it.
+    func appLocale() -> some View { environment(\.locale, Localizer.shared.locale) }
 }

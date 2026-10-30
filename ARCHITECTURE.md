@@ -56,6 +56,12 @@ erfundenen Daten des Vorführmodus und die Seitenliste, die Skripte mit `--list-
 **`Tests/SpeicherExplorerTests`:** Die Tests mit Swift Testing für Ordnerbaum, Suche, Seiten, Gestaltungswerte, Kontrast
 und Übersetzungen. Sie bauen ihre Ordnerbäume von Hand und greifen nie auf die Festplatte zu.
 
+Welcher Teil welchen anderen benutzen darf, steht als Tabelle in `scripts/checks/architecture.py`, und die
+Prüfkette achtet darauf. Die Grundlage aus `Core`, `Localization` und den Tokens mit Farben, Abständen und Symbolen
+dürfen alle benutzen. Darüber liegen Modelle und Dienste, dann das Designsystem und der Zustand, oben die Seiten und
+ganz oben der Start der App. Das Designsystem kennt den Zustand der App nicht: Den Stand des Scans bekommen seine
+Platzhalter als `ScanStatus` aus der Umgebung, den `RootView` hineinreicht.
+
 ## <img src="assets/icons/rules.svg" height="33" align="absmiddle" alt="">Absichtliche Regeln
 
 Diese Regeln sieht man dem Code nicht an. Bitte brich sie nur, wenn du den Grund kennst und ihn hier anpasst.

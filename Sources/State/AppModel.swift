@@ -237,6 +237,13 @@ import SwiftUI
 extension AppModel {
     // MARK: Changes
 
+    /// The versions and sizes of an app's copies, read in the background. The demo's copies exist
+    /// only in the made-up tree, so their details are made up too.
+    func copyDetails(of group: CopyGroup) async -> CopyDetails {
+        if isDemo { return DemoData.copyDetails() }
+        return await Task.detached(priority: .utility) { CopyService.details(group) }.value
+    }
+
     func refreshApps() {
         guard !isDemo else { return }
         let found = AppUsageService.apps(in: root)

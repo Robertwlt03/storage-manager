@@ -22,11 +22,16 @@ struct RootView: View {
             prompt: TextKey.searchPrompt.translated
         )
         .sheet(isPresented: $model.isShowingAccessSheet) { AccessSheet() }
+        .environment(\.scanStatus, scanStatus)
         .appLocale()
         .onExitCommand(perform: closeSidebarOrSearch)
         .onChange(of: model.pane, leaveSearchAndSidebar)
         .onAppear(perform: start)
         .modifier(SystemEvents(model: model))
+    }
+
+    private var scanStatus: ScanStatus {
+        ScanStatus(isScanning: model.isScanning, hasData: model.hasData) { model.scan() }
     }
 
     /// The page beside the sidebar; cards are never squeezed, also with the sidebar open.

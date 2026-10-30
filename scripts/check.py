@@ -14,7 +14,10 @@ import time
 from dataclasses import dataclass
 from typing import Callable
 
-from checks import dead_code, house_rules, language, nesting, project, report, samples, tools
+from checks import (
+    architecture, dead_code, duplicates, guides, house_rules, language, nesting, project, promises,
+    report, samples, tools,
+)
 
 # MARK: Settings
 
@@ -34,9 +37,13 @@ STEPS = [
     Step("rules", "House rules", house_rules.rule_findings),
     Step("design", "Design rules", house_rules.design_findings),
     Step("nesting", "Flat methods (two blocks deep at most)", nesting.nesting_findings),
+    Step("duplicates", "No code written twice", duplicates.duplicate_findings),
+    Step("architecture", "Layers of the architecture", architecture.architecture_findings),
+    Step("promises", "Promises: offline, removing only after asking", promises.promise_findings),
     Step("deadcode", "Dead code (compiler index)", dead_code.dead_code_findings),
     Step("language", "American English names and comments", language.language_findings),
     Step("plists", "Translation files and Info.plist (plutil)", tools.property_list_findings),
+    Step("guides", "Guides: twins alike, links whole, American", guides.guide_findings),
     Step("scripts", "Scripts and Makefile", tools.script_findings),
     Step("samples", "Every planted mistake found (checks/samples)", samples.sample_findings),
 ]

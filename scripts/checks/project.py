@@ -60,6 +60,8 @@ class Codebase:
     python_scripts: tuple[Path, ...] = ()
     shell_scripts: tuple[Path, ...] = ()
     makefiles: tuple[Path, ...] = ()
+    source_root: Path | None = None  # its folders are the layers of the architecture
+    guides: tuple[Path, ...] = ()  # the Markdown files
 
     def swift_files(self) -> tuple[Path, ...]:
         return self.swift_sources + self.swift_tests + self.swift_scripts
@@ -85,7 +87,16 @@ def app() -> Codebase:
         python_scripts=files(SCRIPTS, "*.py"),
         shell_scripts=(PROJECT / "build.sh", *sorted(SCRIPTS.glob("*.sh"))),
         makefiles=(MAKEFILE,),
+        source_root=PROJECT / "Sources",
+        guides=tracked_files("*.md"),
     )
+
+
+def tracked_files(pattern: str) -> tuple[Path, ...]:
+    """The files git knows, so build folders and local notes stay out; never the samples."""
+    names = run(["git", "ls-files", pattern]).output.splitlines()
+    paths = (PROJECT / name for name in names)
+    return tuple(sorted(path for path in paths if not path.is_relative_to(SAMPLES)))
 
 
 # MARK: Reading files

@@ -140,7 +140,7 @@ zusammen: grün, wenn alle Schritte bestanden sind, sonst rot mit den Schritten 
 im Terminal und auf GitHub, und dort steht jeder Fund zusätzlich direkt an seiner Zeile im Pull Request.
 `NO_COLOR=1` schaltet die Farben ab.
 
-Das Skript führt zwölf Prüfungen nacheinander aus:
+Das Skript führt sechzehn Prüfungen nacheinander aus:
 
 1. **Form:** `swift format lint --strict` meldet jede Abweichung von der einheitlichen Form.
 2. **Länge und Verschachtelung:** SwiftLint meldet Funktionen über 40 Zeilen, Closures über 30 Zeilen, zu viele
@@ -161,24 +161,36 @@ Das Skript führt zwölf Prüfungen nacheinander aus:
    (`scripts/checks/nesting.py`). Was eine Methode ist, liest die Prüfung an ihrem Platz ab und nicht an einem
    Schlüsselwort: Alles, was direkt in einem Typ geöffnet wird, zählt als Methode, auch eine Art von Deklaration,
    die Swift erst später einführt. In Python zählt jede Anweisung mit eigenem Block.
-8. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
+8. **Kein doppelter Code:** Stehen dieselben sechs Zeilen mit Gehalt an zwei Stellen, gehören sie in eine gemeinsame
+   Methode. Zahlen und Texte gelten dabei als gleich, sodass auch eine Kopie mit geändertem Wert auffällt; leere
+   Zeilen, Kommentare und einzelne Klammern zählen nicht (`scripts/checks/duplicates.py`).
+9. **Architektur:** Jeder Ordner unter `Sources` ist ein Teil der App und darf nur die Teile benutzen, die die
+   Tabelle in `scripts/checks/architecture.py` erlaubt, etwa das Designsystem keine Seiten und keinen Zustand. Ein
+   neuer Ordner braucht dort erst einen Platz, sonst meldet ihn die Prüfung.
+10. **Versprechen der App:** Netzwerk-Schnittstellen kommen im Code nicht vor, denn die App bleibt auf dem Mac.
+   Dateien löschen oder in den Papierkorb legen nur die drei Dienste, die vorher nachfragen
+   (`scripts/checks/promises.py`).
+11. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
    jede Eigenschaft, die nur beschrieben, aber nie gelesen wird. Die Prüfung liest dafür den Index, den der Compiler
    beim Bauen anlegt (`scripts/checks/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und
    was nur die Tests benutzen, zählt ebenfalls als tot. Für jede Art von Symbol ist festgelegt, ob sie geprüft wird
    oder aus welchem Grund nicht. Taucht eine Art auf, für die das noch niemand entschieden hat, meldet die Prüfung
    sie, statt sie zu überspringen.
-9. **Sprache:** Jeder Name, den wir anlegen, wird in seine Wörter zerlegt (`fileCount`: file, count). Jedes Wort
+12. **Sprache:** Jeder Name, den wir anlegen, wird in seine Wörter zerlegt (`fileCount`: file, count). Jedes Wort
    muss amerikanisches Englisch oder ein bekannter Fachbegriff sein und darf keine Abkürzung sein, also `temporary`
    statt `temp` und `maximum` statt `max`. Die Kommentare werden genauso gelesen. Die Wörter prüft die
    Rechtschreibprüfung von macOS (`scripts/checks/language.py`). Fachbegriffe wie `plist` oder `codesign` stehen in
    keiner Liste: Als bekannt gilt, was in den Namen der benutzten Schnittstellen von Apple und Python vorkommt, was
    als Befehl auf dem Mac installiert ist, die Dateiendungen des Projekts und der Name der App. Nur die verbotenen
    Abkürzungen bleiben eine Liste, weil keine Quelle verlässlich sagt, ob ein Wort eine Abkürzung ist.
-10. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
-11. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
+13. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
+14. **Anleitungen:** Jede deutsche Anleitung und ihr englischer Zwilling haben denselben Aufbau, also dieselben
+   Abschnitte mit denselben Symbolen, Bilder, Codeblöcke und Tabellenzeilen. Jeder Link führt zu einer Datei, die es
+   gibt, und die englischen Texte schreiben amerikanisch (`scripts/checks/guides.py`).
+15. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
    gemeinsamen Kopf. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf
    Schreibfehler.
-12. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
+16. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
    zur App gehört. Jede schlechte Zeile trägt einen Vermerk `expect:` mit dem Fund, den die Prüfung dort melden muss.
    Findet eine Prüfung ihren Fehler nicht mehr, oder meldet sie etwas, das niemand eingebaut hat, schlägt dieser
    Schritt fehl. Wer eine Regel ergänzt, baut ihren Fehler mit Vermerk dort ein.

@@ -11,5 +11,8 @@ enum SampleApp {
         _ = (statistics.fileCount, TextKey.shown, Model().shownValue, BindingSample())
         _ = (RuleSamples(), ruleSamples(), probe(cfgValue: initialCount))
         _ = (deeplyNested(values: []), outerFunction(), Statistics.wrappedSignature(values: []))
+        _ = (firstReport(entries: []), secondReport(entries: []))
+        _ = (LayerSample().page, GadgetSample().page)
+        _ = (removeQuietly, goOnline)
     }
 }

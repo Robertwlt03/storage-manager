@@ -56,6 +56,12 @@ made-up data of the demo mode and the page list that scripts ask for with `--lis
 **`Tests/SpeicherExplorerTests`:** The tests, written with Swift Testing, for the folder tree, search, pages, design
 values, contrast and translations. They build their folder trees by hand and never touch the disk.
 
+Which part may use which other one is a table in `scripts/checks/architecture.py`, and the check pipeline watches
+it. Everyone may use the foundation of `Core`, `Localization` and the tokens with colors, spacing and symbols.
+Models and services sit above it, then the design system and the state, then the pages and, at the very top, the
+start of the app. The design system knows nothing of the app's state: its placeholders get the scan's status as a
+`ScanStatus` from the environment, which `RootView` hands in.
+
 ## <img src="assets/icons/rules.svg" height="33" align="absmiddle" alt="">Deliberate rules
 
 You cannot tell these rules from the code. Please only break one if you know the reason, and update it here.

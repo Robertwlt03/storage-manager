@@ -51,7 +51,7 @@ extension UI {
 
         let kind: Kind
         var placement = Placement.inline
-        @Environment(AppModel.self) private var model
+        @Environment(\.scanStatus) private var scanStatus
 
         init(_ kind: Kind, in placement: Placement = .inline) {
             self.kind = kind
@@ -82,7 +82,7 @@ extension UI {
             case .notMeasured:
                 notMeasured
             case .emptyAfterScan(let title, let symbol, let detail):
-                if model.isScanning || !model.hasData {
+                if scanStatus.isScanning || !scanStatus.hasData {
                     notMeasured
                 } else {
                     Unavailable(title: title, symbol: symbol, detail: detail) { EmptyView() }
@@ -92,16 +92,17 @@ extension UI {
 
         private var notMeasured: some View {
             Unavailable(
-                title: model.isScanning
+                title: scanStatus.isScanning
                     ? TextKey.scanningTitle.translated : TextKey.notMeasuredTitle.translated,
                 symbol: Symbols.measure,
-                detail: model.isScanning
+                detail: scanStatus.isScanning
                     ? TextKey.scanningDetail.translated : TextKey.notMeasuredDetail.translated
             ) {
-                if model.isScanning {
+                if scanStatus.isScanning {
                     ProgressView().controlSize(.small)
                 } else {
-                    Button(TextKey.scanNow.translated) { model.scan() }.appButton(.primary)
+                    Button(TextKey.scanNow.translated) { scanStatus.startScan() }
+                        .appButton(.primary)
                 }
             }
         }
@@ -172,4 +173,16 @@ extension View {
             .disabled(isCalculating)
             .accessibilityHidden(isCalculating)
     }
+}
+
+/// What the placeholders need to know about the scan. The app hands it in (see `RootView`), so the
+/// design system knows nothing of the app's state.
+struct ScanStatus {
+    var isScanning = false
+    var hasData = false
+    var startScan: @MainActor () -> Void = {}
+}
+
+extension EnvironmentValues {
+    @Entry var scanStatus = ScanStatus()
 }

@@ -137,7 +137,7 @@ its line number and what is wrong. At the end a frame sums up: green when every 
 steps and their findings. Colors appear in the terminal and on GitHub, where every finding also stands right beside
 its line in the pull request. `NO_COLOR=1` turns the colors off.
 
-The script runs twelve checks one after another:
+The script runs sixteen checks one after another:
 
 1. **Layout:** `swift format lint --strict` reports every deviation from the uniform layout.
 2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
@@ -157,22 +157,33 @@ The script runs twelve checks one after another:
    function. This applies to Swift, Python and shell (`scripts/checks/nesting.py`). The check tells a method by
    its place, not by a keyword: everything opened directly inside a type counts as a method, even a kind of
    declaration Swift adds later. In Python every statement with a block of its own counts.
-8. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
+8. **No code written twice:** When the same six lines of substance stand in two places, they belong in one shared
+   method. Numbers and texts count as equal, so a copy with a changed value is caught too; blank lines, comments and
+   lone brackets do not count (`scripts/checks/duplicates.py`).
+9. **Architecture:** Every folder below `Sources` is a part of the app and may use only the parts the table in
+   `scripts/checks/architecture.py` allows; the design system, for one, uses no pages and no app state. A new folder
+   first needs a place there, otherwise the check reports it.
+10. **Promises of the app:** Network interfaces do not appear in the code, because the app stays on the Mac. Only the
+   three services that ask first delete files or move them to the Trash (`scripts/checks/promises.py`).
+11. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
    is only written but never read. The check reads the index the compiler writes while building
    (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the
    tests use counts as dead as well. For every kind of symbol it is settled whether it is judged or why not. When a
    kind shows up that nobody has decided on yet, the check reports it instead of skipping it.
-9. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
+12. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
    American English or a known technical term and never an abbreviation, so `temporary` instead of `temp` and
    `maximum` instead of `max`. Comments are read the same way. The macOS spell checker checks the words
    (`scripts/checks/language.py`). Technical terms such as `plist` or `codesign` are in no list: known is what appears
    in the names of the Apple and Python interfaces the code uses, what is installed as a command on the Mac, the
    project's file endings and the app's name. Only the forbidden abbreviations remain a list, because no source
    reliably tells whether a word is an abbreviation.
-10. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
-11. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
+13. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
+14. **Guides:** Every German guide and its English twin have the same layout: the same sections with the same icons,
+   images, code blocks and table rows. Every link leads to a file that exists, and the English texts use American
+   spelling (`scripts/checks/guides.py`).
+15. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
-12. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
+16. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
    never belongs to the app. Every bad line carries a note `expect:` with the finding the check must report there.
    When a check no longer finds its mistake, or reports something nobody planted, this step fails. Whoever adds a
    rule plants its mistake there, with a note.

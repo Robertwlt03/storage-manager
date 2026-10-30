@@ -50,9 +50,10 @@ content here or in comments.
 `make` lists them all. The ones you need:
 
 - `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, house rules, design
-  rules, flat methods (at most two blocks inside each other), dead code from the compiler index, American English
-  names and comments without abbreviations, plutil,
-  scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with the
+  rules, flat methods (at most two blocks inside each other), no code written twice, architecture layers, the app's
+  promises (offline, removing files only in the services that ask first), dead code from the compiler index,
+  American English names and comments without abbreviations, plutil, guides (twins alike, links whole, American
+  spelling), scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with the
   green frame "All … steps passed: no errors, no warnings" before every commit. A kind of symbol or declaration
   the checks do not know is reported, never skipped: decide it in `scripts/checks/` instead of silencing it.
 - `make test`, `make coverage`, `make format`, single steps with `scripts/check.py <step>`.
@@ -64,16 +65,19 @@ content here or in comments.
 2. Keep the rules: spelled-out English names, no numbers without a name, colors only from `Theme`, fonts via
    `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 20
    translations, no dead code, functions as lists of named steps. Scripts follow the same rules and one shared
-   layout (CODE_STYLE.md, step 11): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
+   layout (CODE_STYLE.md, step 15): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
    named and explained (patterns in re.VERBOSE with a comment per part), small named steps, `MARK: Run` at the
    bottom. Spelled-out names, no duplicated code (shared steps live in `scripts/require-xcode.sh` and
    `scripts/sign.sh`), and no copies of lists the app already has (ask the app, as `--list-pages` does).
-3. New logic gets a test in `Tests/SpeicherExplorerTests` (hand-built `Node` trees via `TestTree`, never the real disk).
-4. Run `make check` until it is clean, then check the look in your own test window (see below) when views changed.
-5. A new or changed rule in `scripts/checks/` gets a planted mistake in `scripts/checks/samples` with an
+3. A new folder below `Sources` first gets its row in the layer table of `scripts/checks/architecture.py` (and a
+   line in ARCHITECTURE.md). Never call network interfaces; deleting or trashing files stays in `CleanerService`,
+   `CopyService` and `AppUsageService`, behind the user's confirmation.
+4. New logic gets a test in `Tests/SpeicherExplorerTests` (hand-built `Node` trees via `TestTree`, never the real disk).
+5. Run `make check` until it is clean, then check the look in your own test window (see below) when views changed.
+6. A new or changed rule in `scripts/checks/` gets a planted mistake in `scripts/checks/samples` with an
    `expect:` note on its line. Keep rules general, never a list of today's code: derive what you can from the
    compiler's index, the platform or the project (as the known terms and screen texts do).
-6. Commit on the current branch with the footer above; do not push.
+7. Commit on the current branch with the footer above; do not push.
 
 Design wishes of the user: native Apple look (HIG, Liquid Glass), gentle and minimal animations as feedback only, no
 start animation, energy-saving behavior (nothing animates or polls at rest), text contrast at least 4.5:1 in light and

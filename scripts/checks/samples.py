@@ -11,10 +11,14 @@ ships them except this step.
 import re
 from pathlib import Path
 
+from checks.architecture import architecture_problems
 from checks.dead_code import dead_code_problems
+from checks.duplicates import duplicate_problems
+from checks.guides import guide_problems
 from checks.house_rules import design_problems, house_rule_problems
 from checks.language import language_problems
 from checks.nesting import nesting_problems
+from checks.promises import promise_problems
 from checks.project import PROJECT, SAMPLES, Codebase, numbered_lines, place
 from checks.tools import script_layout_problems
 
@@ -25,13 +29,15 @@ BUILD_FOLDER = PROJECT / ".build" / "check-samples"
 # The note on a planted mistake: "expect: is short for", or "expect below: …" for the next line.
 EXPECTATION = re.compile(r"""
     expect (?P<below> \s below )? :     # expect: or expect below:
-    \s* (?P<part> .+? ) \s* $           # the part of the finding that must appear
+    \s* (?P<part> .+? )                 # the part of the finding that must appear
+    \s* (?: --> )? \s* $                # the end of the note, or of an HTML comment
 """, re.VERBOSE)
 
 # The checks that read code; the tool steps (formatting, tests) have samples of their own.
 CHECKS = [
     house_rule_problems, design_problems, dead_code_problems, language_problems,
-    nesting_problems, script_layout_problems,
+    nesting_problems, script_layout_problems, duplicate_problems, architecture_problems,
+    promise_problems, guide_problems,
 ]
 
 
@@ -46,13 +52,18 @@ def samples() -> Codebase:
         swift_sources=tuple(sorted((SAMPLES / "Sources").rglob("*.swift"))),
         python_scripts=(SAMPLES / "sample.py",),
         shell_scripts=(SAMPLES / "sample.sh",),
+        source_root=SAMPLES / "Sources" / "Samples",
+        guides=tuple(sorted((SAMPLES / "guides").glob("*.md"))),
     )
 
 
 def expectations(codebase: Codebase) -> list[tuple[str, str]]:
     """Each planted mistake: where it is and the part of the finding it must produce."""
     expected = []
-    paths = codebase.swift_sources + codebase.python_scripts + codebase.shell_scripts
+    paths = (
+        codebase.swift_sources + codebase.python_scripts + codebase.shell_scripts
+        + codebase.guides
+    )
     for path, number, line in numbered_lines(paths):
         note = EXPECTATION.search(line)
         if note:
