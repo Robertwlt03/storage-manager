@@ -24,19 +24,21 @@ STEP_MARK="›"
 NOTE_INDENT="   "  # hints start below the text of a result line
 TABLE_WIDTH=16  # the names of a table fill this many characters, so the texts line up
 UNICODE_LOCALE=en_US.UTF-8  # so a mark such as ✔ counts as one character, not three bytes
+# Decided once, while stdout is still the terminal: the pieces paint inside $( ), a pipe.
+if [ -z "${NO_COLOR+set}" ] \
+  && { [ -t 1 ] || [ "${GITHUB_ACTIONS:-}" = true ] || [ -n "${FORCE_COLOR+set}" ]; }; then
+  USES_COLOR=true
+else
+  USES_COLOR=false
+fi
 
 # MARK: Pieces
-
-uses_color() {
-  [ -z "${NO_COLOR+set}" ] \
-    && { [ -t 1 ] || [ "${GITHUB_ACTIONS:-}" = true ] || [ -n "${FORCE_COLOR+set}" ]; }
-}
 
 # console_paint <text> <style>…: the text in these styles, or plain without colors.
 console_paint() {
   local text=$1
   shift
-  if [ $# -eq 0 ] || ! uses_color; then
+  if [ $# -eq 0 ] || [ "$USES_COLOR" = false ]; then
     printf '%s' "$text"
     return
   fi
