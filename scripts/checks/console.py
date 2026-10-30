@@ -6,12 +6,17 @@ A heading names the command; each result gets a line with a mark (✔ done, ✘ 
 and dimmed details; hints follow dimmed and a frame sums up at the end. scripts/console.sh and
 Sources/Diagnostics/Console.swift draw the same pieces for the shell scripts and for the app.
 Colors appear in a terminal and on GitHub; NO_COLOR=1 turns them off and FORCE_COLOR=1 turns them
-on (see no-color.org).
+on (see no-color.org). A command that asks something uses the questions at the end: yes or no,
+a line of text, or a list to walk with the arrow keys.
 """
 
 import os
 import re
 import sys
+import termios
+import tty
+from collections.abc import Iterator
+from contextlib import contextmanager
 
 # MARK: Settings
 
@@ -35,6 +40,16 @@ ENTRY_INDENT = "       "
 ENTRY_LABEL_WIDTH = 5  # wide enough for a line number such as 12345
 CLEAR_LINE = "\r\x1b[K"  # back to the start of the line and erase it
 COLOR_CODE = re.compile(r"\x1b\[[0-9;]*m")
+
+# Questions: a mark in front, the entry the arrow keys point at, and the keys they understand.
+QUESTION_MARK = "?"
+POINTER_MARK = "›"
+YES_ANSWERS = {"y", "yes"}
+ENTER_KEYS = {"\r", "\n"}
+# The arrow keys send these sequences (terminals send either form); j and k move as in vim.
+MOVES = {"\x1b[A": -1, "\x1bOA": -1, "k": -1, "\x1b[B": 1, "\x1bOB": 1, "j": 1}
+LONGEST_KEY = 3  # bytes of one arrow key, so one read takes it whole
+HIDE_CURSOR, SHOW_CURSOR = "\x1b[?25l", "\x1b[?25h"
 
 
 # MARK: Pieces
@@ -112,3 +127,64 @@ def frame(lines: list[str], color: str) -> None:
 def data(text: str) -> None:
     """Plain text another program reads, such as GitHub; never colored."""
     print(text)
+
+
+# MARK: Questions
+# They need a person at a terminal; a command checks can_ask() before it asks.
+
+
+def can_ask() -> bool:
+    return sys.stdin.isatty() and IN_TERMINAL
+
+
+def ask_yes_no(question: str) -> bool:
+    """Enter alone answers no."""
+    answer = input(f"{question_start(question)} {paint('(y/N)', DIM)} ")
+    return answer.strip().lower() in YES_ANSWERS
+
+
+def ask_text(label: str, default: str = "") -> str:
+    """Enter alone keeps the default; without one, the question comes again."""
+    hint = f" {paint(f'({default})', DIM)}" if default else ""
+    while not (answer := input(f"{question_start(label)}{hint} ").strip() or default):
+        note("This one needs an answer.")
+    return answer
+
+
+def ask_choice(question: str, options: list[str]) -> int:
+    """A list to walk with the arrow keys; Enter picks the marked entry and returns its index."""
+    show(f"{question_start(question)}  {paint('↑↓ to move, Enter to pick', DIM)}")
+    marked = 0
+    show_options(options, marked)
+    with keys_one_by_one() as read_key:
+        while (key := read_key()) not in ENTER_KEYS:
+            marked = (marked + MOVES.get(key, 0)) % len(options)
+            print(f"\x1b[{len(options)}F", end="")  # up to the first entry, to draw the list again
+            show_options(options, marked)
+    return marked
+
+
+def question_start(text: str) -> str:
+    return f" {paint(QUESTION_MARK, CYAN, BOLD)} {text}"
+
+
+def show_options(options: list[str], marked: int) -> None:
+    for index, option in enumerate(options):
+        if index == marked:
+            show(f"   {paint(POINTER_MARK, CYAN, BOLD)} {paint(option, BOLD)}")
+        else:
+            show(f"     {paint(option, DIM)}")
+
+
+@contextmanager
+def keys_one_by_one() -> Iterator:
+    """Hands out each key as it is pressed, without Enter, with the cursor hidden meanwhile."""
+    keyboard = sys.stdin.fileno()
+    saved = termios.tcgetattr(keyboard)
+    tty.setcbreak(keyboard)  # unlike raw mode, Ctrl-C still stops the command
+    print(HIDE_CURSOR, end="", flush=True)
+    try:
+        yield lambda: os.read(keyboard, LONGEST_KEY).decode(errors="ignore")
+    finally:
+        termios.tcsetattr(keyboard, termios.TCSADRAIN, saved)
+        print(SHOW_CURSOR, end="", flush=True)

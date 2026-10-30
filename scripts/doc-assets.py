@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 """Draws the graphics of the guides in the shared style, so new ones match the old ones.
 
-Start:  scripts/doc-assets.py banner <file name> <title> <subtitle> [--eyebrow <small line>]
+Start:  make banner (asks for everything), or
+        scripts/doc-assets.py banner <file name> <title> <subtitle> [--eyebrow <small line>]
         scripts/doc-assets.py icon <name> <color> '<svg shapes in a 24-point grid>'
+        (--overwrite replaces a file that exists)
 Needs:  nothing beyond Python
 A banner (assets/banner-<file name>.svg) shows the app icon, a small line, the title and a
 subtitle; an icon (assets/icons/<name>.svg) is a rounded tile in one color with a white glyph.
 Within one guide every section icon gets its own color and its own shape (see CLAUDE.md).
+Asked without texts, the script first offers to replace a banner (picked from a list), then
+asks for the file name of a new one, the title and the subtitle.
 """
 
 import argparse
 import re
+import sys
+from html import escape, unescape
 from pathlib import Path
 
-from checks.console import passed
+from checks.console import ask_choice, ask_text, ask_yes_no, can_ask, failed, note, passed, show
 
 # MARK: Settings
 
@@ -25,6 +31,9 @@ FONT = (
     "Helvetica, Arial, sans-serif"
 )
 DEFAULT_EYEBROW = "Speicher-Explorer · Documentation"
+HAND_DRAWN_BANNERS = {"footer"}  # drawn by hand like assets/banner.svg; never replaced
+BANNER_NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")  # the <file name> in banner-<file name>.svg
+TEXT_ELEMENT = re.compile(r"<text [^>]*>(.*?)</text>")  # a drawn banner's three lines of text
 
 # Top and bottom of each tile gradient, in the spirit of System Settings.
 COLORS = {
@@ -89,12 +98,14 @@ ICON_TEMPLATE = """<svg xmlns="http://www.w3.org/2000/svg" width="60" height="56
 # MARK: Drawing
 
 
-def banner(file_name: str, title: str, subtitle: str, eyebrow: str) -> Path:
+def banner(file_name: str, title: str, subtitle: str, eyebrow: str, overwrite: bool) -> Path:
+    if file_name in HAND_DRAWN_BANNERS:
+        stop(f"banner-{file_name}.svg is drawn by hand", "Edit it in assets/ instead.")
     size = f'width="{BANNER_WIDTH}" height="{BANNER_HEIGHT}"'
     svg = "\n".join([
         f'<svg xmlns="http://www.w3.org/2000/svg" {size}',
         f'  viewBox="0 0 {BANNER_WIDTH} {BANNER_HEIGHT}" role="img"',
-        f'  aria-label="Speicher-Explorer – {title}. {subtitle}">',
+        f'  aria-label="{escape(f"Speicher-Explorer – {title}. {subtitle}")}">',
         BANNER_BACKGROUND.format(size=size),
         banner_icon(),
         text_line(EYEBROW_LINE, eyebrow),
@@ -103,7 +114,7 @@ def banner(file_name: str, title: str, subtitle: str, eyebrow: str) -> Path:
         "</svg>",
         "",
     ])
-    return write(ASSETS / f"banner-{file_name}.svg", svg)
+    return write(banner_path(file_name), svg, overwrite)
 
 
 def banner_icon() -> str:
@@ -120,19 +131,76 @@ def text_line(style: tuple, text: str) -> str:
     baseline, font_size, font_weight, color = style
     return (
         f'<text x="{TEXT_LEFT}" y="{baseline}" font-family="{FONT}" text-anchor="start" '
-        f'font-size="{font_size}" font-weight="{font_weight}" fill="{color}">{text}</text>'
+        f'font-size="{font_size}" font-weight="{font_weight}" fill="{color}">{escape(text)}</text>'
     )
 
 
-def icon(name: str, color: str, glyph: str) -> Path:
+def icon(name: str, color: str, glyph: str, overwrite: bool) -> Path:
     top, bottom = COLORS[color]
     return write(ASSETS / "icons" / f"{name}.svg", ICON_TEMPLATE.format(
-        top=top, bottom=bottom, glyph=glyph))
+        top=top, bottom=bottom, glyph=glyph), overwrite)
 
 
-def write(path: Path, svg: str) -> Path:
+def write(path: Path, svg: str, overwrite: bool) -> Path:
+    if path.exists() and not overwrite:
+        stop(f"{relative(path)} already exists",
+             "Add --overwrite to replace it, or pick it from the list of make banner.")
     path.write_text(svg)
     return path
+
+
+def banner_path(file_name: str) -> Path:
+    return ASSETS / f"banner-{file_name}.svg"
+
+
+def relative(path: Path) -> str:
+    return str(path.relative_to(PROJECT))
+
+
+def stop(problem: str, hint: str) -> None:
+    failed("Nothing drawn", problem)
+    note(hint)
+    sys.exit(1)
+
+
+# MARK: Questions
+
+
+def banner_by_questions() -> Path:
+    """First whether to replace a banner and which one, then the texts of the banner."""
+    if not can_ask():
+        stop("no terminal to ask in",
+             "Name the texts instead: scripts/doc-assets.py banner <file name> <title> <subtitle>")
+    replaceable = sorted(
+        path.stem.removeprefix("banner-") for path in ASSETS.glob("banner-*.svg")
+        if path.stem.removeprefix("banner-") not in HAND_DRAWN_BANNERS
+    )
+    if replaceable and ask_yes_no("Replace an existing banner?"):
+        labels = [f"{name}  {banner_texts(name)[1]}" for name in replaceable]
+        file_name = replaceable[ask_choice("Which banner?", labels)]
+        eyebrow, title, subtitle = banner_texts(file_name)
+    else:
+        file_name = new_banner_name()
+        eyebrow, title, subtitle = DEFAULT_EYEBROW, "", ""
+    title = ask_text("Title", title)
+    subtitle = ask_text("Subtitle", subtitle)
+    return banner(file_name, title, subtitle, eyebrow, overwrite=True)
+
+
+def banner_texts(file_name: str) -> list[str]:
+    """The small line, the title and the subtitle of a banner the script drew."""
+    return [unescape(text) for text in TEXT_ELEMENT.findall(banner_path(file_name).read_text())]
+
+
+def new_banner_name() -> str:
+    while True:
+        file_name = ask_text("File name of the new banner (assets/banner-<file name>.svg)")
+        if not BANNER_NAME.fullmatch(file_name):
+            note("Small letters, digits and hyphens only, such as release-notes.")
+        elif banner_path(file_name).exists():
+            note("That banner exists; answer yes to the first question to replace it.")
+        else:
+            return file_name
 
 
 # MARK: Run
@@ -142,24 +210,42 @@ def command_line() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Draws banners and section icons for the guides.")
     commands = parser.add_subparsers(dest="command", required=True)
     banner_command = commands.add_parser("banner", help="a banner for the top of a guide")
-    banner_command.add_argument("file_name", help="written to assets/banner-<file name>.svg")
-    banner_command.add_argument("title")
-    banner_command.add_argument("subtitle")
+    banner_command.add_argument(
+        "file_name", nargs="?", help="written to assets/banner-<file name>.svg; left out, it asks")
+    banner_command.add_argument("title", nargs="?")
+    banner_command.add_argument("subtitle", nargs="?")
     banner_command.add_argument("--eyebrow", default=DEFAULT_EYEBROW, help="the small line above")
     icon_command = commands.add_parser("icon", help="an icon in front of a section heading")
     icon_command.add_argument("name", help="written to assets/icons/<name>.svg")
     icon_command.add_argument("color", choices=COLORS)
     icon_command.add_argument("glyph", help="white SVG shapes in a 24-point grid")
+    for command in (banner_command, icon_command):
+        command.add_argument("--overwrite", action="store_true", help="replace a file that exists")
     return parser
 
 
+def drawn_file() -> Path:
+    parser = command_line()
+    chosen = parser.parse_args()
+    if chosen.command == "icon":
+        return icon(chosen.name, chosen.color, chosen.glyph, chosen.overwrite)
+    texts = [chosen.file_name, chosen.title, chosen.subtitle]
+    if not any(texts):
+        return banner_by_questions()
+    if not all(texts):
+        parser.error("name the file, the title and the subtitle, or none of them to be asked")
+    if not BANNER_NAME.fullmatch(chosen.file_name):
+        parser.error("the file name takes small letters, digits and hyphens only")
+    return banner(chosen.file_name, chosen.title, chosen.subtitle, chosen.eyebrow,
+                  chosen.overwrite)
+
+
 def main() -> None:
-    chosen = command_line().parse_args()
-    if chosen.command == "banner":
-        drawn = banner(chosen.file_name, chosen.title, chosen.subtitle, chosen.eyebrow)
-    else:
-        drawn = icon(chosen.name, chosen.color, chosen.glyph)
-    passed("Drawn", str(drawn.relative_to(PROJECT)))
+    try:
+        passed("Drawn", relative(drawn_file()))
+    except (KeyboardInterrupt, EOFError):  # Ctrl-C or Ctrl-D while it asks
+        show("")
+        stop("cancelled", "Nothing was written.")
 
 
 if __name__ == "__main__":

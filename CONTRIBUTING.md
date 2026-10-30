@@ -52,6 +52,7 @@ You do not have to remember long commands. Just like npm scripts, every workflow
 | `make build` | builds the app and draws its icon |
 | `make check` | runs the whole check chain, exactly as on GitHub |
 | `make hooks` | optional: runs the check chain before every `git push`, so nothing red leaves the Mac |
+| `make banner` | draws a banner for a guide; asks whether to replace one (picked with the arrow keys), then for its texts |
 | `make test` | runs only the tests |
 | `make coverage` | shows how much of the code the tests reach, per folder |
 | `make format` | puts all Swift files into the shared layout |

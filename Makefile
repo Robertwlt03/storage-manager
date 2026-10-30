@@ -27,8 +27,8 @@ SNAPSHOT_MODE := $(if $(RECORD),--record)
 
 .DEFAULT_GOAL := help
 .SILENT:  # make prints no commands; each command says itself what it did, through $(CONSOLE)
-.PHONY: help build run restart demo snapshots check hooks test coverage format selftest stress \
-	release identity clean
+.PHONY: help build run restart demo snapshots check hooks banner test coverage format selftest \
+	stress release identity clean
 
 # MARK: Commands
 # The text after ## is what make help shows for each command.
@@ -69,6 +69,9 @@ hooks: ## Optional: run make check before every git push (git push --no-verify s
 	git config core.hooksPath scripts/hooks
 	$(CONSOLE) passed "Hooks on" "git runs make check before every push"
 	$(CONSOLE) note "git push --no-verify pushes once without it."
+
+banner: ## Draw a banner for a guide: asks whether to replace one, then for its texts
+	scripts/doc-assets.py banner
 
 test: ## Run only the unit tests
 	scripts/check.py tests
