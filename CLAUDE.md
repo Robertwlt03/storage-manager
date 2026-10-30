@@ -4,7 +4,10 @@
 
 Native macOS app (SwiftUI, Swift 6.4, SwiftPM, no Xcode project) that shows where disk space goes. Requires macOS 27 on
 Apple silicon. MIT, public on GitHub. These notes are for anyone who works on the project with Claude Code; personal
-preferences of one contributor belong in their own `CLAUDE.local.md` (ignored by git), which Claude Code reads too.
+preferences of one contributor belong in their own `CLAUDE.local.md`, which Claude Code reads too. Git ignores it and
+the folder `assets/local/` for its pictures, so a local file can have the same banner and icons as this one: draw them
+with `scripts/doc-assets.py` (`--theme claude`), then move them into `assets/local/`, since `make check` reports any
+picture in `assets/` that no guide shows.
 
 The human-facing guides, all in English: README.md, CONTRIBUTING.md (setup, commands, editors), ARCHITECTURE.md (data
 path, code map, deliberate rules) and CODE_STYLE.md (code rules and how they are checked). Read the last two before
