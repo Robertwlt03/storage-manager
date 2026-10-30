@@ -67,9 +67,9 @@ install_when_asked() {
     mkdir -p ~/Applications
     rm -rf "$INSTALLED_APP"
     cp -R "$APP" ~/Applications/
-    console_frame success "$PASSED_MARK Installed: $INSTALLED_APP"
+    console_frame success "Installed" "$INSTALLED_APP"
   else
-    console_frame success "$PASSED_MARK Built: $APP"
+    console_frame success "Built" "$APP"
   fi
 }
 

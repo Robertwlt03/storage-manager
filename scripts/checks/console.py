@@ -47,7 +47,7 @@ COLOR_CODE = re.compile(r"\x1b\[[0-9;]*m")
 
 # Questions: a mark in front, the line the answer is typed on, the entries of a list, and the keys
 # the list understands.
-QUESTION_MARK = "◆"
+QUESTION_MARK = "?"
 ANSWER_MARK = "❯"
 MARKED_ENTRY, OTHER_ENTRY = "●", "○"
 YES_ANSWERS = {"y", "yes"}
@@ -156,13 +156,17 @@ def table(rows: list[tuple[str, str]]) -> None:
         show(f"  {paint(name.ljust(TABLE_WIDTH), CYAN, BOLD)} {text}")
 
 
-def frame(lines: list[str], color: str) -> None:
+def frame(outcome: str, details: list[str], color: str) -> None:
+    """Ends a command, the same shape everywhere: the outcome after its mark, then below it what
+    it concerns, such as the file or folder it made."""
+    mark = PASSED_MARK if color == SUCCESS else FAILED_MARK
+    lines = [paint(f"{mark} {outcome}", color, BOLD)] + [f"  {detail}" for detail in details]
     width = max(visible_length(line) for line in lines) + 2
     show("\n " + paint("╭" + "─" * width + "╮", color))
     side = paint("│", color)
     for line in lines:
         padding = " " * (width - visible_length(line) - 1)
-        show(f" {side} {paint(line, color, BOLD)}{padding}{side}")
+        show(f" {side} {line}{padding}{side}")
     show(" " + paint("╰" + "─" * width + "╯", color) + "\n")
 
 
@@ -207,8 +211,15 @@ def ask_choice(question: str, options: list[str]) -> int:
     return marked
 
 
+asked: list[str] = []  # the questions asked so far
+
+
 def ask(question: str, hint: str) -> None:
-    """The question, and dimmed a few words on what it means or how to answer."""
+    """The question, and dimmed a few words on what it means or how to answer. A blank line keeps
+    it apart from the question before."""
+    if asked:
+        show("")
+    asked.append(question)
     show(f" {paint(QUESTION_MARK, CYAN, BOLD)} {paint(question, BOLD)}  {paint(hint, DIM)}")
 
 

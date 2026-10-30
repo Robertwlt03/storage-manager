@@ -32,8 +32,7 @@ enum SelfTest {
         reportLargeFiles(in: root)
         reportCopies(in: root)
         reportVolumes()
-        Console.frame(
-            ["\(Console.passedMark) Self test passed: every area matches du"], passed: true)
+        Console.frame("Self test passed", details: ["every area matches du"], passed: true)
         return true
     }
 

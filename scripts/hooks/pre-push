@@ -35,9 +35,9 @@ is_checked_out() {
 }
 
 refuse() {
-  console_frame failure "$FAILED_MARK Not pushed: $1" \
-    "  The checks read the folder, not the commits." \
-    "  git push --no-verify pushes without the checks."
+  console_frame failure "Not pushed" "$1" \
+    "The checks read the folder, not the commits." \
+    "git push --no-verify pushes without the checks."
   exit 1
 }
 

@@ -252,7 +252,7 @@ func verdict(for name: String) -> String? {
 func record() throws {
     try? FileManager.default.removeItem(at: referenceFolder)
     try FileManager.default.moveItem(at: currentFolder, to: referenceFolder)
-    show("frame", "success", "✔ The new pictures are now the references in snapshots/reference")
+    show("frame", "success", "The new pictures are now the references", "snapshots/reference")
 }
 
 // MARK: Run
@@ -273,6 +273,7 @@ if arguments.contains("--record") {
     let allMatch = compareWithReferences(everyPicture)
     show(
         "frame", allMatch ? "success" : "failure",
-        allMatch ? "✔ Every picture matches its reference" : "✘ Some pictures changed")
+        allMatch ? "Every picture matches its reference" : "Some pictures changed",
+        allMatch ? "snapshots/reference" : "compare snapshots/current with snapshots/reference")
     exit(allMatch ? EXIT_SUCCESS : EXIT_FAILURE)
 }

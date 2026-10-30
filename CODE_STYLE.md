@@ -211,8 +211,9 @@ The script runs twenty-three checks one after another:
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
 23. **One look for all output:** Everything a command writes to the console looks the same: one heading
    (`Speicher-Explorer · <command>` and a dimmed detail, `Ctrl-C cancels` when it asks something), lines with a mark
-   (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints and a frame that sums up at the end. A
-   question shows ◆, its answer is typed on the next line after ❯, a list marks the chosen entry with ● and the
+   (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints, and at the end one frame in the same shape
+   everywhere: the outcome after its mark, then below it what it concerns, such as the file or folder it made. A
+   question shows ?, a blank line keeps it apart from the one before, its answer is typed on the next line after ❯, a list marks the chosen entry with ● and the
    others with ○, and yes or no is always `y/n`. What a command starts after its heading leaves its own heading
    out (`CONSOLE_HEADED`). Whatever takes longer than a moment shows a turning wheel (⠋⠙⠹…) with its text
    in a terminal, so it never looks stuck: `console.running` in Python, `console_wait` in the shell. The pieces exist once per language: `scripts/console.sh` for the shell and the `Makefile`,

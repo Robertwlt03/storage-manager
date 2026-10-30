@@ -20,7 +20,7 @@ from html import escape, unescape
 from pathlib import Path
 
 from checks.console import (
-    ask_choice, ask_text, ask_yes_no, can_ask, failed, heading, note, passed,
+    FAILURE, SUCCESS, ask_choice, ask_text, ask_yes_no, can_ask, frame, heading, note,
 )
 
 # MARK: Settings
@@ -160,8 +160,7 @@ def relative(path: Path) -> str:
 
 
 def stop(problem: str, hint: str) -> None:
-    failed("Nothing drawn", problem)
-    note(hint)
+    frame("Nothing drawn", [problem, hint], FAILURE)
     sys.exit(1)
 
 
@@ -260,10 +259,11 @@ def main() -> None:
     except (KeyboardInterrupt, EOFError):  # Ctrl-C or Ctrl-D while it asks; not a failure
         note("Cancelled, nothing written.")
         return
-    passed("Drawn", relative(drawn))
+    details = [relative(drawn)]
     guides = PROJECT.glob("*.md")
     if drawn.parent == ASSETS and not any(drawn.name in guide.read_text() for guide in guides):
-        note("No guide shows it yet; put it at the top of one.")
+        details.append("No guide shows it yet; put it at the top of one.")
+    frame("Drawn", details, SUCCESS)
 
 
 if __name__ == "__main__":

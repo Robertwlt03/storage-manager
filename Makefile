@@ -58,13 +58,13 @@ restart: ## Quit the app if it is open, then open the built one
 		while pgrep -x $(PROCESS) > /dev/null; do sleep $(SECONDS_BETWEEN_QUIT_CHECKS); done; \
 	fi
 	open "$(APP)"
-	$(CONSOLE) passed "Opened" "$(APP)"
+	$(CONSOLE) frame success "Opened" "$(APP)"
 
 demo: ## Build without your certificate, then open the app with made-up data (no scan)
 	$(HEADING) "Speicher-Explorer · demo" "made-up data, nothing scanned"
 	$(HEADED) $(MAKE) build $(DEMO_BUILD)
 	open -n "$(DEMO_APP)" --args -demo YES
-	$(CONSOLE) passed "Demo opened" "made-up data, nothing scanned"
+	$(CONSOLE) frame success "Demo opened" "$(DEMO_APP)"
 
 snapshots: ## Optional: photograph every demo page, light and dark, and compare (RECORD=1 records)
 	@# Only you run it: macOS asks once whether your terminal may record the screen.
@@ -78,8 +78,8 @@ check: ## Run the whole check pipeline, as on GitHub
 hooks: ## Optional: run make check before every git push (git push --no-verify skips it once)
 	$(HEADING) "Speicher-Explorer · hooks" "make check before every push"
 	git config core.hooksPath scripts/hooks
-	$(CONSOLE) passed "Hooks on" "git runs make check before every push"
-	$(CONSOLE) note "git push --no-verify pushes once without it."
+	$(CONSOLE) frame success "Hooks on" "git runs make check before every push" \
+		"git push --no-verify pushes once without it"
 
 banner: ## Draw a banner for a guide: asks whether to replace one, then for its texts
 	scripts/doc-assets.py banner
@@ -93,7 +93,7 @@ coverage: ## Show how much of each source folder the tests reach
 format: ## Bring every Swift file into the shared form
 	$(HEADING) "Speicher-Explorer · format" "Sources, Tests and scripts"
 	$(CONSOLE) wait "Formatting" swift format --in-place --recursive Sources Tests scripts
-	$(CONSOLE) passed "Formatted" "every Swift file in Sources, Tests and scripts"
+	$(CONSOLE) frame success "Formatted" "every Swift file in Sources, Tests and scripts"
 
 selftest: ## Measure real folders and compare with du (prints only counts and sizes)
 	@# Started as the app, so macOS uses the app's Full Disk Access instead of asking per folder.
@@ -108,7 +108,7 @@ selftest: ## Measure real folders and compare with du (prints only counts and si
 stress: ## Open a second app that clicks through every page as fast as it can
 	$(HEADING) "Speicher-Explorer · stress test" "$(APP)"
 	open -n "$(APP)" --args -uiTest "$(STRESS_TEST_FOLDER)"
-	$(CONSOLE) passed "Stress test started" "in a second app; quit it when you have seen enough"
+	$(CONSOLE) frame success "Stress test started" "in a second app; quit it when you have seen enough"
 
 release: ## Build the disk image to share in dist/
 	scripts/release.sh
@@ -119,4 +119,4 @@ identity: ## Create your own signing certificate once
 clean: ## Remove everything that building creates
 	$(HEADING) "Speicher-Explorer · clean" ".build, $(BUILD_FOLDER) and dist"
 	rm -rf .build "$(BUILD_FOLDER)" dist
-	$(CONSOLE) passed "Removed" ".build, $(BUILD_FOLDER) and dist"
+	$(CONSOLE) frame success "Removed" ".build, $(BUILD_FOLDER) and dist"

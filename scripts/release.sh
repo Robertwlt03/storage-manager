@@ -63,7 +63,7 @@ main() {
   gather_contents
   pack_disk_image
   notarize_when_possible
-  console_frame success "$PASSED_MARK Disk image ready: $DISK_IMAGE"
+  console_frame success "Disk image ready" "$DISK_IMAGE"
 }
 
 main "$@"

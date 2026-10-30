@@ -15,7 +15,7 @@ enum Console {
         case step = "36"  // cyan
     }
 
-    static let passedMark = "✔"  // also opens the line of a frame that sums up a success
+    private static let passedMark = "✔"
     private static let failedMark = "✘"
     private static let stepMark = "›"
     private static let noteIndent = "   "
@@ -56,15 +56,19 @@ enum Console {
         show(paint(noteIndent + text, .dim))
     }
 
-    /// A frame that sums up, green when everything passed and red when something failed.
-    static func frame(_ lines: [String], passed: Bool) {
+    /// Ends a command, the same shape everywhere: the outcome after its mark, green when it passed
+    /// and red when it failed, then below it what it concerns.
+    static func frame(_ outcome: String, details: [String] = [], passed: Bool) {
         let color: Style = passed ? .success : .failure
-        let width = (lines.map(\.count).max() ?? 0) + framePadding
+        let title = "\(passed ? passedMark : failedMark) \(outcome)"
+        let indented = details.map { detail in "  \(detail)" }
+        let lines = [(title, paint(title, color, .bold))] + indented.map { line in (line, line) }
+        let width = (lines.map(\.0.count).max() ?? 0) + framePadding
         let border = String(repeating: "─", count: width)
         let side = paint("│", color)
-        let rows = lines.map { line in
-            let padding = String(repeating: " ", count: width - line.count - 1)
-            return " \(side) \(paint(line, color, .bold))\(padding)\(side)"
+        let rows = lines.map { plain, shown in
+            let padding = String(repeating: " ", count: width - plain.count - 1)
+            return " \(side) \(shown)\(padding)\(side)"
         }
         let top = " " + paint("╭\(border)╮", color)
         let bottom = " " + paint("╰\(border)╯", color)

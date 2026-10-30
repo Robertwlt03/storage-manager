@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from checks import console
-from checks.console import DIM, FAILED_MARK, FAILURE, ON_GITHUB, PASSED_MARK, RED, SUCCESS, paint
+from checks.console import DIM, FAILURE, ON_GITHUB, RED, SUCCESS, paint
 from checks.project import PROJECT
 
 # MARK: Settings
@@ -97,9 +97,11 @@ def summary(results: list[tuple[str, int]]) -> None:
     failed = [(title, count) for title, count in results if count]
     if not failed:
         steps = f"All {len(results)} steps" if len(results) > 1 else "The step"
-        console.frame([f"{PASSED_MARK} {steps} passed: no errors, no warnings"], SUCCESS)
+        console.frame(f"{steps} passed", ["no errors, no warnings"], SUCCESS)
         return
     total = sum(count for _, count in failed)
-    lines = [f"{FAILED_MARK} {plural(total, 'finding')} in {len(failed)} of {len(results)} steps"]
-    lines += [f"  {title}: {count}" for title, count in failed]
-    console.frame(lines, FAILURE)
+    console.frame(
+        f"{plural(total, 'finding')} in {len(failed)} of {len(results)} steps",
+        [f"{title}: {count}" for title, count in failed],
+        FAILURE,
+    )

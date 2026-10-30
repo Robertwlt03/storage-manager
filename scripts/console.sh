@@ -144,21 +144,28 @@ console_table() {
   done
 }
 
-# console_frame <success|failure> <line>…
+# console_frame <success|failure> <outcome> [<detail>…]: ends a command, the same shape everywhere:
+# the outcome after its mark, then below it what it concerns, such as the file or folder it made.
 console_frame() {
   local LC_ALL=$UNICODE_LOCALE
-  local color width=0 line
+  local color mark outcome width line side
   color=$(frame_color "$1")
-  shift
+  mark=$PASSED_MARK
+  if [ "$1" = failure ]; then
+    mark=$FAILED_MARK
+  fi
+  outcome="$mark $2"
+  shift 2
+  width=$(( ${#outcome} + 2 ))
   for line in "$@"; do
-    width=$(( ${#line} + 2 > width ? ${#line} + 2 : width ))
+    width=$(( ${#line} + 4 > width ? ${#line} + 4 : width ))  # details stand two further in
   done
-  local side
   side=$(console_paint "│" "$color")
   printf '\n %s\n' "$(console_paint "╭$(repeated "─" "$width")╮" "$color")"
+  printf ' %s %s%*s%s\n' "$side" "$(console_paint "$outcome" "$color" "$BOLD")" \
+    $(( width - ${#outcome} - 1 )) "" "$side"
   for line in "$@"; do
-    printf ' %s %s%*s%s\n' "$side" "$(console_paint "$line" "$color" "$BOLD")" \
-      $(( width - ${#line} - 1 )) "" "$side"
+    printf ' %s   %s%*s%s\n' "$side" "$line" $(( width - ${#line} - 3 )) "" "$side"
   done
   printf ' %s\n\n' "$(console_paint "╰$(repeated "─" "$width")╯" "$color")"
 }

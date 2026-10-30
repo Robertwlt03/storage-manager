@@ -112,8 +112,8 @@ main() {
   write_settings "$password"
   console_passed "Identity created" "in its own keychain"
   trust_for_code_signing
-  console_frame success "$PASSED_MARK Signing identity ready: local.mk signs with it" \
-    "  Grant Full Disk Access to the app once after the next make run"
+  console_frame success "Signing identity ready" "local.mk signs with it" \
+    "Grant Full Disk Access to the app once after the next make run"
 }
 
 main "$@"
