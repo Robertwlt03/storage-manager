@@ -69,18 +69,18 @@ COLORS = {
     "teal": ("#56DBBE", "#12957B"),
     "gray": ("#76767F", "#2C2C31"),
     "slate": ("#A2A2AB", "#6A6A74"),
-    # Claude's colors (claude.com), deepened enough below for a white glyph: for CLAUDE.md.
-    "clay": ("#E08A6D", "#C46849"),
-    "dusk": ("#84AED8", "#4F82B8"),
-    "mineral": ("#78AE9C", "#4C7F6E"),
-    "plum": ("#9A95CF", "#6A65A6"),
+    # Claude's colors (claude.com and its app icon), vivid like Claude's own: for CLAUDE.md.
+    "clay": ("#D97757", "#D8653F"),
+    "dusk": ("#6FA2DA", "#4A86CC"),
+    "mineral": ("#5FA88F", "#3F8A70"),
+    "plum": ("#8A84D1", "#6660BE"),
     "ink": ("#4D4C48", "#141413"),
-    "kraft": ("#DDB08F", "#B8845F"),
-    "cactus": ("#86A89C", "#5B7C71"),
-    "heather": ("#9592BC", "#6B6991"),
-    "peach": ("#DB9B7E", "#B26D4C"),
-    "olive": ("#8FA272", "#5E7047"),
-    "stone": ("#9C9A92", "#5E5D59"),
+    "kraft": ("#DDA174", "#C9844F"),
+    "cactus": ("#E5B84F", "#C9952B"),
+    "heather": ("#DD84A6", "#C45A84"),
+    "peach": ("#EF9A72", "#E07A4C"),
+    "olive": ("#86A05E", "#66843C"),
+    "stone": ("#8F8D86", "#5E5D59"),
 }
 
 # The banner, in pixels: the icon on the left, the three lines of text to its right.
