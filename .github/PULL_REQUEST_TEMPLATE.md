@@ -1,12 +1,12 @@
-**Was ändert sich?**
-Beschreibe kurz, was dieser Beitrag ändert und warum.
+**What changes?**
+Describe briefly what this contribution changes and why.
 
-**Geprüft**
-- [ ] `make check` meldet keinen Fehler und keine Warnung.
-- [ ] `make build` läuft ohne Fehler.
-- [ ] Die Änderung ist im hellen und im dunklen Erscheinungsbild angesehen.
-- [ ] Neue Texte gibt es in allen 20 Sprachen.
-- [ ] Keine Ausgabe zeigt Datei- oder Ordnernamen.
+**Checked**
+- [ ] `make check` reports no error and no warning.
+- [ ] `make build` runs without errors.
+- [ ] The change was looked at in light and dark appearance.
+- [ ] New texts exist in all 20 languages.
+- [ ] No output shows file or folder names.
 
-**Bildschirmfotos**
-Bei sichtbaren Änderungen bitte vorher und nachher, ohne private Namen.
+**Screenshots**
+For visible changes, please before and after, without private names.

@@ -17,8 +17,8 @@ from typing import Callable
 
 from checks import (
     accessibility, architecture, commits, console, console_output, dead_code, disk_access,
-    duplicates, guides, house_rules, language, nesting, project, promises, report, samples, secrets,
-    security, tools, translations, unused_files, unused_python,
+    duplicates, english_only, guides, house_rules, language, nesting, project, promises, report,
+    samples, secrets, security, tools, translations, unused_files, unused_python,
 )
 
 # MARK: Settings
@@ -52,7 +52,8 @@ STEPS = [
     Step("language", "American English names and comments", language.language_findings),
     Step("plists", "Translation files and Info.plist (plutil)", tools.property_list_findings),
     Step("translations", "Every text translated", translations.translation_findings),
-    Step("guides", "Guides: twins alike, links whole, American", guides.guide_findings),
+    Step("guides", "Guides: links whole, American spelling", guides.guide_findings),
+    Step("english", "English everywhere but the translations", english_only.english_only_findings),
     Step("secrets", "No passwords or keys in the repository", secrets.secret_findings),
     Step("security", "No way in: shells, signing, workflows", security.security_findings),
     Step("scripts", "Scripts and Makefile", tools.script_findings),

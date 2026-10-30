@@ -17,6 +17,7 @@ from checks.console_output import console_output_problems
 from checks.dead_code import dead_code_problems
 from checks.disk_access import disk_access_problems
 from checks.duplicates import duplicate_problems
+from checks.english_only import english_only_problems
 from checks.guides import guide_problems
 from checks.house_rules import design_problems, house_rule_problems
 from checks.language import language_problems
@@ -49,7 +50,7 @@ CHECKS = [
     nesting_problems, script_layout_problems, duplicate_problems, architecture_problems,
     promise_problems, guide_problems, accessibility_problems, translation_problems,
     secret_problems, disk_access_problems, unused_file_problems, security_problems,
-    console_output_problems, unused_python_problems,
+    console_output_problems, unused_python_problems, english_only_problems,
 ]
 
 

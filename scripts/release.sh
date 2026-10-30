@@ -31,10 +31,10 @@ build_signed_app() {
 
 gather_contents() {
   rm -rf "$CONTENTS" "$DISK_IMAGE"
-  mkdir -p "$CONTENTS/Anleitung"
+  mkdir -p "$CONTENTS/Guide"
   cp -R "$APP_FOLDER/$NAME.app" "$CONTENTS/"
-  ln -s /Applications "$CONTENTS/Programme"
-  cp -R docs/anleitung/. "$CONTENTS/Anleitung/"
+  ln -s /Applications "$CONTENTS/Applications"
+  cp -R docs/guide/. "$CONTENTS/Guide/"
   console_passed "Gathered" "the app, the Applications link and the guide"
 }
 

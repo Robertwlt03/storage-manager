@@ -1,88 +1,85 @@
 <p align="center">
-  <img src="assets/banner-code-regeln.svg" alt="Code-Regeln des Speicher-Explorers. So schreiben wir Code, den jeder lesen kann." width="100%">
+  <img src="assets/banner-code-rules.svg" alt="Code rules of Speicher-Explorer. How we write code anyone can read." width="100%">
 </p>
 
-<p align="center"><a href="CODE_STYLE.md">Deutsch</a> · <a href="CODE_STYLE.en.md">English</a></p>
+Code is read far more often than it is written. That is why the code of Speicher-Explorer should read almost like
+prose, even for people who do not know every corner of Swift. These rules apply to every line, and the check script
+at the end of this page checks most of them automatically.
 
-Code wird viel öfter gelesen als geschrieben. Deshalb soll sich der Code des Speicher-Explorers fast wie ein Text
-lesen lassen, auch für Menschen, die nicht jeden Winkel von Swift kennen. Diese Regeln gelten für jede Zeile, und das
-Prüfskript am Ende dieser Seite kontrolliert die meisten davon automatisch.
+## <img src="assets/icons/format.svg" height="33" align="absmiddle" alt="">Short lines and a uniform layout
 
-## <img src="assets/icons/format.svg" height="33" align="absmiddle" alt="">Kurze Zeilen und einheitliche Form
-
-Keine Zeile ist länger als 100 Zeichen, und eingerückt wird mit vier Leerzeichen. Die Form legt nicht jeder selbst
-fest, sondern das Werkzeug `swift format` mit der Einstellungsdatei `.swift-format`. Es bricht lange Aufrufe um und
-setzt jeden Schritt einer langen Kette in eine eigene Zeile. Wie viele Zeilen dadurch entstehen, ist egal, denn eine
-kurze Zeile liest man schneller als eine lange.
+No line is longer than 100 characters, and indentation is four spaces. The layout is not something everyone decides
+for themselves; the tool `swift format` sets it, with the settings file `.swift-format`. It wraps long calls and puts
+every step of a long chain on its own line. How many lines that produces does not matter, because a short line is
+quicker to read than a long one.
 
 ```bash
 make format
 ```
 
-## <img src="assets/icons/names.svg" height="33" align="absmiddle" alt="">Namen in Alltagssprache
+## <img src="assets/icons/names.svg" height="33" align="absmiddle" alt="">Names in everyday language
 
-Namen sind auf Englisch und ausgeschrieben. Wir wählen Wörter, die man aus dem Alltag kennt, und keine Abkürzungen,
-denn `category` versteht jeder, `cat` dagegen klingt nach einer Katze. Ein Name sagt, was etwas ist oder tut:
+Names are in English and spelled out. We choose words people know from everyday life and no abbreviations, because
+everyone understands `category`, whereas `cat` sounds like the animal. A name says what something is or does:
 
-- **Werte** heißen nach ihrem Inhalt, zum Beispiel `largeFiles` statt `list` oder `result`.
-- **Funktionen** beginnen mit einem Verb, zum Beispiel `scan()`, `openSettings()` oder `refreshStatistics()`.
-- **Wahrheitswerte** lesen sich wie eine Frage, zum Beispiel `isEmpty`, `hasFullDiskAccess` oder `canSelect`.
-- **Parameter in Closures** bekommen ebenfalls einen Namen. Wir schreiben `{ file in file.bytes }` und nicht
-  `{ $0.bytes }`, damit man nicht raten muss, was `$0` ist.
+- **Values** are named after what they hold, for example `largeFiles` instead of `list` or `result`.
+- **Functions** start with a verb, for example `scan()`, `openSettings()` or `refreshStatistics()`.
+- **Booleans** read like a question, for example `isEmpty`, `hasFullDiskAccess` or `canSelect`.
+- **Closure parameters** get a name too. We write `{ file in file.bytes }` and not `{ $0.bytes }`, so nobody has to
+  guess what `$0` is.
 
-Namen aus ein oder zwei Buchstaben gibt es nicht. Erlaubt sind nur `id` sowie `x` und `y` für Koordinaten, weil diese
-Wörter jeder kennt.
+There are no names of one or two letters. The only ones allowed are `id`, and `x` and `y` for coordinates, because
+everyone knows these words.
 
-## <img src="assets/icons/numbers.svg" height="33" align="absmiddle" alt="">Keine Zahlen ohne Namen
+## <img src="assets/icons/numbers.svg" height="33" align="absmiddle" alt="">No numbers without names
 
-Eine Zahl mitten im Code verrät nicht, was sie bedeutet. Deshalb bekommt jede Zahl einen Namen, und der Code liest
-sich dann wie ein Satz: `.padding(Space.card)` statt `.padding(16)`. Nur `0` und `1` dürfen ohne Namen stehen, wenn
-sie einfach zählen, also für „nichts“ oder „eins weiter“. Bedeuten sie etwas Bestimmtes, etwa volle Deckkraft oder eine
-abgeschlossene Messung, bekommen auch sie einen Namen.
+A number in the middle of the code does not tell you what it means. That is why every number gets a name, and the
+code then reads like a sentence: `.padding(Space.card)` instead of `.padding(16)`. Only `0` and `1` may stand without
+a name when they simply count, that is for “nothing” or “one more”. If they mean something specific, such as full
+opacity or a finished scan, they get a name too.
 
-Jeder Name hat einen festen Ort:
+Every name has a fixed home:
 
-| Wofür | Wo |
+| What for | Where |
 | --- | --- |
-| Abstände, Icon-Größen, Maße und Symbolnamen | `Sources/DesignSystem/Tokens.swift` |
-| Farben | `Sources/DesignSystem/Theme.swift` |
-| Dauer und Art von Animationen | `Sources/DesignSystem/Motion.swift` |
-| Grenzen der Messung, des Aufräumens und der Suche | `Sources/Core/Constants.swift` |
-| Werte, die nur ein einziger Typ braucht | als `private static let` direkt in diesem Typ |
+| Spacing, icon sizes, measurements and symbol names | `Sources/DesignSystem/Tokens.swift` |
+| Colors | `Sources/DesignSystem/Theme.swift` |
+| Duration and kind of animations | `Sources/DesignSystem/Motion.swift` |
+| Limits of the scan, the cleanup and the search | `Sources/Core/Constants.swift` |
+| Values that only a single type needs | as `private static let` directly in that type |
 
-## <img src="assets/icons/palette.svg" height="33" align="absmiddle" alt="">Farben an einem Ort
+## <img src="assets/icons/palette.svg" height="33" align="absmiddle" alt="">Colors in one place
 
-Jede Farbe der App kommt aus `Theme.swift`. Dort ist sie einmal für das helle und einmal für das dunkle Erscheinungsbild
-festgelegt und erreicht in beiden einen Kontrast von mindestens 4,5 zu 1. Alle anderen Dateien verwenden nur diese
-Namen und legen nie selbst eine Farbe an, auch kein `.white` oder `Color(red:green:blue:)`. Wer eine neue Farbe braucht,
-ergänzt sie in `Theme.swift` und in der Liste der Kontrast-Tests in `DesignTests.swift`.
+Every color of the app comes from `Theme.swift`. There it is defined once for the light and once for the dark
+appearance, and reaches a contrast of at least 4.5 to 1 in both. All other files only use these names and never
+create a color themselves, not even `.white` or `Color(red:green:blue:)`. If you need a new color, add it to
+`Theme.swift` and to the list of contrast tests in `DesignTests.swift`.
 
-## <img src="assets/icons/design.svg" height="33" align="absmiddle" alt="">Gestaltung aus einem Guss
+## <img src="assets/icons/design.svg" height="33" align="absmiddle" alt="">A consistent design
 
-Damit gleiche Dinge überall gleich aussehen, hat jede Gestaltungsentscheidung genau einen Ort, und die Seiten
-benutzen nur deren Namen:
+So that the same things look the same everywhere, every design decision has exactly one home, and the pages only
+use its names:
 
-- **Schriften** kommen über `.textRole(...)` aus `TextRole`, zum Beispiel `.textRole(.hint)`, und nie direkt über
+- **Fonts** come via `.textRole(...)` from `TextRole`, for example `.textRole(.hint)`, and never directly via
   `.font(...)`.
-- **Symbole** stehen mit ihrem Namen in `Symbols` in `Tokens.swift`, zum Beispiel `Symbols.trash`, und nie als
-  Zeichenkette auf einer Seite.
-- **Liquid Glass** kommt nur über `.surface()` für Karten und `.appButton(...)` für Knöpfe. Eigenes Glas, Materialien
-  oder Hintergründe unter Karten legt keine Seite selbst an.
-- **Animationen** kommen aus `Motion`, zum Beispiel `Motion.standard`, damit „Bewegung reduzieren“ überall greift.
-- **Ausgaben** mit `print` gibt es nur in `Sources/Diagnostics`, denn jede andere Ausgabe könnte private Datei- oder
-  Ordnernamen zeigen.
+- **Symbols** are listed by name in `Symbols` in `Tokens.swift`, for example `Symbols.trash`, and never appear as a
+  string on a page.
+- **Liquid Glass** only comes via `.surface()` for cards and `.appButton(...)` for buttons. No page creates its own
+  glass, materials or backgrounds under cards.
+- **Animations** come from `Motion`, for example `Motion.standard`, so that “Reduce motion” takes effect everywhere.
+- **Output** with `print` only exists in `Sources/Diagnostics`, because any other output could show private file or
+  folder names.
 
-## <img src="assets/icons/translations.svg" height="33" align="absmiddle" alt="">Texte nur über Übersetzungen
+## <img src="assets/icons/translations.svg" height="33" align="absmiddle" alt="">Texts only through translations
 
-Im Code steht kein Text, den man in der App liest. Jeder sichtbare Text hat einen englischen Schlüssel in
-`TextKey.swift`, zum Beispiel `TextKey.categories.translated`, und die Texte selbst stehen in den 20 Dateien unter
-`Resources`. Deutsche Wörter tauchen im Code deshalb nirgends auf. Ausgaben für Entwickler, etwa vom Selbsttest, sind
-auf Englisch.
+The code contains no text that you read in the app. Every visible text has an English key in `TextKey.swift`, for
+example `TextKey.categories.translated`, and the texts themselves live in the 20 files under `Resources`. That is
+why German words appear nowhere in the code. Output for developers, for example from the self test, is in English.
 
-## <img src="assets/icons/steps.svg" height="33" align="absmiddle" alt="">Kleine, klar getrennte Schritte
+## <img src="assets/icons/steps.svg" height="33" align="absmiddle" alt="">Small, clearly separated steps
 
-Eine Funktion, die einen Ablauf steuert, liest sich wie eine Liste. Jeder Schritt ist eine eigene Funktion mit einem
-sprechenden Namen, und die steuernde Funktion entscheidet nur, welcher Schritt wann laufen darf:
+A function that drives a sequence reads like a list. Every step is a function of its own with a meaningful name, and
+the driving function only decides which step may run when:
 
 ```swift
 func run() async {
@@ -93,169 +90,164 @@ func run() async {
 }
 ```
 
-Lange Ketten aus vielen Aufrufen hintereinander teilen wir in benannte Zwischenschritte. Eine Funktion bleibt unter
-40 Zeilen und unter zehn Verzweigungen; darüber meldet sich SwiftLint. Bei SwiftUI fassen wir
-Modifikatoren, die zusammengehören, in einer eigenen Eigenschaft oder einem eigenen Modifikator zusammen, damit eine
-Ansicht nicht zu einer langen Treppe wird.
+We split long chains of many calls in a row into named intermediate steps. A function stays under 40 lines and under
+ten branches; above that, SwiftLint speaks up. In SwiftUI we group modifiers that belong together into a property or
+modifier of their own, so that a view does not turn into a long staircase.
 
-## <img src="assets/icons/deadcode.svg" height="33" align="absmiddle" alt="">Kein toter Code
+## <img src="assets/icons/deadcode.svg" height="33" align="absmiddle" alt="">No dead code
 
-Was nicht benutzt wird, wird gelöscht und nicht auskommentiert. Toter Code macht die App größer und führt in die
-Irre, weil man ihn für wichtig hält. Wer ihn später wieder braucht, findet ihn in der Versionsgeschichte von Git. Das
-gilt auch für Texte: Ein Schlüssel, den die App nirgends zeigt, verschwindet samt seinen Übersetzungen.
+Whatever is not used gets deleted, not commented out. Dead code makes the app bigger and is misleading, because
+people take it for something important. If you need it again later, you will find it in the Git history. The same
+goes for texts: a key the app shows nowhere disappears along with its translations.
 
-## <img src="assets/icons/comments.svg" height="33" align="absmiddle" alt="">Kommentare nur für das Unsichtbare
+## <img src="assets/icons/comments.svg" height="33" align="absmiddle" alt="">Comments only for what you cannot see
 
-Ein guter Name ersetzt einen Kommentar. Kommentare bleiben für Regeln, die man im Code nicht sieht, etwa warum ein
-Diagramm ohne Animation zeichnet. Die Geschichte, wie ein Fehler entstanden ist, gehört in die Commit-Nachricht oder in
-die [Architektur-Beschreibung](ARCHITECTURE.md).
+A good name replaces a comment. Comments are kept for rules you cannot see in the code, such as why a chart draws
+without animation. The story of how a bug came about belongs in the commit message or in the
+[architecture description](ARCHITECTURE.md).
 
 ## <img src="assets/icons/tests.svg" height="33" align="absmiddle" alt="">Tests
 
-Die Tests liegen in `Tests/SpeicherExplorerTests` und nutzen Apples Test-Framework Swift Testing. Jeder Test hat einen
-Namen, der als ganzer Satz sagt, was gelten soll, zum Beispiel „Only emptying the Trash needs a deliberate click in
-the cleaner“. Getestet wird alles, was ohne Bildschirm eine feste Antwort hat: der Ordnerbaum, die Suche, die
-Seitenliste, die Kategorien, die Größenklassen, die Legende, die Zusammenfassung, die Gestaltungswerte, der Kontrast
-und die Übersetzungen.
+The tests live in `Tests/SpeicherExplorerTests` and use Apple’s test framework Swift Testing. Every test has a name
+that says, as a full sentence, what should hold, for example “Only emptying the Trash needs a deliberate click in
+the cleaner”. We test everything that has a fixed answer without a screen: the folder tree, the search, the page
+list, the categories, the size classes, the legend, the summary, the design values, the contrast and the
+translations.
 
-Tests greifen nie auf die echte Festplatte zu und benutzen keine echten Datei- oder Ordnernamen. Einen Ordnerbaum baut
-ein Test deshalb von Hand auf, mit erfundenen Namen wie `film.mov`. In Tests dürfen Beispielwerte als Zahl dastehen,
-weil sie dort selbst die Erklärung sind. Wer eine Regel im Code ändert oder ergänzt, schreibt oder ändert den
-passenden Test gleich mit.
+Tests never touch the real disk and use no real file or folder names. That is why a test builds a folder tree by
+hand, with made-up names such as `film.mov`. In tests, example values may stand as plain numbers, because there they
+are the explanation themselves. If you change or add a rule in the code, write or update the matching test along
+with it.
 
-## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">So prüfst du deinen Code
+## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">How to check your code
 
-Vor jedem Beitrag startest du die Prüfkette. Sie darf keinen einzigen Fehler und keine einzige Warnung melden.
-Dahinter steckt das Skript `scripts/check.py`. Einzelne Schritte startest du mit deren Namen, etwa
+Before every contribution you run the check chain. It must not report a single error or a single warning. Behind it
+is the script `scripts/check.py`. You run individual steps by their names, for example
 `scripts/check.py tests rules`.
 
 ```bash
 make check
 ```
 
-Die Ausgabe ist so gegliedert, dass man sie auf einen Blick liest. Jeder Schritt bekommt eine Zeile mit einem
-grünen Haken ✔ oder einem roten Kreuz ✘, der Zahl seiner Funde und seiner Dauer. Unter einem Schritt mit Funden
-stehen diese nach Datei geordnet, jeweils mit der Zeilennummer und dem, was falsch ist. Am Ende fasst ein Rahmen
-zusammen: grün, wenn alle Schritte bestanden sind, sonst rot mit den Schritten und ihren Funden. Farben erscheinen
-im Terminal und auf GitHub, und dort steht jeder Fund zusätzlich direkt an seiner Zeile im Pull Request.
-`NO_COLOR=1` schaltet die Farben ab.
+The output is laid out to be read at a glance. Every step gets one line with a green check mark ✔ or a red cross
+✘, its number of findings and how long it took. Below a step with findings, they follow sorted by file, each with
+its line number and what is wrong. At the end a frame sums up: green when every step passed, otherwise red with the
+steps and their findings. Colors appear in the terminal and on GitHub, where every finding also stands right beside
+its line in the pull request. `NO_COLOR=1` turns the colors off.
 
-Das Skript führt dreiundzwanzig Prüfungen nacheinander aus:
+The script runs twenty-three checks one after another:
 
-1. **Form:** `swift format lint --strict` meldet jede Abweichung von der einheitlichen Form.
-2. **Länge und Verschachtelung:** SwiftLint meldet Funktionen über 40 Zeilen, Closures über 30 Zeilen, zu viele
-   Verzweigungen in einer Funktion und zu tief verschachtelte Typen. Die Grenzen stehen in `.swiftlint.yml`.
-3. **Compiler:** Die App wird mit `-warnings-as-errors` gebaut, sodass schon eine Warnung als Fehler zählt.
-4. **Tests:** `swift test` startet alle Tests aus `Tests/SpeicherExplorerTests`, ebenfalls ohne eine Warnung.
-5. **Testabdeckung:** Die Tests müssen in jedem Ordner mit Logik einen Mindestanteil der Zeilen erreichen. Die Werte
-   stehen knapp unter dem heutigen Stand in `MINIMUM_COVERAGE` (`scripts/checks/tools.py`), sodass die Abdeckung nur
-   wachsen kann; die Ordner mit Ansichten sind mit Grund ausgenommen. Ein neuer Ordner ohne Regel wird gemeldet.
-6. **Hausregeln:** Zahlen ohne Namen, Farben außerhalb von `Theme.swift`, deutscher Text im Code, `$0`, Namen aus ein
-   oder zwei Buchstaben, Zeilen über 100 Zeichen und vergessene vorübergehende Debug-Zeilen. Das gilt auch für die
-   Swift-Skripte im Ordner `scripts`.
-7. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, eigenes Glas oder eigene
-   Hintergründe, Animationen außerhalb von `Motion`, ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb
-   der Diagnose. Ausgeschriebene Texte findet die Prüfung über den Compiler-Index: jeden Aufruf von SwiftUI, dessen
-   erstes Argument ein Text in Anführungszeichen ist, also auch Elemente, die es heute noch nicht gibt.
-8. **Bedienhilfen:** Jedes Bild entscheidet, was VoiceOver damit tut: Es trägt Bedeutung und bekommt mit
-   `.accessibilityLabel` einen Namen, oder es schmückt einen Text daneben und schweigt mit
-   `.accessibilityHidden(true)` (`scripts/checks/accessibility.py`). Eine Ansicht, die auf einen Klick reagiert,
-   sagt VoiceOver, dass sie ein Knopf ist (SwiftLint, `accessibility_trait_for_button`).
-9. **Flache Methoden:** In einer Methode dürfen höchstens zwei Blöcke ineinander stecken, also etwa eine Schleife
-   und darin ein `if`. Als Block zählt alles, was über mehrere Zeilen geht: `if`, `else`, `switch`, Schleifen,
-   Closures und innere Funktionen. Ein tieferer Teil gehört in eine eigene Methode mit sprechendem Namen, und eine
-   Funktion in einer Funktion in einer Funktion gibt es nicht. Das gilt für Swift, Python und Shell
-   (`scripts/checks/nesting.py`). Was eine Methode ist, liest die Prüfung an ihrem Platz ab und nicht an einem
-   Schlüsselwort: Alles, was direkt in einem Typ geöffnet wird, zählt als Methode, auch eine Art von Deklaration,
-   die Swift erst später einführt. In Python zählt jede Anweisung mit eigenem Block.
-10. **Kein doppelter Code:** Stehen dieselben sechs Zeilen mit Gehalt an zwei Stellen, gehören sie in eine gemeinsame
-   Methode. Zahlen und Texte gelten dabei als gleich, sodass auch eine Kopie mit geändertem Wert auffällt; leere
-   Zeilen, Kommentare und einzelne Klammern zählen nicht (`scripts/checks/duplicates.py`).
-11. **Architektur:** Jeder Ordner unter `Sources` ist ein Teil der App und darf nur die Teile benutzen, die die
-   Tabelle in `scripts/checks/architecture.py` erlaubt, etwa das Designsystem keine Seiten und keinen Zustand. Ein
-   neuer Ordner braucht dort erst einen Platz, sonst meldet ihn die Prüfung.
-12. **Versprechen der App:** Netzwerk-Schnittstellen kommen im Code nicht vor, denn die App bleibt auf dem Mac.
-   Dateien löschen oder in den Papierkorb legen nur die drei Dienste, die vorher nachfragen
-   (`scripts/checks/promises.py`).
-13. **Festplatte abseits des Hauptthreads:** Jeder Zugriff auf die Festplatte steht in Code, der als `nonisolated`
-   gekennzeichnet ist oder mit `Task.detached` läuft, denn der Hauptthread zeichnet das Fenster. Ausgenommen sind nur
-   die Diagnose-Werkzeuge (`scripts/checks/disk_access.py`).
-14. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
-   jede Eigenschaft, die nur beschrieben, aber nie gelesen wird. Die Prüfung liest dafür den Index, den der Compiler
-   beim Bauen anlegt (`scripts/checks/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und
-   was nur die Tests benutzen, zählt ebenfalls als tot. Für jede Art von Symbol ist festgelegt, ob sie geprüft wird
-   oder aus welchem Grund nicht. Taucht eine Art auf, für die das noch niemand entschieden hat, meldet die Prüfung
-   sie, statt sie zu überspringen. In den Python-Skripten liest Pythons eigener Parser jede Funktion, jede Klasse,
-   jede Einstellung und jeden Import, den niemand benutzt (`scripts/checks/unused_python.py`).
-15. **Keine ungenutzten Dateien:** Jedes Bild und jede andere Mediendatei muss in einer anderen Datei mit ihrem Namen
-   vorkommen, sonst ist sie toter Ballast (`scripts/checks/unused_files.py`).
-16. **Sprache:** Jeder Name, den wir anlegen, wird in seine Wörter zerlegt (`fileCount`: file, count). Jedes Wort
-   muss amerikanisches Englisch oder ein bekannter Fachbegriff sein und darf keine Abkürzung sein, also `temporary`
-   statt `temp` und `maximum` statt `max`. Die Kommentare werden genauso gelesen. Die Wörter prüft die
-   Rechtschreibprüfung von macOS (`scripts/checks/language.py`). Fachbegriffe wie `plist` oder `codesign` stehen in
-   keiner Liste: Als bekannt gilt, was in den Namen der benutzten Schnittstellen von Apple und Python vorkommt, was
-   als Befehl auf dem Mac installiert ist, die Dateiendungen des Projekts und der Name der App. Nur die verbotenen
-   Abkürzungen bleiben eine Liste, weil keine Quelle verlässlich sagt, ob ein Wort eine Abkürzung ist.
-17. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
-18. **Vollständige Übersetzungen:** Ein Text, der in einer Sprache wortgleich mit dem Englischen ist, wird gemeldet,
-   wenn die Rechtschreibprüfung von macOS eines seiner Wörter in dieser Sprache nicht kennt. Begriffe wie „iCloud
-   Drive“, die in den meisten Sprachen gleich lauten, sind ausgenommen (`scripts/checks/translations.py`).
-19. **Anleitungen:** Jede deutsche Anleitung und ihr englischer Zwilling haben denselben Aufbau, also dieselben
-   Abschnitte mit denselben Symbolen, Bilder, Codeblöcke und Tabellenzeilen. Jeder Link führt zu einer Datei, die es
-   gibt, und die englischen Texte schreiben amerikanisch (`scripts/checks/guides.py`).
-20. **Geheimnisse:** Keine Datei, die git kennt, enthält einen privaten Schlüssel, einen Zugangsschlüssel oder ein
-   ausgeschriebenes Passwort. Jede Einstellungsdatei, die das `Makefile` einliest, wie `local.mk`, muss von git
-   ignoriert werden (`scripts/checks/secrets.py`).
-21. **Sicherheit:** Die App hat Festplattenvollzugriff, deshalb darf kein fremder Code in sie hinein. Sie wird mit der
-   gehärteten Laufzeit signiert (`--options runtime`), sodass sich keine Bibliothek einschleusen lässt. Kein Code
-   startet eine Shell, die Text als Befehle liest, kein Skript führt Text als Code aus oder lädt Skripte aus dem
-   Internet direkt in eine Shell, und niemand benutzt feste Pfade im gemeinsamen Ordner für vorübergehende Dateien.
-   Jedes Shell-Skript beginnt mit `set -euo pipefail`. Wo Swift seine Sicherheit abschaltet, etwa mit
-   `nonisolated(unsafe)` oder `@unchecked Sendable`, steht ein Kommentar mit dem Grund. Der Workflow auf GitHub hat
-   nur Leserechte, bindet jede Aktion an einen festen Commit, installiert Werkzeuge in fester Version mit Prüfsumme
-   und gibt Text aus fremden Pull Requests nie in einen Befehl (`scripts/checks/security.py`).
-22. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
-   gemeinsamen Kopf. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf
-   Schreibfehler.
-23. **Einheitliche Ausgabe:** Alles, was ein Befehl in die Konsole schreibt, sieht gleich aus: eine Überschrift,
-   Zeilen mit einem Zeichen (✔ fertig, ✘ fehlgeschlagen, › läuft) und gedimmten Details, gedimmte Hinweise und ein
-   Rahmen, der am Ende zusammenfasst. Die Bausteine stehen einmal je Sprache: `scripts/console.sh` für die Shell und
-   das `Makefile`, `scripts/checks/console.py` für Python und `Sources/Diagnostics/Console.swift` für die App. Jedes
-   andere `echo`, `printf` oder `print` wird gemeldet. Was ein anderes Programm liest statt eines Menschen, nennt
-   das Skript in seinem Kopf mit `Output:` und schreibt es schlicht (`scripts/checks/console_output.py`).
-24. **Commit-Nachrichten:** Jeder Commit hat einen Betreff wie `fix(scan): what changed`, also eine Art nach
-   Conventional Commits, vielleicht einen Teil in Klammern und dann die Änderung. Danach folgen eine Leerzeile und
-   Zeilen bis 100 Zeichen, alles auf Englisch in amerikanischer Schreibweise: Ein Wort, das weder das Wörterbuch
-   noch der Code des Projekts kennt, etwa ein deutsches, wird gemeldet. Die Regel gilt ab dem Commit, der sie eingeführt hat; geprüft werden
-   die Commits, die noch nicht auf dem `main` von GitHub liegen (`scripts/checks/commits.py`).
-25. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
-   zur App gehört. Jede schlechte Zeile trägt einen Vermerk `expect:` mit dem Fund, den die Prüfung dort melden muss.
-   Findet eine Prüfung ihren Fehler nicht mehr, oder meldet sie etwas, das niemand eingebaut hat, schlägt dieser
-   Schritt fehl. Wer eine Regel ergänzt, baut ihren Fehler mit Vermerk dort ein.
+1. **Layout:** `swift format lint --strict` reports every deviation from the uniform layout.
+2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
+   function and types nested too deeply. The limits are in `.swiftlint.yml`.
+3. **Compiler:** The app is built with `-warnings-as-errors`, so even a single warning counts as an error.
+4. **Tests:** `swift test` runs all tests from `Tests/SpeicherExplorerTests`, also without a single warning.
+5. **Test coverage:** In every folder with logic, the tests must reach a minimum share of the lines. The values sit
+   just below today's in `MINIMUM_COVERAGE` (`scripts/checks/tools.py`), so coverage can only grow; the folders with
+   views are left out for a reason. A new folder without a rule is reported.
+6. **House rules:** Numbers without names, colors outside `Theme.swift`, German text in the code, `$0`, names of one
+   or two letters, lines over 100 characters and forgotten temporary debug lines. This also applies to the Swift
+   scripts in the `scripts` folder.
+7. **Design:** Fonts without a text role, symbol names outside `Symbols`, custom glass or custom backgrounds,
+   animations outside `Motion`, hard-coded texts on screen and output outside the diagnostics. Hard-coded texts are
+   found through the compiler's index: every SwiftUI call whose first argument is a text in quotes, including
+   elements that do not exist yet.
+8. **Accessibility:** Every image decides what VoiceOver does with it: it carries meaning and gets a name with
+   `.accessibilityLabel`, or it decorates a text beside it and stays silent with `.accessibilityHidden(true)`
+   (`scripts/checks/accessibility.py`). A view that reacts to a click tells VoiceOver it is a button (SwiftLint,
+   `accessibility_trait_for_button`).
+9. **Flat methods:** At most two blocks may sit inside each other in a method, such as a loop and an `if` in it.
+   A block is anything that spans lines: `if`, `else`, `switch`, loops, closures and inner functions. A deeper part
+   belongs in a method of its own with a telling name, and there is no function inside a function inside a
+   function. This applies to Swift, Python and shell (`scripts/checks/nesting.py`). The check tells a method by
+   its place, not by a keyword: everything opened directly inside a type counts as a method, even a kind of
+   declaration Swift adds later. In Python every statement with a block of its own counts.
+10. **No code written twice:** When the same six lines of substance stand in two places, they belong in one shared
+   method. Numbers and texts count as equal, so a copy with a changed value is caught too; blank lines, comments and
+   lone brackets do not count (`scripts/checks/duplicates.py`).
+11. **Architecture:** Every folder below `Sources` is a part of the app and may use only the parts the table in
+   `scripts/checks/architecture.py` allows; the design system, for one, uses no pages and no app state. A new folder
+   first needs a place there, otherwise the check reports it.
+12. **Promises of the app:** Network interfaces do not appear in the code, because the app stays on the Mac. Only the
+   three services that ask first delete files or move them to the Trash (`scripts/checks/promises.py`).
+13. **The disk off the main thread:** Every access to the disk stands in code marked `nonisolated` or running in a
+   `Task.detached`, because the main thread draws the window. Only the diagnostic tools are left out
+   (`scripts/checks/disk_access.py`).
+14. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
+   is only written but never read. The check reads the index the compiler writes while building
+   (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the
+   tests use counts as dead as well. For every kind of symbol it is settled whether it is judged or why not. When a
+   kind shows up that nobody has decided on yet, the check reports it instead of skipping it. In the Python
+   scripts, Python's own parser finds every function, class, setting and import nobody uses
+   (`scripts/checks/unused_python.py`).
+15. **No unused files:** Every image and every other media file must be named in another file, otherwise it is dead
+   weight (`scripts/checks/unused_files.py`).
+16. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
+   American English or a known technical term and never an abbreviation, so `temporary` instead of `temp` and
+   `maximum` instead of `max`. Comments are read the same way. The macOS spell checker checks the words
+   (`scripts/checks/language.py`). Technical terms such as `plist` or `codesign` are in no list: known is what appears
+   in the names of the Apple and Python interfaces the code uses, what is installed as a command on the Mac, the
+   project's file endings and the app's name. Only the forbidden abbreviations remain a list, because no source
+   reliably tells whether a word is an abbreviation.
+17. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
+18. **Complete translations:** A text that reads exactly like the English one in some language is reported when the
+   macOS spell checker does not know one of its words in that language. Terms that read the same in most languages,
+   such as "iCloud Drive", are left out (`scripts/checks/translations.py`).
+19. **Guides:** Every link in a guide leads to a file that exists, and the texts use American spelling
+   (`scripts/checks/guides.py`). The whole repository is English: German text outside the app's translations in
+   `Resources` is reported, in guides, templates, scripts and every other file git knows
+   (`scripts/checks/english_only.py`).
+20. **Secrets:** No file git knows holds a private key, an access token or a password written out. Every settings
+   file the `Makefile` reads, such as `local.mk`, must be ignored by git (`scripts/checks/secrets.py`).
+21. **Security:** The app holds Full Disk Access, so no other code may get into it. It is signed with the hardened
+   runtime (`--options runtime`), so no library can be injected. No code starts a shell that reads text as
+   commands, no script runs text as code or pipes a script from the internet straight into a shell, and nobody uses
+   fixed paths in the shared folder for temporary files. Every shell script starts with `set -euo pipefail`. Where
+   Swift switches off its safety, such as with `nonisolated(unsafe)` or `@unchecked Sendable`, a comment gives the
+   reason. The GitHub workflow may only read, pins every action to a fixed commit, installs tools in a fixed version
+   checked by checksum and never puts text from strangers' pull requests into a command
+   (`scripts/checks/security.py`).
+22. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
+   shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
+23. **One look for all output:** Everything a command writes to the console looks the same: a heading, lines
+   with a mark (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints and a frame that sums up at the
+   end. The pieces exist once per language: `scripts/console.sh` for the shell and the `Makefile`,
+   `scripts/checks/console.py` for Python and `Sources/Diagnostics/Console.swift` for the app. Any other `echo`,
+   `printf` or `print` is reported. What another program reads instead of a person is named in the script's head
+   with `Output:` and written plainly (`scripts/checks/console_output.py`).
+24. **Commit messages:** Every commit has a subject like `fix(scan): what changed`: a kind from Conventional Commits,
+   maybe a part in brackets, then the change. A blank line and lines up to 100 characters follow, all in English with
+   American spelling: a word that neither the dictionary nor the project's code knows, a German one for instance, is
+   reported.
+   The rule holds from the commit that brought it in; the commits not yet on GitHub's `main` are checked
+   (`scripts/checks/commits.py`).
+25. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
+   never belongs to the app. Every bad line carries a note `expect:` with the finding the check must report there.
+   When a check no longer finds its mistake, or reports something nobody planted, this step fails. Whoever adds a
+   rule plants its mistake there, with a note.
 
-Jedes Skript ist gleich aufgebaut, damit man nach dem ersten auch alle anderen versteht. Oben steht ein Kopf, der in
-einem Satz sagt, was das Skript tut, dazu die Zeilen `Start:` (wie man es startet) und `Needs:` (was es braucht).
-Danach folgen die Einstellungen unter `MARK: Settings`: Jede Zahl und jedes Muster hat dort einen Namen und eine
-Erklärung. Dann kommen die Schritte als kleine, benannte Funktionen, und ganz unten steht unter `MARK: Run` der
-Ablauf als Liste dieser Schritte. Suchmuster werden über mehrere Zeilen mit einem Kommentar pro Teil geschrieben, und
-Namen sind ausgeschrieben, also `BUILD_FOLDER` statt `BUILD_DIR`. Die Prüfkette selbst liegt aufgeteilt in
-`scripts/checks/`, ein Modul pro Thema.
+Every script is built the same way, so once you understand one, you understand them all. At the top, a head says in
+one sentence what the script does, with the lines `Start:` (how to start it) and `Needs:` (what it needs). The
+settings follow under `MARK: Settings`: every number and every pattern has a name and an explanation there. Then come
+the steps as small, named functions, and at the very bottom, under `MARK: Run`, the run as a list of these steps.
+Search patterns are written over several lines with a comment per part, and names are spelled out, so `BUILD_FOLDER`
+instead of `BUILD_DIR`. The check pipeline itself is split up in `scripts/checks/`, one module per topic.
 
-Ob jeder Text in allen 20 Sprachen vorhanden ist und ob jede Farbe den Kontrast erreicht, prüfen die Tests im vierten
-Schritt. Wie viel des Codes die Tests erreichen, zeigt `make coverage` je Ordner an.
+Whether every text exists in all 20 languages and whether every color reaches the contrast is checked by the tests
+in the fourth step. How much of the code the tests reach is shown per folder by `make coverage`.
 
-Auf GitHub läuft dieselbe Prüfung bei jedem Pull Request von selbst, beschrieben in
-`.github/workflows/checks.yml`. Meldet sie auch nur einen Fund, wird der Pull Request rot, und der Beitrag muss
-nachgebessert werden, bevor er übernommen wird. Ob Namen verständlich sind und ob ein Schritt gut
-geschnitten ist, kann kein Skript beurteilen, und auch das Aussehen des Glases sieht nur das Auge: Dafür öffnest
-du die geänderten Seiten mit `make demo`. Darauf achten wir beim Lesen eines Beitrags.
+On GitHub the same check runs by itself on every pull request, as described in
+`.github/workflows/checks.yml`. If it reports even a single finding, the pull request turns red, and the
+contribution has to be improved before it is merged. Whether names are understandable and whether a step is cut
+well, no script can judge, and only the eye can see what the glass looks like: for that, open the changed pages with
+`make demo`. We pay attention to these things when we read a contribution.
 
 <p align="center">
   <img src="assets/banner-footer.svg" alt="" width="480">
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
-  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 27 auf Macs mit Apple-Chip</sub>
+  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a></sub><br>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

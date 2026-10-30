@@ -1,9 +1,11 @@
-# Probe
+# Sample
 
-## <img src="../../../../assets/icons/demo.svg" height="33" alt="">Erster Abschnitt
+## <img src="../../../../assets/icons/demo.svg" height="33" alt="">First section
 
-Ein Satz.
+The colour of a bar. <!-- expect: is British -->
 
-## <img src="../../../../assets/icons/checks.svg" height="33" alt="">Zweiter Abschnitt
+## <img src="../../../../assets/icons/rules.svg" height="33" alt="">Second section
 
-Noch ein Satz.
+See [the missing page](missing.md). <!-- expect: leads nowhere -->
+
+Dieser Satz ist nicht übersetzt. <!-- expect: German text outside -->

@@ -1,137 +1,135 @@
 <p align="center">
-  <img src="assets/banner-architektur.svg" alt="Architektur des Speicher-Explorers. Wo im Code was liegt und warum." width="100%">
+  <img src="assets/banner-architecture.svg" alt="Architecture of Speicher-Explorer. Where things live in the code, and why." width="100%">
 </p>
 
-<p align="center"><a href="ARCHITECTURE.md">Deutsch</a> · <a href="ARCHITECTURE.en.md">English</a></p>
+This description helps you work out where a change belongs. It names files and types, so you can find them with your
+editor’s search. How to build and check is in the [contributing guide](CONTRIBUTING.md).
 
-Diese Beschreibung hilft dir herauszufinden, wo eine Änderung hingehört. Sie nennt Dateien und Typen beim Namen,
-damit du sie mit der Suche deines Editors findest. Wie du baust und prüfst, steht in der
-[Anleitung zum Mitmachen](CONTRIBUTING.md).
+## <img src="assets/icons/about.svg" height="33" align="absmiddle" alt="">What it is about
 
-## <img src="assets/icons/about.svg" height="33" align="absmiddle" alt="">Worum es geht
+Speicher-Explorer measures once how much space the Mac’s folders take up, and shows the result on several pages: as
+an overview, as a folder tree, as a list of large files, while cleaning up and in hidden areas such as the temporary
+folder of macOS. After the scan, every page gets by without any further disk access.
 
-Der Speicher-Explorer misst einmal, wie viel Platz die Ordner des Macs belegen, und zeigt das Ergebnis auf mehreren
-Seiten: als Überblick, als Ordnerbaum, als Liste großer Dateien, beim Aufräumen und in versteckten Bereichen wie dem
-temporären Ordner von macOS. Nach der Messung kommt jede Seite ohne weiteren Festplattenzugriff aus.
+## <img src="assets/icons/dataflow.svg" height="33" align="absmiddle" alt="">How the data flows
 
-## <img src="assets/icons/dataflow.svg" height="33" align="absmiddle" alt="">Der Weg der Daten
+1. `ScanService` walks over one area of the disk once with `FileTreeWalker`, on the processor’s efficiency cores.
+2. This produces a tree of `Node`. Each folder merges its subfolders and files under one megabyte into a single row.
+   That keeps the tree small.
+3. `AppModel` holds this tree and everything that follows from it: categories, key figures, cleanup suggestions and
+   apps. It increments `revision` as soon as the tree changes.
+4. The pages only read from `AppModel` and calculate with the services. They never touch the disk themselves.
 
-1. `ScanService` läuft mit `FileTreeWalker` einmal über einen Bereich der Festplatte, auf den sparsamen Kernen des Prozessors.
-2. Daraus entsteht ein Baum aus `Node`. Ordner und Dateien unter einem Megabyte fasst jeder Ordner zu einer Zeile
-   zusammen. Das hält den Baum klein.
-3. `AppModel` hält diesen Baum und alles, was daraus folgt: Kategorien, Kennzahlen, Aufräum-Vorschläge und Apps. Es
-   erhöht `revision`, sobald sich der Baum ändert.
-4. Die Seiten lesen nur aus `AppModel` und rechnen mit den Services. Selbst greifen sie nie auf die Festplatte zu.
+## <img src="assets/icons/codemap.svg" height="33" align="absmiddle" alt="">Code map
 
-## <img src="assets/icons/codemap.svg" height="33" align="absmiddle" alt="">Code-Karte
+**`Sources/App`:** The app’s launch with window, menus and `RootView`. `RootView` holds the sidebar, the search and
+the currently chosen page together.
 
-**`Sources/App`:** Der Start der App mit Fenster, Menüs und `RootView`. `RootView` hält die Seitenleiste, die Suche und
-die gerade gewählte Seite zusammen.
+**`Sources/Core`:** Fixed values and choices without any interface. `Pane` describes every page in the `details`
+table. `Settings` contains the saved settings and the language choice, `Paths` the locations on disk and `Constants`
+the adjustable numbers of the scan.
 
-**`Sources/Core`:** Feste Werte und Auswahlen ohne Oberfläche. `Pane` beschreibt jede Seite in der Tabelle `details`.
-`Settings` enthält die gespeicherten Einstellungen und die Sprachwahl, `Paths` die Orte auf der Festplatte und
-`Constants` die einstellbaren Zahlen der Messung.
+**`Sources/Models`:** The data: `Node` as the folder tree, `Entry` for a row in tables, plus categories, cleanup kinds
+and app usage.
 
-**`Sources/Models`:** Die Daten: `Node` als Ordnerbaum, `Entry` für eine Zeile in Tabellen, dazu Kategorien,
-Aufräum-Arten und App-Nutzung.
+**`Sources/Services`:** The actual work, each without any interface. This includes scanning, categories, search,
+cleaning up, app copies, key figures, summary, reading aloud, thumbnails and everything that talks to Finder or
+System Settings.
 
-**`Sources/Services`:** Die eigentliche Arbeit, jeweils ohne Oberfläche. Dazu gehören Messen, Kategorien, Suche,
-Aufräumen, App-Kopien, Kennzahlen, Zusammenfassung, Vorlesen, Vorschaubilder und alles, was mit dem Finder oder den
-Systemeinstellungen spricht.
+**`Sources/State`:** `AppModel`, which brings the services together and holds the state of the interface.
 
-**`Sources/State`:** `AppModel`, das die Services zusammenführt und den Zustand der Oberfläche hält.
+**`Sources/DesignSystem`:** All building blocks in the `UI` namespace with their variants. `Tokens` contains spacing,
+icon sizes, text roles, measurements and symbol names, `Theme` the colors, `Surface` cards and button styles, and
+`Motion` all animations.
 
-**`Sources/DesignSystem`:** Alle Bausteine im Namensraum `UI` mit ihren Varianten. `Tokens` enthält Abstände,
-Icon-Größen, Textrollen, Maße und Symbolnamen, `Theme` die Farben, `Surface` Karten und Knopfarten und `Motion` alle
-Animationen.
+**`Sources/Features`:** Every page in a folder of its own. `Pages.swift` maps each page to its view. `Shared`
+contains the shared table and the shared grid for folders, search results and large files.
 
-**`Sources/Features`:** Jede Seite in einem eigenen Ordner. `Pages.swift` ordnet jeder Seite ihre Ansicht zu.
-`Shared` enthält die gemeinsame Tabelle und das gemeinsame Raster für Ordner, Suchergebnisse und große Dateien.
+**`Sources/Localization` and `Resources`:** `TextKey` contains all English text keys, and the 20 language folders
+contain the texts.
 
-**`Sources/Localization` und `Resources`:** `TextKey` enthält alle englischen Textschlüssel, die 20 Sprachordner enthalten die Texte.
+**`Sources/Diagnostics`:** The self test with real folders, the stress test that operates the running app, the
+made-up data of the demo mode and the page list that scripts ask for with `--list-pages`.
 
-**`Sources/Diagnostics`:** Der Selbsttest mit echten Ordnern, der Belastungstest, der die laufende App bedient, die
-erfundenen Daten des Vorführmodus und die Seitenliste, die Skripte mit `--list-pages` abfragen.
+**`Tests/SpeicherExplorerTests`:** The tests, written with Swift Testing, for the folder tree, search, pages, design
+values, contrast and translations. They build their folder trees by hand and never touch the disk.
 
-**`Tests/SpeicherExplorerTests`:** Die Tests mit Swift Testing für Ordnerbaum, Suche, Seiten, Gestaltungswerte, Kontrast
-und Übersetzungen. Sie bauen ihre Ordnerbäume von Hand und greifen nie auf die Festplatte zu.
+Which part may use which other one is a table in `scripts/checks/architecture.py`, and the check pipeline watches
+it. Everyone may use the foundation of `Core`, `Localization` and the tokens with colors, spacing and symbols.
+Models and services sit above it, then the design system and the state, then the pages and, at the very top, the
+start of the app. The design system knows nothing of the app's state: its placeholders get the scan's status as a
+`ScanStatus` from the environment, which `RootView` hands in.
 
-Welcher Teil welchen anderen benutzen darf, steht als Tabelle in `scripts/checks/architecture.py`, und die
-Prüfkette achtet darauf. Die Grundlage aus `Core`, `Localization` und den Tokens mit Farben, Abständen und Symbolen
-dürfen alle benutzen. Darüber liegen Modelle und Dienste, dann das Designsystem und der Zustand, oben die Seiten und
-ganz oben der Start der App. Das Designsystem kennt den Zustand der App nicht: Den Stand des Scans bekommen seine
-Platzhalter als `ScanStatus` aus der Umgebung, den `RootView` hineinreicht.
+## <img src="assets/icons/rules.svg" height="33" align="absmiddle" alt="">Deliberate rules
 
-## <img src="assets/icons/rules.svg" height="33" align="absmiddle" alt="">Absichtliche Regeln
+You cannot tell these rules from the code. Please only break one if you know the reason, and update it here.
 
-Diese Regeln sieht man dem Code nicht an. Bitte brich sie nur, wenn du den Grund kennst und ihn hier anpasst.
+**Privacy:** No part of the program prints file or folder names. The app sends nothing to the network.
 
-**Datenschutz:** Kein Programmteil gibt Datei- oder Ordnernamen aus. Die App sendet nichts ins Netz.
+**Deleting:** Deleting only happens after a confirmation. Copies of an app are only deleted when it is not running,
+and that is checked once more right before deleting.
 
-**Löschen:** Löschen geschieht nur nach einer Bestätigung. Kopien einer App werden nur gelöscht, wenn sie nicht läuft,
-und das wird direkt vor dem Löschen noch einmal geprüft.
+**One scan, not a second:** Everything the pages show comes from the tree of the last scan. A second pass over the
+disk, for example for cleaning up, used to cost noticeable energy. Only a folder’s info window analyses it again in
+more detail on request.
 
-**Eine Messung, keine zweite:** Alles, was die Seiten zeigen, kommt aus dem Baum der letzten Messung. Ein zweiter Lauf
-über die Festplatte, etwa für das Aufräumen, kostete früher spürbar Energie. Nur das Info-Fenster eines Ordners
-analysiert auf Wunsch noch einmal genauer.
+**Charts without animation:** Swift Charts crashed when a chart animated between changing data during a scan. That is
+why charts redraw without animation (`staticChart`) and wait until the scan has finished.
 
-**Diagramme ohne Animation:** Swift Charts stürzte ab, wenn ein Diagramm während einer Messung zwischen wechselnden
-Daten animierte. Diagramme zeichnen deshalb ohne Animation neu (`staticChart`) und warten, bis die Messung fertig ist.
+**Tables are rebuilt, not diffed:** When the whole content of a table changes, for example for a different folder or
+a new search, `contentKey` rebuilds the table. Diffing thousands of new rows caused errors in AppKit, because the
+table tried to update itself at the same time. For the same reason there are no resizable columns, and tables never
+change inside an animation.
 
-**Tabellen werden neu gebaut, nicht verglichen:** Wenn sich der ganze Inhalt einer Tabelle ändert, etwa bei einem
-anderen Ordner oder einer neuen Suche, baut `contentKey` die Tabelle neu. Das Vergleichen tausender neuer Zeilen löste
-in AppKit Fehler aus, weil die Tabelle sich währenddessen selbst aktualisieren wollte. Aus demselben Grund gibt es
-keine anpassbaren Spalten, und Tabellen ändern sich nie innerhalb einer Animation.
+**Launch without animation:** The scan at launch starts before the window is drawn for the first time. If this
+moment were animated, all cards would grow out of the top left corner. That is why the start and end of a scan are
+not animated.
 
-**Start ohne Animation:** Die Messung beim Start beginnt, bevor das Fenster zum ersten Mal gezeichnet ist. Wäre dieser
-Moment animiert, würden alle Karten aus der linken oberen Ecke wachsen. Deshalb sind Beginn und Ende einer Messung
-nicht animiert.
+**Sidebar:** The app replaces the system’s button and menu command with its own, because when the sidebar was shown
+through AppKit, the page jumped to its new width without any frames in between. SwiftUI animates it smoothly instead.
+The button draws its glass circle itself, so that macOS does not leave an empty circle behind when it moves. On every
+resize of the window, `SidebarState` compares whether the sidebar should be open, because at the threshold macOS
+sometimes closes it by itself. For this `AppModel` reads the width directly from the window, because the width from SwiftUI
+briefly jumps past the threshold during the motion.
 
-**Seitenleiste:** Den Knopf und den Menübefehl des Systems ersetzt die App durch eigene, denn beim Einblenden über
-AppKit sprang die Seite ohne Zwischenbilder auf ihre neue Breite. SwiftUI animiert sie stattdessen gleichmäßig. Der
-Knopf zeichnet seinen Glaskreis selbst, damit macOS beim Platzwechsel keinen leeren Kreis zurücklässt. Bei jeder
-Größenänderung des Fensters vergleicht `SidebarState`, ob die Seitenleiste offen sein sollte, denn an der Grenze schließt
-macOS sie manchmal selbst. Die Breite liest `AppModel` dafür direkt vom Fenster, weil die Breite aus SwiftUI während der
-Bewegung kurz über die Grenze springt.
+**Floating sidebar:** In narrow windows the sidebar floats above the page. It is only slid in and out, never
+removed, because otherwise the list inside it disappears abruptly. It is not hidden either, so that the glass effect
+is kept.
 
-**Schwebende Seitenleiste:** In schmalen Fenstern schwebt die Seitenleiste über der Seite. Sie wird nur hinein- und
-hinausgeschoben, nie entfernt, weil die Liste darin sonst abrupt verschwindet. Sie wird auch nicht ausgeblendet, damit
-der Glaseffekt erhalten bleibt.
+**Loading:** Values that are still being calculated keep their place and show a small loading indicator
+(`calculating`). Buttons that refer to these values wait until they are settled. Where there is more room,
+`UI.Placeholder` shows what is currently loading.
 
-**Laden:** Werte, die noch berechnet werden, behalten ihren Platz und zeigen ein kleines Ladesymbol (`calculating`).
-Knöpfe, die sich auf diese Werte beziehen, warten, bis sie feststehen. Wo mehr Platz ist, zeigt `UI.Placeholder`, was
-gerade geladen wird.
+**Main thread by default:** The code is written in Swift 6, and everything runs on the main thread unless it says
+otherwise. Only what really works in the background, that is scanning, cleaning up, the analysis in the info window
+and the app copies, is marked `nonisolated`. The compiler then checks that no data is changed from two places at the
+same time. A scan builds the folder tree in the background and then hands it over as a whole, which is why `Node` may
+cross over.
 
-**Hauptthread als Standard:** Der Code ist in Swift 6 geschrieben, und alles läuft auf dem Hauptthread, solange es
-nichts anderes sagt. Nur was wirklich im Hintergrund arbeitet, also Messen, Aufräumen, die Analyse im Info-Fenster und
-die App-Kopien, ist mit `nonisolated` markiert. Der Compiler prüft dann, dass keine Daten gleichzeitig von zwei Stellen
-verändert werden. Den Ordnerbaum baut eine Messung im Hintergrund und übergibt ihn danach als Ganzes, deshalb darf
-`Node` die Seite wechseln.
+**Self test and stress test only with Full Disk Access:** Both measure real folders. Without Full Disk Access, macOS
+would ask separately for every protected folder and for the data of every other app, often hundreds of times. That is
+why both check for Full Disk Access first and stop right away without it, and `make selftest` launches the built app
+instead of the bare binary, so that macOS credits it with the app’s Full Disk Access.
 
-**Selbsttest und Belastungstest nur mit Vollzugriff:** Beide messen echte Ordner. Ohne Festplattenvollzugriff würde
-macOS dabei für jeden geschützten Ordner und für die Daten jeder anderen App einzeln fragen, oft hunderte Male. Deshalb
-prüfen beide zuerst den Vollzugriff und hören ohne ihn sofort auf, und `make selftest` startet die gebaute App statt
-des nackten Programms, damit macOS den Vollzugriff der App anrechnet.
+**Demo mode:** With `-demo YES` the app fills itself with the made-up data from `DemoData` instead of scanning.
+`AppModel` then blocks every disk access and every removal, and the info window does not analyze anything either. The
+paths of the made-up files and cleanup entries do not exist, and a test checks that.
 
-**Vorführmodus:** Mit `-demo YES` füllt sich die App mit den erfundenen Daten aus `DemoData` statt zu messen. `AppModel`
-sperrt dann jeden Zugriff auf die Festplatte und jedes Entfernen, und auch das Info-Fenster analysiert nichts. Die Pfade
-der erfundenen Dateien und Aufräum-Einträge gibt es nicht, ein Test prüft das.
+**Energy:** No animation runs while idle. The scan runs at low priority, and progress is reported at most twice per
+second.
 
-**Energie:** Keine Animation läuft im Ruhezustand. Die Messung läuft mit niedriger Priorität, und der Fortschritt
-meldet sich höchstens zweimal pro Sekunde.
+**Language and appearance:** Language, appearance and units come from System Settings. The app has no switches of
+its own for them.
 
-**Sprache und Aussehen:** Sprache, Erscheinungsbild und Einheiten kommen aus den Systemeinstellungen. Die App hat dafür
-keine eigenen Schalter.
-
-**Kontrast:** Jede Textfarbe erreicht in beiden Erscheinungsbildern mindestens 4,5 zu 1. Deshalb nutzt Text für
-Nebensächliches den Ton `muted` statt der Systemfarbe, die im hellen Modus darunter bleibt.
+**Contrast:** Every text color reaches at least 4.5 to 1 in both appearances. That is why text for secondary
+information uses the `muted` tone instead of the system color, which falls below that in light mode.
 
 <p align="center">
   <img src="assets/banner-footer.svg" alt="" width="480">
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
-  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 27 auf Macs mit Apple-Chip</sub>
+  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a></sub><br>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

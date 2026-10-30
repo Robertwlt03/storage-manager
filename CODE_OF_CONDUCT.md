@@ -1,43 +1,41 @@
 <p align="center">
-  <img src="assets/banner-verhaltensregeln.svg" alt="Verhaltensregeln des Speicher-Explorers. Wie wir freundlich miteinander arbeiten." width="100%">
+  <img src="assets/banner-conduct.svg" alt="Code of conduct of Speicher-Explorer. How we work together kindly." width="100%">
 </p>
 
-<p align="center"><a href="CODE_OF_CONDUCT.md">Deutsch</a> · <a href="CODE_OF_CONDUCT.en.md">English</a></p>
+Speicher-Explorer should be a place where everyone enjoys taking part, no matter how much experience they have, where
+they come from or which language they speak.
 
-Der Speicher-Explorer soll ein Ort sein, an dem alle gern mitmachen, egal wie viel Erfahrung sie haben, woher sie
-kommen oder welche Sprache sie sprechen.
+## <img src="assets/icons/expect.svg" height="33" align="absmiddle" alt="">What we expect
 
-## <img src="assets/icons/expect.svg" height="33" align="absmiddle" alt="">Was wir erwarten
+- We treat each other kindly and patiently, even when we disagree.
+- We criticize ideas and code, but never people.
+- We help newcomers get started and remember that every one of us was a beginner once.
+- We respect other people’s privacy and do not publish anyone else’s data, including screenshots that show private
+  file or folder names.
 
-- Wir gehen freundlich und geduldig miteinander um, auch wenn wir anderer Meinung sind.
-- Wir kritisieren Ideen und Code, aber nie Menschen.
-- Wir helfen Neuen beim Einstieg und erinnern uns daran, dass jede und jeder einmal angefangen hat.
-- Wir respektieren die Privatsphäre anderer und veröffentlichen keine fremden Daten, auch keine Bildschirmfotos mit
-  privaten Datei- oder Ordnernamen.
+## <img src="assets/icons/forbidden.svg" height="33" align="absmiddle" alt="">What is not okay
 
-## <img src="assets/icons/forbidden.svg" height="33" align="absmiddle" alt="">Was nicht geht
+Insults, harassment, threats, discrimination and demeaning remarks have no place here, whether in issues, in pull
+requests or anywhere else in the project.
 
-Beleidigungen, Belästigung, Drohungen, Diskriminierung und herabsetzende Bemerkungen haben hier keinen Platz, weder in
-Issues noch in Pull Requests noch an anderer Stelle des Projekts.
+## <img src="assets/icons/report.svg" height="33" align="absmiddle" alt="">If something happens
 
-## <img src="assets/icons/report.svg" height="33" align="absmiddle" alt="">Wenn etwas passiert
+If you experience or witness something that breaks these rules, please report it to the project’s maintainer through
+GitHub. Every report is treated confidentially. Anyone who breaks the rules can be warned or excluded from the
+project.
 
-Wenn du etwas erlebst oder beobachtest, das gegen diese Regeln verstößt, melde es bitte über GitHub an den Betreuer des
-Projekts. Jede Meldung wird vertraulich behandelt. Wer gegen die Regeln verstößt, kann verwarnt oder vom Projekt
-ausgeschlossen werden.
+## <img src="assets/icons/basis.svg" height="33" align="absmiddle" alt="">Basis
 
-## <img src="assets/icons/basis.svg" height="33" align="absmiddle" alt="">Grundlage
-
-Diese Regeln lehnen sich an den
-[Contributor Covenant in Version 2.1](https://www.contributor-covenant.org/de/version/2/1/code_of_conduct/) an, den
-viele Open-Source-Projekte verwenden. Dort findest du die ausführliche Fassung auf Deutsch.
+These rules are based on the
+[Contributor Covenant, version 2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct/), which many
+open-source projects use. There you will find the full version in English.
 
 <p align="center">
   <img src="assets/banner-footer.svg" alt="" width="480">
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
-  <sub><a href="README.md">Übersicht</a> · <a href="CONTRIBUTING.md">Mitmachen</a> · <a href="ARCHITECTURE.md">Architektur</a> · <a href="CODE_STYLE.md">Code-Regeln</a> · <a href="CODE_OF_CONDUCT.md">Verhaltensregeln</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 27 auf Macs mit Apple-Chip</sub>
+  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a></sub><br>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

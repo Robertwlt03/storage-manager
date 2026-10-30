@@ -1,7 +1,7 @@
 # Speicher-Explorer – working notes for Claude
 
 Native macOS app (SwiftUI, Swift 6.4, SwiftPM, no Xcode project) that shows where disk space goes. Requires macOS 27 on
-Apple silicon. MIT, public on GitHub. The human-facing guides are German (with English twins `*.en.md`):
+Apple silicon. MIT, public on GitHub. The human-facing guides, all in English:
 README.md, CONTRIBUTING.md (setup, commands, editors), ARCHITECTURE.md (data path, code map, deliberate rules)
 and CODE_STYLE.md (code rules and how they are checked). Read the last two before changing code; do not repeat their
 content here or in comments.
@@ -12,7 +12,7 @@ content here or in comments.
   out ("weil", "deshalb", "danach"), no telegram style, no English phrasing in the prose. Lists only for real steps or
   options, each item a full sentence.
 - Every summary of a change, review or session also comes as a small graphic next to the full text.
-- Say honestly what was checked and what was not (for example "ohne Messdaten geprüft").
+- Say honestly what was checked and what was not (for example "checked without measurement data").
 - Commit footer: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`. PR footer:
   `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
 
@@ -20,8 +20,8 @@ content here or in comments.
 
 - Never print file or folder names from the user's disk in chat, logs or tests: only counts and sizes. Screenshots only
   of your own test window, and never of pages that list file names (explorer, large files, search, app copies).
-- Never delete, clean or move anything on the user's disk, not even in tests. Never press "Aufräumen", "Löschen" or
-  "In den Papierkorb" in the app.
+- Never delete, clean or move anything on the user's disk, not even in tests. Never press "Clean Up", "Delete" or
+  "Move to Trash" in the app.
 - No keychain access and no signing with the user's certificate. The user builds signed builds themselves
   (`make run`, with the identity from `make identity` in the git-ignored `local.mk`). Your builds go to the
   scratchpad and must switch the identity off, because `local.mk` applies to every make call:
@@ -53,8 +53,8 @@ content here or in comments.
   per logic folder, house rules, design rules, every image decided for VoiceOver, flat methods (at most two blocks
   inside each other), no code written twice, architecture layers, the app's
   promises (offline, removing files only in the services that ask first), dead code from the compiler index,
-  American English names and comments without abbreviations, plutil, every text translated, guides (twins alike,
-  links whole, American spelling), no secrets in the repository, no way in for attackers (shells,
+  American English names and comments without abbreviations, plutil, every text translated, guides (links whole,
+  American spelling), English everywhere but the translations, no secrets in the repository, no way in for attackers (shells,
   hardened runtime, workflow permissions and pins), the disk only off the main thread, no unused
   media files, commit messages in the Conventional Commits form, scripts, every output through the shared
   console (scripts/console.sh, checks/console.py, Console.swift), and the samples step that makes sure every check still finds its planted mistake). It must end with the
@@ -126,8 +126,9 @@ with the access sheet open were checked):
 
 ## Documentation
 
-- Guides are German, each with an English twin (`README.en.md`, …) in American spelling; a change to one goes into
-  both. Both carry the Deutsch · English line under the banner. Code, comments and commit messages are English.
+- Everything in the repository is English in American spelling: guides, the installation guide in `docs/guide`,
+  templates, code, comments, scripts and commit messages. German appears only in the app's translations
+  (`Resources/de.lproj`); `make check` reports German anywhere else.
 - Every guide follows the README's layout: banner at the top (`assets/banner-*.svg`), an icon in front of every `##`
   heading (`<img src="assets/icons/<name>.svg" height="33" align="absmiddle" alt="">`), and the shared footer with the
   small banner, the navigation line to all guides and the license line.

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Speicher-Explorer installieren</title>
+<title>Install Speicher-Explorer</title>
 <style>
   :root { color-scheme: light dark; --text: #1d1d1f; --muted: #55555a; --card: #ffffff; --bg: #f5f5f7; --line: #e5e5ea; --accent: #0a5bc4; }
   @media (prefers-color-scheme: dark) { :root { --text: #f2f2f7; --muted: #b4b4bc; --card: #1e1e20; --bg: #000000; --line: #38383a; --accent: #6cb6ff; } }
@@ -22,22 +22,22 @@
 </head>
 <body>
 <main>
-  <h1>Speicher-Explorer installieren</h1>
-  <p class="lead">Fünf kurze Schritte, alles mit der Maus. Die App ist kostenlos und schickt nichts ins Internet.</p>
+  <h1>Install Speicher-Explorer</h1>
+  <p class="lead">Five short steps, all with the mouse. The app is free and sends nothing to the internet.</p>
   <ol>
-    <li><b>Ziehe den Speicher-Explorer in den Ordner „Programme“.</b> Danach kannst du dieses Fenster schließen.
-      <img src="bilder/1-dmg.svg" alt="Die App in den Ordner Programme ziehen"></li>
-    <li><b>Öffne die App aus dem Ordner „Programme“.</b> Beim ersten Mal meldet macOS, dass die App nicht überprüft werden konnte. Klicke auf „Fertig“.
-      <img src="bilder/2-warnung.svg" alt="Hinweis von macOS: auf Fertig klicken"></li>
-    <li><b>Erlaube den ersten Start.</b> Öffne Systemeinstellungen › Datenschutz &amp; Sicherheit, scrolle ganz nach unten und klicke auf „Trotzdem öffnen“. Danach startet die App; das ist nur ein einziges Mal nötig.
-      <img src="bilder/3-trotzdem-oeffnen.svg" alt="Trotzdem öffnen in den Systemeinstellungen"></li>
-    <li><b>Erteile den Festplattenvollzugriff.</b> Die App bietet dafür „Systemeinstellungen öffnen“ an. Schalte dort den Speicher-Explorer ein; fehlt er in der Liste, füge ihn mit „+“ hinzu.
-      <img src="bilder/4-vollzugriff.svg" alt="Festplattenvollzugriff einschalten"></li>
-    <li><b>Klicke in der App auf „App neu starten“.</b> Ab jetzt misst sie alles ohne weitere Fragen.
-      <img src="bilder/5-freigabe.png" alt="Das Freigabe-Fenster der App"></li>
+    <li><b>Drag Speicher-Explorer into the “Applications” folder.</b> Then you can close this window.
+      <img src="images/1-disk-image.svg" alt="Dragging the app into the Applications folder"></li>
+    <li><b>Open the app from the “Applications” folder.</b> The first time, macOS reports that it could not verify the app. Click “Done”.
+      <img src="images/2-warning.svg" alt="The macOS notice: click Done"></li>
+    <li><b>Allow the first start.</b> Open System Settings › Privacy &amp; Security, scroll all the way down and click “Open Anyway”. Then the app starts; this is needed only once.
+      <img src="images/3-open-anyway.svg" alt="Open Anyway in System Settings"></li>
+    <li><b>Grant Full Disk Access.</b> The app offers “Open System Settings” for it. Turn Speicher-Explorer on there; if it is missing from the list, add it with “+”.
+      <img src="images/4-full-disk-access.svg" alt="Turning on Full Disk Access"></li>
+    <li><b>Click “Restart App” in the app.</b> From now on it measures everything without further questions.
+      <img src="images/5-access-window.png" alt="The app’s access window"></li>
   </ol>
-  <h2>Lieber mit der Konsole?</h2>
-  <p class="note">Im Terminal kopierst du die App und erlaubst den ersten Start in einem Rutsch. Den Festplattenvollzugriff kann auch die Konsole nicht erteilen; der letzte Befehl öffnet dafür die passende Systemeinstellung.</p>
+  <h2>Rather use the Terminal?</h2>
+  <p class="note">In the Terminal you copy the app and allow the first start in one go. Not even the Terminal can grant Full Disk Access; the last command opens the matching System Settings pane for it.</p>
   <pre>cp -R "/Volumes/Speicher-Explorer/Speicher-Explorer.app" /Applications/
 xattr -dr com.apple.quarantine /Applications/Speicher-Explorer.app
 open /Applications/Speicher-Explorer.app

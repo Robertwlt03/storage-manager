@@ -63,7 +63,7 @@ SHORT_DECLARATION = re.compile(r"""
     \b (?: let | var ) \s+ ( \w{1,2} ) \b   # let a = …
     | \b _ \s+ ( \w{1,2} ) \s* :            # a parameter without a label: _ a: Int
 """, re.VERBOSE)
-GERMAN_LETTER = re.compile("[äöüÄÖÜß]")
+GERMAN_LETTER = re.compile("[\u00e4\u00f6\u00fc\u00c4\u00d6\u00dc\u00df]")  # umlauts, sharp s
 
 COLOR = re.compile(r"""
     \b (?: Color | NSColor ) \s* [.(]       # Color(…), Color.red, NSColor.…

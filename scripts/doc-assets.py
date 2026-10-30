@@ -24,7 +24,7 @@ FONT = (
     "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', "
     "Helvetica, Arial, sans-serif"
 )
-DEFAULT_EYEBROW = "Speicher-Explorer · Dokumentation"
+DEFAULT_EYEBROW = "Speicher-Explorer · Documentation"
 
 # Top and bottom of each tile gradient, in the spirit of System Settings.
 COLORS = {
