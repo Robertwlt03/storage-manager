@@ -197,15 +197,22 @@ The script runs twenty-three checks one after another:
    spelling (`scripts/checks/guides.py`).
 20. **Secrets:** No file git knows holds a private key, an access token or a password written out. Every settings
    file the `Makefile` reads, such as `local.mk`, must be ignored by git (`scripts/checks/secrets.py`).
-21. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
+21. **Security:** The app holds Full Disk Access, so no other code may get into it. It is signed with the hardened
+   runtime (`--options runtime`), so no library can be injected. No code starts a shell that reads text as
+   commands, no script runs text as code or pipes a script from the internet straight into a shell, and nobody uses
+   fixed paths in the shared folder for temporary files. Every shell script starts with `set -euo pipefail`. Where
+   Swift switches off its safety, such as with `nonisolated(unsafe)` or `@unchecked Sendable`, a comment gives the
+   reason. The GitHub workflow may only read, pins every action to a fixed commit and never puts text from
+   strangers' pull requests into a command (`scripts/checks/security.py`).
+22. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
-22. **Commit messages:** Every commit has a subject like `fix(scan): what changed`: a kind from Conventional Commits,
+23. **Commit messages:** Every commit has a subject like `fix(scan): what changed`: a kind from Conventional Commits,
    maybe a part in brackets, then the change. A blank line and lines up to 100 characters follow, all in English with
    American spelling: a word that neither the dictionary nor the project's code knows, a German one for instance, is
    reported.
    The rule holds from the commit that brought it in; the commits not yet on GitHub's `main` are checked
    (`scripts/checks/commits.py`).
-23. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
+24. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
    never belongs to the app. Every bad line carries a note `expect:` with the finding the check must report there.
    When a check no longer finds its mistake, or reports something nobody planted, this step fails. Whoever adds a
    rule plants its mistake there, with a note.

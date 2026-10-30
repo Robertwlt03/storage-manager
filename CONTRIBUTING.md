@@ -54,6 +54,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | `make restart` | schließt die App, falls sie offen ist, und öffnet sie neu, ohne zu bauen |
 | `make build` | baut die App und zeichnet ihr Symbol |
 | `make check` | startet die ganze Prüfkette, genau wie auf GitHub |
+| `make hooks` | freiwillig: startet die Prüfkette vor jedem `git push`, sodass nichts Rotes den Mac verlässt |
 | `make test` | startet nur die Tests |
 | `make coverage` | zeigt, wie viel des Codes die Tests je Ordner erreichen |
 | `make format` | bringt alle Swift-Dateien in die gemeinsame Form |
@@ -120,6 +121,11 @@ Pull Request von selbst und markiert ihn rot, solange noch etwas zu verbessern i
 ```bash
 make check
 ```
+
+Wer möchte, lässt git die Prüfkette vor jedem Push selbst starten. Der Befehl `make hooks` stellt das einmal ein.
+Danach schickt `git push` nur Commits ab, bei denen die Prüfkette grün ist. Weil sie die Dateien im Ordner liest,
+lehnt der Hook den Push ab, solange noch Änderungen nicht committet sind oder ein anderer Branch als der
+ausgecheckte geschickt wird. Wer ausnahmsweise ohne Prüfung pushen muss, schreibt `git push --no-verify`.
 
 Die Tests in der Prüfkette kontrollieren auch, ob jeder Text in allen 20 Sprachen vorhanden ist und gleich viele
 Platzhalter hat, und ob jede Textfarbe in hellem und dunklem Erscheinungsbild einen Kontrast von mindestens 4,5 zu 1

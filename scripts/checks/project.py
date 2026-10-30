@@ -21,6 +21,7 @@ from checks.index_store import IndexStore, Occurrence
 PROJECT = Path(__file__).resolve().parents[2]
 SCRIPTS = PROJECT / "scripts"
 SAMPLES = SCRIPTS / "checks" / "samples"
+HOOKS = SCRIPTS / "hooks"  # the git hooks, which make hooks switches on
 MAKEFILE = PROJECT / "Makefile"
 BUILD_FOLDER = PROJECT / ".build" / "check"
 
@@ -65,6 +66,7 @@ class Codebase:
     guides: tuple[Path, ...] = ()  # the Markdown files
     translations: Path | None = None  # the folder with one <language>.lproj per language
     text_files: tuple[Path, ...] = ()  # every file that could carry a secret
+    workflows: tuple[Path, ...] = ()  # the GitHub workflows
 
     def swift_files(self) -> tuple[Path, ...]:
         return self.swift_sources + self.swift_tests + self.swift_scripts
@@ -88,12 +90,15 @@ def app() -> Codebase:
         swift_tests=files(PROJECT / "Tests", "*.swift"),
         swift_scripts=files(SCRIPTS, "*.swift"),
         python_scripts=files(SCRIPTS, "*.py"),
-        shell_scripts=(PROJECT / "build.sh", *sorted(SCRIPTS.glob("*.sh"))),
+        shell_scripts=(
+            PROJECT / "build.sh", *sorted(SCRIPTS.glob("*.sh")), *sorted(HOOKS.iterdir()),
+        ),
         makefiles=(MAKEFILE,),
         source_root=PROJECT / "Sources",
         guides=tracked_files("*.md"),
         translations=PROJECT / "Resources",
         text_files=tracked_files("*"),
+        workflows=tracked_files(".github/workflows/*.yml"),
     )
 
 

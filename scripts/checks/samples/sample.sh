@@ -1,4 +1,5 @@
 # expect: the head lacks
+set -euo pipefail
 TMP_DIR=x  # expect: is short for
 
 deeply_nested() {

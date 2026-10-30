@@ -53,6 +53,7 @@ You do not have to remember long commands. Just like npm scripts, every workflow
 | `make restart` | quits the app if it is open and opens it again, without building |
 | `make build` | builds the app and draws its icon |
 | `make check` | runs the whole check chain, exactly as on GitHub |
+| `make hooks` | optional: runs the check chain before every `git push`, so nothing red leaves the Mac |
 | `make test` | runs only the tests |
 | `make coverage` | shows how much of the code the tests reach, per folder |
 | `make format` | puts all Swift files into the shared layout |
@@ -118,6 +119,11 @@ request and marks it red as long as something still needs fixing.
 ```bash
 make check
 ```
+
+If you like, git starts the check chain on its own before every push. The command `make hooks` sets this up once.
+From then on, `git push` only sends commits for which the check chain is green. Because it reads the files in the
+folder, the hook refuses the push while changes are not committed yet or a branch other than the checked-out one
+is sent. Whoever has to push without the check for once writes `git push --no-verify`.
 
 The tests in the check chain also verify that every text exists in all 20 languages and has the same number of
 placeholders, and that every text color reaches a contrast of at least 4.5 to 1 in light and dark appearance. If you

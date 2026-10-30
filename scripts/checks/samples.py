@@ -23,6 +23,7 @@ from checks.language import language_problems
 from checks.nesting import nesting_problems
 from checks.promises import promise_problems
 from checks.secrets import secret_problems
+from checks.security import security_problems
 from checks.translations import translation_problems
 from checks.unused_files import unused_file_problems
 from checks.project import PROJECT, SAMPLES, Codebase, lines_of, numbered_lines, place
@@ -46,7 +47,7 @@ CHECKS = [
     house_rule_problems, design_problems, dead_code_problems, language_problems,
     nesting_problems, script_layout_problems, duplicate_problems, architecture_problems,
     promise_problems, guide_problems, accessibility_problems, translation_problems,
-    secret_problems, disk_access_problems, unused_file_problems,
+    secret_problems, disk_access_problems, unused_file_problems, security_problems,
 ]
 
 
@@ -60,11 +61,12 @@ def samples() -> Codebase:
         build_options=("--scratch-path", str(BUILD_FOLDER), "--enable-index-store"),
         swift_sources=tuple(sorted((SAMPLES / "Sources").rglob("*.swift"))),
         python_scripts=(SAMPLES / "sample.py",),
-        shell_scripts=(SAMPLES / "sample.sh",),
+        shell_scripts=(SAMPLES / "sample.sh", SAMPLES / "unguarded.sh"),
         source_root=SAMPLES / "Sources" / "Samples",
         guides=tuple(sorted((SAMPLES / "guides").glob("*.md"))),
         translations=SAMPLES / "Resources",
         text_files=(SAMPLES / "settings.txt", SAMPLES / "assets" / "orphan.svg", COMMIT_SAMPLES),
+        workflows=(SAMPLES / "workflow.yml",),
     )
 
 
@@ -74,7 +76,7 @@ def expectations(codebase: Codebase) -> list[tuple[str, str]]:
     strings = tuple(sorted(codebase.translations.glob("*.lproj/*.strings")))
     paths = (
         codebase.swift_sources + codebase.python_scripts + codebase.shell_scripts
-        + codebase.guides + strings + codebase.text_files
+        + codebase.guides + strings + codebase.text_files + codebase.workflows
     )
     for path, number, line in numbered_lines(paths):
         note = EXPECTATION.search(line)

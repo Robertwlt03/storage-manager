@@ -1,0 +1,12 @@
+# A sample for the security check: a workflow strangers could steer. expect: no permissions
+name: Sample
+on:
+  pull_request_target:  # expect: pull_request_target runs with
+jobs:
+  sample:
+    permissions: write-all  # expect: write-all gives
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4  # expect: pin its commit
+      - run: |
+          echo "${{ github.event.pull_request.title }}"  # expect: text a stranger chooses

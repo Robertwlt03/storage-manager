@@ -16,7 +16,7 @@ from typing import Callable
 
 from checks import (
     accessibility, architecture, commits, dead_code, disk_access, duplicates, guides, house_rules,
-    language, nesting, project, promises, report, samples, secrets, tools, translations,
+    language, nesting, project, promises, report, samples, secrets, security, tools, translations,
     unused_files,
 )
 
@@ -52,6 +52,7 @@ STEPS = [
     Step("translations", "Every text translated", translations.translation_findings),
     Step("guides", "Guides: twins alike, links whole, American", guides.guide_findings),
     Step("secrets", "No passwords or keys in the repository", secrets.secret_findings),
+    Step("security", "No way in: shells, signing, workflows", security.security_findings),
     Step("scripts", "Scripts and Makefile", tools.script_findings),
     Step("commits", "Commit messages in the shared form", commits.commit_findings),
     Step("samples", "Every planted mistake found (checks/samples)", samples.sample_findings),

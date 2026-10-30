@@ -1,0 +1,54 @@
+#!/bin/bash
+# Runs the whole check pipeline before git sends commits to GitHub, so nothing red leaves the Mac.
+#
+# Start:  git push, once make hooks told git where its hooks are; git push --no-verify skips it
+# Needs:  what make check needs (Xcode 27 and SwiftLint)
+# The checks read the files in the folder, so they only speak for the pushed commits when the
+# folder holds exactly those: no change waits uncommitted, and the pushed branch is checked out.
+
+set -euo pipefail
+
+# MARK: Settings
+
+NO_COMMIT=0000000000000000000000000000000000000000  # what git hands over for a deleted branch
+
+# MARK: Steps
+
+has_uncommitted_changes() {
+  [ -n "$(git status --porcelain)" ]
+}
+
+# git writes one line per pushed branch or tag: its local name and commit, then the remote ones.
+pushes_other_commit() {
+  local local_name local_commit remote_name remote_commit
+  while read -r local_name local_commit remote_name remote_commit; do
+    if [ "$local_commit" != "$NO_COMMIT" ] && ! is_checked_out "$local_commit"; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+is_checked_out() {
+  [ "$(git rev-parse "$1^{commit}")" = "$(git rev-parse HEAD)" ]
+}
+
+refuse() {
+  echo "Not pushed: $1, because the checks read the folder, not the commits." >&2
+  echo "(git push --no-verify pushes without the checks.)" >&2
+  exit 1
+}
+
+# MARK: Run
+
+main() {
+  if has_uncommitted_changes; then
+    refuse "commit your changes or set them aside first"
+  fi
+  if pushes_other_commit; then
+    refuse "check out the branch you push first"
+  fi
+  make check
+}
+
+main

@@ -7,6 +7,10 @@ on:
   push:
     branches: [main]
 
+# The job only reads the code; GitHub's token gets no right to change anything.
+permissions:
+  contents: read
+
 # A newer push replaces the run of an older one instead of using a second Mac.
 concurrency:
   group: checks-${{ github.ref }}
@@ -18,9 +22,11 @@ jobs:
     runs-on: xcode-27
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      # Pinned to a commit, which nobody can move; for a newer version, pin its commit here.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           fetch-depth: 0  # the whole history, so the commit messages of a pull request can be read
+          persist-credentials: false  # no later step needs the token, so it is not kept on disk
       - name: Install SwiftLint
         run: brew install swiftlint
       - name: The whole check pipeline (every step of scripts/check.py)

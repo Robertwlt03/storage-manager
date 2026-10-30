@@ -15,5 +15,7 @@ enum SampleApp {
         _ = (LayerSample().page, GadgetSample().page)
         _ = (removeQuietly, goOnline, AccessibilitySamples())
         _ = (DiskSamples.listFolder(""), QuietDiskSamples.listFolder(""))
+        _ = (SecuritySamples.sharedCount, SecuritySamples.listThroughShell)
+        _ = (SecuritySamples.scratchFile, SecuritySamples.separator)
     }
 }

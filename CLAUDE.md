@@ -54,7 +54,8 @@ content here or in comments.
   inside each other), no code written twice, architecture layers, the app's
   promises (offline, removing files only in the services that ask first), dead code from the compiler index,
   American English names and comments without abbreviations, plutil, every text translated, guides (twins alike,
-  links whole, American spelling), no secrets in the repository, the disk only off the main thread, no unused
+  links whole, American spelling), no secrets in the repository, no way in for attackers (shells,
+  hardened runtime, workflow permissions and pins), the disk only off the main thread, no unused
   media files, commit messages in the Conventional Commits form, scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with the
   green frame "All … steps passed: no errors, no warnings" before every commit. A kind of symbol or declaration
   the checks do not know is reported, never skipped: decide it in `scripts/checks/` instead of silencing it.

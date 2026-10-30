@@ -25,7 +25,7 @@ unlock_own_keychain() {
 # MARK: Run
 
 main() {
-  local options=(--force --sign "$IDENTITY")
+  local options=(--force --options runtime --sign "$IDENTITY")
   if uses_own_keychain; then
     unlock_own_keychain
     options+=(--keychain "$SIGNING_KEYCHAIN")

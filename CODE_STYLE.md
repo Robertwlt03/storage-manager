@@ -204,15 +204,23 @@ Das Skript führt dreiundzwanzig Prüfungen nacheinander aus:
 20. **Geheimnisse:** Keine Datei, die git kennt, enthält einen privaten Schlüssel, einen Zugangsschlüssel oder ein
    ausgeschriebenes Passwort. Jede Einstellungsdatei, die das `Makefile` einliest, wie `local.mk`, muss von git
    ignoriert werden (`scripts/checks/secrets.py`).
-21. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
+21. **Sicherheit:** Die App hat Festplattenvollzugriff, deshalb darf kein fremder Code in sie hinein. Sie wird mit der
+   gehärteten Laufzeit signiert (`--options runtime`), sodass sich keine Bibliothek einschleusen lässt. Kein Code
+   startet eine Shell, die Text als Befehle liest, kein Skript führt Text als Code aus oder lädt Skripte aus dem
+   Internet direkt in eine Shell, und niemand benutzt feste Pfade im gemeinsamen Ordner für vorübergehende Dateien.
+   Jedes Shell-Skript beginnt mit `set -euo pipefail`. Wo Swift seine Sicherheit abschaltet, etwa mit
+   `nonisolated(unsafe)` oder `@unchecked Sendable`, steht ein Kommentar mit dem Grund. Der Workflow auf GitHub hat
+   nur Leserechte, bindet jede Aktion an einen festen Commit und gibt Text aus fremden Pull Requests nie in einen
+   Befehl (`scripts/checks/security.py`).
+22. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
    gemeinsamen Kopf. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf
    Schreibfehler.
-22. **Commit-Nachrichten:** Jeder Commit hat einen Betreff wie `fix(scan): what changed`, also eine Art nach
+23. **Commit-Nachrichten:** Jeder Commit hat einen Betreff wie `fix(scan): what changed`, also eine Art nach
    Conventional Commits, vielleicht einen Teil in Klammern und dann die Änderung. Danach folgen eine Leerzeile und
    Zeilen bis 100 Zeichen, alles auf Englisch in amerikanischer Schreibweise: Ein Wort, das weder das Wörterbuch
    noch der Code des Projekts kennt, etwa ein deutsches, wird gemeldet. Die Regel gilt ab dem Commit, der sie eingeführt hat; geprüft werden
    die Commits, die noch nicht auf dem `main` von GitHub liegen (`scripts/checks/commits.py`).
-23. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
+24. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
    zur App gehört. Jede schlechte Zeile trägt einen Vermerk `expect:` mit dem Fund, den die Prüfung dort melden muss.
    Findet eine Prüfung ihren Fehler nicht mehr, oder meldet sie etwas, das niemand eingebaut hat, schlägt dieser
    Schritt fehl. Wer eine Regel ergänzt, baut ihren Fehler mit Vermerk dort ein.
