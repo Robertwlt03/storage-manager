@@ -40,6 +40,10 @@ code with:
 So that the code still looks the same everywhere, the file `.swift-format` sets the layout. Many editors read it on
 their own when you save, and otherwise `make format` puts everything into shape.
 
+If you work with Claude Code, `CLAUDE.md` holds the project's notes for it: the safety rules, the commands and what
+happens before every commit. Keep your own wishes, such as the language Claude answers in, in a `CLAUDE.local.md` next
+to it. Claude Code reads that file too, and Git ignores it.
+
 ## <img src="assets/icons/terminal.svg" height="33" align="absmiddle" alt="">Short commands
 
 You do not have to remember long commands. Just like npm scripts, every workflow is a short command in the
