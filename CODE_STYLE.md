@@ -205,8 +205,8 @@ The script runs twenty-three checks one after another:
    in the shared folder for temporary files. A shell script, should one come back, starts with `set -euo pipefail`.
    Where Swift switches off its safety, such as with `nonisolated(unsafe)` or `@unchecked Sendable`, a comment gives
    the reason. The GitHub workflow may only read, pins every action to a fixed commit, installs tools in a fixed
-   version checked by checksum, never puts text from strangers' pull requests into a command, and runs a job on the
-   maintainer's own Mac only for pushes and this repository's own pull requests, never for a fork's
+   version checked by checksum, never puts text from strangers' pull requests into a command, and runs a job on a
+   machine of one's own (`self-hosted`) only for pushes and this repository's own pull requests, never for a fork's
    (`scripts/checks/security.py`).
 22. **Scripts:** Two languages only: Swift for the app and the tools that need macOS frameworks, Python 3.13 or newer
    for every other script, and the `Makefile` only as a menu whose lines hand over to them. The scripts and the

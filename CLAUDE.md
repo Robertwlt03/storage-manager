@@ -157,9 +157,11 @@ mode.
 
 ## <img src="assets/icons/claude-github.svg" height="33" align="absmiddle" alt="">GitHub
 
-- The workflow runs on the maintainer's own Mac (`runs-on: [self-hosted, xcode-27]`) and starts only for pushes and
-  for pull requests from this repository, never for a fork's; `make check` reports a job on an own machine without
-  that condition. Pull requests from forks are checked by hand after review.
+- The workflow runs on GitHub's own Mac image for macOS 27 and Xcode 27 (`runs-on: xcode-27`): a fresh Mac per run,
+  thrown away afterwards, so pull requests from forks are checked too. GitHub names its Mac images after the Xcode
+  version (`xcode-27`), not only after macOS (`macos-15`). A job on a machine of one's own (`self-hosted`) would run a
+  fork's code there; `make check` reports such a job unless it starts only for pushes and this repository's own pull
+  requests.
 - Every action is pinned to a commit with its version in a comment; pick a release that has been out for a while.
 - `make hooks` (the person's choice) runs `make check` before every push. The hook starts with any `python3`, then
   hands over to the Python 3.13 or newer that make finds.

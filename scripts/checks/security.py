@@ -116,7 +116,8 @@ JOB_NAME = re.compile(r"^ {2}[\w-]+:\s*$")  # a job, one level below jobs:
 # A machine GitHub does not rent out, such as a runner on the maintainer's own Mac.
 OWN_MACHINE = re.compile(r"""
     ^ \s* runs-on:                              # the machine a job runs on
-    (?! \s* (?: (?: ubuntu | macos | windows ) - # is none of GitHub's own images
+    (?! \s* (?: (?: ubuntu | macos | windows ) -  # is none of GitHub's own images,
+             | xcode - \d+ (?: - xlarge )? \s* (?: \# | $ )  # nor its Xcode image (xcode-27)
              | \$\{\{ ) )                         # and no expression, which may name them
 """, re.VERBOSE)
 # The condition that keeps pull requests from forks away from it.
