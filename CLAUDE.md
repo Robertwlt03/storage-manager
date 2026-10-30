@@ -25,7 +25,7 @@ content here or in comments.
 - No keychain access and no signing with the user's certificate. The user builds signed builds themselves
   (`make run`, with the identity from `make identity` in the git-ignored `local.mk`). Your builds go to the
   scratchpad and must switch the identity off, because `local.mk` applies to every make call:
-  `make build BUILD_DIR=<scratchpad>/build SIGN_IDENTITY=-`. Never overwrite `build/`.
+  `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-`. Never overwrite `build/`.
 - Your ad hoc builds never have Full Disk Access, so any scan in them makes macOS ask once per protected folder
   (hundreds of prompts). Start test windows with `-autoScan NO` and never trigger a scan there. Never run
   `.build/release/SpeicherExplorer --selftest` from the shell; the self test runs only as `make selftest` on the user's
@@ -53,15 +53,17 @@ content here or in comments.
   rules, dead code from the compiler index, plutil, scripts). It must end with "No errors and no warnings." before
   every commit.
 - `make test`, `make coverage`, `make format`, single steps with `scripts/check.py <step>`.
-- `make build BUILD_DIR=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
+- `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
 
 ## Working on code
 
 1. Read the files you touch and the rules in CODE_STYLE.md and ARCHITECTURE.md first.
 2. Keep the rules: spelled-out English names, no numbers without a name, colours only from `Theme`, fonts via
    `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 20
-   translations, no dead code, functions as lists of named steps. Scripts follow the same rules: lines up to 100
-   characters, named numbers, no duplicated code (shared steps live in `scripts/require-xcode.sh` and
+   translations, no dead code, functions as lists of named steps. Scripts follow the same rules and one shared
+   layout (CODE_STYLE.md, step 9): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
+   named and explained (patterns in re.VERBOSE with a comment per part), small named steps, `MARK: Run` at the
+   bottom. Spelled-out names, no duplicated code (shared steps live in `scripts/require-xcode.sh` and
    `scripts/sign.sh`), and no copies of lists the app already has (ask the app, as `--list-pages` does).
 3. New logic gets a test in `Tests/SpeicherExplorerTests` (hand-built `Node` trees via `TestTree`, never the real disk).
 4. Run `make check` until it is clean, then check the look in your own test window (see below) when views changed.
@@ -94,7 +96,7 @@ permission and makes macOS ask the user. Test the real app like this instead (th
 with the access sheet open were checked):
 
 1. Build a test copy with its own bundle identifier, so it has its own permissions and settings and never touches the
-   user's app: `make build BUILD_DIR=<scratchpad>/check SIGN_IDENTITY=- BUNDLE_ID=local.speicher-explorer.check`.
+   user's app: `make build BUILD_FOLDER=<scratchpad>/check SIGN_IDENTITY=- BUNDLE_ID=local.speicher-explorer.check`.
    It has no Full Disk Access, so launched with `-autoScan NO` (and without `-skipAccessSheet`) it shows the access
    sheet and never scans.
 2. Quit requests from macOS (System Settings' "Quit & Reopen", the Dock's Quit) are Apple events. Send the same one

@@ -1,16 +1,23 @@
 // Optional picture comparison: photographs every page of the demo, light and dark, and compares
-// the pictures with the ones you recorded before (see CONTRIBUTING.md). Start it with
-// `make snapshots`, or `make snapshots RECORD=1` to make the new pictures the references.
-// Only you run it: macOS asks once whether your terminal app may record the screen. Everything
-// stays in snapshots/, which git ignores, because the pictures depend on your screen and wallpaper.
+// the pictures with the ones you recorded before (see CONTRIBUTING.md).
+//
+// Start:  make snapshots, or make snapshots RECORD=1 to make the new pictures the references
+// Needs:  Xcode 27 and screen recording for your terminal app (macOS asks the first time); only
+//         you run it. Everything stays in snapshots/, which git ignores, because the pictures
+//         depend on your screen and wallpaper.
 import AppKit
 import UniformTypeIdentifiers
+
+// MARK: Settings
 
 let appearances = ["light", "dark"]
 let secondsUntilDrawn: UInt32 = 3
 let microsecondsBetweenQuitChecks: UInt32 = 100_000
-/// The same window size every time, whatever size the demo window had last.
+/// The same window size every time, whatever size the demo window had last, in AppKit's format
+/// for a saved window: the window's x, y, width and height, then the same for the screen.
 let windowFrame = "100 100 1100 860 0 0 2560 1440"
+/// Layer 0 holds normal windows; menus and the menu bar sit above it.
+let normalWindowLayer = 0
 /// A pixel counts as changed when one colour channel moves further than this (0–255); smaller
 /// moves come from the glass picking up the wallpaper.
 let channelTolerance = 24
@@ -22,6 +29,8 @@ let folder = URL(filePath: "snapshots")
 let referenceFolder = folder.appending(path: "reference")
 let currentFolder = folder.appending(path: "current")
 let differenceFolder = folder.appending(path: "difference")
+
+// MARK: Pictures
 
 /// One picture: a page in one appearance.
 struct Picture {
@@ -64,7 +73,8 @@ func launch(_ app: URL, showing picture: Picture) async throws -> NSRunningAppli
     configuration.createsNewApplicationInstance = true
     configuration.arguments = [
         "-demo", "YES", "-pane", picture.page, "-appearance", picture.appearance,
-        "-ApplePersistenceIgnoreState", "YES", "-NSWindow Frame main", windowFrame,
+        "-ApplePersistenceIgnoreState", "YES",  // do not reopen the windows of the last run
+        "-NSWindow Frame main", windowFrame,  // the saved frame of the window named "main"
     ]
     return try await NSWorkspace.shared.openApplication(at: app, configuration: configuration)
 }
@@ -75,7 +85,7 @@ func mainWindowNumber(of app: NSRunningApplication) -> Int? {
     let list = windows as? [[String: Any]] ?? []
     let ownWindow = list.first { window in
         window[kCGWindowOwnerPID as String] as? pid_t == app.processIdentifier
-            && window[kCGWindowLayer as String] as? Int == 0
+            && window[kCGWindowLayer as String] as? Int == normalWindowLayer
     }
     return ownWindow?[kCGWindowNumber as String] as? Int
 }
@@ -83,6 +93,7 @@ func mainWindowNumber(of app: NSRunningApplication) -> Int? {
 func photograph(windowNumber: Int, to file: URL) throws {
     let capture = Process()
     capture.executableURL = URL(filePath: "/usr/sbin/screencapture")
+    // -x: no shutter sound, -o: without the window's shadow, -l: only the window with this number
     capture.arguments = ["-x", "-o", "-l\(windowNumber)", file.path]
     try capture.run()
     capture.waitUntilExit()
@@ -90,8 +101,10 @@ func photograph(windowNumber: Int, to file: URL) throws {
 
 func quit(_ app: NSRunningApplication) {
     app.terminate()
-    // `isTerminated` never changes in a script without a run loop, so ask the system instead.
-    while kill(app.processIdentifier, 0) == 0 { usleep(microsecondsBetweenQuitChecks) }
+    // `isTerminated` never changes in a script without a run loop, so ask the system instead:
+    // the signal 0 sends nothing and only tells whether the process still exists.
+    let processStillExists = { kill(app.processIdentifier, 0) == 0 }
+    while processStillExists() { usleep(microsecondsBetweenQuitChecks) }
 }
 
 func take(_ pictures: [Picture], of app: URL) async throws {

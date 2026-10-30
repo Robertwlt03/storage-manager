@@ -148,11 +148,20 @@ Das Skript führt neun Prüfungen nacheinander aus:
    der Diagnose.
 7. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
    jede Eigenschaft, die nur beschrieben, aber nie gelesen wird. Die Prüfung liest dafür den Index, den der Compiler
-   beim Bauen anlegt (`scripts/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und was nur die
+   beim Bauen anlegt (`scripts/checks/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und was nur die
    Tests benutzen, zählt ebenfalls als tot.
 8. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
-9. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile. `bash -n`,
-   `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf Schreibfehler.
+9. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
+   gemeinsamen Kopf. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf
+   Schreibfehler.
+
+Jedes Skript ist gleich aufgebaut, damit man nach dem ersten auch alle anderen versteht. Oben steht ein Kopf, der in
+einem Satz sagt, was das Skript tut, dazu die Zeilen `Start:` (wie man es startet) und `Needs:` (was es braucht).
+Danach folgen die Einstellungen unter `MARK: Settings`: Jede Zahl und jedes Muster hat dort einen Namen und eine
+Erklärung. Dann kommen die Schritte als kleine, benannte Funktionen, und ganz unten steht unter `MARK: Run` der
+Ablauf als Liste dieser Schritte. Suchmuster werden über mehrere Zeilen mit einem Kommentar pro Teil geschrieben, und
+Namen sind ausgeschrieben, also `BUILD_FOLDER` statt `BUILD_DIR`. Die Prüfkette selbst liegt aufgeteilt in
+`scripts/checks/`, ein Modul pro Thema.
 
 Ob jeder Text in allen 20 Sprachen vorhanden ist und ob jede Farbe den Kontrast erreicht, prüfen die Tests im vierten
 Schritt. Wie viel des Codes die Tests erreichen, zeigt `make coverage` je Ordner an.

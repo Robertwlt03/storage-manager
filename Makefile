@@ -1,23 +1,39 @@
-# Short commands for everyday work, like npm scripts. `make` alone lists them all.
-# Your own signing identity lives in local.mk (ignored by git); make identity writes it there.
+# Short commands for everyday work, like npm scripts.
+#
+# Start:  make (lists every command), make <command>
+# Needs:  Xcode 27; your own signing identity lives in local.mk (ignored by git), which
+#         make identity writes.
 -include local.mk
 
-BUILD_DIR ?= build
-export BUILD_DIR SIGN_IDENTITY BUNDLE_ID SIGNING_KEYCHAIN SIGNING_KEYCHAIN_PASSWORD
+# MARK: Settings
 
-APP := $(BUILD_DIR)/Speicher-Explorer.app
-DEMO_BUILD_DIR := $(BUILD_DIR)/demo
+BUILD_FOLDER ?= build
+export BUILD_FOLDER SIGN_IDENTITY BUNDLE_ID SIGNING_KEYCHAIN SIGNING_KEYCHAIN_PASSWORD
+
+APP := $(BUILD_FOLDER)/Speicher-Explorer.app
+DEMO_BUILD_FOLDER := $(BUILD_FOLDER)/demo
+DEMO_APP := $(DEMO_BUILD_FOLDER)/Speicher-Explorer.app
+# The demo reads nothing, so it needs no Full Disk Access and no signing identity ("-": ad hoc).
+# Its own folder and bundle identifier keep the signed app and its access untouched.
+DEMO_BUILD := BUILD_FOLDER="$(DEMO_BUILD_FOLDER)" SIGN_IDENTITY=- \
+	BUNDLE_ID=local.speicher-explorer.demo
 PROCESS := SpeicherExplorer
 STRESS_TEST_FOLDER := $(TMPDIR)speicher-test
 SELFTEST_REPORT := $(TMPDIR)speicher-selftest.txt
 SECONDS_BETWEEN_QUIT_CHECKS := 0.2
+# make snapshots RECORD=1 hands --record to the script; without RECORD it hands nothing.
+SNAPSHOT_MODE := $(if $(RECORD),--record)
 
 .DEFAULT_GOAL := help
 .PHONY: help build run restart demo snapshots check test coverage format selftest stress release \
 	identity clean
 
+# MARK: Commands
+# The text after ## is what make help shows for each command.
+
 help: ## List every command
-	@grep -h -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) \
+	@# Each command with its text; %-10s pads the name to ten characters, so the texts line up.
+	@grep --no-filename -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) \
 		| awk -F ':.*## ' '{ printf "  make %-10s %s\n", $$1, $$2 }'
 
 build: ## Build the app and render its icon
@@ -32,15 +48,13 @@ restart: ## Quit the app if it is open, then open the built one
 	open "$(APP)"
 
 demo: ## Build without your certificate, then open the app with made-up data (no scan)
-	@# The demo reads nothing, so it needs no Full Disk Access and no signing identity. Its own
-	@# folder and bundle identifier keep the signed app and its access untouched.
-	$(MAKE) build BUILD_DIR="$(DEMO_BUILD_DIR)" SIGN_IDENTITY=- BUNDLE_ID=local.speicher-explorer.demo
-	open -n "$(DEMO_BUILD_DIR)/Speicher-Explorer.app" --args -demo YES
+	$(MAKE) build $(DEMO_BUILD)
+	open -n "$(DEMO_APP)" --args -demo YES
 
 snapshots: ## Optional: photograph every demo page, light and dark, and compare (RECORD=1 records)
 	@# Only you run it: macOS asks once whether your terminal may record the screen.
-	$(MAKE) build BUILD_DIR="$(DEMO_BUILD_DIR)" SIGN_IDENTITY=- BUNDLE_ID=local.speicher-explorer.demo
-	swift scripts/snapshots.swift "$(DEMO_BUILD_DIR)/Speicher-Explorer.app" $(if $(RECORD),--record)
+	$(MAKE) build $(DEMO_BUILD)
+	swift scripts/snapshots.swift "$(DEMO_APP)" $(SNAPSHOT_MODE)
 
 check: ## Run the whole check pipeline, as on GitHub
 	scripts/check.py
@@ -70,4 +84,4 @@ identity: ## Create your own signing certificate once
 	scripts/create-signing-identity.sh
 
 clean: ## Remove everything that building creates
-	rm -rf .build "$(BUILD_DIR)" dist
+	rm -rf .build "$(BUILD_FOLDER)" dist

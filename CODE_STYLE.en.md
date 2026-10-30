@@ -145,11 +145,18 @@ The script runs nine checks one after another:
    animations outside `Motion`, hard-coded texts on screen and output outside the diagnostics.
 7. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
    is only written but never read. The check reads the index the compiler writes while building
-   (`scripts/index_store.py`). That way it never mixes up properties of the same name, and what only the tests use
+   (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the tests use
    counts as dead as well.
 8. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
-9. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line. `bash -n`,
-   `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
+9. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
+   shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
+
+Every script is built the same way, so once you understand one, you understand them all. At the top, a head says in
+one sentence what the script does, with the lines `Start:` (how to start it) and `Needs:` (what it needs). The
+settings follow under `MARK: Settings`: every number and every pattern has a name and an explanation there. Then come
+the steps as small, named functions, and at the very bottom, under `MARK: Run`, the run as a list of these steps.
+Search patterns are written over several lines with a comment per part, and names are spelled out, so `BUILD_FOLDER`
+instead of `BUILD_DIR`. The check pipeline itself is split up in `scripts/checks/`, one module per topic.
 
 Whether every text exists in all 20 languages and whether every colour reaches the contrast is checked by the tests
 in the fourth step. How much of the code the tests reach is shown per folder by `make coverage`.
