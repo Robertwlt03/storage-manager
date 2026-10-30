@@ -202,8 +202,9 @@ The script runs twenty-three checks one after another:
    commands, no script runs text as code or pipes a script from the internet straight into a shell, and nobody uses
    fixed paths in the shared folder for temporary files. Every shell script starts with `set -euo pipefail`. Where
    Swift switches off its safety, such as with `nonisolated(unsafe)` or `@unchecked Sendable`, a comment gives the
-   reason. The GitHub workflow may only read, pins every action to a fixed commit and never puts text from
-   strangers' pull requests into a command (`scripts/checks/security.py`).
+   reason. The GitHub workflow may only read, pins every action to a fixed commit, installs tools in a fixed version
+   checked by checksum and never puts text from strangers' pull requests into a command
+   (`scripts/checks/security.py`).
 22. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
 23. **Commit messages:** Every commit has a subject like `fix(scan): what changed`: a kind from Conventional Commits,

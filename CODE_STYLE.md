@@ -210,8 +210,8 @@ Das Skript führt dreiundzwanzig Prüfungen nacheinander aus:
    Internet direkt in eine Shell, und niemand benutzt feste Pfade im gemeinsamen Ordner für vorübergehende Dateien.
    Jedes Shell-Skript beginnt mit `set -euo pipefail`. Wo Swift seine Sicherheit abschaltet, etwa mit
    `nonisolated(unsafe)` oder `@unchecked Sendable`, steht ein Kommentar mit dem Grund. Der Workflow auf GitHub hat
-   nur Leserechte, bindet jede Aktion an einen festen Commit und gibt Text aus fremden Pull Requests nie in einen
-   Befehl (`scripts/checks/security.py`).
+   nur Leserechte, bindet jede Aktion an einen festen Commit, installiert Werkzeuge in fester Version mit Prüfsumme
+   und gibt Text aus fremden Pull Requests nie in einen Befehl (`scripts/checks/security.py`).
 22. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
    gemeinsamen Kopf. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf
    Schreibfehler.

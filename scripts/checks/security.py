@@ -82,7 +82,7 @@ SAFETY_SWITCHES = re.compile(r"""
 """, re.VERBOSE)
 SWIFT_COMMENT = re.compile(r"//")
 
-# GitHub workflows: what a stranger's pull request could change or read.
+# GitHub workflows: what a stranger's pull request or a changed tool could change or read.
 WORKFLOW_PERMISSIONS = re.compile(r"^permissions:", re.MULTILINE)
 EVERY_PERMISSION = re.compile(r"\bwrite-all\b")
 ACTION = re.compile(r"""
@@ -93,6 +93,11 @@ COMMIT_NAME = re.compile(r"^[0-9a-f]{40}$")  # a commit's full name, which nobod
 STRANGERS_TRIGGER = re.compile(r"^\s*-?\s*pull_request_target\b")
 RUN_BLOCK = re.compile(r"^(?P<indent>\s*)(?:-\s+)?run:")
 STRANGERS_TEXT = re.compile(r"\$\{\{[^}]*\b(?:github\.event\.|github\.head_ref)")
+# An install that takes whatever version is newest that day.
+NEWEST_VERSION_INSTALL = re.compile(r"""
+    \b brew \s+ install \b                  # Homebrew knows no fixed versions
+    | \b pip3? \s+ install \b (?! .* == )   # pip without name==version
+""", re.VERBOSE)
 
 
 # MARK: Code and scripts
@@ -199,6 +204,9 @@ def line_problems(line: str, inside_run: bool) -> list[str]:
         (inside_run and STRANGERS_TEXT.search(line),
          "puts text a stranger chooses, such as a title or branch name, into a command; hand it "
          "over in env: and read it as a variable"),
+        (inside_run and NEWEST_VERSION_INSTALL.search(line),
+         "installs a tool in whatever version is newest, so unchanged code can turn red or run "
+         "changed tools; download a fixed version and compare its checksum"),
     ]
     return [message for found, message in checks if found]
 

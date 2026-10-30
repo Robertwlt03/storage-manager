@@ -8,5 +8,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4  # expect: pin its commit
+      - run: brew install swiftlint  # expect: whatever version is newest
       - run: |
           echo "${{ github.event.pull_request.title }}"  # expect: text a stranger chooses
