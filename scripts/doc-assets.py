@@ -14,9 +14,11 @@ asks for the file name of a new one, the title and the subtitle.
 """
 
 import argparse
+import math
 import re
 import sys
 from collections.abc import Callable
+from dataclasses import dataclass
 from html import escape, unescape
 from pathlib import Path
 
@@ -34,9 +36,19 @@ FONT = (
     "Helvetica, Arial, sans-serif"
 )
 DEFAULT_EYEBROW = "Speicher-Explorer · Documentation"
-HAND_DRAWN_BANNERS = {"footer"}  # drawn by hand like assets/banner.svg; never replaced
+# Never replaced through make banner: the app's footer is drawn by hand like banner.svg, and the
+# Claude footer is drawn again with every banner in the Claude theme.
+HAND_DRAWN_BANNERS = {"footer", "claude-footer"}
+CLAUDE_FOOTER = "claude-footer"
+FOOTER_WIDTH, FOOTER_HEIGHT = 480, 120  # the size of the app's footer
+FOOTER_TILE_LEFT, FOOTER_TILE_TOP, FOOTER_TILE_SIZE = 36, 24, 72
+FOOTER_TEXT_LEFT = 130
+# The footer's two lines, as on the app's: baseline, size, weight and color.
+FOOTER_NAME_LINE = (58, 28, 700, "#141413")
+FOOTER_CAPTION_LINE = (86, 16, 400, "#5E5D59")
 BANNER_NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")  # the <file name> in banner-<file name>.svg
 TEXT_ELEMENT = re.compile(r"<text [^>]*>(.*?)</text>")  # a drawn banner's three lines of text
+THEME_MARK = re.compile(r'data-theme="(?P<theme>[a-z]+)"')  # the design a banner was drawn in
 FILE_NAME_LIMIT = 40
 # How many characters of usual text fit between the text's start and the banner's right margin,
 # measured in the system font at each line's size and weight.
@@ -58,6 +70,18 @@ COLORS = {
     "teal": ("#56DBBE", "#12957B"),
     "gray": ("#76767F", "#2C2C31"),
     "slate": ("#A2A2AB", "#6A6A74"),
+    # Claude's colors (claude.com), deepened enough below for a white glyph: for CLAUDE.md.
+    "clay": ("#E08A6D", "#C46849"),
+    "dusk": ("#84AED8", "#4F82B8"),
+    "mineral": ("#78AE9C", "#4C7F6E"),
+    "plum": ("#9A95CF", "#6A65A6"),
+    "ink": ("#4D4C48", "#141413"),
+    "kraft": ("#DDB08F", "#B8845F"),
+    "cactus": ("#86A89C", "#5B7C71"),
+    "heather": ("#9592BC", "#6B6991"),
+    "peach": ("#DB9B7E", "#B26D4C"),
+    "olive": ("#8FA272", "#5E7047"),
+    "stone": ("#9C9A92", "#5E5D59"),
 }
 
 # The banner, in pixels: the icon on the left, the three lines of text to its right.
@@ -67,10 +91,16 @@ ICON_SIZE_ON_MAIN_BANNER = 240
 ICON_LEFT, ICON_TOP = 96, 66
 ICON_ORIGIN_ON_MAIN_BANNER = "-96 -100"  # moves the copied icon back to the top left corner
 TEXT_LEFT = 320
-# Each line of text: where it stands (its baseline), its size, its weight and its color.
-EYEBROW_LINE = (112, 22, 600, "#1F52DB")
-TITLE_LINE = (176, 60, 700, "#1D1D1F")
-SUBTITLE_LINE = (224, 28, 400, "#3A3A3C")
+# Each line of text: where it stands (its baseline), its size and its weight; the theme colors it.
+EYEBROW_LINE = (112, 22, 600)
+TITLE_LINE = (176, 60, 700)
+SUBTITLE_LINE = (224, 28, 400)
+# Our own spark for the Claude theme (not Claude's logo): rays from the middle of a clay tile,
+# long and short in turn, as shares of the tile's size.
+SPARK_RAYS = 12
+SPARK_LENGTHS = (0.34, 0.24)
+SPARK_STROKE = 0.075
+TILE_CORNER = 0.225  # the corner radius of the app icon's tile, as a share of its size
 
 # The group in the main banner that draws the app icon, the part with the shadow filter "sh".
 APP_ICON_GROUP = re.compile(r"""
@@ -79,15 +109,15 @@ APP_ICON_GROUP = re.compile(r"""
     </g> \n                         # the group's end, on a line of its own
 """, re.VERBOSE)
 
-# The banner's background and decoration, the same as on the main banner.
+# The banner's background and decoration, in the shape of the main banner.
 BANNER_BACKGROUND = """<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" stop-color="#F7FAFF"/><stop offset="1" stop-color="#DCE7FF"/></linearGradient>
+  <stop offset="0" stop-color="{light}"/><stop offset="1" stop-color="{deep}"/></linearGradient>
 <filter id="sh" x="-20%" y="-20%" width="140%" height="150%">
-  <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#1F52DB" flood-opacity=".28"/>
+  <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="{shadow}" flood-opacity=".28"/>
 </filter></defs>
 <rect {size} rx="32" fill="url(#bg)"/>
-<circle cx="1180" cy="30" r="200" fill="#5C9EFF" fill-opacity=".10"/>
-<circle cx="80" cy="300" r="160" fill="#1F52DB" fill-opacity=".06"/>"""
+<circle cx="1180" cy="30" r="200" fill="{large_circle}" fill-opacity=".10"/>
+<circle cx="80" cy="300" r="160" fill="{shadow}" fill-opacity=".06"/>"""
 
 # A section icon: a 45-pixel tile with a faint white edge, the glyph drawn in white on top.
 ICON_TEMPLATE = """<svg xmlns="http://www.w3.org/2000/svg" width="60" height="56"
@@ -107,23 +137,66 @@ ICON_TEMPLATE = """<svg xmlns="http://www.w3.org/2000/svg" width="60" height="56
 # MARK: Drawing
 
 
-def banner(file_name: str, title: str, subtitle: str, eyebrow: str, overwrite: bool) -> Path:
+@dataclass(frozen=True)
+class Theme:
+    """How a banner looks; the shape stays the same in every theme."""
+    light: str  # the background, from the top left
+    deep: str  # to the bottom right
+    large_circle: str  # the decoration top right
+    shadow: str  # the shadow under the mark, and the decoration bottom left
+    text_colors: tuple[str, str, str]  # the small line, the title, the subtitle
+    mark: Callable[[], str]  # what stands on the left
+
+
+def banner(file_name: str, title: str, subtitle: str, eyebrow: str, overwrite: bool,
+           theme_name: str = "app") -> Path:
     if file_name in HAND_DRAWN_BANNERS:
         stop(f"banner-{file_name}.svg is drawn by hand", "Edit it in assets/ instead.")
+    theme = THEMES[theme_name]
     size = f'width="{BANNER_WIDTH}" height="{BANNER_HEIGHT}"'
+    theme_mark = "" if theme_name == "app" else f' data-theme="{theme_name}"'
+    eyebrow_color, title_color, subtitle_color = theme.text_colors
     svg = "\n".join([
         f'<svg xmlns="http://www.w3.org/2000/svg" {size}',
-        f'  viewBox="0 0 {BANNER_WIDTH} {BANNER_HEIGHT}" role="img"',
+        f'  viewBox="0 0 {BANNER_WIDTH} {BANNER_HEIGHT}" role="img"{theme_mark}',
         f'  aria-label="{escape(f"Speicher-Explorer – {title}. {subtitle}")}">',
-        BANNER_BACKGROUND.format(size=size),
-        banner_icon(),
-        text_line(EYEBROW_LINE, eyebrow),
-        text_line(TITLE_LINE, title),
-        text_line(SUBTITLE_LINE, subtitle),
+        BANNER_BACKGROUND.format(size=size, light=theme.light, deep=theme.deep,
+                                 large_circle=theme.large_circle, shadow=theme.shadow),
+        theme.mark(),
+        text_line(EYEBROW_LINE, eyebrow, eyebrow_color),
+        text_line(TITLE_LINE, title, title_color),
+        text_line(SUBTITLE_LINE, subtitle, subtitle_color),
         "</svg>",
         "",
     ])
+    if theme_name == "claude":
+        write(banner_path(CLAUDE_FOOTER), claude_footer(), overwrite=True)
     return write(banner_path(file_name), svg, overwrite)
+
+
+def claude_footer() -> str:
+    """The footer of CLAUDE.md, with the same spark as its banner."""
+    size = f'width="{FOOTER_WIDTH}" height="{FOOTER_HEIGHT}"'
+    return "\n".join([
+        f'<svg xmlns="http://www.w3.org/2000/svg" {size} viewBox="0 0 {FOOTER_WIDTH} '
+        f'{FOOTER_HEIGHT}" role="img" aria-label="Speicher-Explorer, built with Claude Code">',
+        '<defs><linearGradient id="fbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" '
+        'stop-color="#FAF9F5"/><stop offset="1" stop-color="#F0EEE6"/></linearGradient></defs>',
+        f'<rect {size} rx="24" fill="url(#fbg)"/>',
+        spark_tile(FOOTER_TILE_LEFT, FOOTER_TILE_TOP, FOOTER_TILE_SIZE),
+        footer_text(FOOTER_NAME_LINE, "Speicher-Explorer"),
+        footer_text(FOOTER_CAPTION_LINE, "Built with Claude Code"),
+        "</svg>",
+        "",
+    ])
+
+
+def footer_text(style: tuple, text: str) -> str:
+    baseline, font_size, font_weight, color = style
+    return (
+        f'<text x="{FOOTER_TEXT_LEFT}" y="{baseline}" font-family="{FONT}" font-size="{font_size}" '
+        f'font-weight="{font_weight}" fill="{color}" text-anchor="start">{escape(text)}</text>'
+    )
 
 
 def banner_icon() -> str:
@@ -136,8 +209,42 @@ def banner_icon() -> str:
     )
 
 
-def text_line(style: tuple, text: str) -> str:
-    baseline, font_size, font_weight, color = style
+def spark_tile(left: float, top: float, size: float) -> str:
+    """A clay tile with a light spark, drawn at any size (banner, footer)."""
+    center_x, center_y = left + size / 2, top + size / 2
+    rays = []
+    for index in range(SPARK_RAYS):
+        angle = 2 * math.pi * index / SPARK_RAYS
+        length = size * SPARK_LENGTHS[index % 2]
+        end_x, end_y = center_x + length * math.sin(angle), center_y - length * math.cos(angle)
+        rays.append(f'<path d="M{center_x:.1f} {center_y:.1f}L{end_x:.1f} {end_y:.1f}"/>')
+    top_color, bottom_color = COLORS["clay"]
+    return (
+        f'<defs><linearGradient id="clay" x1="0" y1="0" x2="0" y2="1">'
+        f'<stop offset="0" stop-color="{top_color}"/><stop offset="1" stop-color="{bottom_color}"/>'
+        f'</linearGradient></defs>'
+        f'<rect x="{left}" y="{top}" width="{size}" height="{size}" rx="{size * TILE_CORNER:.1f}" '
+        f'fill="url(#clay)"/>'
+        f'<g stroke="#FAF9F5" stroke-width="{size * SPARK_STROKE:.1f}" stroke-linecap="round">'
+        f'{"".join(rays)}</g>'
+    )
+
+
+def claude_mark() -> str:
+    return f'<g filter="url(#sh)">{spark_tile(ICON_LEFT, ICON_TOP, ICON_SIZE_ON_BANNER)}</g>'
+
+
+THEMES = {
+    "app": Theme("#F7FAFF", "#DCE7FF", "#5C9EFF", "#1F52DB",
+                 ("#1F52DB", "#1D1D1F", "#3A3A3C"), banner_icon),
+    # Claude's ivory, clay and slate (claude.com); the small line in a deeper clay for 4.5:1
+    "claude": Theme("#FAF9F5", "#F0EEE6", "#D97757", "#C46849",
+                    ("#A85536", "#141413", "#3D3D3A"), claude_mark),
+}
+
+
+def text_line(style: tuple, text: str, color: str) -> str:
+    baseline, font_size, font_weight = style
     return (
         f'<text x="{TEXT_LEFT}" y="{baseline}" font-family="{FONT}" text-anchor="start" '
         f'font-size="{font_size}" font-weight="{font_weight}" fill="{color}">{escape(text)}</text>'
@@ -183,14 +290,22 @@ def banner_by_questions() -> Path:
     if replaceable and ask_yes_no("Replace an existing banner?"):
         file_name = replaceable[ask_choice("Which banner?", banner_list(replaceable))]
         eyebrow, title, subtitle = banner_texts(file_name)
+        theme_name = banner_theme(file_name)
     else:
         file_name = new_banner_name()
         eyebrow, title, subtitle = DEFAULT_EYEBROW, "", ""
+        theme_name = "app"
     title = ask_text("Title", f"large line, up to {TITLE_LIMIT} characters", title,
                      too_long(TITLE_LIMIT))
     subtitle = ask_text("Subtitle", f"one sentence below, up to {SUBTITLE_LIMIT} characters",
                         subtitle, too_long(SUBTITLE_LIMIT))
-    return banner(file_name, title, subtitle, eyebrow, overwrite=True)
+    return banner(file_name, title, subtitle, eyebrow, overwrite=True, theme_name=theme_name)
+
+
+def banner_theme(file_name: str) -> str:
+    """The theme a banner was drawn in, so replacing it keeps its look."""
+    mark = THEME_MARK.search(banner_path(file_name).read_text())
+    return mark["theme"] if mark else "app"
 
 
 def banner_list(file_names: list[str]) -> list[str]:
@@ -253,6 +368,9 @@ def command_line() -> argparse.ArgumentParser:
     banner_command.add_argument("title", nargs="?")
     banner_command.add_argument("subtitle", nargs="?")
     banner_command.add_argument("--eyebrow", default=DEFAULT_EYEBROW, help="the small line above")
+    banner_command.add_argument(
+        "--theme", choices=THEMES,
+        help="app: the app's blue; claude: Claude's ivory and clay (default: the banner's own)")
     icon_command = commands.add_parser("icon", help="an icon in front of a section heading")
     icon_command.add_argument("name", help="written to assets/icons/<name>.svg")
     icon_command.add_argument("color", choices=COLORS)
@@ -282,8 +400,11 @@ def drawn_file() -> Path:
     if problem := next((problem for problem in problems if problem), ""):
         parser.error(problem)
     heading("Speicher-Explorer · banner", relative_path(banner_path(arguments.file_name)))
+    # Without --theme, a banner drawn again keeps the theme it has, and a new one gets the app's.
+    exists = banner_path(arguments.file_name).exists()
+    theme_name = arguments.theme or (banner_theme(arguments.file_name) if exists else "app")
     return banner(arguments.file_name, arguments.title, arguments.subtitle, arguments.eyebrow,
-                  arguments.overwrite)
+                  arguments.overwrite, theme_name)
 
 
 def main() -> None:

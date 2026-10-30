@@ -1,4 +1,6 @@
-# Speicher-Explorer – working notes for Claude
+<p align="center">
+  <img src="assets/banner-claude.svg" alt="Working with Claude on Speicher-Explorer. How Claude Code helps build and check the app." width="100%">
+</p>
 
 Native macOS app (SwiftUI, Swift 6.4, SwiftPM, no Xcode project) that shows where disk space goes. Requires macOS 27 on
 Apple silicon. MIT, public on GitHub. These notes are for anyone who works on the project with Claude Code; personal
@@ -8,7 +10,7 @@ The human-facing guides, all in English: README.md, CONTRIBUTING.md (setup, comm
 path, code map, deliberate rules) and CODE_STYLE.md (code rules and how they are checked). Read the last two before
 changing code; do not repeat their content here or in comments.
 
-## Working with the person at the keyboard
+## <img src="assets/icons/claude-conversation.svg" height="33" align="absmiddle" alt="">Working with the person at the keyboard
 
 - Answer in the language they write in, unless their `CLAUDE.local.md` says otherwise.
 - Say honestly what was checked and what was not (for example "checked without measurement data", "not run because it
@@ -17,7 +19,7 @@ changing code; do not repeat their content here or in comments.
   tool. Commands that need a password (`sudo …`, keychain, `tccutil`) are theirs to run.
 - End commit messages and pull request descriptions with the attribution lines Claude Code itself provides.
 
-## Privacy and safety (hard rules)
+## <img src="assets/icons/claude-privacy.svg" height="33" align="absmiddle" alt="">Privacy and safety (hard rules)
 
 - Never print file or folder names from the person's disk in chat, logs or tests: only counts and sizes. Screenshots
   only of your own test window, and never of pages that list file names (explorer, large files, search, app copies);
@@ -35,7 +37,7 @@ changing code; do not repeat their content here or in comments.
   running copy of the app, also the person's), `make identity`, `make hooks` (changes their git settings).
 - Never send key presses or clicks through System Events or `osascript`; see "Testing safely" for what to do instead.
 
-## Toolchain and languages
+## <img src="assets/icons/claude-languages.svg" height="33" align="absmiddle" alt="">Toolchain and languages
 
 - Xcode 27 is required as a toolchain only (SwiftUI's `@State` macro plugin ships only with Xcode); any editor works.
   `xcode-select --print-path` must point to `/Applications/Xcode.app/Contents/Developer`.
@@ -50,7 +52,7 @@ changing code; do not repeat their content here or in comments.
   leave the main thread, `Task.detached(priority:)` where scanning, cleaning or reading needs a lower priority.
 - SwiftLint (Homebrew) runs in the pipeline; `swift format` comes with the toolchain.
 
-## Commands
+## <img src="assets/icons/claude-commands.svg" height="33" align="absmiddle" alt="">Commands
 
 `make` lists them all. The ones you use:
 
@@ -62,7 +64,7 @@ changing code; do not repeat their content here or in comments.
 - `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-` for your own builds.
 - `make banner` draws a guide banner (asks everything, offers existing ones to replace).
 
-## Before every commit
+## <img src="assets/icons/claude-commit.svg" height="33" align="absmiddle" alt="">Before every commit
 
 1. `make check` is green.
 2. Code Inspect: review exactly what the commit will contain (the staged diff, or the working tree when nothing is
@@ -73,7 +75,7 @@ changing code; do not repeat their content here or in comments.
    person is trying out slips in. Messages follow Conventional Commits in English (`make check` checks them). Do not
    push.
 
-## Working on the app
+## <img src="assets/icons/claude-app.svg" height="33" align="absmiddle" alt="">Working on the app
 
 1. Read the files you touch and the rules in CODE_STYLE.md and ARCHITECTURE.md first.
 2. Keep the rules: spelled-out English names, no numbers without a name, colors only from `Theme`, fonts via
@@ -92,7 +94,7 @@ Design goals: native Apple look (HIG, Liquid Glass), gentle and minimal animatio
 animation, energy-saving behavior (nothing animates or polls at rest), text contrast at least 4.5:1 in light and dark
 mode.
 
-## Working on scripts and checks
+## <img src="assets/icons/claude-scripts.svg" height="33" align="absmiddle" alt="">Working on scripts and checks
 
 - Every script follows the shared layout (CODE_STYLE.md, step 22): a head with `Start:` and `Needs:`,
   `MARK: Settings` with every number and pattern named and explained (patterns in re.VERBOSE with a comment per part),
@@ -108,7 +110,7 @@ mode.
 - `make check` does not run the tool scripts themselves (build, release, hook, banner). After changing one, run it as
   described under "Testing safely".
 
-## Testing safely
+## <img src="assets/icons/claude-testing.svg" height="33" align="absmiddle" alt="">Testing safely
 
 - **The look:** use the demo mode (made-up data, no scan, nothing read or removed). Launch your scratchpad build and
   photograph only its window:
@@ -138,7 +140,7 @@ mode.
 - **Questions in the console:** drive them in a pseudo terminal (Python's `pty` module) that types the answers and
   arrow keys, against a scratchpad copy, so nothing in the project is drawn or replaced.
 
-## Skills and helpers
+## <img src="assets/icons/claude-skills.svg" height="33" align="absmiddle" alt="">Skills and helpers
 
 - Use only the skills this session lists as available; never assume one that another contributor may have installed.
   `/code-review` (and `/ponytail-review` for over-engineering, if installed) serve Code Inspect; without them, review
@@ -148,7 +150,7 @@ mode.
   uses its own build folder (`swift build --build-path <scratchpad>/…`). The session that started them merges the
   results, applies renames that cross areas, and runs everything once at the end.
 
-## GitHub
+## <img src="assets/icons/claude-github.svg" height="33" align="absmiddle" alt="">GitHub
 
 - The workflow runs on the maintainer's own Mac (`runs-on: [self-hosted, xcode-27]`) and starts only for pushes and
   for pull requests from this repository, never for a fork's; `make check` reports a job on an own machine without
@@ -157,7 +159,7 @@ mode.
 - `make hooks` (the person's choice) runs `make check` before every push. The hook starts with any `python3`, then
   hands over to the Python 3.13 or newer that make finds.
 
-## Documentation
+## <img src="assets/icons/claude-documentation.svg" height="33" align="absmiddle" alt="">Documentation
 
 - Everything in the repository is English in American spelling: guides, the installation guide in `docs/guide`,
   templates, code, comments, scripts and commit messages. Other languages appear only in the app's translations
@@ -169,5 +171,19 @@ mode.
   others; an existing file is only replaced with `--overwrite` or by picking it in `make banner`. Section icons: 60×56
   canvas, 45 px rounded tile with a two-stop gradient, white 2 px stroke glyph in a 24 px grid; within one guide every
   icon has its own color and shape.
+- This file has the same form in Claude's colors (ivory, clay and slate from claude.com): `assets/banner-claude.svg`
+  (`--theme claude`; a banner drawn again keeps its theme), `assets/banner-claude-footer.svg`, which is drawn again
+  with it, and the `claude-*` icons in the Claude tones of `scripts/doc-assets.py`. The spark on the clay tile is our
+  own drawing, not Claude's logo.
 - When requirements, commands or rules change, update README, CONTRIBUTING, CODE_STYLE, ARCHITECTURE and this file in
   the same commit.
+
+<p align="center">
+  <img src="assets/banner-claude-footer.svg" alt="" width="480">
+</p>
+
+<p align="center">
+  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
+</p>
