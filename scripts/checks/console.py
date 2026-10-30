@@ -27,7 +27,7 @@ USES_COLOR = "NO_COLOR" not in os.environ and (
 )
 
 # Terminal codes for text styles (ECMA-48 "select graphic rendition").
-BOLD, DIM, UNDERLINE, RED, GREEN, CYAN = "1", "2", "4", "31", "32", "36"
+BOLD, DIM, RED, GREEN, CYAN = "1", "2", "31", "32", "36"
 SUCCESS, FAILURE = GREEN, RED  # the colors of a frame
 
 PASSED_MARK = "✔"
@@ -137,25 +137,22 @@ def can_ask() -> bool:
     return sys.stdin.isatty() and IN_TERMINAL
 
 
-def ask_yes_no(question: str, hint: str = "") -> bool:
+def ask_yes_no(question: str) -> bool:
     """Enter alone answers no."""
-    ask(question, "y or n, Enter means no", hint)
-    return answer().lower() in YES_ANSWERS
+    return answer(question, "y/N").lower() in YES_ANSWERS
 
 
-def ask_text(label: str, explanation: str, current: str = "") -> str:
+def ask_text(label: str, meaning: str, current: str = "") -> str:
     """Enter alone keeps the current text; without one, the question comes again."""
-    ask(label, explanation, f"Now: {current} · Enter keeps it" if current else "")
-    while not (text := answer() or current):
+    hint = f'{meaning} · Enter keeps "{current}"' if current else meaning
+    while not (text := answer(label, hint) or current):
         note("This one needs an answer.")
     return text
 
 
-def ask_choice(question: str, options: list[str], header: str = "") -> int:
+def ask_choice(question: str, options: list[str]) -> int:
     """A list to walk with the arrow keys; Enter picks the marked entry and returns its index."""
-    ask(question, "↑↓ to move, Enter to pick")
-    if header:
-        show(f"     {paint(header, DIM, UNDERLINE)}")
+    show(f"{question_start(question)}  {paint('↑↓ Enter', DIM)}")
     marked = 0
     show_options(options, marked)
     with keys_one_by_one() as read_key:
@@ -166,16 +163,17 @@ def ask_choice(question: str, options: list[str], header: str = "") -> int:
     return marked
 
 
-def ask(question: str, explanation: str, hint: str = "") -> None:
-    """A question gets a line of its own: what is asked, then dimmed what it means."""
-    show(f" {paint(QUESTION_MARK, CYAN, BOLD)} {paint(question, BOLD)}  {paint(explanation, DIM)}")
-    if hint:
-        note(hint)
+def answer(question: str, hint: str) -> str:
+    """One line: the question, dimmed what it means, and the answer typed behind it."""
+    try:
+        return input(f"{question_start(question)}  {paint(hint, DIM)}  ").strip()
+    except (KeyboardInterrupt, EOFError):
+        print()  # the cursor still stands behind the question
+        raise
 
 
-def answer() -> str:
-    """The answer is typed on the line below its question, after the pointer."""
-    return input(f"   {paint(POINTER_MARK, CYAN, BOLD)} ").strip()
+def question_start(question: str) -> str:
+    return f" {paint(QUESTION_MARK, CYAN, BOLD)} {paint(question, BOLD)}"
 
 
 def show_options(options: list[str], marked: int) -> None:
