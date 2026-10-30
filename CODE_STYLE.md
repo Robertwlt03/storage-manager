@@ -208,8 +208,9 @@ Das Skript führt dreiundzwanzig Prüfungen nacheinander aus:
    gemeinsamen Kopf. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf
    Schreibfehler.
 22. **Commit-Nachrichten:** Jeder Commit hat einen Betreff wie `fix(scan): what changed`, also eine Art nach
-   Conventional Commits, vielleicht einen Teil in Klammern und dann die Änderung. Danach folgen eine Leerzeile, Zeilen
-   bis 100 Zeichen und amerikanisches Englisch. Die Regel gilt ab dem Commit, der sie eingeführt hat; geprüft werden
+   Conventional Commits, vielleicht einen Teil in Klammern und dann die Änderung. Danach folgen eine Leerzeile und
+   Zeilen bis 100 Zeichen, alles auf Englisch in amerikanischer Schreibweise: Ein Wort, das weder das Wörterbuch
+   noch der Code des Projekts kennt, etwa ein deutsches, wird gemeldet. Die Regel gilt ab dem Commit, der sie eingeführt hat; geprüft werden
    die Commits, die noch nicht auf dem `main` von GitHub liegen (`scripts/checks/commits.py`).
 23. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
    zur App gehört. Jede schlechte Zeile trägt einen Vermerk `expect:` mit dem Fund, den die Prüfung dort melden muss.

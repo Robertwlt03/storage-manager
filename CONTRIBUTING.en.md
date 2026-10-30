@@ -153,7 +153,7 @@ make stress
   are written in German, and each has an English twin (`*.en.md`) that changes along with it.
 - **Commit messages in one form:** The subject reads like `fix(scan): canceled scans stop at once`: the kind of change
   (`feat`, `fix`, `docs`, `refactor`, `test` …), maybe the part it touches in brackets, then in one sentence what
-  changes. After a blank line, the body explains why.
+  changes. After a blank line, the body explains why, in English.
 - **Readable code:** Spelled-out names in everyday language, no numbers without names, colors only from `Theme`, and
   small, clearly separated steps. The details are in the [code rules](CODE_STYLE.en.md).
 

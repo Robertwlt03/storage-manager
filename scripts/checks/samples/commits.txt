@@ -7,3 +7,6 @@ right below the subject
 ---
 # expect below: is British
 docs: explain the colour of the bars
+---
+# expect below: is not an English word
+fix(scan): der Scan stoppt jetzt sofort
