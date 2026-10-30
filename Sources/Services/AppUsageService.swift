@@ -42,15 +42,18 @@ enum AppUsageService {
     }
 
     private static func appPaths() -> [String] {
+        folders.flatMap(appPaths(in:))
+    }
+
+    /// The apps in a folder, and those one folder deeper, such as in Utilities.
+    private static func appPaths(in folder: String) -> [String] {
         var paths: [String] = []
-        for folder in folders {
-            for name in FileSystem.names(in: folder) {
-                let path = folder + "/" + name
-                if name.hasSuffix(appSuffix) {
-                    paths.append(path)
-                } else if isFolder(path) {
-                    paths += appPaths(directlyIn: path)
-                }
+        for name in FileSystem.names(in: folder) {
+            let path = folder + "/" + name
+            if name.hasSuffix(appSuffix) {
+                paths.append(path)
+            } else if isFolder(path) {
+                paths += appPaths(directlyIn: path)
             }
         }
         return paths

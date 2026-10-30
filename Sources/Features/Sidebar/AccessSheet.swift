@@ -39,12 +39,14 @@ struct AccessSheet: View {
                 FinderService.openFullDiskAccessSettings()
             }
             .keyboardShortcut(hasVisitedSettings ? nil : .defaultAction)
-            if hasVisitedSettings {
-                UI.ActionButton(TextKey.accessRestart.translated, .confirm) {
-                    LifecycleService.relaunch()
-                }
-                .keyboardShortcut(.defaultAction)
-            }
+            if hasVisitedSettings { restartButton }
         }
+    }
+
+    private var restartButton: some View {
+        UI.ActionButton(TextKey.accessRestart.translated, .confirm) {
+            LifecycleService.relaunch()
+        }
+        .keyboardShortcut(.defaultAction)
     }
 }

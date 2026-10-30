@@ -24,22 +24,26 @@ extension UI {
             Button {
                 action?()
             } label: {
-                HStack(spacing: Space.item) {
-                    if let icon { Icon(icon) }
-                    VStack(alignment: .leading, spacing: Space.hairline) {
-                        Text(title)
-                        if let detail { Text(detail).textRole(.hint) }
-                    }
-                    Spacer(minLength: Space.item)
-                    if let value { Text(value).textRole(.value).contentTransition(.numericText()) }
-                    Chevron().opacity(action == nil ? Opacity.hidden : Opacity.full)
-                }
-                .contentShape(Rectangle())
-                .modifier(RowHighlight(isActive: action != nil))
+                rowContent
             }
             .appButton(.content)
             .allowsHitTesting(action != nil)  // not .disabled, which would dim the text below 4.5:1
             .accessibilityElement(children: .combine)
+        }
+
+        private var rowContent: some View {
+            HStack(spacing: Space.item) {
+                if let icon { Icon(icon) }
+                VStack(alignment: .leading, spacing: Space.hairline) {
+                    Text(title)
+                    if let detail { Text(detail).textRole(.hint) }
+                }
+                Spacer(minLength: Space.item)
+                if let value { Text(value).textRole(.value).contentTransition(.numericText()) }
+                Chevron().opacity(action == nil ? Opacity.hidden : Opacity.full)
+            }
+            .contentShape(Rectangle())
+            .modifier(RowHighlight(isActive: action != nil))
         }
     }
 

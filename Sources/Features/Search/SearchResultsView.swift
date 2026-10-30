@@ -11,7 +11,6 @@ struct SearchResultsView: View {
     private var searchKey: String { "\(model.searchText)|\(model.searchScope)" }
 
     var body: some View {
-        @Bindable var model = model
         EntryBrowser(
             entries: results,
             total: results.reduce(0) { total, result in total + result.bytes },
@@ -21,18 +20,25 @@ struct SearchResultsView: View {
             contentKey: resultsKey
         )
         .navigationTitle(TextKey.searchResults.translated(with: Format.count(results.count)))
-        .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(.searchNote) {
-                UI.SegmentPicker(selection: $model.searchScope) {
-                    ForEach(SearchScope.allCases) { scope in
-                        Text(scope.title.translated).tag(scope)
-                    }
-                }
-                UI.ActionButton(TextKey.cancel.translated) { model.endSearch() }
-                    .keyboardShortcut(.cancelAction)
+        .safeAreaInset(edge: .top, spacing: 0) { header }
+        .task(id: "\(searchKey)|\(model.revision)") { await searchOnceTypingPauses() }
+    }
+
+    private var header: some View {
+        UI.PageHeader(.searchNote) {
+            scopePicker
+            UI.ActionButton(TextKey.cancel.translated) { model.endSearch() }
+                .keyboardShortcut(.cancelAction)
+        }
+    }
+
+    private var scopePicker: some View {
+        @Bindable var model = model
+        return UI.SegmentPicker(selection: $model.searchScope) {
+            ForEach(SearchScope.allCases) { scope in
+                Text(scope.title.translated).tag(scope)
             }
         }
-        .task(id: "\(searchKey)|\(model.revision)") { await searchOnceTypingPauses() }
     }
 
     private func searchOnceTypingPauses() async {

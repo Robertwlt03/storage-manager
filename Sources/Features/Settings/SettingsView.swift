@@ -29,18 +29,22 @@ struct SettingsView: View {
             .overlay {
                 if folders.isEmpty { Text(TextKey.none.translated).textRole(.hint) }
             }
-            HStack(spacing: Space.extraSmall) {
-                Button(TextKey.add.translated, systemImage: Symbols.add) {
-                    addChosenFolders(to: folders)
-                }
-                Button(TextKey.remove.translated, systemImage: Symbols.remove) {
-                    let remaining = folders.filter { folder in folder != selectedFolder }
-                    extraFolders = AppSettings.store(remaining)
-                }
-                .disabled(selectedFolder == nil)
-            }
-            .labelStyle(.iconOnly)
+            folderButtons(folders)
         }
+    }
+
+    private func folderButtons(_ folders: [String]) -> some View {
+        HStack(spacing: Space.extraSmall) {
+            Button(TextKey.add.translated, systemImage: Symbols.add) {
+                addChosenFolders(to: folders)
+            }
+            Button(TextKey.remove.translated, systemImage: Symbols.remove) {
+                let remaining = folders.filter { folder in folder != selectedFolder }
+                extraFolders = AppSettings.store(remaining)
+            }
+            .disabled(selectedFolder == nil)
+        }
+        .labelStyle(.iconOnly)
     }
 
     /// Adds the folders picked in the open panel; a folder already in the list stays once.

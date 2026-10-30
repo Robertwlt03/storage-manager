@@ -43,12 +43,12 @@ nonisolated enum ScanService {
 
         let isFinished = FileTreeWalker.walk(path) { entry in
             visitedEntries += 1
-            if visitedEntries & ScanLimits.cancelCheckMask == 0 {
-                if Task.isCancelled { return false }
-                if Date().timeIntervalSince(lastReport) > ScanLimits.progressInterval {
-                    reportProgress(builder.progress)
-                    lastReport = Date()
-                }
+            // Every few thousand entries: stop when canceled, and report progress when it is due.
+            let isCheckpoint = visitedEntries & ScanLimits.cancelCheckMask == 0
+            if isCheckpoint && Task.isCancelled { return false }
+            if isCheckpoint && Date().timeIntervalSince(lastReport) > ScanLimits.progressInterval {
+                reportProgress(builder.progress)
+                lastReport = Date()
             }
             builder.add(entry, scanRoot: path)
             return true

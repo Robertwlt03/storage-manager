@@ -14,7 +14,8 @@ from pathlib import Path
 from checks.dead_code import dead_code_problems
 from checks.house_rules import design_problems, house_rule_problems
 from checks.language import language_problems
-from checks.project import PROJECT, SAMPLES, Codebase, lines_of, place
+from checks.nesting import nesting_problems
+from checks.project import PROJECT, SAMPLES, Codebase, numbered_lines, place
 from checks.tools import script_layout_problems
 
 # MARK: Settings
@@ -30,7 +31,7 @@ EXPECTATION = re.compile(r"""
 # The checks that read code; the tool steps (formatting, tests) have samples of their own.
 CHECKS = [
     house_rule_problems, design_problems, dead_code_problems, language_problems,
-    script_layout_problems,
+    nesting_problems, script_layout_problems,
 ]
 
 
@@ -51,12 +52,12 @@ def samples() -> Codebase:
 def expectations(codebase: Codebase) -> list[tuple[str, str]]:
     """Each planted mistake: where it is and the part of the finding it must produce."""
     expected = []
-    for path in codebase.swift_sources + codebase.python_scripts + codebase.shell_scripts:
-        for number, line in enumerate(lines_of(path), start=1):
-            note = EXPECTATION.search(line)
-            if note:
-                line_of_mistake = number + 1 if note["below"] else number
-                expected.append((place(path, line_of_mistake), note["part"]))
+    paths = codebase.swift_sources + codebase.python_scripts + codebase.shell_scripts
+    for path, number, line in numbered_lines(paths):
+        note = EXPECTATION.search(line)
+        if note:
+            line_of_mistake = number + 1 if note["below"] else number
+            expected.append((place(path, line_of_mistake), note["part"]))
     return expected
 
 

@@ -32,12 +32,14 @@ struct InfoSheet: View {
                 Divider()
                 UI.Fields(basicFields)
             }
-            if entry.isFolder {
-                contentsCard
-                if let profile, let largestTypeBytes = profile.types.first?.bytes {
-                    fileTypesCard(profile, largestTypeBytes: largestTypeBytes)
-                }
-            }
+            if entry.isFolder { folderCards }
+        }
+    }
+
+    @ViewBuilder private var folderCards: some View {
+        contentsCard
+        if let profile, let largestTypeBytes = profile.types.first?.bytes {
+            fileTypesCard(profile, largestTypeBytes: largestTypeBytes)
         }
     }
 
@@ -94,14 +96,18 @@ struct InfoSheet: View {
         }
         return UI.Card(TextKey.typesBySize.translated) {
             UI.Rows(fileTypes) { fileType in
-                HStack(spacing: Space.item) {
-                    Text(fileType.fileExtension).frame(maxWidth: .infinity, alignment: .leading)
-                    UI.ShareCell(fileType.bytes, of: largestTypeBytes)
-                    UI.NumberCell(bytes: fileType.bytes).frame(width: Layout.sizeColumn.ideal)
-                    Text(TextKey.fileCount.translated(with: Format.count(fileType.count)))
-                        .textRole(.value)
-                }
+                fileTypeRow(fileType, largestTypeBytes: largestTypeBytes)
             }
+        }
+    }
+
+    private func fileTypeRow(_ fileType: FileTypeRow, largestTypeBytes: Int64) -> some View {
+        HStack(spacing: Space.item) {
+            Text(fileType.fileExtension).frame(maxWidth: .infinity, alignment: .leading)
+            UI.ShareCell(fileType.bytes, of: largestTypeBytes)
+            UI.NumberCell(bytes: fileType.bytes).frame(width: Layout.sizeColumn.ideal)
+            Text(TextKey.fileCount.translated(with: Format.count(fileType.count)))
+                .textRole(.value)
         }
     }
 

@@ -14,30 +14,32 @@ struct EntryTable: View {
 
     var body: some View {
         let rows = entries.sorted(using: sortOrder)
-        Group {
-            if showLocation {
-                Table(rows, selection: $selection, sortOrder: $sortOrder) {
-                    nameColumn
-                    locationColumn
-                    sizeColumn
-                    shareColumn
-                    filesColumn
+        table(rows)
+            .contextMenu(forSelectionType: Entry.ID.self) { selectedIDs in
+                if let entry = firstEntry(in: rows, with: selectedIDs) {
+                    EntryMenu(entry: entry, infoEntry: $infoEntry)
                 }
-            } else {
-                Table(rows, selection: $selection, sortOrder: $sortOrder) {
-                    nameColumn
-                    sizeColumn
-                    shareColumn
-                    filesColumn
-                }
+            } primaryAction: { selectedIDs in
+                firstEntry(in: rows, with: selectedIDs).map(model.activate)
             }
-        }
-        .contextMenu(forSelectionType: Entry.ID.self) { selectedIDs in
-            if let entry = firstEntry(in: rows, with: selectedIDs) {
-                EntryMenu(entry: entry, infoEntry: $infoEntry)
+    }
+
+    @ViewBuilder private func table(_ rows: [Entry]) -> some View {
+        if showLocation {
+            Table(rows, selection: $selection, sortOrder: $sortOrder) {
+                nameColumn
+                locationColumn
+                sizeColumn
+                shareColumn
+                filesColumn
             }
-        } primaryAction: { selectedIDs in
-            firstEntry(in: rows, with: selectedIDs).map(model.activate)
+        } else {
+            Table(rows, selection: $selection, sortOrder: $sortOrder) {
+                nameColumn
+                sizeColumn
+                shareColumn
+                filesColumn
+            }
         }
     }
 

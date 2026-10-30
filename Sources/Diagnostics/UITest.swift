@@ -124,18 +124,24 @@ enum UITest {
             // Only for this test run; the app itself follows the system.
             NSApp.appearance = appearance
             for pane in allPanes(model) {
-                for layout in LayoutMode.allCases where layout == .list || pane.supportsGrid {
-                    changeSetting(SettingsKey.layoutMode, to: layout.rawValue)
-                    model.pane = pane
-                    let appearanceName = appearance?.name.rawValue ?? ""
-                    await step(
-                        "Page \(logName(of: pane)) \(appearanceName) \(layout)", model,
-                        wait: Pause.perPage)
-                }
+                await visitEveryLayout(of: pane, appearance: appearance, model)
             }
         }
         changeSetting(SettingsKey.layoutMode, to: LayoutMode.list.rawValue)
         NSApp.appearance = nil
+    }
+
+    /// One page as list and, where it has one, as grid.
+    private static func visitEveryLayout(
+        of pane: Pane, appearance: NSAppearance?, _ model: AppModel
+    ) async {
+        for layout in LayoutMode.allCases where layout == .list || pane.supportsGrid {
+            changeSetting(SettingsKey.layoutMode, to: layout.rawValue)
+            model.pane = pane
+            let appearanceName = appearance?.name.rawValue ?? ""
+            await step(
+                "Page \(logName(of: pane)) \(appearanceName) \(layout)", model, wait: Pause.perPage)
+        }
     }
 
     /// Open every category, go five levels deep, back out, and repeat quickly.

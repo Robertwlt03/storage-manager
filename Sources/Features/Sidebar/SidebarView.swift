@@ -45,11 +45,13 @@ private struct SidebarList: View {
     /// own page.
     @ViewBuilder private var volumesSection: some View {
         let externalVolumes = model.volumes.filter { volume in !volume.isRoot }
-        if !externalVolumes.isEmpty {
-            Section(TextKey.sectionVolumes.translated) {
-                ForEach(externalVolumes) { volume in
-                    Label(volume.name, systemImage: volume.symbol).tag(Pane.volume(volume.path))
-                }
+        if !externalVolumes.isEmpty { volumeRows(externalVolumes) }
+    }
+
+    private func volumeRows(_ volumes: [VolumeInfo]) -> some View {
+        Section(TextKey.sectionVolumes.translated) {
+            ForEach(volumes) { volume in
+                Label(volume.name, systemImage: volume.symbol).tag(Pane.volume(volume.path))
             }
         }
     }

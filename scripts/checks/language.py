@@ -19,7 +19,7 @@ from pathlib import Path
 
 from checks.index_store import Kind, Role
 from checks.project import (
-    PROJECT, SCRIPTS, Codebase, CompilerIndex, app, compiler_index, lines_of, place, run,
+    PROJECT, SCRIPTS, Codebase, CompilerIndex, app, compiler_index, numbered_lines, place, run,
 )
 
 # MARK: Settings
@@ -123,35 +123,44 @@ def declared_names(codebase: Codebase, index: CompilerIndex) -> list[Name]:
 
 def swift_index_names(index: CompilerIndex) -> list[Name]:
     """Every declaration in the Swift code, with argument labels: scan(_:progress:)."""
-    names = []
-    for found in index.occurrences:
-        is_ours = found.roles & Role.DEFINITION and not found.roles & Role.IMPLICIT
-        if is_ours and not found.is_accessor() and found.kind in set(Kind):
-            for part in re.split(r"[(:)]", found.name):
-                names.append(Name(part, place(found.path, found.line)))
+    definitions = [found for found in index.occurrences if is_written_definition(found)]
+    names = [
+        Name(part, place(found.path, found.line))
+        for found in definitions
+        for part in re.split(r"[(:)]", found.name)
+    ]
     return [name for name in names if name.text not in ("", "_")]
+
+
+def is_written_definition(found) -> bool:
+    """A declaration written in our code, not one a macro or the compiler adds, nor an accessor."""
+    is_ours = found.roles & Role.DEFINITION and not found.roles & Role.IMPLICIT
+    return bool(is_ours) and not found.is_accessor() and found.kind in set(Kind)
 
 
 def swift_local_names(codebase: Codebase) -> list[Name]:
     names = []
-    for path in codebase.swift_files():
-        for number, line in enumerate(lines_of(path), start=1):
-            code = line.split("//", 1)[0]
-            for pattern in (SWIFT_LOCAL_NAME, SWIFT_DECLARATION):
-                for match in pattern.finditer(code):
-                    for group in filter(None, match.groups()):
-                        where = place(path, number)
-                        names += [Name(text.strip(), where) for text in group.split(",")]
+    for path, number, line in numbered_lines(codebase.swift_files()):
+        code = line.split("//", 1)[0]
+        names += names_in_line(code, place(path, number), (SWIFT_LOCAL_NAME, SWIFT_DECLARATION))
     return names
+
+
+def names_in_line(code: str, where: str, patterns: tuple) -> list[Name]:
+    """Every name the patterns find; a group can list several: `{ entry, index in`."""
+    groups = [
+        group for pattern in patterns for match in pattern.finditer(code)
+        for group in match.groups() if group
+    ]
+    return [Name(text.strip(), where) for group in groups for text in group.split(",")]
 
 
 def python_names(codebase: Codebase) -> list[Name]:
     names = []
     for path in codebase.python_scripts:
-        for node in ast.walk(ast.parse(path.read_text())):
-            text = declared_python_name(node)
-            if text:
-                names.append(Name(text, place(path, node.lineno)))
+        nodes = ast.walk(ast.parse(path.read_text()))
+        declared = [(node, text) for node in nodes if (text := declared_python_name(node))]
+        names += [Name(text, place(path, node.lineno)) for node, text in declared]
     return names
 
 
@@ -176,11 +185,9 @@ def is_python_special(name: str) -> bool:
 
 def shell_names(codebase: Codebase) -> list[Name]:
     names = []
-    for path in codebase.shell_scripts + codebase.makefiles:
+    for path, number, line in numbered_lines(codebase.shell_scripts + codebase.makefiles):
         pattern = MAKE_VARIABLE if path in codebase.makefiles else SHELL_NAME
-        for number, line in enumerate(lines_of(path), start=1):
-            for match in pattern.finditer(line):
-                names += [Name(text, place(path, number)) for text in filter(None, match.groups())]
+        names += names_in_line(line, place(path, number), (pattern,))
     return names
 
 
@@ -188,25 +195,23 @@ def comment_words(codebase: Codebase) -> list[CommentWord]:
     """Every prose word of every comment, so each place with a problem is named."""
     words = []
     for path, number, comment in comments(codebase):
-        for word in PLAIN_WORD.findall(NOT_PROSE.sub(" ", comment)):
-            if not CODE_NAME.search(word):
-                words.append(CommentWord(word, place(path, number)))
+        prose = PLAIN_WORD.findall(NOT_PROSE.sub(" ", comment))
+        where = place(path, number)
+        words += [CommentWord(word, where) for word in prose if not CODE_NAME.search(word)]
     return words
 
 
 def comments(codebase: Codebase):
     """Each comment with its file and line: Swift //, Python # and docstrings, shell #."""
-    for path in codebase.swift_files():
-        for number, line in enumerate(lines_of(path), start=1):
-            if "//" in line:
-                yield path, number, line.split("//", 1)[1]
+    for path, number, line in numbered_lines(codebase.swift_files()):
+        if "//" in line:
+            yield path, number, line.split("//", 1)[1]
     for path in codebase.python_scripts:
         yield from python_comments(path)
-    for path in codebase.shell_scripts + codebase.makefiles:
-        for number, line in enumerate(lines_of(path), start=1):
-            match = SHELL_COMMENT.search(line)
-            if match:
-                yield path, number, match.group(1)
+    for path, number, line in numbered_lines(codebase.shell_scripts + codebase.makefiles):
+        match = SHELL_COMMENT.search(line)
+        if match:
+            yield path, number, match.group(1)
 
 
 def python_comments(path: Path):
@@ -254,13 +259,19 @@ def python_used_names(codebase: Codebase) -> set[str]:
     """Names the Python scripts use but do not declare, such as ctypes.c_char_p."""
     used = set()
     for path in codebase.python_scripts:
-        for node in ast.walk(ast.parse(path.read_text())):
-            if isinstance(node, ast.Attribute) and isinstance(node.ctx, ast.Load):
-                used.add(node.attr)
-            if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
-                used.add(node.id)
+        nodes = ast.walk(ast.parse(path.read_text()))
+        used |= {name for node in nodes if (name := loaded_python_name(node))}
     declared = {name.text for name in python_names(codebase)}
     return used - declared
+
+
+def loaded_python_name(node: ast.AST) -> str | None:
+    """The name a node reads: a variable, or an attribute such as c_char_p in ctypes.c_char_p."""
+    if isinstance(node, ast.Attribute) and isinstance(node.ctx, ast.Load):
+        return node.attr
+    if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
+        return node.id
+    return None
 
 
 def is_known_term(word: str, terms: set[str]) -> bool:
@@ -309,14 +320,21 @@ def language_problems(codebase: Codebase) -> list[str]:
     all_words = {part for name in names for part in words_of(name.text)}
     all_words |= {word.text.lower() for word in words}
     verdicts = unknown_words(all_words, known_terms(codebase, index))
-    findings = []
-    for name in names:
-        for part in words_of(name.text):
-            found = problem(part, verdicts, check_abbreviations=True)
-            if found:
-                findings.append(f"{name.place}: '{part}' in {name.text} {found}")
-    for word in words:
-        found = problem(word.text.lower(), verdicts, check_abbreviations=False)
-        if found:
-            findings.append(f"{word.place}: comment word '{word.text}' {found}")
-    return sorted(set(findings))
+    return sorted(set(name_problems(names, verdicts) + comment_problems(words, verdicts)))
+
+
+def name_problems(names: list[Name], verdicts: dict) -> list[str]:
+    return [
+        f"{name.place}: '{part}' in {name.text} {found}"
+        for name in names
+        for part in words_of(name.text)
+        if (found := problem(part, verdicts, check_abbreviations=True))
+    ]
+
+
+def comment_problems(words: list[CommentWord], verdicts: dict) -> list[str]:
+    return [
+        f"{word.place}: comment word '{word.text}' {found}"
+        for word in words
+        if (found := problem(word.text.lower(), verdicts, check_abbreviations=False))
+    ]

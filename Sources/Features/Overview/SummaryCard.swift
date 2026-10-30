@@ -22,18 +22,22 @@ struct SummaryCard: View {
         let isLoading = model.isScanning
         UI.Card(TextKey.summaryTitle.translated) {
             VStack(alignment: .leading, spacing: Space.item) {
-                if isLoading {
-                    UI.Placeholder(
-                        .loading(
-                            title: .loadingSummaryTitle, detail: .loadingSummaryDetail,
-                            symbol: Symbols.summary))
-                } else {
-                    Text(summary).fixedSize(horizontal: false, vertical: true)
-                        .textSelection(.enabled)
-                }
+                summaryText(summary, isLoading: isLoading)
                 readAloudButton(summary).disabled(isLoading)
             }
             .padding(.vertical, Space.row)
+        }
+    }
+
+    @ViewBuilder private func summaryText(_ summary: String, isLoading: Bool) -> some View {
+        if isLoading {
+            UI.Placeholder(
+                .loading(
+                    title: .loadingSummaryTitle, detail: .loadingSummaryDetail,
+                    symbol: Symbols.summary))
+        } else {
+            Text(summary).fixedSize(horizontal: false, vertical: true)
+                .textSelection(.enabled)
         }
     }
 

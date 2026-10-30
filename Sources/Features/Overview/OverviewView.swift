@@ -133,23 +133,31 @@ struct OverviewView: View {
         if model.categories.isEmpty {
             UI.Card(TextKey.categories.translated) { UI.Placeholder(.notMeasured, in: .card) }
         } else if layout == .grid {
-            Text(TextKey.categories.translated).textRole(.section)
-                .padding(.leading, Space.extraSmall)
-            UI.TileGrid(model.categories) { category in
-                UI.Tile(
-                    icon: badge(category), title: category.kind.title.translated,
-                    value: Format.bytes(category.bytes)
-                )
-                .onTapGesture { category.node.map(model.open) }
-            }
+            categoryTiles
         } else {
-            UI.Card(TextKey.categories.translated) {
-                UI.Rows(model.categories) { category in
-                    UI.NavigationRow(
-                        category.kind.title.translated, icon: badge(category),
-                        value: Format.bytes(category.bytes),
-                        action: category.node.map { node in { model.open(node) } })
-                }
+            categoryRows
+        }
+    }
+
+    @ViewBuilder private var categoryTiles: some View {
+        Text(TextKey.categories.translated).textRole(.section)
+            .padding(.leading, Space.extraSmall)
+        UI.TileGrid(model.categories) { category in
+            UI.Tile(
+                icon: badge(category), title: category.kind.title.translated,
+                value: Format.bytes(category.bytes)
+            )
+            .onTapGesture { category.node.map(model.open) }
+        }
+    }
+
+    private var categoryRows: some View {
+        UI.Card(TextKey.categories.translated) {
+            UI.Rows(model.categories) { category in
+                UI.NavigationRow(
+                    category.kind.title.translated, icon: badge(category),
+                    value: Format.bytes(category.bytes),
+                    action: category.node.map { node in { model.open(node) } })
             }
         }
     }

@@ -8,9 +8,8 @@ enum SearchService {
 
         func collectMatches(in folder: Node) {
             for child in folder.children {
-                if scope != .files && child.name.localizedStandardContains(trimmedQuery) {
-                    matches.append(.folder(child))
-                }
+                let isMatch = scope != .files && child.name.localizedStandardContains(trimmedQuery)
+                if isMatch { matches.append(.folder(child)) }
                 collectMatches(in: child)
             }
             if scope != .folders {

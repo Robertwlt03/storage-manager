@@ -96,6 +96,13 @@ def lines_of(path: Path) -> list[str]:
     return path.read_text().splitlines()
 
 
+def numbered_lines(paths):
+    """Each line of the files with its file and its number, counted from 1."""
+    for path in paths:
+        for number, line in enumerate(lines_of(path), start=1):
+            yield path, number, line
+
+
 def relative_path(path: Path) -> str:
     return path.relative_to(PROJECT).as_posix()
 

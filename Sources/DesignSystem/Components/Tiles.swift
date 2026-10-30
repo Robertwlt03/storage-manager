@@ -51,15 +51,7 @@ extension UI {
         var body: some View {
             Button(action: action) {
                 HStack(spacing: Space.item) {
-                    VStack(alignment: .leading, spacing: Space.hairline) {
-                        Icon(.symbol(symbol), size: .small).foregroundStyle(.tint)
-                            .padding(.bottom, Space.extraSmall)
-                        Text(value).textRole(.figure).contentTransition(.numericText())
-                            .lineLimit(1).minimumScaleFactor(Layout.keyFigureMinimumScale)
-                            .calculating(isLoading)
-                        Text(label).foregroundStyle(.muted)
-                            .lineLimit(Layout.maximumWrappedLines, reservesSpace: true)
-                    }
+                    figure
                     Spacer(minLength: 0)
                     Chevron()
                 }
@@ -71,6 +63,18 @@ extension UI {
             .hoverLift()
             .allowsHitTesting(!isLoading)
             .accessibilityElement(children: .combine)
+        }
+
+        private var figure: some View {
+            VStack(alignment: .leading, spacing: Space.hairline) {
+                Icon(.symbol(symbol), size: .small).foregroundStyle(.tint)
+                    .padding(.bottom, Space.extraSmall)
+                Text(value).textRole(.figure).contentTransition(.numericText())
+                    .lineLimit(1).minimumScaleFactor(Layout.keyFigureMinimumScale)
+                    .calculating(isLoading)
+                Text(label).foregroundStyle(.muted)
+                    .lineLimit(Layout.maximumWrappedLines, reservesSpace: true)
+            }
         }
     }
 

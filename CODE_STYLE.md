@@ -133,7 +133,7 @@ Dahinter steckt das Skript `scripts/check.py`. Einzelne Schritte startest du mit
 make check
 ```
 
-Das Skript führt elf Prüfungen nacheinander aus:
+Das Skript führt zwölf Prüfungen nacheinander aus:
 
 1. **Form:** `swift format lint --strict` meldet jede Abweichung von der einheitlichen Form.
 2. **Länge und Verschachtelung:** SwiftLint meldet Funktionen über 40 Zeilen, Closures über 30 Zeilen, zu viele
@@ -147,22 +147,27 @@ Das Skript führt elf Prüfungen nacheinander aus:
    Hintergründe, Animationen außerhalb von `Motion`, ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb
    der Diagnose. Ausgeschriebene Texte findet die Prüfung über den Compiler-Index: jeden Aufruf von SwiftUI, dessen
    erstes Argument ein Text in Anführungszeichen ist, also auch Elemente, die es heute noch nicht gibt.
-7. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
+7. **Flache Methoden:** In einer Methode dürfen höchstens zwei Blöcke ineinander stecken, also etwa eine Schleife
+   und darin ein `if`. Als Block zählt alles, was über mehrere Zeilen geht: `if`, `else`, `switch`, Schleifen,
+   Closures und innere Funktionen. Ein tieferer Teil gehört in eine eigene Methode mit sprechendem Namen, und eine
+   Funktion in einer Funktion in einer Funktion gibt es nicht. Das gilt für Swift, Python und Shell
+   (`scripts/checks/nesting.py`).
+8. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
    jede Eigenschaft, die nur beschrieben, aber nie gelesen wird. Die Prüfung liest dafür den Index, den der Compiler
    beim Bauen anlegt (`scripts/checks/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und was nur die
    Tests benutzen, zählt ebenfalls als tot.
-8. **Sprache:** Jeder Name, den wir anlegen, wird in seine Wörter zerlegt (`fileCount`: file, count). Jedes Wort
+9. **Sprache:** Jeder Name, den wir anlegen, wird in seine Wörter zerlegt (`fileCount`: file, count). Jedes Wort
    muss amerikanisches Englisch oder ein bekannter Fachbegriff sein und darf keine Abkürzung sein, also `temporary`
    statt `temp` und `maximum` statt `max`. Die Kommentare werden genauso gelesen. Die Wörter prüft die
    Rechtschreibprüfung von macOS (`scripts/checks/language.py`). Fachbegriffe wie `plist` oder `codesign` stehen in
    keiner Liste: Als bekannt gilt, was in den Namen der benutzten Schnittstellen von Apple und Python vorkommt, was
    als Befehl auf dem Mac installiert ist, die Dateiendungen des Projekts und der Name der App. Nur die verbotenen
    Abkürzungen bleiben eine Liste, weil keine Quelle verlässlich sagt, ob ein Wort eine Abkürzung ist.
-9. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
-10. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
+10. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
+11. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile, und jedes beginnt mit dem
    gemeinsamen Kopf. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf
    Schreibfehler.
-11. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
+12. **Probe:** Im Ordner `scripts/checks/samples` steht ein kleines eigenes Paket mit schlechten Beispielen, das nie
    zur App gehört. Jede schlechte Zeile trägt einen Vermerk `expect:` mit dem Fund, den die Prüfung dort melden muss.
    Findet eine Prüfung ihren Fehler nicht mehr, oder meldet sie etwas, das niemand eingebaut hat, schlägt dieser
    Schritt fehl. Wer eine Regel ergänzt, baut ihren Fehler mit Vermerk dort ein.

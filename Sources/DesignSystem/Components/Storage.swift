@@ -93,19 +93,23 @@ private struct StorageBar: View {
     var body: some View {
         let barBytes = self.barBytes
         GeometryReader { geometry in
-            HStack(spacing: 0) {
-                ForEach(segments) { segment in
-                    Rectangle()
-                        .fill(segment.color)
-                        .frame(width: geometry.size.width * segment.shownBytes / barBytes)
-                        .accessibilityElement()
-                        .accessibilityLabel(segment.title)
-                        .accessibilityValue(Format.bytes(segment.bytes))
-                }
-            }
+            segmentRow(width: geometry.size.width, barBytes: barBytes)
         }
         .frame(height: Layout.storageBarHeight)
         .clipShape(RoundedRectangle(cornerRadius: Layout.storageBarRadius, style: .continuous))
+    }
+
+    private func segmentRow(width: CGFloat, barBytes: CGFloat) -> some View {
+        HStack(spacing: 0) {
+            ForEach(segments) { segment in
+                Rectangle()
+                    .fill(segment.color)
+                    .frame(width: width * segment.shownBytes / barBytes)
+                    .accessibilityElement()
+                    .accessibilityLabel(segment.title)
+                    .accessibilityValue(Format.bytes(segment.bytes))
+            }
+        }
     }
 
     /// The bytes the whole bar stands for: the volume, or more if the parts add up to more.

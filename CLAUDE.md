@@ -50,7 +50,8 @@ content here or in comments.
 `make` lists them all. The ones you need:
 
 - `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, house rules, design
-  rules, dead code from the compiler index, American English names and comments without abbreviations, plutil,
+  rules, flat methods (at most two blocks inside each other), dead code from the compiler index, American English
+  names and comments without abbreviations, plutil,
   scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with "No errors and no warnings." before
   every commit.
 - `make test`, `make coverage`, `make format`, single steps with `scripts/check.py <step>`.
@@ -62,7 +63,7 @@ content here or in comments.
 2. Keep the rules: spelled-out English names, no numbers without a name, colors only from `Theme`, fonts via
    `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 20
    translations, no dead code, functions as lists of named steps. Scripts follow the same rules and one shared
-   layout (CODE_STYLE.md, step 10): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
+   layout (CODE_STYLE.md, step 11): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
    named and explained (patterns in re.VERBOSE with a comment per part), small named steps, `MARK: Run` at the
    bottom. Spelled-out names, no duplicated code (shared steps live in `scripts/require-xcode.sh` and
    `scripts/sign.sh`), and no copies of lists the app already has (ask the app, as `--list-pages` does).

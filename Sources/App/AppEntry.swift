@@ -44,32 +44,34 @@ struct SpeicherExplorerApp: App {
                 .environment(model)
                 .frame(minWidth: Layout.minimumWindowWidth, minHeight: Layout.minimumWindowHeight)
         }
-        .commands {
-            LayoutCommands()
-            // The system item would use the jerky AppKit toggle.
-            CommandGroup(replacing: .sidebar) {
-                Button(
-                    model.sidebar.isShown
-                        ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
-                ) { model.toggleSidebar() }
-                .keyboardShortcut("s", modifiers: [.control, .command])
-            }
-            // The system item would only beep while the access sheet is open.
-            CommandGroup(replacing: .appTermination) {
-                Button(TextKey.quitApp.translated(with: TextKey.appName.translated)) {
-                    LifecycleService.quit()
-                }
-                .keyboardShortcut("q")
-            }
-            CommandGroup(after: .newItem) {
-                Button(TextKey.rescan.translated) { model.scan() }.keyboardShortcut("r")
-                    .disabled(model.isScanning)
-                Button(TextKey.cancelScan.translated) { model.cancelScan() }.keyboardShortcut(".")
-                    .disabled(!model.isScanning)
-            }
-        }
+        .commands { menuCommands }
         Settings {
             SettingsView().environment(model)
+        }
+    }
+
+    @CommandsBuilder private var menuCommands: some Commands {
+        LayoutCommands()
+        // The system item would use the jerky AppKit toggle.
+        CommandGroup(replacing: .sidebar) {
+            Button(
+                model.sidebar.isShown
+                    ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
+            ) { model.toggleSidebar() }
+            .keyboardShortcut("s", modifiers: [.control, .command])
+        }
+        // The system item would only beep while the access sheet is open.
+        CommandGroup(replacing: .appTermination) {
+            Button(TextKey.quitApp.translated(with: TextKey.appName.translated)) {
+                LifecycleService.quit()
+            }
+            .keyboardShortcut("q")
+        }
+        CommandGroup(after: .newItem) {
+            Button(TextKey.rescan.translated) { model.scan() }.keyboardShortcut("r")
+                .disabled(model.isScanning)
+            Button(TextKey.cancelScan.translated) { model.cancelScan() }.keyboardShortcut(".")
+                .disabled(!model.isScanning)
         }
     }
 }
