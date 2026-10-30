@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "Průzkumník úložiště";
+"appName" = "Storage Manager";
 "paneOverview" = "Přehled";
 "paneExplorer" = "Složky";
 "paneLargeFiles" = "Velké soubory";

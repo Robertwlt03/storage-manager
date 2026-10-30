@@ -14,7 +14,7 @@ enum AppEntry {
         if let iconFile = value(after: .renderIcon, in: arguments) {
             finish(succeeded: AppIconView.render(to: iconFile))
         }
-        SpeicherExplorerApp.main()
+        StorageManagerApp.main()
     }
 
     private static func finish(succeeded: Bool) -> Never {
@@ -34,7 +34,7 @@ enum AppEntry {
     }
 }
 
-struct SpeicherExplorerApp: App {
+struct StorageManagerApp: App {
     @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
     @State private var model = AppModel()
 

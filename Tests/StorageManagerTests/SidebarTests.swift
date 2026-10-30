@@ -1,7 +1,7 @@
 import SwiftUI
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// The sidebar's rules, like Mail: a narrow window closes it, a wide one brings it back unless the
 /// user closed it, and in a narrow window the button lets it float above the page.

@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "Провідник сховища";
+"appName" = "Storage Manager";
 "paneOverview" = "Огляд";
 "paneExplorer" = "Папки";
 "paneLargeFiles" = "Великі файли";

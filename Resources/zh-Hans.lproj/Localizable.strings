@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "存储空间浏览器";
+"appName" = "Storage Manager";
 "paneOverview" = "概览";
 "paneExplorer" = "文件夹";
 "paneLargeFiles" = "大文件";

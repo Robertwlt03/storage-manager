@@ -57,7 +57,7 @@ def refuse(reason: str) -> None:
 
 
 def main() -> None:
-    console.heading("Speicher-Explorer · pre-push", "checks the commits before they leave the Mac")
+    console.heading("Storage Manager · pre-push", "checks the commits before they leave the Mac")
     if has_uncommitted_changes():
         refuse("commit your changes or set them aside first")
     if pushes_other_commit(sys.stdin.read().splitlines()):

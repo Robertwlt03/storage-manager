@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// The design rules from CODE_STYLE.md that a value can break: grid, sizes, contrast, motion.
 @Suite("Design")

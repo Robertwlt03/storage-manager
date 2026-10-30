@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// The legend under the storage bar.
 @Suite("Storage legend")

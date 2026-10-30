@@ -1,6 +1,6 @@
 import Foundation
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// Builds scanned trees by hand, with made-up names and no disk access.
 enum TestTree {

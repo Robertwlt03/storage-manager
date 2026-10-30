@@ -17,12 +17,12 @@ enum SelfTest {
     /// it, macOS would ask once for every app's data folder. `make selftest` therefore starts the
     /// built app, which holds the access, instead of the bare program.
     static func run() -> Bool {
-        Console.heading("Speicher-Explorer · self test", detail: "counts and sizes only")
+        Console.heading("Storage Manager · self test", detail: "counts and sizes only")
         guard PermissionService.hasFullDiskAccess else {
             Console.failed(
                 "Full Disk Access is missing, so the self test stops before macOS asks per folder")
             Console.note(
-                "Grant it to Speicher-Explorer in System Settings, then run make selftest.")
+                "Grant it to Storage Manager in System Settings, then run make selftest.")
             return false
         }
         let root = Node.virtualRoot()

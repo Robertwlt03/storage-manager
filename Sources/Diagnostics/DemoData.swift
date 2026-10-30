@@ -139,7 +139,7 @@ struct DemoData {
         ]
         return CleanKind.allCases.map { kind in
             CleanItem(
-                kind: kind, paths: [Paths.home + "/.speicher-explorer-demo/" + kind.rawValue],
+                kind: kind, paths: [Paths.home + "/.storage-manager-demo/" + kind.rawValue],
                 bytes: sizes[kind] ?? 0)
         }
     }

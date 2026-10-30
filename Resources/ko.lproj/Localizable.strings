@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "저장 공간 탐색기";
+"appName" = "Storage Manager";
 "paneOverview" = "개요";
 "paneExplorer" = "폴더";
 "paneLargeFiles" = "큰 파일";

@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// The decisions the services make from a scanned tree, checked on hand-built trees.
 @Suite("Services")
@@ -21,7 +21,7 @@ struct ServiceTests {
         return root
     }
 
-    private static func bytes(of kind: CategoryKind, in categories: [SpeicherExplorer.Category])
+    private static func bytes(of kind: CategoryKind, in categories: [StorageManager.Category])
         -> Int64
     {
         categories.first { category in category.kind == kind }?.bytes ?? 0

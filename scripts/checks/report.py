@@ -67,7 +67,7 @@ def by_file(findings: list[str]) -> dict[str, list[Finding]]:
 
 
 def header(step_count: int) -> None:
-    console.heading("Speicher-Explorer · check pipeline", plural(step_count, "step"))
+    console.heading("Storage Manager · check pipeline", plural(step_count, "step"))
 
 
 def step_finished(title: str, findings: list[str], seconds: float) -> None:

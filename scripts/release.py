@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Builds the disk image to share: the app, a link to the Applications folder and the illustrated
-installation guide, in dist/Speicher-Explorer-<version>.dmg.
+installation guide, in dist/Storage-Manager-<version>.dmg.
 
 Start:  make release
 Needs:  Xcode 27 and a signing identity in SIGN_IDENTITY (make identity writes it to local.mk).
@@ -21,7 +21,8 @@ from checks.project import PROJECT
 
 # MARK: Settings
 
-DISK_IMAGE_NAME = "Speicher-Explorer"
+DISK_IMAGE_NAME = "Storage Manager"  # the volume's name; the file uses hyphens
+DISK_IMAGE_FILE = "Storage-Manager"  # no space, so a download link needs no escaping
 RELEASE_FOLDER = PROJECT / "dist"
 APP_FOLDER = RELEASE_FOLDER / "app"
 CONTENTS = RELEASE_FOLDER / "contents"  # what the disk image shows, gathered before packing
@@ -80,13 +81,13 @@ def notarize_when_possible(disk_image: Path, identity: str) -> None:
 
 def main() -> None:
     release_version = version()
-    console.heading("Speicher-Explorer · release", f"version {release_version}")
+    console.heading("Storage Manager · release", f"version {release_version}")
     identity = os.environ.get("SIGN_IDENTITY", "")
     if not identity:
         console.frame("No disk image", ["Create a signing identity first: make identity"],
                       console.FAILURE)
         sys.exit(1)
-    disk_image = RELEASE_FOLDER / f"{DISK_IMAGE_NAME}-{release_version}.dmg"
+    disk_image = RELEASE_FOLDER / f"{DISK_IMAGE_FILE}-{release_version}.dmg"
     build_signed_app(identity)
     gather_contents()
     pack(disk_image, identity)

@@ -7,7 +7,7 @@
 <rect x="258" y="166" width="470" height="150" rx="12" fill="#FFFFFF" stroke="#E5E5EA"/>
 <text x="278" y="200" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#3A3A3C" text-anchor="start">Allow apps from: App Store &amp; Known Developers</text>
 <line x1="278" y1="220" x2="708" y2="220" stroke="#E5E5EA"/>
-<text x="278" y="250" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#1D1D1F" text-anchor="start">“Speicher-Explorer” was blocked to protect</text>
+<text x="278" y="250" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#1D1D1F" text-anchor="start">“Storage Manager” was blocked to protect</text>
 <text x="278" y="270" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="400" fill="#1D1D1F" text-anchor="start">your Mac.</text>
 <rect x="574" y="276" width="138" height="30" rx="8" fill="#FFFFFF" stroke="#C7C7CC"/><text x="643" y="296" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="14" font-weight="500" fill="#1D1D1F" text-anchor="middle">Open Anyway</text>
 <rect x="567" y="269" width="152" height="44" rx="13" fill="none" stroke="#FF9F0A" stroke-width="3"/>

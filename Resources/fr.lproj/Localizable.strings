@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "Explorateur de stockage";
+"appName" = "Storage Manager";
 "paneOverview" = "Vue d’ensemble";
 "paneExplorer" = "Dossiers";
 "paneLargeFiles" = "Fichiers volumineux";

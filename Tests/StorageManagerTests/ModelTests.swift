@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// Small rules of the models and pages that the views rely on.
 @Suite("Models and pages")

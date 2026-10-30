@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "Depolama Gezgini";
+"appName" = "Storage Manager";
 "paneOverview" = "Genel Bakış";
 "paneExplorer" = "Klasörler";
 "paneLargeFiles" = "Büyük Dosyalar";

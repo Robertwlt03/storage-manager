@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "Lagringsutforskaren";
+"appName" = "Storage Manager";
 "paneOverview" = "Översikt";
 "paneExplorer" = "Mappar";
 "paneLargeFiles" = "Stora filer";

@@ -46,7 +46,7 @@ struct Picture {
 func pictures(of app: URL) throws -> [Picture] {
     let listing = Process()
     let output = Pipe()
-    listing.executableURL = app.appending(path: "Contents/MacOS/SpeicherExplorer")
+    listing.executableURL = app.appending(path: "Contents/MacOS/StorageManager")
     listing.arguments = ["--list-pages"]
     listing.standardOutput = output
     try listing.run()
@@ -266,7 +266,7 @@ guard let appPath = arguments.first else {
 }
 let app = URL(filePath: appPath)
 let everyPicture = try pictures(of: app)
-show("heading", "Speicher-Explorer · snapshots", "\(everyPicture.count) pictures")
+show("heading", "Storage Manager · snapshots", "\(everyPicture.count) pictures")
 ensureScreenRecordingAccess()
 try await take(everyPicture, of: app)
 if arguments.contains("--record") {

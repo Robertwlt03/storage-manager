@@ -17,7 +17,7 @@ from checks import console
 
 # MARK: Settings
 
-PROCESS_NAME = "SpeicherExplorer"
+PROCESS_NAME = "StorageManager"
 SECONDS_BETWEEN_QUIT_CHECKS = 0.2
 # The frame the self test ends with when every check held (Sources/Diagnostics/SelfTest.swift).
 # open only tells whether the app started, so this line is the self test's verdict.
@@ -28,7 +28,7 @@ SELF_TEST_PASSED = "Self test passed"
 
 
 def restart(app: Path) -> None:
-    console.heading("Speicher-Explorer · restart", str(app))
+    console.heading("Storage Manager · restart", str(app))
     if subprocess.run(["pkill", "-x", PROCESS_NAME]).returncode == 0:
         while subprocess.run(["pgrep", "-x", PROCESS_NAME], capture_output=True).returncode == 0:
             time.sleep(SECONDS_BETWEEN_QUIT_CHECKS)
@@ -37,7 +37,7 @@ def restart(app: Path) -> None:
 
 
 def selftest(app: Path) -> int:
-    console.heading("Speicher-Explorer · self test", "counts and sizes only")
+    console.heading("Storage Manager · self test", "counts and sizes only")
     # The app writes into a file, not into this terminal: it is told when colors fit, and that
     # this heading is already there.
     environment_options = ["--env", "CONSOLE_HEADED=1"]

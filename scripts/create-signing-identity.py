@@ -126,7 +126,7 @@ def trust_for_code_signing(work_folder: Path) -> None:
 
 
 def main() -> None:
-    console.heading("Speicher-Explorer · signing identity", IDENTITY_NAME)
+    console.heading("Storage Manager · signing identity", IDENTITY_NAME)
     # The key files live in a folder that is removed at the end, so they never stay on disk.
     with tempfile.TemporaryDirectory() as folder:
         work_folder = Path(folder)

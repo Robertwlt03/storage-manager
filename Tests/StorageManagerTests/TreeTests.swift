@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// The scanned tree, built by hand: no disk access, no real file names.
 @Suite("Scanned tree")

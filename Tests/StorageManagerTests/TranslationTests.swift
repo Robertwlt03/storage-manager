@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// The 20 translations under Resources, read straight from the project folder.
 @Suite("Translations")

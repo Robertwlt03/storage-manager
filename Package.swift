@@ -11,14 +11,14 @@ let mainActorByDefault: [SwiftSetting] = [
 ]
 
 let package = Package(
-    name: "SpeicherExplorer",
+    name: "StorageManager",
     platforms: [.macOS(.v27)],
     targets: [
         .executableTarget(
-            name: "SpeicherExplorer", path: "Sources", swiftSettings: mainActorByDefault),
+            name: "StorageManager", path: "Sources", swiftSettings: mainActorByDefault),
         .testTarget(
-            name: "SpeicherExplorerTests", dependencies: ["SpeicherExplorer"],
-            path: "Tests/SpeicherExplorerTests", swiftSettings: mainActorByDefault),
+            name: "StorageManagerTests", dependencies: ["StorageManager"],
+            path: "Tests/StorageManagerTests", swiftSettings: mainActorByDefault),
     ],
     swiftLanguageModes: [.v6]
 )

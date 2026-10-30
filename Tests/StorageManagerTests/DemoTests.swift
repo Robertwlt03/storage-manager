@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// The demo shows every page with made-up data and must never touch the disk.
 @Suite("Demo mode", .serialized)

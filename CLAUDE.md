@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner-claude.svg" alt="Working with Claude on Speicher-Explorer. How Claude Code helps build and check the app." width="100%">
+  <img src="assets/banner-claude.svg" alt="Working with Claude on Storage Manager. How Claude Code helps build and check the app." width="100%">
 </p>
 
 Native macOS app (SwiftUI, Swift 6.4, SwiftPM, no Xcode project) that shows where disk space goes. Requires macOS 27 on
@@ -84,12 +84,14 @@ changing code; do not repeat their content here or in comments.
 2. Keep the rules: spelled-out English names, no numbers without a name, colors only from `Theme`, fonts via
    `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 20
    translations, no dead code, functions as lists of named steps. Never rename a `TextKey` case (it is the key in the
-   translation files), a settings key, a launch argument or a page key.
+   translation files), a settings key, a launch argument or a page key. The app was called Speicher-Explorer before it
+   became Storage Manager; its bundle identifier `local.speicher-explorer`, the signing keychain and the identity
+   "Speicher-Explorer Dev" keep that name on purpose, because macOS ties Full Disk Access and the settings to them.
 3. A new folder below `Sources` first gets its row in the layer table of `scripts/checks/architecture.py` and a line in
    ARCHITECTURE.md. Never call network interfaces. Deleting or trashing files stays in `CleanerService`,
    `CopyService` and `AppUsageService`, behind the person's confirmation; the cleaner makes its list again right
    before deleting.
-4. New logic gets a test in `Tests/SpeicherExplorerTests` (hand-built `Node` trees via `TestTree`, never the real
+4. New logic gets a test in `Tests/StorageManagerTests` (hand-built `Node` trees via `TestTree`, never the real
    disk). Each logic folder has a coverage minimum that may only rise.
 5. When views changed, check the look in your own test window (see "Testing safely").
 
@@ -119,13 +121,13 @@ mode.
   photograph only its window:
 
   ```bash
-  open -n <scratchpad>/build/Speicher-Explorer.app --args -ApplePersistenceIgnoreState YES -demo YES \
+  open -n "<scratchpad>/build/Storage Manager.app" --args -ApplePersistenceIgnoreState YES -demo YES \
     -pane overview -"NSWindow Frame main" "100 100 1100 860 0 0 2560 1440"
   ```
 
   Find the window number with a small CoreGraphics script (`CGWindowListCopyWindowInfo`, filtered by the app's PID
   and a width over 500 points, so it is the main window) and capture it with `screencapture -x -o -l <window>`.
-  `SpeicherExplorer --list-pages` prints the page names; `-appearance dark` or `light` fixes the look. For
+  `StorageManager --list-pages` prints the page names; `-appearance dark` or `light` fixes the look. For
   refactors, build the previous commit into another scratchpad folder and compare both captures. A locked screen
   allows no captures; wait until it is unlocked.
 - **App behavior without new permissions:** build a test copy with its own bundle identifier, so it never touches
@@ -187,7 +189,7 @@ mode.
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <b>Storage Manager · See at a glance where your storage goes.</b><br>
   <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
   <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner-architecture.svg" alt="Architecture of Speicher-Explorer. Where things live in the code, and why." width="100%">
+  <img src="assets/banner-architecture.svg" alt="Architecture of Storage Manager. Where things live in the code, and why." width="100%">
 </p>
 
 This description helps you work out where a change belongs. It names files and types, so you can find them with your
@@ -7,7 +7,7 @@ editor’s search. How to build and check is in the [contributing guide](CONTRIB
 
 ## <img src="assets/icons/about.svg" height="33" align="absmiddle" alt="">What it is about
 
-Speicher-Explorer measures once how much space the Mac’s folders take up, and shows the result on several pages: as
+Storage Manager measures once how much space the Mac’s folders take up, and shows the result on several pages: as
 an overview, as a folder tree, as a list of large files, while cleaning up and in hidden areas such as the temporary
 folder of macOS. After the scan, every page gets by without any further disk access.
 
@@ -51,7 +51,7 @@ contain the texts.
 **`Sources/Diagnostics`:** The self test with real folders, the stress test that operates the running app, the
 made-up data of the demo mode and the page list that scripts ask for with `--list-pages`.
 
-**`Tests/SpeicherExplorerTests`:** The tests, written with Swift Testing, for the folder tree, search, pages, design
+**`Tests/StorageManagerTests`:** The tests, written with Swift Testing, for the folder tree, search, pages, design
 values, contrast and translations. They build their folder trees by hand and never touch the disk.
 
 Which part may use which other one is a table in `scripts/checks/architecture.py`, and the check pipeline watches
@@ -132,7 +132,7 @@ information uses the `muted` tone instead of the system color, which falls below
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <b>Storage Manager · See at a glance where your storage goes.</b><br>
   <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
   <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

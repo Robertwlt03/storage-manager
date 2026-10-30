@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "Обозреватель хранилища";
+"appName" = "Storage Manager";
 "paneOverview" = "Обзор";
 "paneExplorer" = "Папки";
 "paneLargeFiles" = "Большие файлы";

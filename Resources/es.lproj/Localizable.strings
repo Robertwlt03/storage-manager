@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "Explorador de almacenamiento";
+"appName" = "Storage Manager";
 "paneOverview" = "Resumen";
 "paneExplorer" = "Carpetas";
 "paneLargeFiles" = "Archivos grandes";

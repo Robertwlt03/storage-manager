@@ -1,7 +1,7 @@
 import Foundation
 import Testing
 
-@testable import SpeicherExplorer
+@testable import StorageManager
 
 /// Sizes, numbers and dates in the app's language. The words depend on the system's language, so
 /// these tests check what holds in every language: digits, units and that different values read

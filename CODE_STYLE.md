@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/banner-code-rules.svg" alt="Code rules of Speicher-Explorer. How we write code anyone can read." width="100%">
+  <img src="assets/banner-code-rules.svg" alt="Code rules of Storage Manager. How we write code anyone can read." width="100%">
 </p>
 
-Code is read far more often than it is written. That is why the code of Speicher-Explorer should read almost like
+Code is read far more often than it is written. That is why the code of Storage Manager should read almost like
 prose, even for people who do not know every corner of Swift. These rules apply to every line, and the check script
 at the end of this page checks most of them automatically.
 
@@ -108,7 +108,7 @@ without animation. The story of how a bug came about belongs in the commit messa
 
 ## <img src="assets/icons/tests.svg" height="33" align="absmiddle" alt="">Tests
 
-The tests live in `Tests/SpeicherExplorerTests` and use Apple’s test framework Swift Testing. Every test has a name
+The tests live in `Tests/StorageManagerTests` and use Apple’s test framework Swift Testing. Every test has a name
 that says, as a full sentence, what should hold, for example “Only emptying the Trash needs a deliberate click in
 the cleaner”. We test everything that has a fixed answer without a screen: the folder tree, the search, the page
 list, the categories, the size classes, the legend, the summary, the design values, the contrast and the
@@ -141,7 +141,7 @@ The script runs twenty-three checks one after another:
 2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
    function and types nested too deeply. The limits are in `.swiftlint.yml`.
 3. **Compiler:** The app is built with `-warnings-as-errors`, so even a single warning counts as an error.
-4. **Tests:** `swift test` runs all tests from `Tests/SpeicherExplorerTests`, also without a single warning.
+4. **Tests:** `swift test` runs all tests from `Tests/StorageManagerTests`, also without a single warning.
 5. **Test coverage:** In every folder with logic, the tests must reach a minimum share of the lines. The values sit
    just below today's in `MINIMUM_COVERAGE` (`scripts/checks/tools.py`), so coverage can only grow; the folders with
    views are left out for a reason. A new folder without a rule is reported.
@@ -213,7 +213,7 @@ The script runs twenty-three checks one after another:
    `Makefile` also stay under 100 characters per line, and each one opens with the shared head. `python3 -m
    py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
 23. **One look for all output:** Everything a command writes to the console looks the same: one heading
-   (`Speicher-Explorer · <command>` and a dimmed detail, `Ctrl-C cancels` when it asks something), lines with a mark
+   (`Storage Manager · <command>` and a dimmed detail, `Ctrl-C cancels` when it asks something), lines with a mark
    (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints, and at the end one frame in the same shape
    everywhere: the outcome after its mark, then below it what it concerns, such as the file or folder it made. A
    question shows ?, its answer is typed on the next line after ❯, a list marks the chosen entry with ● and the
@@ -257,7 +257,7 @@ well, no script can judge, and only the eye can see what the glass looks like: f
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <b>Storage Manager · See at a glance where your storage goes.</b><br>
   <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
   <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

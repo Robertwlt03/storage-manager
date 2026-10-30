@@ -1,5 +1,5 @@
 /* App and sidebar */
-"appName" = "Tallennustilan tutkija";
+"appName" = "Storage Manager";
 "paneOverview" = "Yleiskatsaus";
 "paneExplorer" = "Kansiot";
 "paneLargeFiles" = "Suuret tiedostot";

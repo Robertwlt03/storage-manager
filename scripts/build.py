@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds Speicher-Explorer.app with its icon, translations and signature.
+"""Builds Storage Manager.app with its icon, translations and signature.
 
 Start:  make build, or make build INSTALL_APP=1 to copy the app to ~/Applications as well
 Needs:  Xcode 27; settings come from the environment (the Makefile passes them on):
@@ -19,8 +19,8 @@ from checks.project import PROJECT, has_xcode
 
 # MARK: Settings
 
-APP_NAME = "Speicher-Explorer.app"
-BINARY = PROJECT / ".build" / "release" / "SpeicherExplorer"
+APP_NAME = "Storage Manager.app"
+BINARY = PROJECT / ".build" / "release" / "StorageManager"
 # The sizes in points macOS asks for in an app icon; each one also comes twice as large for
 # Retina screens.
 ICON_SIZES = (16, 32, 128, 256, 512)
@@ -113,7 +113,7 @@ def build(build_folder: Path, identity: str, bundle_id: str = "") -> Path:
 
 
 def shown(path: Path) -> str:
-    """A path inside the project as the project sees it, such as build/Speicher-Explorer.app."""
+    """A path inside the project as the project sees it, such as build/Storage Manager.app."""
     return str(path.relative_to(PROJECT) if path.is_relative_to(PROJECT) else path)
 
 
@@ -128,7 +128,7 @@ def install(app: Path) -> None:
 
 def main() -> None:
     build_folder = PROJECT / os.environ.get("BUILD_FOLDER", "build")
-    console.heading("Speicher-Explorer · build", shown(build_folder / APP_NAME))
+    console.heading("Storage Manager · build", shown(build_folder / APP_NAME))
     identity = os.environ.get("SIGN_IDENTITY") or AD_HOC_IDENTITY
     app = build(build_folder, identity, os.environ.get("BUNDLE_ID", ""))
     if os.environ.get("INSTALL_APP"):

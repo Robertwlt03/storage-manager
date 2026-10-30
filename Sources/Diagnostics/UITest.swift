@@ -51,7 +51,7 @@ enum UITest {
     static func run(_ model: AppModel, into pictureFolderPath: String) async {
         // Without Full Disk Access every scan would make macOS ask once per protected folder.
         guard model.hasFullDiskAccess else {
-            log("STOP: Full Disk Access is missing; grant it to Speicher-Explorer and start again")
+            log("STOP: Full Disk Access is missing; grant it to Storage Manager and start again")
             return
         }
         preparePictureFolder(at: pictureFolderPath)

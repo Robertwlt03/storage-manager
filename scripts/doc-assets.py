@@ -34,7 +34,7 @@ FONT = (
     "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', "
     "Helvetica, Arial, sans-serif"
 )
-DEFAULT_EYEBROW = "Speicher-Explorer · Documentation"
+DEFAULT_EYEBROW = "Storage Manager · Documentation"
 # Never replaced through make banner: the app's footer is drawn by hand like banner.svg, and the
 # Claude footer is drawn again with every banner in the Claude theme.
 HAND_DRAWN_BANNERS = {"footer", "claude-footer"}
@@ -183,7 +183,7 @@ def banner(file_name: str, title: str, subtitle: str, eyebrow: str, overwrite: b
     svg = "\n".join([
         f'<svg xmlns="http://www.w3.org/2000/svg" {size}',
         f'  viewBox="0 0 {BANNER_WIDTH} {BANNER_HEIGHT}" role="img"{theme_mark}',
-        f'  aria-label="{escape(f"Speicher-Explorer – {title}. {subtitle}")}">',
+        f'  aria-label="{escape(f"Storage Manager – {title}. {subtitle}")}">',
         BANNER_BACKGROUND.format(size=size, light=theme.light, deep=theme.deep,
                                  large_circle=theme.large_circle, shadow=theme.shadow),
         theme.mark(),
@@ -203,12 +203,12 @@ def claude_footer() -> str:
     size = f'width="{FOOTER_WIDTH}" height="{FOOTER_HEIGHT}"'
     return "\n".join([
         f'<svg xmlns="http://www.w3.org/2000/svg" {size} viewBox="0 0 {FOOTER_WIDTH} '
-        f'{FOOTER_HEIGHT}" role="img" aria-label="Speicher-Explorer, built with Claude Code">',
+        f'{FOOTER_HEIGHT}" role="img" aria-label="Storage Manager, built with Claude Code">',
         '<defs><linearGradient id="fbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" '
         'stop-color="#FAF9F5"/><stop offset="1" stop-color="#F0EEE6"/></linearGradient></defs>',
         f'<rect {size} rx="24" fill="url(#fbg)"/>',
         claude_tile(FOOTER_TILE_LEFT, FOOTER_TILE_TOP, FOOTER_TILE_SIZE),
-        footer_text(FOOTER_NAME_LINE, "Speicher-Explorer"),
+        footer_text(FOOTER_NAME_LINE, "Storage Manager"),
         footer_text(FOOTER_CAPTION_LINE, "Built with Claude Code"),
         "</svg>",
         "",
@@ -299,7 +299,7 @@ def stop(problem: str, hint: str) -> None:
 
 def banner_by_questions() -> Path:
     """First whether to replace a banner and which one, then the texts of the banner."""
-    heading("Speicher-Explorer · banner", "Ctrl-C cancels")
+    heading("Storage Manager · banner", "Ctrl-C cancels")
     if not can_ask():
         stop("no terminal to ask in",
              "Name the texts instead: scripts/doc-assets.py banner <file name> <title> <subtitle>")
@@ -404,7 +404,7 @@ def drawn_file() -> Path:
     parser = command_line()
     arguments = parser.parse_args()
     if arguments.command == "icon":
-        heading("Speicher-Explorer · icon", f"assets/icons/{arguments.name}.svg")
+        heading("Storage Manager · icon", f"assets/icons/{arguments.name}.svg")
         return icon(arguments.name, arguments.color, arguments.glyph, arguments.overwrite)
     texts = [arguments.file_name, arguments.title, arguments.subtitle]
     if not any(texts):
@@ -419,7 +419,7 @@ def drawn_file() -> Path:
     ]
     if problem := next((problem for problem in problems if problem), ""):
         parser.error(problem)
-    heading("Speicher-Explorer · banner", relative_path(banner_path(arguments.file_name)))
+    heading("Storage Manager · banner", relative_path(banner_path(arguments.file_name)))
     # Without --theme, a banner drawn again keeps the theme it has, and a new one gets the app's.
     exists = banner_path(arguments.file_name).exists()
     theme_name = arguments.theme or (banner_theme(arguments.file_name) if exists else "app")

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner-contributing.svg" alt="Contributing to Speicher-Explorer. How to build, check and extend the app." width="100%">
+  <img src="assets/banner-contributing.svg" alt="Contributing to Storage Manager. How to build, check and extend the app." width="100%">
 </p>
 
 Great that you want to help. This guide explains how to build the app, where to find what and what to look out for.
@@ -212,7 +212,7 @@ We treat each other kindly and respectfully. The details are in the [code of con
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <b>Storage Manager · See at a glance where your storage goes.</b><br>
   <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
   <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

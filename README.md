@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Speicher-Explorer. See at a glance where your storage goes." width="100%">
+  <img src="assets/banner.svg" alt="Storage Manager. See at a glance where your storage goes." width="100%">
 </p>
 
 <p align="center">
@@ -10,7 +10,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="License: MIT"></a>
 </p>
 
-**Speicher-Explorer** shows you where the storage on your Mac goes. It measures all the important areas, sorts them
+**Storage Manager** shows you where the storage on your Mac goes. It measures all the important areas, sorts them
 into categories that make sense, and also finds what macOS otherwise hides from you. Everything stays on your Mac,
 because the app only reads sizes and sends nothing to the internet.
 
@@ -26,7 +26,7 @@ copies of Google Chrome that together took up more than a hundred gigabytes. But
 simply hand on to others. So I turned it into a proper app that is much friendlier to use, that anyone can work with
 without a terminal, and that you can share with others without having to wait for an update from Apple.
 
-## <img src="assets/icons/screens.svg" height="33" align="absmiddle" alt="">What Speicher-Explorer looks like
+## <img src="assets/icons/screens.svg" height="33" align="absmiddle" alt="">What Storage Manager looks like
 
 <table>
   <tr>
@@ -79,10 +79,10 @@ with gentle motion, and if you have turned on “Reduce motion” in the Accessi
 
 ## <img src="assets/icons/install.svg" height="33" align="absmiddle" alt="">Installing
 
-You need a Mac with Apple silicon, meaning M1 or newer, running macOS 27 or later, and the file **Speicher-Explorer-1.0.dmg**. Everything else you do
+You need a Mac with Apple silicon, meaning M1 or newer, running macOS 27 or later, and the file **Storage-Manager-1.0.dmg**. Everything else you do
 with the mouse.
 
-**1. Open the DMG file and drag Speicher-Explorer into the “Applications” folder.**
+**1. Open the DMG file and drag Storage Manager into the “Applications” folder.**
 
 <p align="center"><img src="docs/guide/images/1-disk-image.svg" alt="Drag the app into the Applications folder" width="620"></p>
 
@@ -92,13 +92,13 @@ distribute it through Apple’s paid developer program. Just click “Done” he
 <p align="center"><img src="docs/guide/images/2-warning.svg" alt="Notice from macOS: click Done" width="620"></p>
 
 **3. Allow the first launch.** Open System Settings and go to “Privacy & Security”. Right at the bottom you will find
-a notice about Speicher-Explorer with the button “Open Anyway”. You only have to do this once, and never again for
+a notice about Storage Manager with the button “Open Anyway”. You only have to do this once, and never again for
 later updates.
 
 <p align="center"><img src="docs/guide/images/3-open-anyway.svg" alt="Open Anyway in System Settings" width="620"></p>
 
 **4. Grant Full Disk Access.** The app asks for it at launch and, if you like, opens the right place in System
-Settings. Turn Speicher-Explorer on there. If it is missing from the list, add it with the plus button.
+Settings. Turn Storage Manager on there. If it is missing from the list, add it with the plus button.
 
 <p align="center"><img src="docs/guide/images/4-full-disk-access.svg" alt="Turn on Full Disk Access" width="620"></p>
 
@@ -114,23 +114,23 @@ If you prefer working in the terminal, paste these commands in one after another
 Downloads folder, copy the app to “Applications” and allow the first launch.
 
 ```bash
-hdiutil attach ~/Downloads/Speicher-Explorer-1.0.dmg
+hdiutil attach ~/Downloads/Storage-Manager-1.0.dmg
 ```
 
 ```bash
-cp -R "/Volumes/Speicher-Explorer/Speicher-Explorer.app" /Applications/
+cp -R "/Volumes/Storage Manager/Storage Manager.app" /Applications/
 ```
 
 ```bash
-hdiutil detach "/Volumes/Speicher-Explorer"
+hdiutil detach "/Volumes/Storage Manager"
 ```
 
 ```bash
-xattr -dr com.apple.quarantine /Applications/Speicher-Explorer.app
+xattr -dr com.apple.quarantine "/Applications/Storage Manager.app"
 ```
 
 ```bash
-open /Applications/Speicher-Explorer.app
+open "/Applications/Storage Manager.app"
 ```
 
 Not even the terminal can grant Full Disk Access; that only works with the switch. This command opens the right place
@@ -155,13 +155,13 @@ go to the Trash and can be restored from there.
 
 ## <img src="assets/icons/energy.svg" height="33" align="absmiddle" alt="">Easy on energy
 
-Speicher-Explorer measures everything once, in a single pass. To do that it uses the energy-efficient cores of your
+Storage Manager measures everything once, in a single pass. To do that it uses the energy-efficient cores of your
 Mac and then remembers the result. Clicking, sorting and searching therefore never trigger a new scan. When the app is
 simply open, it needs practically no computing power, and in Low Power Mode it does not scan on its own.
 
 ## <img src="assets/icons/build.svg" height="33" align="absmiddle" alt="">How the app was built
 
-Speicher-Explorer is a real Mac app, written in Swift with SwiftUI, Apple’s own toolkit for Mac interfaces. That is
+Storage Manager is a real Mac app, written in Swift with SwiftUI, Apple’s own toolkit for Mac interfaces. That is
 why it looks like the apps that come with macOS and adapts to light and dark. It grew out of my small terminal
 script, which I expanded step by step into a complete app together with Claude.
 
@@ -206,7 +206,7 @@ The code is split into small parts, and every file has exactly one job:
 
 ## <img src="assets/icons/community.svg" height="33" align="absmiddle" alt="">Contributing
 
-Speicher-Explorer is open source. Anyone can read the code, improve it and bring in their own ideas. You can report
+Storage Manager is open source. Anyone can read the code, improve it and bring in their own ideas. You can report
 bugs and wishes in the [issues](../../issues), and I am happy to take improvements as pull requests. How to get
 started is in the [contributing guide](CONTRIBUTING.md), where to find what in the code is in the
 [architecture description](ARCHITECTURE.md), and how we write code is in the [code rules](CODE_STYLE.md). For how we treat each other, the [code of conduct](CODE_OF_CONDUCT.md) applies.
@@ -220,7 +220,7 @@ translations were made by machine, so I am especially glad about improvements fr
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
+  <b>Storage Manager · See at a glance where your storage goes.</b><br>
   <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
   <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>
