@@ -131,8 +131,8 @@ def summary(results: list[tuple[str, int]]) -> None:
     """A frame with the outcome: every step passed, or how many findings came from which steps."""
     failed = [(title, count) for title, count in results if count]
     if not failed:
-        frame([f"{PASSED_MARK} All {plural(len(results), 'step')} passed: no errors, no warnings"],
-              GREEN)
+        steps = f"All {len(results)} steps" if len(results) > 1 else "The step"
+        frame([f"{PASSED_MARK} {steps} passed: no errors, no warnings"], GREEN)
         return
     total = sum(count for _, count in failed)
     lines = [f"{FAILED_MARK} {plural(total, 'finding')} in {len(failed)} of {len(results)} steps"]
