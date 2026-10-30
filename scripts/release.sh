@@ -40,15 +40,16 @@ gather_contents() {
 
 pack_disk_image() {
   # UDZO: a compressed, read-only image, the usual format for sharing apps.
-  hdiutil create -volname "$NAME" -srcfolder "$CONTENTS" -format UDZO -ov "$DISK_IMAGE" \
-    > /dev/null
+  console_wait "Packing the disk image" hdiutil create -quiet -volname "$NAME" \
+    -srcfolder "$CONTENTS" -format UDZO -ov "$DISK_IMAGE"
   rm -rf "$CONTENTS"
   SIGN_IDENTITY="$IDENTITY" scripts/sign.sh "$DISK_IMAGE"
 }
 
 notarize_when_possible() {
   if [[ "$IDENTITY" == "$APPLE_IDENTITY_PREFIX"* && -n "${NOTARY_PROFILE:-}" ]]; then
-    xcrun notarytool submit "$DISK_IMAGE" --keychain-profile "$NOTARY_PROFILE" --wait
+    console_wait "Waiting for Apple to notarize the disk image" \
+      xcrun notarytool submit "$DISK_IMAGE" --keychain-profile "$NOTARY_PROFILE" --wait
     xcrun stapler staple "$DISK_IMAGE"
     console_passed "Notarized" "macOS opens the app without a warning"
   fi

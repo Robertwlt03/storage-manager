@@ -24,12 +24,21 @@ STEP_MARK="›"
 NOTE_INDENT="   "  # hints start below the text of a result line
 TABLE_WIDTH=16  # the names of a table fill this many characters, so the texts line up
 UNICODE_LOCALE=en_US.UTF-8  # so a mark such as ✔ counts as one character, not three bytes
+# A wheel turns in front of a long command while it runs, so it does not look stuck.
+SPINNER_FRAMES=(⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏)
+SPINNER_SECONDS=0.08
+CLEAR_LINE='\r\033[K'  # back to the start of the line and erase it
 # Decided once, while stdout is still the terminal: the pieces paint inside $( ), a pipe.
 if [ -z "${NO_COLOR+set}" ] \
   && { [ -t 1 ] || [ "${GITHUB_ACTIONS:-}" = true ] || [ -n "${FORCE_COLOR+set}" ]; }; then
   USES_COLOR=true
 else
   USES_COLOR=false
+fi
+if [ -t 1 ]; then
+  IN_TERMINAL=true
+else
+  IN_TERMINAL=false  # a log, on GitHub for instance: no wheel, the command's output as it comes
 fi
 
 # MARK: Pieces
@@ -96,6 +105,34 @@ console_step() {
 
 console_note() {
   printf '%s\n' "$(console_paint "$NOTE_INDENT$1" "$DIM")"
+}
+
+# console_wait <text> <command>…: runs the command with a turning wheel and the text in front of
+# it, then erases that line and shows what the command printed. Returns the command's status.
+console_wait() {
+  local text=$1
+  shift
+  if [ "$IN_TERMINAL" = false ]; then
+    console_step "$text"
+    "$@"
+    return
+  fi
+  local output status=0 frame=0 worker
+  output=$(mktemp)
+  "$@" > "$output" 2>&1 &
+  worker=$!
+  while kill -0 "$worker" 2> /dev/null; do
+    printf "$CLEAR_LINE %s %s" \
+      "$(console_paint "${SPINNER_FRAMES[frame % ${#SPINNER_FRAMES[@]}]}" "$CYAN" "$BOLD")" \
+      "$(console_paint "$text" "$DIM")"
+    frame=$((frame + 1))  # not inside $( ): that runs in a copy of the shell and forgets the count
+    sleep "$SPINNER_SECONDS"
+  done
+  wait "$worker" || status=$?
+  printf "$CLEAR_LINE"
+  cat "$output"
+  rm -f "$output"
+  return "$status"
 }
 
 # console_table: reads "name<tab>text" lines and lines the texts up behind the names.

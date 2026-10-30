@@ -25,8 +25,8 @@ INSTALLED_APP=~/Applications/Speicher-Explorer.app
 
 compile() {
   scripts/require-xcode.sh
-  console_step "Compiling" "release; errors appear below"
-  swift build --configuration release --quiet
+  console_wait "Compiling (release; errors appear below)" \
+    swift build --configuration release --quiet
   console_passed "Compiled" "release"
 }
 

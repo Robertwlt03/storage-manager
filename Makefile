@@ -92,7 +92,7 @@ coverage: ## Show how much of each source folder the tests reach
 
 format: ## Bring every Swift file into the shared form
 	$(HEADING) "Speicher-Explorer · format" "Sources, Tests and scripts"
-	swift format --in-place --recursive Sources Tests scripts
+	$(CONSOLE) wait "Formatting" swift format --in-place --recursive Sources Tests scripts
 	$(CONSOLE) passed "Formatted" "every Swift file in Sources, Tests and scripts"
 
 selftest: ## Measure real folders and compare with du (prints only counts and sizes)
@@ -101,7 +101,8 @@ selftest: ## Measure real folders and compare with du (prints only counts and si
 	@# The app writes into a file, not into this terminal, so it is told when colors fit.
 	color=""; \
 	if [ -t 1 ] && [ -z "$${NO_COLOR+set}" ]; then color="--env FORCE_COLOR=1"; fi; \
-	open -n -W --stdout "$(SELFTEST_REPORT)" $$color "$(APP)" --args --selftest
+	$(CONSOLE) wait "Measuring real folders" \
+		open -n -W --stdout "$(SELFTEST_REPORT)" $$color "$(APP)" --args --selftest
 	cat "$(SELFTEST_REPORT)"
 
 stress: ## Open a second app that clicks through every page as fast as it can

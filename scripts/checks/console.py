@@ -14,6 +14,7 @@ import os
 import re
 import sys
 import termios
+import threading
 import tty
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -32,7 +33,9 @@ SUCCESS, FAILURE = GREEN, RED  # the colors of a frame
 
 PASSED_MARK = "✔"
 FAILED_MARK = "✘"
-RUNNING_MARK = "…"
+# A wheel turns in front of a step while it runs, so a long step does not look stuck.
+SPINNER_FRAMES = "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
+SPINNER_SECONDS = 0.08
 GROUP_MARK = "▸"
 NOTE_INDENT = "   "  # hints start below the text of a result line
 TABLE_WIDTH = 16  # the names of a table fill this many characters, so the texts line up
@@ -69,7 +72,8 @@ def visible_length(text: str) -> int:
 
 
 def show(text: str) -> None:
-    """Every piece ends here; in a terminal it first erases a line that said what is running."""
+    """Every piece ends here; in a terminal it first stops the wheel and erases its line."""
+    stop_running()
     print(f"{CLEAR_LINE if IN_TERMINAL else ''}{text}")
 
 
@@ -84,10 +88,41 @@ def heading(title: str, detail: str = "") -> None:
     show(f"\n{paint(title, BOLD)}  {paint(detail, DIM)}\n")
 
 
+class Spinner(threading.Thread):
+    """Draws the wheel and the text again and again, in a thread of its own, until it is stopped."""
+
+    def __init__(self, text: str) -> None:
+        super().__init__(daemon=True)  # Ctrl-C ends the command without waiting for the wheel
+        self.text = text
+        self.stopped = threading.Event()
+
+    def run(self) -> None:
+        frame = 0
+        while True:
+            wheel = paint(SPINNER_FRAMES[frame % len(SPINNER_FRAMES)], CYAN, BOLD)
+            print(f"{CLEAR_LINE} {wheel} {paint(self.text, DIM)}", end="", flush=True)
+            if self.stopped.wait(SPINNER_SECONDS):
+                return
+            frame += 1
+
+
+turning: list[Spinner] = []  # the wheel that turns right now, if any
+
+
 def running(text: str) -> None:
-    """A dim line while something runs, which the next piece replaces; only in a terminal."""
+    """A turning wheel and the text while something runs; the next piece replaces it. Only in a
+    terminal: a log on GitHub gets the result lines alone."""
+    stop_running()
     if IN_TERMINAL:
-        print(paint(f" {RUNNING_MARK} {text}", DIM), end="", flush=True)
+        turning.append(Spinner(text))
+        turning[-1].start()
+
+
+def stop_running() -> None:
+    while turning:
+        spinner = turning.pop()
+        spinner.stopped.set()
+        spinner.join()
 
 
 def passed(text: str, detail: str = "") -> None:
@@ -133,6 +168,7 @@ def frame(lines: list[str], color: str) -> None:
 
 def data(text: str) -> None:
     """Plain text another program reads, such as GitHub; never colored."""
+    stop_running()
     print(text)
 
 
