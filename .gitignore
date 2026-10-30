@@ -6,3 +6,4 @@ build/
 dist/
 local.mk
 snapshots/
+__pycache__/

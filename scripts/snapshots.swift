@@ -6,9 +6,11 @@
 import AppKit
 import UniformTypeIdentifiers
 
-let pages = ["overview", "explorer", "largeFiles", "cleaner", "apps", "temp", "copies"]
 let appearances = ["light", "dark"]
 let secondsUntilDrawn: UInt32 = 3
+let microsecondsBetweenQuitChecks: UInt32 = 100_000
+/// The same window size every time, whatever size the demo window had last.
+let windowFrame = "100 100 1100 860 0 0 2560 1440"
 /// A pixel counts as changed when one colour channel moves further than this (0–255); smaller
 /// moves come from the glass picking up the wallpaper.
 let channelTolerance = 24
@@ -20,6 +22,29 @@ let folder = URL(filePath: "snapshots")
 let referenceFolder = folder.appending(path: "reference")
 let currentFolder = folder.appending(path: "current")
 let differenceFolder = folder.appending(path: "difference")
+
+/// One picture: a page in one appearance.
+struct Picture {
+    let page: String
+    let appearance: String
+    var fileName: String { "\(page)-\(appearance).png" }
+}
+
+/// Every page in every appearance; the app itself lists its pages, so this script keeps no copy.
+func pictures(of app: URL) throws -> [Picture] {
+    let listing = Process()
+    let output = Pipe()
+    listing.executableURL = app.appending(path: "Contents/MacOS/SpeicherExplorer")
+    listing.arguments = ["--list-pages"]
+    listing.standardOutput = output
+    try listing.run()
+    listing.waitUntilExit()
+    let text = String(decoding: output.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
+    let pages = text.split(separator: "\n").map(String.init)
+    return appearances.flatMap { appearance in
+        pages.map { page in Picture(page: page, appearance: appearance) }
+    }
+}
 
 // MARK: Taking the pictures
 
@@ -34,14 +59,12 @@ func ensureScreenRecordingAccess() {
     exit(EXIT_FAILURE)
 }
 
-func launch(_ app: URL, page: String, appearance: String) async throws -> NSRunningApplication {
+func launch(_ app: URL, showing picture: Picture) async throws -> NSRunningApplication {
     let configuration = NSWorkspace.OpenConfiguration()
     configuration.createsNewApplicationInstance = true
     configuration.arguments = [
-        "-demo", "YES", "-pane", page, "-appearance", appearance,
-        "-ApplePersistenceIgnoreState", "YES",
-        // The same window size every time, whatever size the demo window had last.
-        "-NSWindow Frame main", "100 100 1100 860 0 0 2560 1440",
+        "-demo", "YES", "-pane", picture.page, "-appearance", picture.appearance,
+        "-ApplePersistenceIgnoreState", "YES", "-NSWindow Frame main", windowFrame,
     ]
     return try await NSWorkspace.shared.openApplication(at: app, configuration: configuration)
 }
@@ -68,25 +91,22 @@ func photograph(windowNumber: Int, to file: URL) throws {
 func quit(_ app: NSRunningApplication) {
     app.terminate()
     // `isTerminated` never changes in a script without a run loop, so ask the system instead.
-    while kill(app.processIdentifier, 0) == 0 { usleep(100_000) }
+    while kill(app.processIdentifier, 0) == 0 { usleep(microsecondsBetweenQuitChecks) }
 }
 
-func takePictures(of app: URL) async throws {
+func take(_ pictures: [Picture], of app: URL) async throws {
     try? FileManager.default.removeItem(at: currentFolder)
     try FileManager.default.createDirectory(at: currentFolder, withIntermediateDirectories: true)
-    for appearance in appearances {
-        for page in pages {
-            let running = try await launch(app, page: page, appearance: appearance)
-            sleep(secondsUntilDrawn)
-            if let windowNumber = mainWindowNumber(of: running) {
-                try photograph(
-                    windowNumber: windowNumber,
-                    to: currentFolder.appending(path: "\(page)-\(appearance).png"))
-            } else {
-                print("\(page)-\(appearance): no window found")
-            }
-            quit(running)
+    for picture in pictures {
+        let running = try await launch(app, showing: picture)
+        sleep(secondsUntilDrawn)
+        if let windowNumber = mainWindowNumber(of: running) {
+            try photograph(
+                windowNumber: windowNumber, to: currentFolder.appending(path: picture.fileName))
+        } else {
+            print("\(picture.fileName): no window found")
         }
+        quit(running)
     }
 }
 
@@ -94,6 +114,12 @@ func takePictures(of app: URL) async throws {
 
 /// The picture's pixels as RGBA bytes, drawn the same way for both pictures.
 struct Pixels {
+    static let bytesPerPixel = 4
+    static let bitsPerChannel = 8
+    static let colourChannels = 0..<3  // red, green and blue; the fourth byte is opacity
+    static let opacity = 3
+    static let fullChannel: UInt8 = 255
+
     let width: Int
     let height: Int
     var bytes: [UInt8]
@@ -101,7 +127,7 @@ struct Pixels {
     init(width: Int, height: Int) {
         self.width = width
         self.height = height
-        bytes = [UInt8](repeating: 0, count: width * height * 4)
+        bytes = [UInt8](repeating: 0, count: width * height * Self.bytesPerPixel)
     }
 
     init?(file: URL) {
@@ -119,8 +145,9 @@ struct Pixels {
         let (width, height) = (self.width, self.height)
         return bytes.withUnsafeMutableBytes { buffer in
             CGContext(
-                data: buffer.baseAddress, width: width, height: height, bitsPerComponent: 8,
-                bytesPerRow: width * 4, space: CGColorSpaceCreateDeviceRGB(),
+                data: buffer.baseAddress, width: width, height: height,
+                bitsPerComponent: Self.bitsPerChannel,
+                bytesPerRow: width * Self.bytesPerPixel, space: CGColorSpaceCreateDeviceRGB(),
                 bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
             )
             .map(body)
@@ -138,39 +165,41 @@ struct Pixels {
     }
 }
 
+/// The unchanged parts as a light grey copy (a quarter of the brightness on top of three quarters
+/// white), so the red stands out.
+let fadedShare = 4
+let fadedBase = Int(Pixels.fullChannel) - Int(Pixels.fullChannel) / fadedShare
+let changedColour: [UInt8] = [Pixels.fullChannel, 0, 0]  // red
+
 /// The share of changed pixels, and a picture that shows them red over a faded original.
 func compare(_ reference: Pixels, _ current: Pixels) -> (share: Double, difference: Pixels) {
     var difference = Pixels(width: current.width, height: current.height)
     var changed = 0
-    for start in stride(from: 0, to: current.bytes.count, by: 4) {
-        let channels = start..<start + 3
-        let isChanged = channels.contains { index in
-            abs(Int(reference.bytes[index]) - Int(current.bytes[index])) > channelTolerance
+    for start in stride(from: 0, to: current.bytes.count, by: Pixels.bytesPerPixel) {
+        let isChanged = Pixels.colourChannels.contains { channel in
+            let index = start + channel
+            return abs(Int(reference.bytes[index]) - Int(current.bytes[index])) > channelTolerance
         }
         if isChanged { changed += 1 }
-        // The unchanged picture as a light grey copy, so the red stands out.
-        let faded = UInt8(Int(current.bytes[start]) / 4 + 191)
-        difference.bytes[start] = isChanged ? 255 : faded
-        difference.bytes[start + 1] = isChanged ? 0 : faded
-        difference.bytes[start + 2] = isChanged ? 0 : faded
-        difference.bytes[start + 3] = 255
+        let faded = UInt8(Int(current.bytes[start]) / fadedShare + fadedBase)
+        for channel in Pixels.colourChannels {
+            difference.bytes[start + channel] = isChanged ? changedColour[channel] : faded
+        }
+        difference.bytes[start + Pixels.opacity] = Pixels.fullChannel
     }
     return (Double(changed) / Double(current.width * current.height), difference)
 }
 
 /// Prints one line per picture and returns whether all of them still match.
-func compareWithReferences() -> Bool {
+func compareWithReferences(_ pictures: [Picture]) -> Bool {
     try? FileManager.default.removeItem(at: differenceFolder)
     try? FileManager.default.createDirectory(
         at: differenceFolder, withIntermediateDirectories: true)
     var allMatch = true
-    for appearance in appearances {
-        for page in pages {
-            let name = "\(page)-\(appearance).png"
-            let verdict = verdict(for: name)
-            if verdict != nil { allMatch = false }
-            print("\(name): \(verdict ?? "same")")
-        }
+    for picture in pictures {
+        let verdict = verdict(for: picture.fileName)
+        if verdict != nil { allMatch = false }
+        print("\(picture.fileName): \(verdict ?? "same")")
     }
     return allMatch
 }
@@ -190,7 +219,8 @@ func verdict(for name: String) -> String? {
     let (share, difference) = compare(reference, current)
     guard share > changedShareAllowed else { return nil }
     difference.write(to: differenceFolder.appending(path: name))
-    return String(format: "%.1f %% changed, see snapshots/difference/%@", share * 100, name)
+    let percent = share.formatted(.percent.precision(.fractionLength(1)))
+    return "\(percent) changed, see snapshots/difference/\(name)"
 }
 
 func record() throws {
@@ -206,10 +236,12 @@ guard let appPath = arguments.first else {
     print("Usage: swift scripts/snapshots.swift <app> [--record]")
     exit(EXIT_FAILURE)
 }
+let app = URL(filePath: appPath)
+let everyPicture = try pictures(of: app)
 ensureScreenRecordingAccess()
-try await takePictures(of: URL(filePath: appPath))
+try await take(everyPicture, of: app)
 if arguments.contains("--record") {
     try record()
 } else {
-    exit(compareWithReferences() ? EXIT_SUCCESS : EXIT_FAILURE)
+    exit(compareWithReferences(everyPicture) ? EXIT_SUCCESS : EXIT_FAILURE)
 }

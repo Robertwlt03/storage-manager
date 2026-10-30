@@ -1,15 +1,15 @@
 #!/bin/bash
-# Builds a disk image to share: dist/Speicher-Explorer-<version>.dmg with the app, a link to the Applications
-# folder and the illustrated installation guide.
+# Builds a disk image to share: dist/Speicher-Explorer-<version>.dmg with the app, a link to the
+# Applications folder and the illustrated installation guide.
 #
-# Signing (free): SIGN_IDENTITY defaults to the self-signed "Speicher-Explorer Dev" from create-signing-identity.sh.
-#   Users confirm the first start once ("Open Anyway"); permissions then survive every update.
-# Signing (Apple, paid): SIGN_IDENTITY="Developer ID Application: …" NOTARY_PROFILE=<notarytool profile>
+# Signing (free): the self-signed identity from make identity, read from local.mk. Users confirm
+#   the first start once ("Open Anyway"); permissions then survive every update.
+# Signing (Apple, paid): SIGN_IDENTITY="Developer ID Application: …" NOTARY_PROFILE=<profile>
 #   additionally notarizes the image, so macOS opens it without any warning.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-IDENTITY="${SIGN_IDENTITY:-Speicher-Explorer Dev}"
+IDENTITY="${SIGN_IDENTITY:?Create a signing identity first: make identity}"
 NAME="Speicher-Explorer"
 VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" Info.plist)
 DMG="dist/$NAME-$VERSION.dmg"
@@ -25,11 +25,7 @@ ln -s /Applications "$STAGE/Programme"
 cp -R docs/anleitung/. "$STAGE/Anleitung/"
 
 hdiutil create -volname "$NAME" -srcfolder "$STAGE" -format UDZO -ov "$DMG" > /dev/null
-if [ -n "${SIGNING_KEYCHAIN:-}" ]; then
-  codesign --force --sign "$IDENTITY" --keychain "$SIGNING_KEYCHAIN" "$DMG"
-else
-  codesign --force --sign "$IDENTITY" "$DMG"
-fi
+SIGN_IDENTITY="$IDENTITY" scripts/sign.sh "$DMG"
 
 if [[ "$IDENTITY" == "Developer ID Application:"* && -n "${NOTARY_PROFILE:-}" ]]; then
   xcrun notarytool submit "$DMG" --keychain-profile "$NOTARY_PROFILE" --wait

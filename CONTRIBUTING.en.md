@@ -63,7 +63,7 @@ You do not have to remember long commands. Just like npm scripts, every workflow
 | `make clean` | deletes everything the build produces |
 
 The commands only call the scripts that are in the project anyway. So you can keep using them directly as well, for
-example `./build.sh` or `scripts/inspect.py tests`.
+example `./build.sh` or `scripts/check.py tests`.
 
 ## <img src="assets/icons/build.svg" height="33" align="absmiddle" alt="">Building and launching the app
 

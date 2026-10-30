@@ -102,4 +102,5 @@ enum SearchScope: CaseIterable, Identifiable {
 enum LaunchCommand: String {
     case selfTest = "--selftest"
     case renderIcon = "--render-icon"
+    case listPages = "--list-pages"
 }

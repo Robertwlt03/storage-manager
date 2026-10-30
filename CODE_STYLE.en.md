@@ -124,8 +124,8 @@ with it.
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">How to check your code
 
 Before every contribution you run the check chain. It must not report a single error or a single warning. Behind it
-is the script `scripts/inspect.py`. You run individual steps by their names, for example
-`scripts/inspect.py tests rules`.
+is the script `scripts/check.py`. You run individual steps by their names, for example
+`scripts/check.py tests rules`.
 
 ```bash
 make check
@@ -137,14 +137,19 @@ The script runs nine checks one after another:
 2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
    function and types nested too deeply. The limits are in `.swiftlint.yml`.
 3. **Compiler:** The app is built with `-warnings-as-errors`, so even a single warning counts as an error.
-4. **Tests:** `swift test` runs all tests from `Tests/SpeicherExplorerTests`.
+4. **Tests:** `swift test` runs all tests from `Tests/SpeicherExplorerTests`, also without a single warning.
 5. **House rules:** Numbers without names, colours outside `Theme.swift`, German text in the code, `$0`, names of one
-   or two letters, lines over 100 characters and forgotten temporary debug lines.
+   or two letters, lines over 100 characters and forgotten temporary debug lines. This also applies to the Swift
+   scripts in the `scripts` folder.
 6. **Design:** Fonts without a text role, symbol names outside `Symbols`, custom glass or custom backgrounds,
    animations outside `Motion`, hard-coded texts on screen and output outside the diagnostics.
-7. **Dead code:** every function, value and text that is created but used nowhere.
+7. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
+   is only written but never read. The check reads the index the compiler writes while building
+   (`scripts/index_store.py`). That way it never mixes up properties of the same name, and what only the tests use
+   counts as dead as well.
 8. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
-9. **Scripts:** `bash -n` and `make -n` check the shell scripts and the `Makefile` for typos.
+9. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line. `bash -n`,
+   `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
 
 Whether every text exists in all 20 languages and whether every colour reaches the contrast is checked by the tests
 in the fourth step. How much of the code the tests reach is shown per folder by `make coverage`.

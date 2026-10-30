@@ -7,6 +7,10 @@ enum AppEntry {
         AppSettings.registerDefaults()
         let arguments = CommandLine.arguments
         if arguments.contains(LaunchCommand.selfTest.rawValue) { runSelfTest() }
+        if arguments.contains(LaunchCommand.listPages.rawValue) {
+            PageList.printLaunchKeys()
+            finish(succeeded: true)
+        }
         if let iconFile = value(after: .renderIcon, in: arguments) {
             finish(succeeded: AppIconView.render(to: iconFile))
         }

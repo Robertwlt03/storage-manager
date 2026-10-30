@@ -126,8 +126,8 @@ passenden Test gleich mit.
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">So prüfst du deinen Code
 
 Vor jedem Beitrag startest du die Prüfkette. Sie darf keinen einzigen Fehler und keine einzige Warnung melden.
-Dahinter steckt das Skript `scripts/inspect.py`. Einzelne Schritte startest du mit deren Namen, etwa
-`scripts/inspect.py tests rules`.
+Dahinter steckt das Skript `scripts/check.py`. Einzelne Schritte startest du mit deren Namen, etwa
+`scripts/check.py tests rules`.
 
 ```bash
 make check
@@ -139,15 +139,20 @@ Das Skript führt neun Prüfungen nacheinander aus:
 2. **Länge und Verschachtelung:** SwiftLint meldet Funktionen über 40 Zeilen, Closures über 30 Zeilen, zu viele
    Verzweigungen in einer Funktion und zu tief verschachtelte Typen. Die Grenzen stehen in `.swiftlint.yml`.
 3. **Compiler:** Die App wird mit `-warnings-as-errors` gebaut, sodass schon eine Warnung als Fehler zählt.
-4. **Tests:** `swift test` startet alle Tests aus `Tests/SpeicherExplorerTests`.
+4. **Tests:** `swift test` startet alle Tests aus `Tests/SpeicherExplorerTests`, ebenfalls ohne eine Warnung.
 5. **Hausregeln:** Zahlen ohne Namen, Farben außerhalb von `Theme.swift`, deutscher Text im Code, `$0`, Namen aus ein
-   oder zwei Buchstaben, Zeilen über 100 Zeichen und vergessene vorübergehende Debug-Zeilen.
+   oder zwei Buchstaben, Zeilen über 100 Zeichen und vergessene vorübergehende Debug-Zeilen. Das gilt auch für die
+   Swift-Skripte im Ordner `scripts`.
 6. **Gestaltung:** Schriften ohne Textrolle, Symbolnamen außerhalb von `Symbols`, eigenes Glas oder eigene
    Hintergründe, Animationen außerhalb von `Motion`, ausgeschriebene Texte auf dem Bildschirm und Ausgaben außerhalb
    der Diagnose.
-7. **Toter Code:** jede Funktion, jeder Wert und jeder Text, der zwar angelegt, aber nirgends benutzt wird.
+7. **Toter Code:** jede Funktion, jeder Typ, jeder Wert und jeder Text, den der eigene Code nirgends benutzt, und
+   jede Eigenschaft, die nur beschrieben, aber nie gelesen wird. Die Prüfung liest dafür den Index, den der Compiler
+   beim Bauen anlegt (`scripts/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und was nur die
+   Tests benutzen, zählt ebenfalls als tot.
 8. **Übersetzungsdateien:** `plutil -lint` prüft, ob alle 20 Übersetzungen und die `Info.plist` lesbar sind.
-9. **Skripte:** `bash -n` und `make -n` prüfen die Shell-Skripte und das `Makefile` auf Schreibfehler.
+9. **Skripte:** Auch die Skripte und das `Makefile` bleiben unter 100 Zeichen pro Zeile. `bash -n`,
+   `python3 -m py_compile`, `swiftc -typecheck` und `make -n` prüfen sie auf Schreibfehler.
 
 Ob jeder Text in allen 20 Sprachen vorhanden ist und ob jede Farbe den Kontrast erreicht, prüfen die Tests im vierten
 Schritt. Wie viel des Codes die Tests erreichen, zeigt `make coverage` je Ordner an.

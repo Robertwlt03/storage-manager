@@ -1,6 +1,6 @@
 # SwiftLint measures what swift format cannot: length, nesting and complexity, so that
 # "small, clearly separated steps" (CODE_STYLE.md) is checked, not only asked for.
-# Form and naming are already covered by swift format and scripts/inspect.py; the rules
+# Form and naming are already covered by swift format and scripts/check.py; the rules
 # that would argue with them are switched off.
 included:
   - Sources

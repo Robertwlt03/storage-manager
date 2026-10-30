@@ -1,13 +1,9 @@
 #!/bin/bash
-# Builds Speicher-Explorer.app into $BUILD_DIR (default: build). With --install it also copies it to ~/Applications.
+# Builds Speicher-Explorer.app into $BUILD_DIR (default: build).
+# With --install it also copies the app to ~/Applications.
 set -euo pipefail
 cd "$(dirname "$0")"
-
-# SwiftUI's macros for macOS 27 ship only with Xcode, not with the Command Line Tools.
-if [[ "${DEVELOPER_DIR:-$(xcode-select --print-path)}" != *Xcode* ]]; then
-  echo "Xcode 27 is needed. Install it, then switch once: sudo xcode-select --switch /Applications/Xcode.app"
-  exit 1
-fi
+scripts/require-xcode.sh
 
 swift build -c release
 BIN=.build/release/SpeicherExplorer
@@ -27,19 +23,16 @@ fi
 cp -R Resources/*.lproj "$APP/Contents/Resources/"
 
 "$BIN" --render-icon "$BUILD_DIR/icon.png"
-for s in 16 32 128 256 512; do
-  sips -z $s $s "$BUILD_DIR/icon.png" --out "$ICONSET/icon_${s}x${s}.png" > /dev/null
-  sips -z $((s * 2)) $((s * 2)) "$BUILD_DIR/icon.png" --out "$ICONSET/icon_${s}x${s}@2x.png" > /dev/null
+for size in 16 32 128 256 512; do
+  double=$((size * 2))
+  sips -z $size $size "$BUILD_DIR/icon.png" --out "$ICONSET/icon_${size}x${size}.png" > /dev/null
+  sips -z $double $double "$BUILD_DIR/icon.png" --out "$ICONSET/icon_${size}x${size}@2x.png" \
+    > /dev/null
 done
 iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/AppIcon.icns"
-# With a fixed identity macOS keeps granted permissions across rebuilds; ad hoc it asks again after every build.
-# make identity creates one in a keychain of its own and writes SIGN_IDENTITY and SIGNING_KEYCHAIN to local.mk.
-SIGN_ARGUMENTS=(--force --sign "${SIGN_IDENTITY:--}")
-if [ -n "${SIGNING_KEYCHAIN:-}" ] && [ "${SIGN_IDENTITY:--}" != "-" ]; then
-  security unlock-keychain -p "$SIGNING_KEYCHAIN_PASSWORD" "$SIGNING_KEYCHAIN"
-  SIGN_ARGUMENTS+=(--keychain "$SIGNING_KEYCHAIN")
-fi
-codesign "${SIGN_ARGUMENTS[@]}" "$APP"
+# With a fixed identity macOS keeps granted permissions across rebuilds; ad hoc it asks again
+# after every build. make identity creates one and writes it to local.mk.
+scripts/sign.sh "$APP"
 
 if [ "${1:-}" = "--install" ]; then
   mkdir -p ~/Applications

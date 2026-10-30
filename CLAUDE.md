@@ -50,8 +50,9 @@ content here or in comments.
 `make` lists them all. The ones you need:
 
 - `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, house rules, design
-  rules, dead code, plutil, shell scripts). It must end with "No errors and no warnings." before every commit.
-- `make test`, `make coverage`, `make format`, single steps with `scripts/inspect.py <step>`.
+  rules, dead code from the compiler index, plutil, scripts). It must end with "No errors and no warnings." before
+  every commit.
+- `make test`, `make coverage`, `make format`, single steps with `scripts/check.py <step>`.
 - `make build BUILD_DIR=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
 
 ## Working on code
@@ -59,7 +60,9 @@ content here or in comments.
 1. Read the files you touch and the rules in CODE_STYLE.md and ARCHITECTURE.md first.
 2. Keep the rules: spelled-out English names, no numbers without a name, colours only from `Theme`, fonts via
    `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 20
-   translations, no dead code, functions as lists of named steps.
+   translations, no dead code, functions as lists of named steps. Scripts follow the same rules: lines up to 100
+   characters, named numbers, no duplicated code (shared steps live in `scripts/require-xcode.sh` and
+   `scripts/sign.sh`), and no copies of lists the app already has (ask the app, as `--list-pages` does).
 3. New logic gets a test in `Tests/SpeicherExplorerTests` (hand-built `Node` trees via `TestTree`, never the real disk).
 4. Run `make check` until it is clean, then check the look in your own test window (see below) when views changed.
 5. Commit on the current branch with the footer above; do not push.
@@ -79,8 +82,8 @@ open -n <scratchpad>/build/Speicher-Explorer.app --args -ApplePersistenceIgnoreS
 ```
 
 Find the window number with a small CoreGraphics script (`CGWindowListCopyWindowInfo`, filter by the app's PID and a
-width over 500) and capture it with `screencapture -x -o -l <window>`. Panes: `overview`, `explorer`, `largeFiles`,
-`cleaner`, `apps`, `temp`, `copies`; add `-appearance dark` (or `light`) for a fixed look. For refactors, build the
+width over 500) and capture it with `screencapture -x -o -l <window>`. `SpeicherExplorer --list-pages` prints the
+pane names; add `-appearance dark` (or `light`) for a fixed look. For refactors, build the
 previous commit into a separate scratchpad folder and compare both captures pixel by pixel; differences in free space
 and selection colour (window focus) are expected.
 

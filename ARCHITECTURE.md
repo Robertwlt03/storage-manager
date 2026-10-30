@@ -50,7 +50,8 @@ Animationen.
 
 **`Sources/Localization` und `Resources`:** `TextKey` enthält alle englischen Textschlüssel, die 20 Sprachordner enthalten die Texte.
 
-**`Sources/Diagnostics`:** Der Selbsttest mit echten Ordnern und der Belastungstest, der die laufende App bedient.
+**`Sources/Diagnostics`:** Der Selbsttest mit echten Ordnern, der Belastungstest, der die laufende App bedient, die
+erfundenen Daten des Vorführmodus und die Seitenliste, die Skripte mit `--list-pages` abfragen.
 
 **`Tests/SpeicherExplorerTests`:** Die Tests mit Swift Testing für Ordnerbaum, Suche, Seiten, Gestaltungswerte, Kontrast
 und Übersetzungen. Sie bauen ihre Ordnerbäume von Hand und greifen nie auf die Festplatte zu.

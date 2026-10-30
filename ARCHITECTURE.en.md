@@ -50,7 +50,8 @@ contains the shared table and the shared grid for folders, search results and la
 **`Sources/Localization` and `Resources`:** `TextKey` contains all English text keys, and the 20 language folders
 contain the texts.
 
-**`Sources/Diagnostics`:** The self test with real folders and the stress test that operates the running app.
+**`Sources/Diagnostics`:** The self test with real folders, the stress test that operates the running app, the
+made-up data of the demo mode and the page list that scripts ask for with `--list-pages`.
 
 **`Tests/SpeicherExplorerTests`:** The tests, written with Swift Testing, for the folder tree, search, pages, design
 values, contrast and translations. They build their folder trees by hand and never touch the disk.

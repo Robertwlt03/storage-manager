@@ -64,7 +64,7 @@ Lange Befehle musst du dir nicht merken. Wie bei den Skripten von npm steht jede
 | `make clean` | löscht alles, was beim Bauen entsteht |
 
 Die Befehle rufen nur die Skripte auf, die ohnehin im Projekt liegen. Du kannst sie also auch weiterhin direkt
-benutzen, etwa `./build.sh` oder `scripts/inspect.py tests`.
+benutzen, etwa `./build.sh` oder `scripts/check.py tests`.
 
 ## <img src="assets/icons/build.svg" height="33" align="absmiddle" alt="">Die App bauen und starten
 
