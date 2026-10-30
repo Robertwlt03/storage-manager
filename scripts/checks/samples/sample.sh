@@ -1,5 +1,5 @@
 # expect: the head lacks
-set -euo pipefail
+set -Eeuo pipefail  # strict mode with one more letter and a comment still counts
 TMP_DIR=x  # expect: is short for
 
 deeply_nested() {
@@ -12,3 +12,6 @@ deeply_nested() {
   done
 }
 echo "done"  # expect: past the shared console
+cat <<TEXT  # expect: past the shared console
+done
+TEXT

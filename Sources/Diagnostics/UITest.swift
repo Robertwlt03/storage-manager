@@ -81,7 +81,7 @@ enum UITest {
                 model.pane = pane
                 changeSetting(
                     SettingsKey.layoutMode, to: (round + stepCount) % LayoutMode.allCases.count)
-                model.searchText = stepCount % searchEveryNthStep == 0 ? sampleQuery : ""
+                model.searchText = stepCount.isMultiple(of: searchEveryNthStep) ? sampleQuery : ""
                 await step(
                     "Chaos \(round) \(logName(of: pane))", model, wait: Pause.betweenSwitches,
                     picture: false)

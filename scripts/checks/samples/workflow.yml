@@ -1,7 +1,6 @@
 # A sample for the security check: a workflow strangers could steer. expect: no permissions
 name: Sample
-on:
-  pull_request_target:  # expect: pull_request_target runs with
+on: [push, pull_request_target]  # expect: pull_request_target runs with
 jobs:
   sample:
     permissions: write-all  # expect: write-all gives

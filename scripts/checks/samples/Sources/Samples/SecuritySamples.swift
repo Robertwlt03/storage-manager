@@ -8,6 +8,7 @@ enum SecuritySamples {
     // The note is a block comment on purpose: the check takes only line comments for a reason.
     static let separator = copiedCount
     nonisolated(unsafe) static var sharedCount = 0  /* expect: switches off Swift's safety */
+    nonisolated(unsafe) static var site = "https://example.com"  /* expect: switches off */
 
     static func listThroughShell(_ folder: String) throws {
         let process = Process()

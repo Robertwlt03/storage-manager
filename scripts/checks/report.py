@@ -70,10 +70,6 @@ def header(step_count: int) -> None:
     console.heading("Speicher-Explorer · check pipeline", plural(step_count, "step"))
 
 
-def step_started(title: str) -> None:
-    console.running(title)
-
-
 def step_finished(title: str, findings: list[str], seconds: float) -> None:
     count = paint(plural(len(findings), "finding").ljust(COUNT_WIDTH), RED if findings else DIM)
     result = console.failed if findings else console.passed

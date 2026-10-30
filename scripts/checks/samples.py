@@ -9,7 +9,6 @@ ships them except this step.
 """
 
 import re
-from pathlib import Path
 
 from checks.accessibility import accessibility_problems
 from checks.architecture import architecture_problems
@@ -27,6 +26,7 @@ from checks.secrets import secret_problems
 from checks.security import security_problems
 from checks.translations import translation_problems
 from checks.unused_files import unused_file_problems
+from checks.unused_python import unused_python_problems
 from checks.project import PROJECT, SAMPLES, Codebase, lines_of, numbered_lines, place
 from checks.tools import script_layout_problems
 
@@ -49,7 +49,7 @@ CHECKS = [
     nesting_problems, script_layout_problems, duplicate_problems, architecture_problems,
     promise_problems, guide_problems, accessibility_problems, translation_problems,
     secret_problems, disk_access_problems, unused_file_problems, security_problems,
-    console_output_problems,
+    console_output_problems, unused_python_problems,
 ]
 
 

@@ -8,8 +8,8 @@ included:
 disabled_rules:
   - trailing_comma        # swift format adds trailing commas to multi-line lists
   - opening_brace         # swift format decides where braces go
-  - line_length           # swift format and inspect.py hold every line to 100 characters
-  - identifier_name       # inspect.py checks names with the house rules
+  - line_length           # swift format and scripts/check.py hold every line to 100 characters
+  - identifier_name       # scripts/check.py checks names with the house rules
   - type_name
   - todo
 opt_in_rules:
@@ -21,6 +21,10 @@ opt_in_rules:
   - sorted_first_last
   - redundant_type_annotation
   - unused_parameter
+  - accessibility_trait_for_button  # a view that reacts to a tap tells VoiceOver it is a button
+  - legacy_multiple                 # isMultiple(of:) reads like the rule it checks
+  - prefer_key_path                 # \.isRoot instead of a closure that only reads a property
+  - return_value_from_void_function # return showDemo() hides that nothing comes back
 function_body_length:
   warning: 40
   error: 60

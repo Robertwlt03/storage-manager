@@ -93,8 +93,10 @@ struct SidebarOverlay: View {
 
     var body: some View {
         ZStack(alignment: .leading) {
+            // VoiceOver closes the sidebar with Escape or its button, so it skips this area.
             Theme.clickCatcher.contentShape(Rectangle())
                 .onTapGesture { model.closeSidebarOverlay() }
+                .accessibilityHidden(true)
             SidebarList()
                 .scrollContentBackground(.hidden)
                 .frame(width: Layout.sidebarIdealWidth)

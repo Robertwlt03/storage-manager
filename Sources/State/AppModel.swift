@@ -41,7 +41,7 @@ import SwiftUI
     private var scanTask: Task<Void, Never>?
     private var scanID = UUID()  // the current scan; older, canceled runs check it and step aside
 
-    var startupVolume: VolumeInfo? { volumes.first { volume in volume.isRoot } }
+    var startupVolume: VolumeInfo? { volumes.first(where: \.isRoot) }
     /// Reads `revision`, so views that ask this refresh when the tree changes (the tree itself is
     /// not observed).
     var hasData: Bool {
@@ -85,7 +85,10 @@ import SwiftUI
     /// Asks for Full Disk Access on every launch until it works (one switch instead of many
     /// prompts), then scans if the settings allow it.
     func launch() {
-        if AppSettings.showsDemo { return showDemo() }
+        if AppSettings.showsDemo {
+            showDemo()
+            return
+        }
         refreshAccess()
         if !hasFullDiskAccess && !AppSettings.shouldSkipAccessSheet {
             isShowingAccessSheet = true

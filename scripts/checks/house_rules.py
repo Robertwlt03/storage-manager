@@ -96,7 +96,7 @@ CALL_WITH_TEXT = re.compile(r'''
     " [^"\\]{2,} "        # a text of at least two characters
 ''', re.VERBOSE)
 SWIFTUI = "s:7SwiftUI"  # how every unique name in the SwiftUI framework starts
-OUTPUT = re.compile(r"\bprint\(")
+OUTPUT = re.compile(r"\bprint\(|\bConsole\.")  # print, or the shared console of Diagnostics
 OWN_SURFACE = re.compile(r"""
     \.glassEffect\( | \.buttonStyle\( | Material \b
     | \.background\( (?! Backdrop\(\)\) )   # any background but the shared Backdrop()

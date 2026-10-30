@@ -64,7 +64,7 @@ extension UI {
     struct Fields: View {
         let fields: [Field]
 
-        init(_ fields: [Field?]) { self.fields = fields.compactMap { field in field } }
+        init(_ fields: [Field?]) { self.fields = fields.compactMap(\.self) }
 
         var body: some View {
             Rows(fields) { field in

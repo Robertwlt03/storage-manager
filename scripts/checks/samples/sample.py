@@ -1,6 +1,11 @@
 # expect: the head lacks
 """A sample for the checks of scripts, without the shared head on purpose."""
 
+import json  # expect: is imported but never used
+import sys
+
+UNUSED_SETTING = 1  # expect: is declared but never used
+
 
 def probe_msg(arg_count):  # expect: is short for
     return arg_count
@@ -24,3 +29,5 @@ def outer_function():
 
 
 print("done")  # expect: past the shared console
+sys.stdout.write("done")  # expect: past the shared console
+probe_msg(deeply_nested([outer_function()]))

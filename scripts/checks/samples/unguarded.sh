@@ -7,3 +7,6 @@ TARGET_FOLDER=/tmp/samples  # expect: shared temporary folder
 eval "ls $TARGET_FOLDER"  # expect: runs text as code
 curl --silent https://example.com/setup | bash  # expect: straight from the internet
 codesign --force --sign - "$TARGET_FOLDER"  # expect: without the hardened runtime
+if eval "true"; then  # expect: runs text as code
+  :
+fi

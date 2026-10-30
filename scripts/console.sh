@@ -17,13 +17,10 @@ BOLD=1
 DIM=2
 RED=31
 GREEN=32
-YELLOW=33
 CYAN=36
 PASSED_MARK="✔"
 FAILED_MARK="✘"
 STEP_MARK="›"
-RUNNING_MARK="…"
-CLEAR_LINE=$'\r\033[K'  # back to the start of the line and erase it
 NOTE_INDENT="   "  # hints start below the text of a result line
 TABLE_WIDTH=16  # the names of a table fill this many characters, so the texts line up
 UNICODE_LOCALE=en_US.UTF-8  # so a mark such as ✔ counts as one character, not three bytes
@@ -47,19 +44,11 @@ console_paint() {
   printf '\033[%sm%s\033[0m' "$*" "$text"
 }
 
-# In a terminal every piece first erases a line that said what was running.
-start_line() {
-  if [ -t 1 ]; then
-    printf '%s' "$CLEAR_LINE"
-  fi
-}
-
 result_line() {
   local mark=$1 text=$2 detail=${3:-}
   if [ -n "$detail" ]; then
     detail="  $(console_paint "$detail" "$DIM")"
   fi
-  start_line
   printf ' %s %s%s\n' "$mark" "$text" "$detail"
 }
 
@@ -67,7 +56,6 @@ frame_color() {
   case "$1" in
     success) printf '%s' "$GREEN" ;;
     failure) printf '%s' "$RED" ;;
-    attention) printf '%s' "$YELLOW" ;;
     *) printf 'Unknown kind of frame: %s\n' "$1" >&2; return 1 ;;
   esac
 }
@@ -83,16 +71,7 @@ repeated() {
 # MARK: What a command prints
 
 console_heading() {
-  start_line
   printf '\n%s  %s\n\n' "$(console_paint "$1" "$BOLD")" "$(console_paint "${2:-}" "$DIM")"
-}
-
-# console_running <text>: a dim line while something runs, which the next piece replaces; only in
-# a terminal.
-console_running() {
-  if [ -t 1 ]; then
-    console_paint " $RUNNING_MARK $1" "$DIM"
-  fi
 }
 
 console_passed() {
@@ -108,7 +87,6 @@ console_step() {
 }
 
 console_note() {
-  start_line
   printf '%s\n' "$(console_paint "$NOTE_INDENT$1" "$DIM")"
 }
 
@@ -121,7 +99,7 @@ console_table() {
   done
 }
 
-# console_frame <success|failure|attention> <line>…
+# console_frame <success|failure> <line>…
 console_frame() {
   local LC_ALL=$UNICODE_LOCALE
   local color width=0 line
@@ -132,7 +110,6 @@ console_frame() {
   done
   local side
   side=$(console_paint "│" "$color")
-  start_line
   printf '\n %s\n' "$(console_paint "╭$(repeated "─" "$width")╮" "$color")"
   for line in "$@"; do
     printf ' %s %s%*s%s\n' "$side" "$(console_paint "$line" "$color" "$BOLD")" \

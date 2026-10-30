@@ -159,7 +159,8 @@ Das Skript führt dreiundzwanzig Prüfungen nacheinander aus:
    erstes Argument ein Text in Anführungszeichen ist, also auch Elemente, die es heute noch nicht gibt.
 8. **Bedienhilfen:** Jedes Bild entscheidet, was VoiceOver damit tut: Es trägt Bedeutung und bekommt mit
    `.accessibilityLabel` einen Namen, oder es schmückt einen Text daneben und schweigt mit
-   `.accessibilityHidden(true)` (`scripts/checks/accessibility.py`).
+   `.accessibilityHidden(true)` (`scripts/checks/accessibility.py`). Eine Ansicht, die auf einen Klick reagiert,
+   sagt VoiceOver, dass sie ein Knopf ist (SwiftLint, `accessibility_trait_for_button`).
 9. **Flache Methoden:** In einer Methode dürfen höchstens zwei Blöcke ineinander stecken, also etwa eine Schleife
    und darin ein `if`. Als Block zählt alles, was über mehrere Zeilen geht: `if`, `else`, `switch`, Schleifen,
    Closures und innere Funktionen. Ein tieferer Teil gehört in eine eigene Methode mit sprechendem Namen, und eine
@@ -184,7 +185,8 @@ Das Skript führt dreiundzwanzig Prüfungen nacheinander aus:
    beim Bauen anlegt (`scripts/checks/index_store.py`). So verwechselt sie keine gleichnamigen Eigenschaften, und
    was nur die Tests benutzen, zählt ebenfalls als tot. Für jede Art von Symbol ist festgelegt, ob sie geprüft wird
    oder aus welchem Grund nicht. Taucht eine Art auf, für die das noch niemand entschieden hat, meldet die Prüfung
-   sie, statt sie zu überspringen.
+   sie, statt sie zu überspringen. In den Python-Skripten liest Pythons eigener Parser jede Funktion, jede Klasse,
+   jede Einstellung und jeden Import, den niemand benutzt (`scripts/checks/unused_python.py`).
 15. **Keine ungenutzten Dateien:** Jedes Bild und jede andere Mediendatei muss in einer anderen Datei mit ihrem Namen
    vorkommen, sonst ist sie toter Ballast (`scripts/checks/unused_files.py`).
 16. **Sprache:** Jeder Name, den wir anlegen, wird in seine Wörter zerlegt (`fileCount`: file, count). Jedes Wort

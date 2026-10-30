@@ -16,7 +16,7 @@ nonisolated enum VolumeService {
         return urls.compactMap(volumeInfo).sorted(by: isListedBefore)
     }
 
-    static func startup() -> VolumeInfo? { all().first { volume in volume.isRoot } }
+    static func startup() -> VolumeInfo? { all().first(where: \.isRoot) }
 
     private static func isListedBefore(_ left: VolumeInfo, _ right: VolumeInfo) -> Bool {
         if left.isRoot != right.isRoot { return left.isRoot }

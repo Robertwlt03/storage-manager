@@ -22,12 +22,11 @@ USES_COLOR = "NO_COLOR" not in os.environ and (
 )
 
 # Terminal codes for text styles (ECMA-48 "select graphic rendition").
-BOLD, DIM, RED, GREEN, YELLOW, CYAN = "1", "2", "31", "32", "33", "36"
-SUCCESS, FAILURE, ATTENTION = GREEN, RED, YELLOW  # the colors of a frame
+BOLD, DIM, RED, GREEN, CYAN = "1", "2", "31", "32", "36"
+SUCCESS, FAILURE = GREEN, RED  # the colors of a frame
 
 PASSED_MARK = "✔"
 FAILED_MARK = "✘"
-STEP_MARK = "›"
 RUNNING_MARK = "…"
 GROUP_MARK = "▸"
 NOTE_INDENT = "   "  # hints start below the text of a result line
@@ -75,10 +74,6 @@ def passed(text: str, detail: str = "") -> None:
 
 def failed(text: str, detail: str = "") -> None:
     result_line(paint(FAILED_MARK, RED, BOLD), text, detail)
-
-
-def step(text: str, detail: str = "") -> None:
-    result_line(paint(STEP_MARK, CYAN, BOLD), text, detail)
 
 
 def result_line(mark: str, text: str, detail: str) -> None:

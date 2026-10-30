@@ -18,7 +18,7 @@ from typing import Callable
 from checks import (
     accessibility, architecture, commits, console, console_output, dead_code, disk_access,
     duplicates, guides, house_rules, language, nesting, project, promises, report, samples, secrets,
-    security, tools, translations, unused_files,
+    security, tools, translations, unused_files, unused_python,
 )
 
 # MARK: Settings
@@ -47,6 +47,7 @@ STEPS = [
     Step("promises", "Promises: offline, removing only after asking", promises.promise_findings),
     Step("disk", "The disk only off the main thread", disk_access.disk_access_findings),
     Step("deadcode", "Dead code (compiler index)", dead_code.dead_code_findings),
+    Step("deadscripts", "Dead code in the Python scripts", unused_python.unused_python_findings),
     Step("files", "No unused images or media", unused_files.unused_file_findings),
     Step("language", "American English names and comments", language.language_findings),
     Step("plists", "Translation files and Info.plist (plutil)", tools.property_list_findings),
@@ -85,7 +86,7 @@ def run_steps(steps: list[Step]) -> list[tuple[str, int]]:
     """Runs each step and prints its result; returns each step's title and number of findings."""
     results = []
     for step in steps:
-        report.step_started(step.title)
+        console.running(step.title)
         started = time.monotonic()
         findings = step.check()
         report.step_finished(step.title, findings, time.monotonic() - started)

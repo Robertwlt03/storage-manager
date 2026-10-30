@@ -2,3 +2,4 @@
 //
 // Start:  never; the checks only read it
 print("done")  // expect: past the shared console
+debugPrint("done")  // expect: past the shared console

@@ -22,13 +22,20 @@ CONSOLE_NAME = "console"  # console.sh, console.py and Console.swift draw the sh
 DATA_OUTPUT = "Output:"  # in a script's head: what it prints is data for another program
 SHELL_OUTPUT = re.compile(r"""
     ^ (?! \s* \# )                      # not a comment
-    .* \b (?: echo | printf ) \b        # echo or printf ...
-    (?! .* > \s* [^&\s] )               # ... unless it writes into a file
+    .* (?: \b (?: echo | printf ) \b    # echo or printf ...
+         | \b cat \b [^>]* << )          # ... or a text block handed to cat ...
+    (?! .* > \s* [^&\s] )               # ... unless it goes into a file
 """, re.VERBOSE)
-PRINT = re.compile(r"""
-    ^ (?! \s* (?: \# | // ) )           # not a comment
-    .* \b print \(                      # a call of print ...
-    (?! .* \b file \s* = )              # ... unless Python writes into a file
+PYTHON_OUTPUT = re.compile(r"""
+    ^ (?! \s* \# )                      # not a comment
+    .* (?: \b print \(                  # a call of print ...
+         | \b sys \. std (?: out | err ) \. write \b )  # ... or a direct write
+    (?! .* \b file \s* = )              # ... unless it goes into a file
+""", re.VERBOSE)
+SWIFT_OUTPUT = re.compile(r"""
+    ^ (?! \s* // )                       # not a comment
+    .* (?: \b (?: print | debugPrint | dump | fputs | NSLog ) \(   # a printing function
+         | \b FileHandle \. standard (?: Output | Error ) \b )     # or the terminal itself
 """, re.VERBOSE)
 MESSAGE = (
     "prints past the shared console; use its pieces (scripts/console.sh, checks/console.py, "
@@ -39,20 +46,14 @@ MESSAGE = (
 # MARK: Steps
 
 
-def is_console(path: Path) -> bool:
-    return path.stem.lower() == CONSOLE_NAME
-
-
 def prints_data(path: Path) -> bool:
     return any(line.lstrip("#/ ").startswith(DATA_OUTPUT) for line in lines_of(path)[:HEAD_LINES])
 
 
-def may_print_only_through_console(path: Path) -> bool:
-    return not is_console(path) and not prints_data(path)
-
-
 def output_problems_in(paths: tuple[Path, ...], output: re.Pattern) -> list[str]:
-    checked = [path for path in paths if may_print_only_through_console(path)]
+    checked = [
+        path for path in paths if path.stem.lower() != CONSOLE_NAME and not prints_data(path)
+    ]
     return [
         f"{place(path, number)}: {MESSAGE}"
         for path, number, line in numbered_lines(checked) if output.search(line)
@@ -76,6 +77,6 @@ def console_output_findings() -> list[str]:
 def console_output_problems(codebase: Codebase) -> list[str]:
     return (
         output_problems_in(codebase.shell_scripts + codebase.makefiles, SHELL_OUTPUT)
-        + output_problems_in(codebase.python_scripts, PRINT)
-        + output_problems_in(swift_files_that_may_print(codebase), PRINT)
+        + output_problems_in(codebase.python_scripts, PYTHON_OUTPUT)
+        + output_problems_in(swift_files_that_may_print(codebase), SWIFT_OUTPUT)
     )

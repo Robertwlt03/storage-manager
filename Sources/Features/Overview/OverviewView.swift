@@ -148,6 +148,7 @@ struct OverviewView: View {
                 value: Format.bytes(category.bytes)
             )
             .onTapGesture { category.node.map(model.open) }
+            .accessibilityAddTraits(.isButton)
         }
     }
 

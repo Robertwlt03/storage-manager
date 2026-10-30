@@ -12,6 +12,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+from checks.house_rules import STRING_LITERAL
 from checks.project import Codebase, app, lines_of, numbered_lines, place
 
 # MARK: Settings
@@ -56,7 +57,7 @@ PYTHON_RISKS = (
     FIXED_TEMPORARY_PATH,
 )
 SHELL_RISKS = (
-    Risk(re.compile(r"(?: ^ | [;&|] ) \s* eval \b", re.VERBOSE), CODE_FROM_TEXT),
+    Risk(re.compile(r"^ [^#]* \b eval \s", re.VERBOSE), CODE_FROM_TEXT),  # eval anywhere in code
     Risk(re.compile(r"\b (?: curl | wget ) \b .* \| \s* (?: sudo \s+ )? \w*sh \b", re.VERBOSE),
          "runs a script straight from the internet; download it, read it, then run it"),
     FIXED_TEMPORARY_PATH,
@@ -65,6 +66,12 @@ SHELL_RISKS = (
 # The first command of every shell script: stop at the first failed command, at the first unset
 # variable and at a failure inside a pipe, instead of going on with a half-done result.
 STRICT_MODE = "set -euo pipefail"
+STRICT_MODE_COMMAND = re.compile(r"""
+    ^ \s* set \s+ -
+    (?= [A-Za-z]* e ) (?= [A-Za-z]* u )   # the letters e and u, in any order, maybe with others
+    [A-Za-z]* o \s+ pipefail             # then -o pipefail
+    \s* (?: \# .* )? $                   # maybe a comment after it
+""", re.VERBOSE)
 COMMENT_OR_BLANK = re.compile(r"^\s*(?:#.*)?$")
 
 # Signing: the hardened runtime keeps other code out of the app (no injected libraries, no
@@ -90,7 +97,8 @@ ACTION = re.compile(r"""
     [^@\s]+ @ (?P<version> [^\s#]+ )    # owner/name@version
 """, re.VERBOSE)
 COMMIT_NAME = re.compile(r"^[0-9a-f]{40}$")  # a commit's full name, which nobody can move
-STRANGERS_TRIGGER = re.compile(r"^\s*-?\s*pull_request_target\b")
+# The trigger anywhere before a comment, also in a list such as on: [push, pull_request_target].
+STRANGERS_TRIGGER = re.compile(r"^ [^#]* \b pull_request_target \b", re.VERBOSE)
 RUN_BLOCK = re.compile(r"^(?P<indent>\s*)(?:-\s+)?run:")
 STRANGERS_TEXT = re.compile(r"\$\{\{[^}]*\b(?:github\.event\.|github\.head_ref)")
 # An install that takes whatever version is newest that day.
@@ -117,7 +125,7 @@ def strict_mode_problems(shell_scripts: tuple[Path, ...]) -> list[str]:
         numbered = enumerate(lines_of(path), start=1)
         first = next(((number, line) for number, line in numbered
                       if not COMMENT_OR_BLANK.match(line)), None)
-        if first and first[1].strip() != STRICT_MODE:
+        if first and not STRICT_MODE_COMMAND.match(first[1]):
             problems.append(
                 f"{place(path, first[0])}: the first command must be '{STRICT_MODE}', so the "
                 "script stops at the first failure instead of going on"
@@ -146,7 +154,7 @@ def safety_switch_problems(swift_files: tuple[Path, ...]) -> list[str]:
 def has_reason(lines: list[str], number: int) -> bool:
     """A comment on the line, or above it past the lines that switch off the same safety."""
     for line in reversed(lines[:number]):
-        if SWIFT_COMMENT.search(line):
+        if SWIFT_COMMENT.search(STRING_LITERAL.sub('""', line)):  # not // inside "https://"
             return True
         if not SAFETY_SWITCHES.search(line):
             return False
@@ -198,7 +206,7 @@ def line_problems(line: str, inside_run: bool) -> list[str]:
         (action and not COMMIT_NAME.match(action["version"]),
          "an action by a name its owner can move to other code; pin its commit (40 characters) "
          "and write the version in a comment"),
-        (STRANGERS_TRIGGER.match(line),
+        (STRANGERS_TRIGGER.search(line),
          "pull_request_target runs with the repository's secrets for strangers' pull requests; "
          "use pull_request"),
         (inside_run and STRANGERS_TEXT.search(line),

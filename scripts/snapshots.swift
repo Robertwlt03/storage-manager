@@ -65,7 +65,8 @@ func show(_ piece: String, _ texts: String...) {
     let drawing = Process()
     drawing.executableURL = console
     drawing.arguments = [piece] + texts
-    try? drawing.run()
+    // Without the console nothing can be reported, so the script stops and says why.
+    guard (try? drawing.run()) != nil else { fatalError("\(console.path) did not start") }
     drawing.waitUntilExit()
 }
 

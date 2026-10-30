@@ -156,7 +156,8 @@ The script runs twenty-three checks one after another:
    elements that do not exist yet.
 8. **Accessibility:** Every image decides what VoiceOver does with it: it carries meaning and gets a name with
    `.accessibilityLabel`, or it decorates a text beside it and stays silent with `.accessibilityHidden(true)`
-   (`scripts/checks/accessibility.py`).
+   (`scripts/checks/accessibility.py`). A view that reacts to a click tells VoiceOver it is a button (SwiftLint,
+   `accessibility_trait_for_button`).
 9. **Flat methods:** At most two blocks may sit inside each other in a method, such as a loop and an `if` in it.
    A block is anything that spans lines: `if`, `else`, `switch`, loops, closures and inner functions. A deeper part
    belongs in a method of its own with a telling name, and there is no function inside a function inside a
@@ -178,7 +179,9 @@ The script runs twenty-three checks one after another:
    is only written but never read. The check reads the index the compiler writes while building
    (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the
    tests use counts as dead as well. For every kind of symbol it is settled whether it is judged or why not. When a
-   kind shows up that nobody has decided on yet, the check reports it instead of skipping it.
+   kind shows up that nobody has decided on yet, the check reports it instead of skipping it. In the Python
+   scripts, Python's own parser finds every function, class, setting and import nobody uses
+   (`scripts/checks/unused_python.py`).
 15. **No unused files:** Every image and every other media file must be named in another file, otherwise it is dead
    weight (`scripts/checks/unused_files.py`).
 16. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
