@@ -19,6 +19,8 @@ enum Console {
     private static let failedMark = "✘"
     private static let stepMark = "›"
     private static let noteIndent = "   "
+    /// Set once a heading shows, the same name as in console.sh and console.py.
+    private static let headedVariable = "CONSOLE_HEADED"
     /// Space inside a frame, one character on each side of the longest line.
     private static let framePadding = 2
 
@@ -31,7 +33,10 @@ enum Console {
 
     // MARK: What the app prints
 
+    /// Opens a command, once only: what the command starts afterwards leaves out its own heading.
     static func heading(_ title: String, detail: String = "") {
+        guard ProcessInfo.processInfo.environment[headedVariable] == nil else { return }
+        setenv(headedVariable, "1", 1)
         show("\n\(paint(title, .bold))  \(paint(detail, .dim))\n")
     }
 

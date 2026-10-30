@@ -22,6 +22,10 @@ STRESS_TEST_FOLDER := $(TMPDIR)speicher-test
 SELFTEST_REPORT := $(TMPDIR)speicher-selftest.txt
 SECONDS_BETWEEN_QUIT_CHECKS := 0.2
 CONSOLE := scripts/console.sh  # prints in the shared look of every command
+# Every command opens with one heading: a script that draws its own gets none here. HEADED goes in
+# front of what a command starts after its heading, so that leaves its own heading out.
+HEADING := $(CONSOLE) heading
+HEADED := CONSOLE_HEADED=1
 # make snapshots RECORD=1 hands --record to the script; without RECORD it hands nothing.
 SNAPSHOT_MODE := $(if $(RECORD),--record)
 
@@ -34,7 +38,7 @@ SNAPSHOT_MODE := $(if $(RECORD),--record)
 # The text after ## is what make help shows for each command.
 
 help: ## List every command
-	$(CONSOLE) heading "Speicher-Explorer · commands" "make <command>"
+	$(HEADING) "Speicher-Explorer · commands" "make <command>"
 	@# Each command and its text, split at the ## into the two columns of the table.
 	grep --no-filename -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) \
 		| awk -F ':.*## ' '{ print "make " $$1 "\t" $$2 }' | $(CONSOLE) table
@@ -43,9 +47,13 @@ help: ## List every command
 build: ## Build the app and render its icon
 	./build.sh
 
-run: build restart ## Build the app, then quit the running one and open the new one
+run: ## Build the app, then quit the running one and open the new one
+	$(HEADING) "Speicher-Explorer · run" "build, then open $(APP)"
+	$(HEADED) $(MAKE) build
+	$(HEADED) $(MAKE) restart
 
 restart: ## Quit the app if it is open, then open the built one
+	$(HEADING) "Speicher-Explorer · restart" "$(APP)"
 	if pkill -x $(PROCESS); then \
 		while pgrep -x $(PROCESS) > /dev/null; do sleep $(SECONDS_BETWEEN_QUIT_CHECKS); done; \
 	fi
@@ -53,19 +61,22 @@ restart: ## Quit the app if it is open, then open the built one
 	$(CONSOLE) passed "Opened" "$(APP)"
 
 demo: ## Build without your certificate, then open the app with made-up data (no scan)
-	$(MAKE) build $(DEMO_BUILD)
+	$(HEADING) "Speicher-Explorer · demo" "made-up data, nothing scanned"
+	$(HEADED) $(MAKE) build $(DEMO_BUILD)
 	open -n "$(DEMO_APP)" --args -demo YES
 	$(CONSOLE) passed "Demo opened" "made-up data, nothing scanned"
 
 snapshots: ## Optional: photograph every demo page, light and dark, and compare (RECORD=1 records)
 	@# Only you run it: macOS asks once whether your terminal may record the screen.
-	$(MAKE) build $(DEMO_BUILD)
-	swift scripts/snapshots.swift "$(DEMO_APP)" $(SNAPSHOT_MODE)
+	$(HEADING) "Speicher-Explorer · snapshots" "every demo page, light and dark"
+	$(HEADED) $(MAKE) build $(DEMO_BUILD)
+	$(HEADED) swift scripts/snapshots.swift "$(DEMO_APP)" $(SNAPSHOT_MODE)
 
 check: ## Run the whole check pipeline, as on GitHub
 	scripts/check.py
 
 hooks: ## Optional: run make check before every git push (git push --no-verify skips it once)
+	$(HEADING) "Speicher-Explorer · hooks" "make check before every push"
 	git config core.hooksPath scripts/hooks
 	$(CONSOLE) passed "Hooks on" "git runs make check before every push"
 	$(CONSOLE) note "git push --no-verify pushes once without it."
@@ -80,6 +91,7 @@ coverage: ## Show how much of each source folder the tests reach
 	scripts/check.py coverage-report
 
 format: ## Bring every Swift file into the shared form
+	$(HEADING) "Speicher-Explorer · format" "Sources, Tests and scripts"
 	swift format --in-place --recursive Sources Tests scripts
 	$(CONSOLE) passed "Formatted" "every Swift file in Sources, Tests and scripts"
 
@@ -93,6 +105,7 @@ selftest: ## Measure real folders and compare with du (prints only counts and si
 	cat "$(SELFTEST_REPORT)"
 
 stress: ## Open a second app that clicks through every page as fast as it can
+	$(HEADING) "Speicher-Explorer · stress test" "$(APP)"
 	open -n "$(APP)" --args -uiTest "$(STRESS_TEST_FOLDER)"
 	$(CONSOLE) passed "Stress test started" "in a second app; quit it when you have seen enough"
 
@@ -103,5 +116,6 @@ identity: ## Create your own signing certificate once
 	scripts/create-signing-identity.sh
 
 clean: ## Remove everything that building creates
+	$(HEADING) "Speicher-Explorer · clean" ".build, $(BUILD_FOLDER) and dist"
 	rm -rf .build "$(BUILD_FOLDER)" dist
 	$(CONSOLE) passed "Removed" ".build, $(BUILD_FOLDER) and dist"

@@ -44,13 +44,13 @@ refuse() {
 # MARK: Run
 
 main() {
+  console_heading "Speicher-Explorer · pre-push" "checks the commits before they leave the Mac"
   if has_uncommitted_changes; then
     refuse "commit your changes or set them aside first"
   fi
   if pushes_other_commit; then
     refuse "check out the branch you push first"
   fi
-  console_step "Checking the commits before they leave the Mac"
   make check
 }
 

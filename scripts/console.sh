@@ -72,7 +72,13 @@ repeated() {
 
 # MARK: What a command prints
 
+# console_heading <title> <detail>: opens a command, once only. It tells everything the command
+# starts afterwards (scripts, inner make calls) to leave out its own heading.
 console_heading() {
+  if [ -n "${CONSOLE_HEADED:-}" ]; then
+    return
+  fi
+  export CONSOLE_HEADED=1
   printf '\n%s  %s\n\n' "$(console_paint "$1" "$BOLD")" "$(console_paint "${2:-}" "$DIM")"
 }
 

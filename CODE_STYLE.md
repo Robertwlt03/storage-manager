@@ -209,9 +209,12 @@ The script runs twenty-three checks one after another:
    (`scripts/checks/security.py`).
 22. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
-23. **One look for all output:** Everything a command writes to the console looks the same: a heading, lines
-   with a mark (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints and a frame that sums up at the
-   end. The pieces exist once per language: `scripts/console.sh` for the shell and the `Makefile`,
+23. **One look for all output:** Everything a command writes to the console looks the same: one heading
+   (`Speicher-Explorer · <command>` and a dimmed detail, `Ctrl-C cancels` when it asks something), lines with a mark
+   (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints and a frame that sums up at the end. A
+   question shows ◆, its answer is typed on the next line after ❯, a list marks the chosen entry with ● and the
+   others with ○, and yes or no is always `y/n`. What a command starts after its heading leaves its own heading
+   out (`CONSOLE_HEADED`). The pieces exist once per language: `scripts/console.sh` for the shell and the `Makefile`,
    `scripts/checks/console.py` for Python and `Sources/Diagnostics/Console.swift` for the app. Any other `echo`,
    `printf` or `print` is reported. What another program reads instead of a person is named in the script's head
    with `Output:` and written plainly (`scripts/checks/console_output.py`).

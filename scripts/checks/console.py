@@ -38,12 +38,15 @@ NOTE_INDENT = "   "  # hints start below the text of a result line
 TABLE_WIDTH = 16  # the names of a table fill this many characters, so the texts line up
 ENTRY_INDENT = "       "
 ENTRY_LABEL_WIDTH = 5  # wide enough for a line number such as 12345
+HEADED = "CONSOLE_HEADED"  # set once a heading shows; what the command starts leaves out its own
 CLEAR_LINE = "\r\x1b[K"  # back to the start of the line and erase it
 COLOR_CODE = re.compile(r"\x1b\[[0-9;]*m")
 
-# Questions: a mark in front, the entry the arrow keys point at, and the keys they understand.
-QUESTION_MARK = "?"
-POINTER_MARK = "›"
+# Questions: a mark in front, the line the answer is typed on, the entries of a list, and the keys
+# the list understands.
+QUESTION_MARK = "◆"
+ANSWER_MARK = "❯"
+MARKED_ENTRY, OTHER_ENTRY = "●", "○"
 YES_ANSWERS = {"y", "yes"}
 ENTER_KEYS = {"\r", "\n"}
 # The arrow keys send these sequences (terminals send either form); j and k move as in vim.
@@ -74,6 +77,10 @@ def show(text: str) -> None:
 
 
 def heading(title: str, detail: str = "") -> None:
+    """Opens a command; once only, so a script another command started adds no second one."""
+    if os.environ.get(HEADED):
+        return
+    os.environ[HEADED] = "1"
     show(f"\n{paint(title, BOLD)}  {paint(detail, DIM)}\n")
 
 
@@ -139,20 +146,21 @@ def can_ask() -> bool:
 
 def ask_yes_no(question: str) -> bool:
     """Enter alone answers no."""
-    return answer(question, "y/N").lower() in YES_ANSWERS
+    ask(question, "y/n")
+    return answer().lower() in YES_ANSWERS
 
 
 def ask_text(label: str, meaning: str, current: str = "") -> str:
     """Enter alone keeps the current text; without one, the question comes again."""
-    hint = f'{meaning} · Enter keeps "{current}"' if current else meaning
-    while not (text := answer(label, hint) or current):
+    ask(label, f'{meaning} · Enter keeps "{current}"' if current else meaning)
+    while not (text := answer() or current):
         note("This one needs an answer.")
     return text
 
 
 def ask_choice(question: str, options: list[str]) -> int:
     """A list to walk with the arrow keys; Enter picks the marked entry and returns its index."""
-    show(f"{question_start(question)}  {paint('↑↓ Enter', DIM)}")
+    ask(question, "↑↓ Enter")
     marked = 0
     show_options(options, marked)
     with keys_one_by_one() as read_key:
@@ -163,25 +171,26 @@ def ask_choice(question: str, options: list[str]) -> int:
     return marked
 
 
-def answer(question: str, hint: str) -> str:
-    """One line: the question, dimmed what it means, and the answer typed behind it."""
+def ask(question: str, hint: str) -> None:
+    """The question, and dimmed a few words on what it means or how to answer."""
+    show(f" {paint(QUESTION_MARK, CYAN, BOLD)} {paint(question, BOLD)}  {paint(hint, DIM)}")
+
+
+def answer() -> str:
+    """The answer is typed on the line below its question."""
     try:
-        return input(f"{question_start(question)}  {paint(hint, DIM)}  ").strip()
+        return input(f"   {paint(ANSWER_MARK, CYAN, BOLD)} ").strip()
     except (KeyboardInterrupt, EOFError):
-        print()  # the cursor still stands behind the question
+        print()  # the cursor still stands on the answer line
         raise
-
-
-def question_start(question: str) -> str:
-    return f" {paint(QUESTION_MARK, CYAN, BOLD)} {paint(question, BOLD)}"
 
 
 def show_options(options: list[str], marked: int) -> None:
     for index, option in enumerate(options):
         if index == marked:
-            show(f"   {paint(POINTER_MARK, CYAN, BOLD)} {paint(option, BOLD)}")
+            show(f"   {paint(MARKED_ENTRY, CYAN, BOLD)} {paint(option, BOLD)}")
         else:
-            show(f"     {paint(option, DIM)}")
+            show(f"   {paint(OTHER_ENTRY, DIM)} {paint(option, DIM)}")
 
 
 @contextmanager

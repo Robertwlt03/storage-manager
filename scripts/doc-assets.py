@@ -170,10 +170,10 @@ def stop(problem: str, hint: str) -> None:
 
 def banner_by_questions() -> Path:
     """First whether to replace a banner and which one, then the texts of the banner."""
+    heading("Speicher-Explorer · banner", "Ctrl-C cancels")
     if not can_ask():
         stop("no terminal to ask in",
              "Name the texts instead: scripts/doc-assets.py banner <file name> <title> <subtitle>")
-    heading("Banner for a guide", "Ctrl-C cancels")
     replaceable = sorted(
         path.stem.removeprefix("banner-") for path in ASSETS.glob("banner-*.svg")
         if path.stem.removeprefix("banner-") not in HAND_DRAWN_BANNERS
@@ -240,6 +240,7 @@ def drawn_file() -> Path:
     parser = command_line()
     chosen = parser.parse_args()
     if chosen.command == "icon":
+        heading("Speicher-Explorer · icon", f"assets/icons/{chosen.name}.svg")
         return icon(chosen.name, chosen.color, chosen.glyph, chosen.overwrite)
     texts = [chosen.file_name, chosen.title, chosen.subtitle]
     if not any(texts):
@@ -248,6 +249,7 @@ def drawn_file() -> Path:
         parser.error("name the file, the title and the subtitle, or none of them to be asked")
     if not BANNER_NAME.fullmatch(chosen.file_name):
         parser.error("the file name takes small letters, digits and hyphens only")
+    heading("Speicher-Explorer · banner", relative(banner_path(chosen.file_name)))
     return banner(chosen.file_name, chosen.title, chosen.subtitle, chosen.eyebrow,
                   chosen.overwrite)
 
