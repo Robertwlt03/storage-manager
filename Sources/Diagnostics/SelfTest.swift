@@ -3,7 +3,7 @@ import Foundation
 /// `--selftest`: scans real data, compares every area with `du` and prints only counts, sizes and
 /// times – never file or folder names.
 enum SelfTest {
-    private static let areas = [Paths.home, Paths.applications, Paths.tempArea]
+    private static let areas = [Paths.home, Paths.applications, Paths.temporaryArea]
     /// How far the scanner may differ from `du`, as a fraction.
     private static let tolerance = 0.02
     private static let sampleQuery = "a"
@@ -88,7 +88,7 @@ enum SelfTest {
     }
 
     private static func reportCopies(in root: Node) {
-        let groups = CopyService.groups(in: root.descendant(at: Paths.tempCopies))
+        let groups = CopyService.groups(in: root.descendant(at: Paths.temporaryCopies))
         print("Signature copy groups: \(groups.count)")
     }
 

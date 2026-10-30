@@ -3,7 +3,7 @@
 "paneOverview" = "Resumen";
 "paneExplorer" = "Carpetas";
 "paneLargeFiles" = "Archivos grandes";
-"paneTemp" = "Zona temporal";
+"paneTemporaryFiles" = "Zona temporal";
 "paneCopies" = "Copias de apps";
 "sectionSystem" = "Zonas ocultas";
 "sectionVolumes" = "Volúmenes";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ disponibles de %@";
 "categories" = "Categorías";
 "freeSpace" = "Libre";
-"tempAreaName" = "Zona temporal del sistema";
+"temporaryAreaName" = "Zona temporal del sistema";
 "categoryApps" = "Aplicaciones";
 "categoryDocuments" = "Documentos y Escritorio";
 "categoryDownloads" = "Descargas";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Cachés";
 "categoryAppData" = "Datos de apps";
 "categoryTrash" = "Papelera";
-"categoryTemp" = "Archivos temporales";
+"categoryTemporary" = "Archivos temporales";
 "categoryUser" = "Otros datos de usuario";
 "categoryLibrary" = "Datos de apps compartidos";
 "categoryOther" = "Otras carpetas";
@@ -91,14 +91,14 @@
 "total" = "Total";
 "subfolders" = "Subcarpetas";
 "viewCopies" = "Ver copias de apps …";
-"tempFolderT" = "Archivos temporales";
-"tempFolderTDetail" = "En su mayoría se vacían al reiniciar.";
-"tempFolderC" = "Cachés";
-"tempFolderCDetail" = "Cachés de apps y de servicios del sistema.";
-"tempFolderX" = "Copias de apps";
-"tempFolderXDetail" = "Copias que macOS crea al comprobar firmas.";
-"tempFolder0" = "Servicios del sistema";
-"tempFolder0Detail" = "Datos de servicios en segundo plano.";
+"temporaryFolderT" = "Archivos temporales";
+"temporaryFolderTDetail" = "En su mayoría se vacían al reiniciar.";
+"temporaryFolderC" = "Cachés";
+"temporaryFolderCDetail" = "Cachés de apps y de servicios del sistema.";
+"temporaryFolderX" = "Copias de apps";
+"temporaryFolderXDetail" = "Copias que macOS crea al comprobar firmas.";
+"temporaryFolder0" = "Servicios del sistema";
+"temporaryFolder0Detail" = "Datos de servicios en segundo plano.";
 
 /* Signature copies */
 "noCopies" = "Sin copias de apps";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Datos de compilación de Xcode y cachés de paquetes como npm; se vuelven a crear en la próxima compilación.";
 "cleanLogs" = "Registros antiguos";
 "cleanLogsDetail" = "Registros de apps con más de una semana.";
-"cleanTemp" = "Archivos temporales antiguos";
-"cleanTempDetail" = "Archivos temporales sin modificar desde hace al menos tres días.";
+"cleanTemporary" = "Archivos temporales antiguos";
+"cleanTemporaryDetail" = "Archivos temporales sin modificar desde hace al menos tres días.";
 "cleanTrash" = "Papelera";
 "cleanTrashDetail" = "Vacía la Papelera de forma definitiva. No está seleccionada por defecto.";
 "cleanFailed" = "No se pudieron eliminar %@ elementos porque están en uso o protegidos.";
@@ -215,7 +215,7 @@
 "infoApps" = "Apps que no has abierto desde hace tiempo. La fecha procede del propio macOS; la app no registra nada. Mueve aquí a la Papelera lo que ya no necesites; podrás recuperarlo desde allí.";
 "infoExplorer" = "Todas las carpetas analizadas, ordenadas por tamaño. Al hacer doble clic se abre una carpeta; el menú contextual muestra los archivos en el Finder y da información sobre ellos.";
 "infoLargeFiles" = "Todos los archivos del tamaño elegido o mayores en el último análisis. Al hacer doble clic se muestra el archivo en el Finder.";
-"infoTemp" = "macOS crea esta zona para cada usuario en /private/var/folders. Está oculta en el Finder y no se desglosa en “Gestionar almacenamiento”.";
+"infoTemporaryFiles" = "macOS crea esta zona para cada usuario en /private/var/folders. Está oculta en el Finder y no se desglosa en “Gestionar almacenamiento”.";
 "infoCopies" = "Al comprobar una firma, macOS a veces coloca copias completas de una app en la carpeta X. No son programas independientes; macOS crea una nueva cuando hace falta. Eliminarlas es seguro mientras la app esté cerrada.";
 "infoVolume" = "Capacidad de este volumen: lo que está usado, lo que macOS puede liberar por sí mismo cuando hace falta y lo que está libre. Aquí se pueden analizar los volúmenes externos.";
 "aboutPage" = "Acerca de esta página";

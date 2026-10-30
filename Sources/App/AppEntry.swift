@@ -42,7 +42,7 @@ struct SpeicherExplorerApp: App {
         Window(TextKey.appName.translated, id: WindowID.main) {
             RootView()
                 .environment(model)
-                .frame(minWidth: Layout.minWindowWidth, minHeight: Layout.minWindowHeight)
+                .frame(minWidth: Layout.minimumWindowWidth, minHeight: Layout.minimumWindowHeight)
         }
         .commands {
             LayoutCommands()

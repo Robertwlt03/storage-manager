@@ -2,7 +2,7 @@ import Foundation
 
 /// What the cleaner can remove; each kind regenerates by itself or is already thrown away.
 nonisolated enum CleanKind: String, CaseIterable, Identifiable {
-    case caches, developer, logs, temp, trash
+    case caches, developer, logs, temporary, trash
     var id: Self { self }
 
     var title: TextKey {
@@ -10,7 +10,7 @@ nonisolated enum CleanKind: String, CaseIterable, Identifiable {
         case .caches: .cleanCaches
         case .developer: .cleanDeveloper
         case .logs: .cleanLogs
-        case .temp: .cleanTemp
+        case .temporary: .cleanTemporary
         case .trash: .cleanTrash
         }
     }
@@ -20,18 +20,18 @@ nonisolated enum CleanKind: String, CaseIterable, Identifiable {
         case .caches: .cleanCachesDetail
         case .developer: .cleanDeveloperDetail
         case .logs: .cleanLogsDetail
-        case .temp: .cleanTempDetail
+        case .temporary: .cleanTemporaryDetail
         case .trash: .cleanTrashDetail
         }
     }
 
-    /// Same symbol and colour as the matching storage category.
+    /// Same symbol and color as the matching storage category.
     var category: CategoryKind {
         switch self {
         case .caches: .caches
         case .developer: .developer
         case .logs: .library
-        case .temp: .temp
+        case .temporary: .temporary
         case .trash: .trash
         }
     }

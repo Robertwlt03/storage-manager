@@ -3,7 +3,7 @@
 "paneOverview" = "Overzicht";
 "paneExplorer" = "Mappen";
 "paneLargeFiles" = "Grote bestanden";
-"paneTemp" = "Tijdelijk gebied";
+"paneTemporaryFiles" = "Tijdelijk gebied";
 "paneCopies" = "App-kopieën";
 "sectionSystem" = "Verborgen gebieden";
 "sectionVolumes" = "Volumes";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ beschikbaar van %@";
 "categories" = "Categorieën";
 "freeSpace" = "Vrij";
-"tempAreaName" = "Tijdelijk systeemgebied";
+"temporaryAreaName" = "Tijdelijk systeemgebied";
 "categoryApps" = "Apps";
 "categoryDocuments" = "Documenten en bureaublad";
 "categoryDownloads" = "Downloads";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Caches";
 "categoryAppData" = "Appgegevens";
 "categoryTrash" = "Prullenmand";
-"categoryTemp" = "Tijdelijke bestanden";
+"categoryTemporary" = "Tijdelijke bestanden";
 "categoryUser" = "Overige gebruikersgegevens";
 "categoryLibrary" = "Gedeelde appgegevens";
 "categoryOther" = "Overige mappen";
@@ -91,14 +91,14 @@
 "total" = "Totaal";
 "subfolders" = "Submappen";
 "viewCopies" = "App-kopieën bekijken …";
-"tempFolderT" = "Tijdelijke bestanden";
-"tempFolderTDetail" = "Wordt meestal bij het herstarten geleegd.";
-"tempFolderC" = "Caches";
-"tempFolderCDetail" = "Caches van apps en systeemdiensten.";
-"tempFolderX" = "App-kopieën";
-"tempFolderXDetail" = "Kopieën die macOS maakt bij het controleren van handtekeningen.";
-"tempFolder0" = "Systeemdiensten";
-"tempFolder0Detail" = "Gegevens van achtergronddiensten.";
+"temporaryFolderT" = "Tijdelijke bestanden";
+"temporaryFolderTDetail" = "Wordt meestal bij het herstarten geleegd.";
+"temporaryFolderC" = "Caches";
+"temporaryFolderCDetail" = "Caches van apps en systeemdiensten.";
+"temporaryFolderX" = "App-kopieën";
+"temporaryFolderXDetail" = "Kopieën die macOS maakt bij het controleren van handtekeningen.";
+"temporaryFolder0" = "Systeemdiensten";
+"temporaryFolder0Detail" = "Gegevens van achtergronddiensten.";
 
 /* Signature copies */
 "noCopies" = "Geen app-kopieën";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Buildgegevens van Xcode en pakketcaches zoals npm; ze worden bij de volgende build opnieuw aangemaakt.";
 "cleanLogs" = "Oude logbestanden";
 "cleanLogsDetail" = "Logbestanden van apps die ouder zijn dan een week.";
-"cleanTemp" = "Oude tijdelijke bestanden";
-"cleanTempDetail" = "Tijdelijke bestanden die al minstens drie dagen niet zijn gewijzigd.";
+"cleanTemporary" = "Oude tijdelijke bestanden";
+"cleanTemporaryDetail" = "Tijdelijke bestanden die al minstens drie dagen niet zijn gewijzigd.";
 "cleanTrash" = "Prullenmand";
 "cleanTrashDetail" = "Leegt de prullenmand definitief. Standaard niet geselecteerd.";
 "cleanFailed" = "%@ onderdelen konden niet worden verwijderd omdat ze in gebruik of beveiligd zijn.";
@@ -215,7 +215,7 @@
 "infoApps" = "Apps die je al een tijd niet hebt geopend. De datum komt van macOS zelf; de app legt niets vast. Wat je niet meer nodig hebt, verplaats je hier naar de prullenmand en kun je daar terughalen.";
 "infoExplorer" = "Alle gescande mappen, gesorteerd op grootte. Dubbelklikken opent een map; het contextmenu toont bestanden in de Finder en geeft er informatie over.";
 "infoLargeFiles" = "Alle bestanden vanaf de gekozen grootte uit de laatste scan. Dubbelklikken toont het bestand in de Finder.";
-"infoTemp" = "macOS maakt dit gebied voor elke gebruiker aan onder /private/var/folders. Het is verborgen in de Finder en wordt niet uitgesplitst in “Beheer opslag”.";
+"infoTemporaryFiles" = "macOS maakt dit gebied voor elke gebruiker aan onder /private/var/folders. Het is verborgen in de Finder en wordt niet uitgesplitst in “Beheer opslag”.";
 "infoCopies" = "Bij het controleren van een handtekening plaatst macOS soms complete kopieën van een app in map X. Het zijn geen aparte programma’s; macOS maakt zo nodig een nieuwe aan. Verwijderen is veilig zolang de app is gestopt.";
 "infoVolume" = "Capaciteit van dit volume: wat in gebruik is, wat macOS zo nodig zelf kan vrijmaken en wat vrij is. Externe volumes kunnen hier worden gescand.";
 "aboutPage" = "Over deze pagina";

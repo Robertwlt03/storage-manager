@@ -18,7 +18,7 @@ let microsecondsBetweenQuitChecks: UInt32 = 100_000
 let windowFrame = "100 100 1100 860 0 0 2560 1440"
 /// Layer 0 holds normal windows; menus and the menu bar sit above it.
 let normalWindowLayer = 0
-/// A pixel counts as changed when one colour channel moves further than this (0–255); smaller
+/// A pixel counts as changed when one color channel moves further than this (0–255); smaller
 /// moves come from the glass picking up the wallpaper.
 let channelTolerance = 24
 /// A page counts as changed when more of its pixels changed than this share; the time in the
@@ -129,7 +129,7 @@ func take(_ pictures: [Picture], of app: URL) async throws {
 struct Pixels {
     static let bytesPerPixel = 4
     static let bitsPerChannel = 8
-    static let colourChannels = 0..<3  // red, green and blue; the fourth byte is opacity
+    static let colorChannels = 0..<3  // red, green and blue; the fourth byte is opacity
     static let opacity = 3
     static let fullChannel: UInt8 = 255
 
@@ -178,25 +178,25 @@ struct Pixels {
     }
 }
 
-/// The unchanged parts as a light grey copy (a quarter of the brightness on top of three quarters
+/// The unchanged parts as a light gray copy (a quarter of the brightness on top of three quarters
 /// white), so the red stands out.
 let fadedShare = 4
 let fadedBase = Int(Pixels.fullChannel) - Int(Pixels.fullChannel) / fadedShare
-let changedColour: [UInt8] = [Pixels.fullChannel, 0, 0]  // red
+let changedColor: [UInt8] = [Pixels.fullChannel, 0, 0]  // red
 
 /// The share of changed pixels, and a picture that shows them red over a faded original.
 func compare(_ reference: Pixels, _ current: Pixels) -> (share: Double, difference: Pixels) {
     var difference = Pixels(width: current.width, height: current.height)
     var changed = 0
     for start in stride(from: 0, to: current.bytes.count, by: Pixels.bytesPerPixel) {
-        let isChanged = Pixels.colourChannels.contains { channel in
+        let isChanged = Pixels.colorChannels.contains { channel in
             let index = start + channel
             return abs(Int(reference.bytes[index]) - Int(current.bytes[index])) > channelTolerance
         }
         if isChanged { changed += 1 }
         let faded = UInt8(Int(current.bytes[start]) / fadedShare + fadedBase)
-        for channel in Pixels.colourChannels {
-            difference.bytes[start + channel] = isChanged ? changedColour[channel] : faded
+        for channel in Pixels.colorChannels {
+            difference.bytes[start + channel] = isChanged ? changedColor[channel] : faded
         }
         difference.bytes[start + Pixels.opacity] = Pixels.fullChannel
     }

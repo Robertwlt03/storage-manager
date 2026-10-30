@@ -9,7 +9,7 @@ struct DesignTests {
     private static let gridStep: CGFloat = 4
     private static let minimumContrast = 4.5
     private static let blackAndWhiteContrast = 21.0
-    private static let sameColourContrast = 1.0
+    private static let sameColorContrast = 1.0
     private static let allowedRoundingError = 0.01
 
     @Test("Every spacing step sits on Apple's 4-point grid, except the hairline")
@@ -34,8 +34,8 @@ struct DesignTests {
 
     @Test("The sidebar closes by itself exactly when sidebar and page no longer fit side by side")
     func sidebarCollapsesAtTheRightWidth() {
-        #expect(Layout.sidebarCollapseWidth == Layout.sidebarIdealWidth + Layout.pageMinWidth)
-        #expect(Layout.minWindowWidth <= Layout.sidebarCollapseWidth)
+        #expect(Layout.sidebarCollapseWidth == Layout.sidebarIdealWidth + Layout.pageMinimumWidth)
+        #expect(Layout.minimumWindowWidth <= Layout.sidebarCollapseWidth)
     }
 
     @Test("Quick animations are shorter than standard ones")
@@ -52,7 +52,7 @@ struct DesignTests {
     ]
     private static let whiteText: UInt32 = 0xFFFFFF
 
-    @Test("Every text colour reaches 4.5:1 on every light and dark surface")
+    @Test("Every text color reaches 4.5:1 on every light and dark surface")
     func textContrast() {
         let textTones = [
             ("muted", Theme.muted), ("good", Theme.good), ("warning", Theme.warning),
@@ -73,9 +73,9 @@ struct DesignTests {
     @Test("White button text reaches 4.5:1 on every button fill")
     func buttonContrast() {
         for (name, fill) in [("primary", Theme.primaryFill), ("confirm", Theme.confirmFill)] {
-            for colour in [fill.light, fill.dark] {
-                let ratio = Contrast.ratio(Self.whiteText, colour)
-                #expect(ratio >= Self.minimumContrast, "\(name) \(colour): \(ratio)")
+            for color in [fill.light, fill.dark] {
+                let ratio = Contrast.ratio(Self.whiteText, color)
+                #expect(ratio >= Self.minimumContrast, "\(name) \(color): \(ratio)")
             }
         }
     }
@@ -84,12 +84,12 @@ struct DesignTests {
     func contrastFormula() {
         let blackOnWhite = Contrast.ratio(0xFFFFFF, 0x000000)
         #expect(abs(blackOnWhite - Self.blackAndWhiteContrast) < Self.allowedRoundingError)
-        #expect(Contrast.ratio(0x777777, 0x777777) == Self.sameColourContrast)
+        #expect(Contrast.ratio(0x777777, 0x777777) == Self.sameColorContrast)
         #expect(Contrast.ratio(0x000000, 0xFFFFFF) == blackOnWhite)
     }
 
-    @Test("Category colours repeat instead of running out")
-    func categoryColoursRepeat() {
+    @Test("Category colors repeat instead of running out")
+    func categoryColorsRepeat() {
         let count = Theme.categoryColors.count
         #expect(Theme.categoryColor(count) == Theme.categoryColor(0))
     }

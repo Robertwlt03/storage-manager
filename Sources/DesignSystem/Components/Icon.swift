@@ -4,7 +4,7 @@ import SwiftUI
 enum IconKind {
     case symbol(String)
     case dot(Color)
-    /// A white symbol on a coloured square, like System Settings.
+    /// A white symbol on a colored square, like System Settings.
     case badge(symbol: String, colorIndex: Int)
     case letter(String)  // a short code on a neutral square: T, C, X, 0
     case file(String)  // the Finder icon of a path

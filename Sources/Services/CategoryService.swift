@@ -2,7 +2,8 @@
 /// specific folder wins. Folders that do not exist on a Mac simply stay empty, so the same rules
 /// work everywhere.
 enum CategoryKind: Int, CaseIterable {
-    case apps, documents, downloads, media, iCloud, mail, developer, caches, appData, trash, temp,
+    case apps, documents, downloads, media, iCloud, mail, developer, caches, appData, trash,
+        temporary,
         user, library
     case other, purgeable, system
 
@@ -21,7 +22,7 @@ enum CategoryKind: Int, CaseIterable {
         case .caches: .categoryCaches
         case .appData: .categoryAppData
         case .trash: .categoryTrash
-        case .temp: .categoryTemp
+        case .temporary: .categoryTemporary
         case .user: .categoryUser
         case .library: .categoryLibrary
         case .other: .categoryOther
@@ -42,7 +43,7 @@ enum CategoryKind: Int, CaseIterable {
         case .caches: Symbols.caches
         case .appData: Symbols.appData
         case .trash: Symbols.trash
-        case .temp: Symbols.temporaryArea
+        case .temporary: Symbols.temporaryArea
         case .user: Symbols.user
         case .library: Symbols.library
         case .other: Symbols.otherFiles
@@ -71,7 +72,7 @@ enum CategoryKind: Int, CaseIterable {
         case .appData:
             ["~/Library/Application Support", "~/Library/Containers", "~/Library/Group Containers"]
         case .trash: ["~/.Trash"]
-        case .temp: [Paths.tempArea]
+        case .temporary: [Paths.temporaryArea]
         case .user: [Paths.home]
         case .library: [Paths.library]
         case .other, .purgeable, .system: []

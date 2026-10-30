@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/-SwiftUI-1D1D1F?style=flat-square&logo=swift&logoColor=F05138" alt="SwiftUI">
   <img src="https://img.shields.io/badge/Languages-20-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="20 languages">
   <img src="https://img.shields.io/badge/Price-free-1B7332?style=flat-square&labelColor=1D1D1F" alt="free">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/Licence-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="Licence: MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="License: MIT"></a>
 </p>
 
 **Speicher-Explorer** shows you where the storage on your Mac goes. It measures all the important areas, sorts them
@@ -51,7 +51,7 @@ without a terminal, and that you can share with others without having to wait fo
 
 The **Overview** is your home page. Right at the top are the most important numbers, such as how many files you
 have, how many of them are large and how many apps you have not opened for a long time, and clicking one takes you
-straight to the matching page. Below that, it shows your Mac with a coloured bar and a legend. It then sums up in a
+straight to the matching page. Below that, it shows your Mac with a colored bar and a legend. It then sums up in a
 few sentences how your storage is doing, and reads that out to you if you like. A chart also shows you how much space
 small and large files take up, and at the very bottom you find all categories, from applications and downloads to
 caches.
@@ -87,7 +87,7 @@ with the mouse.
 <p align="center"><img src="docs/anleitung/bilder/1-dmg.svg" alt="Drag the app into the Applications folder" width="620"></p>
 
 **2. Open the app.** The first time, macOS reports that it could not verify the app. That is because I do not
-distribute it through Apple’s paid developer programme. Just click “Done” here.
+distribute it through Apple’s paid developer program. Just click “Done” here.
 
 <p align="center"><img src="docs/anleitung/bilder/2-warnung.svg" alt="Notice from macOS: click Done" width="620"></p>
 
@@ -182,7 +182,7 @@ make run
 `make` shows you all the short commands, and the [contributing guide](CONTRIBUTING.en.md) explains them. There is a
 separate script for a DMG to pass on. It signs the app with a free certificate of your own, which you create once
 with `make identity`. That way Full Disk Access survives every update. With a Developer ID from Apple, the script
-also notarises the DMG, and then steps 2 and 3 of the installation are no longer needed.
+also notarizes the DMG, and then steps 2 and 3 of the installation are no longer needed.
 
 ```bash
 make release
@@ -193,7 +193,7 @@ The code is split into small parts, and every file has exactly one job:
 | Folder | Contents |
 | --- | --- |
 | `Sources/Features` | One folder for each page of the app, for example Overview, Folders and Clean Up. `Pages.swift` maps each page to its view. |
-| `Sources/DesignSystem` | All interface building blocks in the `UI` namespace, with fixed variants, plus spacing, fonts and colours. |
+| `Sources/DesignSystem` | All interface building blocks in the `UI` namespace, with fixed variants, plus spacing, fonts and colors. |
 | `Sources/Services` | Scanning, categories, cleaning up, apps, search, summary and reading aloud. |
 | `Sources/State` | The app state that brings the services together. |
 | `Sources/Core` | Constants and fixed choices such as pages and settings. |
@@ -222,5 +222,5 @@ translations were made by machine, so I am especially glad about improvements fr
 <p align="center">
   <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
   <sub><a href="README.en.md">Overview</a> · <a href="CONTRIBUTING.en.md">Contributing</a> · <a href="ARCHITECTURE.en.md">Architecture</a> · <a href="CODE_STYLE.en.md">Code rules</a> · <a href="CODE_OF_CONDUCT.en.md">Code of conduct</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT licence</a> · For macOS 27 on Macs with Apple silicon</sub>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

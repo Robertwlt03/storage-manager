@@ -3,7 +3,7 @@
 "paneOverview" = "總覽";
 "paneExplorer" = "檔案夾";
 "paneLargeFiles" = "大型檔案";
-"paneTemp" = "暫存區域";
+"paneTemporaryFiles" = "暫存區域";
 "paneCopies" = "App 拷貝";
 "sectionSystem" = "隱藏區域";
 "sectionVolumes" = "磁碟機";
@@ -34,7 +34,7 @@
 "availableOf" = "可用 %@，共 %@";
 "categories" = "類別";
 "freeSpace" = "可用";
-"tempAreaName" = "暫存系統區域";
+"temporaryAreaName" = "暫存系統區域";
 "categoryApps" = "應用程式";
 "categoryDocuments" = "文件與桌面";
 "categoryDownloads" = "下載項目";
@@ -45,7 +45,7 @@
 "categoryCaches" = "快取";
 "categoryAppData" = "App 資料";
 "categoryTrash" = "垃圾桶";
-"categoryTemp" = "暫存檔案";
+"categoryTemporary" = "暫存檔案";
 "categoryUser" = "其他使用者資料";
 "categoryLibrary" = "共享 App 資料";
 "categoryOther" = "其他檔案夾";
@@ -91,14 +91,14 @@
 "total" = "總計";
 "subfolders" = "子檔案夾";
 "viewCopies" = "檢視 App 拷貝⋯";
-"tempFolderT" = "暫存檔案";
-"tempFolderTDetail" = "大部分會在重新啟動時清空。";
-"tempFolderC" = "快取";
-"tempFolderCDetail" = "App 和系統服務的快取。";
-"tempFolderX" = "App 拷貝";
-"tempFolderXDetail" = "macOS 在檢查簽名時建立的拷貝。";
-"tempFolder0" = "系統服務";
-"tempFolder0Detail" = "背景服務的資料。";
+"temporaryFolderT" = "暫存檔案";
+"temporaryFolderTDetail" = "大部分會在重新啟動時清空。";
+"temporaryFolderC" = "快取";
+"temporaryFolderCDetail" = "App 和系統服務的快取。";
+"temporaryFolderX" = "App 拷貝";
+"temporaryFolderXDetail" = "macOS 在檢查簽名時建立的拷貝。";
+"temporaryFolder0" = "系統服務";
+"temporaryFolder0Detail" = "背景服務的資料。";
 
 /* Signature copies */
 "noCopies" = "沒有 App 拷貝";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Xcode 建置資料以及 npm 等套件快取；下次建置時會重新產生。";
 "cleanLogs" = "舊記錄檔";
 "cleanLogsDetail" = "超過一週的 App 記錄檔。";
-"cleanTemp" = "舊暫存檔案";
-"cleanTempDetail" = "至少三天未更改的暫存檔案。";
+"cleanTemporary" = "舊暫存檔案";
+"cleanTemporaryDetail" = "至少三天未更改的暫存檔案。";
 "cleanTrash" = "垃圾桶";
 "cleanTrashDetail" = "永久清空垃圾桶。預設不會選取。";
 "cleanFailed" = "有 %@ 個項目無法移除，因為它們正在使用中或受到保護。";
@@ -215,7 +215,7 @@
 "infoApps" = "你已有一段時間沒有打開的 App。日期來自 macOS 本身；本 App 不會記錄任何內容。你可以在這裡將不再需要的 App 移到垃圾桶，也可以從垃圾桶中復原。";
 "infoExplorer" = "所有已測量的檔案夾，依大小排序。連按兩下可打開檔案夾；快速選單可在 Finder 中顯示檔案並檢視其資訊。";
 "infoLargeFiles" = "上次掃描中達到所選大小的所有檔案。連按兩下可在 Finder 中顯示該檔案。";
-"infoTemp" = "macOS 會在 /private/var/folders 下為每位使用者建立此區域。它在 Finder 中是隱藏的，在「管理儲存空間」中也不會細分顯示。";
+"infoTemporaryFiles" = "macOS 會在 /private/var/folders 下為每位使用者建立此區域。它在 Finder 中是隱藏的，在「管理儲存空間」中也不會細分顯示。";
 "infoCopies" = "在檢查簽名時，macOS 有時會在檔案夾 X 中建立 App 的完整拷貝。它們不是獨立的程式；需要時 macOS 會重新建立。只要 App 已結束，就可以放心刪除。";
 "infoVolume" = "此磁碟機的容量：已使用的空間、macOS 需要時可自行釋放的空間，以及可用空間。外接磁碟機可以在這裡測量。";
 "aboutPage" = "關於此頁面";

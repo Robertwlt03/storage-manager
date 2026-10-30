@@ -69,13 +69,28 @@ enum AppSettings {
 /// comes from macOS, which also allows a language per app (System Settings › General › Language &
 /// Region › Applications).
 nonisolated enum AppLanguage: String, CaseIterable {
-    case de, en, fr, es, it, nl
-    case ptBR = "pt-BR"
-    case sv, da, nb, fi, pl, cs, tr, ru, uk, ja, ko
-    case zhHans = "zh-Hans"
-    case zhHant = "zh-Hant"
+    case german = "de"
+    case english = "en"
+    case french = "fr"
+    case spanish = "es"
+    case italian = "it"
+    case dutch = "nl"
+    case brazilianPortuguese = "pt-BR"
+    case swedish = "sv"
+    case danish = "da"
+    case norwegian = "nb"
+    case finnish = "fi"
+    case polish = "pl"
+    case czech = "cs"
+    case turkish = "tr"
+    case russian = "ru"
+    case ukrainian = "uk"
+    case japanese = "ja"
+    case korean = "ko"
+    case simplifiedChinese = "zh-Hans"
+    case traditionalChinese = "zh-Hant"
 
-    static let fallback = AppLanguage.en
+    static let fallback = AppLanguage.english
 
     /// The first preferred system language the app supports.
     static var current: AppLanguage {
@@ -87,9 +102,11 @@ nonisolated enum AppLanguage: String, CaseIterable {
         let language = Locale.Language(identifier: identifier)
         guard let code = language.languageCode?.identifier else { return nil }
         switch code {
-        case "zh": return language.maximalIdentifier.contains("Hant") ? .zhHant : .zhHans
-        case "pt": return .ptBR
-        case "no", "nn": return .nb
+        case "zh":
+            let isTraditional = language.maximalIdentifier.contains("Hant")
+            return isTraditional ? .traditionalChinese : .simplifiedChinese
+        case "pt": return .brazilianPortuguese
+        case "no", "nn": return .norwegian
         default: return AppLanguage(rawValue: code)
         }
     }

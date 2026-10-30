@@ -12,7 +12,7 @@ extension UI {
         var body: some View {
             VStack(spacing: Space.small) {
                 Icon(icon, size: .large)
-                Text(title).textRole(.section).lineLimit(Layout.maxWrappedLines)
+                Text(title).textRole(.section).lineLimit(Layout.maximumWrappedLines)
                     .multilineTextAlignment(.center)
                 Text(value).textRole(.value)
                 if let detail { Text(detail).textRole(.hint).lineLimit(1) }
@@ -58,7 +58,7 @@ extension UI {
                             .lineLimit(1).minimumScaleFactor(Layout.keyFigureMinimumScale)
                             .calculating(isLoading)
                         Text(label).foregroundStyle(.muted)
-                            .lineLimit(Layout.maxWrappedLines, reservesSpace: true)
+                            .lineLimit(Layout.maximumWrappedLines, reservesSpace: true)
                     }
                     Spacer(minLength: 0)
                     Chevron()

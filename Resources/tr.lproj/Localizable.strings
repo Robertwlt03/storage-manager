@@ -3,7 +3,7 @@
 "paneOverview" = "Genel Bakış";
 "paneExplorer" = "Klasörler";
 "paneLargeFiles" = "Büyük Dosyalar";
-"paneTemp" = "Geçici Alan";
+"paneTemporaryFiles" = "Geçici Alan";
 "paneCopies" = "Uygulama Kopyaları";
 "sectionSystem" = "Gizli Alanlar";
 "sectionVolumes" = "Birimler";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ kullanılabilir, toplam %@";
 "categories" = "Kategoriler";
 "freeSpace" = "Boş";
-"tempAreaName" = "Geçici Sistem Alanı";
+"temporaryAreaName" = "Geçici Sistem Alanı";
 "categoryApps" = "Uygulamalar";
 "categoryDocuments" = "Belgeler ve Masaüstü";
 "categoryDownloads" = "İndirilenler";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Önbellekler";
 "categoryAppData" = "Uygulama Verileri";
 "categoryTrash" = "Çöp Sepeti";
-"categoryTemp" = "Geçici Dosyalar";
+"categoryTemporary" = "Geçici Dosyalar";
 "categoryUser" = "Diğer Kullanıcı Verileri";
 "categoryLibrary" = "Paylaşılan Uygulama Verileri";
 "categoryOther" = "Diğer Klasörler";
@@ -91,14 +91,14 @@
 "total" = "Toplam";
 "subfolders" = "Alt Klasörler";
 "viewCopies" = "Uygulama Kopyalarını Göster …";
-"tempFolderT" = "Geçici Dosyalar";
-"tempFolderTDetail" = "Çoğunlukla yeniden başlatmada boşaltılır.";
-"tempFolderC" = "Önbellekler";
-"tempFolderCDetail" = "Uygulamaların ve sistem hizmetlerinin önbellekleri.";
-"tempFolderX" = "Uygulama Kopyaları";
-"tempFolderXDetail" = "macOS'un imzaları kontrol ederken oluşturduğu kopyalar.";
-"tempFolder0" = "Sistem Hizmetleri";
-"tempFolder0Detail" = "Arka plan hizmetlerinin verileri.";
+"temporaryFolderT" = "Geçici Dosyalar";
+"temporaryFolderTDetail" = "Çoğunlukla yeniden başlatmada boşaltılır.";
+"temporaryFolderC" = "Önbellekler";
+"temporaryFolderCDetail" = "Uygulamaların ve sistem hizmetlerinin önbellekleri.";
+"temporaryFolderX" = "Uygulama Kopyaları";
+"temporaryFolderXDetail" = "macOS'un imzaları kontrol ederken oluşturduğu kopyalar.";
+"temporaryFolder0" = "Sistem Hizmetleri";
+"temporaryFolder0Detail" = "Arka plan hizmetlerinin verileri.";
 
 /* Signature copies */
 "noCopies" = "Uygulama Kopyası Yok";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Xcode derleme verileri ve npm gibi paket önbellekleri; bir sonraki derlemede yeniden oluşturulurlar.";
 "cleanLogs" = "Eski Günlükler";
 "cleanLogsDetail" = "Bir haftadan eski uygulama günlükleri.";
-"cleanTemp" = "Eski Geçici Dosyalar";
-"cleanTempDetail" = "En az üç gündür değiştirilmemiş geçici dosyalar.";
+"cleanTemporary" = "Eski Geçici Dosyalar";
+"cleanTemporaryDetail" = "En az üç gündür değiştirilmemiş geçici dosyalar.";
 "cleanTrash" = "Çöp Sepeti";
 "cleanTrashDetail" = "Çöp Sepeti'ni kalıcı olarak boşaltır. Varsayılan olarak seçili değildir.";
 "cleanFailed" = "%@ öğe, kullanımda olduğu veya korumalı olduğu için kaldırılamadı.";
@@ -215,7 +215,7 @@
 "infoApps" = "Bir süredir açmadığınız uygulamalar. Tarih macOS'un kendisinden gelir; uygulama hiçbir şey kaydetmez. Artık ihtiyacınız olmayanları buradan Çöp Sepeti'ne taşıyın; oradan geri yükleyebilirsiniz.";
 "infoExplorer" = "Ölçülen tüm klasörler, boyuta göre sıralı. Çift tıklama bir klasörü açar; bağlam menüsü dosyaları Finder'da gösterir ve bunlar hakkında bilgi verir.";
 "infoLargeFiles" = "Son taramadaki seçilen boyut ve üzerindeki tüm dosyalar. Çift tıklama dosyayı Finder'da gösterir.";
-"infoTemp" = "macOS bu alanı her kullanıcı için /private/var/folders altında oluşturur. Finder'da gizlidir ve “Depolamayı Yönet” içinde ayrıntılandırılmaz.";
+"infoTemporaryFiles" = "macOS bu alanı her kullanıcı için /private/var/folders altında oluşturur. Finder'da gizlidir ve “Depolamayı Yönet” içinde ayrıntılandırılmaz.";
 "infoCopies" = "Bir imzayı kontrol ederken macOS bazen bir uygulamanın tam kopyalarını X klasörüne yerleştirir. Bunlar ayrı programlar değildir; macOS gerektiğinde yenisini oluşturur. Uygulama kapalıyken silmek güvenlidir.";
 "infoVolume" = "Bu birimin kapasitesi: kullanılan, macOS'un gerektiğinde kendiliğinden boşaltabileceği ve boş olan alan. Harici birimler burada taranabilir.";
 "aboutPage" = "Bu Sayfa Hakkında";

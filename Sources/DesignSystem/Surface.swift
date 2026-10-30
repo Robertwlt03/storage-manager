@@ -10,7 +10,7 @@ private struct SurfaceModifier: ViewModifier {
     }
 }
 
-/// Button roles with their own colour, so several buttons side by side stay distinguishable.
+/// Button roles with their own color, so several buttons side by side stay distinguishable.
 /// `quiet` is a bare symbol button (sidebar footer, info button); `content` makes a whole row, tile
 /// or legend entry clickable without drawing a button around it.
 enum ButtonKind {

@@ -2,7 +2,7 @@ import SwiftUI
 
 /// The one table for folders, search results and large files: same columns, menu and double-click
 /// everywhere. The location column only exists where entries come from different folders. No column
-/// customisation (see ARCHITECTURE.md).
+/// customization (see ARCHITECTURE.md).
 struct EntryTable: View {
     let entries: [Entry]
     let total: Int64

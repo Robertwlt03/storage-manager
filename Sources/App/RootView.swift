@@ -32,7 +32,7 @@ struct RootView: View {
     /// The page beside the sidebar; cards are never squeezed, also with the sidebar open.
     private var page: some View {
         detail
-            .frame(minWidth: Layout.pageMinWidth)
+            .frame(minWidth: Layout.pageMinimumWidth)
             .overlay(alignment: .leading) { floatingSidebar }
             .smoothChanges(of: model.pane)
             .smoothChanges(of: model.isSearching)

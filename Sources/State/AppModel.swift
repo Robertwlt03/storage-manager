@@ -39,7 +39,7 @@ import SwiftUI
     /// Made-up data instead of a scan: nothing is read from the disk and nothing can be removed.
     private(set) var isDemo = false
     private var scanTask: Task<Void, Never>?
-    private var scanID = UUID()  // the current scan; older, cancelled runs check it and step aside
+    private var scanID = UUID()  // the current scan; older, canceled runs check it and step aside
 
     var startupVolume: VolumeInfo? { volumes.first { volume in volume.isRoot } }
     /// Reads `revision`, so views that ask this refresh when the tree changes (the tree itself is
@@ -138,7 +138,7 @@ import SwiftUI
             await measure(areas, scanID: id)
             // A newer scan took over; it finishes the state itself.
             guard scanID == id else { return }
-            finishScan(wasCancelled: Task.isCancelled, wasFullScan: reset)
+            finishScan(wasCanceled: Task.isCancelled, wasFullScan: reset)
         }
     }
 
@@ -182,9 +182,9 @@ import SwiftUI
         treeChanged()
     }
 
-    private func finishScan(wasCancelled: Bool, wasFullScan: Bool) {
+    private func finishScan(wasCanceled: Bool, wasFullScan: Bool) {
         isScanning = false
-        if !wasCancelled {
+        if !wasCanceled {
             lastScan = Date()
             if wasFullScan {
                 UserDefaults.standard.set(root.fileCount, forKey: SettingsKey.lastScanFiles)
@@ -321,7 +321,7 @@ extension AppModel {
         Motion.animate { categories = measuredCategories }
         // Figures only from complete data, so they never jump.
         if !isScanning { refreshStatistics() }
-        copyGroups = CopyService.groups(in: root.descendant(at: Paths.tempCopies))
+        copyGroups = CopyService.groups(in: root.descendant(at: Paths.temporaryCopies))
         // Drives the tables, which must not update inside an animation (NSTableView reentrancy).
         revision += 1
     }

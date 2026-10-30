@@ -14,8 +14,8 @@ nonisolated enum ScanLimits {
 
 /// What the cleaner may remove and how old things must be.
 nonisolated enum CleanUpRules {
-    static let tempMinAgeDays = 3
-    static let logMinAgeDays = 7
+    static let temporaryMinimumAgeDays = 3
+    static let logMinimumAgeDays = 7
     static let unusedDayOptions = [30, 90, 180, 365]
     static let defaultUnusedDays = 90
 }

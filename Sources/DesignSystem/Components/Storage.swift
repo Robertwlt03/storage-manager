@@ -9,14 +9,14 @@ struct StorageSegment: Identifiable {
     static let usedID = "used"  // used space no category covers yet
     static let otherID = "other"
     /// When the legend is full, the last place goes to the entry that groups the rest.
-    private static let namedEntryLimit = Layout.legendMaxEntries - 1
+    private static let namedEntryLimit = Layout.legendMaximumEntries - 1
 
     /// The legend's rows: at most a few categories by name, the smaller ones grouped as "other",
     /// then free space and used space that no category covers.
     static func legend(of segments: [StorageSegment]) -> [StorageSegment] {
         let named = segments.filter { segment in !segment.isListedLast }
         let listedLast = segments.filter(\.isListedLast)
-        guard named.count > Layout.legendMaxEntries else { return named + listedLast }
+        guard named.count > Layout.legendMaximumEntries else { return named + listedLast }
         let rest = named.dropFirst(namedEntryLimit)
         let other = StorageSegment(
             id: otherID, title: TextKey.otherCategories.translated,
@@ -116,7 +116,7 @@ private struct StorageBar: View {
 }
 
 extension StorageSegment {
-    /// Free space is grey, every other part has its category colour.
+    /// Free space is gray, every other part has its category color.
     fileprivate var color: Color { colorIndex.map(Theme.categoryColor) ?? Theme.freeSegment }
 
     /// A negative size, which a measurement can briefly report, shows as nothing.

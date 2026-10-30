@@ -3,7 +3,7 @@
 "paneOverview" = "Vue d’ensemble";
 "paneExplorer" = "Dossiers";
 "paneLargeFiles" = "Fichiers volumineux";
-"paneTemp" = "Zone temporaire";
+"paneTemporaryFiles" = "Zone temporaire";
 "paneCopies" = "Copies d’apps";
 "sectionSystem" = "Zones masquées";
 "sectionVolumes" = "Volumes";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ disponibles sur %@";
 "categories" = "Catégories";
 "freeSpace" = "Libre";
-"tempAreaName" = "Zone système temporaire";
+"temporaryAreaName" = "Zone système temporaire";
 "categoryApps" = "Applications";
 "categoryDocuments" = "Documents et Bureau";
 "categoryDownloads" = "Téléchargements";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Caches";
 "categoryAppData" = "Données d’apps";
 "categoryTrash" = "Corbeille";
-"categoryTemp" = "Fichiers temporaires";
+"categoryTemporary" = "Fichiers temporaires";
 "categoryUser" = "Autres données utilisateur";
 "categoryLibrary" = "Données d’apps partagées";
 "categoryOther" = "Autres dossiers";
@@ -91,14 +91,14 @@
 "total" = "Total";
 "subfolders" = "Sous-dossiers";
 "viewCopies" = "Afficher les copies d’apps …";
-"tempFolderT" = "Fichiers temporaires";
-"tempFolderTDetail" = "Presque entièrement vidés au redémarrage.";
-"tempFolderC" = "Caches";
-"tempFolderCDetail" = "Caches des apps et des services système.";
-"tempFolderX" = "Copies d’apps";
-"tempFolderXDetail" = "Copies que macOS crée lors de la vérification des signatures.";
-"tempFolder0" = "Services système";
-"tempFolder0Detail" = "Données des services d’arrière-plan.";
+"temporaryFolderT" = "Fichiers temporaires";
+"temporaryFolderTDetail" = "Presque entièrement vidés au redémarrage.";
+"temporaryFolderC" = "Caches";
+"temporaryFolderCDetail" = "Caches des apps et des services système.";
+"temporaryFolderX" = "Copies d’apps";
+"temporaryFolderXDetail" = "Copies que macOS crée lors de la vérification des signatures.";
+"temporaryFolder0" = "Services système";
+"temporaryFolder0Detail" = "Données des services d’arrière-plan.";
 
 /* Signature copies */
 "noCopies" = "Aucune copie d’app";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Données de compilation Xcode et caches de paquets comme npm ; ils sont recréés lors de la prochaine compilation.";
 "cleanLogs" = "Anciens journaux";
 "cleanLogsDetail" = "Journaux d’apps datant de plus d’une semaine.";
-"cleanTemp" = "Anciens fichiers temporaires";
-"cleanTempDetail" = "Fichiers temporaires non modifiés depuis au moins trois jours.";
+"cleanTemporary" = "Anciens fichiers temporaires";
+"cleanTemporaryDetail" = "Fichiers temporaires non modifiés depuis au moins trois jours.";
 "cleanTrash" = "Corbeille";
 "cleanTrashDetail" = "Vide la Corbeille définitivement. Non sélectionné par défaut.";
 "cleanFailed" = "%@ éléments n’ont pas pu être supprimés, car ils sont en cours d’utilisation ou protégés.";
@@ -215,7 +215,7 @@
 "infoApps" = "Apps que vous n’avez pas ouvertes depuis un moment. La date provient de macOS lui-même ; l’app n’enregistre rien. Placez ici dans la Corbeille ce dont vous n’avez plus besoin ; vous pourrez le restaurer depuis la Corbeille.";
 "infoExplorer" = "Tous les dossiers analysés, triés par taille. Un double-clic ouvre un dossier ; le menu contextuel affiche les fichiers dans le Finder et donne des informations à leur sujet.";
 "infoLargeFiles" = "Tous les fichiers à partir de la taille choisie lors de la dernière analyse. Un double-clic affiche le fichier dans le Finder.";
-"infoTemp" = "macOS crée cette zone pour chaque utilisateur dans /private/var/folders. Elle est masquée dans le Finder et n’est pas détaillée dans « Gérer le stockage ».";
+"infoTemporaryFiles" = "macOS crée cette zone pour chaque utilisateur dans /private/var/folders. Elle est masquée dans le Finder et n’est pas détaillée dans « Gérer le stockage ».";
 "infoCopies" = "Lors de la vérification d’une signature, macOS place parfois des copies complètes d’une app dans le dossier X. Ce ne sont pas des programmes distincts ; macOS en crée une nouvelle en cas de besoin. Les supprimer est sans risque tant que l’app est quittée.";
 "infoVolume" = "Capacité de ce volume : ce qui est utilisé, ce que macOS peut libérer lui-même en cas de besoin et ce qui est libre. Les volumes externes peuvent être analysés ici.";
 "aboutPage" = "À propos de cette page";

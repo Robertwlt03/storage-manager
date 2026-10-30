@@ -45,16 +45,16 @@ Every name has a fixed home:
 | What for | Where |
 | --- | --- |
 | Spacing, icon sizes, measurements and symbol names | `Sources/DesignSystem/Tokens.swift` |
-| Colours | `Sources/DesignSystem/Theme.swift` |
+| Colors | `Sources/DesignSystem/Theme.swift` |
 | Duration and kind of animations | `Sources/DesignSystem/Motion.swift` |
 | Limits of the scan, the cleanup and the search | `Sources/Core/Constants.swift` |
 | Values that only a single type needs | as `private static let` directly in that type |
 
-## <img src="assets/icons/palette.svg" height="33" align="absmiddle" alt="">Colours in one place
+## <img src="assets/icons/palette.svg" height="33" align="absmiddle" alt="">Colors in one place
 
-Every colour of the app comes from `Theme.swift`. There it is defined once for the light and once for the dark
+Every color of the app comes from `Theme.swift`. There it is defined once for the light and once for the dark
 appearance, and reaches a contrast of at least 4.5 to 1 in both. All other files only use these names and never
-create a colour themselves, not even `.white` or `Color(red:green:blue:)`. If you need a new colour, add it to
+create a color themselves, not even `.white` or `Color(red:green:blue:)`. If you need a new color, add it to
 `Theme.swift` and to the list of contrast tests in `DesignTests.swift`.
 
 ## <img src="assets/icons/design.svg" height="33" align="absmiddle" alt="">A consistent design
@@ -131,14 +131,14 @@ is the script `scripts/check.py`. You run individual steps by their names, for e
 make check
 ```
 
-The script runs nine checks one after another:
+The script runs ten checks one after another:
 
 1. **Layout:** `swift format lint --strict` reports every deviation from the uniform layout.
 2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
    function and types nested too deeply. The limits are in `.swiftlint.yml`.
 3. **Compiler:** The app is built with `-warnings-as-errors`, so even a single warning counts as an error.
 4. **Tests:** `swift test` runs all tests from `Tests/SpeicherExplorerTests`, also without a single warning.
-5. **House rules:** Numbers without names, colours outside `Theme.swift`, German text in the code, `$0`, names of one
+5. **House rules:** Numbers without names, colors outside `Theme.swift`, German text in the code, `$0`, names of one
    or two letters, lines over 100 characters and forgotten temporary debug lines. This also applies to the Swift
    scripts in the `scripts` folder.
 6. **Design:** Fonts without a text role, symbol names outside `Symbols`, custom glass or custom backgrounds,
@@ -147,8 +147,13 @@ The script runs nine checks one after another:
    is only written but never read. The check reads the index the compiler writes while building
    (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the tests use
    counts as dead as well.
-8. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
-9. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
+8. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
+   American English or a known technical term and never an abbreviation, so `temporary` instead of `temp` and
+   `maximum` instead of `max`. Comments are read the same way. The macOS spell checker checks the words
+   (`scripts/checks/language.py`); allowed technical terms such as `macOS` or `plist` and the list of forbidden
+   abbreviations are in its settings.
+9. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
+10. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
 
 Every script is built the same way, so once you understand one, you understand them all. At the top, a head says in
@@ -158,7 +163,7 @@ the steps as small, named functions, and at the very bottom, under `MARK: Run`, 
 Search patterns are written over several lines with a comment per part, and names are spelled out, so `BUILD_FOLDER`
 instead of `BUILD_DIR`. The check pipeline itself is split up in `scripts/checks/`, one module per topic.
 
-Whether every text exists in all 20 languages and whether every colour reaches the contrast is checked by the tests
+Whether every text exists in all 20 languages and whether every color reaches the contrast is checked by the tests
 in the fourth step. How much of the code the tests reach is shown per folder by `make coverage`.
 
 On GitHub the same check runs by itself on every pull request, as described in
@@ -174,5 +179,5 @@ well, no script can judge, and only the eye can see what the glass looks like: f
 <p align="center">
   <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
   <sub><a href="README.en.md">Overview</a> · <a href="CONTRIBUTING.en.md">Contributing</a> · <a href="ARCHITECTURE.en.md">Architecture</a> · <a href="CODE_STYLE.en.md">Code rules</a> · <a href="CODE_OF_CONDUCT.en.md">Code of conduct</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT licence</a> · For macOS 27 on Macs with Apple silicon</sub>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

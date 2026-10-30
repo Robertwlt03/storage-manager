@@ -6,8 +6,8 @@ nonisolated enum CleanerService {
     private static let cachesFolder = Paths.home + "/Library/Caches"
     private static let logsFolder = Paths.home + "/Library/Logs"
     private static let trashFolder = Paths.home + "/.Trash"
-    private static var tempFolder: String {
-        Paths.tempArea + "/" + TempPart.temporaryFiles.rawValue
+    private static var temporaryFolder: String {
+        Paths.temporaryArea + "/" + TemporaryAreaPart.temporaryFiles.rawValue
     }
     private static let systemPrefix = "com.apple."
     private static let developerFolders = [
@@ -43,10 +43,10 @@ nonisolated enum CleanerService {
             return developerFolders.map(Paths.expand).filter(Paths.exists)
         case .logs:
             return entries(of: logsFolder)
-                .filter { path in isOlder(path, thanDays: CleanUpRules.logMinAgeDays) }
-        case .temp:
-            return entries(of: tempFolder)
-                .filter { path in isOlder(path, thanDays: CleanUpRules.tempMinAgeDays) }
+                .filter { path in isOlder(path, thanDays: CleanUpRules.logMinimumAgeDays) }
+        case .temporary:
+            return entries(of: temporaryFolder)
+                .filter { path in isOlder(path, thanDays: CleanUpRules.temporaryMinimumAgeDays) }
         case .trash:
             return entries(of: trashFolder)
         }

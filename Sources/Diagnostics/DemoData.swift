@@ -72,20 +72,21 @@ struct DemoData {
     }
 
     private static func temporaryArea() -> Node {
-        folder(Paths.tempArea, smallFiles: 0, smallBytes: 0) { area in
+        folder(Paths.temporaryArea, smallFiles: 0, smallBytes: 0) { area in
             folder(
-                TempPart.temporaryFiles.rawValue, in: area, smallFiles: 500,
+                TemporaryAreaPart.temporaryFiles.rawValue, in: area, smallFiles: 500,
                 smallBytes: 1_100 * megabyte)
             folder(
-                TempPart.caches.rawValue, in: area, smallFiles: 1_400,
+                TemporaryAreaPart.caches.rawValue, in: area, smallFiles: 1_400,
                 smallBytes: 2_200 * megabyte)
-            folder(TempPart.appCopies.rawValue, in: area, smallFiles: 0, smallBytes: 0) { copies in
+            let copiesFolder = TemporaryAreaPart.appCopies.rawValue
+            folder(copiesFolder, in: area, smallFiles: 0, smallBytes: 0) { copies in
                 folder(
                     "com.example.Browser.code_sign_clone", in: copies, smallFiles: 3_600,
                     smallBytes: 4_200 * megabyte)
             }
             folder(
-                TempPart.systemServices.rawValue, in: area, smallFiles: 300,
+                TemporaryAreaPart.systemServices.rawValue, in: area, smallFiles: 300,
                 smallBytes: 40 * megabyte)
         }
     }
@@ -134,7 +135,7 @@ struct DemoData {
     private static func cleanItems() -> [CleanItem] {
         let sizes: [CleanKind: Int64] = [
             .caches: 6_800 * megabyte, .developer: 11 * gigabyte, .logs: 420 * megabyte,
-            .temp: 900 * megabyte, .trash: 1_300 * megabyte,
+            .temporary: 900 * megabyte, .trash: 1_300 * megabyte,
         ]
         return CleanKind.allCases.map { kind in
             CleanItem(

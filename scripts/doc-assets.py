@@ -2,11 +2,11 @@
 """Draws the graphics of the guides in the shared style, so new ones match the old ones.
 
 Start:  scripts/doc-assets.py banner <file name> <title> <subtitle> [--eyebrow <small line>]
-        scripts/doc-assets.py icon <name> <colour> '<svg shapes in a 24-point grid>'
+        scripts/doc-assets.py icon <name> <color> '<svg shapes in a 24-point grid>'
 Needs:  nothing beyond Python
 A banner (assets/banner-<file name>.svg) shows the app icon, a small line, the title and a
-subtitle; an icon (assets/icons/<name>.svg) is a rounded tile in one colour with a white glyph.
-Within one guide every section icon gets its own colour and its own shape (see CLAUDE.md).
+subtitle; an icon (assets/icons/<name>.svg) is a rounded tile in one color with a white glyph.
+Within one guide every section icon gets its own color and its own shape (see CLAUDE.md).
 """
 
 import argparse
@@ -25,7 +25,7 @@ FONT = (
 DEFAULT_EYEBROW = "Speicher-Explorer · Dokumentation"
 
 # Top and bottom of each tile gradient, in the spirit of System Settings.
-COLOURS = {
+COLORS = {
     "blue": ("#5AA9FF", "#0A6CF0"),
     "sky": ("#62CBFA", "#1A86D9"),
     "indigo": ("#8389FF", "#4B4FD8"),
@@ -47,7 +47,7 @@ ICON_SIZE_ON_MAIN_BANNER = 240
 ICON_LEFT, ICON_TOP = 96, 66
 ICON_ORIGIN_ON_MAIN_BANNER = "-96 -100"  # moves the copied icon back to the top left corner
 TEXT_LEFT = 320
-# Each line of text: where it stands (its baseline), its size, its weight and its colour.
+# Each line of text: where it stands (its baseline), its size, its weight and its color.
 EYEBROW_LINE = (112, 22, 600, "#1F52DB")
 TITLE_LINE = (176, 60, 700, "#1D1D1F")
 SUBTITLE_LINE = (224, 28, 400, "#3A3A3C")
@@ -115,15 +115,15 @@ def banner_icon() -> str:
 
 
 def text_line(style: tuple, text: str) -> str:
-    baseline, font_size, font_weight, colour = style
+    baseline, font_size, font_weight, color = style
     return (
         f'<text x="{TEXT_LEFT}" y="{baseline}" font-family="{FONT}" text-anchor="start" '
-        f'font-size="{font_size}" font-weight="{font_weight}" fill="{colour}">{text}</text>'
+        f'font-size="{font_size}" font-weight="{font_weight}" fill="{color}">{text}</text>'
     )
 
 
-def icon(name: str, colour: str, glyph: str) -> Path:
-    top, bottom = COLOURS[colour]
+def icon(name: str, color: str, glyph: str) -> Path:
+    top, bottom = COLORS[color]
     return write(ASSETS / "icons" / f"{name}.svg", ICON_TEMPLATE.format(
         top=top, bottom=bottom, glyph=glyph))
 
@@ -146,7 +146,7 @@ def command_line() -> argparse.ArgumentParser:
     banner_command.add_argument("--eyebrow", default=DEFAULT_EYEBROW, help="the small line above")
     icon_command = commands.add_parser("icon", help="an icon in front of a section heading")
     icon_command.add_argument("name", help="written to assets/icons/<name>.svg")
-    icon_command.add_argument("colour", choices=COLOURS)
+    icon_command.add_argument("color", choices=COLORS)
     icon_command.add_argument("glyph", help="white SVG shapes in a 24-point grid")
     return parser
 
@@ -156,7 +156,7 @@ def main() -> None:
     if chosen.command == "banner":
         print(banner(chosen.file_name, chosen.title, chosen.subtitle, chosen.eyebrow))
     else:
-        print(icon(chosen.name, chosen.colour, chosen.glyph))
+        print(icon(chosen.name, chosen.color, chosen.glyph))
 
 
 if __name__ == "__main__":

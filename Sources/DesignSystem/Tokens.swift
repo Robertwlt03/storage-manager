@@ -23,33 +23,33 @@ enum Space {
 
 /// One icon size per role, so icons of the same role always match.
 enum IconSize: CGFloat {
-    case extraSmall = 10  // accents inside text: chevrons, colour dots of a legend
+    case extraSmall = 10  // accents inside text: chevrons, color dots of a legend
     case small = 16  // beside text: sidebar footer, table cells, key figures
     case medium = 26  // at the start of a row: categories, cleaner, apps
     case large = 52  // headers, sheets and tiles in the grid view
 }
 
 enum Layout {
-    /// Corner radius of coloured squares, relative to their size.
+    /// Corner radius of colored squares, relative to their size.
     static let badgeRadiusShare: CGFloat = 0.23
-    /// The symbol or letter on a coloured square fills half of it.
+    /// The symbol or letter on a colored square fills half of it.
     static let badgeContentShare: CGFloat = 0.5
     static let cardRadius: CGFloat = 16
     static let storageBarHeight: CGFloat = 22
     static let storageBarRadius: CGFloat = 5
-    static let maxContentWidth: CGFloat = 900
+    static let maximumContentWidth: CGFloat = 900
     static let sizeColumn = (min: CGFloat(70), ideal: CGFloat(90), max: CGFloat(120))
     static let shareColumn = (min: CGFloat(90), ideal: CGFloat(150))
     static let countColumn = (min: CGFloat(60), ideal: CGFloat(80), max: CGFloat(110))
     static let percentColumnWidth: CGFloat = 38
     /// The page never gets narrower than this; a narrower window shows the sidebar floating above
     /// the page.
-    static let pageMinWidth: CGFloat = 600
-    static let minWindowWidth: CGFloat = pageMinWidth
+    static let pageMinimumWidth: CGFloat = 600
+    static let minimumWindowWidth: CGFloat = pageMinimumWidth
     /// Room for the sidebar and the page side by side; below it the sidebar closes by itself, like
     /// in Mail.
-    static let sidebarCollapseWidth: CGFloat = sidebarIdealWidth + pageMinWidth
-    static let minWindowHeight: CGFloat = 560
+    static let sidebarCollapseWidth: CGFloat = sidebarIdealWidth + pageMinimumWidth
+    static let minimumWindowHeight: CGFloat = 560
     static let sidebarIdealWidth: CGFloat = 230
     static let settingsWidth: CGFloat = 520
     static let sheetWidth: CGFloat = 560
@@ -58,7 +58,7 @@ enum Layout {
     static let settingsHeight: CGFloat = 330
     static let placeholderHeight: CGFloat = 320
     static let gridTileSize: CGFloat = 170
-    static let legendMaxEntries = 6
+    static let legendMaximumEntries = 6
     static let legendColumns = 2
     static let chartHeight: CGFloat = 220
     static let keyFigureColumns = 3
@@ -67,7 +67,7 @@ enum Layout {
     static let headerHeight: CGFloat = 28
     static let placeholderPageShare = 0.72
     /// Titles and labels that may wrap show at most this many lines.
-    static let maxWrappedLines = 2
+    static let maximumWrappedLines = 2
 }
 
 /// How much of a view shows: fully, or not at all while it keeps its place.

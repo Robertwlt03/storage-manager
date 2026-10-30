@@ -24,11 +24,11 @@ struct LegendTests {
 
     @Test("A long legend groups the smaller categories into one entry")
     func longLegend() {
-        let categories = (0..<Layout.legendMaxEntries + 2).map(Self.category)
+        let categories = (0..<Layout.legendMaximumEntries + 2).map(Self.category)
         let legend = StorageSegment.legend(of: categories + [Self.free])
-        #expect(legend.count == Layout.legendMaxEntries + 1)
-        #expect(legend[Layout.legendMaxEntries - 1].id == StorageSegment.otherID)
-        #expect(legend[Layout.legendMaxEntries - 1].bytes == 3)
+        #expect(legend.count == Layout.legendMaximumEntries + 1)
+        #expect(legend[Layout.legendMaximumEntries - 1].id == StorageSegment.otherID)
+        #expect(legend[Layout.legendMaximumEntries - 1].bytes == 3)
         #expect(legend.last?.id == "free")
     }
 }

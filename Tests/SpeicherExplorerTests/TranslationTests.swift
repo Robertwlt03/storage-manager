@@ -24,7 +24,7 @@ struct TranslationTests {
 
     @Test("Every text has as many placeholders as in English", arguments: AppLanguage.allCases)
     func placeholdersMatch(language: AppLanguage) throws {
-        let english = try #require(Self.texts(of: .en))
+        let english = try #require(Self.texts(of: .english))
         let translated = try #require(Self.texts(of: language))
         for (key, englishText) in english {
             let translatedText = translated[key] ?? ""
@@ -51,8 +51,9 @@ struct TranslationTests {
     @Test(
         "System languages lead to the shipped ones, including script and regional variants",
         arguments: [
-            ("de-DE", AppLanguage.de), ("en-GB", .en), ("zh-TW", .zhHant), ("zh-Hans-CN", .zhHans),
-            ("zh-HK", .zhHant), ("pt-PT", .ptBR), ("no", .nb), ("nb-NO", .nb),
+            ("de-DE", AppLanguage.german), ("en-GB", .english), ("zh-TW", .traditionalChinese),
+            ("zh-Hans-CN", .simplifiedChinese), ("zh-HK", .traditionalChinese),
+            ("pt-PT", .brazilianPortuguese), ("no", .norwegian), ("nb-NO", .norwegian),
         ])
     func languageMatching(systemLanguage: String, shipped: AppLanguage) {
         #expect(AppLanguage.match(systemLanguage) == shipped)
@@ -61,6 +62,6 @@ struct TranslationTests {
     @Test("An unknown language falls back to none, so English takes over")
     func unknownLanguage() {
         #expect(AppLanguage.match("xx") == nil)
-        #expect(AppLanguage.fallback == .en)
+        #expect(AppLanguage.fallback == .english)
     }
 }

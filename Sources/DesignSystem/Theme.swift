@@ -1,7 +1,7 @@
 import AppKit
 import SwiftUI
 
-/// A colour with one value for light and one for dark mode.
+/// A color with one value for light and one for dark mode.
 struct Tone {
     let light: UInt32
     let dark: UInt32
@@ -16,7 +16,7 @@ struct Tone {
 }
 
 enum Theme {
-    // Secondary and status text. The system's secondary label colour reaches only about 4:1 in
+    // Secondary and status text. The system's secondary label color reaches only about 4:1 in
     // light mode, so text uses these tones; surfaces and controls stay native. DesignTests checks
     // every tone and fill against light and dark surfaces.
     static let muted = Tone(light: 0x55555A, dark: 0xB4B4BC)
@@ -35,7 +35,7 @@ enum Theme {
     /// Invisible, but still catches clicks, for example beside the floating sidebar.
     static let clickCatcher = Color.clear
 
-    /// Category colours: Apple's dynamic system colours, which adapt to light, dark and increased
+    /// Category colors: Apple's dynamic system colors, which adapt to light, dark and increased
     /// contrast by themselves. The white symbols on them are decorative (a text label always names
     /// the category), so the 3:1 rule for meaningful graphics does not apply; all text keeps its
     /// 4.5:1 check.
@@ -65,7 +65,7 @@ extension ShapeStyle where Self == Color {
     static var bad: Color { Theme.bad.color }
 }
 
-/// The red, green and blue parts of a colour written as one hex number such as 0x0A5BC4, each from
+/// The red, green and blue parts of a color written as one hex number such as 0x0A5BC4, each from
 /// 0 to 1.
 private struct HexChannels {
     private static let redShift: UInt32 = 16

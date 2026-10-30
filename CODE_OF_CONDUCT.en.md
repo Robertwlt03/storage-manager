@@ -10,7 +10,7 @@ they come from or which language they speak.
 ## <img src="assets/icons/expect.svg" height="33" align="absmiddle" alt="">What we expect
 
 - We treat each other kindly and patiently, even when we disagree.
-- We criticise ideas and code, but never people.
+- We criticize ideas and code, but never people.
 - We help newcomers get started and remember that every one of us was a beginner once.
 - We respect other people’s privacy and do not publish anyone else’s data, including screenshots that show private
   file or folder names.
@@ -39,5 +39,5 @@ open-source projects use. There you will find the full version in English.
 <p align="center">
   <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
   <sub><a href="README.en.md">Overview</a> · <a href="CONTRIBUTING.en.md">Contributing</a> · <a href="ARCHITECTURE.en.md">Architecture</a> · <a href="CODE_STYLE.en.md">Code rules</a> · <a href="CODE_OF_CONDUCT.en.md">Code of conduct</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT licence</a> · For macOS 27 on Macs with Apple silicon</sub>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

@@ -111,7 +111,7 @@ permission, which is why the comparison is optional and does not run on GitHub.
 ## <img src="assets/icons/checks.svg" height="33" align="absmiddle" alt="">Checks before every contribution
 
 Before every contribution you run the check chain. It checks the layout, builds the app with warnings as errors, runs
-all tests and checks the [code rules](CODE_STYLE.en.md), that is names, numbers, colours, design, texts and dead
+all tests and checks the [code rules](CODE_STYLE.en.md), that is names, numbers, colors, design, texts and dead
 code. It must not report a single error or a single warning. On GitHub the same check runs by itself on every pull
 request and marks it red as long as something still needs fixing.
 
@@ -120,7 +120,7 @@ make check
 ```
 
 The tests in the check chain also verify that every text exists in all 20 languages and has the same number of
-placeholders, and that every text colour reaches a contrast of at least 4.5 to 1 in light and dark appearance. If you
+placeholders, and that every text color reaches a contrast of at least 4.5 to 1 in light and dark appearance. If you
 change a rule, add the matching test, and `make coverage` shows you what is still untested.
 
 You run two more checks yourself when needed. The self test measures real folders and compares the result with the
@@ -151,7 +151,7 @@ make stress
   from native speakers.
 - **Code in English, guides in German and English:** You write names, comments and commit messages in English. Guides
   are written in German, and each has an English twin (`*.en.md`) that changes along with it.
-- **Readable code:** Spelled-out names in everyday language, no numbers without names, colours only from `Theme`, and
+- **Readable code:** Spelled-out names in everyday language, no numbers without names, colors only from `Theme`, and
   small, clearly separated steps. The details are in the [code rules](CODE_STYLE.en.md).
 
 ## <img src="assets/icons/newpage.svg" height="33" align="absmiddle" alt="">Adding a new page
@@ -199,5 +199,5 @@ We treat each other kindly and respectfully. The details are in the [code of con
 <p align="center">
   <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
   <sub><a href="README.en.md">Overview</a> · <a href="CONTRIBUTING.en.md">Contributing</a> · <a href="ARCHITECTURE.en.md">Architecture</a> · <a href="CODE_STYLE.en.md">Code rules</a> · <a href="CODE_OF_CONDUCT.en.md">Code of conduct</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT licence</a> · For macOS 27 on Macs with Apple silicon</sub>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

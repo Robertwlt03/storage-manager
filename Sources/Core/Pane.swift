@@ -1,12 +1,12 @@
 /// Every page of the app; the sidebar is built from it. A new page needs a case here, its line in
 /// `details` and its view in `Pane.page` (Features/Pages.swift).
 enum Pane: Hashable {
-    case overview, explorer, largeFiles, cleaner, apps, temp, copies
+    case overview, explorer, largeFiles, cleaner, apps, temporaryFiles, copies
     case volume(String)
 
     static let main: [Pane] = [.overview, .explorer, .largeFiles]
     static let tidy: [Pane] = [.cleaner, .apps]
-    static let system: [Pane] = [.temp, .copies]
+    static let system: [Pane] = [.temporaryFiles, .copies]
     static let everyPage = main + tidy + system
 
     /// Pages whose contents can be shown as a list or as a grid.
@@ -51,7 +51,9 @@ enum Pane: Hashable {
             Details("largeFiles", .paneLargeFiles, .infoLargeFiles, Symbols.largeFiles)
         case .cleaner: Details("cleaner", .paneCleaner, .infoCleaner, Symbols.cleaner)
         case .apps: Details("apps", .paneApps, .infoApps, Symbols.apps)
-        case .temp: Details("temp", .paneTemp, .infoTemp, Symbols.temporaryArea)
+        case .temporaryFiles:
+            Details(
+                "temporaryFiles", .paneTemporaryFiles, .infoTemporaryFiles, Symbols.temporaryArea)
         case .copies: Details("copies", .paneCopies, .infoCopies, Symbols.copies)
         case .volume(let path): Details(path, .sectionVolumes, .infoVolume, Symbols.internalDrive)
         }
@@ -59,7 +61,7 @@ enum Pane: Hashable {
 }
 
 /// The four subfolders of the per-user temporary area.
-nonisolated enum TempPart: String, CaseIterable, Identifiable {
+nonisolated enum TemporaryAreaPart: String, CaseIterable, Identifiable {
     case temporaryFiles = "T"
     case caches = "C"
     case appCopies = "X"
@@ -68,19 +70,19 @@ nonisolated enum TempPart: String, CaseIterable, Identifiable {
 
     var title: TextKey {
         switch self {
-        case .temporaryFiles: .tempFolderT
-        case .caches: .tempFolderC
-        case .appCopies: .tempFolderX
-        case .systemServices: .tempFolder0
+        case .temporaryFiles: .temporaryFolderT
+        case .caches: .temporaryFolderC
+        case .appCopies: .temporaryFolderX
+        case .systemServices: .temporaryFolder0
         }
     }
 
     var detail: TextKey {
         switch self {
-        case .temporaryFiles: .tempFolderTDetail
-        case .caches: .tempFolderCDetail
-        case .appCopies: .tempFolderXDetail
-        case .systemServices: .tempFolder0Detail
+        case .temporaryFiles: .temporaryFolderTDetail
+        case .caches: .temporaryFolderCDetail
+        case .appCopies: .temporaryFolderXDetail
+        case .systemServices: .temporaryFolder0Detail
         }
     }
 }

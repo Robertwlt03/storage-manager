@@ -25,7 +25,7 @@ extension UI {
                     content
                 }
                 .padding(Space.page)
-                .frame(maxWidth: Layout.maxContentWidth)
+                .frame(maxWidth: Layout.maximumContentWidth)
                 .frame(maxWidth: .infinity)
             }
             .scrollContentBackground(.hidden)

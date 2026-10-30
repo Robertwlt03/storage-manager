@@ -33,6 +33,12 @@ LINE_LENGTH = json.loads((PROJECT / ".swift-format").read_text())["lineLength"]
 # A line a tool prints for a problem, such as "File.swift:12:5: warning: …".
 TOOL_DIAGNOSTIC = re.compile(r": (?:warning|error):")
 
+# Colors and links that tools write into their output for a terminal; they hide the words above.
+TERMINAL_FORMATTING = re.compile(r"""
+    \x1b \[ [0-9;]* m              # a color: ESC [ 1;31 m
+    | \x1b \] 8 ;; [^\x1b]* \x1b \\  # a link: ESC ] 8 ;; address ESC \
+""", re.VERBOSE)
+
 
 # MARK: Files
 
@@ -95,9 +101,10 @@ class ToolResult:
         return readable_findings
 
 
-def run(command: list[str]) -> ToolResult:
-    result = subprocess.run(command, cwd=PROJECT, capture_output=True, text=True)
-    return ToolResult(result.returncode == 0, result.stdout + result.stderr)
+def run(command: list[str], given_input: str | None = None) -> ToolResult:
+    result = subprocess.run(command, cwd=PROJECT, input=given_input, capture_output=True, text=True)
+    output = TERMINAL_FORMATTING.sub("", result.stdout + result.stderr)
+    return ToolResult(result.returncode == 0, output)
 
 
 def has_xcode() -> bool:

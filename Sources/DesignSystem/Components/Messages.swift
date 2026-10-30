@@ -108,7 +108,7 @@ extension UI {
     }
 }
 
-/// The system's empty state with a darker description: its secondary colour stays below 4.5:1 in
+/// The system's empty state with a darker description: its secondary color stays below 4.5:1 in
 /// light mode.
 private struct Unavailable<Actions: View>: View {
     let title: String

@@ -25,7 +25,7 @@ class Role(IntFlag):
     IMPLICIT = 1 << 8  # written by the compiler or a macro, not by us
     CHILD_OF = 1 << 9  # a member of a type
     BASE_OF = 1 << 10  # a protocol or class another type builds on
-    OVERRIDE_OF = 1 << 11  # an override, or the fulfilment of a protocol requirement
+    OVERRIDE_OF = 1 << 11  # an override, or the fulfillment of a protocol requirement
 
 
 ALL_NAMED_ROLES = sum(Role)  # roles this module does not name are dropped
@@ -49,6 +49,7 @@ class Kind(IntEnum):
     CLASS_PROPERTY = 20
     STATIC_PROPERTY = 21
     INITIALIZER = 22
+    PARAMETER = 25
 
 
 class Accessor(IntEnum):
@@ -175,10 +176,11 @@ class IndexStore:
             raise RuntimeError(f"no index store in {folder}")
 
     def occurrences(self, inside: Path) -> list[Occurrence]:
-        """Every occurrence in the files below `inside`; the system's own files are skipped."""
+        """Every occurrence in the files below `inside`; the system's own files are skipped, and so
+        are files that were renamed or deleted since the index was written."""
         found = []
         for record, path in self.records().items():
-            if path.is_relative_to(inside):
+            if path.is_relative_to(inside) and path.exists():
                 found += self.occurrences_in_record(record, path)
         return found
 

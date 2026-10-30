@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// "Get Info" for a folder or file: basics right away, folder contents analysed in the background.
+/// "Get Info" for a folder or file: basics right away, folder contents analyzed in the background.
 struct InfoSheet: View {
     let entry: Entry
     @Environment(\.dismiss) private var dismiss
@@ -17,7 +17,7 @@ struct InfoSheet: View {
         }
         .frame(width: Layout.sheetWidth, height: Layout.sheetHeight)
         .task {
-            // The demo's paths are made up, so nothing is analysed on the disk.
+            // The demo's paths are made up, so nothing is analyzed on the disk.
             guard entry.isFolder, !model.isDemo else { return }
             let path = path
             profile = await Task.detached(priority: .utility) { ProfileService.profile(path) }.value

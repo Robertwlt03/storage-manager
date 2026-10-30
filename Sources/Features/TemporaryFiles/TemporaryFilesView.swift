@@ -1,16 +1,16 @@
 import SwiftUI
 
 /// The hidden per-user area under /private/var/folders with its four subfolders.
-struct TempView: View {
+struct TemporaryFilesView: View {
     @Environment(AppModel.self) private var model
 
-    private var tempArea: Node? {
+    private var temporaryArea: Node? {
         _ = model.revision
-        return model.root.descendant(at: Paths.tempArea)
+        return model.root.descendant(at: Paths.temporaryArea)
     }
 
     var body: some View {
-        UI.Page(.temp, options: { viewCopiesButton }, content)
+        UI.Page(.temporaryFiles, options: { viewCopiesButton }, content)
     }
 
     @ViewBuilder private var viewCopiesButton: some View {
@@ -20,23 +20,23 @@ struct TempView: View {
     }
 
     @ViewBuilder private func content() -> some View {
-        if let tempArea {
+        if let temporaryArea {
             UI.Card {
                 UI.Fields([
-                    UI.Field(.location, Paths.tempArea),
-                    UI.Field(.total, Format.bytes(tempArea.bytes)),
+                    UI.Field(.location, Paths.temporaryArea),
+                    UI.Field(.total, Format.bytes(temporaryArea.bytes)),
                 ])
             }
             UI.Card(TextKey.subfolders.translated) {
-                UI.Rows(TempPart.allCases) { part in row(part, in: tempArea) }
+                UI.Rows(TemporaryAreaPart.allCases) { part in row(part, in: temporaryArea) }
             }
         } else {
             UI.Placeholder(.notMeasured, in: .page)
         }
     }
 
-    private func row(_ part: TempPart, in tempArea: Node) -> some View {
-        let folder = tempArea.child(named: part.rawValue)
+    private func row(_ part: TemporaryAreaPart, in temporaryArea: Node) -> some View {
+        let folder = temporaryArea.child(named: part.rawValue)
         return UI.NavigationRow(
             part.title.translated, icon: .letter(part.rawValue),
             detail: part.detail.translated,

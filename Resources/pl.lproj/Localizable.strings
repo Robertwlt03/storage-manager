@@ -3,7 +3,7 @@
 "paneOverview" = "Przegląd";
 "paneExplorer" = "Foldery";
 "paneLargeFiles" = "Duże pliki";
-"paneTemp" = "Obszar tymczasowy";
+"paneTemporaryFiles" = "Obszar tymczasowy";
 "paneCopies" = "Kopie aplikacji";
 "sectionSystem" = "Ukryte obszary";
 "sectionVolumes" = "Woluminy";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ dostępne z %@";
 "categories" = "Kategorie";
 "freeSpace" = "Wolne";
-"tempAreaName" = "Tymczasowy obszar systemu";
+"temporaryAreaName" = "Tymczasowy obszar systemu";
 "categoryApps" = "Programy";
 "categoryDocuments" = "Dokumenty i Biurko";
 "categoryDownloads" = "Pobrane";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Pamięci podręczne";
 "categoryAppData" = "Dane aplikacji";
 "categoryTrash" = "Kosz";
-"categoryTemp" = "Pliki tymczasowe";
+"categoryTemporary" = "Pliki tymczasowe";
 "categoryUser" = "Pozostałe dane użytkownika";
 "categoryLibrary" = "Wspólne dane aplikacji";
 "categoryOther" = "Pozostałe foldery";
@@ -91,14 +91,14 @@
 "total" = "Łącznie";
 "subfolders" = "Podfoldery";
 "viewCopies" = "Pokaż kopie aplikacji …";
-"tempFolderT" = "Pliki tymczasowe";
-"tempFolderTDetail" = "W większości opróżniane przy ponownym uruchomieniu.";
-"tempFolderC" = "Pamięci podręczne";
-"tempFolderCDetail" = "Pamięci podręczne aplikacji i usług systemowych.";
-"tempFolderX" = "Kopie aplikacji";
-"tempFolderXDetail" = "Kopie, które macOS tworzy podczas sprawdzania podpisów.";
-"tempFolder0" = "Usługi systemowe";
-"tempFolder0Detail" = "Dane usług działających w tle.";
+"temporaryFolderT" = "Pliki tymczasowe";
+"temporaryFolderTDetail" = "W większości opróżniane przy ponownym uruchomieniu.";
+"temporaryFolderC" = "Pamięci podręczne";
+"temporaryFolderCDetail" = "Pamięci podręczne aplikacji i usług systemowych.";
+"temporaryFolderX" = "Kopie aplikacji";
+"temporaryFolderXDetail" = "Kopie, które macOS tworzy podczas sprawdzania podpisów.";
+"temporaryFolder0" = "Usługi systemowe";
+"temporaryFolder0Detail" = "Dane usług działających w tle.";
 
 /* Signature copies */
 "noCopies" = "Brak kopii aplikacji";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Dane kompilacji Xcode i pamięci podręczne pakietów, np. npm; powstają ponownie przy następnej kompilacji.";
 "cleanLogs" = "Stare dzienniki";
 "cleanLogsDetail" = "Dzienniki aplikacji starsze niż tydzień.";
-"cleanTemp" = "Stare pliki tymczasowe";
-"cleanTempDetail" = "Pliki tymczasowe niezmieniane od co najmniej trzech dni.";
+"cleanTemporary" = "Stare pliki tymczasowe";
+"cleanTemporaryDetail" = "Pliki tymczasowe niezmieniane od co najmniej trzech dni.";
 "cleanTrash" = "Kosz";
 "cleanTrashDetail" = "Opróżnia Kosz na stałe. Domyślnie nie jest zaznaczone.";
 "cleanFailed" = "Nie udało się usunąć %@ elementów, ponieważ są używane lub chronione.";
@@ -215,7 +215,7 @@
 "infoApps" = "Aplikacje, których od dawna nie otwierano. Data pochodzi od samego macOS; aplikacja niczego nie zapisuje. To, czego już nie potrzebujesz, przenosisz tutaj do Kosza i możesz stamtąd przywrócić.";
 "infoExplorer" = "Wszystkie zmierzone foldery posortowane według rozmiaru. Dwukrotne kliknięcie otwiera folder; menu kontekstowe pokazuje pliki w Finderze i podaje informacje o nich.";
 "infoLargeFiles" = "Wszystkie pliki od wybranego rozmiaru z ostatniego pomiaru. Dwukrotne kliknięcie pokazuje plik w Finderze.";
-"infoTemp" = "macOS tworzy ten obszar dla każdego użytkownika w /private/var/folders. Jest ukryty w Finderze i nie jest rozbijany w „Zarządzaj pamięcią”.";
+"infoTemporaryFiles" = "macOS tworzy ten obszar dla każdego użytkownika w /private/var/folders. Jest ukryty w Finderze i nie jest rozbijany w „Zarządzaj pamięcią”.";
 "infoCopies" = "Podczas sprawdzania podpisu macOS czasem tworzy pełne kopie aplikacji w folderze X. To nie są osobne programy; macOS tworzy nową w razie potrzeby. Usuwanie jest bezpieczne, dopóki aplikacja jest zamknięta.";
 "infoVolume" = "Pojemność tego woluminu: co jest zajęte, co macOS może w razie potrzeby sam zwolnić i co jest wolne. Woluminy zewnętrzne można tu zmierzyć.";
 "aboutPage" = "O tej stronie";

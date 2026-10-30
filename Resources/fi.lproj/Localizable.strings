@@ -3,7 +3,7 @@
 "paneOverview" = "Yleiskatsaus";
 "paneExplorer" = "Kansiot";
 "paneLargeFiles" = "Suuret tiedostot";
-"paneTemp" = "Tilapäinen alue";
+"paneTemporaryFiles" = "Tilapäinen alue";
 "paneCopies" = "Appien kopiot";
 "sectionSystem" = "Piilotetut alueet";
 "sectionVolumes" = "Taltiot";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ käytettävissä (yhteensä %@)";
 "categories" = "Luokat";
 "freeSpace" = "Vapaana";
-"tempAreaName" = "Tilapäinen järjestelmäalue";
+"temporaryAreaName" = "Tilapäinen järjestelmäalue";
 "categoryApps" = "Ohjelmat";
 "categoryDocuments" = "Dokumentit ja Työpöytä";
 "categoryDownloads" = "Lataukset";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Välimuistit";
 "categoryAppData" = "Appien tiedot";
 "categoryTrash" = "Roskakori";
-"categoryTemp" = "Tilapäiset tiedostot";
+"categoryTemporary" = "Tilapäiset tiedostot";
 "categoryUser" = "Muut käyttäjätiedot";
 "categoryLibrary" = "Yhteiset appien tiedot";
 "categoryOther" = "Muut kansiot";
@@ -91,14 +91,14 @@
 "total" = "Yhteensä";
 "subfolders" = "Alikansiot";
 "viewCopies" = "Näytä appien kopiot …";
-"tempFolderT" = "Tilapäiset tiedostot";
-"tempFolderTDetail" = "Tyhjennetään enimmäkseen uudelleenkäynnistyksessä.";
-"tempFolderC" = "Välimuistit";
-"tempFolderCDetail" = "Appien ja järjestelmäpalvelujen välimuistit.";
-"tempFolderX" = "Appien kopiot";
-"tempFolderXDetail" = "Kopioita, jotka macOS luo allekirjoitusten tarkistuksen aikana.";
-"tempFolder0" = "Järjestelmäpalvelut";
-"tempFolder0Detail" = "Taustapalvelujen tiedot.";
+"temporaryFolderT" = "Tilapäiset tiedostot";
+"temporaryFolderTDetail" = "Tyhjennetään enimmäkseen uudelleenkäynnistyksessä.";
+"temporaryFolderC" = "Välimuistit";
+"temporaryFolderCDetail" = "Appien ja järjestelmäpalvelujen välimuistit.";
+"temporaryFolderX" = "Appien kopiot";
+"temporaryFolderXDetail" = "Kopioita, jotka macOS luo allekirjoitusten tarkistuksen aikana.";
+"temporaryFolder0" = "Järjestelmäpalvelut";
+"temporaryFolder0Detail" = "Taustapalvelujen tiedot.";
 
 /* Signature copies */
 "noCopies" = "Ei appien kopioita";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Xcoden koontitiedot ja pakettien välimuistit, kuten npm; ne syntyvät uudelleen seuraavassa koonnissa.";
 "cleanLogs" = "Vanhat lokit";
 "cleanLogsDetail" = "Appien lokit, jotka ovat yli viikon vanhoja.";
-"cleanTemp" = "Vanhat tilapäiset tiedostot";
-"cleanTempDetail" = "Tilapäiset tiedostot, joita ei ole muutettu vähintään kolmeen päivään.";
+"cleanTemporary" = "Vanhat tilapäiset tiedostot";
+"cleanTemporaryDetail" = "Tilapäiset tiedostot, joita ei ole muutettu vähintään kolmeen päivään.";
 "cleanTrash" = "Roskakori";
 "cleanTrashDetail" = "Tyhjentää roskakorin pysyvästi. Ei valittuna oletuksena.";
 "cleanFailed" = "%@ kohdetta ei voitu poistaa, koska ne ovat käytössä tai suojattuja.";
@@ -215,7 +215,7 @@
 "infoApps" = "Apit, joita et ole avannut pitkään aikaan. Päivämäärä tulee macOS:ltä itseltään; app ei tallenna mitään. Sen, mitä et enää tarvitse, voit siirtää täältä roskakoriin ja palauttaa sieltä.";
 "infoExplorer" = "Kaikki mitatut kansiot koon mukaan lajiteltuina. Kaksoisnapsautus avaa kansion; kontekstivalikko näyttää tiedostot Finderissa ja antaa niistä tietoja.";
 "infoLargeFiles" = "Kaikki tiedostot viimeisimmästä mittauksesta valitusta koosta alkaen. Kaksoisnapsautus näyttää tiedoston Finderissa.";
-"infoTemp" = "macOS luo tämän alueen jokaiselle käyttäjälle kohteeseen /private/var/folders. Se on piilotettu Finderissa, eikä sitä eritellä kohdassa ”Hallitse tallennustilaa”.";
+"infoTemporaryFiles" = "macOS luo tämän alueen jokaiselle käyttäjälle kohteeseen /private/var/folders. Se on piilotettu Finderissa, eikä sitä eritellä kohdassa ”Hallitse tallennustilaa”.";
 "infoCopies" = "Allekirjoitusta tarkistaessaan macOS luo joskus apista täydellisiä kopioita kansioon X. Ne eivät ole omia ohjelmiaan; macOS luo tarvittaessa uuden. Niiden poistaminen on turvallista, kun app on suljettu.";
 "infoVolume" = "Tämän taltion kapasiteetti: mitä on käytetty, minkä macOS voi tarvittaessa vapauttaa itse ja mitä on vapaana. Ulkoisia taltioita voi mitata täällä.";
 "aboutPage" = "Tietoja tästä sivusta";

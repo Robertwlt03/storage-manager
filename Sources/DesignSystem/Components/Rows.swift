@@ -92,8 +92,8 @@ extension UI {
             HStack(spacing: Space.item) {
                 Icon(icon, size: .large)
                 VStack(alignment: .leading, spacing: Space.hairline) {
-                    Text(title).textRole(.title).lineLimit(Layout.maxWrappedLines)
-                    Text(subtitle).foregroundStyle(.muted).lineLimit(Layout.maxWrappedLines)
+                    Text(title).textRole(.title).lineLimit(Layout.maximumWrappedLines)
+                    Text(subtitle).foregroundStyle(.muted).lineLimit(Layout.maximumWrappedLines)
                         .textSelection(.enabled)
                 }
             }

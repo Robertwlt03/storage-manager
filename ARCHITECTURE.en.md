@@ -41,7 +41,7 @@ System Settings.
 **`Sources/State`:** `AppModel`, which brings the services together and holds the state of the interface.
 
 **`Sources/DesignSystem`:** All building blocks in the `UI` namespace with their variants. `Tokens` contains spacing,
-icon sizes, text roles, measurements and symbol names, `Theme` the colours, `Surface` cards and button styles, and
+icon sizes, text roles, measurements and symbol names, `Theme` the colors, `Surface` cards and button styles, and
 `Motion` all animations.
 
 **`Sources/Features`:** Every page in a folder of its own. `Pages.swift` maps each page to its view. `Shared`
@@ -108,7 +108,7 @@ why both check for Full Disk Access first and stop right away without it, and `m
 instead of the bare binary, so that macOS credits it with the app’s Full Disk Access.
 
 **Demo mode:** With `-demo YES` the app fills itself with the made-up data from `DemoData` instead of scanning.
-`AppModel` then blocks every disk access and every removal, and the info window does not analyse anything either. The
+`AppModel` then blocks every disk access and every removal, and the info window does not analyze anything either. The
 paths of the made-up files and cleanup entries do not exist, and a test checks that.
 
 **Energy:** No animation runs while idle. The scan runs at low priority, and progress is reported at most twice per
@@ -117,8 +117,8 @@ second.
 **Language and appearance:** Language, appearance and units come from System Settings. The app has no switches of
 its own for them.
 
-**Contrast:** Every text colour reaches at least 4.5 to 1 in both appearances. That is why text for secondary
-information uses the `muted` tone instead of the system colour, which falls below that in light mode.
+**Contrast:** Every text color reaches at least 4.5 to 1 in both appearances. That is why text for secondary
+information uses the `muted` tone instead of the system color, which falls below that in light mode.
 
 <p align="center">
   <img src="assets/banner-footer-en.svg" alt="" width="480">
@@ -127,5 +127,5 @@ information uses the `muted` tone instead of the system colour, which falls belo
 <p align="center">
   <b>Speicher-Explorer · See at a glance where your storage goes.</b><br>
   <sub><a href="README.en.md">Overview</a> · <a href="CONTRIBUTING.en.md">Contributing</a> · <a href="ARCHITECTURE.en.md">Architecture</a> · <a href="CODE_STYLE.en.md">Code rules</a> · <a href="CODE_OF_CONDUCT.en.md">Code of conduct</a></sub><br>
-  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT licence</a> · For macOS 27 on Macs with Apple silicon</sub>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

@@ -35,7 +35,7 @@ nonisolated enum ScanService {
             .map(\.element)
     }
 
-    /// Runs on the caller's thread; call it from a low-priority task. Nil when cancelled.
+    /// Runs on the caller's thread; call it from a low-priority task. Nil when canceled.
     static func scan(_ path: String, progress reportProgress: (Progress) -> Void) -> Result? {
         var builder = TreeBuilder()
         var visitedEntries = 0

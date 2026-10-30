@@ -50,7 +50,8 @@ content here or in comments.
 `make` lists them all. The ones you need:
 
 - `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, house rules, design
-  rules, dead code from the compiler index, plutil, scripts). It must end with "No errors and no warnings." before
+  rules, dead code from the compiler index, American English names and comments without abbreviations, plutil,
+  scripts). It must end with "No errors and no warnings." before
   every commit.
 - `make test`, `make coverage`, `make format`, single steps with `scripts/check.py <step>`.
 - `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
@@ -58,10 +59,10 @@ content here or in comments.
 ## Working on code
 
 1. Read the files you touch and the rules in CODE_STYLE.md and ARCHITECTURE.md first.
-2. Keep the rules: spelled-out English names, no numbers without a name, colours only from `Theme`, fonts via
+2. Keep the rules: spelled-out English names, no numbers without a name, colors only from `Theme`, fonts via
    `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 20
    translations, no dead code, functions as lists of named steps. Scripts follow the same rules and one shared
-   layout (CODE_STYLE.md, step 9): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
+   layout (CODE_STYLE.md, step 10): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
    named and explained (patterns in re.VERBOSE with a comment per part), small named steps, `MARK: Run` at the
    bottom. Spelled-out names, no duplicated code (shared steps live in `scripts/require-xcode.sh` and
    `scripts/sign.sh`), and no copies of lists the app already has (ask the app, as `--list-pages` does).
@@ -70,7 +71,7 @@ content here or in comments.
 5. Commit on the current branch with the footer above; do not push.
 
 Design wishes of the user: native Apple look (HIG, Liquid Glass), gentle and minimal animations as feedback only, no
-start animation, energy-saving behaviour (nothing animates or polls at rest), text contrast at least 4.5:1 in light and
+start animation, energy-saving behavior (nothing animates or polls at rest), text contrast at least 4.5:1 in light and
 dark mode.
 
 ## Checking the look
@@ -87,9 +88,9 @@ Find the window number with a small CoreGraphics script (`CGWindowListCopyWindow
 width over 500) and capture it with `screencapture -x -o -l <window>`. `SpeicherExplorer --list-pages` prints the
 pane names; add `-appearance dark` (or `light`) for a fixed look. For refactors, build the
 previous commit into a separate scratchpad folder and compare both captures pixel by pixel; differences in free space
-and selection colour (window focus) are expected.
+and selection color (window focus) are expected.
 
-## Testing app behaviour without new permissions
+## Testing app behavior without new permissions
 
 Never send key presses or clicks through System Events or `osascript`: that needs Accessibility or Automation
 permission and makes macOS ask the user. Test the real app like this instead (this is how Cmd+Q and "Quit & Reopen"
@@ -112,14 +113,14 @@ with the access sheet open were checked):
 
 ## Documentation
 
-- Guides are German, each with an English twin (`README.en.md`, …) in British spelling; a change to one goes into
+- Guides are German, each with an English twin (`README.en.md`, …) in American spelling; a change to one goes into
   both. Both carry the Deutsch · English line under the banner. Code, comments and commit messages are English.
 - Every guide follows the README's layout: banner at the top (`assets/banner-*.svg`), an icon in front of every `##`
   heading (`<img src="assets/icons/<name>.svg" height="33" align="absmiddle" alt="">`), and the shared footer with the
-  small banner, the navigation line to all guides and the licence line.
+  small banner, the navigation line to all guides and the license line.
 - Draw new banners and icons with `scripts/doc-assets.py` (see its help) so they match the others.
 - Section icons: 60×56 canvas, 45 px rounded tile with a two-stop gradient, white 2 px stroke glyph in a 24 px grid.
-  Within one guide every icon has its own colour and its own shape; check new icons rendered large and at 33 px in
+  Within one guide every icon has its own color and its own shape; check new icons rendered large and at 33 px in
   light and dark.
 - When requirements, commands or rules change, update README, CONTRIBUTING, CODE_STYLE and ARCHITECTURE in the same
   commit.

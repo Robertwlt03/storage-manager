@@ -9,7 +9,7 @@ extension Pane {
         case .largeFiles: LargeFilesView()
         case .cleaner: CleanerView()
         case .apps: UnusedAppsView()
-        case .temp: TempView()
+        case .temporaryFiles: TemporaryFilesView()
         case .copies: CopiesView()
         case .volume(let path): VolumeView(path: path)
         }

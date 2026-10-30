@@ -3,7 +3,7 @@
 "paneOverview" = "Panoramica";
 "paneExplorer" = "Cartelle";
 "paneLargeFiles" = "File di grandi dimensioni";
-"paneTemp" = "Area temporanea";
+"paneTemporaryFiles" = "Area temporanea";
 "paneCopies" = "Copie delle app";
 "sectionSystem" = "Aree nascoste";
 "sectionVolumes" = "Volumi";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ disponibili su %@";
 "categories" = "Categorie";
 "freeSpace" = "Libero";
-"tempAreaName" = "Area temporanea del sistema";
+"temporaryAreaName" = "Area temporanea del sistema";
 "categoryApps" = "Applicazioni";
 "categoryDocuments" = "Documenti e Scrivania";
 "categoryDownloads" = "Download";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Cache";
 "categoryAppData" = "Dati delle app";
 "categoryTrash" = "Cestino";
-"categoryTemp" = "File temporanei";
+"categoryTemporary" = "File temporanei";
 "categoryUser" = "Altri dati utente";
 "categoryLibrary" = "Dati delle app condivisi";
 "categoryOther" = "Altre cartelle";
@@ -91,14 +91,14 @@
 "total" = "Totale";
 "subfolders" = "Sottocartelle";
 "viewCopies" = "Mostra le copie delle app …";
-"tempFolderT" = "File temporanei";
-"tempFolderTDetail" = "Per la maggior parte vengono svuotati al riavvio.";
-"tempFolderC" = "Cache";
-"tempFolderCDetail" = "Cache di app e servizi di sistema.";
-"tempFolderX" = "Copie delle app";
-"tempFolderXDetail" = "Copie create da macOS durante la verifica delle firme.";
-"tempFolder0" = "Servizi di sistema";
-"tempFolder0Detail" = "Dati dei servizi in background.";
+"temporaryFolderT" = "File temporanei";
+"temporaryFolderTDetail" = "Per la maggior parte vengono svuotati al riavvio.";
+"temporaryFolderC" = "Cache";
+"temporaryFolderCDetail" = "Cache di app e servizi di sistema.";
+"temporaryFolderX" = "Copie delle app";
+"temporaryFolderXDetail" = "Copie create da macOS durante la verifica delle firme.";
+"temporaryFolder0" = "Servizi di sistema";
+"temporaryFolder0Detail" = "Dati dei servizi in background.";
 
 /* Signature copies */
 "noCopies" = "Nessuna copia delle app";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Dati di build di Xcode e cache dei pacchetti come npm; vengono ricreati alla build successiva.";
 "cleanLogs" = "Vecchi log";
 "cleanLogsDetail" = "Log delle app più vecchi di una settimana.";
-"cleanTemp" = "Vecchi file temporanei";
-"cleanTempDetail" = "File temporanei non modificati da almeno tre giorni.";
+"cleanTemporary" = "Vecchi file temporanei";
+"cleanTemporaryDetail" = "File temporanei non modificati da almeno tre giorni.";
 "cleanTrash" = "Cestino";
 "cleanTrashDetail" = "Svuota il Cestino in modo definitivo. Non selezionato per impostazione predefinita.";
 "cleanFailed" = "Non è stato possibile rimuovere %@ elementi perché sono in uso o protetti.";
@@ -215,7 +215,7 @@
 "infoApps" = "App che non apri da un po’. La data proviene da macOS stesso; l’app non registra nulla. Sposta qui nel Cestino ciò che non ti serve più; potrai ripristinarlo da lì.";
 "infoExplorer" = "Tutte le cartelle analizzate, ordinate per dimensioni. Con un doppio clic si apre una cartella; il menu contestuale mostra i file nel Finder e ne fornisce le informazioni.";
 "infoLargeFiles" = "Tutti i file dalla dimensione scelta in su nell’ultima analisi. Con un doppio clic il file viene mostrato nel Finder.";
-"infoTemp" = "macOS crea quest’area per ogni utente in /private/var/folders. È nascosta nel Finder e non è suddivisa in “Gestisci spazio di archiviazione”.";
+"infoTemporaryFiles" = "macOS crea quest’area per ogni utente in /private/var/folders. È nascosta nel Finder e non è suddivisa in “Gestisci spazio di archiviazione”.";
 "infoCopies" = "Durante la verifica di una firma, macOS a volte inserisce copie complete di un’app nella cartella X. Non sono programmi separati; macOS ne crea una nuova quando serve. Eliminarle è sicuro finché l’app è chiusa.";
 "infoVolume" = "Capacità di questo volume: ciò che è utilizzato, ciò che macOS può liberare da solo quando serve e ciò che è libero. Qui è possibile analizzare i volumi esterni.";
 "aboutPage" = "Informazioni su questa pagina";

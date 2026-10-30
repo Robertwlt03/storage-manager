@@ -25,6 +25,8 @@ TEXT_KEYS = "TextKey"
 # A property wrapper such as @Binding passes every write on, so writing alone is a use.
 PROPERTY_WRAPPER = re.compile(r"^\s*@[A-Z]\w*")  # an attribute with a capital letter: @State
 
+# The index holds where parameters are declared but not where they are used, so they are left out.
+DECLARATION_KINDS = set(Kind) - {Kind.PARAMETER}
 PROPERTY_KINDS = {
     Kind.VARIABLE, Kind.INSTANCE_PROPERTY, Kind.CLASS_PROPERTY, Kind.STATIC_PROPERTY,
 }
@@ -119,10 +121,10 @@ class DeadCode:
 
 
 def is_written_declaration(definition: Occurrence) -> bool:
-    """A declaration written in our code; accessors, generated code and the fulfilment of a
+    """A declaration written in our code; accessors, generated code and the fulfillment of a
     protocol requirement (which the system calls) are left out."""
     return (
-        definition.kind in set(Kind)
+        definition.kind in DECLARATION_KINDS
         and not definition.is_accessor()
         and not definition.roles & Role.IMPLICIT
         and not definition.related(Role.OVERRIDE_OF)

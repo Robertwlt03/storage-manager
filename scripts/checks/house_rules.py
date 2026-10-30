@@ -64,10 +64,10 @@ SHORT_DECLARATION = re.compile(r"""
 """, re.VERBOSE)
 GERMAN_LETTER = re.compile("[äöüÄÖÜß]")
 
-COLOUR = re.compile(r"""
+COLOR = re.compile(r"""
     \b (?: Color | NSColor ) \s* [.(]       # Color(…), Color.red, NSColor.…
     | \. (?: red | orange | yellow | green | mint | teal | cyan | blue | indigo | purple
-           | pink | brown | gray | black | white ) \b    # a system colour such as .red
+           | pink | brown | gray | black | white ) \b    # a system color such as .red
 """, re.VERBOSE)
 CLOSURE_SHORTHAND = re.compile(r"\$\d")  # $0, $1 instead of a named closure parameter
 DEBUG_LINE = re.compile(re.escape(DEBUG_MARK) + r"\s*$")
@@ -129,7 +129,7 @@ class PatternRule:
 
 
 HOUSE_RULES = [
-    PatternRule("colour defined outside Theme.swift", COLOUR, allowed_in=(TESTS, THEME)),
+    PatternRule("color defined outside Theme.swift", COLOR, allowed_in=(TESTS, THEME)),
     PatternRule("$0 instead of a named closure parameter", CLOSURE_SHORTHAND),
     PatternRule(
         "temporary debug line left in the code", DEBUG_LINE, reads_comments_and_texts=True),

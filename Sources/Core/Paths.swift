@@ -8,18 +8,20 @@ nonisolated enum Paths {
     static let usrLocal = "/usr/local"
 
     /// Per-user area under /private/var/folders/… with the subfolders T, C, X and 0.
-    static let tempArea: String = {
+    static let temporaryArea: String = {
         var buffer = [CChar](repeating: 0, count: Int(PATH_MAX))
         confstr(_CS_DARWIN_USER_TEMP_DIR, &buffer, buffer.count)
         return withoutSymlinks(
             ((String(utf8String: buffer) ?? "") as NSString).deletingLastPathComponent)
     }()
 
-    static var tempCopies: String { tempArea + "/" + TempPart.appCopies.rawValue }
+    static var temporaryCopies: String {
+        temporaryArea + "/" + TemporaryAreaPart.appCopies.rawValue
+    }
 
     /// Areas measured on every Mac; missing ones are skipped.
     static var defaultScanRoots: [String] {
-        [home, applications, library, opt, usrLocal, tempArea]
+        [home, applications, library, opt, usrLocal, temporaryArea]
     }
 
     /// `~/…` to an absolute path.
@@ -36,7 +38,7 @@ nonisolated enum Paths {
     }
 
     static func displayName(_ path: String) -> String {
-        if path == tempArea { return TextKey.tempAreaName.translated }
+        if path == temporaryArea { return TextKey.temporaryAreaName.translated }
         return path.hasPrefix(home) ? "~" + path.dropFirst(home.count) : path
     }
 

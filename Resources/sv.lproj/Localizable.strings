@@ -3,7 +3,7 @@
 "paneOverview" = "Översikt";
 "paneExplorer" = "Mappar";
 "paneLargeFiles" = "Stora filer";
-"paneTemp" = "Tillfälligt område";
+"paneTemporaryFiles" = "Tillfälligt område";
 "paneCopies" = "Appkopior";
 "sectionSystem" = "Dolda områden";
 "sectionVolumes" = "Volymer";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ tillgängligt av %@";
 "categories" = "Kategorier";
 "freeSpace" = "Ledigt";
-"tempAreaName" = "Tillfälligt systemområde";
+"temporaryAreaName" = "Tillfälligt systemområde";
 "categoryApps" = "Program";
 "categoryDocuments" = "Dokument och Skrivbord";
 "categoryDownloads" = "Hämtade filer";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Cacheminnen";
 "categoryAppData" = "Appdata";
 "categoryTrash" = "Papperskorgen";
-"categoryTemp" = "Tillfälliga filer";
+"categoryTemporary" = "Tillfälliga filer";
 "categoryUser" = "Övriga användardata";
 "categoryLibrary" = "Delad appdata";
 "categoryOther" = "Övriga mappar";
@@ -91,14 +91,14 @@
 "total" = "Totalt";
 "subfolders" = "Undermappar";
 "viewCopies" = "Visa appkopior …";
-"tempFolderT" = "Tillfälliga filer";
-"tempFolderTDetail" = "Töms för det mesta vid omstart.";
-"tempFolderC" = "Cacheminnen";
-"tempFolderCDetail" = "Cacheminnen för appar och systemtjänster.";
-"tempFolderX" = "Appkopior";
-"tempFolderXDetail" = "Kopior som macOS skapar när signaturer kontrolleras.";
-"tempFolder0" = "Systemtjänster";
-"tempFolder0Detail" = "Data från bakgrundstjänster.";
+"temporaryFolderT" = "Tillfälliga filer";
+"temporaryFolderTDetail" = "Töms för det mesta vid omstart.";
+"temporaryFolderC" = "Cacheminnen";
+"temporaryFolderCDetail" = "Cacheminnen för appar och systemtjänster.";
+"temporaryFolderX" = "Appkopior";
+"temporaryFolderXDetail" = "Kopior som macOS skapar när signaturer kontrolleras.";
+"temporaryFolder0" = "Systemtjänster";
+"temporaryFolder0Detail" = "Data från bakgrundstjänster.";
 
 /* Signature copies */
 "noCopies" = "Inga appkopior";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Byggdata från Xcode och paketcacher som npm; de skapas på nytt vid nästa bygge.";
 "cleanLogs" = "Gamla loggar";
 "cleanLogsDetail" = "Apploggar som är äldre än en vecka.";
-"cleanTemp" = "Gamla tillfälliga filer";
-"cleanTempDetail" = "Tillfälliga filer som inte har ändrats på minst tre dagar.";
+"cleanTemporary" = "Gamla tillfälliga filer";
+"cleanTemporaryDetail" = "Tillfälliga filer som inte har ändrats på minst tre dagar.";
 "cleanTrash" = "Papperskorgen";
 "cleanTrashDetail" = "Tömmer papperskorgen permanent. Inte markerad som standard.";
 "cleanFailed" = "%@ objekt kunde inte tas bort eftersom de används eller är skyddade.";
@@ -215,7 +215,7 @@
 "infoApps" = "Appar som du inte har öppnat på ett tag. Datumet kommer från macOS självt; appen registrerar ingenting. Det du inte längre behöver flyttar du härifrån till papperskorgen och kan återställa därifrån.";
 "infoExplorer" = "Alla uppmätta mappar, sorterade efter storlek. Dubbelklicka för att öppna en mapp; snabbmenyn visar filer i Finder och ger information om dem.";
 "infoLargeFiles" = "Alla filer från den valda storleken i den senaste mätningen. Dubbelklicka för att visa filen i Finder.";
-"infoTemp" = "macOS skapar det här området för varje användare under /private/var/folders. Det är dolt i Finder och specificeras inte i ”Hantera lagring”.";
+"infoTemporaryFiles" = "macOS skapar det här området för varje användare under /private/var/folders. Det är dolt i Finder och specificeras inte i ”Hantera lagring”.";
 "infoCopies" = "När macOS kontrollerar en signatur lägger det ibland kompletta kopior av en app i mappen X. De är inga egna program; macOS skapar en ny vid behov. Det är ofarligt att ta bort dem så länge appen är avslutad.";
 "infoVolume" = "Kapaciteten för den här volymen: vad som är upptaget, vad macOS kan frigöra själv vid behov och vad som är ledigt. Externa volymer kan mätas här.";
 "aboutPage" = "Om den här sidan";

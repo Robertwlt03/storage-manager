@@ -3,7 +3,7 @@
 "paneOverview" = "Visão geral";
 "paneExplorer" = "Pastas";
 "paneLargeFiles" = "Arquivos grandes";
-"paneTemp" = "Área temporária";
+"paneTemporaryFiles" = "Área temporária";
 "paneCopies" = "Cópias de apps";
 "sectionSystem" = "Áreas ocultas";
 "sectionVolumes" = "Volumes";
@@ -34,7 +34,7 @@
 "availableOf" = "%@ disponíveis de %@";
 "categories" = "Categorias";
 "freeSpace" = "Livre";
-"tempAreaName" = "Área temporária do sistema";
+"temporaryAreaName" = "Área temporária do sistema";
 "categoryApps" = "Aplicativos";
 "categoryDocuments" = "Documentos e Mesa";
 "categoryDownloads" = "Downloads";
@@ -45,7 +45,7 @@
 "categoryCaches" = "Caches";
 "categoryAppData" = "Dados de apps";
 "categoryTrash" = "Lixo";
-"categoryTemp" = "Arquivos temporários";
+"categoryTemporary" = "Arquivos temporários";
 "categoryUser" = "Outros dados do usuário";
 "categoryLibrary" = "Dados de apps compartilhados";
 "categoryOther" = "Outras pastas";
@@ -91,14 +91,14 @@
 "total" = "Total";
 "subfolders" = "Subpastas";
 "viewCopies" = "Ver cópias de apps …";
-"tempFolderT" = "Arquivos temporários";
-"tempFolderTDetail" = "Na maior parte, são esvaziados ao reiniciar.";
-"tempFolderC" = "Caches";
-"tempFolderCDetail" = "Caches de apps e serviços do sistema.";
-"tempFolderX" = "Cópias de apps";
-"tempFolderXDetail" = "Cópias que o macOS cria ao verificar assinaturas.";
-"tempFolder0" = "Serviços do sistema";
-"tempFolder0Detail" = "Dados de serviços em segundo plano.";
+"temporaryFolderT" = "Arquivos temporários";
+"temporaryFolderTDetail" = "Na maior parte, são esvaziados ao reiniciar.";
+"temporaryFolderC" = "Caches";
+"temporaryFolderCDetail" = "Caches de apps e serviços do sistema.";
+"temporaryFolderX" = "Cópias de apps";
+"temporaryFolderXDetail" = "Cópias que o macOS cria ao verificar assinaturas.";
+"temporaryFolder0" = "Serviços do sistema";
+"temporaryFolder0Detail" = "Dados de serviços em segundo plano.";
 
 /* Signature copies */
 "noCopies" = "Nenhuma cópia de app";
@@ -178,8 +178,8 @@
 "cleanDeveloperDetail" = "Dados de build do Xcode e caches de pacotes, como o npm; eles são recriados na próxima build.";
 "cleanLogs" = "Registros antigos";
 "cleanLogsDetail" = "Registros de apps com mais de uma semana.";
-"cleanTemp" = "Arquivos temporários antigos";
-"cleanTempDetail" = "Arquivos temporários não modificados há pelo menos três dias.";
+"cleanTemporary" = "Arquivos temporários antigos";
+"cleanTemporaryDetail" = "Arquivos temporários não modificados há pelo menos três dias.";
 "cleanTrash" = "Lixo";
 "cleanTrashDetail" = "Esvazia o Lixo permanentemente. Não selecionado por padrão.";
 "cleanFailed" = "%@ itens não puderam ser removidos porque estão em uso ou protegidos.";
@@ -215,7 +215,7 @@
 "infoApps" = "Apps que você não abre há algum tempo. A data vem do próprio macOS; o app não registra nada. O que você não precisa mais, mova aqui para o Lixo e restaure de lá, se quiser.";
 "infoExplorer" = "Todas as pastas analisadas, ordenadas por tamanho. Um clique duplo abre uma pasta; o menu de contexto mostra os arquivos no Finder e dá informações sobre eles.";
 "infoLargeFiles" = "Todos os arquivos a partir do tamanho escolhido na última análise. Um clique duplo mostra o arquivo no Finder.";
-"infoTemp" = "O macOS cria esta área para cada usuário em /private/var/folders. Ela fica oculta no Finder e não é detalhada em “Gerenciar Armazenamento”.";
+"infoTemporaryFiles" = "O macOS cria esta área para cada usuário em /private/var/folders. Ela fica oculta no Finder e não é detalhada em “Gerenciar Armazenamento”.";
 "infoCopies" = "Ao verificar uma assinatura, o macOS às vezes coloca cópias completas de um app na pasta X. Elas não são programas independentes; o macOS cria uma nova quando necessário. Excluí-las é seguro enquanto o app estiver encerrado.";
 "infoVolume" = "Capacidade deste volume: o que está em uso, o que o macOS pode liberar sozinho quando necessário e o que está livre. Volumes externos podem ser analisados aqui.";
 "aboutPage" = "Sobre esta página";
