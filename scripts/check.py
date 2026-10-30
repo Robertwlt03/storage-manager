@@ -15,8 +15,8 @@ from dataclasses import dataclass
 from typing import Callable
 
 from checks import (
-    architecture, dead_code, duplicates, guides, house_rules, language, nesting, project, promises,
-    report, samples, tools,
+    accessibility, architecture, dead_code, duplicates, guides, house_rules, language, nesting,
+    project, promises, report, samples, secrets, tools, translations,
 )
 
 # MARK: Settings
@@ -34,8 +34,11 @@ STEPS = [
     Step("lint", "Length, nesting and complexity (SwiftLint)", tools.lint_findings),
     Step("compiler", "Compiler warnings and errors", tools.compiler_findings),
     Step("tests", "Unit tests (Swift Testing)", tools.test_findings),
+    Step("coverage", "Test coverage at least the minimum", tools.coverage_findings),
     Step("rules", "House rules", house_rules.rule_findings),
     Step("design", "Design rules", house_rules.design_findings),
+    Step("accessibility", "Every image decided for VoiceOver",
+         accessibility.accessibility_findings),
     Step("nesting", "Flat methods (two blocks deep at most)", nesting.nesting_findings),
     Step("duplicates", "No code written twice", duplicates.duplicate_findings),
     Step("architecture", "Layers of the architecture", architecture.architecture_findings),
@@ -43,13 +46,15 @@ STEPS = [
     Step("deadcode", "Dead code (compiler index)", dead_code.dead_code_findings),
     Step("language", "American English names and comments", language.language_findings),
     Step("plists", "Translation files and Info.plist (plutil)", tools.property_list_findings),
+    Step("translations", "Every text translated", translations.translation_findings),
     Step("guides", "Guides: twins alike, links whole, American", guides.guide_findings),
+    Step("secrets", "No passwords or keys in the repository", secrets.secret_findings),
     Step("scripts", "Scripts and Makefile", tools.script_findings),
     Step("samples", "Every planted mistake found (checks/samples)", samples.sample_findings),
 ]
-# Reports that only run when asked for by name, like `scripts/check.py coverage`.
+# Reports that only run when asked for by name, like `scripts/check.py coverage-report`.
 EXTRA_STEPS = [
-    Step("coverage", "Test coverage per folder", tools.coverage_report),
+    Step("coverage-report", "Test coverage per folder", tools.coverage_report),
 ]
 
 PASSED, FAILED, UNKNOWN_STEP = 0, 1, 2  # the exit status of the script

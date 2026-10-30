@@ -49,14 +49,15 @@ content here or in comments.
 
 `make` lists them all. The ones you need:
 
-- `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, house rules, design
-  rules, flat methods (at most two blocks inside each other), no code written twice, architecture layers, the app's
+- `make check`: the whole pipeline (format, SwiftLint, compiler with warnings as errors, tests, a coverage minimum
+  per logic folder, house rules, design rules, every image decided for VoiceOver, flat methods (at most two blocks
+  inside each other), no code written twice, architecture layers, the app's
   promises (offline, removing files only in the services that ask first), dead code from the compiler index,
-  American English names and comments without abbreviations, plutil, guides (twins alike, links whole, American
-  spelling), scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with the
+  American English names and comments without abbreviations, plutil, every text translated, guides (twins alike,
+  links whole, American spelling), no secrets in the repository, scripts, and the samples step that makes sure every check still finds its planted mistake). It must end with the
   green frame "All … steps passed: no errors, no warnings" before every commit. A kind of symbol or declaration
   the checks do not know is reported, never skipped: decide it in `scripts/checks/` instead of silencing it.
-- `make test`, `make coverage`, `make format`, single steps with `scripts/check.py <step>`.
+- `make test`, `make coverage` (the table per folder), `make format`, single steps with `scripts/check.py <step>`.
 - `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-` for your own builds (never with the user's identity).
 
 ## Working on code
@@ -65,7 +66,7 @@ content here or in comments.
 2. Keep the rules: spelled-out English names, no numbers without a name, colors only from `Theme`, fonts via
    `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 20
    translations, no dead code, functions as lists of named steps. Scripts follow the same rules and one shared
-   layout (CODE_STYLE.md, step 15): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
+   layout (CODE_STYLE.md, step 19): a head with `Start:` and `Needs:`, `MARK: Settings` with every number and pattern
    named and explained (patterns in re.VERBOSE with a comment per part), small named steps, `MARK: Run` at the
    bottom. Spelled-out names, no duplicated code (shared steps live in `scripts/require-xcode.sh` and
    `scripts/sign.sh`), and no copies of lists the app already has (ask the app, as `--list-pages` does).

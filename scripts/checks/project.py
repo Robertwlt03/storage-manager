@@ -29,6 +29,7 @@ BUILD_OPTIONS = (
     "--scratch-path", str(BUILD_FOLDER),  # a build folder of its own, apart from build.sh
     "--enable-index-store",  # the compiler's index, which several steps read
     "-Xswiftc", "-warnings-as-errors",  # a single warning already fails the build
+    "--enable-code-coverage",  # the tests measure what they reach, for the coverage step
 )
 
 # The longest line allowed, in Swift code and in every script; swift format reads the same value.
@@ -62,6 +63,8 @@ class Codebase:
     makefiles: tuple[Path, ...] = ()
     source_root: Path | None = None  # its folders are the layers of the architecture
     guides: tuple[Path, ...] = ()  # the Markdown files
+    translations: Path | None = None  # the folder with one <language>.lproj per language
+    text_files: tuple[Path, ...] = ()  # every file that could carry a secret
 
     def swift_files(self) -> tuple[Path, ...]:
         return self.swift_sources + self.swift_tests + self.swift_scripts
@@ -89,6 +92,8 @@ def app() -> Codebase:
         makefiles=(MAKEFILE,),
         source_root=PROJECT / "Sources",
         guides=tracked_files("*.md"),
+        translations=PROJECT / "Resources",
+        text_files=tracked_files("*"),
     )
 
 

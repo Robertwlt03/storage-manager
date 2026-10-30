@@ -1,6 +1,7 @@
 import SwiftUI
 
-/// What an icon shows; how big it is comes from `IconSize`.
+/// What an icon shows; how big it is comes from `IconSize`. Icons always stand beside a text that
+/// says what they mean, so VoiceOver skips them instead of reading a symbol's technical name.
 enum IconKind {
     case symbol(String)
     case dot(Color)
@@ -31,10 +32,12 @@ extension UI {
             switch kind {
             case .symbol(let name):
                 Image(systemName: name).resizable().scaledToFit().frame(width: side, height: side)
+                    .accessibilityHidden(true)
             case .dot(let color):
                 Circle().fill(color).frame(width: side, height: side)
             case .badge(let name, let index):
                 Image(systemName: name).resizable().scaledToFit().fontWeight(.semibold)
+                    .accessibilityHidden(true)
                     .foregroundStyle(Theme.badgeSymbol)
                     .frame(width: badgeContent, height: badgeContent)
                     .frame(width: side, height: side)
@@ -43,7 +46,9 @@ extension UI {
                 Text(text).font(.system(size: badgeContent, weight: .semibold, design: .monospaced))
                     .frame(width: side, height: side).background(.quaternary, in: square)
             case .file(let path):
-                FinderService.icon(path).resizable().frame(width: side, height: side)
+                Image(nsImage: FinderService.iconImage(path)).resizable()
+                    .frame(width: side, height: side)
+                    .accessibilityHidden(true)
             case .preview(let path):
                 PreviewIcon(path: path, side: side)
             }
@@ -70,6 +75,7 @@ private struct PreviewIcon: View {
             .resizable()
             .scaledToFit()
             .frame(width: side, height: side)
+            .accessibilityHidden(true)
             .task(id: path) { thumbnail = await PreviewService.thumbnail(path, size: side) }
     }
 }

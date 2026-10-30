@@ -1,12 +1,9 @@
 import AppKit
-import SwiftUI
 
 /// Everything that talks to Finder, the pasteboard or System Settings.
 enum FinderService {
     /// Finder icons are looked up once per path: rows are rebuilt often (search, sorting,
     /// scrolling) and each lookup asks Launch Services and the disk again.
-    static func icon(_ path: String) -> Image { Image(nsImage: iconImage(path)) }
-
     static func iconImage(_ path: String) -> NSImage {
         if let cached = iconCache.object(forKey: path as NSString) { return cached }
         let image = NSWorkspace.shared.icon(forFile: path)

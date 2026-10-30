@@ -6,7 +6,7 @@ struct RuleSamples: View {
         VStack {
             Text("Hello")  // expect: written-out text
             Menu("Options") {}  // expect: written-out text
-            Image(systemName: "folder")  // expect: symbol name outside
+            Image(systemName: "folder").accessibilityHidden(true)  // expect: symbol name outside
             Color.red  // expect: outside Theme
         }
         .font(.title)  // expect: font set directly

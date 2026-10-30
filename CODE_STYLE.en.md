@@ -137,53 +137,64 @@ its line number and what is wrong. At the end a frame sums up: green when every 
 steps and their findings. Colors appear in the terminal and on GitHub, where every finding also stands right beside
 its line in the pull request. `NO_COLOR=1` turns the colors off.
 
-The script runs sixteen checks one after another:
+The script runs twenty checks one after another:
 
 1. **Layout:** `swift format lint --strict` reports every deviation from the uniform layout.
 2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
    function and types nested too deeply. The limits are in `.swiftlint.yml`.
 3. **Compiler:** The app is built with `-warnings-as-errors`, so even a single warning counts as an error.
 4. **Tests:** `swift test` runs all tests from `Tests/SpeicherExplorerTests`, also without a single warning.
-5. **House rules:** Numbers without names, colors outside `Theme.swift`, German text in the code, `$0`, names of one
+5. **Test coverage:** In every folder with logic, the tests must reach a minimum share of the lines. The values sit
+   just below today's in `MINIMUM_COVERAGE` (`scripts/checks/tools.py`), so coverage can only grow; the folders with
+   views are left out for a reason. A new folder without a rule is reported.
+6. **House rules:** Numbers without names, colors outside `Theme.swift`, German text in the code, `$0`, names of one
    or two letters, lines over 100 characters and forgotten temporary debug lines. This also applies to the Swift
    scripts in the `scripts` folder.
-6. **Design:** Fonts without a text role, symbol names outside `Symbols`, custom glass or custom backgrounds,
+7. **Design:** Fonts without a text role, symbol names outside `Symbols`, custom glass or custom backgrounds,
    animations outside `Motion`, hard-coded texts on screen and output outside the diagnostics. Hard-coded texts are
    found through the compiler's index: every SwiftUI call whose first argument is a text in quotes, including
    elements that do not exist yet.
-7. **Flat methods:** At most two blocks may sit inside each other in a method, such as a loop and an `if` in it.
+8. **Accessibility:** Every image decides what VoiceOver does with it: it carries meaning and gets a name with
+   `.accessibilityLabel`, or it decorates a text beside it and stays silent with `.accessibilityHidden(true)`
+   (`scripts/checks/accessibility.py`).
+9. **Flat methods:** At most two blocks may sit inside each other in a method, such as a loop and an `if` in it.
    A block is anything that spans lines: `if`, `else`, `switch`, loops, closures and inner functions. A deeper part
    belongs in a method of its own with a telling name, and there is no function inside a function inside a
    function. This applies to Swift, Python and shell (`scripts/checks/nesting.py`). The check tells a method by
    its place, not by a keyword: everything opened directly inside a type counts as a method, even a kind of
    declaration Swift adds later. In Python every statement with a block of its own counts.
-8. **No code written twice:** When the same six lines of substance stand in two places, they belong in one shared
+10. **No code written twice:** When the same six lines of substance stand in two places, they belong in one shared
    method. Numbers and texts count as equal, so a copy with a changed value is caught too; blank lines, comments and
    lone brackets do not count (`scripts/checks/duplicates.py`).
-9. **Architecture:** Every folder below `Sources` is a part of the app and may use only the parts the table in
+11. **Architecture:** Every folder below `Sources` is a part of the app and may use only the parts the table in
    `scripts/checks/architecture.py` allows; the design system, for one, uses no pages and no app state. A new folder
    first needs a place there, otherwise the check reports it.
-10. **Promises of the app:** Network interfaces do not appear in the code, because the app stays on the Mac. Only the
+12. **Promises of the app:** Network interfaces do not appear in the code, because the app stays on the Mac. Only the
    three services that ask first delete files or move them to the Trash (`scripts/checks/promises.py`).
-11. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
+13. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
    is only written but never read. The check reads the index the compiler writes while building
    (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the
    tests use counts as dead as well. For every kind of symbol it is settled whether it is judged or why not. When a
    kind shows up that nobody has decided on yet, the check reports it instead of skipping it.
-12. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
+14. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
    American English or a known technical term and never an abbreviation, so `temporary` instead of `temp` and
    `maximum` instead of `max`. Comments are read the same way. The macOS spell checker checks the words
    (`scripts/checks/language.py`). Technical terms such as `plist` or `codesign` are in no list: known is what appears
    in the names of the Apple and Python interfaces the code uses, what is installed as a command on the Mac, the
    project's file endings and the app's name. Only the forbidden abbreviations remain a list, because no source
    reliably tells whether a word is an abbreviation.
-13. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
-14. **Guides:** Every German guide and its English twin have the same layout: the same sections with the same icons,
+15. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
+16. **Complete translations:** A text that reads exactly like the English one in some language is reported when the
+   macOS spell checker does not know one of its words in that language. Terms that read the same in most languages,
+   such as "iCloud Drive", are left out (`scripts/checks/translations.py`).
+17. **Guides:** Every German guide and its English twin have the same layout: the same sections with the same icons,
    images, code blocks and table rows. Every link leads to a file that exists, and the English texts use American
    spelling (`scripts/checks/guides.py`).
-15. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
+18. **Secrets:** No file git knows holds a private key, an access token or a password written out. Every settings
+   file the `Makefile` reads, such as `local.mk`, must be ignored by git (`scripts/checks/secrets.py`).
+19. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
-16. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
+20. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
    never belongs to the app. Every bad line carries a note `expect:` with the finding the check must report there.
    When a check no longer finds its mistake, or reports something nobody planted, this step fails. Whoever adds a
    rule plants its mistake there, with a note.

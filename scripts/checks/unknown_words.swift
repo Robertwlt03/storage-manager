@@ -1,9 +1,12 @@
 // Asks the macOS spell checker which words are not American English.
 //
-// Start:  swift scripts/checks/unknown_words.swift < words   (checks/language.py calls it)
-// Needs:  macOS; reads one word per line and prints one line per word the American dictionary
-//         does not know: the word, "british" or "unknown", and the checker's best guess, each
-//         separated by a tab.
+// Start:  swift scripts/checks/unknown_words.swift [language] < words
+//         (checks/language.py and checks/translations.py call it)
+// Needs:  macOS; reads one word per line and prints one line per word the dictionary does not
+//         know: the word, "british" or "unknown", and the checker's best guess, each separated by
+//         a tab. Without a language it asks American English and tells British spellings apart;
+//         with one, such as "de", it asks that language. A language macOS has no dictionary for
+//         knows no word at all, so nothing slips through unchecked.
 import AppKit
 
 // MARK: Settings
@@ -57,8 +60,16 @@ func verdict(for word: String) -> String? {
     return [word, "british", americanWord].joined(separator: separator)
 }
 
+func verdict(for word: String, in language: String) -> String? {
+    let hasDictionary = NSSpellChecker.shared.availableLanguages.contains(language)
+    guard !hasDictionary || !isKnown(word, in: language) else { return nil }
+    return [word, "unknown", ""].joined(separator: separator)
+}
+
 // MARK: Run
 
+let chosenLanguage = CommandLine.arguments.dropFirst().first
 while let word = readLine() {
-    if let line = verdict(for: word) { print(line) }
+    let line = chosenLanguage.map { language in verdict(for: word, in: language) }
+    if let line = line ?? verdict(for: word) { print(line) }
 }

@@ -63,7 +63,7 @@ test: ## Run only the unit tests
 	scripts/check.py tests
 
 coverage: ## Show how much of each source folder the tests reach
-	scripts/check.py coverage
+	scripts/check.py coverage-report
 
 format: ## Bring every Swift file into the shared form
 	swift format --in-place --recursive Sources Tests scripts

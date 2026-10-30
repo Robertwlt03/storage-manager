@@ -106,16 +106,67 @@ def syntax_checks(codebase: Codebase) -> list[list[str]]:
     return checks
 
 
-# MARK: Extra report
+# MARK: Test coverage
+
+# The least share of lines the tests must reach in each folder with logic. Each sits just below
+# what the tests reach today, so coverage can only grow; raise a value when the tests grew.
+MINIMUM_COVERAGE = {
+    "Localization": 0.85,
+    "Models": 0.65,
+    "Core": 0.45,
+    "Services": 0.35,
+    "State": 0.30,
+}
+# Folders the unit tests do not measure, each for a reason. A folder in neither list is reported.
+NOT_MEASURED = {
+    "App": "it starts the app and its windows",
+    "Features": "views, checked in the demo and with make snapshots",
+    "DesignSystem": "views, checked in the demo and with make snapshots",
+    "Diagnostics": "the self test and the stress test, which test the app themselves",
+}
 
 
-def coverage_report() -> list[str]:
-    """Runs the tests with coverage and prints how much of each source folder they reach."""
-    result = run(["swift", "test", *BUILD_OPTIONS, "--enable-code-coverage"])
+def coverage_findings() -> list[str]:
+    report = coverage_data()
+    if isinstance(report, list):
+        return report
+    covered_lines, all_lines = lines_per_folder(report)
+    findings = []
+    for folder in sorted(all_lines):
+        share = covered_lines[folder] / all_lines[folder]
+        findings += coverage_problems(folder, share)
+    return findings
+
+
+def coverage_problems(folder: str, share: float) -> list[str]:
+    where = f"Sources/{folder}:1"
+    if folder in NOT_MEASURED:
+        return []
+    if folder not in MINIMUM_COVERAGE:
+        return [
+            f"{where}: no coverage rule yet; add the folder to MINIMUM_COVERAGE or NOT_MEASURED"
+        ]
+    minimum = MINIMUM_COVERAGE[folder]
+    if share >= minimum:
+        return []
+    return [f"{where}: the tests reach {share:.1%} of the lines, at least {minimum:.0%} are due"]
+
+
+def coverage_data() -> dict | list[str]:
+    """The report of the last test run, which measured coverage (see BUILD_OPTIONS); the tests
+    run again only when they are not current."""
+    result = run(["swift", "test", *BUILD_OPTIONS])
     if not result.succeeded:
         return result.findings([])
     report_path = run(["swift", "test", *BUILD_OPTIONS, "--show-codecov-path"]).output
-    report = json.loads(Path(report_path.strip().splitlines()[-1]).read_text())
+    return json.loads(Path(report_path.strip().splitlines()[-1]).read_text())
+
+
+def coverage_report() -> list[str]:
+    """Prints how much of each source folder the tests reach."""
+    report = coverage_data()
+    if isinstance(report, list):
+        return report
     covered_lines, all_lines = lines_per_folder(report)
     for folder in sorted(all_lines):
         print_coverage(folder, covered_lines[folder], all_lines[folder])

@@ -1,0 +1,2 @@
+password = "sample-not-a-real-one"  # expect: a secret written into a setting
+-----BEGIN SAMPLE PRIVATE KEY----- expect: a private key
