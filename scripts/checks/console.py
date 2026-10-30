@@ -27,7 +27,7 @@ USES_COLOR = "NO_COLOR" not in os.environ and (
 )
 
 # Terminal codes for text styles (ECMA-48 "select graphic rendition").
-BOLD, DIM, RED, GREEN, CYAN = "1", "2", "31", "32", "36"
+BOLD, DIM, UNDERLINE, RED, GREEN, CYAN = "1", "2", "4", "31", "32", "36"
 SUCCESS, FAILURE = GREEN, RED  # the colors of a frame
 
 PASSED_MARK = "✔"
@@ -137,23 +137,25 @@ def can_ask() -> bool:
     return sys.stdin.isatty() and IN_TERMINAL
 
 
-def ask_yes_no(question: str) -> bool:
+def ask_yes_no(question: str, hint: str = "") -> bool:
     """Enter alone answers no."""
-    answer = input(f"{question_start(question)} {paint('(y/N)', DIM)} ")
-    return answer.strip().lower() in YES_ANSWERS
+    ask(question, "y or n, Enter means no", hint)
+    return answer().lower() in YES_ANSWERS
 
 
-def ask_text(label: str, default: str = "") -> str:
-    """Enter alone keeps the default; without one, the question comes again."""
-    hint = f" {paint(f'({default})', DIM)}" if default else ""
-    while not (answer := input(f"{question_start(label)}{hint} ").strip() or default):
+def ask_text(label: str, explanation: str, current: str = "") -> str:
+    """Enter alone keeps the current text; without one, the question comes again."""
+    ask(label, explanation, f"Now: {current} · Enter keeps it" if current else "")
+    while not (text := answer() or current):
         note("This one needs an answer.")
-    return answer
+    return text
 
 
-def ask_choice(question: str, options: list[str]) -> int:
+def ask_choice(question: str, options: list[str], header: str = "") -> int:
     """A list to walk with the arrow keys; Enter picks the marked entry and returns its index."""
-    show(f"{question_start(question)}  {paint('↑↓ to move, Enter to pick', DIM)}")
+    ask(question, "↑↓ to move, Enter to pick")
+    if header:
+        show(f"     {paint(header, DIM, UNDERLINE)}")
     marked = 0
     show_options(options, marked)
     with keys_one_by_one() as read_key:
@@ -164,8 +166,16 @@ def ask_choice(question: str, options: list[str]) -> int:
     return marked
 
 
-def question_start(text: str) -> str:
-    return f" {paint(QUESTION_MARK, CYAN, BOLD)} {text}"
+def ask(question: str, explanation: str, hint: str = "") -> None:
+    """A question gets a line of its own: what is asked, then dimmed what it means."""
+    show(f" {paint(QUESTION_MARK, CYAN, BOLD)} {paint(question, BOLD)}  {paint(explanation, DIM)}")
+    if hint:
+        note(hint)
+
+
+def answer() -> str:
+    """The answer is typed on the line below its question, after the pointer."""
+    return input(f"   {paint(POINTER_MARK, CYAN, BOLD)} ").strip()
 
 
 def show_options(options: list[str], marked: int) -> None:

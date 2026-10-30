@@ -19,7 +19,9 @@ import sys
 from html import escape, unescape
 from pathlib import Path
 
-from checks.console import ask_choice, ask_text, ask_yes_no, can_ask, failed, note, passed, show
+from checks.console import (
+    ask_choice, ask_text, ask_yes_no, can_ask, failed, heading, note, passed, show, table,
+)
 
 # MARK: Settings
 
@@ -171,20 +173,36 @@ def banner_by_questions() -> Path:
     if not can_ask():
         stop("no terminal to ask in",
              "Name the texts instead: scripts/doc-assets.py banner <file name> <title> <subtitle>")
+    heading("Banner for a guide", "Ctrl-C stops at any point, without writing anything")
     replaceable = sorted(
         path.stem.removeprefix("banner-") for path in ASSETS.glob("banner-*.svg")
         if path.stem.removeprefix("banner-") not in HAND_DRAWN_BANNERS
     )
-    if replaceable and ask_yes_no("Replace an existing banner?"):
-        labels = [f"{name}  {banner_texts(name)[1]}" for name in replaceable]
-        file_name = replaceable[ask_choice("Which banner?", labels)]
+    if replaceable and ask_yes_no(
+        "Replace an existing banner?",
+        "Yes: pick a banner from a list and change its texts. No: draw a new banner."
+    ):
+        file_name = replaceable[ask_choice("Which banner?", *banner_list(replaceable))]
         eyebrow, title, subtitle = banner_texts(file_name)
     else:
         file_name = new_banner_name()
         eyebrow, title, subtitle = DEFAULT_EYEBROW, "", ""
-    title = ask_text("Title", title)
-    subtitle = ask_text("Subtitle", subtitle)
+    title = ask_text("Title", "the large line, usually the name of the guide", title)
+    subtitle = ask_text("Subtitle", "the line below it: what the guide is for, one sentence",
+                        subtitle)
+    show("")
     return banner(file_name, title, subtitle, eyebrow, overwrite=True)
+
+
+def banner_list(file_names: list[str]) -> tuple[list[str], str]:
+    """Each banner as its title and its file, in two columns, with the column names above."""
+    titles = [banner_texts(name)[1] for name in file_names]
+    width = max(len(title) for title in [*titles, "Title"])
+    rows = [
+        f"{title.ljust(width)}  {banner_path(name).name}"
+        for title, name in zip(titles, file_names, strict=True)
+    ]
+    return rows, f"{'Title'.ljust(width)}  File"
 
 
 def banner_texts(file_name: str) -> list[str]:
@@ -194,7 +212,8 @@ def banner_texts(file_name: str) -> list[str]:
 
 def new_banner_name() -> str:
     while True:
-        file_name = ask_text("File name of the new banner (assets/banner-<file name>.svg)")
+        file_name = ask_text(
+            "File name", "becomes assets/banner-<file name>.svg, such as release-notes")
         if not BANNER_NAME.fullmatch(file_name):
             note("Small letters, digits and hyphens only, such as release-notes.")
         elif banner_path(file_name).exists():
@@ -240,12 +259,28 @@ def drawn_file() -> Path:
                   chosen.overwrite)
 
 
+def describe(banner_file: Path) -> None:
+    """What the banner shows, line by line, and which guides show the banner."""
+    eyebrow, title, subtitle = banner_texts(banner_file.stem.removeprefix("banner-"))
+    guides = [guide.name for guide in sorted(PROJECT.glob("*.md"))
+              if banner_file.name in guide.read_text()]
+    table([
+        ("Small line", eyebrow),
+        ("Title", title),
+        ("Subtitle", subtitle),
+        ("Shown in", ", ".join(guides) or "no guide yet; put it at the top of one"),
+    ])
+
+
 def main() -> None:
     try:
-        passed("Drawn", relative(drawn_file()))
+        drawn = drawn_file()
     except (KeyboardInterrupt, EOFError):  # Ctrl-C or Ctrl-D while it asks
         show("")
         stop("cancelled", "Nothing was written.")
+    passed("Drawn", relative(drawn))
+    if drawn.parent == ASSETS:
+        describe(drawn)
 
 
 if __name__ == "__main__":
