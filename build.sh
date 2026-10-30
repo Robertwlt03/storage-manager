@@ -7,6 +7,7 @@
 #         and SIGN_IDENTITY (default: ad hoc, see scripts/sign.sh)
 set -euo pipefail
 cd "$(dirname "$0")"
+. scripts/console.sh
 
 # MARK: Settings
 
@@ -24,7 +25,9 @@ INSTALLED_APP=~/Applications/Speicher-Explorer.app
 
 compile() {
   scripts/require-xcode.sh
-  swift build --configuration release
+  console_running "Compiling"
+  swift build --configuration release --quiet
+  console_passed "Compiled" "release"
 }
 
 assemble_app() {
@@ -38,6 +41,7 @@ assemble_app() {
   if [ -n "${BUNDLE_ID:-}" ]; then
     /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier $BUNDLE_ID" "$APP/Contents/Info.plist"
   fi
+  console_passed "Put together" "${BUNDLE_ID:-the identifier from Info.plist}"
 }
 
 add_icon() {
@@ -49,6 +53,7 @@ add_icon() {
     scale_icon $((size * 2)) "icon_${size}x${size}@2x.png"
   done
   iconutil --convert icns "$ICON_SET" --output "$APP/Contents/Resources/AppIcon.icns"
+  console_passed "Icon drawn" "${#ICON_SIZES[@]} sizes, each also for Retina"
 }
 
 scale_icon() {
@@ -62,15 +67,16 @@ install_when_asked() {
     mkdir -p ~/Applications
     rm -rf "$INSTALLED_APP"
     cp -R "$APP" ~/Applications/
-    echo "Installed: $INSTALLED_APP"
+    console_frame success "$PASSED_MARK Installed: $INSTALLED_APP"
   else
-    echo "Done: $APP"
+    console_frame success "$PASSED_MARK Built: $APP"
   fi
 }
 
 # MARK: Run
 
 main() {
+  console_heading "Speicher-Explorer · build" "$APP"
   compile
   assemble_app
   add_icon

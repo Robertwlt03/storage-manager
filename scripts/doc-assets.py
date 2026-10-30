@@ -13,6 +13,8 @@ import argparse
 import re
 from pathlib import Path
 
+from checks.console import passed
+
 # MARK: Settings
 
 PROJECT = Path(__file__).resolve().parents[1]
@@ -154,9 +156,10 @@ def command_line() -> argparse.ArgumentParser:
 def main() -> None:
     chosen = command_line().parse_args()
     if chosen.command == "banner":
-        print(banner(chosen.file_name, chosen.title, chosen.subtitle, chosen.eyebrow))
+        drawn = banner(chosen.file_name, chosen.title, chosen.subtitle, chosen.eyebrow)
     else:
-        print(icon(chosen.name, chosen.color, chosen.glyph))
+        drawn = icon(chosen.name, chosen.color, chosen.glyph)
+    passed("Drawn", str(drawn.relative_to(PROJECT)))
 
 
 if __name__ == "__main__":

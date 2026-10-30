@@ -2,11 +2,12 @@
 //
 // Start:  swift scripts/checks/unknown_words.swift [language] < words
 //         (checks/language.py and checks/translations.py call it)
-// Needs:  macOS; reads one word per line and prints one line per word the dictionary does not
-//         know: the word, "british" or "unknown", and the checker's best guess, each separated by
-//         a tab. Without a language it asks American English and tells British spellings apart;
-//         with one, such as "de", it asks that language. A language macOS has no dictionary for
-//         knows no word at all, so nothing slips through unchecked.
+// Needs:  macOS; reads one word per line. Without a language it asks American English and
+//         tells British spellings apart; with one, such as "de", it asks that language. A
+//         language macOS has no dictionary for knows no word at all, so nothing slips through.
+// Output: data for those checks, not for people: one line per word the dictionary does not
+//         know, with the word, "british" or "unknown", and the checker's best guess, each
+//         separated by a tab.
 import AppKit
 
 // MARK: Settings

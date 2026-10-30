@@ -312,8 +312,6 @@ extension UITest {
     }
 
     private static func log(_ text: String) {
-        let time = Date().formatted(timeFormat)
-        print("[UITest] \(time) \(text)")
-        fflush(stdout)
+        Console.step(text, detail: Date().formatted(timeFormat))
     }
 }

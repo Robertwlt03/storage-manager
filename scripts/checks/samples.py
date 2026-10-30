@@ -14,6 +14,7 @@ from pathlib import Path
 from checks.accessibility import accessibility_problems
 from checks.architecture import architecture_problems
 from checks.commits import CommitMessage, commit_problems
+from checks.console_output import console_output_problems
 from checks.dead_code import dead_code_problems
 from checks.disk_access import disk_access_problems
 from checks.duplicates import duplicate_problems
@@ -48,6 +49,7 @@ CHECKS = [
     nesting_problems, script_layout_problems, duplicate_problems, architecture_problems,
     promise_problems, guide_problems, accessibility_problems, translation_problems,
     secret_problems, disk_access_problems, unused_file_problems, security_problems,
+    console_output_problems,
 ]
 
 
@@ -60,6 +62,7 @@ def samples() -> Codebase:
         build_folder=BUILD_FOLDER,
         build_options=("--scratch-path", str(BUILD_FOLDER), "--enable-index-store"),
         swift_sources=tuple(sorted((SAMPLES / "Sources").rglob("*.swift"))),
+        swift_scripts=(SAMPLES / "sample.swift",),
         python_scripts=(SAMPLES / "sample.py",),
         shell_scripts=(SAMPLES / "sample.sh", SAMPLES / "unguarded.sh"),
         source_root=SAMPLES / "Sources" / "Samples",
@@ -75,8 +78,9 @@ def expectations(codebase: Codebase) -> list[tuple[str, str]]:
     expected = []
     strings = tuple(sorted(codebase.translations.glob("*.lproj/*.strings")))
     paths = (
-        codebase.swift_sources + codebase.python_scripts + codebase.shell_scripts
-        + codebase.guides + strings + codebase.text_files + codebase.workflows
+        codebase.swift_sources + codebase.swift_scripts + codebase.python_scripts
+        + codebase.shell_scripts + codebase.guides + strings + codebase.text_files
+        + codebase.workflows
     )
     for path, number, line in numbered_lines(paths):
         note = EXPECTATION.search(line)

@@ -5,6 +5,7 @@
 # Start:  scripts/require-xcode.sh   (build.sh and scripts/check.py call it)
 # Needs:  nothing
 set -euo pipefail
+. "$(dirname "$0")/console.sh"
 
 # MARK: Settings
 
@@ -14,8 +15,9 @@ DEVELOPER_FOLDER="${DEVELOPER_DIR:-$(xcode-select --print-path)}"  # DEVELOPER_D
 
 main() {
   if [[ "$DEVELOPER_FOLDER" != *Xcode* ]]; then
-    echo "Xcode 27 is needed. Install it, then switch once:"
-    echo "  sudo xcode-select --switch /Applications/Xcode.app"
+    console_failed "Xcode 27 is needed" "the developer tools point elsewhere"
+    console_note "Install it, then switch once:"
+    console_note "sudo xcode-select --switch /Applications/Xcode.app"
     exit 1
   fi
 }

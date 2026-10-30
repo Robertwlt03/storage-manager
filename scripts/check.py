@@ -6,7 +6,8 @@ Needs:  Xcode 27 and SwiftLint (brew install swiftlint)
 It ends with status 1 as soon as one finding is left, so it guards every pull request. The steps
 live in scripts/checks/: project.py (folders, files, running tools), tools.py, house_rules.py,
 nesting.py, dead_code.py with index_store.py, language.py with unknown_words.swift, and
-samples.py, which tests the checks themselves on planted mistakes; report.py prints the results.
+samples.py, which tests the checks themselves on planted mistakes; report.py prints the results
+with the pieces of console.py.
 """
 
 import sys
@@ -15,9 +16,9 @@ from dataclasses import dataclass
 from typing import Callable
 
 from checks import (
-    accessibility, architecture, commits, dead_code, disk_access, duplicates, guides, house_rules,
-    language, nesting, project, promises, report, samples, secrets, security, tools, translations,
-    unused_files,
+    accessibility, architecture, commits, console, console_output, dead_code, disk_access,
+    duplicates, guides, house_rules, language, nesting, project, promises, report, samples, secrets,
+    security, tools, translations, unused_files,
 )
 
 # MARK: Settings
@@ -54,6 +55,7 @@ STEPS = [
     Step("secrets", "No passwords or keys in the repository", secrets.secret_findings),
     Step("security", "No way in: shells, signing, workflows", security.security_findings),
     Step("scripts", "Scripts and Makefile", tools.script_findings),
+    Step("output", "Every output in the shared look", console_output.console_output_findings),
     Step("commits", "Commit messages in the shared form", commits.commit_findings),
     Step("samples", "Every planted mistake found (checks/samples)", samples.sample_findings),
 ]
@@ -73,7 +75,8 @@ def chosen_steps(names: list[str]) -> list[Step] | None:
     known = {step.name: step for step in STEPS + EXTRA_STEPS}
     unknown = [name for name in names if name not in known]
     if unknown:
-        print(f"Unknown step: {', '.join(unknown)}. Steps: {', '.join(known)}")
+        console.failed(f"Unknown step: {', '.join(unknown)}")
+        console.note(f"Steps: {', '.join(known)}")
         return None
     return [known[name] for name in names] if names else STEPS
 

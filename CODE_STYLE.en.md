@@ -207,13 +207,19 @@ The script runs twenty-three checks one after another:
    (`scripts/checks/security.py`).
 22. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
-23. **Commit messages:** Every commit has a subject like `fix(scan): what changed`: a kind from Conventional Commits,
+23. **One look for all output:** Everything a command writes to the console looks the same: a heading, lines
+   with a mark (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints and a frame that sums up at the
+   end. The pieces exist once per language: `scripts/console.sh` for the shell and the `Makefile`,
+   `scripts/checks/console.py` for Python and `Sources/Diagnostics/Console.swift` for the app. Any other `echo`,
+   `printf` or `print` is reported. What another program reads instead of a person is named in the script's head
+   with `Output:` and written plainly (`scripts/checks/console_output.py`).
+24. **Commit messages:** Every commit has a subject like `fix(scan): what changed`: a kind from Conventional Commits,
    maybe a part in brackets, then the change. A blank line and lines up to 100 characters follow, all in English with
    American spelling: a word that neither the dictionary nor the project's code knows, a German one for instance, is
    reported.
    The rule holds from the commit that brought it in; the commits not yet on GitHub's `main` are checked
    (`scripts/checks/commits.py`).
-24. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
+25. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
    never belongs to the app. Every bad line carries a note `expect:` with the finding the check must report there.
    When a check no longer finds its mistake, or reports something nobody planted, this step fails. Whoever adds a
    rule plants its mistake there, with a note.

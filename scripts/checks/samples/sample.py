@@ -21,3 +21,6 @@ def outer_function():
             return 1
         return innermost_function()
     return inner_function()
+
+
+print("done")  # expect: past the shared console

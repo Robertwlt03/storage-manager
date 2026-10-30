@@ -10,6 +10,7 @@ import shutil
 from collections import Counter
 from pathlib import Path
 
+from checks import console
 from checks.project import BUILD_OPTIONS, LINE_LENGTH, PROJECT, Codebase, app, lines_of, place, run
 
 # MARK: Settings
@@ -23,9 +24,7 @@ MAKE_RULE = re.compile(r"^([a-z]+):", re.MULTILINE)
 # How many lines at the top of a script count as its head.
 HEAD_LINES = 12
 
-# The coverage report's columns, in characters.
-FOLDER_COLUMN_WIDTH = 14
-PERCENT_WIDTH = 6
+PERCENT_WIDTH = 6  # the coverage report's percent column, in characters
 
 SOURCE_FOLDER = PROJECT / "Sources"  # the coverage report sorts by the folders below it
 
@@ -185,17 +184,19 @@ def coverage_report() -> list[str]:
     if isinstance(report, list):
         return report
     covered_lines, all_lines = lines_per_folder(report)
-    for folder in sorted(all_lines):
-        print_coverage(folder, covered_lines[folder], all_lines[folder])
-    print_coverage("all", sum(covered_lines.values()), sum(all_lines.values()))
+    folders = [*sorted(all_lines), "all"]
+    covered_lines["all"], all_lines["all"] = sum(covered_lines.values()), sum(all_lines.values())
+    console.table([
+        (folder, coverage_text(covered_lines[folder], all_lines[folder])) for folder in folders
+    ])
     return []
 
 
-def print_coverage(folder: str, covered: int, lines: int) -> None:
-    """One line of the report, such as "  Services       84.2 %  (412 of 489 lines)"."""
+def coverage_text(covered: int, lines: int) -> str:
+    """One row of the report, such as "84.2 %  (412 of 489 lines)"."""
     percent = f"{covered / lines:.1%}"  # a share as percent with one decimal
-    print(f"  {folder.ljust(FOLDER_COLUMN_WIDTH)} {percent.rjust(PERCENT_WIDTH)}"
-          f"  ({covered} of {lines} lines)")
+    lines_reached = console.paint(f"({covered} of {lines} lines)", console.DIM)
+    return f"{percent.rjust(PERCENT_WIDTH)}  {lines_reached}"
 
 
 def lines_per_folder(report: dict) -> tuple[Counter, Counter]:

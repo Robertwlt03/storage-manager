@@ -11,3 +11,4 @@ deeply_nested() {
     fi
   done
 }
+echo "done"  # expect: past the shared console

@@ -7,6 +7,7 @@
 # folder holds exactly those: no change waits uncommitted, and the pushed branch is checked out.
 
 set -euo pipefail
+. scripts/console.sh  # git starts hooks in the top folder of the project
 
 # MARK: Settings
 
@@ -34,8 +35,9 @@ is_checked_out() {
 }
 
 refuse() {
-  echo "Not pushed: $1, because the checks read the folder, not the commits." >&2
-  echo "(git push --no-verify pushes without the checks.)" >&2
+  console_frame failure "$FAILED_MARK Not pushed: $1" \
+    "  The checks read the folder, not the commits." \
+    "  git push --no-verify pushes without the checks."
   exit 1
 }
 
@@ -48,6 +50,7 @@ main() {
   if pushes_other_commit; then
     refuse "check out the branch you push first"
   fi
+  console_step "Checking the commits before they leave the Mac"
   make check
 }
 

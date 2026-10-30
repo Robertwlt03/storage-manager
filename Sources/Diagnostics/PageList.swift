@@ -2,6 +2,6 @@
 /// such as scripts/snapshots.swift never keep their own copy of the list.
 enum PageList {
     static func printLaunchKeys() {
-        print(Pane.everyPage.map(\.launchKey).joined(separator: "\n"))
+        Console.data(Pane.everyPage.map(\.launchKey).joined(separator: "\n"))
     }
 }

@@ -25,6 +25,9 @@ let channelTolerance = 24
 /// sidebar footer alone changes a few.
 let changedShareAllowed = 0.01
 
+/// Prints in the project's shared look (see console.sh); make starts this script in the project.
+let console = URL(filePath: "scripts/console.sh")
+
 let folder = URL(filePath: "snapshots")
 let referenceFolder = folder.appending(path: "reference")
 let currentFolder = folder.appending(path: "current")
@@ -55,16 +58,25 @@ func pictures(of app: URL) throws -> [Picture] {
     }
 }
 
+// MARK: Printing
+
+/// One piece of the shared look, such as show("passed", "home-light.png", "same").
+func show(_ piece: String, _ texts: String...) {
+    let drawing = Process()
+    drawing.executableURL = console
+    drawing.arguments = [piece] + texts
+    try? drawing.run()
+    drawing.waitUntilExit()
+}
+
 // MARK: Taking the pictures
 
 func ensureScreenRecordingAccess() {
     guard !CGPreflightScreenCaptureAccess() else { return }
     CGRequestScreenCaptureAccess()
-    print(
-        """
-        Your terminal app may not record the screen yet. Allow it in System Settings ›
-        Privacy & Security › Screen & System Audio Recording, then run make snapshots again.
-        """)
+    show("failed", "Your terminal app may not record the screen yet")
+    show("note", "Allow it in System Settings › Privacy & Security ›")
+    show("note", "Screen & System Audio Recording, then run make snapshots again.")
     exit(EXIT_FAILURE)
 }
 
@@ -117,7 +129,7 @@ func take(_ pictures: [Picture], of app: URL) async throws {
             try photograph(
                 windowNumber: windowNumber, to: currentFolder.appending(path: picture.fileName))
         } else {
-            print("\(picture.fileName): no window found")
+            show("failed", picture.fileName, "no window found")
         }
         quit(running)
     }
@@ -212,7 +224,7 @@ func compareWithReferences(_ pictures: [Picture]) -> Bool {
     for picture in pictures {
         let verdict = verdict(for: picture.fileName)
         if verdict != nil { allMatch = false }
-        print("\(picture.fileName): \(verdict ?? "same")")
+        show(verdict == nil ? "passed" : "failed", picture.fileName, verdict ?? "same")
     }
     return allMatch
 }
@@ -239,22 +251,27 @@ func verdict(for name: String) -> String? {
 func record() throws {
     try? FileManager.default.removeItem(at: referenceFolder)
     try FileManager.default.moveItem(at: currentFolder, to: referenceFolder)
-    print("The new pictures are now the references in snapshots/reference.")
+    show("frame", "success", "✔ The new pictures are now the references in snapshots/reference")
 }
 
 // MARK: Run
 
 let arguments = Array(CommandLine.arguments.dropFirst())
 guard let appPath = arguments.first else {
-    print("Usage: swift scripts/snapshots.swift <app> [--record]")
+    show("failed", "Which app?", "swift scripts/snapshots.swift <app> [--record]")
     exit(EXIT_FAILURE)
 }
 let app = URL(filePath: appPath)
 let everyPicture = try pictures(of: app)
+show("heading", "Speicher-Explorer · snapshots", "\(everyPicture.count) pictures")
 ensureScreenRecordingAccess()
 try await take(everyPicture, of: app)
 if arguments.contains("--record") {
     try record()
 } else {
-    exit(compareWithReferences(everyPicture) ? EXIT_SUCCESS : EXIT_FAILURE)
+    let allMatch = compareWithReferences(everyPicture)
+    show(
+        "frame", allMatch ? "success" : "failure",
+        allMatch ? "✔ Every picture matches its reference" : "✘ Some pictures changed")
+    exit(allMatch ? EXIT_SUCCESS : EXIT_FAILURE)
 }

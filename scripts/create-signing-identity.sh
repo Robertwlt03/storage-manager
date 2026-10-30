@@ -8,6 +8,7 @@
 # development certificate, and nothing leaves this Mac.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+. scripts/console.sh
 
 # MARK: Settings
 
@@ -71,12 +72,12 @@ write_settings() {
   # Keep whatever else local.mk holds and replace only the signing lines.
   grep -v -E '^(SIGN_IDENTITY|SIGNING_KEYCHAIN|SIGNING_KEYCHAIN_PASSWORD) *=' "$SETTINGS_FILE" \
     > "$WORK_FOLDER/settings" || true
-  {
-    cat "$WORK_FOLDER/settings"
-    echo "SIGN_IDENTITY = $IDENTITY_NAME"
-    echo "SIGNING_KEYCHAIN = $KEYCHAIN"
-    echo "SIGNING_KEYCHAIN_PASSWORD = $password"
-  } > "$SETTINGS_FILE"
+  cat "$WORK_FOLDER/settings" - > "$SETTINGS_FILE" <<SETTINGS
+SIGN_IDENTITY = $IDENTITY_NAME
+SIGNING_KEYCHAIN = $KEYCHAIN
+SIGNING_KEYCHAIN_PASSWORD = $password
+SETTINGS
+  console_passed "Settings written" "$SETTINGS_FILE"
 }
 
 # Newer macOS keeps Full Disk Access across rebuilds only for a certificate it trusts for code
@@ -85,18 +86,20 @@ trust_for_code_signing() {
   local certificate="$WORK_FOLDER/trusted.pem"
   security find-certificate -c "$IDENTITY_NAME" -p "$KEYCHAIN" > "$certificate"
   if security verify-cert -c "$certificate" -p codeSign > /dev/null 2>&1; then
-    echo "macOS already trusts \"$IDENTITY_NAME\" for code signing."
+    console_passed "Trusted for code signing" "$IDENTITY_NAME"
     return
   fi
-  echo "macOS now asks once for your password to trust \"$IDENTITY_NAME\" for code signing."
+  console_step "macOS now asks once for your password" "to trust $IDENTITY_NAME for code signing"
   security add-trusted-cert -r trustRoot -p codeSign -k "$KEYCHAIN" "$certificate"
+  console_passed "Trusted for code signing" "$IDENTITY_NAME"
 }
 
 # MARK: Run
 
 main() {
+  console_heading "Speicher-Explorer · signing identity" "$IDENTITY_NAME"
   if [ -f "$KEYCHAIN" ]; then
-    echo "The signing keychain already exists: $KEYCHAIN"
+    console_step "The signing keychain already exists" "$KEYCHAIN"
     unlock_existing_keychain
     trust_for_code_signing
     return
@@ -107,9 +110,10 @@ main() {
   create_certificate "$password"
   import_identity "$password"
   write_settings "$password"
-  echo "Signing identity \"$IDENTITY_NAME\" created in its own keychain; local.mk signs with it."
+  console_passed "Identity created" "in its own keychain"
   trust_for_code_signing
-  echo "Grant Full Disk Access to the app once after the next make run."
+  console_frame success "$PASSED_MARK Signing identity ready: local.mk signs with it" \
+    "  Grant Full Disk Access to the app once after the next make run"
 }
 
 main "$@"

@@ -169,10 +169,8 @@ def run(command: list[str], given_input: str | None = None) -> ToolResult:
 
 def has_xcode() -> bool:
     """SwiftUI's macros for macOS 27 ship only with Xcode; the shared script explains how."""
-    result = run([str(SCRIPTS / "require-xcode.sh")])
-    if not result.succeeded:
-        print(result.output.strip())
-    return result.succeeded
+    # Not through run(): the script's hint goes straight to the terminal, in its own colors.
+    return subprocess.run([str(SCRIPTS / "require-xcode.sh")], cwd=PROJECT).returncode == 0
 
 
 # MARK: The compiler's index

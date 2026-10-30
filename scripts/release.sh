@@ -9,6 +9,7 @@
 #         notarize the image, so macOS opens it without any warning.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+. scripts/console.sh
 
 # MARK: Settings
 
@@ -25,6 +26,7 @@ APPLE_IDENTITY_PREFIX="Developer ID Application:"
 build_signed_app() {
   BUILD_FOLDER="$APP_FOLDER" SIGN_IDENTITY="$IDENTITY" ./build.sh
   codesign --verify --strict "$APP_FOLDER/$NAME.app"
+  console_passed "Signature verified" "$APP_FOLDER/$NAME.app"
 }
 
 gather_contents() {
@@ -33,6 +35,7 @@ gather_contents() {
   cp -R "$APP_FOLDER/$NAME.app" "$CONTENTS/"
   ln -s /Applications "$CONTENTS/Programme"
   cp -R docs/anleitung/. "$CONTENTS/Anleitung/"
+  console_passed "Gathered" "the app, the Applications link and the guide"
 }
 
 pack_disk_image() {
@@ -47,18 +50,19 @@ notarize_when_possible() {
   if [[ "$IDENTITY" == "$APPLE_IDENTITY_PREFIX"* && -n "${NOTARY_PROFILE:-}" ]]; then
     xcrun notarytool submit "$DISK_IMAGE" --keychain-profile "$NOTARY_PROFILE" --wait
     xcrun stapler staple "$DISK_IMAGE"
-    echo "Notarized: macOS opens the app without a warning."
+    console_passed "Notarized" "macOS opens the app without a warning"
   fi
 }
 
 # MARK: Run
 
 main() {
+  console_heading "Speicher-Explorer · release" "version $VERSION"
   build_signed_app
   gather_contents
   pack_disk_image
   notarize_when_possible
-  echo "Done: $DISK_IMAGE"
+  console_frame success "$PASSED_MARK Disk image ready: $DISK_IMAGE"
 }
 
 main "$@"

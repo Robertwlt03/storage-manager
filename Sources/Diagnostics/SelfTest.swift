@@ -17,10 +17,12 @@ enum SelfTest {
     /// it, macOS would ask once for every app's data folder. `make selftest` therefore starts the
     /// built app, which holds the access, instead of the bare program.
     static func run() -> Bool {
+        Console.heading("Speicher-Explorer · self test", detail: "counts and sizes only")
         guard PermissionService.hasFullDiskAccess else {
-            print(
-                "Full Disk Access is missing, so the self test stops before macOS asks per folder.")
-            print("Grant it to Speicher-Explorer in System Settings, then run make selftest.")
+            Console.failed(
+                "Full Disk Access is missing, so the self test stops before macOS asks per folder")
+            Console.note(
+                "Grant it to Speicher-Explorer in System Settings, then run make selftest.")
             return false
         }
         let root = Node.virtualRoot()
@@ -30,6 +32,8 @@ enum SelfTest {
         reportLargeFiles(in: root)
         reportCopies(in: root)
         reportVolumes()
+        Console.frame(
+            ["\(Console.passedMark) Self test passed: every area matches du"], passed: true)
         return true
     }
 
@@ -48,13 +52,16 @@ enum SelfTest {
             let deviationText = String(format: "%.2f", deviation * percent)
             let secondsText = String(format: "%.1f", seconds)
             let cpuText = String(format: "%.1f", cpuTime)
-            print(
-                "Area \(index + 1): \(Format.count(result.root.fileCount)) files,"
+            let isClose = deviation < tolerance
+            let report = isClose ? Console.passed : Console.failed
+            report(
+                "Area \(index + 1)",
+                "\(Format.count(result.root.fileCount)) files,"
                     + " \(Format.bytes(result.root.bytes)) (du \(Format.bytes(reference)),"
                     + " deviation \(deviationText) %), \(result.unreadable) unreadable,"
                     + " \(secondsText) s, CPU \(cpuText) s"
             )
-            precondition(deviation < tolerance, "scanner and du differ too much")
+            precondition(isClose, "scanner and du differ too much")
         }
     }
 
@@ -64,7 +71,8 @@ enum SelfTest {
             .allSatisfy { larger, smaller in larger.bytes >= smaller.bytes }
         precondition(!categories.isEmpty && isSortedBySize)
         let totalBytes = categories.reduce(0) { total, category in total + category.bytes }
-        print("Categories: \(categories.count), total \(Format.bytes(totalBytes))")
+        Console.passed(
+            "Categories", detail: "\(categories.count), total \(Format.bytes(totalBytes))")
     }
 
     private static func checkSearch(in root: Node) {
@@ -75,8 +83,9 @@ enum SelfTest {
         let millisecondsPerSearch =
             Date().timeIntervalSince(searchStart) * millisecondsPerSecond / searchCount
         precondition(folders.allSatisfy(\.isFolder) && files.allSatisfy { file in !file.isFolder })
-        print(
-            "Search: \(folders.count) folders, \(files.count) files"
+        Console.passed(
+            "Search",
+            detail: "\(folders.count) folders, \(files.count) files"
                 + " (limit \(ScanLimits.searchLimit)), \(Int(millisecondsPerSearch)) ms per search"
         )
     }
@@ -84,18 +93,21 @@ enum SelfTest {
     private static func reportLargeFiles(in root: Node) {
         let threshold = LargeFileThreshold.bytes(LargeFileThreshold.defaultMegabytes)
         let largeFiles = SearchService.largeFiles(atLeast: threshold, in: root)
-        print("Large files from \(LargeFileThreshold.defaultMegabytes) MB: \(largeFiles.count)")
+        Console.step(
+            "Large files",
+            detail: "\(largeFiles.count) from \(LargeFileThreshold.defaultMegabytes) MB")
     }
 
     private static func reportCopies(in root: Node) {
         let groups = CopyService.groups(in: root.descendant(at: Paths.temporaryCopies))
-        print("Signature copy groups: \(groups.count)")
+        Console.step("Signature copy groups", detail: "\(groups.count)")
     }
 
     private static func reportVolumes() {
-        print(
-            "Volumes: \(VolumeService.all().count),"
-                + " Full Disk Access: \(PermissionService.hasFullDiskAccess)")
+        Console.step(
+            "Volumes",
+            detail: "\(VolumeService.all().count), Full Disk Access: "
+                + "\(PermissionService.hasFullDiskAccess)")
     }
 
     private static func cpuSeconds() -> Double {
