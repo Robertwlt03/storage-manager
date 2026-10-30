@@ -6,7 +6,8 @@
 # Needs:  nothing
 # The same pieces as scripts/checks/console.py: a heading, lines with a mark (✔ done, ✘ failed,
 # › under way) and dimmed details, dimmed hints, a table and a frame that sums up. Colors appear
-# in a terminal and on GitHub; NO_COLOR=1 turns them off and FORCE_COLOR=1 turns them on.
+# in a terminal and on GitHub; NO_COLOR=1 turns them off and FORCE_COLOR=1 turns them on. Only
+# the heading starts with a blank line, and every block ends with one, so two never meet.
 
 set -euo pipefail
 
@@ -161,7 +162,7 @@ console_frame() {
     width=$(( ${#line} + 4 > width ? ${#line} + 4 : width ))  # details stand two further in
   done
   side=$(console_paint "│" "$color")
-  printf '\n %s\n' "$(console_paint "╭$(repeated "─" "$width")╮" "$color")"
+  printf ' %s\n' "$(console_paint "╭$(repeated "─" "$width")╮" "$color")"
   printf ' %s %s%*s%s\n' "$side" "$(console_paint "$outcome" "$color" "$BOLD")" \
     $(( width - ${#outcome} - 1 )) "" "$side"
   for line in "$@"; do

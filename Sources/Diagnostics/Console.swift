@@ -4,7 +4,8 @@ import Foundation
 /// the list of pages), the same pieces as scripts/console.sh and scripts/checks/console.py: a
 /// heading, lines with a mark (✔ done, ✘ failed, › under way) and dimmed details, dimmed hints
 /// and a frame that sums up. Colors appear in a terminal; NO_COLOR turns them off and FORCE_COLOR
-/// turns them on (see no-color.org), as for `make selftest`, which writes into a file.
+/// turns them on (see no-color.org), as for `make selftest`, which writes into a file. Only the
+/// heading starts with a blank line, and every block ends with one, so two never meet.
 enum Console {
     /// Terminal codes for text styles (ECMA-48 "select graphic rendition").
     private enum Style: String {
@@ -72,7 +73,7 @@ enum Console {
         }
         let top = " " + paint("╭\(border)╮", color)
         let bottom = " " + paint("╰\(border)╯", color)
-        show((["", top] + rows + [bottom, ""]).joined(separator: "\n"))
+        show(([top] + rows + [bottom, ""]).joined(separator: "\n"))
     }
 
     /// Plain text another program reads; never colored.

@@ -6,7 +6,9 @@ A heading names the command; each result gets a line with a mark (✔ done, ✘ 
 and dimmed details; hints follow dimmed and a frame sums up at the end. scripts/console.sh and
 Sources/Diagnostics/Console.swift draw the same pieces for the shell scripts and for the app.
 Colors appear in a terminal and on GitHub; NO_COLOR=1 turns them off and FORCE_COLOR=1 turns them
-on (see no-color.org). A command that asks something uses the questions at the end: yes or no,
+on (see no-color.org). Spacing follows one rule, so two blank lines never meet: only the heading
+starts with a blank line, and every block (heading, question, group, frame) ends with one.
+A command that asks something uses the questions at the end: yes or no,
 a line of text, or a list to walk with the arrow keys.
 """
 
@@ -162,7 +164,7 @@ def frame(outcome: str, details: list[str], color: str) -> None:
     mark = PASSED_MARK if color == SUCCESS else FAILED_MARK
     lines = [paint(f"{mark} {outcome}", color, BOLD)] + [f"  {detail}" for detail in details]
     width = max(visible_length(line) for line in lines) + 2
-    show("\n " + paint("╭" + "─" * width + "╮", color))
+    show(" " + paint("╭" + "─" * width + "╮", color))
     side = paint("│", color)
     for line in lines:
         padding = " " * (width - visible_length(line) - 1)
@@ -187,7 +189,9 @@ def can_ask() -> bool:
 def ask_yes_no(question: str) -> bool:
     """Enter alone answers no."""
     ask(question, "y/n")
-    return answer().lower() in YES_ANSWERS
+    said_yes = answer().lower() in YES_ANSWERS
+    show("")
+    return said_yes
 
 
 def ask_text(label: str, meaning: str, current: str = "") -> str:
@@ -195,6 +199,7 @@ def ask_text(label: str, meaning: str, current: str = "") -> str:
     ask(label, f'{meaning} · Enter keeps "{current}"' if current else meaning)
     while not (text := answer() or current):
         note("This one needs an answer.")
+    show("")
     return text
 
 
@@ -208,18 +213,12 @@ def ask_choice(question: str, options: list[str]) -> int:
             marked = (marked + MOVES.get(key, 0)) % len(options)
             print(f"\x1b[{len(options)}F", end="")  # up to the first entry, to draw the list again
             show_options(options, marked)
+    show("")
     return marked
 
 
-asked: list[str] = []  # the questions asked so far
-
-
 def ask(question: str, hint: str) -> None:
-    """The question, and dimmed a few words on what it means or how to answer. A blank line keeps
-    it apart from the question before."""
-    if asked:
-        show("")
-    asked.append(question)
+    """The question, and dimmed a few words on what it means or how to answer."""
     show(f" {paint(QUESTION_MARK, CYAN, BOLD)} {paint(question, BOLD)}  {paint(hint, DIM)}")
 
 
