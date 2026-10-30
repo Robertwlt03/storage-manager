@@ -103,9 +103,11 @@ is kept.
 (`calculating`). Buttons that refer to these values wait until they are settled. Where there is more room,
 `UI.Placeholder` shows what is currently loading.
 
-**Main thread by default:** The code is written in Swift 6, and everything runs on the main thread unless it says
-otherwise. Only what really works in the background, that is scanning, cleaning up, the analysis in the info window
-and the app copies, is marked `nonisolated`. The compiler then checks that no data is changed from two places at the
+**Main thread by default:** The code is written in Swift 6 with approachable concurrency, and everything runs on the
+main thread unless it says otherwise; an async function without an actor runs where its caller runs. Only what really
+works in the background, that is scanning, cleaning up, the analysis in the information window and the app copies, is
+marked `nonisolated`, an async function that must leave the main thread is marked `@concurrent`, and work that needs a
+lower priority starts in a `Task.detached`. The compiler then checks that no data is changed from two places at the
 same time. A scan builds the folder tree in the background and then hands it over as a whole, which is why `Node` may
 cross over.
 
@@ -115,8 +117,8 @@ why both check for Full Disk Access first and stop right away without it, and `m
 instead of the bare binary, so that macOS credits it with the app’s Full Disk Access.
 
 **Demo mode:** With `-demo YES` the app fills itself with the made-up data from `DemoData` instead of scanning.
-`AppModel` then blocks every disk access and every removal, and the info window does not analyze anything either. The
-paths of the made-up files and cleanup entries do not exist, and a test checks that.
+`AppModel` then blocks every disk access and every removal, and the information window does not analyze anything
+either. The paths of the made-up files and cleanup entries do not exist, and a test checks that.
 
 **Energy:** No animation runs while idle. The scan runs at low priority, and progress is reported at most twice per
 second.

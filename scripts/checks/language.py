@@ -85,13 +85,8 @@ SWIFT_LOCAL_NAME = re.compile(r"""
 SWIFT_DECLARATION = re.compile(r"""
     \b (?: func | struct | enum | class | protocol | typealias ) \s+ ( [A-Za-z_]\w* )
 """, re.VERBOSE)
-SHELL_NAME = re.compile(r"""
-    ^ \s* (?: local \s+ )? ([A-Za-z_]\w*) =     # NAME=… or local name=…
-    | ^ \s* ([A-Za-z_]\w*) \(\) \s* \{          # a function: name() {
-    | \b for \s+ (\w+) \s+ in \b                # for size in …
-""", re.VERBOSE)
 MAKE_VARIABLE = re.compile(r"^([A-Z_]+) \s* [?:]?=", re.VERBOSE)
-SHELL_COMMENT = re.compile(r"(?:^|\s)#(?!!)(.*)$")  # from # to the end, not the #! line
+MAKE_COMMENT = re.compile(r"(?:^|\s)#(.*)$")  # from # to the end of the line
 
 
 # MARK: Words with their places
@@ -114,7 +109,7 @@ class CommentWord:
 def declared_names(codebase: Codebase, index: CompilerIndex) -> list[Name]:
     names = (
         swift_index_names(index) + swift_local_names(codebase) + python_names(codebase)
-        + shell_names(codebase)
+        + make_names(codebase)
     )
     first = {}
     for name in names:
@@ -184,11 +179,10 @@ def is_python_special(name: str) -> bool:
     return name.startswith("__") and name.endswith("__")
 
 
-def shell_names(codebase: Codebase) -> list[Name]:
+def make_names(codebase: Codebase) -> list[Name]:
     names = []
-    for path, number, line in numbered_lines(codebase.shell_scripts + codebase.makefiles):
-        pattern = MAKE_VARIABLE if path in codebase.makefiles else SHELL_NAME
-        names += names_in_line(line, place(path, number), (pattern,))
+    for path, number, line in numbered_lines(codebase.makefiles):
+        names += names_in_line(line, place(path, number), (MAKE_VARIABLE,))
     return names
 
 
@@ -203,14 +197,14 @@ def comment_words(codebase: Codebase) -> list[CommentWord]:
 
 
 def comments(codebase: Codebase):
-    """Each comment with its file and line: Swift //, Python # and docstrings, shell #."""
+    """Each comment with its file and line: Swift //, Python # and docstrings, make #."""
     for path, number, line in numbered_lines(codebase.swift_files()):
         if "//" in line:
             yield path, number, line.split("//", 1)[1]
     for path in codebase.python_scripts:
         yield from python_comments(path)
-    for path, number, line in numbered_lines(codebase.shell_scripts + codebase.makefiles):
-        match = SHELL_COMMENT.search(line)
+    for path, number, line in numbered_lines(codebase.makefiles):
+        match = MAKE_COMMENT.search(line)
         if match:
             yield path, number, match.group(1)
 

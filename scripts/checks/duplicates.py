@@ -57,7 +57,7 @@ def duplicate_findings() -> list[str]:
 
 
 def duplicate_problems(codebase: Codebase) -> list[str]:
-    paths = codebase.swift_files() + codebase.python_scripts + codebase.shell_scripts
+    paths = codebase.swift_files() + codebase.python_scripts
     first_places: dict[tuple, Line] = {}  # each run of lines and where it stood first
     findings = []
     for path in paths:

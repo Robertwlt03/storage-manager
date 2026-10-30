@@ -4,8 +4,9 @@ Start:  imported by scripts/check.py, not started on its own
 Needs:  Xcode 27 (the compiler's index shows every interface the app's code calls)
 In this project every type runs on the main thread unless it is marked `nonisolated`, and the main
 thread draws the window: a slow disk there makes the app stutter and keeps the Mac awake longer.
-So every call that reaches the disk stands inside a declaration marked `nonisolated` or a task
-started with `Task.detached`. The diagnostics, which test the app themselves, are left out.
+So every call that reaches the disk stands inside a declaration marked `nonisolated`, a function
+marked `@concurrent` or a task started with `Task.detached`. The diagnostics, which test the app
+themselves, are left out.
 """
 
 import re
@@ -37,12 +38,17 @@ DISK_INTERFACES = {
 OFF_THE_MAIN_THREAD = re.compile(r"""
     \b nonisolated \b (?! \s* \( \s* unsafe )     # nonisolated, but not nonisolated(unsafe)
     | \b Task\.detached \b                         # a task of its own
+    | @ concurrent \b                              # a function that leaves the caller's actor
 """, re.VERBOSE)
 # The words that open a declaration. The text before a brace can start with earlier members of a
 # type, so only the line of the last such word on belongs to the brace's own declaration.
 DECLARATION = re.compile(r"""
     \b (?: func | init | deinit | subscript | var | let       # a function or a property
          | struct | class | enum | extension | actor | protocol ) \b   # or a type
+""", re.VERBOSE)
+# A line that holds nothing but attributes, such as `@concurrent` or `@available(macOS 27, *)`.
+ATTRIBUTE_LINE = re.compile(r"""
+    [ \t]* (?: (?: @ \w+ (?: \( [^()\n]* \) )? | nonisolated ) [ \t]* )+
 """, re.VERBOSE)
 LEFT_OUT = ("Sources/Diagnostics/",)
 
@@ -67,7 +73,8 @@ def disk_access_problems(codebase: Codebase) -> list[str]:
         if interface and found.path in app_code and not runs_off_the_main_thread(found):
             findings.add(
                 f"{place(found.path, found.line)}: {interface} reaches the disk on the main "
-                "thread; move it into a nonisolated service or a Task.detached"
+                "thread; move it into a nonisolated service, an @concurrent function or a "
+                "Task.detached"
             )
     return sorted(findings)
 
@@ -104,4 +111,14 @@ def own_declaration(text_before: str) -> str:
     declarations = list(DECLARATION.finditer(text_before))
     if not declarations:  # a closure, such as .task {: only its own line belongs to it
         return text_before.rpartition("\n")[2]
-    return text_before[text_before.rfind("\n", 0, declarations[-1].start()) + 1:]
+    start = line_start(text_before, declarations[-1].start())
+    while start:  # attributes on lines of their own above, such as @concurrent, belong to it
+        above = line_start(text_before, start - 1)
+        if not ATTRIBUTE_LINE.fullmatch(text_before, above, start - 1):
+            break
+        start = above
+    return text_before[start:]
+
+
+def line_start(text: str, position: int) -> int:
+    return text.rfind("\n", 0, position) + 1

@@ -159,7 +159,7 @@ The script runs twenty-three checks one after another:
 9. **Flat methods:** At most two blocks may sit inside each other in a method, such as a loop and an `if` in it.
    A block is anything that spans lines: `if`, `else`, `switch`, loops, closures and inner functions. A deeper part
    belongs in a method of its own with a telling name, and there is no function inside a function inside a
-   function. This applies to Swift, Python and shell (`scripts/checks/nesting.py`). The check tells a method by
+   function. This applies to Swift and Python (`scripts/checks/nesting.py`). The check tells a method by
    its place, not by a keyword: everything opened directly inside a type counts as a method, even a kind of
    declaration Swift adds later. In Python every statement with a block of its own counts.
 10. **No code written twice:** When the same six lines of substance stand in two places, they belong in one shared
@@ -170,8 +170,8 @@ The script runs twenty-three checks one after another:
    first needs a place there, otherwise the check reports it.
 12. **Promises of the app:** Network interfaces do not appear in the code, because the app stays on the Mac. Only the
    three services that ask first delete files or move them to the Trash (`scripts/checks/promises.py`).
-13. **The disk off the main thread:** Every access to the disk stands in code marked `nonisolated` or running in a
-   `Task.detached`, because the main thread draws the window. Only the diagnostic tools are left out
+13. **The disk off the main thread:** Every access to the disk stands in code marked `nonisolated` or `@concurrent`,
+   or running in a `Task.detached`, because the main thread draws the window. Only the diagnostic tools are left out
    (`scripts/checks/disk_access.py`).
 14. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
    is only written but never read. The check reads the index the compiler writes while building
@@ -202,11 +202,10 @@ The script runs twenty-three checks one after another:
 21. **Security:** The app holds Full Disk Access, so no other code may get into it. It is signed with the hardened
    runtime (`--options runtime`), so no library can be injected. No code starts a shell that reads text as commands,
    no script runs text as code or pipes a script from the internet straight into a shell, and nobody uses fixed paths
-   in the shared folder for temporary files. A shell script, should one come back, starts with `set -euo pipefail`.
+   in the shared folder for temporary files. There are no shell scripts, and `make check` reports one should it appear.
    Where Swift switches off its safety, such as with `nonisolated(unsafe)` or `@unchecked Sendable`, a comment gives
    the reason. The GitHub workflow may only read, pins every action to a fixed commit, installs tools in a fixed
-   version checked by checksum, never puts text from strangers' pull requests into a command, and runs a job on a
-   machine of one's own (`self-hosted`) only for pushes and this repository's own pull requests, never for a fork's
+   version checked by checksum and never puts text from strangers' pull requests into a command
    (`scripts/checks/security.py`).
 22. **Scripts:** Two languages only: Swift for the app and the tools that need macOS frameworks, Python 3.13 or newer
    for every other script, and the `Makefile` only as a menu whose lines hand over to them. The scripts and the

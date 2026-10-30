@@ -24,6 +24,7 @@ PROJECT = Path(__file__).resolve().parents[2]
 SCRIPTS = PROJECT / "scripts"
 SAMPLES = SCRIPTS / "checks" / "samples"
 MAKEFILE = PROJECT / "Makefile"
+SHELL_LINE = re.compile(r"#!.*\b(?:sh|bash|zsh|dash|ksh)\b")  # the first line of a shell script
 BUILD_FOLDER = PROJECT / ".build" / "check"
 
 # Building and testing share one configuration, so neither step rebuilds what the other built.
@@ -92,7 +93,8 @@ def app() -> Codebase:
         swift_scripts=files(SCRIPTS, "*.swift"),
         # The hooks are Python too; only what git knows, never a cache Python leaves beside them.
         python_scripts=(*files(SCRIPTS, "*.py"), *tracked_files("scripts/hooks/*")),
-        shell_scripts=tracked_files("*.sh"),  # none: the tooling is Python (CLAUDE.md)
+        # None: the tools are Python (CLAUDE.md); check.py reports any that appears.
+        shell_scripts=tuple(filter(is_shell_script, tracked_files("*"))),
         makefiles=(MAKEFILE,),
         source_root=PROJECT / "Sources",
         guides=tracked_files("*.md"),
@@ -120,6 +122,14 @@ def is_text(path: Path) -> bool:
     except (UnicodeDecodeError, IsADirectoryError, FileNotFoundError):
         return False
     return True
+
+
+def is_shell_script(path: Path) -> bool:
+    """A .sh file, or a text file whose first line starts a shell, such as #!/usr/bin/env bash."""
+    if path.suffix == ".sh":
+        return True
+    first_line = lines_of(path)[:1] if is_text(path) else []
+    return any(SHELL_LINE.match(line) for line in first_line)
 
 
 @cache

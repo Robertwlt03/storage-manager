@@ -76,7 +76,7 @@ def console_output_findings() -> list[str]:
 
 def console_output_problems(codebase: Codebase) -> list[str]:
     return (
-        output_problems_in(codebase.shell_scripts + codebase.makefiles, SHELL_OUTPUT)
+        output_problems_in(codebase.makefiles, SHELL_OUTPUT)
         + output_problems_in(codebase.python_scripts, PYTHON_OUTPUT)
         + output_problems_in(swift_files_that_may_print(codebase), SWIFT_OUTPUT)
     )

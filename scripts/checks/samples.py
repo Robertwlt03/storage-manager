@@ -65,7 +65,8 @@ def samples() -> Codebase:
         swift_sources=tuple(sorted((SAMPLES / "Sources").rglob("*.swift"))),
         swift_scripts=(SAMPLES / "sample.swift",),
         python_scripts=(SAMPLES / "sample.py",),
-        shell_scripts=(SAMPLES / "sample.sh", SAMPLES / "unguarded.sh"),
+        shell_scripts=(SAMPLES / "sample.sh",),
+        makefiles=(SAMPLES / "Makefile",),
         source_root=SAMPLES / "Sources" / "Samples",
         guides=tuple(sorted((SAMPLES / "guides").glob("*.md"))),
         translations=SAMPLES / "Resources",
@@ -80,8 +81,8 @@ def expectations(codebase: Codebase) -> list[tuple[str, str]]:
     strings = tuple(sorted(codebase.translations.glob("*.lproj/*.strings")))
     paths = (
         codebase.swift_sources + codebase.swift_scripts + codebase.python_scripts
-        + codebase.shell_scripts + codebase.guides + strings + codebase.text_files
-        + codebase.workflows
+        + codebase.shell_scripts + codebase.makefiles + codebase.guides + strings
+        + codebase.text_files + codebase.workflows
     )
     for path, number, line in numbered_lines(paths):
         note = EXPECTATION.search(line)

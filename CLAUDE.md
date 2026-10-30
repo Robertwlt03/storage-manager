@@ -45,8 +45,8 @@ changing code; do not repeat their content here or in comments.
 - Xcode 27 is required as a toolchain only (SwiftUI's `@State` macro plugin ships only with Xcode); any editor works.
   `xcode-select --print-path` must point to `/Applications/Xcode.app/Contents/Developer`.
 - Two languages only. Swift for the app and the two tools that need macOS frameworks (`scripts/snapshots.swift`,
-  `scripts/checks/unknown_words.swift`); Python 3.13 or newer for every other script in `scripts/`. No shell scripts:
-  the `Makefile` is only a menu whose lines hand over to Python, Swift or one macOS tool.
+  `scripts/checks/unknown_words.swift`); Python 3.13 or newer for every other script in `scripts/`. No shell scripts
+  (`make check` reports one): the `Makefile` is only a menu whose lines hand over to Python, Swift or one macOS tool.
 - `make` picks the newest Python from 3.13 on and exports it as `PYTHON` (with `scripts/` on `PYTHONPATH`);
   `scripts/checks/__init__.py` stops an older Python with a clear message. Started by hand, a script needs a new enough
   Python, such as `python3.14 scripts/check.py tests`.
@@ -75,8 +75,9 @@ changing code; do not repeat their content here or in comments.
    (see "Skills and helpers"); otherwise review the diff yourself along the same lines. Fix what it finds or say why a
    finding is wrong, then run `make check` again.
 3. Commit on the current branch, naming every file (`git add <files>`, never `git add -u` or `-A`), so nothing the
-   person is trying out slips in. Messages follow Conventional Commits in English (`make check` checks them). Do not
-   push.
+   person is trying out slips in. Messages follow Conventional Commits in English. Do not push.
+4. Run `make check` once more after committing: it checks a commit message only once the commit exists, so a word it
+   does not accept is fixed with `git commit --amend` before anyone pushes.
 
 ## <img src="assets/icons/claude-app.svg" height="33" align="absmiddle" alt="">Working on the app
 
@@ -159,9 +160,7 @@ mode.
 
 - The workflow runs on GitHub's own Mac image for macOS 27 and Xcode 27 (`runs-on: xcode-27`): a fresh Mac per run,
   thrown away afterwards, so pull requests from forks are checked too. GitHub names its Mac images after the Xcode
-  version (`xcode-27`), not only after macOS (`macos-15`). A job on a machine of one's own (`self-hosted`) would run a
-  fork's code there; `make check` reports such a job unless it starts only for pushes and this repository's own pull
-  requests.
+  version (`xcode-27`), not only after macOS (`macos-15`).
 - Every action is pinned to a commit with its version in a comment; pick a release that has been out for a while.
 - `make hooks` (the person's choice) runs `make check` before every push. The hook starts with any `python3`, then
   hands over to the Python 3.13 or newer that make finds.

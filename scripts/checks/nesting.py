@@ -5,7 +5,7 @@ Needs:  nothing beyond Python
 A block is anything that opens on one line and closes on a later one: if, else, switch, a loop,
 a closure or an inner function. Inside a method at most MAXIMUM_BLOCK_DEPTH blocks may be open at
 once; a deeper part belongs in a method of its own, named for what it does. One-line blocks such
-as `.map { entry in entry.name }` do not count. Swift, Python and shell are measured alike.
+as `.map { entry in entry.name }` do not count. Swift and Python are measured alike.
 """
 
 import ast
@@ -13,7 +13,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from checks.project import Codebase, app, lines_of, place
+from checks.project import Codebase, app, place
 
 # MARK: Settings
 
@@ -47,11 +47,6 @@ SWIFT_NOISE = re.compile(r'''
 # Swift `switch` does with its braces.
 PYTHON_FUNCTIONS = (ast.FunctionDef, ast.AsyncFunctionDef)
 
-# Shell: a function starts with `name() {`; blocks open with these words and close with the
-# matching ones, unless both stand on the same line.
-SHELL_FUNCTION = re.compile(r"^(\w+)\(\)\s*\{")
-SHELL_OPENING = re.compile(r"^\s*(?:if|for|while|until|case)\b")
-SHELL_CLOSING = re.compile(r"(?:^|[\s;])(?:fi|done|esac)\b")
 
 
 # MARK: What a check reports
@@ -91,8 +86,6 @@ def nesting_problems(codebase: Codebase) -> list[str]:
         places += swift_deep_places(path)
     for path in codebase.python_scripts:
         places += python_deep_places(path)
-    for path in codebase.shell_scripts:
-        places += shell_deep_places(path)
     return [deep_place.finding() for deep_place in places]
 
 
@@ -232,23 +225,3 @@ def python_children(node: ast.AST, depth: int, functions: int):
         adds_level = is_block and not is_elif
         is_function = isinstance(child, PYTHON_FUNCTIONS)
         yield child, depth + adds_level, functions + is_function
-
-
-# MARK: Shell
-
-
-def shell_deep_places(path: Path) -> list[DeepPlace]:
-    places = []
-    function, depth, reported = "", 0, False
-    for number, line in enumerate(lines_of(path), start=1):
-        started = SHELL_FUNCTION.match(line)
-        if started:
-            function, depth, reported = started.group(1), 0, False
-            continue
-        opens = SHELL_OPENING.match(line) is not None
-        closes = SHELL_CLOSING.search(line) is not None
-        depth += opens - closes
-        if function and opens and not closes and depth > MAXIMUM_BLOCK_DEPTH and not reported:
-            places.append(DeepPlace(path, number, function, too_deep(depth)))
-            reported = True
-    return places

@@ -116,7 +116,7 @@ def project_terms() -> set[str]:
     """The known technical terms, and every word the project's own code holds, whole and in its
     parts: `nonisolated`, `fts`, `fileCount` as file and count."""
     codebase = app()
-    code = codebase.swift_files() + codebase.python_scripts + codebase.shell_scripts
+    code = codebase.swift_files() + codebase.python_scripts
     words = {word for path in code for line in lines_of(path) for word in WORD.findall(line)}
     parts = {part for word in words for part in words_of(word)}
     terms = known_terms(codebase, compiler_index(codebase))

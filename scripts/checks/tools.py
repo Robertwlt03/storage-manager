@@ -94,7 +94,11 @@ def script_findings() -> list[str]:
 
 
 def script_layout_problems(codebase: Codebase) -> list[str]:
-    problems = []
+    problems = [
+        f"{place(path, 1)}: a shell script; the tools are written in Python and the app in Swift "
+        "(two languages, see CLAUDE.md)"
+        for path in codebase.shell_scripts
+    ]
     for path in codebase.all_scripts():
         problems += long_lines(path)
         if not any(SCRIPT_HEAD in line for line in lines_of(path)[:HEAD_LINES]):
@@ -118,7 +122,6 @@ COMPILE_ONLY = "import sys; compile(open(sys.argv[1]).read(), sys.argv[1], 'exec
 def syntax_checks(codebase: Codebase) -> list[list[str]]:
     """Each tool reads a script without running it."""
     checks = [
-        *(["bash", "-n", str(path)] for path in codebase.shell_scripts),
         *([sys.executable, "-c", COMPILE_ONLY, str(path)] for path in codebase.python_scripts),
         *(["swiftc", "-typecheck", str(path)] for path in codebase.swift_scripts),
     ]

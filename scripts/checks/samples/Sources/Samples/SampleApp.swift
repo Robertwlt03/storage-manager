@@ -14,7 +14,7 @@ enum SampleApp {
         _ = (firstReport(entries: []), secondReport(entries: []))
         _ = (LayerSample().page, GadgetSample().page)
         _ = (removeQuietly, goOnline, AccessibilitySamples())
-        _ = (DiskSamples.listFolder(""), QuietDiskSamples.listFolder(""))
+        _ = (DiskSamples.listFolder(""), DiskSamples.readFolder, QuietDiskSamples.listFolder(""))
         _ = (SecuritySamples.sharedCount, SecuritySamples.listThroughShell)
         _ = (SecuritySamples.scratchFile, SecuritySamples.separator, SecuritySamples.site)
     }

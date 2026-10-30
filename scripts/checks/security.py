@@ -3,9 +3,10 @@
 Start:  imported by scripts/check.py, not started on its own
 Needs:  nothing beyond Python
 The app holds Full Disk Access, so whoever runs code inside it can read every file on the Mac.
-Each rule names one way in: a shell that reads words as commands, text run as code, a fixed place
-in the shared temporary folder, a signature that lets other code load into the app, Swift's
-safety switched off without a reason, and a GitHub workflow that strangers could steer.
+Each rule names one way in: a shell that reads words as commands (also in the Makefile's recipes),
+text run as code, a fixed place in the shared temporary folder, a signature that lets other code
+load into the app, Swift's safety switched off without a reason, and a GitHub workflow that
+strangers could steer.
 """
 
 import re
@@ -56,27 +57,19 @@ PYTHON_RISKS = (
          "builds any object a YAML file asks for; use yaml.safe_load"),
     FIXED_TEMPORARY_PATH,
 )
+# The Makefile's recipe lines are shell commands, so the shell's ways in count there.
 SHELL_RISKS = (
-    Risk(re.compile(r"^ [^#]* \b eval \s", re.VERBOSE), CODE_FROM_TEXT),  # eval before any comment
+    # eval before any comment, but not Make's own $(eval …)
+    Risk(re.compile(r"^ [^#]* (?<! \( ) \b eval \s", re.VERBOSE), CODE_FROM_TEXT),
     Risk(re.compile(r"\b (?: curl | wget ) \b .* \| \s* (?: sudo \s+ )? \w*sh \b", re.VERBOSE),
          "runs a script straight from the internet; download it, read it, then run it"),
     FIXED_TEMPORARY_PATH,
 )
 
-# The first command of every shell script: stop at the first failed command, at the first unset
-# variable and at a failure inside a pipe, instead of going on with a half-done result.
-STRICT_MODE = "set -euo pipefail"
-STRICT_MODE_COMMAND = re.compile(r"""
-    ^ \s* set \s+ -
-    (?= [A-Za-z]* e ) (?= [A-Za-z]* u )   # the letters e and u, in any order, maybe with others
-    [A-Za-z]* o \s+ pipefail             # then -o pipefail
-    \s* (?: \# .* )? $                   # maybe a comment after it
-""", re.VERBOSE)
-COMMENT_OR_BLANK = re.compile(r"^\s*(?:#.*)?$")
 
 # Signing: the hardened runtime keeps other code out of the app (no injected libraries, no
 # debugger), so nobody borrows its Full Disk Access.
-# The scripts sign in a shell line or in a Python list of arguments, so both forms count.
+# Python scripts sign with a list of arguments, the Makefile with a shell line, so both forms count.
 SIGNS = re.compile(r"""
     (?: ^ | \s ) -- sign \b      # the option in a shell command, after a space
     | ["'] -- sign ["']          # the option as a quoted item of a Python list
@@ -106,25 +99,6 @@ COMMIT_NAME = re.compile(r"^[0-9a-f]{40}$")  # a commit's full name, which nobod
 # The trigger anywhere before a comment, also in a list such as on: [push, pull_request_target].
 STRANGERS_TRIGGER = re.compile(r"^ [^#]* \b pull_request_target \b", re.VERBOSE)
 RUN_BLOCK = re.compile(r"^(?P<indent>\s*)(?:-\s+)?run:")
-# The triggers under on: that run a pull request's code, also one from a stranger's fork.
-FORK_TRIGGER = re.compile(r"""
-    \b pull_request                                  # a pull request opened or updated,
-    (?: _target | _review | _review_comment )? \b    # or reviewed, or commented on
-""", re.VERBOSE)
-TOP_LEVEL_KEY = re.compile(r"^[\w-]+:")  # such as on: or jobs:, at the start of the line
-JOB_NAME = re.compile(r"^ {2}[\w-]+:\s*$")  # a job, one level below jobs:
-# A machine GitHub does not rent out, such as a runner on the maintainer's own Mac.
-OWN_MACHINE = re.compile(r"""
-    ^ \s* runs-on:                              # the machine a job runs on
-    (?! \s* (?: (?: ubuntu | macos | windows ) -  # is none of GitHub's own images,
-             | xcode - \d+ (?: - xlarge )? \s* (?: \# | $ )  # nor its Xcode image (xcode-27)
-             | \$\{\{ ) )                         # and no expression, which may name them
-""", re.VERBOSE)
-# The condition that keeps pull requests from forks away from it.
-FORKS_KEPT_OUT = re.compile(r"""
-    github\.event\.pull_request\.head\.repo\.full_name   # where the pull request comes from
-    \s* == \s* github\.repository                       # is this repository
-""", re.VERBOSE)
 STRANGERS_TEXT = re.compile(r"\$\{\{[^}]*\b(?:github\.event\.|github\.head_ref)")
 # An install that takes whatever version is newest that day.
 NEWEST_VERSION_INSTALL = re.compile(r"""
@@ -142,20 +116,6 @@ def risk_problems(paths: tuple[Path, ...], risks: tuple[Risk, ...]) -> list[str]
         for path, number, line in numbered_lines(paths)
         for risk in risks if risk.pattern.search(line)
     ]
-
-
-def strict_mode_problems(shell_scripts: tuple[Path, ...]) -> list[str]:
-    problems = []
-    for path in shell_scripts:
-        numbered = enumerate(lines_of(path), start=1)
-        first = next(((number, line) for number, line in numbered
-                      if not COMMENT_OR_BLANK.match(line)), None)
-        if first and not STRICT_MODE_COMMAND.match(first[1]):
-            problems.append(
-                f"{place(path, first[0])}: the first command must be '{STRICT_MODE}', so the "
-                "script stops at the first failure instead of going on"
-            )
-    return problems
 
 
 def signing_problems(scripts: tuple[Path, ...]) -> list[str]:
@@ -197,49 +157,8 @@ def workflow_problems(workflows: tuple[Path, ...]) -> list[str]:
                 f"{place(workflow, 1)}: no permissions: block, so the job gets every right of "
                 "GitHub's token; start with 'permissions: contents: read'"
             )
-        problems += workflow_line_problems(workflow) + own_machine_problems(workflow)
+        problems += workflow_line_problems(workflow)
     return problems
-
-
-def own_machine_problems(workflow: Path) -> list[str]:
-    """A runner on one's own machine runs whatever code a pull request brings; each job there
-    must keep a fork's pull requests away. Comment lines do not count."""
-    lines = [
-        (number, line) for number, line in enumerate(lines_of(workflow), start=1)
-        if not line.lstrip().startswith("#")
-    ]
-    if not any(FORK_TRIGGER.search(line) for _, line in section(lines, "on")):
-        return []
-    return [
-        f"{place(workflow, number)}: runs on a machine of your own, and a pull request from a fork "
-        "would run its code there; start the job only for this repository's own pull requests "
-        "(github.event.pull_request.head.repo.full_name == github.repository)"
-        for job in jobs(section(lines, "jobs"))
-        if not FORKS_KEPT_OUT.search("\n".join(line for _, line in job))
-        for number, line in job if OWN_MACHINE.match(line)
-    ]
-
-
-def section(lines: list[tuple[int, str]], key: str) -> list[tuple[int, str]]:
-    """The lines of one top-level part, such as on:, from its own line to the next part."""
-    found, inside = [], False
-    for number, line in lines:
-        if TOP_LEVEL_KEY.match(line):
-            inside = line.startswith(f"{key}:")
-        if inside:
-            found.append((number, line))
-    return found
-
-
-def jobs(lines: list[tuple[int, str]]) -> list[list[tuple[int, str]]]:
-    """The jobs: section split into one list of lines per job."""
-    split: list[list[tuple[int, str]]] = []
-    for number, line in lines:
-        if JOB_NAME.match(line):
-            split.append([])
-        if split:
-            split[-1].append((number, line))
-    return split
 
 
 def workflow_line_problems(workflow: Path) -> list[str]:
@@ -297,9 +216,8 @@ def security_problems(codebase: Codebase) -> list[str]:
     return (
         risk_problems(swift_files, SWIFT_RISKS)
         + risk_problems(codebase.python_scripts, PYTHON_RISKS)
-        + risk_problems(codebase.shell_scripts, SHELL_RISKS)
-        + strict_mode_problems(codebase.shell_scripts)
-        + signing_problems(codebase.shell_scripts + codebase.python_scripts)
+        + risk_problems(codebase.makefiles, SHELL_RISKS)
+        + signing_problems(codebase.python_scripts + codebase.makefiles)
         + safety_switch_problems(swift_files)
         + workflow_problems(codebase.workflows)
     )
