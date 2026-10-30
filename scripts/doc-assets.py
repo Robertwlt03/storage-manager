@@ -14,7 +14,6 @@ asks for the file name of a new one, the title and the subtitle.
 """
 
 import argparse
-import math
 import re
 import sys
 from collections.abc import Callable
@@ -95,11 +94,36 @@ TEXT_LEFT = 320
 EYEBROW_LINE = (112, 22, 600)
 TITLE_LINE = (176, 60, 700)
 SUBTITLE_LINE = (224, 28, 400)
-# Our own spark for the Claude theme (not Claude's logo): rays from the middle of a clay tile,
-# long and short in turn, as shares of the tile's size.
-SPARK_RAYS = 12
-SPARK_LENGTHS = (0.34, 0.24)
-SPARK_STROKE = 0.075
+# Claude's mark for the Claude theme, the path of the logo on claude.com in a square of
+# CLAUDE_MARK_UNITS; it stands light on a clay tile, as in Claude's app icon. The mark belongs to
+# Anthropic and names the tool only; the project's MIT license does not cover it.
+CLAUDE_MARK = (
+    "M54.375 118.75L56.125 111L58.125 101L59.75 93L61.25 83.125L62.125 79.875L62 "
+    "79.625L61.375 79.75L53.875 90L42.5 105.375L33.5 114.875L31.375 115.75L27.625 113.875L28 "
+    "110.375L30.125 107.375L42.5 91.5L50 81.625L54.875 76L54.75 75.25H54.5L21.5 96.75L15.625 "
+    "97.5L13 95.125L13.375 91.25L14.625 90L24.5 83.125L49.125 69.375L49.5 68.125L49.125 "
+    "67.5H47.875L43.75 67.25L29.75 66.875L17.625 66.375L5.75 65.75L2.75 65.125L0 61.375L0.25 "
+    "59.5L2.75 57.875L6.375 58.125L14.25 58.75L26.125 59.5L34.75 60L47.5 61.375H49.5L49.75 "
+    "60.5L49.125 60L48.625 59.5L36.25 51.25L23 42.5L16 37.375L12.25 34.75L10.375 32.375L9.625 "
+    "27.125L13 23.375L17.625 23.75L18.75 24L23.375 27.625L33.25 35.25L46.25 44.875L48.125 "
+    "46.375L49 45.875V45.5L48.125 44.125L41.125 31.375L33.625 18.375L30.25 13L29.375 "
+    "9.75C29.0417 8.625 28.875 7.375 28.875 6L32.75 0.750006L34.875 0L40.125 0.750006L42.25 "
+    "2.625L45.5 10L50.625 21.625L58.75 37.375L61.125 42.125L62.375 46.375L62.875 "
+    "47.75H63.75V47L64.375 38L65.625 27.125L66.875 13.125L67.25 9.125L69.25 4.375L73.125 "
+    "1.87501L76.125 3.25L78.625 6.875L78.25 9.125L76.875 18.75L73.875 33.875L72 "
+    "44.125H73.125L74.375 42.75L79.5 36L88.125 25.25L91.875 21L96.375 16.25L99.25 "
+    "14H104.625L108.5 19.875L106.75 26L101.25 33L96.625 38.875L90 47.75L86 54.875L86.375 "
+    "55.375H87.25L102.125 52.125L110.25 50.75L119.75 49.125L124.125 51.125L124.625 "
+    "53.125L122.875 57.375L112.625 59.875L100.625 62.25L82.75 66.5L82.5 66.625L82.75 67L90.75 "
+    "67.75L94.25 68H102.75L118.5 69.125L122.625 71.875L125 75.125L124.625 77.75L118.25 "
+    "80.875L109.75 78.875L89.75 74.125L83 72.5H82V73L87.75 78.625L98.125 88L111.25 "
+    "100.125L111.875 103.125L110.25 105.625L108.5 105.375L97 96.625L92.5 92.75L82.5 "
+    "84.375H81.875V85.25L84.125 88.625L96.375 107L97 112.625L96.125 114.375L92.875 115.5L89.5 "
+    "114.875L82.25 104.875L74.875 93.5L68.875 83.375L68.25 83.875L64.625 121.625L63 "
+    "123.5L59.25 125L56.125 122.625L54.375 118.75Z"
+)
+CLAUDE_MARK_UNITS = 125
+CLAUDE_MARK_SHARE = 0.64  # how much of the tile the mark fills
 TILE_CORNER = 0.225  # the corner radius of the app icon's tile, as a share of its size
 
 # The group in the main banner that draws the app icon, the part with the shadow filter "sh".
@@ -175,7 +199,7 @@ def banner(file_name: str, title: str, subtitle: str, eyebrow: str, overwrite: b
 
 
 def claude_footer() -> str:
-    """The footer of CLAUDE.md, with the same spark as its banner."""
+    """The footer of CLAUDE.md, with the same mark as its banner."""
     size = f'width="{FOOTER_WIDTH}" height="{FOOTER_HEIGHT}"'
     return "\n".join([
         f'<svg xmlns="http://www.w3.org/2000/svg" {size} viewBox="0 0 {FOOTER_WIDTH} '
@@ -183,7 +207,7 @@ def claude_footer() -> str:
         '<defs><linearGradient id="fbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" '
         'stop-color="#FAF9F5"/><stop offset="1" stop-color="#F0EEE6"/></linearGradient></defs>',
         f'<rect {size} rx="24" fill="url(#fbg)"/>',
-        spark_tile(FOOTER_TILE_LEFT, FOOTER_TILE_TOP, FOOTER_TILE_SIZE),
+        claude_tile(FOOTER_TILE_LEFT, FOOTER_TILE_TOP, FOOTER_TILE_SIZE),
         footer_text(FOOTER_NAME_LINE, "Speicher-Explorer"),
         footer_text(FOOTER_CAPTION_LINE, "Built with Claude Code"),
         "</svg>",
@@ -209,15 +233,11 @@ def banner_icon() -> str:
     )
 
 
-def spark_tile(left: float, top: float, size: float) -> str:
-    """A clay tile with a light spark, drawn at any size (banner, footer)."""
-    center_x, center_y = left + size / 2, top + size / 2
-    rays = []
-    for index in range(SPARK_RAYS):
-        angle = 2 * math.pi * index / SPARK_RAYS
-        length = size * SPARK_LENGTHS[index % 2]
-        end_x, end_y = center_x + length * math.sin(angle), center_y - length * math.cos(angle)
-        rays.append(f'<path d="M{center_x:.1f} {center_y:.1f}L{end_x:.1f} {end_y:.1f}"/>')
+def claude_tile(left: float, top: float, size: float) -> str:
+    """A clay tile with Claude's mark in ivory, drawn at any size (banner, footer)."""
+    mark_size = size * CLAUDE_MARK_SHARE
+    offset = (size - mark_size) / 2
+    scale = mark_size / CLAUDE_MARK_UNITS
     top_color, bottom_color = COLORS["clay"]
     return (
         f'<defs><linearGradient id="clay" x1="0" y1="0" x2="0" y2="1">'
@@ -225,13 +245,13 @@ def spark_tile(left: float, top: float, size: float) -> str:
         f'</linearGradient></defs>'
         f'<rect x="{left}" y="{top}" width="{size}" height="{size}" rx="{size * TILE_CORNER:.1f}" '
         f'fill="url(#clay)"/>'
-        f'<g stroke="#FAF9F5" stroke-width="{size * SPARK_STROKE:.1f}" stroke-linecap="round">'
-        f'{"".join(rays)}</g>'
+        f'<path transform="translate({left + offset:.1f} {top + offset:.1f}) scale({scale:.4f})" '
+        f'fill="#FAF9F5" d="{CLAUDE_MARK}"/>'
     )
 
 
 def claude_mark() -> str:
-    return f'<g filter="url(#sh)">{spark_tile(ICON_LEFT, ICON_TOP, ICON_SIZE_ON_BANNER)}</g>'
+    return f'<g filter="url(#sh)">{claude_tile(ICON_LEFT, ICON_TOP, ICON_SIZE_ON_BANNER)}</g>'
 
 
 THEMES = {
