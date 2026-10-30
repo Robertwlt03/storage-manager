@@ -137,7 +137,7 @@ its line number and what is wrong. At the end a frame sums up: green when every 
 steps and their findings. Colors appear in the terminal and on GitHub, where every finding also stands right beside
 its line in the pull request. `NO_COLOR=1` turns the colors off.
 
-The script runs twenty checks one after another:
+The script runs twenty-three checks one after another:
 
 1. **Layout:** `swift format lint --strict` reports every deviation from the uniform layout.
 2. **Length and nesting:** SwiftLint reports functions over 40 lines, closures over 30 lines, too many branches in one
@@ -171,30 +171,39 @@ The script runs twenty checks one after another:
    first needs a place there, otherwise the check reports it.
 12. **Promises of the app:** Network interfaces do not appear in the code, because the app stays on the Mac. Only the
    three services that ask first delete files or move them to the Trash (`scripts/checks/promises.py`).
-13. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
+13. **The disk off the main thread:** Every access to the disk stands in code marked `nonisolated` or running in a
+   `Task.detached`, because the main thread draws the window. Only the diagnostic tools are left out
+   (`scripts/checks/disk_access.py`).
+14. **Dead code:** every function, type, value and text that the app's own code uses nowhere, and every property that
    is only written but never read. The check reads the index the compiler writes while building
    (`scripts/checks/index_store.py`). That way it never mixes up properties of the same name, and what only the
    tests use counts as dead as well. For every kind of symbol it is settled whether it is judged or why not. When a
    kind shows up that nobody has decided on yet, the check reports it instead of skipping it.
-14. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
+15. **No unused files:** Every image and every other media file must be named in another file, otherwise it is dead
+   weight (`scripts/checks/unused_files.py`).
+16. **Language:** Every name we declare is split into its words (`fileCount`: file, count). Each word must be
    American English or a known technical term and never an abbreviation, so `temporary` instead of `temp` and
    `maximum` instead of `max`. Comments are read the same way. The macOS spell checker checks the words
    (`scripts/checks/language.py`). Technical terms such as `plist` or `codesign` are in no list: known is what appears
    in the names of the Apple and Python interfaces the code uses, what is installed as a command on the Mac, the
    project's file endings and the app's name. Only the forbidden abbreviations remain a list, because no source
    reliably tells whether a word is an abbreviation.
-15. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
-16. **Complete translations:** A text that reads exactly like the English one in some language is reported when the
+17. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
+18. **Complete translations:** A text that reads exactly like the English one in some language is reported when the
    macOS spell checker does not know one of its words in that language. Terms that read the same in most languages,
    such as "iCloud Drive", are left out (`scripts/checks/translations.py`).
-17. **Guides:** Every German guide and its English twin have the same layout: the same sections with the same icons,
+19. **Guides:** Every German guide and its English twin have the same layout: the same sections with the same icons,
    images, code blocks and table rows. Every link leads to a file that exists, and the English texts use American
    spelling (`scripts/checks/guides.py`).
-18. **Secrets:** No file git knows holds a private key, an access token or a password written out. Every settings
+20. **Secrets:** No file git knows holds a private key, an access token or a password written out. Every settings
    file the `Makefile` reads, such as `local.mk`, must be ignored by git (`scripts/checks/secrets.py`).
-19. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
+21. **Scripts:** The scripts and the `Makefile` also stay under 100 characters per line, and each one opens with the
    shared head. `bash -n`, `python3 -m py_compile`, `swiftc -typecheck` and `make -n` check them for typos.
-20. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
+22. **Commit messages:** Every commit has a subject like `fix(scan): what changed`: a kind from Conventional Commits,
+   maybe a part in brackets, then the change. A blank line, lines up to 100 characters and American English follow.
+   The rule holds from the commit that brought it in; the commits not yet on GitHub's `main` are checked
+   (`scripts/checks/commits.py`).
+23. **Samples:** The folder `scripts/checks/samples` holds a small package of its own with bad examples, which
    never belongs to the app. Every bad line carries a note `expect:` with the finding the check must report there.
    When a check no longer finds its mistake, or reports something nobody planted, this step fails. Whoever adds a
    rule plants its mistake there, with a note.

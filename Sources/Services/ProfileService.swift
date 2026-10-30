@@ -6,6 +6,16 @@ nonisolated enum ProfileService {
     private static let packageSuffixes = [".app", ".bundle", ".framework"]
     private static let shownTypeCount = 10
 
+    static func basics(of path: String) -> FileBasics {
+        let values = try? URL(fileURLWithPath: path)
+            .resourceValues(forKeys: [
+                .contentModificationDateKey, .creationDateKey, .localizedTypeDescriptionKey,
+            ])
+        return FileBasics(
+            kind: values?.localizedTypeDescription, modified: values?.contentModificationDate,
+            created: values?.creationDate)
+    }
+
     static func profile(_ path: String) -> FolderProfile {
         var profile = FolderProfile()
         var bytesPerType: [String: Int64] = [:]

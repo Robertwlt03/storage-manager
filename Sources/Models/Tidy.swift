@@ -47,7 +47,7 @@ nonisolated struct CleanItem: Identifiable {
     var id: CleanKind { kind }
 }
 
-struct AppUsage: Identifiable {
+nonisolated struct AppUsage: Identifiable {
     let path: String
     let name: String
     let bundleID: String?

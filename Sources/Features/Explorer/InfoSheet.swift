@@ -53,17 +53,12 @@ struct InfoSheet: View {
     }
 
     private var basicFields: [UI.Field?] {
-        let resources = try? URL(fileURLWithPath: path)
-            .resourceValues(forKeys: [
-                .contentModificationDateKey, .creationDateKey, .localizedTypeDescriptionKey,
-            ])
-        let modified = resources?.contentModificationDate
-        let created = resources?.creationDate
+        let basics = ProfileService.basics(of: path)
         return [
             UI.Field(.allocated, Format.bytes(entry.bytes)),
-            UI.Field(.kind, resources?.localizedTypeDescription ?? "–"),
-            modified.map { date in UI.Field(.modified, Format.dateTime(date)) },
-            created.map { date in UI.Field(.created, Format.dateTime(date)) },
+            UI.Field(.kind, basics.kind ?? "–"),
+            basics.modified.map { date in UI.Field(.modified, Format.dateTime(date)) },
+            basics.created.map { date in UI.Field(.created, Format.dateTime(date)) },
         ]
     }
 

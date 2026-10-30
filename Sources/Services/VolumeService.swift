@@ -1,6 +1,6 @@
 import Foundation
 
-enum VolumeService {
+nonisolated enum VolumeService {
     private static let volumeKeys: [URLResourceKey] = [
         .volumeNameKey, .volumeLocalizedFormatDescriptionKey, .volumeTotalCapacityKey,
         .volumeAvailableCapacityKey,

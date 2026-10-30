@@ -3,7 +3,7 @@ import Foundation
 /// Full Disk Access replaces the single prompts for Desktop, Documents, Downloads, iCloud Drive,
 /// other apps' data and external volumes. Apps cannot request it with a dialog; they can only check
 /// it and open System Settings.
-enum PermissionService {
+nonisolated enum PermissionService {
     /// Folders only Full Disk Access may list; listing them without it fails quietly, without a
     /// prompt. Several, because not every Mac has every folder, and macOS 27 no longer lets even
     /// Full Disk Access open the TCC database that older checks relied on.

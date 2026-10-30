@@ -1,18 +1,8 @@
 import AppKit
 
-/// Everything that talks to Finder, the pasteboard or System Settings.
+/// Everything the user does with Finder, the pasteboard or System Settings; Finder's icons come
+/// from `PreviewService`, which may run off the main thread.
 enum FinderService {
-    /// Finder icons are looked up once per path: rows are rebuilt often (search, sorting,
-    /// scrolling) and each lookup asks Launch Services and the disk again.
-    static func iconImage(_ path: String) -> NSImage {
-        if let cached = iconCache.object(forKey: path as NSString) { return cached }
-        let image = NSWorkspace.shared.icon(forFile: path)
-        iconCache.setObject(image, forKey: path as NSString)
-        return image
-    }
-
-    private static let iconCache: NSCache<NSString, NSImage> = .images()
-
     static func reveal(_ path: String) {
         NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)])
     }

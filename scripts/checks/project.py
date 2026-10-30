@@ -107,6 +107,15 @@ def tracked_files(pattern: str) -> tuple[Path, ...]:
 # MARK: Reading files
 
 
+def is_text(path: Path) -> bool:
+    """A file that reads as text; images, icons and other binary files do not."""
+    try:
+        path.read_text()
+    except (UnicodeDecodeError, IsADirectoryError, FileNotFoundError):
+        return False
+    return True
+
+
 @cache
 def lines_of(path: Path) -> list[str]:
     return path.read_text().splitlines()

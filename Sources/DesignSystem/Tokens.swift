@@ -86,7 +86,7 @@ enum Fraction {
 }
 
 /// SF Symbol names used across the app.
-enum Symbols {
+nonisolated enum Symbols {
     static let overview = "chart.bar.xaxis"
     static let cleaner = "sparkles"
     static let apps = "app.badge.clock"

@@ -45,7 +45,7 @@ nonisolated struct Entry: Identifiable {
     }
 }
 
-struct VolumeInfo: Identifiable, Hashable {
+nonisolated struct VolumeInfo: Identifiable, Hashable {
     let path: String
     let name: String
     let format: String
@@ -80,6 +80,13 @@ nonisolated struct CopyDetails {
     var copyCount = 0
     var versions: [(version: String, count: Int)] = []
     var days: [(day: Date, count: Int)] = []
+}
+
+/// What macOS knows about a file or folder beyond its size, for the info sheet.
+nonisolated struct FileBasics {
+    var kind: String?
+    var modified: Date?
+    var created: Date?
 }
 
 nonisolated struct FolderProfile {

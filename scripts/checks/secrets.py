@@ -10,7 +10,7 @@ with the password of the signing keychain, must be ignored by git, so it can nev
 import re
 from pathlib import Path
 
-from checks.project import MAKEFILE, PROJECT, Codebase, app, numbered_lines, place, run
+from checks.project import MAKEFILE, PROJECT, Codebase, app, is_text, numbered_lines, place, run
 
 # MARK: Settings
 
@@ -41,14 +41,6 @@ def secrets_in(paths: tuple[Path, ...]) -> list[str]:
             for kind, pattern in SECRETS.items() if pattern.search(line)
         ]
     return findings
-
-
-def is_text(path: Path) -> bool:
-    try:
-        path.read_text()
-    except (UnicodeDecodeError, IsADirectoryError, FileNotFoundError):
-        return False
-    return True
 
 
 def unignored_settings() -> list[str]:

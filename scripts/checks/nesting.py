@@ -134,7 +134,7 @@ def swift_blocks(path: Path):
     """Each block that spans lines, with the open blocks around it, outermost first. An opening
     brace is noted with the text before it; a closing one ends the latest block."""
     open_braces: list[Brace] = []
-    for line, text_before, character in braces_of(swift_code(path)):
+    for line, _, text_before, character in braces_of(swift_code(path)):
         if character == "{":
             parent = open_braces[-1] if open_braces else None
             open_braces.append(opened_brace(text_before, line, parent))
@@ -145,13 +145,14 @@ def swift_blocks(path: Path):
 
 
 def braces_of(code: str):
-    """Each brace with its line and the text since the brace before it, across lines, so a
-    signature that wraps still shows its `func`."""
-    line, segment_start = 1, 0
+    """Each brace with its line, its column and the text since the brace before it, across lines,
+    so a signature that wraps still shows its `func`."""
+    line, line_start, segment_start = 1, 0, 0
     for position, character in enumerate(code):
-        line += character == "\n"
+        if character == "\n":
+            line, line_start = line + 1, position + 1
         if character in "{}":
-            yield line, code[segment_start:position], character
+            yield line, position - line_start + 1, code[segment_start:position], character
             segment_start = position + 1
 
 

@@ -155,6 +155,9 @@ make stress
 - **Code auf Englisch, Anleitungen auf Deutsch und Englisch:** Namen, Kommentare und Commit-Nachrichten schreibst du auf
   Englisch. Anleitungen entstehen auf Deutsch, und jede hat einen englischen Zwilling (`*.en.md`), der mit ihr
   geändert wird.
+- **Commit-Nachrichten in fester Form:** Der Betreff lautet etwa `fix(scan): canceled scans stop at once`, also die
+  Art der Änderung (`feat`, `fix`, `docs`, `refactor`, `test` …), vielleicht der betroffene Teil in Klammern und dann
+  in einem Satz, was sich ändert. Nach einer Leerzeile erklärt der Text, warum.
 - **Lesbarer Code:** Ausgeschriebene Namen in Alltagssprache, keine Zahlen ohne Namen, Farben nur aus `Theme` und
   kleine, klar getrennte Schritte. Die Einzelheiten stehen in den [Code-Regeln](CODE_STYLE.md).
 

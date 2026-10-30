@@ -40,7 +40,7 @@ CLEAR_LINE = "\r\x1b[K"  # back to the start of the line and erase it
 # A finding that names its place: "Sources/File.swift:12: message"; tools may add a column
 # ("…:12:5: error: …") and write the whole path.
 PLACED_FINDING = re.compile(r"""
-    ^ (?P<path> [^:\s][^:]* ) : (?P<line> \d+ )     # the file and the line
+    ^ (?P<path> [^:\s]+ ) : (?P<line> \d+ )         # the file and the line
     (?: : \d+ )? : \s*                              # maybe the column
     (?P<message> .+ ) $                             # what is wrong
 """, re.VERBOSE)

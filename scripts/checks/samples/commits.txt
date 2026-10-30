@@ -1,0 +1,9 @@
+# expect below: is not a commit subject
+Updated some stuff
+---
+# expect below: a blank line belongs
+fix(scan): stop canceled scans at once
+right below the subject
+---
+# expect below: is British
+docs: explain the colour of the bars

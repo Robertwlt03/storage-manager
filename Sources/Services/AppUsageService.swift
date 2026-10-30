@@ -3,7 +3,7 @@ import Foundation
 
 /// Installed apps with the date macOS last opened them. The date comes from Spotlight, which
 /// records it anyway; the app itself tracks nothing.
-enum AppUsageService {
+nonisolated enum AppUsageService {
     private static let appSuffix = ".app"
     private static var folders: [String] { [Paths.applications, Paths.home + "/Applications"] }
 

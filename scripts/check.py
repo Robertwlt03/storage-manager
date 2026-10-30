@@ -15,8 +15,9 @@ from dataclasses import dataclass
 from typing import Callable
 
 from checks import (
-    accessibility, architecture, dead_code, duplicates, guides, house_rules, language, nesting,
-    project, promises, report, samples, secrets, tools, translations,
+    accessibility, architecture, commits, dead_code, disk_access, duplicates, guides, house_rules,
+    language, nesting, project, promises, report, samples, secrets, tools, translations,
+    unused_files,
 )
 
 # MARK: Settings
@@ -43,13 +44,16 @@ STEPS = [
     Step("duplicates", "No code written twice", duplicates.duplicate_findings),
     Step("architecture", "Layers of the architecture", architecture.architecture_findings),
     Step("promises", "Promises: offline, removing only after asking", promises.promise_findings),
+    Step("disk", "The disk only off the main thread", disk_access.disk_access_findings),
     Step("deadcode", "Dead code (compiler index)", dead_code.dead_code_findings),
+    Step("files", "No unused images or media", unused_files.unused_file_findings),
     Step("language", "American English names and comments", language.language_findings),
     Step("plists", "Translation files and Info.plist (plutil)", tools.property_list_findings),
     Step("translations", "Every text translated", translations.translation_findings),
     Step("guides", "Guides: twins alike, links whole, American", guides.guide_findings),
     Step("secrets", "No passwords or keys in the repository", secrets.secret_findings),
     Step("scripts", "Scripts and Makefile", tools.script_findings),
+    Step("commits", "Commit messages in the shared form", commits.commit_findings),
     Step("samples", "Every planted mistake found (checks/samples)", samples.sample_findings),
 ]
 # Reports that only run when asked for by name, like `scripts/check.py coverage-report`.

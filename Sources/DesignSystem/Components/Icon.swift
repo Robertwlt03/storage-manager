@@ -46,7 +46,7 @@ extension UI {
                 Text(text).font(.system(size: badgeContent, weight: .semibold, design: .monospaced))
                     .frame(width: side, height: side).background(.quaternary, in: square)
             case .file(let path):
-                Image(nsImage: FinderService.iconImage(path)).resizable()
+                Image(nsImage: PreviewService.finderIcon(path)).resizable()
                     .frame(width: side, height: side)
                     .accessibilityHidden(true)
             case .preview(let path):
@@ -69,13 +69,16 @@ private struct PreviewIcon: View {
     let path: String
     let side: CGFloat
     @State private var thumbnail: NSImage?
+    @Environment(\.displayScale) private var displayScale
 
     var body: some View {
-        Image(nsImage: thumbnail ?? FinderService.iconImage(path))
+        Image(nsImage: thumbnail ?? PreviewService.finderIcon(path))
             .resizable()
             .scaledToFit()
             .frame(width: side, height: side)
             .accessibilityHidden(true)
-            .task(id: path) { thumbnail = await PreviewService.thumbnail(path, size: side) }
+            .task(id: path) {
+                thumbnail = await PreviewService.thumbnail(path, size: side, scale: displayScale)
+            }
     }
 }

@@ -13,7 +13,9 @@ from pathlib import Path
 
 from checks.accessibility import accessibility_problems
 from checks.architecture import architecture_problems
+from checks.commits import CommitMessage, commit_problems
 from checks.dead_code import dead_code_problems
+from checks.disk_access import disk_access_problems
 from checks.duplicates import duplicate_problems
 from checks.guides import guide_problems
 from checks.house_rules import design_problems, house_rule_problems
@@ -22,12 +24,15 @@ from checks.nesting import nesting_problems
 from checks.promises import promise_problems
 from checks.secrets import secret_problems
 from checks.translations import translation_problems
-from checks.project import PROJECT, SAMPLES, Codebase, numbered_lines, place
+from checks.unused_files import unused_file_problems
+from checks.project import PROJECT, SAMPLES, Codebase, lines_of, numbered_lines, place
 from checks.tools import script_layout_problems
 
 # MARK: Settings
 
 BUILD_FOLDER = PROJECT / ".build" / "check-samples"
+COMMIT_SAMPLES = SAMPLES / "commits.txt"  # messages kept apart by lines of three dashes
+MESSAGE_SEPARATOR = "---"
 
 # The note on a planted mistake: "expect: is short for", or "expect below: …" for the next line.
 EXPECTATION = re.compile(r"""
@@ -41,7 +46,7 @@ CHECKS = [
     house_rule_problems, design_problems, dead_code_problems, language_problems,
     nesting_problems, script_layout_problems, duplicate_problems, architecture_problems,
     promise_problems, guide_problems, accessibility_problems, translation_problems,
-    secret_problems,
+    secret_problems, disk_access_problems, unused_file_problems,
 ]
 
 
@@ -59,7 +64,7 @@ def samples() -> Codebase:
         source_root=SAMPLES / "Sources" / "Samples",
         guides=tuple(sorted((SAMPLES / "guides").glob("*.md"))),
         translations=SAMPLES / "Resources",
-        text_files=(SAMPLES / "settings.txt",),
+        text_files=(SAMPLES / "settings.txt", SAMPLES / "assets" / "orphan.svg", COMMIT_SAMPLES),
     )
 
 
@@ -79,6 +84,20 @@ def expectations(codebase: Codebase) -> list[tuple[str, str]]:
     return expected
 
 
+def commit_samples(codebase: Codebase) -> list[str]:
+    """The commit check, run on the sample messages; lines starting with # are notes, as git
+    leaves them out of a message too."""
+    messages, kept, first_line = [], [], 0
+    for number, line in enumerate(lines_of(COMMIT_SAMPLES) + [MESSAGE_SEPARATOR], start=1):
+        if line == MESSAGE_SEPARATOR:
+            messages.append(CommitMessage(place(COMMIT_SAMPLES, first_line), "\n".join(kept)))
+            kept = []
+        elif not line.startswith("#"):
+            first_line = first_line if kept else number
+            kept.append(line)
+    return commit_problems(messages)
+
+
 def matches(finding: str, where: str, part: str) -> bool:
     return finding.startswith(f"{where}:") and part in finding
 
@@ -88,7 +107,7 @@ def matches(finding: str, where: str, part: str) -> bool:
 
 def sample_findings() -> list[str]:
     codebase = samples()
-    found = [finding for check in CHECKS for finding in check(codebase)]
+    found = [finding for check in CHECKS + [commit_samples] for finding in check(codebase)]
     expected = expectations(codebase)
     problems = [
         f"{where}: no check finds '{part}' any more"

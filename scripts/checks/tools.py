@@ -29,8 +29,13 @@ PERCENT_WIDTH = 6
 
 SOURCE_FOLDER = PROJECT / "Sources"  # the coverage report sorts by the folders below it
 
-# A failed test in the output of Swift Testing.
-FAILED_TEST = "✘"
+# A failed expectation in the output of Swift Testing:
+# ✘ Test "Sizes …" recorded an issue at FormatTests.swift:18:9: Expectation failed: …
+TEST_ISSUE = re.compile(r"""
+    Test \s "(?P<test> [^"]+ )" \s recorded \s an \s issue \s at \s   # the test
+    (?P<file> [^:\s]+ ) : (?P<line> \d+ ) : \d+ : \s                # its file, line and column
+    (?P<message> .+ )                                               # what failed
+""", re.VERBOSE)
 
 
 # MARK: Steps
@@ -56,10 +61,22 @@ def compiler_findings() -> list[str]:
 def test_findings() -> list[str]:
     result = run(["swift", "test", *BUILD_OPTIONS])
     failures = [
-        line.strip() for line in result.output.splitlines()
-        if FAILED_TEST in line or ": error:" in line
+        readable_failure(line.strip()) for line in result.output.splitlines()
+        if TEST_ISSUE.search(line) or ": error:" in line
     ]
     return result.findings(failures)
+
+
+def readable_failure(line: str) -> str:
+    """A failed expectation as "Tests/…/File.swift:18: the test: what failed", so the report sorts
+    it under its file."""
+    issue = TEST_ISSUE.search(line)
+    if not issue:
+        return line
+    test_files = {path.name: path for path in app().swift_tests}
+    path = test_files.get(issue["file"])
+    where = place(path, int(issue["line"])) if path else f"{issue['file']}:{issue['line']}"
+    return f"{where}: {issue['test']}: {issue['message']}"
 
 
 def property_list_findings() -> list[str]:
