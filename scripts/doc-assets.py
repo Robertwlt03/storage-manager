@@ -16,6 +16,7 @@ asks for the file name of a new one, the title and the subtitle.
 import argparse
 import re
 import sys
+from collections.abc import Callable
 from html import escape, unescape
 from pathlib import Path
 
@@ -36,6 +37,12 @@ DEFAULT_EYEBROW = "Speicher-Explorer · Documentation"
 HAND_DRAWN_BANNERS = {"footer"}  # drawn by hand like assets/banner.svg; never replaced
 BANNER_NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")  # the <file name> in banner-<file name>.svg
 TEXT_ELEMENT = re.compile(r"<text [^>]*>(.*?)</text>")  # a drawn banner's three lines of text
+FILE_NAME_LIMIT = 40
+# How many characters of usual text fit between the text's start and the banner's right margin,
+# measured in the system font at each line's size and weight.
+# ponytail: counts characters, not their width; a line of only wide letters (W, M) may still run
+# out, which a look at the drawn banner shows. Measure with the font itself if that happens often.
+EYEBROW_LIMIT, TITLE_LIMIT, SUBTITLE_LIMIT = 60, 24, 50
 
 # Top and bottom of each tile gradient, in the spirit of System Settings.
 COLORS = {
@@ -183,8 +190,10 @@ def banner_by_questions() -> Path:
     else:
         file_name = new_banner_name()
         eyebrow, title, subtitle = DEFAULT_EYEBROW, "", ""
-    title = ask_text("Title", "large line", title)
-    subtitle = ask_text("Subtitle", "one sentence below", subtitle)
+    title = ask_text("Title", f"large line, up to {TITLE_LIMIT} characters", title,
+                     too_long(TITLE_LIMIT))
+    subtitle = ask_text("Subtitle", f"one sentence below, up to {SUBTITLE_LIMIT} characters",
+                        subtitle, too_long(SUBTITLE_LIMIT))
     return banner(file_name, title, subtitle, eyebrow, overwrite=True)
 
 
@@ -204,14 +213,36 @@ def banner_texts(file_name: str) -> list[str]:
 
 
 def new_banner_name() -> str:
-    while True:
-        file_name = ask_text("File name", "assets/banner-<name>.svg, such as release-notes")
-        if not BANNER_NAME.fullmatch(file_name):
-            note("Small letters, digits and hyphens only, such as release-notes.")
-        elif banner_path(file_name).exists():
-            note("That banner exists; answer yes to the first question to replace it.")
-        else:
-            return file_name
+    return ask_text("File name", "assets/banner-<name>.svg, such as release-notes", "",
+                    lambda file_name: name_problem(file_name) or exists_problem(file_name))
+
+
+# MARK: Checking the texts
+# Each returns what is wrong with a text, or nothing when it fits.
+
+
+def too_long(limit: int) -> Callable[[str], str]:
+    def problem(text: str) -> str:
+        if len(text) > limit:
+            return f"{len(text)} characters; at most {limit} fit on the banner."
+        return ""
+    return problem
+
+
+def name_problem(file_name: str) -> str:
+    if not BANNER_NAME.fullmatch(file_name):
+        return "Small letters, digits and hyphens only, such as release-notes."
+    if len(file_name) > FILE_NAME_LIMIT:
+        return f"{len(file_name)} characters; at most {FILE_NAME_LIMIT} for a file name."
+    return ""
+
+
+def exists_problem(file_name: str) -> str:
+    if file_name in HAND_DRAWN_BANNERS:
+        return "That name belongs to a banner drawn by hand; choose another."
+    if banner_path(file_name).exists():
+        return "That banner exists; answer y to the first question to replace it."
+    return ""
 
 
 # MARK: Run
@@ -246,8 +277,14 @@ def drawn_file() -> Path:
         return banner_by_questions()
     if not all(texts):
         parser.error("name the file, the title and the subtitle, or none of them to be asked")
-    if not BANNER_NAME.fullmatch(chosen.file_name):
-        parser.error("the file name takes small letters, digits and hyphens only")
+    problems = [
+        name_problem(chosen.file_name),
+        too_long(EYEBROW_LIMIT)(chosen.eyebrow),
+        too_long(TITLE_LIMIT)(chosen.title),
+        too_long(SUBTITLE_LIMIT)(chosen.subtitle),
+    ]
+    if problem := next((problem for problem in problems if problem), ""):
+        parser.error(problem)
     heading("Speicher-Explorer · banner", relative(banner_path(chosen.file_name)))
     return banner(chosen.file_name, chosen.title, chosen.subtitle, chosen.eyebrow,
                   chosen.overwrite)

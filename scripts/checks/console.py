@@ -18,7 +18,7 @@ import sys
 import termios
 import threading
 import tty
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 
 # MARK: Settings
@@ -52,7 +52,7 @@ COLOR_CODE = re.compile(r"\x1b\[[0-9;]*m")
 QUESTION_MARK = "?"
 ANSWER_MARK = "❯"
 MARKED_ENTRY, OTHER_ENTRY = "●", "○"
-YES_ANSWERS = {"y", "yes"}
+YES_ANSWERS, NO_ANSWERS = {"y", "yes"}, {"n", "no"}
 ENTER_KEYS = {"\r", "\n"}
 # The arrow keys send these sequences (terminals send either form); j and k move as in vim.
 MOVES = {"\x1b[A": -1, "\x1bOA": -1, "k": -1, "\x1b[B": 1, "\x1bOB": 1, "j": 1}
@@ -187,20 +187,30 @@ def can_ask() -> bool:
 
 
 def ask_yes_no(question: str) -> bool:
-    """Enter alone answers no."""
-    ask(question, "y/n")
-    said_yes = answer().lower() in YES_ANSWERS
-    show("")
-    return said_yes
+    """Enter alone answers no; another answer than y or n is named and the question comes again."""
+    def problem(reply: str) -> str:
+        return "" if reply.lower() in YES_ANSWERS | NO_ANSWERS else f'"{reply}" is neither y nor n.'
+    return ask_until(question, "y/n", problem, current="n").lower() in YES_ANSWERS
 
 
-def ask_text(label: str, meaning: str, current: str = "") -> str:
-    """Enter alone keeps the current text; without one, the question comes again."""
-    ask(label, f'{meaning} · Enter keeps "{current}"' if current else meaning)
-    while not (text := answer() or current):
-        note("This one needs an answer.")
-    show("")
-    return text
+def ask_text(label: str, meaning: str, current: str = "",
+             problem: Callable[[str], str] = lambda text: "") -> str:
+    """Enter alone keeps the current text. problem names what is wrong with an answer, or says
+    nothing when it fits; a wrong answer is named and the question comes again."""
+    hint = f'{meaning} · Enter keeps "{current}"' if current else meaning
+    return ask_until(label, hint, problem, current)
+
+
+def ask_until(question: str, hint: str, problem: Callable[[str], str], current: str = "") -> str:
+    while True:
+        ask(question, hint)
+        reply = answer() or current
+        wrong = problem(reply) if reply else "This one needs an answer."
+        if not wrong:
+            show("")
+            return reply
+        show(f"   {paint(FAILED_MARK, RED, BOLD)} {wrong}")
+        show("")
 
 
 def ask_choice(question: str, options: list[str]) -> int:
