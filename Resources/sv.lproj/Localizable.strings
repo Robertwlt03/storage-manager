@@ -162,6 +162,7 @@
 "reportTitle" = "Lagringsrapport från %@";
 "reportFileName" = "Lagringsrapport";
 "extraFolders" = "Ytterligare mappar";
+"excludedFolders" = "Undantagna mappar";
 "none" = "Inga";
 "add" = "Lägg till";
 "remove" = "Ta bort";

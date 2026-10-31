@@ -162,6 +162,7 @@
 "reportTitle" = "%@のストレージレポート";
 "reportFileName" = "ストレージレポート";
 "extraFolders" = "追加のフォルダ";
+"excludedFolders" = "除外するフォルダ";
 "none" = "なし";
 "add" = "追加";
 "remove" = "削除";

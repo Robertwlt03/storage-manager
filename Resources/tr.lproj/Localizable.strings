@@ -162,6 +162,7 @@
 "reportTitle" = "%@ tarihli depolama raporu";
 "reportFileName" = "Depolama Raporu";
 "extraFolders" = "Ek Klasörler";
+"excludedFolders" = "Hariç Tutulan Klasörler";
 "none" = "Yok";
 "add" = "Ekle";
 "remove" = "Kaldır";

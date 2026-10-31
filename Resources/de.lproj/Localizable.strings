@@ -162,6 +162,7 @@
 "reportTitle" = "Speicherbericht vom %@";
 "reportFileName" = "Speicherbericht";
 "extraFolders" = "Zusätzliche Ordner";
+"excludedFolders" = "Ausgeschlossene Ordner";
 "none" = "Keine";
 "add" = "Hinzufügen";
 "remove" = "Entfernen";

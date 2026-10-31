@@ -162,6 +162,7 @@
 "reportTitle" = "Rapport de stockage du %@";
 "reportFileName" = "Rapport de stockage";
 "extraFolders" = "Dossiers supplémentaires";
+"excludedFolders" = "Dossiers exclus";
 "none" = "Aucun";
 "add" = "Ajouter";
 "remove" = "Supprimer";

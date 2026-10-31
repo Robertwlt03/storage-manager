@@ -162,6 +162,7 @@
 "reportTitle" = "Lagringsrapport fra %@";
 "reportFileName" = "Lagringsrapport";
 "extraFolders" = "Flere mapper";
+"excludedFolders" = "Utelatte mapper";
 "none" = "Ingen";
 "add" = "Legg til";
 "remove" = "Fjern";

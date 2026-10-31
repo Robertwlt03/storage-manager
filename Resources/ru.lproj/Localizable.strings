@@ -162,6 +162,7 @@
 "reportTitle" = "Отчёт о хранилище от %@";
 "reportFileName" = "Отчёт о хранилище";
 "extraFolders" = "Дополнительные папки";
+"excludedFolders" = "Исключённые папки";
 "none" = "Нет";
 "add" = "Добавить";
 "remove" = "Удалить";

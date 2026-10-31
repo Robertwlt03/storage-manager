@@ -78,6 +78,29 @@ struct ServiceTests {
         #expect(ScanService.withoutDuplicatesOrNesting(folders) == ["/a", "/c", "/ab"])
     }
 
+    @Test("An excluded folder covers itself and everything inside it, not a similar name")
+    func excludedRoots() {
+        let excluded: Set<String> = ["/a"]
+        #expect(ScanService.liesIn("/a", anyOf: excluded))
+        #expect(ScanService.liesIn("/a/b", anyOf: excluded))
+        #expect(!ScanService.liesIn("/ab", anyOf: excluded))
+    }
+
+    @Test("A scan leaves excluded folders out with everything inside")
+    func excludedScan() throws {
+        let folder =
+            FileManager.default.temporaryDirectory.path + "/ExcludedScan-" + UUID().uuidString
+        defer { try? FileManager.default.removeItem(atPath: folder) }
+        for path in ["/keep", "/skip/inner"] {
+            try FileManager.default.createDirectory(
+                atPath: folder + path, withIntermediateDirectories: true)
+            FileManager.default.createFile(atPath: folder + path + "/file", contents: Data([1]))
+        }
+        let result = try #require(
+            ScanService.scan(folder, excluding: [folder + "/skip"]) { _ in })
+        #expect(result.root.fileCount == 1)
+    }
+
     @Test("Unused apps are those not opened for the chosen days, the longest unused first")
     func unusedApps() {
         let now = Date()

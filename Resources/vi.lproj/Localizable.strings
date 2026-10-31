@@ -162,6 +162,7 @@
 "reportTitle" = "Báo cáo dung lượng từ %@";
 "reportFileName" = "Báo cáo dung lượng";
 "extraFolders" = "Thư mục bổ sung";
+"excludedFolders" = "Thư mục loại trừ";
 "none" = "Không có";
 "add" = "Thêm";
 "remove" = "Xóa";

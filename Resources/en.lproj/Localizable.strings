@@ -162,6 +162,7 @@
 "reportTitle" = "Storage report from %@";
 "reportFileName" = "Storage Report";
 "extraFolders" = "Additional Folders";
+"excludedFolders" = "Excluded Folders";
 "none" = "None";
 "add" = "Add";
 "remove" = "Remove";

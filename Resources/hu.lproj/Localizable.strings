@@ -162,6 +162,7 @@
 "reportTitle" = "Tárhelyjelentés: %@";
 "reportFileName" = "Tárhelyjelentés";
 "extraFolders" = "További mappák";
+"excludedFolders" = "Kizárt mappák";
 "none" = "Nincs";
 "add" = "Hozzáadás";
 "remove" = "Eltávolítás";

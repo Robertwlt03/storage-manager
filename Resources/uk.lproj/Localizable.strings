@@ -162,6 +162,7 @@
 "reportTitle" = "Звіт про сховище від %@";
 "reportFileName" = "Звіт про сховище";
 "extraFolders" = "Додаткові папки";
+"excludedFolders" = "Виключені папки";
 "none" = "Немає";
 "add" = "Додати";
 "remove" = "Вилучити";

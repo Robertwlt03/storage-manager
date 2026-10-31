@@ -224,9 +224,10 @@ import WidgetKit
     private func measureInBackground(
         _ area: String, startingFrom earlierProgress: ScanService.Progress, scanID id: UUID
     ) async -> ScanService.Result? {
+        let excluded = ScanService.excludedFolders()
         // Background QoS runs on the efficiency cores of Apple Silicon.
         let measuring = Task.detached(priority: .background) {
-            ScanService.scan(area) { areaProgress in
+            ScanService.scan(area, excluding: excluded) { areaProgress in
                 Task { @MainActor in self.showProgress(earlierProgress + areaProgress, ofScan: id) }
             }
         }
@@ -282,7 +283,10 @@ extension AppModel {
         let refreshID = UUID()
         cleanItemsRefreshID = refreshID
         Task {
-            let listing = Task.detached(priority: .utility) { CleanerService.removablePaths() }
+            let excluded = ScanService.excludedFolders()
+            let listing = Task.detached(priority: .utility) {
+                CleanerService.removablePaths(excluding: excluded)
+            }
             let listed = await listing.value
             guard cleanItemsRefreshID == refreshID else { return }
             let found = listed.map { kind, paths in

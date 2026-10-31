@@ -162,6 +162,7 @@
 "reportTitle" = "Laporan penyimpanan dari %@";
 "reportFileName" = "Laporan Penyimpanan";
 "extraFolders" = "Folder Tambahan";
+"excludedFolders" = "Folder yang Dikecualikan";
 "none" = "Tidak Ada";
 "add" = "Tambah";
 "remove" = "Hapus";

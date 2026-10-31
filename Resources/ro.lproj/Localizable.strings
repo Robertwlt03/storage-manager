@@ -162,6 +162,7 @@
 "reportTitle" = "Raport de stocare din %@";
 "reportFileName" = "Raport de stocare";
 "extraFolders" = "Dosare suplimentare";
+"excludedFolders" = "Dosare excluse";
 "none" = "Niciunul";
 "add" = "Adaugă";
 "remove" = "Elimină";

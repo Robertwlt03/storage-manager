@@ -162,6 +162,7 @@
 "reportTitle" = "Informe de almacenamiento del %@";
 "reportFileName" = "Informe de almacenamiento";
 "extraFolders" = "Carpetas adicionales";
+"excludedFolders" = "Carpetas excluidas";
 "none" = "Ninguna";
 "add" = "Añadir";
 "remove" = "Quitar";

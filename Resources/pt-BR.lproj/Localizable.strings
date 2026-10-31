@@ -162,6 +162,7 @@
 "reportTitle" = "Relatório de armazenamento de %@";
 "reportFileName" = "Relatório de armazenamento";
 "extraFolders" = "Pastas adicionais";
+"excludedFolders" = "Pastas excluídas";
 "none" = "Nenhuma";
 "add" = "Adicionar";
 "remove" = "Remover";

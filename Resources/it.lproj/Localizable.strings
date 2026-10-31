@@ -162,6 +162,7 @@
 "reportTitle" = "Rapporto spazio del %@";
 "reportFileName" = "Rapporto spazio";
 "extraFolders" = "Cartelle aggiuntive";
+"excludedFolders" = "Cartelle escluse";
 "none" = "Nessuna";
 "add" = "Aggiungi";
 "remove" = "Rimuovi";

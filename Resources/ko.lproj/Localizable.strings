@@ -162,6 +162,7 @@
 "reportTitle" = "%@ 저장 공간 보고서";
 "reportFileName" = "저장 공간 보고서";
 "extraFolders" = "추가 폴더";
+"excludedFolders" = "제외할 폴더";
 "none" = "없음";
 "add" = "추가";
 "remove" = "제거";

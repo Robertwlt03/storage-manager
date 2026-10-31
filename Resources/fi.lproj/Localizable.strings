@@ -162,6 +162,7 @@
 "reportTitle" = "Tallennustilaraportti %@";
 "reportFileName" = "Tallennustilaraportti";
 "extraFolders" = "Lisäkansiot";
+"excludedFolders" = "Ohitettavat kansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";
 "remove" = "Poista";

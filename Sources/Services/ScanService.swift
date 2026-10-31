@@ -20,7 +20,18 @@ nonisolated enum ScanService {
     @MainActor static func defaultRoots() -> [String] {
         let wantedFolders = Paths.defaultScanRoots + AppSettings.extraFolders
         let existingFolders = wantedFolders.map(Paths.withoutSymlinks).filter(Paths.exists)
+        let excluded = excludedFolders()
         return withoutDuplicatesOrNesting(existingFolders)
+            .filter { folder in !liesIn(folder, anyOf: excluded) }
+    }
+
+    /// The folders from the settings that no scan measures, as the walk sees their paths.
+    @MainActor static func excludedFolders() -> Set<String> {
+        Set(AppSettings.excludedFolders.map(Paths.withoutSymlinks))
+    }
+
+    static func liesIn(_ folder: String, anyOf others: Set<String>) -> Bool {
+        others.contains { other in folder == other || folder.hasPrefix(other + "/") }
     }
 
     /// Keeps each folder once, in its order, and drops folders that lie inside another one.
@@ -36,12 +47,15 @@ nonisolated enum ScanService {
     }
 
     /// Runs on the caller's thread; call it from a low-priority task. Nil when canceled.
-    static func scan(_ path: String, progress reportProgress: (Progress) -> Void) -> Result? {
+    static func scan(
+        _ path: String, excluding excluded: Set<String> = [],
+        progress reportProgress: (Progress) -> Void
+    ) -> Result? {
         var builder = TreeBuilder()
         var visitedEntries = 0
         var lastReport = Date()
 
-        let isComplete = FileTreeWalker.walk(path) { entry in
+        let isComplete = FileTreeWalker.walk(path, excluding: excluded) { entry in
             visitedEntries += 1
             let isCheckpoint = visitedEntries & ScanLimits.cancelCheckMask == 0
             if isCheckpoint && Task.isCancelled { return false }

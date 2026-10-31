@@ -162,6 +162,7 @@
 "reportTitle" = "Opslagrapport van %@";
 "reportFileName" = "Opslagrapport";
 "extraFolders" = "Extra mappen";
+"excludedFolders" = "Uitgesloten mappen";
 "none" = "Geen";
 "add" = "Voeg toe";
 "remove" = "Verwijder";

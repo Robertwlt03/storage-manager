@@ -162,6 +162,7 @@
 "reportTitle" = "Lagerrapport fra %@";
 "reportFileName" = "Lagerrapport";
 "extraFolders" = "Yderligere mapper";
+"excludedFolders" = "Udelukkede mapper";
 "none" = "Ingen";
 "add" = "Tilføj";
 "remove" = "Fjern";

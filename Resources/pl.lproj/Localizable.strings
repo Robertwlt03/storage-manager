@@ -162,6 +162,7 @@
 "reportTitle" = "Raport miejsca z %@";
 "reportFileName" = "Raport miejsca";
 "extraFolders" = "Dodatkowe foldery";
+"excludedFolders" = "Wykluczone foldery";
 "none" = "Brak";
 "add" = "Dodaj";
 "remove" = "Usuń";

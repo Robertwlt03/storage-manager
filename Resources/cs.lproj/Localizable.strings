@@ -162,6 +162,7 @@
 "reportTitle" = "Zpráva o úložišti z %@";
 "reportFileName" = "Zpráva o úložišti";
 "extraFolders" = "Další složky";
+"excludedFolders" = "Vyloučené složky";
 "none" = "Žádné";
 "add" = "Přidat";
 "remove" = "Odebrat";
