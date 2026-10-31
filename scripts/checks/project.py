@@ -68,7 +68,7 @@ class Codebase:
     guides: tuple[Path, ...] = ()  # the Markdown files
     translations: Path | None = None  # the folder with one <language>.lproj per language
     text_files: tuple[Path, ...] = ()  # every file that could carry a secret
-    workflows: tuple[Path, ...] = ()  # the GitHub workflows
+    workflows: tuple[Path, ...] = ()  # the GitHub workflows and the actions they share
 
     def swift_files(self) -> tuple[Path, ...]:
         return self.swift_sources + self.swift_tests + self.swift_scripts
@@ -100,7 +100,8 @@ def app() -> Codebase:
         guides=tracked_files("*.md"),
         translations=PROJECT / "Resources",
         text_files=tracked_files("*"),
-        workflows=tracked_files(".github/workflows/*.yml"),
+        workflows=(*tracked_files(".github/workflows/*.yml"),
+                   *tracked_files(".github/actions/*/action.yml")),
     )
 
 

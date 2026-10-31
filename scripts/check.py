@@ -62,9 +62,8 @@ STEPS = [
     Step("commits", "Commit messages in the shared form", commits.commit_findings),
     Step("samples", "Every planted mistake found (checks/samples)", samples.sample_findings),
 ]
-# The steps in groups that GitHub runs side by side, each on a Mac of its own; the workflow's
-# matrix lists the same names. Every step belongs to exactly one group, which the line after the
-# table makes sure of.
+# The steps in groups that GitHub runs side by side, each as a job of its own in the workflow.
+# Every step belongs to exactly one group, which the line after the table makes sure of.
 GROUPS = {
     "tools": ["format", "lint", "compiler", "tests", "coverage"],
     "code": ["rules", "design", "accessibility", "nesting", "duplicates", "architecture",

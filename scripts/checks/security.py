@@ -95,6 +95,7 @@ ACTION = re.compile(r"""
     \b uses: \s* (?! \./ | docker:// )  # an action from another repository
     [^@\s]+ @ (?P<version> [^\s#]+ )    # owner/name@version
 """, re.VERBOSE)
+SHARED_ACTION = "action.yml"  # the file of an action that the workflows share
 COMMIT_NAME = re.compile(r"^[0-9a-f]{40}$")  # a commit's full name, which nobody can move
 # The trigger anywhere before a comment, also in a list such as on: [push, pull_request_target].
 STRANGERS_TRIGGER = re.compile(r"^ [^#]* \b pull_request_target \b", re.VERBOSE)
@@ -152,7 +153,9 @@ def has_reason(lines: list[str], number: int) -> bool:
 def workflow_problems(workflows: tuple[Path, ...]) -> list[str]:
     problems = []
     for workflow in workflows:
-        if not WORKFLOW_PERMISSIONS.search(workflow.read_text()):
+        # A shared action (action.yml) has no rights of its own; the workflow using it sets them.
+        is_workflow = workflow.name != SHARED_ACTION
+        if is_workflow and not WORKFLOW_PERMISSIONS.search(workflow.read_text()):
             problems.append(
                 f"{place(workflow, 1)}: no permissions: block, so the job gets every right of "
                 "GitHub's token; start with 'permissions: contents: read'"

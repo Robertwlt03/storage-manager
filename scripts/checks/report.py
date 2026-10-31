@@ -5,9 +5,11 @@ Needs:  nothing beyond Python
 Each step gets one line with a mark, its number of findings and how long it took; its findings
 follow, grouped by file. A frame at the end sums up. The pieces and colors come from
 console.py, the shared look of every command. On GitHub every finding also becomes an annotation
-beside its line in the pull request.
+beside its line in the pull request, and the run's summary page gets a table of the steps with
+every finding linked to its line.
 """
 
+import os
 import re
 from collections import defaultdict
 from dataclasses import dataclass
@@ -30,6 +32,11 @@ PLACED_FINDING = re.compile(r"""
     (?P<message> .+ ) $                             # what is wrong
 """, re.VERBOSE)
 GENERAL = "general"  # the group of findings that name no file
+# GitHub's summary page of the job, and where the checked code can be read on GitHub.
+SUMMARY_FILE = os.environ.get("GITHUB_STEP_SUMMARY")
+CODE_ADDRESS = "{}/{}/blob/{}".format(
+    *(os.environ.get(name, "") for name in ("GITHUB_SERVER_URL", "GITHUB_REPOSITORY", "GITHUB_SHA"))
+)
 # How GitHub's workflow commands write characters that would end a message or a property.
 MESSAGE_ESCAPES = {"%": "%25", "\r": "%0D", "\n": "%0A"}
 PROPERTY_ESCAPES = MESSAGE_ESCAPES | {":": "%3A", ",": "%2C"}
@@ -71,6 +78,7 @@ def by_file(findings: list[str]) -> dict[str, list[Finding]]:
 
 def header(step_count: int) -> None:
     console.heading("Storage Manager · check pipeline", plural(step_count, "step"))
+    write_summary("| | Step | Findings | Time |\n|:-:|---|---|--:|")
 
 
 def step_finished(title: str, findings: list[str], seconds: float) -> None:
@@ -79,6 +87,7 @@ def step_finished(title: str, findings: list[str], seconds: float) -> None:
     result(f"{title.ljust(TITLE_WIDTH)} {count}", f"{seconds:.1f} s")
     for path, group in sorted(by_file(findings).items()):
         print_group(path, group, title)
+    write_summary(summary_row(title, findings, seconds))
 
 
 def print_group(path: str, group: list[Finding], title: str) -> None:
@@ -103,6 +112,32 @@ def github_annotation(finding: Finding, title: str) -> str:
 def escaped(text: str, escapes: dict[str, str] = MESSAGE_ESCAPES) -> str:
     """GitHub reads % and line breaks in a message as escapes, and also : and , in a property."""
     return "".join(escapes.get(character, character) for character in text)
+
+
+# MARK: GitHub's summary page
+
+
+def write_summary(line: str) -> None:
+    """Adds a line to the job's summary page on GitHub; elsewhere there is none."""
+    if SUMMARY_FILE:
+        with open(SUMMARY_FILE, "a", encoding="utf-8") as page:
+            page.write(line + "\n")
+
+
+def summary_row(title: str, findings: list[str], seconds: float) -> str:
+    """One step as a table row: its mark, title, findings (each linked to its line) and time."""
+    mark = "✘" if findings else "✔"
+    cells = [plural(len(findings), "finding"), *map(linked, map(parsed, findings))]
+    return f"| {mark} | {title} | {'<br>'.join(cells)} | {seconds:.1f} s |"
+
+
+def linked(finding: Finding) -> str:
+    # A bar would end the table cell, and an angle bracket would open an HTML tag.
+    message = finding.message.replace("|", "\\|").replace("<", "&lt;").replace(">", "&gt;")
+    if finding.path == GENERAL:
+        return message
+    place = f"{finding.path}:{finding.line}"
+    return f"[{place}]({CODE_ADDRESS}/{finding.path}#L{finding.line}) {message}"
 
 
 def summary(results: list[tuple[str, int]]) -> None:

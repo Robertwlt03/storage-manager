@@ -134,7 +134,8 @@ The output is laid out to be read at a glance. Every step gets one line with a g
 ✘, its number of findings and how long it took. Below a step with findings, they follow sorted by file, each with
 its line number and what is wrong. At the end a frame sums up: green when every step passed, otherwise red with the
 steps and their findings. Colors appear in the terminal and on GitHub, where every finding also stands right beside
-its line in the pull request. `NO_COLOR=1` turns the colors off.
+its line in the pull request, and the summary page of a run shows each job's steps as a table, every finding linked
+to its line. `NO_COLOR=1` turns the colors off.
 
 The script runs twenty-three checks one after another:
 
@@ -248,8 +249,9 @@ Whether every text exists in all 20 languages and whether every color reaches th
 in the fourth step. How much of the code the tests reach is shown per folder by `make coverage`.
 
 On GitHub the same check runs by itself on every pull request, as described in
-`.github/workflows/checks.yml`: the four groups side by side, each on a Mac of its own, the app's build beside them,
-and at the end the job `checks`, which is green only when all of them are. If it reports even a single finding, the
+`.github/workflows/checks.yml`: the four groups side by side as the jobs "Build and tests", "Code rules", "Texts and
+guides" and "Safety and scripts", each on a Mac of its own, the job "App and icon" beside them, and at the end the
+job `checks`, which is green only when all of them are. If it reports even a single finding, the
 pull request turns red, and the
 contribution has to be improved before it is merged. Whether names are understandable and whether a step is cut
 well, no script can judge, and only the eye can see what the glass looks like: for that, open the changed pages with

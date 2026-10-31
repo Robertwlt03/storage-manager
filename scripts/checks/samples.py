@@ -71,7 +71,7 @@ def samples() -> Codebase:
         guides=tuple(sorted((SAMPLES / "guides").glob("*.md"))),
         translations=SAMPLES / "Resources",
         text_files=(SAMPLES / "settings.txt", SAMPLES / "assets" / "orphan.svg", COMMIT_SAMPLES),
-        workflows=(SAMPLES / "workflow.yml",),
+        workflows=(SAMPLES / "workflow.yml", SAMPLES / "actions" / "setup" / "action.yml"),
     )
 
 
