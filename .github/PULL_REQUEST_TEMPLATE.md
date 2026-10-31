@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Robertwlt03/storage-manager/main/assets/banner.svg" alt="Storage Manager. See at a glance where your storage goes." width="100%">
+  <img src="https://raw.githubusercontent.com/Robertwlt03/storage-manager/main/assets/banner-pull-request.svg" alt="Pull request for Storage Manager. What changes, why, and how it was checked." width="100%">
 </p>
 
 <!-- Fill in every section and remove these hints. The pictures load from the repository's main branch, so a pull

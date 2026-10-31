@@ -172,7 +172,7 @@ mode.
   and pull `main`. CONTRIBUTING.md shows the steps.
 - Branch names follow CONTRIBUTING.md (`1239-scan-cancel`, or `readme-typo` without an issue). When a task has no
   issue, suggest opening one that describes the problem or wish.
-- Pull request descriptions follow `.github/PULL_REQUEST_TEMPLATE.md`: the README's banner, every section with its
+- Pull request descriptions follow `.github/PULL_REQUEST_TEMPLATE.md`: its banner, every section with its
   icon filled in (none left with only its hint, the screenshots removed when nothing is visible), the footer, and the
   attribution line last. `gh pr create` does not fill the template by itself, so start from a copy and pass it with
   `--body-file`. Its pictures use full addresses on `main`, because a description cannot load files by path.

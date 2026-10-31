@@ -169,9 +169,9 @@ from a fork, you start from this repository's `main` (`git remote add upstream <
    comment, and a branch name has no spaces. No kind such as `feat/` or `fix/` goes in front: one branch often holds
    commits of several kinds, a feature and then a fix for it, and the kind already stands in every commit message.
 3. Commit, run `make check`, push the branch and open a pull request. GitHub fills its description with the
-   template from `.github/PULL_REQUEST_TEMPLATE.md`, in the same form as these guides: the README's banner, a
-   section with its icon for what changes, why, the issue, the checks and the screenshots, and the footer. Fill in
-   every section and remove the hints; `Closes #1239` under "Issue" closes the issue once the pull request is merged.
+   template from `.github/PULL_REQUEST_TEMPLATE.md`, in the same form as these guides: a banner, a section with its
+   icon for what changes, why, the issue, the checks and the screenshots, and the footer. Fill in every section and
+   remove the hints; `Closes #1239` under "Issue" closes the issue once the pull request is merged.
 4. Merge once the checks are green, with "Create a merge commit" rather than "Squash and merge", so every commit
    keeps its own message.
 5. Then delete the branch on GitHub and on your Mac, and bring `main` up to date:
