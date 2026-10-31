@@ -6,10 +6,14 @@ nonisolated enum FileTreeWalker {
     private static let bytesPerBlock: Int64 = 512
     private static let terminatingZeroLength = 1
 
-    /// Calls `visit` for every entry; returning false stops the walk. Returns false if stopped, not
-    /// opened or ended early by an error.
+    /// Calls `visit` for every entry; returning false stops the walk. Folders in `excluded` are
+    /// left out with everything inside. Returns false if stopped, not opened or ended early by an
+    /// error.
     @discardableResult
-    static func walk(_ path: String, _ visit: (UnsafeMutablePointer<FTSENT>) -> Bool) -> Bool {
+    static func walk(
+        _ path: String, excluding excluded: Set<String> = [],
+        _ visit: (UnsafeMutablePointer<FTSENT>) -> Bool
+    ) -> Bool {
         let pathCopy = strdup(path)
         defer { free(pathCopy) }
         var arguments: [UnsafeMutablePointer<CChar>?] = [pathCopy, nil]
@@ -17,7 +21,20 @@ nonisolated enum FileTreeWalker {
             return false
         }
         defer { fts_close(walkHandle) }
+        var skippedFolder: UnsafeMutablePointer<FTSENT>?
         while let entry = fts_read(walkHandle) {
+            // fts returns a skipped folder once more as FTS_DP; neither visit reaches `visit`.
+            if entry == skippedFolder {
+                skippedFolder = nil
+                continue
+            }
+            if !excluded.isEmpty && kind(of: entry) == FTS_D
+                && excluded.contains(String(cString: entry.pointee.fts_path))
+            {
+                fts_set(walkHandle, entry, FTS_SKIP)
+                skippedFolder = entry
+                continue
+            }
             if !visit(entry) { return false }
         }
         // fts_read sets errno to 0 at the regular end and to the error when it gives up early.

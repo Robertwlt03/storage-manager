@@ -94,7 +94,7 @@ coverage: ## Show how much of each source folder the tests reach
 
 format: ## Bring every Swift file into the shared form
 	$(HEADING) "Storage Manager · format" "Sources, Tests and scripts"
-	$(CONSOLE) wait "Formatting" swift format --in-place --recursive Sources Tests scripts
+	$(CONSOLE) wait "Formatting" swift format --in-place --recursive Sources Widget Tests scripts
 	$(CONSOLE) frame success "Formatted" "every Swift file in Sources, Tests and scripts"
 
 selftest: ## Measure real folders and compare with du (prints only counts and sizes)

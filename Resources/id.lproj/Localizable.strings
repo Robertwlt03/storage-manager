@@ -119,7 +119,7 @@
 "freed" = "Ruang yang benar-benar dikosongkan: %@";
 "deleteError" = "Tidak semua dapat dihapus: %@";
 "quitToDelete" = "Tutup %@ dengan ⌘Q untuk menghapus.";
-"openInExplorer" = "Buka di Explorer";
+"openInExplorer" = "Tampilkan di Folder";
 "deleteAll" = "Hapus Semua Salinan …";
 "deleteTitle" = "Hapus %@ salinan %@?";
 "deleteForever" = "Hapus Permanen";
@@ -158,9 +158,13 @@
 
 /* Settings */
 "autoScan" = "Pindai otomatis saat dibuka";
+"exportReport" = "Ekspor Laporan …";
+"reportTitle" = "Laporan penyimpanan dari %@";
+"reportFileName" = "Laporan Penyimpanan";
 "extraFolders" = "Folder Tambahan";
 "showInMenuBar" = "Tampilkan ruang kosong di bar menu";
 "openApp" = "Buka %@";
+"excludedFolders" = "Folder yang Dikecualikan";
 "none" = "Tidak Ada";
 "add" = "Tambah";
 "remove" = "Hapus";
@@ -184,12 +188,15 @@
 "cleanTemporaryDetail" = "File sementara yang tidak berubah setidaknya tiga hari.";
 "cleanTrash" = "Tong Sampah";
 "cleanTrashDetail" = "Mengosongkan Tong Sampah secara permanen. Tidak dipilih secara default.";
+"cleanInstallers" = "Penginstal Lama";
+"cleanInstallersDetail" = "Image disk dan paket penginstal di Unduhan yang berumur lebih dari satu bulan. Tidak dipilih secara default.";
 "cleanFailed" = "%@ item tidak dapat dihapus karena sedang digunakan atau dilindungi.";
 "cleaning" = "Membersihkan …";
 "cleanerRefresh" = "Cari Lagi";
 "cleanSelected" = "Bersihkan Pilihan (%@)";
 "cleanConfirmTitle" = "Hapus %@ secara permanen?";
 "cleanConfirmMessage" = "File tidak masuk ke Tong Sampah. App membuat ulang cache-nya bila perlu. Setelah itu app mengukur semuanya lagi.";
+"cleanConfirmInstallersMessage" = "File tidak masuk ke Tong Sampah. App membuat ulang cache-nya bila perlu. Setelah itu app mengukur semuanya lagi. Penginstal yang dihapus harus diunduh lagi.";
 "appsNoneUnused" = "Semua app baru-baru ini digunakan";
 "unusedSince" = "Tidak dibuka selama";
 "daysOption" = "lebih dari %@ hari";
@@ -233,6 +240,7 @@
 "summaryClean" = "Pembersihan dapat mengosongkan sekitar %@.";
 "summaryCopies" = "Salinan app yang dibuat macOS saat memeriksanya terhitung %@.";
 "summaryApps" = "%@ app sudah lama tidak dibuka.";
+"summaryFreed" = "Sejauh ini, app ini telah mengosongkan %@.";
 "readAloud" = "Bacakan";
 "stopReading" = "Berhenti Membacakan";
 
@@ -240,6 +248,12 @@
 "sizeClassesTitle" = "Seberapa besar file Anda?";
 "sizeClassesCaption" = "Berapa banyak ruang yang dipakai tiap kelas ukuran dan berapa file di dalamnya. Beberapa file besar biasanya memakan lebih banyak ruang daripada banyak file kecil.";
 "figureLargeFilesFrom" = "file besar mulai %@";
+"historyTitle" = "Riwayat";
+"historyCaption" = "Ruang terpakai setelah setiap pemindaian penuh.";
+"historyAfterNextScan" = "Riwayat muncul setelah pemindaian penuh berikutnya.";
+"grownSince" = "Bertambah sejak %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Tidak ada folder yang bertambah lebih dari %@.";
 "bucketValue" = "%@
 %@ file";
 "settingsSystemNote" = "Tampilan dan satuan mengikuti Pengaturan Sistem.";

@@ -119,7 +119,7 @@
 "freed" = "Espaço realmente libertado: %@";
 "deleteError" = "Não foi possível apagar tudo: %@";
 "quitToDelete" = "Termine %@ com ⌘Q para poder apagar.";
-"openInExplorer" = "Abrir no explorador";
+"openInExplorer" = "Mostrar em Pastas";
 "deleteAll" = "Apagar todas as cópias …";
 "deleteTitle" = "Apagar %@ cópias de %@?";
 "deleteForever" = "Apagar permanentemente";
@@ -158,9 +158,13 @@
 
 /* Settings */
 "autoScan" = "Analisar automaticamente ao abrir";
+"exportReport" = "Exportar relatório …";
+"reportTitle" = "Relatório de armazenamento de %@";
+"reportFileName" = "Relatório de armazenamento";
 "extraFolders" = "Pastas adicionais";
 "showInMenuBar" = "Mostrar o espaço livre na barra de menus";
 "openApp" = "Abrir %@";
+"excludedFolders" = "Pastas excluídas";
 "none" = "Nenhuma";
 "add" = "Adicionar";
 "remove" = "Remover";
@@ -184,12 +188,15 @@
 "cleanTemporaryDetail" = "Ficheiros temporários sem alterações há pelo menos três dias.";
 "cleanTrash" = "Lixo";
 "cleanTrashDetail" = "Esvazia o Lixo permanentemente. Não selecionado por omissão.";
+"cleanInstallers" = "Instaladores antigos";
+"cleanInstallersDetail" = "Imagens de disco e pacotes de instalação em Descargas com mais de um mês. Não selecionado por omissão.";
 "cleanFailed" = "Não foi possível remover %@ itens porque estão em uso ou protegidos.";
 "cleaning" = "A limpar …";
 "cleanerRefresh" = "Procurar novamente";
 "cleanSelected" = "Limpar seleção (%@)";
 "cleanConfirmTitle" = "Remover %@ permanentemente?";
 "cleanConfirmMessage" = "Os ficheiros não vão para o Lixo. As apps recriam as caches quando necessário. Depois, a app volta a medir tudo.";
+"cleanConfirmInstallersMessage" = "Os ficheiros não vão para o Lixo. As apps recriam as caches quando necessário. Depois, a app volta a medir tudo. Os instaladores removidos terão de ser transferidos novamente.";
 "appsNoneUnused" = "Todas as apps foram utilizadas recentemente";
 "unusedSince" = "Sem abrir há";
 "daysOption" = "mais de %@ dias";
@@ -233,6 +240,7 @@
 "summaryClean" = "Uma limpeza pode libertar cerca de %@.";
 "summaryCopies" = "As cópias de apps que o macOS cria ao verificá-las ocupam %@.";
 "summaryApps" = "%@ apps não são abertas há algum tempo.";
+"summaryFreed" = "Até agora, esta app libertou %@.";
 "readAloud" = "Ler em voz alta";
 "stopReading" = "Parar leitura";
 
@@ -240,6 +248,12 @@
 "sizeClassesTitle" = "Qual é o tamanho dos seus ficheiros?";
 "sizeClassesCaption" = "Quanto espaço ocupa cada classe de tamanho e quantos ficheiros contém. Normalmente, poucos ficheiros grandes ocupam mais espaço do que muitos pequenos.";
 "figureLargeFilesFrom" = "ficheiros grandes a partir de %@";
+"historyTitle" = "Histórico";
+"historyCaption" = "Espaço utilizado após cada análise completa.";
+"historyAfterNextScan" = "O histórico aparece depois da próxima análise completa.";
+"grownSince" = "Crescimento desde %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Nenhuma pasta cresceu mais de %@.";
 "bucketValue" = "%@
 %@ ficheiros";
 "settingsSystemNote" = "O aspeto e as unidades vêm das Definições do Sistema.";

@@ -119,7 +119,7 @@
 "freed" = "Faktisk frigjort: %@";
 "deleteError" = "Det hele kunne ikke slettes: %@";
 "quitToDelete" = "Afslut %@ med ⌘Q for at kunne slette.";
-"openInExplorer" = "Åbn i Lagringsudforsker";
+"openInExplorer" = "Vis i Mapper";
 "deleteAll" = "Slet alle kopier …";
 "deleteTitle" = "Vil du slette %@ kopier af %@?";
 "deleteForever" = "Slet permanent";
@@ -158,9 +158,13 @@
 
 /* Settings */
 "autoScan" = "Mål automatisk ved start";
+"exportReport" = "Eksportér rapport …";
+"reportTitle" = "Lagerrapport fra %@";
+"reportFileName" = "Lagerrapport";
 "extraFolders" = "Yderligere mapper";
 "showInMenuBar" = "Vis ledig plads i menulinjen";
 "openApp" = "Åbn %@";
+"excludedFolders" = "Udelukkede mapper";
 "none" = "Ingen";
 "add" = "Tilføj";
 "remove" = "Fjern";
@@ -184,12 +188,15 @@
 "cleanTemporaryDetail" = "Midlertidige filer, der ikke er ændret i mindst tre dage.";
 "cleanTrash" = "Papirkurv";
 "cleanTrashDetail" = "Tømmer papirkurven permanent. Er ikke valgt som standard.";
+"cleanInstallers" = "Gamle installationsfiler";
+"cleanInstallersDetail" = "Diskbilleder og installationspakker i Downloads, der er ældre end en måned. Er ikke valgt som standard.";
 "cleanFailed" = "%@ emner kunne ikke fjernes, fordi de er i brug eller beskyttet.";
 "cleaning" = "Rydder op …";
 "cleanerRefresh" = "Søg igen";
 "cleanSelected" = "Ryd op i markeringen (%@)";
 "cleanConfirmTitle" = "Vil du fjerne %@ permanent?";
 "cleanConfirmMessage" = "Filerne havner ikke i papirkurven. Apps opretter deres cacher igen efter behov. Derefter måler appen alt igen.";
+"cleanConfirmInstallersMessage" = "Filerne havner ikke i papirkurven. Apps opretter deres cacher igen efter behov. Derefter måler appen alt igen. Fjernede installationsfiler skal hentes igen.";
 "appsNoneUnused" = "Alle apps er brugt for nylig";
 "unusedSince" = "Ikke åbnet i";
 "daysOption" = "mere end %@ dage";
@@ -233,6 +240,7 @@
 "summaryClean" = "Ved at rydde op kan du frigøre ca. %@.";
 "summaryCopies" = "Kopier af apps, som macOS opretter ved kontrol, fylder %@.";
 "summaryApps" = "%@ apps er ikke blevet åbnet i et stykke tid.";
+"summaryFreed" = "Indtil nu har appen frigjort %@.";
 "readAloud" = "Læs op";
 "stopReading" = "Stop oplæsning";
 
@@ -240,6 +248,12 @@
 "sizeClassesTitle" = "Hvor store er dine filer?";
 "sizeClassesCaption" = "Hvor meget plads hver størrelsesklasse fylder, og hvor mange filer der er i den. Nogle få store filer fylder som regel mere end mange små.";
 "figureLargeFilesFrom" = "store filer fra %@";
+"historyTitle" = "Historik";
+"historyCaption" = "Brugt plads efter hver fuld måling.";
+"historyAfterNextScan" = "Historikken vises efter næste fulde måling.";
+"grownSince" = "Vokset siden %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Ingen mappe er vokset med mere end %@.";
 "bucketValue" = "%@
 %@ filer";
 "settingsSystemNote" = "Udseende og enheder kommer fra Systemindstillinger.";

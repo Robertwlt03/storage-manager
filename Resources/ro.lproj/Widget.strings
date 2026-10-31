@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Spațiu liber";
+"widgetDescription" = "Arată cât spațiu este disponibil pe Mac.";
+"widgetAvailable" = "disponibil";
+"widgetOfTotal" = "din %@";
+"widgetUnreadable" = "Spațiul liber nu a putut fi citit.";

@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Ledig plass";
+"widgetDescription" = "Viser hvor mye plass som er tilgjengelig på Macen.";
+"widgetAvailable" = "tilgjengelig";
+"widgetOfTotal" = "av %@";
+"widgetUnreadable" = "Kunne ikke lese den ledige plassen.";

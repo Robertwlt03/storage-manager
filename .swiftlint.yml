@@ -4,6 +4,7 @@
 # that would argue with them are switched off.
 included:
   - Sources
+  - Widget
   - Tests
 disabled_rules:
   - trailing_comma        # swift format adds trailing commas to multi-line lists

@@ -119,7 +119,7 @@
 "freed" = "Spațiu eliberat efectiv: %@";
 "deleteError" = "Nu s-a putut șterge totul: %@";
 "quitToDelete" = "Închide %@ cu ⌘Q pentru a șterge.";
-"openInExplorer" = "Deschide în Explorer";
+"openInExplorer" = "Afișează în Dosare";
 "deleteAll" = "Șterge toate copiile …";
 "deleteTitle" = "Ștergi %@ copii ale aplicației %@?";
 "deleteForever" = "Șterge definitiv";
@@ -158,9 +158,13 @@
 
 /* Settings */
 "autoScan" = "Scanează automat la pornire";
+"exportReport" = "Exportă raportul …";
+"reportTitle" = "Raport de stocare din %@";
+"reportFileName" = "Raport de stocare";
 "extraFolders" = "Dosare suplimentare";
 "showInMenuBar" = "Afișează spațiul liber în bara de meniu";
 "openApp" = "Deschide %@";
+"excludedFolders" = "Dosare excluse";
 "none" = "Niciunul";
 "add" = "Adaugă";
 "remove" = "Elimină";
@@ -184,12 +188,15 @@
 "cleanTemporaryDetail" = "Fișiere temporare nemodificate de cel puțin trei zile.";
 "cleanTrash" = "Coș";
 "cleanTrashDetail" = "Golește definitiv Coșul. Nu este selectat implicit.";
+"cleanInstallers" = "Programe de instalare vechi";
+"cleanInstallersDetail" = "Imagini de disc și pachete de instalare din Descărcări mai vechi de o lună. Nu este selectat implicit.";
 "cleanFailed" = "%@ elemente nu au putut fi eliminate, fiindcă sunt în uz sau protejate.";
 "cleaning" = "Se curăță …";
 "cleanerRefresh" = "Caută din nou";
 "cleanSelected" = "Curăță selecția (%@)";
 "cleanConfirmTitle" = "Elimini definitiv %@?";
 "cleanConfirmMessage" = "Fișierele nu ajung în Coș. Aplicațiile își refac cache-urile la nevoie. Apoi aplicația măsoară totul din nou.";
+"cleanConfirmInstallersMessage" = "Fișierele nu ajung în Coș. Aplicațiile își refac cache-urile la nevoie. Apoi aplicația măsoară totul din nou. Programele de instalare eliminate trebuie descărcate din nou.";
 "appsNoneUnused" = "Toate aplicațiile au fost folosite recent";
 "unusedSince" = "Nedeschise de";
 "daysOption" = "mai mult de %@ zile";
@@ -233,6 +240,7 @@
 "summaryClean" = "Curățarea poate elibera aproximativ %@.";
 "summaryCopies" = "Copiile de aplicații pe care macOS le face când le verifică ocupă %@.";
 "summaryApps" = "%@ aplicații nu au mai fost deschise de ceva timp.";
+"summaryFreed" = "Până acum, aplicația a eliberat %@.";
 "readAloud" = "Citește cu voce tare";
 "stopReading" = "Oprește citirea";
 
@@ -240,6 +248,12 @@
 "sizeClassesTitle" = "Cât de mari sunt fișierele tale?";
 "sizeClassesCaption" = "Cât spațiu ocupă fiecare clasă de dimensiune și câte fișiere conține. De obicei, câteva fișiere mari ocupă mai mult decât multe fișiere mici.";
 "figureLargeFilesFrom" = "fișiere mari de la %@";
+"historyTitle" = "Istoric";
+"historyCaption" = "Spațiul ocupat după fiecare scanare completă.";
+"historyAfterNextScan" = "Istoricul apare după următoarea scanare completă.";
+"grownSince" = "Creștere din %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Niciun dosar nu a crescut cu mai mult de %@.";
 "bucketValue" = "%@
 %@ fișiere";
 "settingsSystemNote" = "Aspectul și unitățile vin din Configurări sistem.";
