@@ -34,6 +34,8 @@ import SwiftUI
     private(set) var apps: [AppUsage] = []
     private(set) var cleanItems: [CleanItem]?
     private(set) var statistics: Statistics?  // key figures of the last finished scan
+    private(set) var totalFreedBytes = Int64(
+        UserDefaults.standard.integer(forKey: SettingsKey.totalFreedBytes))
     /// Found once per tree change: each group asks Launch Services and reads an Info.plist.
     private(set) var copyGroups: [CopyGroup] = []
     /// Made-up data instead of a scan: nothing is read from the disk and nothing can be removed.
@@ -113,6 +115,7 @@ import SwiftUI
         lastScan = Date()
         apps = demo.apps
         cleanItems = demo.cleanItems
+        totalFreedBytes = demo.totalFreedBytes
         treeChanged()
     }
 
@@ -314,7 +317,8 @@ extension AppModel {
     func clean(_ items: [CleanItem]) async -> (freed: Int64, failed: Int) {
         guard !isDemo else { return (0, 0) }
         var failed = 0
-        let freed = await freeSpaceGained {
+        let removedBytes = items.reduce(0) { total, item in total + item.bytes }
+        let freed = await freeSpaceGained(removing: removedBytes) {
             failed = await Task.detached(priority: .utility) { CleanerService.clean(items) }.value
         }
         scan()
@@ -328,7 +332,8 @@ extension AppModel {
         let unusedApps = AppUsageService.unused(apps, days: unusedDays)
         let facts = SummaryService.Input(
             volume: startupVolume, categories: isScanning ? [] : categories,
-            cleanableBytes: cleanableBytes, copyBytes: copyBytes, unusedAppCount: unusedApps.count)
+            cleanableBytes: cleanableBytes, copyBytes: copyBytes, unusedAppCount: unusedApps.count,
+            freedBytes: totalFreedBytes)
         return SummaryService.text(facts)
     }
 
@@ -356,17 +361,27 @@ extension AppModel {
     /// Deletes all copies of one app and returns how much free space really grew.
     func delete(_ group: CopyGroup) async throws -> Int64 {
         guard !isDemo else { return 0 }
-        let freed = try await freeSpaceGained { try await CopyService.delete(group) }
+        let freed = try await freeSpaceGained(removing: group.node.bytes) {
+            try await CopyService.delete(group)
+        }
         group.node.detach()
         treeChanged()
         return freed
     }
 
-    private func freeSpaceGained(by removal: () async throws -> Void) async rethrows -> Int64 {
-        let freeBefore = VolumeService.startup()?.freeBytes ?? 0
+    /// Runs `removal` and returns what it really freed, which also goes into the total.
+    private func freeSpaceGained(
+        removing removedBytes: Int64, by removal: () async throws -> Void
+    ) async rethrows -> Int64 {
+        let freeBefore = VolumeService.startup()?.freeBytes
         try await removal()
         try? await Task.sleep(for: Self.waitForFreedSpace)
-        return (VolumeService.startup()?.freeBytes ?? freeBefore) - freeBefore
+        let freed = VolumeService.freedBytes(
+            before: freeBefore, after: VolumeService.startup()?.freeBytes,
+            removedBytes: removedBytes)
+        totalFreedBytes += freed
+        UserDefaults.standard.set(totalFreedBytes, forKey: SettingsKey.totalFreedBytes)
+        return freed
     }
 
     private func treeChanged() {

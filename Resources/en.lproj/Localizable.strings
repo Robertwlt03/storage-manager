@@ -234,6 +234,7 @@
 "summaryClean" = "Cleaning up can free about %@.";
 "summaryCopies" = "Copies of apps that macOS makes while checking them count for %@.";
 "summaryApps" = "%@ apps have not been opened for a while.";
+"summaryFreed" = "So far, this app has freed %@.";
 "readAloud" = "Read Aloud";
 "stopReading" = "Stop Reading";
 

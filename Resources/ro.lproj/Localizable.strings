@@ -234,6 +234,7 @@
 "summaryClean" = "Curățarea poate elibera aproximativ %@.";
 "summaryCopies" = "Copiile de aplicații pe care macOS le face când le verifică ocupă %@.";
 "summaryApps" = "%@ aplicații nu au mai fost deschise de ceva timp.";
+"summaryFreed" = "Până acum, aplicația a eliberat %@.";
 "readAloud" = "Citește cu voce tare";
 "stopReading" = "Oprește citirea";
 

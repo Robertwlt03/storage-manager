@@ -234,6 +234,7 @@
 "summaryClean" = "Porządkowanie może zwolnić około %@.";
 "summaryCopies" = "Kopie aplikacji, które macOS tworzy podczas sprawdzania, zajmują w sumie %@.";
 "summaryApps" = "Liczba aplikacji, których od dawna nie otwierano: %@.";
+"summaryFreed" = "Do tej pory aplikacja zwolniła %@.";
 "readAloud" = "Czytaj na głos";
 "stopReading" = "Przestań czytać";
 

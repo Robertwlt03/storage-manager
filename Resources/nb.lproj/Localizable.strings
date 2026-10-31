@@ -234,6 +234,7 @@
 "summaryClean" = "Ved å rydde opp kan du frigjøre omtrent %@.";
 "summaryCopies" = "Kopier av apper som macOS oppretter ved kontroll, utgjør %@.";
 "summaryApps" = "%@ apper har ikke vært åpnet på en stund.";
+"summaryFreed" = "Så langt har appen frigjort %@.";
 "readAloud" = "Les opp";
 "stopReading" = "Stopp opplesing";
 

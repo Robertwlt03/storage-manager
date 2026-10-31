@@ -234,6 +234,7 @@
 "summaryClean" = "정리하면 약 %@을(를) 확보할 수 있습니다.";
 "summaryCopies" = "macOS가 확인할 때 만드는 앱 사본은 %@(으)로 집계됩니다.";
 "summaryApps" = "앱 %@개를 한동안 열지 않았습니다.";
+"summaryFreed" = "지금까지 이 앱으로 확보한 공간: %@.";
 "readAloud" = "소리 내어 읽기";
 "stopReading" = "읽기 중단";
 

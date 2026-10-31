@@ -234,6 +234,7 @@
 "summaryClean" = "Siivoamalla voit vapauttaa noin %@.";
 "summaryCopies" = "Appien kopiot, jotka macOS luo tarkistuksen aikana, vievät laskettuna %@.";
 "summaryApps" = "%@ appia ei ole avattu pitkään aikaan.";
+"summaryFreed" = "Tähän mennessä sovellus on vapauttanut %@.";
 "readAloud" = "Lue ääneen";
 "stopReading" = "Lopeta lukeminen";
 
