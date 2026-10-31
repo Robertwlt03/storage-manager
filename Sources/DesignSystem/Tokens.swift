@@ -55,7 +55,6 @@ enum Layout {
     static let sheetWidth: CGFloat = 560
     static let sheetHeight: CGFloat = 600
     static let folderListHeight: CGFloat = 90
-    static let settingsHeight: CGFloat = 380
     static let placeholderHeight: CGFloat = 320
     static let gridTileSize: CGFloat = 170
     static let legendMaximumEntries = 6

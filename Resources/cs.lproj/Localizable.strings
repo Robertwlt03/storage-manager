@@ -119,7 +119,7 @@
 "freed" = "Skutečně uvolněno: %@";
 "deleteError" = "Ne vše se podařilo smazat: %@";
 "quitToDelete" = "Ukončete %@ pomocí ⌘Q, pak půjde smazat.";
-"openInExplorer" = "Otevřít v Průzkumníku";
+"openInExplorer" = "Zobrazit ve Složkách";
 "deleteAll" = "Smazat všechny kopie …";
 "deleteTitle" = "Smazat kopie (%@) aplikace %@?";
 "deleteForever" = "Smazat trvale";

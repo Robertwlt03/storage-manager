@@ -1,12 +1,13 @@
 import SwiftUI
 
 /// The one table for folders, search results and large files: same columns, menu and double-click
-/// everywhere. The location column only exists where entries come from different folders. No column
-/// customization (see ARCHITECTURE.md).
+/// everywhere. The location column only exists where entries come from different folders, and the
+/// files column only where an entry can be a folder. No column customization (see ARCHITECTURE.md).
 struct EntryTable: View {
     let entries: [Entry]
     let total: Int64
     var showsLocation = false
+    var showsFileCount = true
     @Environment(AppModel.self) private var model
     @State private var selection: Set<Entry.ID> = []
     @State private var sortOrder = [KeyPathComparator(\Entry.bytes, order: .reverse)]
@@ -25,7 +26,8 @@ struct EntryTable: View {
     }
 
     @ViewBuilder private func table(_ rows: [Entry]) -> some View {
-        if showsLocation {
+        switch (showsLocation, showsFileCount) {
+        case (true, true):
             Table(rows, selection: $selection, sortOrder: $sortOrder) {
                 nameColumn
                 locationColumn
@@ -33,12 +35,25 @@ struct EntryTable: View {
                 shareColumn
                 filesColumn
             }
-        } else {
+        case (true, false):
+            Table(rows, selection: $selection, sortOrder: $sortOrder) {
+                nameColumn
+                locationColumn
+                sizeColumn
+                shareColumn
+            }
+        case (false, true):
             Table(rows, selection: $selection, sortOrder: $sortOrder) {
                 nameColumn
                 sizeColumn
                 shareColumn
                 filesColumn
+            }
+        case (false, false):
+            Table(rows, selection: $selection, sortOrder: $sortOrder) {
+                nameColumn
+                sizeColumn
+                shareColumn
             }
         }
     }

@@ -119,7 +119,7 @@
 "freed" = "Gerçekten boşalan alan: %@";
 "deleteError" = "Her şey silinemedi: %@";
 "quitToDelete" = "Silmek için %@ uygulamasından ⌘Q ile çıkın.";
-"openInExplorer" = "Gezgin'de Aç";
+"openInExplorer" = "Klasörler’de Göster";
 "deleteAll" = "Tüm Kopyaları Sil …";
 "deleteTitle" = "%@ kopya silinsin mi (%@)?";
 "deleteForever" = "Kalıcı Olarak Sil";

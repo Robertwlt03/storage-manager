@@ -119,7 +119,7 @@
 "freed" = "実際に解放された容量: %@";
 "deleteError" = "すべてを削除できませんでした: %@";
 "quitToDelete" = "削除するには、%@を⌘Qで終了してください。";
-"openInExplorer" = "エクスプローラで開く";
+"openInExplorer" = "フォルダで表示";
 "deleteAll" = "すべてのコピーを削除…";
 "deleteTitle" = "%@個の「%@」のコピーを削除しますか?";
 "deleteForever" = "完全に削除";

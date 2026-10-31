@@ -38,6 +38,8 @@ import SwiftUI
     private(set) var copyGroups: [CopyGroup] = []
     /// Made-up data instead of a scan: nothing is read from the disk and nothing can be removed.
     private(set) var isDemo = false
+    /// The temporary area's path as its page shows it; the demo shows a made-up one.
+    var shownTemporaryArea: String { isDemo ? DemoData.shownTemporaryArea : Paths.temporaryArea }
     private var scanTask: Task<Void, Never>?
     private var scanID = UUID()  // the current scan; older, canceled runs check it and step aside
     // The newest background refresh of each list; an older one that finishes later steps aside.
