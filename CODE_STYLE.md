@@ -192,7 +192,8 @@ The script runs twenty-three checks one after another:
 17. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
 18. **Complete translations:** A text that reads exactly like the English one in some language is reported when the
    macOS spell checker does not know one of its words in that language. Terms that read the same in most languages,
-   such as "iCloud Drive", are left out (`scripts/checks/translations.py`).
+   such as "iCloud Drive", are left out, and so is a text whose line ends in `/* same as English on purpose */`,
+   because the dictionaries differ from Mac to Mac (`scripts/checks/translations.py`).
 19. **Guides:** Every link in a guide leads to a file that exists, and the texts use American spelling
    (`scripts/checks/guides.py`). The whole repository is English: German text outside the app's translations in
    `Resources` is reported, in guides, templates, scripts and every other file git knows

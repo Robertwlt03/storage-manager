@@ -28,7 +28,6 @@ SUBJECT = re.compile(rf"""
     (?: \( [a-z0-9-]+ \) )?     # maybe the part it touches: (scan)
     !? : \s \S                  # maybe ! for a breaking change, then the summary
 """, re.VERBOSE)
-MERGE = re.compile(r"^Merge ")  # merge commits are written by git and GitHub
 RULE_FILE = "scripts/checks/commits.py"
 LINK = re.compile(r"\w+://\S+")
 UNIT_SEPARATOR, RECORD_SEPARATOR = "\x1f", "\x1e"  # keep commits apart in git's output
@@ -53,7 +52,8 @@ def commits_to_check() -> list[CommitMessage]:
         return []  # the rule is not committed yet, so it holds from its own commit on
     excluded = [f"^{first}^"] + [f"^{base}" for base in comparison_bases()]
     message_format = f"--format=%h{UNIT_SEPARATOR}%B{RECORD_SEPARATOR}"
-    output = run(["git", "log", message_format, "HEAD", *excluded])
+    # Merge commits are written by git and GitHub, such as the one a pull request is checked on.
+    output = run(["git", "log", "--no-merges", message_format, "HEAD", *excluded])
     records = [record.strip("\n") for record in output.output.split(RECORD_SEPARATOR)]
     pairs = [record.split(UNIT_SEPARATOR, 1) for record in records if UNIT_SEPARATOR in record]
     return [CommitMessage(f"commit {short_id}", text.strip()) for short_id, text in pairs]
@@ -73,8 +73,6 @@ def comparison_bases() -> list[str]:
 def message_problems(message: CommitMessage) -> list[str]:
     lines = message.text.splitlines()
     subject = lines[0] if lines else ""
-    if MERGE.match(subject):
-        return []
     problems = []
     if not SUBJECT.match(subject):
         problems.append(f"'{subject}' is not a commit subject like 'fix(scan): what changed'")
