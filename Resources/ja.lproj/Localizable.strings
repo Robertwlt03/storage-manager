@@ -182,12 +182,15 @@
 "cleanTemporaryDetail" = "3日以上変更されていない一時ファイルです。";
 "cleanTrash" = "ゴミ箱";
 "cleanTrashDetail" = "ゴミ箱を完全に空にします。初期設定では選択されていません。";
+"cleanInstallers" = "古いインストーラ";
+"cleanInstallersDetail" = "ダウンロード内の1か月以上前のディスクイメージとインストーラパッケージ。初期設定では選択されていません。";
 "cleanFailed" = "使用中または保護されているため、%@個の項目を削除できませんでした。";
 "cleaning" = "クリーンアップ中…";
 "cleanerRefresh" = "再検索";
 "cleanSelected" = "選択した項目をクリーンアップ(%@)";
 "cleanConfirmTitle" = "%@を完全に削除しますか?";
 "cleanConfirmMessage" = "ファイルはゴミ箱に入りません。Appは必要に応じてキャッシュを再作成します。完了後、このAppはすべてをもう一度スキャンします。";
+"cleanConfirmInstallersMessage" = "ファイルはゴミ箱に入りません。Appは必要に応じてキャッシュを再作成します。完了後、このAppはすべてをもう一度スキャンします。削除したインストーラは再ダウンロードが必要です。";
 "appsNoneUnused" = "すべてのAppが最近使用されています";
 "unusedSince" = "未使用の期間";
 "daysOption" = "%@日より長い";

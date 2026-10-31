@@ -182,12 +182,15 @@
 "cleanTemporaryDetail" = "Midlertidige filer som ikke er endret på minst tre dager.";
 "cleanTrash" = "Papirkurv";
 "cleanTrashDetail" = "Tømmer papirkurven permanent. Er ikke valgt som standard.";
+"cleanInstallers" = "Gamle installasjonsfiler";
+"cleanInstallersDetail" = "Diskbilder og installasjonspakker i Nedlastinger som er eldre enn en måned. Er ikke valgt som standard.";
 "cleanFailed" = "%@ objekter kunne ikke fjernes fordi de er i bruk eller beskyttet.";
 "cleaning" = "Rydder opp …";
 "cleanerRefresh" = "Søk på nytt";
 "cleanSelected" = "Rydd opp i utvalget (%@)";
 "cleanConfirmTitle" = "Vil du fjerne %@ permanent?";
 "cleanConfirmMessage" = "Filene havner ikke i papirkurven. Apper oppretter hurtigbufferne sine på nytt ved behov. Etterpå måler appen alt på nytt.";
+"cleanConfirmInstallersMessage" = "Filene havner ikke i papirkurven. Apper oppretter hurtigbufferne sine på nytt ved behov. Etterpå måler appen alt på nytt. Fjernede installasjonsfiler må lastes ned på nytt.";
 "appsNoneUnused" = "Alle apper er brukt nylig";
 "unusedSince" = "Ikke åpnet på";
 "daysOption" = "mer enn %@ dager";

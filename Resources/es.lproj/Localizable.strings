@@ -182,12 +182,15 @@
 "cleanTemporaryDetail" = "Archivos temporales sin modificar desde hace al menos tres días.";
 "cleanTrash" = "Papelera";
 "cleanTrashDetail" = "Vacía la Papelera de forma definitiva. No está seleccionada por defecto.";
+"cleanInstallers" = "Instaladores antiguos";
+"cleanInstallersDetail" = "Imágenes de disco y paquetes de instalación en Descargas con más de un mes. No está seleccionado por defecto.";
 "cleanFailed" = "No se pudieron eliminar %@ elementos porque están en uso o protegidos.";
 "cleaning" = "Limpiando …";
 "cleanerRefresh" = "Buscar de nuevo";
 "cleanSelected" = "Limpiar la selección (%@)";
 "cleanConfirmTitle" = "¿Eliminar %@ de forma definitiva?";
 "cleanConfirmMessage" = "Los archivos no van a la Papelera. Las apps recrean sus cachés cuando hace falta. Después, la app lo analiza todo de nuevo.";
+"cleanConfirmInstallersMessage" = "Los archivos no van a la Papelera. Las apps recrean sus cachés cuando hace falta. Después, la app lo analiza todo de nuevo. Los instaladores eliminados tendrán que descargarse de nuevo.";
 "appsNoneUnused" = "Todas las apps se han usado recientemente";
 "unusedSince" = "Sin abrir desde hace";
 "daysOption" = "más de %@ días";

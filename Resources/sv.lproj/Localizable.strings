@@ -182,12 +182,15 @@
 "cleanTemporaryDetail" = "Tillfälliga filer som inte har ändrats på minst tre dagar.";
 "cleanTrash" = "Papperskorgen";
 "cleanTrashDetail" = "Tömmer papperskorgen permanent. Inte markerad som standard.";
+"cleanInstallers" = "Gamla installationsfiler";
+"cleanInstallersDetail" = "Skivavbilder och installationspaket i Hämtade filer som är äldre än en månad. Inte markerad som standard.";
 "cleanFailed" = "%@ objekt kunde inte tas bort eftersom de används eller är skyddade.";
 "cleaning" = "Rensar upp …";
 "cleanerRefresh" = "Sök igen";
 "cleanSelected" = "Rensa markeringen (%@)";
 "cleanConfirmTitle" = "Ta bort %@ permanent?";
 "cleanConfirmMessage" = "Filerna hamnar inte i papperskorgen. Appar bygger upp sina cacheminnen igen vid behov. Därefter mäter appen allt på nytt.";
+"cleanConfirmInstallersMessage" = "Filerna hamnar inte i papperskorgen. Appar bygger upp sina cacheminnen igen vid behov. Därefter mäter appen allt på nytt. Borttagna installationsfiler måste hämtas igen.";
 "appsNoneUnused" = "Alla appar har använts nyligen";
 "unusedSince" = "Inte öppnad på";
 "daysOption" = "mer än %@ dagar";

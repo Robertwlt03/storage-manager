@@ -182,12 +182,15 @@
 "cleanTemporaryDetail" = "Legalább három napja nem módosított ideiglenes fájlok.";
 "cleanTrash" = "Kuka";
 "cleanTrashDetail" = "Véglegesen kiüríti a Kukát. Alapból nincs kijelölve.";
+"cleanInstallers" = "Régi telepítők";
+"cleanInstallersDetail" = "Egy hónapnál régebbi lemezképek és telepítőcsomagok a Letöltésekben. Alapból nincs kijelölve.";
 "cleanFailed" = "%@ elem nem távolítható el, mert használatban van vagy védett.";
 "cleaning" = "Takarítás …";
 "cleanerRefresh" = "Keresés újra";
 "cleanSelected" = "Kijelöltek takarítása (%@)";
 "cleanConfirmTitle" = "%@ végleges eltávolítása?";
 "cleanConfirmMessage" = "A fájlok nem kerülnek a Kukába. Az appok szükség esetén újra létrehozzák a gyorsítótárukat. Utána az app mindent újra felmér.";
+"cleanConfirmInstallersMessage" = "A fájlok nem kerülnek a Kukába. Az appok szükség esetén újra létrehozzák a gyorsítótárukat. Utána az app mindent újra felmér. Az eltávolított telepítőket újra le kell tölteni.";
 "appsNoneUnused" = "Mostanában minden appot használtál";
 "unusedSince" = "Nem volt megnyitva";
 "daysOption" = "több mint %@ napja";

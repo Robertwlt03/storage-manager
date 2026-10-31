@@ -60,7 +60,7 @@ nonisolated enum TextKey: String, CaseIterable {
     case paneCleaner, paneApps, sectionTidy, layoutList, layoutGrid, settings, emptyFolder,
         otherCategories, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail,
         cleanLogs, cleanLogsDetail, cleanTemporary, cleanTemporaryDetail, cleanTrash,
-        cleanTrashDetail,
+        cleanTrashDetail, cleanInstallers, cleanInstallersDetail, cleanConfirmInstallersMessage,
         cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle,
         cleanConfirmMessage, appsNoneUnused, unusedSince, daysOption, trashAppTitle,
         trashAppMessage, moveToTrash, lastOpened, trashAppFailed, figureFiles, figureUnusedApps,

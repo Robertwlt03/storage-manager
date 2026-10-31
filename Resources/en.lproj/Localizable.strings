@@ -182,12 +182,15 @@
 "cleanTemporaryDetail" = "Temporary files not changed for at least three days.";
 "cleanTrash" = "Trash";
 "cleanTrashDetail" = "Empties the Trash permanently. Not selected by default.";
+"cleanInstallers" = "Old Installers";
+"cleanInstallersDetail" = "Disk images and installer packages in Downloads older than one month. Not selected by default.";
 "cleanFailed" = "%@ items could not be removed because they are in use or protected.";
 "cleaning" = "Cleaning up …";
 "cleanerRefresh" = "Search Again";
 "cleanSelected" = "Clean Up Selection (%@)";
 "cleanConfirmTitle" = "Remove %@ permanently?";
 "cleanConfirmMessage" = "The files do not go to the Trash. Apps rebuild their caches when needed. Afterwards the app measures everything again.";
+"cleanConfirmInstallersMessage" = "The files do not go to the Trash. Apps rebuild their caches when needed. Afterwards the app measures everything again. Removed installers have to be downloaded again.";
 "appsNoneUnused" = "All apps were used recently";
 "unusedSince" = "Not opened for";
 "daysOption" = "more than %@ days";

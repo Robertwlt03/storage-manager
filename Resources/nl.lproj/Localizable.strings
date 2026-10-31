@@ -182,12 +182,15 @@
 "cleanTemporaryDetail" = "Tijdelijke bestanden die al minstens drie dagen niet zijn gewijzigd.";
 "cleanTrash" = "Prullenmand";
 "cleanTrashDetail" = "Leegt de prullenmand definitief. Standaard niet geselecteerd.";
+"cleanInstallers" = "Oude installatiebestanden";
+"cleanInstallersDetail" = "Schijfkopieën en installatiepakketten in Downloads die ouder zijn dan een maand. Standaard niet geselecteerd.";
 "cleanFailed" = "%@ onderdelen konden niet worden verwijderd omdat ze in gebruik of beveiligd zijn.";
 "cleaning" = "Bezig met opruimen …";
 "cleanerRefresh" = "Opnieuw zoeken";
 "cleanSelected" = "Selectie opruimen (%@)";
 "cleanConfirmTitle" = "%@ definitief verwijderen?";
 "cleanConfirmMessage" = "De bestanden gaan niet naar de prullenmand. Apps maken hun caches zo nodig opnieuw aan. Daarna scant de app alles opnieuw.";
+"cleanConfirmInstallersMessage" = "De bestanden gaan niet naar de prullenmand. Apps maken hun caches zo nodig opnieuw aan. Daarna scant de app alles opnieuw. Verwijderde installatiebestanden moeten opnieuw worden gedownload.";
 "appsNoneUnused" = "Alle apps zijn onlangs gebruikt";
 "unusedSince" = "Niet geopend gedurende";
 "daysOption" = "meer dan %@ dagen";

@@ -182,12 +182,15 @@
 "cleanTemporaryDetail" = "至少三天未更改的暫存檔案。";
 "cleanTrash" = "垃圾桶";
 "cleanTrashDetail" = "永久清空垃圾桶。預設不會選取。";
+"cleanInstallers" = "舊的安裝程式";
+"cleanInstallersDetail" = "「下載項目」中超過一個月的磁碟映像檔和安裝套件。預設不會選取。";
 "cleanFailed" = "有 %@ 個項目無法移除，因為它們正在使用中或受到保護。";
 "cleaning" = "正在清理⋯";
 "cleanerRefresh" = "重新搜尋";
 "cleanSelected" = "清理所選項目（%@）";
 "cleanConfirmTitle" = "要永久移除 %@ 嗎？";
 "cleanConfirmMessage" = "這些檔案不會移到垃圾桶。App 會在需要時重新產生快取。之後，本 App 會重新測量所有內容。";
+"cleanConfirmInstallersMessage" = "這些檔案不會移到垃圾桶。App 會在需要時重新產生快取。之後，本 App 會重新測量所有內容。已移除的安裝程式需要重新下載。";
 "appsNoneUnused" = "所有 App 最近都用過";
 "unusedSince" = "未打開時間";
 "daysOption" = "超過 %@ 天";
