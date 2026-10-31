@@ -119,7 +119,7 @@
 "freed" = "Wirklich frei geworden: %@";
 "deleteError" = "Nicht alles ließ sich löschen: %@";
 "quitToDelete" = "Beende %@ mit ⌘Q, dann lässt sich löschen.";
-"openInExplorer" = "Im Explorer öffnen";
+"openInExplorer" = "In „Ordner“ zeigen";
 "deleteAll" = "Alle Kopien löschen …";
 "deleteTitle" = "%@ Kopien von %@ löschen?";
 "deleteForever" = "Endgültig löschen";

@@ -119,7 +119,7 @@
 "freed" = "Todellisuudessa vapautunut: %@";
 "deleteError" = "Kaikkea ei voitu poistaa: %@";
 "quitToDelete" = "Lopeta %@ komennolla ⌘Q, niin voit poistaa kopiot.";
-"openInExplorer" = "Avaa Tallennustilan tutkijassa";
+"openInExplorer" = "Näytä Kansioissa";
 "deleteAll" = "Poista kaikki kopiot …";
 "deleteTitle" = "Poistetaanko %@ kopiota kohteesta %@?";
 "deleteForever" = "Poista pysyvästi";

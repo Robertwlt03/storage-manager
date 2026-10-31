@@ -18,7 +18,9 @@ struct SettingsView: View {
             Text(TextKey.settingsSystemNote.translated).textRole(.hint)
         }
         .formStyle(.grouped)
-        .frame(width: Layout.settingsWidth, height: Layout.settingsHeight)
+        .frame(width: Layout.settingsWidth)
+        // As tall as its rows, the restart row included, so no empty band stays below them.
+        .fixedSize(horizontal: false, vertical: true)
         .appLocale()
     }
 

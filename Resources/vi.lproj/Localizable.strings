@@ -119,7 +119,7 @@
 "freed" = "Dung lượng thực sự được giải phóng: %@";
 "deleteError" = "Không thể xóa hết: %@";
 "quitToDelete" = "Thoát %@ bằng ⌘Q để xóa.";
-"openInExplorer" = "Mở trong Thư mục";
+"openInExplorer" = "Hiện trong Thư mục";
 "deleteAll" = "Xóa tất cả bản sao…";
 "deleteTitle" = "Xóa %@ bản sao của %@?";
 "deleteForever" = "Xóa vĩnh viễn";

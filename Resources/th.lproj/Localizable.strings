@@ -119,7 +119,7 @@
 "freed" = "พื้นที่ที่ได้คืนจริง: %@";
 "deleteError" = "ลบได้ไม่ทั้งหมด: %@";
 "quitToDelete" = "ปิด %@ ด้วย ⌘Q เพื่อลบ";
-"openInExplorer" = "เปิดในโฟลเดอร์";
+"openInExplorer" = "แสดงในโฟลเดอร์";
 "deleteAll" = "ลบสำเนาทั้งหมด…";
 "deleteTitle" = "ลบสำเนา %@ รายการของ %@ ใช่ไหม";
 "deleteForever" = "ลบอย่างถาวร";

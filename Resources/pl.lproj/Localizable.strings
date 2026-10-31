@@ -119,7 +119,7 @@
 "freed" = "Faktycznie zwolniono: %@";
 "deleteError" = "Nie wszystko udało się usunąć: %@";
 "quitToDelete" = "Zamknij %@ za pomocą ⌘Q, aby móc usunąć.";
-"openInExplorer" = "Otwórz w Eksploratorze pamięci";
+"openInExplorer" = "Pokaż w Folderach";
 "deleteAll" = "Usuń wszystkie kopie …";
 "deleteTitle" = "Usunąć %@ kopii aplikacji %@?";
 "deleteForever" = "Usuń na stałe";
