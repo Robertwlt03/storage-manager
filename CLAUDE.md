@@ -73,7 +73,8 @@ changing code; do not repeat their content here or in comments.
 2. Code Inspect: review exactly what the commit will contain (the staged diff, or the working tree when nothing is
    staged yet) for bugs, reuse, simplification and the rules here. Use the `/code-review` skill if this session has it
    (see "Skills and helpers"); otherwise review the diff yourself along the same lines. Fix what it finds or say why a
-   finding is wrong, then run `make check` again.
+   finding is wrong, then run `make check` again. Repeat the review (and `/ponytail-review`, if installed) until a
+   round finds nothing real; what you leave on purpose goes, with its reason, into the pull request.
 3. Commit on the task's own branch, never on `main` (see "GitHub"). Name every file (`git add <files>`, never
    `git add -u` or `-A`), so nothing the person is trying out slips in. Messages follow Conventional Commits in
    English. Do not push.
@@ -95,7 +96,11 @@ changing code; do not repeat their content here or in comments.
    before deleting.
 4. New logic gets a test in `Tests/StorageManagerTests` (hand-built `Node` trees via `TestTree`, never the real
    disk). Each logic folder has a coverage minimum that may only rise.
-5. When views changed, check the look in your own test window (see "Testing safely").
+5. The scanned tree (`Node`) belongs to the main actor: read it there and hand background work finished values,
+   because a new scan can empty the tree at any moment. `AppModel.swift` stays under SwiftLint's 400 lines: parts
+   that only read or only navigate go into extensions such as `AppModel+Figures.swift`. A type the app stores in its
+   settings (as JSON) must still read what an earlier version saved, or say in the pull request what is lost once.
+6. When views changed, check the look in your own test window (see "Testing safely").
 
 Design goals: native Apple look (HIG, Liquid Glass), gentle and minimal animations as feedback only, no start
 animation, energy-saving behavior (nothing animates or polls at rest), text contrast at least 4.5:1 in light and dark
@@ -140,6 +145,14 @@ mode.
   temporary line ending in `// DBG` that performs it when an environment variable is set, start the copy with
   `open -n --env DBG_QUIT=1 --stderr <scratchpad>/err.txt <app>`, read the result with `pgrep`, then remove the line
   (`make check` fails while one is left). Quit only your copy, by its scratchpad path.
+- **States behind a click:** open sheets, popovers, empty pages and menus with such a `// DBG` line instead of a click
+  or keystroke; a menu opens inside your window with `NSMenu.popUp(positioning:at:in:)` and can then be captured.
+  The menu bar item and its menu are drawn by macOS outside the app and refuse every capture: ask the person to look
+  at them in light and dark appearance and say so in the pull request.
+- **Traces of test copies:** a launched copy registers its widget with macOS; unregister it afterwards with
+  `pluginkit -r "<scratchpad>/…/Storage Manager.app/Contents/PlugIns/StorageWidget.appex"`, so the person's widget
+  gallery shows only their app. A copy also keeps its settings between launches; a value one test stored (for
+  example a switch set by a launch argument) is reset with `defaults delete <its bundle identifier> <key>`.
 - **Tool scripts:** copy the project into the scratchpad (`rsync -a --exclude .build --exclude /build --exclude /dist
   --exclude local.mk <project>/ <scratchpad>/copy/`) and run `make release SIGN_IDENTITY=-` or the pre-push hook there,
   never in the project. Hand the hook git's input on stdin, and start it with the oldest `python3` it must survive
@@ -156,6 +169,10 @@ mode.
   `swift test` or builds in the project at the same time (builds collide in `.build/`); a helper that must compile
   uses its own build folder (`swift build --build-path <scratchpad>/…`). The session that started them merges the
   results, applies renames that cross areas, and runs everything once at the end.
+- Helpers that each build a whole branch work in a git worktree of their own
+  (`git worktree add ../storage-manager-wt/<branch> -b <branch> origin/main`) with their own scratchpad folder and
+  test-copy bundle identifier, so builds and windows never collide. Each one reports the files it touched that other
+  branches touch too; the starting session plans the merge order from that and rebases the later branches.
 
 ## <img src="assets/icons/claude-github.svg" height="33" align="absmiddle" alt="">GitHub
 
@@ -188,7 +205,11 @@ mode.
 - Pull request descriptions follow `.github/PULL_REQUEST_TEMPLATE.md`: its banner, every section with its
   icon filled in (none left with only its hint, the screenshots removed when nothing is visible), the footer, and the
   attribution line last. `gh pr create` does not fill the template by itself, so start from a copy and pass it with
-  `--body-file`. Its pictures use full addresses on `main`, because a description cannot load files by path.
+  `--body-file`. Its pictures use full addresses on `main`, because a description cannot load files by path. Tick
+  a checkbox only when its task is really done; what could not be checked (a tooltip, a real key press) is said
+  plainly in the text instead.
+- Give every `gh` command the repository (`gh pr edit 20 -R Robertwlt03/storage-manager …`): a shell that starts in
+  another checkout would otherwise change a pull request of that other repository.
 - Every action is pinned to a commit with its version in a comment; pick a release that has been out for a while.
 - `make hooks` (the person's choice) runs `make check` before every push. The hook starts with any `python3`, then
   hands over to the Python 3.13 or newer that make finds.
