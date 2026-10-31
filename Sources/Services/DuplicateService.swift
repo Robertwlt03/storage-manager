@@ -14,7 +14,7 @@ nonisolated enum DuplicateService {
 
     /// Files of equal size, the biggest size first; only these can be duplicates.
     static func sameSizeGroups(_ files: [Entry]) -> [[Entry]] {
-        let candidates = files.filter { file in file.bytes >= smallestBytes && file.path != nil }
+        let candidates = files.filter { file in file.bytes >= smallestBytes }
         return Dictionary(grouping: candidates, by: \.bytes).values
             .filter { group in group.count > 1 }
             .sorted { first, second in first[0].bytes > second[0].bytes }

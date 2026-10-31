@@ -17,17 +17,15 @@ enum ReportService {
             TextKey.reportTitle.translated(with: Format.dateTime(input.date)), "", input.summary,
         ]
         lines += ["", TextKey.categories.translated]
+        // The size first and a tab after it, so the lines also paste into a spreadsheet.
         lines += input.categories.map { category in
-            row(Format.bytes(category.bytes), category.kind.title.translated)
+            "\(Format.bytes(category.bytes))\t\(category.kind.title.translated)"
         }
         lines += ["", TextKey.paneLargeFiles.translated]
         lines += input.largeFiles.prefix(listedFiles)
             .map { file in
-                row(Format.bytes(file.bytes), Paths.displayName(file.path ?? file.name))
+                "\(Format.bytes(file.bytes))\t\(Paths.displayName(file.path ?? file.name))"
             }
         return lines.joined(separator: "\n") + "\n"
     }
-
-    /// The size first and a tab after it, so the lines also paste into a spreadsheet.
-    private static func row(_ size: String, _ name: String) -> String { size + "\t" + name }
 }
