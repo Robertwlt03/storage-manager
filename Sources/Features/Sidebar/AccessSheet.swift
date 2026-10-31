@@ -34,7 +34,10 @@ struct AccessSheet: View {
         HStack {
             UI.ActionButton(TextKey.accessContinue.translated) { model.finishAccessSheet() }
             Spacer()
-            UI.ActionButton(TextKey.accessOpenSettings.translated, .primary) {
+            // Once System Settings were visited, the restart is the one prominent step left.
+            UI.ActionButton(
+                TextKey.accessOpenSettings.translated, hasVisitedSettings ? .normal : .primary
+            ) {
                 hasVisitedSettings = true
                 FinderService.openFullDiskAccessSettings()
             }
@@ -44,7 +47,7 @@ struct AccessSheet: View {
     }
 
     private var restartButton: some View {
-        UI.ActionButton(TextKey.accessRestart.translated, .confirm) {
+        UI.ActionButton(TextKey.accessRestart.translated, .primary) {
             LifecycleService.relaunch()
         }
         .keyboardShortcut(.defaultAction)

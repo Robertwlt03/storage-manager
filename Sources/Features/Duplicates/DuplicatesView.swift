@@ -18,7 +18,11 @@ struct DuplicatesView: View {
             }
         }
         .navigationTitle(TextKey.paneDuplicates.translated)
-        .safeAreaInset(edge: .top, spacing: 0) { UI.PageHeader(Pane.duplicates.information) {} }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            UI.PageHeader(Pane.duplicates.information) {
+                LayoutSwitcher(pane: .duplicates)
+            }
+        }
         // Waits for a running scan; the search starts once the tree is complete.
         .task(id: model.isScanning ? nil : model.revision) { await model.findDuplicates() }
     }

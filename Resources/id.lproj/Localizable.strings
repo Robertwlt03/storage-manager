@@ -177,6 +177,7 @@
 "sectionTidy" = "Kosongkan Ruang";
 "layoutList" = "Daftar";
 "layoutGrid" = "Kisi";
+"layoutSwitch" = "Tampilan";
 "settings" = "Pengaturan";
 "emptyFolder" = "Folder ini kosong";
 "otherCategories" = "Lainnya";

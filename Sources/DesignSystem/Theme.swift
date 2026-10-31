@@ -24,9 +24,8 @@ enum Theme {
     static let warning = Tone(light: 0x984200, dark: 0xFFA552)
     static let bad = Tone(light: 0xB3141F, dark: 0xFF8C8C)
 
-    // Button fills with white text on top.
+    // The fill of primary buttons, with white text on top.
     static let primaryFill = Tone(light: 0x0A5BC4, dark: 0x1F6FD0)
-    static let confirmFill = Tone(light: 0x1B7332, dark: 0x1B7332)
 
     // The native window surface, which follows light and dark mode by itself.
     static let windowBackground = Color(nsColor: .windowBackgroundColor)

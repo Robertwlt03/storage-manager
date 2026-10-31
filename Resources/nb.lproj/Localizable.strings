@@ -177,6 +177,7 @@
 "sectionTidy" = "Frigjør plass";
 "layoutList" = "Liste";
 "layoutGrid" = "Rutenett";
+"layoutSwitch" = "Visning";
 "settings" = "Innstillinger";
 "emptyFolder" = "Denne mappen er tom";
 "otherCategories" = "Andre";

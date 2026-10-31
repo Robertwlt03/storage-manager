@@ -177,6 +177,7 @@
 "sectionTidy" = "เพิ่มพื้นที่ว่าง";
 "layoutList" = "รายการ";
 "layoutGrid" = "ตาราง";
+"layoutSwitch" = "มุมมอง";
 "settings" = "การตั้งค่า";
 "emptyFolder" = "โฟลเดอร์นี้ว่างเปล่า";
 "otherCategories" = "อื่นๆ";

@@ -93,7 +93,6 @@ nonisolated enum Symbols {
     static let list = "list.bullet"
     static let grid = "square.grid.2x2"
     static let files = "doc.on.doc"
-    static let speaker = "speaker.wave.2"
     static let summary = "text.bubble"
     static let sidebar = "sidebar.left"
     static let explorer = "folder"

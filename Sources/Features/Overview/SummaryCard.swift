@@ -34,15 +34,9 @@ struct SummaryCard: View {
     }
 
     private func readAloudButton(_ summary: String) -> some View {
-        Button {
-            speech.toggle(summary)
-        } label: {
-            Label(
-                speech.isSpeaking ? TextKey.stopReading.translated : TextKey.readAloud.translated,
-                systemImage: Symbols.speaker
-            )
-            .symbolEffect(.variableColor.iterative, isActive: speech.isSpeaking)
-        }
-        .appButton()
+        UI.ActionButton(
+            speech.isSpeaking ? TextKey.stopReading.translated : TextKey.readAloud.translated,
+            .inline
+        ) { speech.toggle(summary) }
     }
 }

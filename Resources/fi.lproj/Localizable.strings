@@ -177,6 +177,7 @@
 "sectionTidy" = "Vapauta tilaa";
 "layoutList" = "Luettelo";
 "layoutGrid" = "Ruudukko";
+"layoutSwitch" = "Näkymä";
 "settings" = "Asetukset";
 "emptyFolder" = "Tämä kansio on tyhjä";
 "otherCategories" = "Muut";

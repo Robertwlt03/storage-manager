@@ -177,6 +177,7 @@
 "sectionTidy" = "Απελευθέρωση χώρου";
 "layoutList" = "Λίστα";
 "layoutGrid" = "Πλέγμα";
+"layoutSwitch" = "Προβολή";
 "settings" = "Ρυθμίσεις";
 "emptyFolder" = "Αυτός ο φάκελος είναι κενός";
 "otherCategories" = "Άλλα";

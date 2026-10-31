@@ -177,6 +177,7 @@
 "sectionTidy" = "空き容量を増やす";
 "layoutList" = "リスト";
 "layoutGrid" = "グリッド";
+"layoutSwitch" = "表示方法";
 "settings" = "設定";
 "emptyFolder" = "このフォルダは空です";
 "otherCategories" = "その他";

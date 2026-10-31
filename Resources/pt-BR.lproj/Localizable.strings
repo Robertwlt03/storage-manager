@@ -177,6 +177,7 @@
 "sectionTidy" = "Liberar espaço";
 "layoutList" = "Lista";
 "layoutGrid" = "Grade";
+"layoutSwitch" = "Visualização";
 "settings" = "Ajustes";
 "emptyFolder" = "Esta pasta está vazia";
 "otherCategories" = "Outras";

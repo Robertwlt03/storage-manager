@@ -177,6 +177,7 @@
 "sectionTidy" = "공간 확보";
 "layoutList" = "목록";
 "layoutGrid" = "격자";
+"layoutSwitch" = "보기 방식";
 "settings" = "설정";
 "emptyFolder" = "이 폴더는 비어 있습니다";
 "otherCategories" = "기타";

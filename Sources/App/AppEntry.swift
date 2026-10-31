@@ -58,7 +58,7 @@ struct StorageManagerApp: App {
     }
 
     @CommandsBuilder private var menuCommands: some Commands {
-        LayoutCommands()
+        LayoutCommands(model: model)
         // The system item would use the jerky AppKit toggle.
         CommandGroup(replacing: .sidebar) {
             Button(
@@ -89,22 +89,38 @@ struct StorageManagerApp: App {
     }
 }
 
-/// "View" menu entries like Finder's: ⌘1 shows lists, ⌘2 shows tiles.
+/// "View" menu entries like Finder's, the same choices as the layout switch: ⌘1 shows lists, ⌘2
+/// tiles and ⌘3 rings, which only Folders has.
 private struct LayoutCommands: Commands {
+    /// Read here rather than in the app's body, so typing a search only redraws this menu.
+    let model: AppModel
     @AppStorage(SettingsKey.layoutMode) private var layoutMode = LayoutMode.list
+    @AppStorage(SettingsKey.showsRings) private var showsRings = false
 
     var body: some Commands {
+        // Search results replace the page and have list and tiles only.
+        let pane = model.isSearching ? nil : model.pane
+        let selection = PageLayout.selection(on: pane, $layoutMode, $showsRings)
         CommandGroup(before: .sidebar) {
-            ForEach(LayoutMode.allCases) { mode in
+            ForEach(PageLayout.allCases) { layout in
                 Toggle(
-                    mode.title.translated,
+                    layout.title.translated,
                     isOn: Binding(
-                        get: { layoutMode == mode },
-                        set: { isOn in if isOn { layoutMode = mode } })
+                        get: { selection.wrappedValue == layout },
+                        set: { isOn in if isOn { selection.wrappedValue = layout } })
                 )
-                .keyboardShortcut(mode == .list ? "1" : "2")
+                .keyboardShortcut(Self.shortcut(of: layout))
+                .disabled(layout == .rings && pane?.supportsRings != true)
             }
             Divider()
+        }
+    }
+
+    private static func shortcut(of layout: PageLayout) -> KeyEquivalent {
+        switch layout {
+        case .list: "1"
+        case .grid: "2"
+        case .rings: "3"
         }
     }
 }

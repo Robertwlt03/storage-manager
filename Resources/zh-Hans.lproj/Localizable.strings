@@ -177,6 +177,7 @@
 "sectionTidy" = "腾出空间";
 "layoutList" = "列表";
 "layoutGrid" = "网格";
+"layoutSwitch" = "显示方式";
 "settings" = "设置";
 "emptyFolder" = "此文件夹为空";
 "otherCategories" = "其他";

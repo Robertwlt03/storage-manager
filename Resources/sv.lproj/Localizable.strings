@@ -177,6 +177,7 @@
 "sectionTidy" = "Frigör utrymme";
 "layoutList" = "Lista";
 "layoutGrid" = "Rutnät";
+"layoutSwitch" = "Vy";
 "settings" = "Inställningar";
 "emptyFolder" = "Den här mappen är tom";
 "otherCategories" = "Övrigt";

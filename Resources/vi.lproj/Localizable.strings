@@ -177,6 +177,7 @@
 "sectionTidy" = "Giải phóng dung lượng";
 "layoutList" = "Danh sách";
 "layoutGrid" = "Lưới";
+"layoutSwitch" = "Kiểu xem";
 "settings" = "Cài đặt";
 "emptyFolder" = "Thư mục này trống";
 "otherCategories" = "Khác";

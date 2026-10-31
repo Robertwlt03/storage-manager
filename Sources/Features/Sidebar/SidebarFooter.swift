@@ -1,10 +1,9 @@
 import SwiftUI
 
 /// Bottom of the sidebar, always in the same place: a quiet scan status (details on click)
-/// and the app-wide controls – list or grid, rescan and settings.
+/// and the app-wide controls, rescan and settings.
 struct SidebarFooter: View {
     @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
     @State private var isShowingDetails = false
     /// Turns the rescan symbol once when a scan starts (button or ⌘R; not at launch).
     @State private var scanStartCount = 0
@@ -20,7 +19,6 @@ struct SidebarFooter: View {
             }
             Divider()
             HStack(spacing: Space.medium) {
-                layoutButton
                 Spacer()
                 rescanButton
                 SettingsLink { UI.Icon(.symbol(Symbols.settings), size: .small) }
@@ -41,22 +39,6 @@ struct SidebarFooter: View {
         .appButton(.content)
         .help(TextKey.scanDetails.translated)
         .popover(isPresented: $isShowingDetails, arrowEdge: .trailing) { ScanDetails() }
-    }
-
-    /// One quiet button like the two next to it; the symbol shows what a click switches to.
-    private var layoutButton: some View {
-        let switchTitle =
-            layout == .list ? TextKey.layoutGrid.translated : TextKey.layoutList.translated
-        return Button {
-            layout = layout == .list ? .grid : .list
-        } label: {
-            UI.Icon(.symbol(layout == .list ? Symbols.grid : Symbols.list), size: .small)
-                .contentTransition(.symbolEffect(.replace))
-        }
-        .appButton(.quiet)
-        .disabled(!(model.pane ?? .overview).supportsGrid || model.isSearching)
-        .help(switchTitle)
-        .accessibilityLabel(switchTitle)
     }
 
     private var rescanButton: some View {

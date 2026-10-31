@@ -177,6 +177,7 @@
 "sectionTidy" = "Frigør plads";
 "layoutList" = "Liste";
 "layoutGrid" = "Gitter";
+"layoutSwitch" = "Visning";
 "settings" = "Indstillinger";
 "emptyFolder" = "Denne mappe er tom";
 "otherCategories" = "Øvrige";

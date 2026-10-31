@@ -70,13 +70,11 @@ struct DesignTests {
         }
     }
 
-    @Test("White button text reaches 4.5:1 on every button fill")
+    @Test("White button text reaches 4.5:1 on the primary button fill")
     func buttonContrast() {
-        for (name, fill) in [("primary", Theme.primaryFill), ("confirm", Theme.confirmFill)] {
-            for color in [fill.light, fill.dark] {
-                let ratio = Contrast.ratio(Self.whiteText, color)
-                #expect(ratio >= Self.minimumContrast, "\(name) \(color): \(ratio)")
-            }
+        for color in [Theme.primaryFill.light, Theme.primaryFill.dark] {
+            let ratio = Contrast.ratio(Self.whiteText, color)
+            #expect(ratio >= Self.minimumContrast, "primary \(color): \(ratio)")
         }
     }
 

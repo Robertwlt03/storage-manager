@@ -177,6 +177,7 @@
 "sectionTidy" = "Free Up Space";
 "layoutList" = "List";
 "layoutGrid" = "Grid";
+"layoutSwitch" = "Layout";
 "settings" = "Settings";
 "emptyFolder" = "This folder is empty";
 "otherCategories" = "Other";
