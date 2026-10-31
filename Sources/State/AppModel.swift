@@ -53,33 +53,6 @@ import WidgetKit
     private var appsRefreshID = UUID()
     private var cleanItemsRefreshID = UUID()
 
-    /// Animated by SwiftUI, not AppKit (see ARCHITECTURE.md).
-    func toggleSidebar() {
-        withAnimation(Motion.standard) { sidebar.toggle() }
-    }
-
-    func closeSidebarOverlay() {
-        guard sidebar.isFloating else { return }
-        withAnimation(Motion.standard) { sidebar.closeFloating() }
-    }
-
-    private var mainWindow: NSWindow? {
-        NSApp.windows.first { window in window.identifier?.rawValue == WindowID.main }
-    }
-
-    /// Reads the width from the window, because SwiftUI's width jumps across the limit for a
-    /// moment while the window moves (see ARCHITECTURE.md).
-    func windowResized() {
-        guard let width = mainWindow?.frame.width else { return }
-        sidebar.measure(windowWidth: width)
-        withAnimation(Motion.quick) { sidebar.fitToWindow() }
-    }
-
-    func endSearch() {
-        searchText = ""
-        isSearchPresented = false
-    }
-
     // MARK: Launch
 
     /// Asks for Full Disk Access on every launch until it works (one switch instead of many
@@ -304,14 +277,6 @@ extension AppModel {
     }
 
     /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
-    func activate(_ entry: Entry) {
-        if let node = entry.node {
-            open(node)
-        } else if let path = entry.path {
-            FinderService.reveal(path)
-        }
-    }
-
     func moveToTrash(_ app: AppUsage) throws {
         guard !isDemo else { return }
         try AppUsageService.moveToTrash(app)
@@ -351,12 +316,6 @@ extension AppModel {
     /// Only a real change reaches the views; every assignment would redraw them.
     private func show(_ found: [VolumeInformation]) {
         if found != volumes { volumes = found }
-    }
-
-    func open(_ node: Node) {
-        explorerPath = node.nodesFromRoot
-        endSearch()  // opening a result leaves the search, even when the explorer is already shown
-        pane = .explorer
     }
 
     /// Deletes all copies of one app and returns how much free space really grew.
