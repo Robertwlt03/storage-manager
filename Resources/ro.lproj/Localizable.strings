@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Scanează automat la pornire";
+"rings" = "Inele";
 "extraFolders" = "Dosare suplimentare";
 "none" = "Niciunul";
 "add" = "Adaugă";

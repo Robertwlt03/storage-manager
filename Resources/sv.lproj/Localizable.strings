@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Mät automatiskt vid start";
+"rings" = "Ringar";
 "extraFolders" = "Ytterligare mappar";
 "none" = "Inga";
 "add" = "Lägg till";

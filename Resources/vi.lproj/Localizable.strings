@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Tự động quét khi mở";
+"rings" = "Vòng";
 "extraFolders" = "Thư mục bổ sung";
 "none" = "Không có";
 "add" = "Thêm";

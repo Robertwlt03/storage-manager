@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Beim Start automatisch messen";
+"rings" = "Ringe";
 "extraFolders" = "Zusätzliche Ordner";
 "none" = "Keine";
 "add" = "Hinzufügen";

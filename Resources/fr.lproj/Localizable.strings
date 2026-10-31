@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Analyser automatiquement au lancement";
+"rings" = "Anneaux";
 "extraFolders" = "Dossiers supplémentaires";
 "none" = "Aucun";
 "add" = "Ajouter";

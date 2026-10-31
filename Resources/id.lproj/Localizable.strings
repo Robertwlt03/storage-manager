@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Pindai otomatis saat dibuka";
+"rings" = "Cincin";
 "extraFolders" = "Folder Tambahan";
 "none" = "Tidak Ada";
 "add" = "Tambah";

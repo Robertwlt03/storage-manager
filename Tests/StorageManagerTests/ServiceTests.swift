@@ -78,6 +78,36 @@ struct ServiceTests {
         #expect(ScanService.withoutDuplicatesOrNesting(folders) == ["/a", "/c", "/ab"])
     }
 
+    @Test("Rings share the circle by size, keep their branch, stop after the last ring")
+    func sunburst() throws {
+        let root = Node.virtualRoot()
+        let unit = TestTree.big
+        TestTree.folder("/a", in: root, fileBytes: 0) { area in
+            TestTree.folder("one", in: area, fileBytes: unit * 3) { one in
+                TestTree.chain(["two", "three", "four"], in: one, fileBytes: unit)
+            }
+        }
+        TestTree.folder("/b", in: root, fileBytes: unit * 6)
+        let segments = SunburstService.segments(of: root)
+        let byName = Dictionary(
+            uniqueKeysWithValues: segments.map { segment in (segment.node.name, segment) })
+        #expect(segments.count == 4)  // two areas and two rings below /a; "three" is too deep
+        let first = try #require(byName["/a"])
+        #expect(first.start == 0 && abs(first.end - 0.5) < 1e-9)
+        let one = try #require(byName["one"])
+        #expect(one.ring == 1 && one.branch == first.branch)
+        #expect(byName["/b"]?.branch != first.branch)
+        #expect(byName["two"]?.ring == 2 && byName["three"] == nil)
+        let middleOfFirst = SunburstService.innerRadius(ofRing: 0) + SunburstService.ringWidth / 2
+        #expect(
+            SunburstService.segment(atRadius: middleOfFirst, turn: 0.25, in: segments)?.id == "/a")
+        #expect(
+            SunburstService.segment(atRadius: middleOfFirst, turn: 0.75, in: segments)?.id == "/b")
+        #expect(
+            SunburstService.segment(
+                atRadius: SunburstService.holeShare / 2, turn: 0.25, in: segments) == nil)
+    }
+
     @Test("Unused apps are those not opened for the chosen days, the longest unused first")
     func unusedApps() {
         let now = Date()

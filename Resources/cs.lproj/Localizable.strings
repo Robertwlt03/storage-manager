@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Skenovat automaticky při spuštění";
+"rings" = "Prstence";
 "extraFolders" = "Další složky";
 "none" = "Žádné";
 "add" = "Přidat";

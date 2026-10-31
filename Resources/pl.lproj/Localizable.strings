@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Mierz automatycznie przy uruchomieniu";
+"rings" = "Pierścienie";
 "extraFolders" = "Dodatkowe foldery";
 "none" = "Brak";
 "add" = "Dodaj";

@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Açılışta otomatik tara";
+"rings" = "Halkalar";
 "extraFolders" = "Ek Klasörler";
 "none" = "Yok";
 "add" = "Ekle";

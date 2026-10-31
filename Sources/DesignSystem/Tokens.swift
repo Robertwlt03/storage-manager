@@ -101,6 +101,7 @@ nonisolated enum Symbols {
     static let largeFiles = "doc.viewfinder"
     static let temporaryArea = "hourglass"
     static let copies = "checkmark.seal"
+    static let rings = "circle.circle"
     static let internalDrive = "internaldrive"
     static let externalDrive = "externaldrive"
     static let volumeGone = "externaldrive.badge.xmark"

@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Automatisch scannen bij het openen";
+"rings" = "Ringen";
 "extraFolders" = "Extra mappen";
 "none" = "Geen";
 "add" = "Voeg toe";

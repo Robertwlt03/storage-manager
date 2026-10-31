@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Automatikus vizsgálat indításkor";
+"rings" = "Gyűrűk";
 "extraFolders" = "További mappák";
 "none" = "Nincs";
 "add" = "Hozzáadás";

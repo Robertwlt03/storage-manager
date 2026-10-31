@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Analizza automaticamente all’avvio";
+"rings" = "Anelli";
 "extraFolders" = "Cartelle aggiuntive";
 "none" = "Nessuna";
 "add" = "Aggiungi";

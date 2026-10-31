@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Analisar automaticamente ao abrir";
+"rings" = "Anéis";
 "extraFolders" = "Pastas adicionais";
 "none" = "Nenhuma";
 "add" = "Adicionar";

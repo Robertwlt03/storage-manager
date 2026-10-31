@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "啟動時自動掃描";
+"rings" = "圓環";
 "extraFolders" = "其他檔案夾";
 "none" = "無";
 "add" = "加入";

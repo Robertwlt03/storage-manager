@@ -8,6 +8,7 @@ enum SettingsKey {
     static let largeFileMegabytes = "largeFileMB"
     static let unusedDays = "unusedDays"
     static let layoutMode = "layoutMode"
+    static let showsRings = "showsRings"  // the Folders page as rings instead of a table
     static let lastScanFiles = "lastScanFiles"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let opensSettingsAtLaunch = "openSettings"  // `open … --args -openSettings YES`

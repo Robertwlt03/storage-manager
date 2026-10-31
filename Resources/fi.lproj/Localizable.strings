@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Mittaa automaattisesti käynnistyksessä";
+"rings" = "Renkaat";
 "extraFolders" = "Lisäkansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";

@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Scan automatically at launch";
+"rings" = "Rings";
 "extraFolders" = "Additional Folders";
 "none" = "None";
 "add" = "Add";

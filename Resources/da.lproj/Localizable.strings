@@ -158,6 +158,7 @@
 
 /* Settings */
 "autoScan" = "Mål automatisk ved start";
+"rings" = "Ringe";
 "extraFolders" = "Yderligere mapper";
 "none" = "Ingen";
 "add" = "Tilføj";
