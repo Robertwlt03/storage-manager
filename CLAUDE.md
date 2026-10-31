@@ -74,8 +74,9 @@ changing code; do not repeat their content here or in comments.
    staged yet) for bugs, reuse, simplification and the rules here. Use the `/code-review` skill if this session has it
    (see "Skills and helpers"); otherwise review the diff yourself along the same lines. Fix what it finds or say why a
    finding is wrong, then run `make check` again.
-3. Commit on the current branch, naming every file (`git add <files>`, never `git add -u` or `-A`), so nothing the
-   person is trying out slips in. Messages follow Conventional Commits in English. Do not push.
+3. Commit on the task's own branch, never on `main` (see "GitHub"). Name every file (`git add <files>`, never
+   `git add -u` or `-A`), so nothing the person is trying out slips in. Messages follow Conventional Commits in
+   English. Do not push.
 4. Run `make check` once more after committing: it checks a commit message only once the commit exists, so a word it
    does not accept is fixed with `git commit --amend` before anyone pushes.
 
@@ -159,8 +160,14 @@ mode.
 ## <img src="assets/icons/claude-github.svg" height="33" align="absmiddle" alt="">GitHub
 
 - The workflow runs on GitHub's own Mac image for macOS 27 and Xcode 27 (`runs-on: xcode-27`): a fresh Mac per run,
-  thrown away afterwards, so pull requests from forks are checked too. GitHub names its Mac images after the Xcode
-  version (`xcode-27`), not only after macOS (`macos-15`).
+  thrown away afterwards, so pull requests from forks are checked too, once the owner approves the run. GitHub names
+  its Mac images after the Xcode version (`xcode-27`), not only after macOS (`macos-15`).
+- `main` is protected by a ruleset without exceptions: every change, the maintainer's too, comes in through a pull
+  request whose `checks` are green, merged with a merge commit (no squash). Start each task on a new branch from an
+  up-to-date `main`; after the merge, delete the branch on GitHub and locally (`git branch -d`, `git fetch --prune`)
+  and pull `main`. CONTRIBUTING.md shows the steps.
+- Branch names follow CONTRIBUTING.md (`1239-scan-cancel`, or `readme-typo` without an issue). When a task has no
+  issue, suggest opening one that describes the problem or wish.
 - Every action is pinned to a commit with its version in a comment; pick a release that has been out for a while.
 - `make hooks` (the person's choice) runs `make check` before every push. The hook starts with any `python3`, then
   hands over to the Python 3.13 or newer that make finds.
