@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "dużych plików od %@";
 "bucketValue" = "%@
 %@ plików";
-"settingsSystemNote" = "Wygląd, język i jednostki aplikacja przejmuje z Ustawień systemowych. Osobny język dla tej aplikacji ustawisz tam w sekcji Ogólne › Język i region › Aplikacje.";
+"settingsSystemNote" = "Wygląd i jednostki pochodzą z Ustawień systemowych.";
+"appLanguage" = "Język";
+"languageLikeMac" = "Taki jak na Macu";
+"languageRestartHint" = "Nowy język pojawi się po ponownym uruchomieniu.";

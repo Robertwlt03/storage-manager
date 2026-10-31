@@ -73,9 +73,8 @@ them.
 
 Every page has an info button at the top right that explains what the page is for. The app speaks 20 languages,
 including German, English, French, Spanish, Japanese and Chinese, and follows the language of your Mac. If you want
-to use the app in a different language, set it in System Settings under General, Language & Region and then
-Applications. It also takes the light or dark appearance from your Mac, and it uses Liquid Glass. New content appears
-with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
+to use the app in a different language, pick it in the app's settings; it shows after a restart. It also takes
+the light or dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
 
 ## <img src="assets/icons/install.svg" height="33" align="absmiddle" alt="">Installing
 

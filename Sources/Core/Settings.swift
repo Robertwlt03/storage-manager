@@ -19,6 +19,8 @@ enum SettingsKey {
     static let uiTestReportFolder = "uiTest"
     /// `open … --args -appearance dark` (or `light`) overrides System Settings, for snapshots.
     static let launchAppearance = "appearance"
+    /// macOS's own key for an app's languages, which its per-app language setting writes too.
+    nonisolated static let appLanguages = "AppleLanguages"
 }
 
 enum AppSettings {
@@ -66,8 +68,8 @@ enum AppSettings {
 }
 
 /// Languages the app ships; the raw value is the name of the `.lproj` folder. Which one is used
-/// comes from macOS, which also allows a language per app (System Settings › General › Language &
-/// Region › Applications).
+/// comes from macOS, unless one is picked in the app's settings (the same as macOS's language per
+/// app under System Settings › General › Language & Region › Applications).
 nonisolated enum AppLanguage: String, CaseIterable {
     case german = "de"
     case english = "en"
@@ -91,6 +93,38 @@ nonisolated enum AppLanguage: String, CaseIterable {
     case traditionalChinese = "zh-Hant"
 
     static let fallback = AppLanguage.english
+
+    /// The language picked in the app's settings, nil while it follows the Mac. Only the app's own
+    /// settings count, as the Mac's languages stand under the same key in the global ones.
+    static var chosen: AppLanguage? {
+        let ownSettings = UserDefaults.standard.persistentDomain(
+            forName: Bundle.main.bundleIdentifier ?? "")
+        let languages = ownSettings?[SettingsKey.appLanguages] as? [String]
+        return languages?.first.flatMap(match)
+    }
+
+    /// Takes effect at the next launch, as macOS reads the languages once when the app starts.
+    static func choose(_ language: AppLanguage?) {
+        if let language {
+            UserDefaults.standard.set([language.rawValue], forKey: SettingsKey.appLanguages)
+        } else {
+            UserDefaults.standard.removeObject(forKey: SettingsKey.appLanguages)
+        }
+    }
+
+    /// The language's name in itself, such as "Deutsch" or "日本語", so everyone finds their own.
+    var nativeName: String {
+        let locale = Locale(identifier: rawValue)
+        let name = locale.localizedString(forIdentifier: rawValue) ?? rawValue
+        return name.prefix(1).uppercased(with: locale) + name.dropFirst()
+    }
+
+    /// Every language, sorted by its own name.
+    static var byNativeName: [AppLanguage] {
+        allCases.sorted { left, right in
+            left.nativeName.localizedStandardCompare(right.nativeName) == .orderedAscending
+        }
+    }
 
     /// The first preferred system language the app supports.
     static var current: AppLanguage {

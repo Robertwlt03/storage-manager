@@ -21,15 +21,21 @@ extension UI {
         var body: some View { Button(title, role: role, action: action).appButton(kind) }
     }
 
-    /// A menu that shows its current choice next to its name.
+    /// A menu that shows its current choice next to its name. On a page it keeps the width of its
+    /// content; in a form (`inForm`) the form places it at the row's right edge.
     struct MenuPicker<Value: Hashable, Items: View>: View {
         let title: TextKey
         @Binding var selection: Value
+        var inForm = false
         @ViewBuilder let items: Items
 
-        init(_ title: TextKey, selection: Binding<Value>, @ViewBuilder _ items: () -> Items) {
+        init(
+            _ title: TextKey, selection: Binding<Value>, inForm: Bool = false,
+            @ViewBuilder _ items: () -> Items
+        ) {
             self.title = title
             _selection = selection
+            self.inForm = inForm
             self.items = items()
         }
 
@@ -40,7 +46,7 @@ extension UI {
                 Text(title.translated)
             }
             .pickerStyle(.menu)
-            .fixedSize()
+            .fixedSize(horizontal: !inForm, vertical: !inForm)
         }
     }
 

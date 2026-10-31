@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "velké soubory od %@";
 "bucketValue" = "%@
 Souborů: %@";
-"settingsSystemNote" = "Vzhled, jazyk a jednotky aplikace přebírá z Nastavení systému. Vlastní jazyk pro tuto aplikaci tam nastavíte v části Obecné › Jazyk a region › Aplikace.";
+"settingsSystemNote" = "Vzhled a jednotky přebírá aplikace z Nastavení systému.";
+"appLanguage" = "Jazyk";
+"languageLikeMac" = "Stejný jako na Macu";
+"languageRestartHint" = "Nový jazyk se zobrazí po restartu.";

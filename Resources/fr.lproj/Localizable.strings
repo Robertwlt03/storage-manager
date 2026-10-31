@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "fichiers volumineux à partir de %@";
 "bucketValue" = "%@
 %@ fichiers";
-"settingsSystemNote" = "L’apparence, la langue et les unités proviennent de Réglages Système. Une langue distincte pour cette app se définit dans Général › Langue et région › Applications.";
+"settingsSystemNote" = "L’apparence et les unités viennent des Réglages Système.";
+"appLanguage" = "Langue";
+"languageLikeMac" = "Comme sur le Mac";
+"languageRestartHint" = "La nouvelle langue s’affiche après un redémarrage.";

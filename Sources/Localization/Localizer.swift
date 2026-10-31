@@ -5,6 +5,8 @@ nonisolated final class Localizer: Sendable {
     static let shared = Localizer()
 
     let locale: Locale
+    /// The language picked in the settings at launch; a different choice needs a restart.
+    let chosenAtLaunch = AppLanguage.chosen
     private let bundle: Bundle
 
     private init() {

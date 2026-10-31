@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "%@ 以上的大型檔案";
 "bucketValue" = "%@
 %@ 個檔案";
-"settingsSystemNote" = "外觀、語言和單位由「系統設定」決定。你可以在「系統設定」的「一般 › 語言與地區 › 應用程式」中，為本 App 單獨設定語言。";
+"settingsSystemNote" = "外觀和單位來自「系統設定」。";
+"appLanguage" = "語言";
+"languageLikeMac" = "與 Mac 相同";
+"languageRestartHint" = "新語言會在重新啟動後顯示。";

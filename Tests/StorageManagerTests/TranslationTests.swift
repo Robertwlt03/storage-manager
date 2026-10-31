@@ -59,6 +59,18 @@ struct TranslationTests {
         #expect(AppLanguage.match(systemLanguage) == shipped)
     }
 
+    @Test("The language menu names every language in itself, sorted by that name")
+    func nativeNames() {
+        #expect(AppLanguage.german.nativeName == "Deutsch")
+        #expect(AppLanguage.japanese.nativeName == "日本語")
+        let names = AppLanguage.byNativeName.map(\.nativeName)
+        #expect(Set(names).count == AppLanguage.allCases.count)
+        let sorted = names.sorted { left, right in
+            left.localizedStandardCompare(right) == .orderedAscending
+        }
+        #expect(names == sorted)
+    }
+
     @Test("An unknown language falls back to none, so English takes over")
     func unknownLanguage() {
         #expect(AppLanguage.match("xx") == nil)

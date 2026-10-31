@@ -1,14 +1,16 @@
 import SwiftUI
 
-/// Only what macOS does not already cover: appearance, language and units come from System
-/// Settings.
+/// Only what macOS does not already cover: appearance and units come from System Settings. The
+/// language can follow the Mac or be picked here.
 struct SettingsView: View {
     @AppStorage(SettingsKey.scansAutomatically) private var scansAtLaunch = true
     @AppStorage(SettingsKey.extraFolders) private var extraFolders = ""
     @State private var selectedFolder: String?
+    @State private var language = AppLanguage.chosen
 
     var body: some View {
         Form {
+            languagePicker
             Toggle(TextKey.autoScan.translated, isOn: $scansAtLaunch)
             LabeledContent(TextKey.extraFolders.translated) {
                 folderEditor(AppSettings.folders(from: extraFolders))
@@ -18,6 +20,23 @@ struct SettingsView: View {
         .formStyle(.grouped)
         .frame(width: Layout.settingsWidth, height: Layout.settingsHeight)
         .appLocale()
+    }
+
+    @ViewBuilder private var languagePicker: some View {
+        UI.MenuPicker(.appLanguage, selection: $language, inForm: true) {
+            Text(TextKey.languageLikeMac.translated).tag(AppLanguage?.none)
+            ForEach(AppLanguage.byNativeName, id: \.self) { choice in
+                Text(choice.nativeName).tag(AppLanguage?.some(choice))
+            }
+        }
+        .onChange(of: language) { AppLanguage.choose(language) }
+        if language != Localizer.shared.chosenAtLaunch {
+            HStack {
+                Text(TextKey.languageRestartHint.translated).textRole(.hint)
+                Spacer()
+                UI.ActionButton(TextKey.accessRestart.translated) { LifecycleService.relaunch() }
+            }
+        }
     }
 
     private func folderEditor(_ folders: [String]) -> some View {

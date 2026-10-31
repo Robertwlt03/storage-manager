@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
 "bucketValue" = "%@
 %@ tiedostoa";
-"settingsSystemNote" = "Ulkoasu, kieli ja yksiköt tulevat Järjestelmäasetuksista. Tämän apin oman kielen voit asettaa siellä kohdassa Yleiset › Kieli ja alue › Apit.";
+"settingsSystemNote" = "Ulkoasu ja yksiköt tulevat Järjestelmäasetuksista.";
+"appLanguage" = "Kieli";
+"languageLikeMac" = "Sama kuin Macissa";
+"languageRestartHint" = "Uusi kieli näkyy uudelleenkäynnistyksen jälkeen.";
