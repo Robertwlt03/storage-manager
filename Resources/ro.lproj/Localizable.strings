@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Scanează automat la pornire";
 "extraFolders" = "Dosare suplimentare";
+"showInMenuBar" = "Afișează spațiul liber în bara de meniu";
+"openApp" = "Deschide %@";
 "none" = "Niciunul";
 "add" = "Adaugă";
 "remove" = "Elimină";

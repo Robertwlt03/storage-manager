@@ -37,6 +37,7 @@ enum AppEntry {
 struct StorageManagerApp: App {
     @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
     @State private var model = AppModel()
+    @AppStorage(SettingsKey.showsMenuBarItem) private var showsMenuBarItem = true
 
     var body: some Scene {
         Window(TextKey.appName.translated, id: WindowID.main) {
@@ -48,6 +49,12 @@ struct StorageManagerApp: App {
         Settings {
             SettingsView().environment(model)
         }
+        MenuBarExtra(isInserted: $showsMenuBarItem) {
+            MenuBarMenu().environment(model)
+        } label: {
+            MenuBarLabel().environment(model)
+        }
+        .menuBarExtraStyle(.menu)
     }
 
     @CommandsBuilder private var menuCommands: some Commands {
@@ -110,6 +117,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 self, andSelector: #selector(quit(_:withReply:)),
                 forEventClass: AEEventClass(kCoreEventClass),
                 andEventID: AEEventID(kAEQuitApplication))
+    }
+
+    /// With the menu bar item the app stays open without a window, like other menu bar apps.
+    func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool {
+        !AppSettings.showsMenuBarItem
     }
 
     @objc private func quit(_: NSAppleEventDescriptor, withReply _: NSAppleEventDescriptor) {

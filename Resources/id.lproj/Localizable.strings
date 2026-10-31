@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Pindai otomatis saat dibuka";
 "extraFolders" = "Folder Tambahan";
+"showInMenuBar" = "Tampilkan ruang kosong di bar menu";
+"openApp" = "Buka %@";
 "none" = "Tidak Ada";
 "add" = "Tambah";
 "remove" = "Hapus";

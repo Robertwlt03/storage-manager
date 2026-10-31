@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "啟動時自動掃描";
 "extraFolders" = "其他檔案夾";
+"showInMenuBar" = "在選單列中顯示可用空間";
+"openApp" = "打開 %@";
 "none" = "無";
 "add" = "加入";
 "remove" = "移除";

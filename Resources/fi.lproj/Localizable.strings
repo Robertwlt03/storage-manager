@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Mittaa automaattisesti käynnistyksessä";
 "extraFolders" = "Lisäkansiot";
+"showInMenuBar" = "Näytä vapaa tila valikkorivillä";
+"openApp" = "Avaa %@";
 "none" = "Ei mitään";
 "add" = "Lisää";
 "remove" = "Poista";

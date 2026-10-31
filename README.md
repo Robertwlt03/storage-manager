@@ -75,6 +75,9 @@ Every page has an info button at the top right that explains what the page is fo
 dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have
 turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
 
+The menu bar shows how much space is available on your Mac, even with the window closed, and its menu opens the
+app or starts a new scan. You can turn it off in the settings.
+
 ## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Languages
 
 The app speaks 28 languages and follows the language of your Mac. To use it in a different one, pick it in the

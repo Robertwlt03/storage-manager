@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Analizza automaticamente all’avvio";
 "extraFolders" = "Cartelle aggiuntive";
+"showInMenuBar" = "Mostra lo spazio libero nella barra dei menu";
+"openApp" = "Apri %@";
 "none" = "Nessuna";
 "add" = "Aggiungi";
 "remove" = "Rimuovi";

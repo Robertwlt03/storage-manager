@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Automatikus vizsgálat indításkor";
 "extraFolders" = "További mappák";
+"showInMenuBar" = "Szabad hely mutatása a menüsoron";
+"openApp" = "%@ megnyitása";
 "none" = "Nincs";
 "add" = "Hozzáadás";
 "remove" = "Eltávolítás";

@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "실행할 때 자동으로 검사";
 "extraFolders" = "추가 폴더";
+"showInMenuBar" = "메뉴 막대에 여유 공간 표시";
+"openApp" = "%@ 열기";
 "none" = "없음";
 "add" = "추가";
 "remove" = "제거";

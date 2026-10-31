@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Beim Start automatisch messen";
 "extraFolders" = "Zusätzliche Ordner";
+"showInMenuBar" = "Freien Platz in der Menüleiste zeigen";
+"openApp" = "%@ öffnen";
 "none" = "Keine";
 "add" = "Hinzufügen";
 "remove" = "Entfernen";

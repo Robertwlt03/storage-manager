@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Mät automatiskt vid start";
 "extraFolders" = "Ytterligare mappar";
+"showInMenuBar" = "Visa ledigt utrymme i menyraden";
+"openApp" = "Öppna %@";
 "none" = "Inga";
 "add" = "Lägg till";
 "remove" = "Ta bort";

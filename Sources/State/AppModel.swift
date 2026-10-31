@@ -9,6 +9,8 @@ import SwiftUI
     private static let largestEstimatedFraction = 0.99
     /// APFS reports freed blocks with a short delay.
     private static let waitForFreedSpace: Duration = .seconds(2)
+    /// Free space changes without a scan; the menu bar reads the volumes again this often.
+    private static let volumeWatchInterval: Duration = .seconds(60)
 
     /// Set before the first frame, so nothing animates in.
     var pane: Pane? = AppSettings.launchPane ?? .overview
@@ -321,7 +323,23 @@ extension AppModel {
 
     func refreshVolumes() {
         guard !isDemo else { return }
-        volumes = VolumeService.all()
+        show(VolumeService.all())
+    }
+
+    /// Reads the volumes again every minute until the calling task ends, off the main thread
+    /// because a sleeping disk or a network volume can take a moment to answer.
+    func watchVolumes() async {
+        while !Task.isCancelled {
+            if !isDemo {
+                show(await Task.detached(priority: .utility) { VolumeService.all() }.value)
+            }
+            try? await Task.sleep(for: Self.volumeWatchInterval)
+        }
+    }
+
+    /// Only a real change reaches the views; every assignment would redraw them.
+    private func show(_ found: [VolumeInformation]) {
+        if found != volumes { volumes = found }
     }
 
     func open(_ node: Node) {

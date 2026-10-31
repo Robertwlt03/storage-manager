@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Scan automatically at launch";
 "extraFolders" = "Additional Folders";
+"showInMenuBar" = "Show free space in the menu bar";
+"openApp" = "Open %@";
 "none" = "None";
 "add" = "Add";
 "remove" = "Remove";

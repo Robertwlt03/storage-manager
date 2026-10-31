@@ -159,6 +159,8 @@
 /* Settings */
 "autoScan" = "Skenovat automaticky při spuštění";
 "extraFolders" = "Další složky";
+"showInMenuBar" = "Zobrazovat volné místo na řádku nabídek";
+"openApp" = "Otevřít %@";
 "none" = "Žádné";
 "add" = "Přidat";
 "remove" = "Odebrat";
