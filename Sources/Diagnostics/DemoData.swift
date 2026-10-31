@@ -8,6 +8,7 @@ struct DemoData {
     let volume: VolumeInformation
     let apps: [AppUsage]
     let cleanItems: [CleanItem]
+    let totalFreedBytes = 23_400 * megabyte
 
     /// What the temporary area's page shows as its place. The demo's folders lie under the real
     /// path, so the app finds them where it looks, but the page shows nothing of this Mac.

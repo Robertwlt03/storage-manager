@@ -231,6 +231,7 @@
 "summaryClean" = "Dọn dẹp có thể giải phóng khoảng %@.";
 "summaryCopies" = "Bản sao ứng dụng mà macOS tạo khi kiểm tra chiếm %@.";
 "summaryApps" = "%@ ứng dụng đã lâu không được mở.";
+"summaryFreed" = "Đến nay, ứng dụng đã giải phóng %@.";
 "readAloud" = "Đọc to";
 "stopReading" = "Dừng đọc";
 
