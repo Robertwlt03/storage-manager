@@ -58,9 +58,11 @@ struct StorageManagerApp: App {
     }
 
     @CommandsBuilder private var menuCommands: some Commands {
-        LayoutCommands(model: model)
-        // The system item would use the jerky AppKit toggle.
+        // The system item would use the jerky AppKit toggle. The layout items share this group:
+        // macOS drops a group placed before the replaced sidebar group.
         CommandGroup(replacing: .sidebar) {
+            LayoutMenuItems(model: model)
+            Divider()
             Button(
                 model.sidebar.isShown
                     ? TextKey.hideSidebar.translated : TextKey.showSidebar.translated
@@ -91,28 +93,26 @@ struct StorageManagerApp: App {
 
 /// "View" menu entries like Finder's, the same choices as the layout switch: ⌘1 shows lists, ⌘2
 /// tiles and ⌘3 rings, which only Folders has.
-private struct LayoutCommands: Commands {
-    /// Read here rather than in the app's body, so typing a search only redraws this menu.
+private struct LayoutMenuItems: View {
+    /// Its page decides which layouts the items offer.
     let model: AppModel
     @AppStorage(SettingsKey.layoutMode) private var layoutMode = LayoutMode.list
     @AppStorage(SettingsKey.showsRings) private var showsRings = false
 
-    var body: some Commands {
+    var body: some View {
         // Search results replace the page and have list and tiles only.
         let pane = model.isSearching ? nil : model.pane
         let selection = PageLayout.selection(on: pane, $layoutMode, $showsRings)
-        CommandGroup(before: .sidebar) {
-            ForEach(PageLayout.allCases) { layout in
-                Toggle(
-                    layout.title.translated,
-                    isOn: Binding(
-                        get: { selection.wrappedValue == layout },
-                        set: { isOn in if isOn { selection.wrappedValue = layout } })
-                )
-                .keyboardShortcut(Self.shortcut(of: layout))
-                .disabled(layout == .rings && pane?.supportsRings != true)
-            }
-            Divider()
+        let offered = PageLayout.choices(on: pane)
+        ForEach(PageLayout.allCases) { layout in
+            Toggle(
+                layout.title.translated,
+                isOn: Binding(
+                    get: { selection.wrappedValue == layout },
+                    set: { isOn in if isOn { selection.wrappedValue = layout } })
+            )
+            .keyboardShortcut(Self.shortcut(of: layout))
+            .disabled(!offered.contains(layout))
         }
     }
 

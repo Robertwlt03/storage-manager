@@ -51,19 +51,22 @@ struct ModelTests {
         #expect(Pane(launchKey: "unknown") == nil)
     }
 
-    @Test("Rings are offered only on Folders, and pages without layouts only have a list")
+    @Test("Rings only on Folders, a list only on pages without layouts, search with list and tiles")
     func layoutChoices() {
         #expect(PageLayout.choices(on: .explorer) == [.list, .grid, .rings])
         #expect(PageLayout.choices(on: .largeFiles) == [.list, .grid])
         #expect(PageLayout.choices(on: .cleaner) == [.list])
+        #expect(PageLayout.choices(on: nil) == [.list, .grid])
     }
 
-    @Test("Rings show only on Folders; every other page keeps the stored list or tiles")
+    @Test("Rings show only on Folders, tiles only on pages with layouts, else the stored choice")
     func shownLayout() {
         #expect(PageLayout.shown(on: .explorer, layoutMode: .grid, showsRings: true) == .rings)
         #expect(PageLayout.shown(on: .apps, layoutMode: .grid, showsRings: true) == .grid)
         #expect(PageLayout.shown(on: nil, layoutMode: .list, showsRings: true) == .list)
         #expect(PageLayout.shown(on: .explorer, layoutMode: .list, showsRings: false) == .list)
+        #expect(PageLayout.shown(on: .cleaner, layoutMode: .grid, showsRings: false) == .list)
+        #expect(PageLayout.shown(on: nil, layoutMode: .grid, showsRings: true) == .grid)
     }
 
     @Test("Choosing a layout leaves rings alone off Folders and keeps the list or tiles for rings")

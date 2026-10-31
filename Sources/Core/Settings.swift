@@ -210,9 +210,10 @@ enum PageLayout: CaseIterable, Identifiable {
     }
 
     /// What a page can show: tiles where it has layouts, rings on Folders, otherwise only a list.
-    static func choices(on pane: Pane) -> [PageLayout] {
-        guard pane.supportsGrid else { return [.list] }
-        return pane.supportsRings ? allCases : [.list, .grid]
+    /// Search results (no page) have list and tiles.
+    static func choices(on pane: Pane?) -> [PageLayout] {
+        if pane?.supportsGrid == false { return [.list] }
+        return pane?.supportsRings == true ? allCases : [.list, .grid]
     }
 
     /// The settings to store when this layout is chosen on a page: rings change only where they
@@ -224,8 +225,10 @@ enum PageLayout: CaseIterable, Identifiable {
         (self.layoutMode ?? layoutMode, pane?.supportsRings == true ? self == .rings : showsRings)
     }
 
-    /// What a page shows with the stored settings; rings count only where they are offered.
+    /// What a page shows with the stored settings; tiles and rings count only where they are
+    /// offered.
     static func shown(on pane: Pane?, layoutMode: LayoutMode, showsRings: Bool) -> PageLayout {
+        if pane?.supportsGrid == false { return .list }
         if showsRings && pane?.supportsRings == true { return .rings }
         return layoutMode == .grid ? .grid : .list
     }
