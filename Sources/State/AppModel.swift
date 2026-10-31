@@ -9,6 +9,8 @@ import WidgetKit
     /// An estimate never claims "done" before the scan really is.
     /// APFS reports freed blocks with a short delay.
     private static let waitForFreedSpace: Duration = .seconds(2)
+    /// Free space changes without a scan; the menu bar reads the volumes again this often.
+    private static let volumeWatchInterval: Duration = .seconds(60)
 
     /// Set before the first frame, so nothing animates in.
     var pane: Pane? = AppSettings.launchPane ?? .overview
@@ -50,33 +52,6 @@ import WidgetKit
     // The newest background refresh of each list; an older one that finishes later steps aside.
     private var appsRefreshID = UUID()
     private var cleanItemsRefreshID = UUID()
-
-    /// Animated by SwiftUI, not AppKit (see ARCHITECTURE.md).
-    func toggleSidebar() {
-        withAnimation(Motion.standard) { sidebar.toggle() }
-    }
-
-    func closeSidebarOverlay() {
-        guard sidebar.isFloating else { return }
-        withAnimation(Motion.standard) { sidebar.closeFloating() }
-    }
-
-    private var mainWindow: NSWindow? {
-        NSApp.windows.first { window in window.identifier?.rawValue == WindowID.main }
-    }
-
-    /// Reads the width from the window, because SwiftUI's width jumps across the limit for a
-    /// moment while the window moves (see ARCHITECTURE.md).
-    func windowResized() {
-        guard let width = mainWindow?.frame.width else { return }
-        sidebar.measure(windowWidth: width)
-        withAnimation(Motion.quick) { sidebar.fitToWindow() }
-    }
-
-    func endSearch() {
-        searchText = ""
-        isSearchPresented = false
-    }
 
     // MARK: Launch
 
@@ -302,14 +277,6 @@ extension AppModel {
     }
 
     /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
-    func activate(_ entry: Entry) {
-        if let node = entry.node {
-            open(node)
-        } else if let path = entry.path {
-            FinderService.reveal(path)
-        }
-    }
-
     func moveToTrash(_ app: AppUsage) throws {
         guard !isDemo else { return }
         try AppUsageService.moveToTrash(app)
@@ -332,13 +299,23 @@ extension AppModel {
 
     func refreshVolumes() {
         guard !isDemo else { return }
-        volumes = VolumeService.all()
+        show(VolumeService.all())
     }
 
-    func open(_ node: Node) {
-        explorerPath = node.nodesFromRoot
-        endSearch()  // opening a result leaves the search, even when the explorer is already shown
-        pane = .explorer
+    /// Reads the volumes again every minute until the calling task ends, off the main thread
+    /// because a sleeping disk or a network volume can take a moment to answer.
+    func watchVolumes() async {
+        while !Task.isCancelled {
+            if !isDemo {
+                show(await Task.detached(priority: .utility) { VolumeService.all() }.value)
+            }
+            try? await Task.sleep(for: Self.volumeWatchInterval)
+        }
+    }
+
+    /// Only a real change reaches the views; every assignment would redraw them.
+    private func show(_ found: [VolumeInformation]) {
+        if found != volumes { volumes = found }
     }
 
     /// Deletes all copies of one app and returns how much free space really grew.

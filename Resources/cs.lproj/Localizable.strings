@@ -162,6 +162,8 @@
 "reportTitle" = "Zpráva o úložišti z %@";
 "reportFileName" = "Zpráva o úložišti";
 "extraFolders" = "Další složky";
+"showInMenuBar" = "Zobrazovat volné místo na řádku nabídek";
+"openApp" = "Otevřít %@";
 "excludedFolders" = "Vyloučené složky";
 "none" = "Žádné";
 "add" = "Přidat";

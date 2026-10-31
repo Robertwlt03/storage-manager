@@ -29,6 +29,17 @@ struct DemoTests {
         #expect(model.cleanItems?.count == CleanKind.allCases.count)
     }
 
+    @Test("Watching the volumes keeps the made-up one and ends with its task")
+    func watchVolumes() async {
+        let model = Self.demoModel()
+        let volumes = model.volumes
+        let watch = Task { await model.watchVolumes() }
+        await Task.yield()
+        watch.cancel()
+        await watch.value
+        #expect(model.volumes == volumes)
+    }
+
     @Test("The report holds the summary, every category and the largest files")
     func report() {
         let model = Self.demoModel()

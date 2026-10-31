@@ -162,6 +162,8 @@
 "reportTitle" = "Storage report from %@";
 "reportFileName" = "Storage Report";
 "extraFolders" = "Additional Folders";
+"showInMenuBar" = "Show free space in the menu bar";
+"openApp" = "Open %@";
 "excludedFolders" = "Excluded Folders";
 "none" = "None";
 "add" = "Add";

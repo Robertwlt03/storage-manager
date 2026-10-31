@@ -162,6 +162,8 @@
 "reportTitle" = "Laporan penyimpanan dari %@";
 "reportFileName" = "Laporan Penyimpanan";
 "extraFolders" = "Folder Tambahan";
+"showInMenuBar" = "Tampilkan ruang kosong di bar menu";
+"openApp" = "Buka %@";
 "excludedFolders" = "Folder yang Dikecualikan";
 "none" = "Tidak Ada";
 "add" = "Tambah";

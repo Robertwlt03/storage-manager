@@ -162,6 +162,8 @@
 "reportTitle" = "Lagerrapport fra %@";
 "reportFileName" = "Lagerrapport";
 "extraFolders" = "Yderligere mapper";
+"showInMenuBar" = "Vis ledig plads i menulinjen";
+"openApp" = "Åbn %@";
 "excludedFolders" = "Udelukkede mapper";
 "none" = "Ingen";
 "add" = "Tilføj";

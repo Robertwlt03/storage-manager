@@ -162,6 +162,8 @@
 "reportTitle" = "Relatório de armazenamento de %@";
 "reportFileName" = "Relatório de armazenamento";
 "extraFolders" = "Pastas adicionais";
+"showInMenuBar" = "Mostrar o espaço livre na barra de menus";
+"openApp" = "Abrir %@";
 "excludedFolders" = "Pastas excluídas";
 "none" = "Nenhuma";
 "add" = "Adicionar";

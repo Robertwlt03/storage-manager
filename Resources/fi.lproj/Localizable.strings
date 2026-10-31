@@ -162,6 +162,8 @@
 "reportTitle" = "Tallennustilaraportti %@";
 "reportFileName" = "Tallennustilaraportti";
 "extraFolders" = "Lisäkansiot";
+"showInMenuBar" = "Näytä vapaa tila valikkorivillä";
+"openApp" = "Avaa %@";
 "excludedFolders" = "Ohitettavat kansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";

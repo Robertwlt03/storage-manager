@@ -162,6 +162,8 @@
 "reportTitle" = "Informe de almacenamiento del %@";
 "reportFileName" = "Informe de almacenamiento";
 "extraFolders" = "Carpetas adicionales";
+"showInMenuBar" = "Mostrar el espacio libre en la barra de menús";
+"openApp" = "Abrir %@";
 "excludedFolders" = "Carpetas excluidas";
 "none" = "Ninguna";
 "add" = "Añadir";

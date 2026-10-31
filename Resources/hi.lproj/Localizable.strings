@@ -162,6 +162,8 @@
 "reportTitle" = "%@ की स्टोरेज रिपोर्ट";
 "reportFileName" = "स्टोरेज रिपोर्ट";
 "extraFolders" = "अतिरिक्त फ़ोल्डर";
+"showInMenuBar" = "मेनू बार में खाली जगह दिखाएँ";
+"openApp" = "%@ खोलें";
 "excludedFolders" = "बाहर रखे गए फ़ोल्डर";
 "none" = "कोई नहीं";
 "add" = "जोड़ें";

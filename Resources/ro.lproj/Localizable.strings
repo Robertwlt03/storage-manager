@@ -162,6 +162,8 @@
 "reportTitle" = "Raport de stocare din %@";
 "reportFileName" = "Raport de stocare";
 "extraFolders" = "Dosare suplimentare";
+"showInMenuBar" = "Afișează spațiul liber în bara de meniu";
+"openApp" = "Deschide %@";
 "excludedFolders" = "Dosare excluse";
 "none" = "Niciunul";
 "add" = "Adaugă";

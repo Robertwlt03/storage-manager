@@ -162,6 +162,8 @@
 "reportTitle" = "Rapporto spazio del %@";
 "reportFileName" = "Rapporto spazio";
 "extraFolders" = "Cartelle aggiuntive";
+"showInMenuBar" = "Mostra lo spazio libero nella barra dei menu";
+"openApp" = "Apri %@";
 "excludedFolders" = "Cartelle escluse";
 "none" = "Nessuna";
 "add" = "Aggiungi";

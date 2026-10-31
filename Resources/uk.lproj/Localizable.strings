@@ -162,6 +162,8 @@
 "reportTitle" = "Звіт про сховище від %@";
 "reportFileName" = "Звіт про сховище";
 "extraFolders" = "Додаткові папки";
+"showInMenuBar" = "Показувати вільне місце в рядку меню";
+"openApp" = "Відкрити %@";
 "excludedFolders" = "Виключені папки";
 "none" = "Немає";
 "add" = "Додати";

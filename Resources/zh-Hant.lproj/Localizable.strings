@@ -162,6 +162,8 @@
 "reportTitle" = "%@ 的儲存空間報告";
 "reportFileName" = "儲存空間報告";
 "extraFolders" = "其他檔案夾";
+"showInMenuBar" = "在選單列中顯示可用空間";
+"openApp" = "打開 %@";
 "excludedFolders" = "排除的檔案夾";
 "none" = "無";
 "add" = "加入";

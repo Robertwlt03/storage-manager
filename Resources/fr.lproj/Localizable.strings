@@ -162,6 +162,8 @@
 "reportTitle" = "Rapport de stockage du %@";
 "reportFileName" = "Rapport de stockage";
 "extraFolders" = "Dossiers supplémentaires";
+"showInMenuBar" = "Afficher l’espace libre dans la barre des menus";
+"openApp" = "Ouvrir %@";
 "excludedFolders" = "Dossiers exclus";
 "none" = "Aucun";
 "add" = "Ajouter";

@@ -5,6 +5,7 @@ import AppKit
 enum SettingsKey {
     static let scansAutomatically = "autoScan"
     static let extraFolders = "extraFolders"
+    static let showsMenuBarItem = "showsMenuBarItem"
     static let excludedFolders = "excludedFolders"
     static let largeFileMegabytes = "largeFileMB"
     static let unusedDays = "unusedDays"
@@ -36,12 +37,14 @@ enum AppSettings {
     static func registerDefaults() {
         defaults.register(defaults: [
             SettingsKey.scansAutomatically: true,
+            SettingsKey.showsMenuBarItem: true,
             SettingsKey.largeFileMegabytes: LargeFileThreshold.defaultMegabytes,
             SettingsKey.unusedDays: CleanUpRules.defaultUnusedDays,
         ])
     }
 
     static var scansAutomatically: Bool { defaults.bool(forKey: SettingsKey.scansAutomatically) }
+    static var showsMenuBarItem: Bool { defaults.bool(forKey: SettingsKey.showsMenuBarItem) }
     static var largeFileMegabytes: Int { defaults.integer(forKey: SettingsKey.largeFileMegabytes) }
     static var unusedDays: Int { defaults.integer(forKey: SettingsKey.unusedDays) }
     static var launchPane: Pane? {

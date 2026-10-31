@@ -162,6 +162,8 @@
 "reportTitle" = "Raport miejsca z %@";
 "reportFileName" = "Raport miejsca";
 "extraFolders" = "Dodatkowe foldery";
+"showInMenuBar" = "Pokazuj wolne miejsce na pasku menu";
+"openApp" = "Otwórz %@";
 "excludedFolders" = "Wykluczone foldery";
 "none" = "Brak";
 "add" = "Dodaj";

@@ -162,6 +162,8 @@
 "reportTitle" = "Opslagrapport van %@";
 "reportFileName" = "Opslagrapport";
 "extraFolders" = "Extra mappen";
+"showInMenuBar" = "Toon vrije ruimte in de menubalk";
+"openApp" = "Open %@";
 "excludedFolders" = "Uitgesloten mappen";
 "none" = "Geen";
 "add" = "Voeg toe";

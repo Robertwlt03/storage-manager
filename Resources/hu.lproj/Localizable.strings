@@ -162,6 +162,8 @@
 "reportTitle" = "Tárhelyjelentés: %@";
 "reportFileName" = "Tárhelyjelentés";
 "extraFolders" = "További mappák";
+"showInMenuBar" = "Szabad hely mutatása a menüsoron";
+"openApp" = "%@ megnyitása";
 "excludedFolders" = "Kizárt mappák";
 "none" = "Nincs";
 "add" = "Hozzáadás";

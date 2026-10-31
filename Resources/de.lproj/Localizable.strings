@@ -162,6 +162,8 @@
 "reportTitle" = "Speicherbericht vom %@";
 "reportFileName" = "Speicherbericht";
 "extraFolders" = "Zusätzliche Ordner";
+"showInMenuBar" = "Freien Platz in der Menüleiste zeigen";
+"openApp" = "%@ öffnen";
 "excludedFolders" = "Ausgeschlossene Ordner";
 "none" = "Keine";
 "add" = "Hinzufügen";

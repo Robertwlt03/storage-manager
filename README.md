@@ -84,6 +84,9 @@ keeping or passing on. Each line has the size first, so it also pastes into a sp
 A widget shows the available space on your desktop or in Notification Center. Add it like any other widget: click the
 desktop with the right mouse button, choose Edit Widgets and look for Storage Manager.
 
+The menu bar shows how much space is available on your Mac, even with the window closed, and its menu opens the
+app or starts a new scan. You can turn it off in the settings.
+
 ## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Languages
 
 The app speaks 28 languages and follows the language of your Mac. To use it in a different one, pick it in the

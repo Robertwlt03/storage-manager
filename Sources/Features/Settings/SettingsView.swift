@@ -4,6 +4,7 @@ import SwiftUI
 /// language can follow the Mac or be picked here.
 struct SettingsView: View {
     @AppStorage(SettingsKey.scansAutomatically) private var scansAtLaunch = true
+    @AppStorage(SettingsKey.showsMenuBarItem) private var showsMenuBarItem = true
     @AppStorage(SettingsKey.extraFolders) private var extraFolders = ""
     @AppStorage(SettingsKey.excludedFolders) private var excludedFolders = ""
     @State private var selectedExtraFolder: String?
@@ -14,6 +15,7 @@ struct SettingsView: View {
         Form {
             languagePicker
             Toggle(TextKey.autoScan.translated, isOn: $scansAtLaunch)
+            Toggle(TextKey.showInMenuBar.translated, isOn: $showsMenuBarItem)
             LabeledContent(TextKey.extraFolders.translated) {
                 folderEditor($extraFolders, selection: $selectedExtraFolder)
             }
