@@ -177,6 +177,7 @@
 "sectionTidy" = "Hely felszabadítása";
 "layoutList" = "Lista";
 "layoutGrid" = "Rács";
+"layoutSwitch" = "Nézet";
 "settings" = "Beállítások";
 "emptyFolder" = "Ez a mappa üres";
 "otherCategories" = "Egyéb";

@@ -177,6 +177,7 @@
 "sectionTidy" = "Uvolnit místo";
 "layoutList" = "Seznam";
 "layoutGrid" = "Mřížka";
+"layoutSwitch" = "Zobrazení";
 "settings" = "Nastavení";
 "emptyFolder" = "Tato složka je prázdná";
 "otherCategories" = "Ostatní";

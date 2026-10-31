@@ -227,7 +227,7 @@ block has a few fixed variants, so that the same things look the same everywhere
 | `UI.Note` | one line of information | hint, in progress, good, warning, error |
 | `UI.Placeholder` | stand-in for missing content | empty, loading, not measured, on a page or card |
 | `UI.Tile`, `UI.KeyFigure` | tiles | grid tile or key figure |
-| `UI.ActionButton` | a button with text | normal, prominent, confirming, quiet, content |
+| `UI.ActionButton` | a button with text | prominent (one per page), normal, small inside rows and cards, quiet, content; red when destructive |
 
 Take spacing from `Space`, icon sizes from `IconSize` and fonts via `textRole` from `TextRole`. We avoid fixed
 numbers or individual fonts directly in the code, because then one part of the app soon looks different from the

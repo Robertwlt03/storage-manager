@@ -59,10 +59,12 @@ small and large files take up, and at the very bottom you find all categories, f
 caches.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
-all files above a size you choose yourself, and **Search** finds folders and files by name. You can also show each of
-these lists as a grid of large tiles. With **Rings**, Folders shows the subfolders as rings around the current folder:
-the wider a piece, the bigger the folder, and a click opens it. In the settings you can add folders to measure, such
-as an external project folder, and exclude folders that the app should neither measure nor show nor clean up.
+all files above a size you choose yourself, and **Search** finds folders and files by name. Each of these lists can
+also show large tiles: ⌘1 shows the list and ⌘2 the tiles, and Overview, Folders, Large Files, Duplicates and Unused
+Apps also have a switch for it at the top of the page. On Folders the switch also offers **Rings** (⌘3), which show the
+subfolders as rings around the current folder: the wider a piece, the bigger the folder, and a click opens it. In the
+settings you can add folders to measure, such as an external project folder, and exclude folders that the app should
+neither measure nor show nor clean up.
 
 In **Clean Up** you remove files your system barely needs. These include caches that apps rebuild on their own, old
 logs, old temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently

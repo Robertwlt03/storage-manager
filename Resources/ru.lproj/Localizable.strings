@@ -177,6 +177,7 @@
 "sectionTidy" = "Освободить место";
 "layoutList" = "Список";
 "layoutGrid" = "Сетка";
+"layoutSwitch" = "Вид";
 "settings" = "Настройки";
 "emptyFolder" = "Эта папка пуста";
 "otherCategories" = "Прочее";

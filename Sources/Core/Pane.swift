@@ -12,6 +12,8 @@ enum Pane: Hashable {
     var supportsGrid: Bool {
         [.overview, .explorer, .largeFiles, .duplicates, .apps].contains(self)
     }
+    /// Only Folders can show its contents as rings.
+    var supportsRings: Bool { self == .explorer }
 
     init?(launchKey: String) {
         if launchKey.hasPrefix("/") {  // a volume by its mount point, e.g. `-pane /`

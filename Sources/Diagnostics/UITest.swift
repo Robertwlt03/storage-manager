@@ -8,7 +8,8 @@ import SwiftUI
 /// names) and restores the user's settings at the end.
 enum UITest {
     private static let changedSettingKeys = [
-        SettingsKey.layoutMode, SettingsKey.largeFileMegabytes, SettingsKey.unusedDays,
+        SettingsKey.layoutMode, SettingsKey.showsRings, SettingsKey.largeFileMegabytes,
+        SettingsKey.unusedDays,
     ]
     private static let roundsDuringScan = 3
     /// While the first scan runs, every fifth step also types a search.
@@ -77,10 +78,12 @@ enum UITest {
     private static func switchAroundDuringScan(_ model: AppModel) async {
         if !model.isScanning { model.scan() }
         for round in 0..<roundsDuringScan {
-            for pane in allPanes(model) {
+            for (position, pane) in allPanes(model).enumerated() {
                 model.pane = pane
-                changeSetting(
-                    SettingsKey.layoutMode, to: (round + stepCount) % LayoutMode.allCases.count)
+                // Each round moves every page on to its next layout, so a search typed there also
+                // shows tiles.
+                let layouts = PageLayout.allCases
+                show(layouts[(round + position) % layouts.count], on: pane)
                 model.searchText = stepCount.isMultiple(of: searchEveryNthStep) ? sampleQuery : ""
                 await step(
                     "Chaos \(round) \(logName(of: pane))", model, wait: Pause.betweenSwitches,
@@ -118,7 +121,7 @@ enum UITest {
         await step("After the scan", model, wait: Pause.afterScan)
     }
 
-    /// Every page in light and dark, as list and as grid, with a picture of each.
+    /// Every page in light and dark, in every layout its switch offers, with a picture of each.
     private static func visitEveryPage(_ model: AppModel) async {
         for appearance in [NSAppearance(named: .aqua), NSAppearance(named: .darkAqua)] {
             // Only for this test run; the app itself follows the system.
@@ -127,16 +130,16 @@ enum UITest {
                 await visitEveryLayout(of: pane, appearance: appearance, model)
             }
         }
-        changeSetting(SettingsKey.layoutMode, to: LayoutMode.list.rawValue)
+        show(.list, on: .explorer)
         NSApp.appearance = nil
     }
 
-    /// One page as list and, where it has one, as grid.
+    /// One page as list and, where the layout switch offers them, as grid and rings.
     private static func visitEveryLayout(
         of pane: Pane, appearance: NSAppearance?, _ model: AppModel
     ) async {
-        for layout in LayoutMode.allCases where layout == .list || pane.supportsGrid {
-            changeSetting(SettingsKey.layoutMode, to: layout.rawValue)
+        for layout in PageLayout.choices(on: pane) {
+            show(layout, on: pane)
             model.pane = pane
             let appearanceName = appearance?.name.rawValue ?? ""
             await step(
@@ -269,6 +272,17 @@ extension UITest {
     private static func logName(of pane: Pane) -> String {
         if case .volume = pane { return "volume" }
         return pane.launchKey
+    }
+
+    /// Chooses a layout on a page the way the layout switch and the View menu store it.
+    private static func show(_ layout: PageLayout, on pane: Pane) {
+        let defaults = UserDefaults.standard
+        let layoutMode = LayoutMode(rawValue: defaults.integer(forKey: SettingsKey.layoutMode))
+        let stored = layout.stored(
+            on: pane, layoutMode: layoutMode ?? .list,
+            showsRings: defaults.bool(forKey: SettingsKey.showsRings))
+        changeSetting(SettingsKey.layoutMode, to: stored.layoutMode.rawValue)
+        changeSetting(SettingsKey.showsRings, to: stored.showsRings)
     }
 
     private static func changeSetting(_ key: String, to value: Any) {

@@ -51,6 +51,39 @@ struct ModelTests {
         #expect(Pane(launchKey: "unknown") == nil)
     }
 
+    @Test("Rings only on Folders, a list only on pages without layouts, search with list and tiles")
+    func layoutChoices() {
+        #expect(PageLayout.choices(on: .explorer) == [.list, .grid, .rings])
+        #expect(PageLayout.choices(on: .largeFiles) == [.list, .grid])
+        #expect(PageLayout.choices(on: .cleaner) == [.list])
+        #expect(PageLayout.choices(on: nil) == [.list, .grid])
+    }
+
+    @Test("Rings show only on Folders, tiles only on pages with layouts, else the stored choice")
+    func shownLayout() {
+        #expect(PageLayout.shown(on: .explorer, layoutMode: .grid, showsRings: true) == .rings)
+        #expect(PageLayout.shown(on: .apps, layoutMode: .grid, showsRings: true) == .grid)
+        #expect(PageLayout.shown(on: nil, layoutMode: .list, showsRings: true) == .list)
+        #expect(PageLayout.shown(on: .explorer, layoutMode: .list, showsRings: false) == .list)
+        #expect(PageLayout.shown(on: .cleaner, layoutMode: .grid, showsRings: false) == .list)
+        #expect(PageLayout.shown(on: nil, layoutMode: .grid, showsRings: true) == .grid)
+    }
+
+    @Test("Choosing a layout leaves rings alone off Folders and keeps the list or tiles for rings")
+    func chosenLayout() {
+        let tilesOnApps = PageLayout.grid.stored(on: .apps, layoutMode: .list, showsRings: true)
+        #expect(tilesOnApps == (.grid, true))
+        let listOnFolders = PageLayout.list.stored(
+            on: .explorer, layoutMode: .grid, showsRings: true)
+        #expect(listOnFolders == (.list, false))
+        let ringsOnFolders = PageLayout.rings.stored(
+            on: .explorer, layoutMode: .grid, showsRings: false)
+        #expect(ringsOnFolders == (.grid, true))
+        // The View menu during a search has no page, and leaves the rings of Folders alone.
+        #expect(
+            PageLayout.grid.stored(on: nil, layoutMode: .list, showsRings: true) == (.grid, true))
+    }
+
     @Test("Large-file thresholds are counted in decimal megabytes, like Finder")
     func largeFileThreshold() {
         #expect(LargeFileThreshold.bytes(1) == 1_000_000)

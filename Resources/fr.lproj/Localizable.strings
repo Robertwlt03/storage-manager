@@ -177,6 +177,7 @@
 "sectionTidy" = "Libérer de l’espace";
 "layoutList" = "Liste";
 "layoutGrid" = "Grille";
+"layoutSwitch" = "Présentation";
 "settings" = "Réglages";
 "emptyFolder" = "Ce dossier est vide";
 "otherCategories" = "Autres";

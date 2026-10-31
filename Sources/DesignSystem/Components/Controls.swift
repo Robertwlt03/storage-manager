@@ -1,12 +1,14 @@
 import SwiftUI
 
 extension UI {
-    /// A button with a text, in one of the `ButtonKind` variants.
+    /// A button with a text, in one of the `ButtonKind` variants; a destructive one says so in red
+    /// while it can be clicked.
     struct ActionButton: View {
         let title: String
         var kind = ButtonKind.normal
         var role: ButtonRole?
         let action: () -> Void
+        @Environment(\.isEnabled) private var isEnabled
 
         init(
             _ title: String, _ kind: ButtonKind = .normal, role: ButtonRole? = nil,
@@ -18,7 +20,14 @@ extension UI {
             self.action = action
         }
 
-        var body: some View { Button(title, role: role, action: action).appButton(kind) }
+        @ViewBuilder var body: some View {
+            let button = Button(title, role: role, action: action).appButton(kind)
+            if role == .destructive && isEnabled {
+                button.foregroundStyle(.bad)
+            } else {
+                button
+            }
+        }
     }
 
     /// A menu that shows its current choice next to its name. On a page it keeps the width of its

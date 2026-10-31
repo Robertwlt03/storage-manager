@@ -177,6 +177,7 @@
 "sectionTidy" = "Platz schaffen";
 "layoutList" = "Liste";
 "layoutGrid" = "Raster";
+"layoutSwitch" = "Darstellung";
 "settings" = "Einstellungen";
 "emptyFolder" = "Dieser Ordner ist leer";
 "otherCategories" = "Weitere";

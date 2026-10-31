@@ -43,9 +43,13 @@ struct SettingsView: View {
             HStack {
                 Text(TextKey.languageRestartHint.translated).textRole(.hint)
                 Spacer()
-                UI.ActionButton(TextKey.accessRestart.translated) { LifecycleService.relaunch() }
+                languageRestartButton
             }
         }
+    }
+
+    private var languageRestartButton: some View {
+        UI.ActionButton(TextKey.accessRestart.translated, .inline) { LifecycleService.relaunch() }
     }
 
     /// A list of folders stored one path per line, with buttons to add and remove.

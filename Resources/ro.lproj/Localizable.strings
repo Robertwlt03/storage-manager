@@ -177,6 +177,7 @@
 "sectionTidy" = "Eliberează spațiu";
 "layoutList" = "Listă";
 "layoutGrid" = "Grilă";
+"layoutSwitch" = "Vizualizare";
 "settings" = "Configurări";
 "emptyFolder" = "Acest dosar este gol";
 "otherCategories" = "Altele";

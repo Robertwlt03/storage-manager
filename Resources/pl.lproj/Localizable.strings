@@ -177,6 +177,7 @@
 "sectionTidy" = "Zwolnij miejsce";
 "layoutList" = "Lista";
 "layoutGrid" = "Siatka";
+"layoutSwitch" = "Widok";
 "settings" = "Ustawienia";
 "emptyFolder" = "Ten folder jest pusty";
 "otherCategories" = "Pozostałe";

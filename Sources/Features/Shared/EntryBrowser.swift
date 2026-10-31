@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Folders, search results and large files as a table or as tiles, depending on the toolbar switch.
+/// Folders, search results and large files as a table or as tiles, depending on the layout switch.
 /// While a scan runs, an empty result says so instead of "nothing found".
 struct EntryBrowser: View {
     let entries: [Entry]

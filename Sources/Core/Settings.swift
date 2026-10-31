@@ -173,8 +173,63 @@ nonisolated enum AppLanguage: String, CaseIterable {
     }
 }
 
-enum LayoutMode: Int, CaseIterable, Identifiable {
+enum LayoutMode: Int {
     case list, grid
+}
+
+/// The choices of the layout switch: list and tiles on every page with layouts, rings only on
+/// Folders. List and tiles are stored as `LayoutMode` for all pages, rings as a switch of their
+/// own.
+enum PageLayout: CaseIterable, Identifiable {
+    case list, grid, rings
     var id: Self { self }
-    var title: TextKey { self == .list ? .layoutList : .layoutGrid }
+
+    var title: TextKey {
+        switch self {
+        case .list: .layoutList
+        case .grid: .layoutGrid
+        case .rings: .rings
+        }
+    }
+
+    var symbol: String {
+        switch self {
+        case .list: Symbols.list
+        case .grid: Symbols.grid
+        case .rings: Symbols.rings
+        }
+    }
+
+    /// The stored mode behind this choice; rings keep the mode the other pages use.
+    private var layoutMode: LayoutMode? {
+        switch self {
+        case .list: .list
+        case .grid: .grid
+        case .rings: nil
+        }
+    }
+
+    /// What a page can show: tiles where it has layouts, rings on Folders, otherwise only a list.
+    /// Search results (no page) have list and tiles.
+    static func choices(on pane: Pane?) -> [PageLayout] {
+        if pane?.supportsGrid == false { return [.list] }
+        return pane?.supportsRings == true ? allCases : [.list, .grid]
+    }
+
+    /// The settings to store when this layout is chosen on a page: rings change only where they
+    /// are offered, so tiles on another page leave Folders as it was, and rings keep the list or
+    /// tiles the other pages use.
+    func stored(on pane: Pane?, layoutMode: LayoutMode, showsRings: Bool) -> (
+        layoutMode: LayoutMode, showsRings: Bool
+    ) {
+        (self.layoutMode ?? layoutMode, pane?.supportsRings == true ? self == .rings : showsRings)
+    }
+
+    /// What a page shows with the stored settings; tiles and rings count only where they are
+    /// offered.
+    static func shown(on pane: Pane?, layoutMode: LayoutMode, showsRings: Bool) -> PageLayout {
+        if pane?.supportsGrid == false { return .list }
+        if showsRings && pane?.supportsRings == true { return .rings }
+        return layoutMode == .grid ? .grid : .list
+    }
 }

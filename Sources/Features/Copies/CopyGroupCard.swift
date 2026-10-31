@@ -87,8 +87,8 @@ struct CopyGroupCard: View {
                 Text(TextKey.quitToDelete.translated(with: group.appName)).foregroundStyle(.warning)
             }
             Spacer()
-            UI.ActionButton(TextKey.openInExplorer.translated) { model.open(group.node) }
-            UI.ActionButton(TextKey.deleteAll.translated, role: .destructive) {
+            UI.ActionButton(TextKey.openInExplorer.translated, .inline) { model.open(group.node) }
+            UI.ActionButton(TextKey.deleteAll.translated, .inline, role: .destructive) {
                 isConfirming = true
             }
             .disabled(isAppRunning || isDeleting || details == nil)

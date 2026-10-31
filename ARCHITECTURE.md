@@ -44,7 +44,8 @@ icon sizes, text roles, measurements and symbol names, `Theme` the colors, `Surf
 `Motion` all animations.
 
 **`Sources/Features`:** Every page in a folder of its own. `Pages.swift` maps each page to its view. `Shared`
-contains the shared table and the shared grid for folders, search results and large files.
+contains the shared table and the shared grid for folders, search results and large files, and the layout switch whose
+choice the View menu shares.
 
 **`Sources/Localization` and `Resources`:** `TextKey` contains all English text keys, and the 28 language folders
 contain the texts.

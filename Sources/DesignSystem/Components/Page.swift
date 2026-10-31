@@ -106,7 +106,8 @@ private struct HeaderBar<Options: View>: View {
 
     var body: some View {
         HStack(spacing: Space.item) {
-            options
+            // Pickers in the header as tall as its buttons (`ButtonKind.size`).
+            options.controlSize(ButtonKind.normal.size)
             Spacer(minLength: 0)
             informationButton
         }

@@ -44,8 +44,7 @@ private struct FolderView: View {
     }
 
     @ViewBuilder private var folderActions: some View {
-        Toggle(TextKey.rings.translated, systemImage: Symbols.rings, isOn: $showsRings)
-            .toggleStyle(.button)
+        LayoutSwitcher(pane: .explorer)
         if !node.isVirtual {
             UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(node.path) }
             UI.ActionButton(TextKey.info.translated) { informationEntry = .folder(node) }

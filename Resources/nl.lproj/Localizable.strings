@@ -177,6 +177,7 @@
 "sectionTidy" = "Ruimte vrijmaken";
 "layoutList" = "Lijst";
 "layoutGrid" = "Raster";
+"layoutSwitch" = "Weergave";
 "settings" = "Instellingen";
 "emptyFolder" = "Deze map is leeg";
 "otherCategories" = "Overig";
