@@ -227,6 +227,12 @@
 "infoLargeFiles" = "Todos os ficheiros a partir do tamanho escolhido na última análise. Um duplo clique mostra o ficheiro no Finder.";
 "infoTemporaryFiles" = "O macOS cria esta área para cada utilizador em /private/var/folders. Está oculta no Finder e não é detalhada em «Gerir armazenamento».";
 "infoCopies" = "Ao verificar uma assinatura, o macOS coloca por vezes cópias completas de uma app na pasta X. Não são programas independentes; o macOS cria uma nova quando necessário. Apagá-las é seguro desde que a app esteja terminada.";
+"paneDuplicates" = "Duplicados";
+"infoDuplicates" = "Ficheiros grandes a partir de 10 MB que existem mais de uma vez com o mesmo conteúdo. Os ficheiros do mesmo tamanho são comparados pelo conteúdo. Aqui nada é removido; «Mostrar no Finder» leva até eles.";
+"noDuplicates" = "Nenhum duplicado";
+"searchingDuplicates" = "A comparar ficheiros …";
+"searchingDuplicatesDetail" = "Os ficheiros do mesmo tamanho são lidos e comparados. Com ficheiros grandes demora um momento.";
+"duplicatesTotal" = "%@ ficheiros · %@ podem ser libertados";
 "infoVolume" = "Capacidade deste volume: o que está ocupado, o que o macOS pode libertar sozinho quando necessário e o que está livre. Os volumes externos podem ser medidos aqui.";
 "aboutPage" = "Acerca desta página";
 "scanDetails" = "Análise";

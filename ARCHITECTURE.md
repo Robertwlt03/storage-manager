@@ -9,7 +9,8 @@ editor’s search. How to build and check is in the [contributing guide](CONTRIB
 
 Storage Manager measures once how much space the Mac’s folders take up, and shows the result on several pages: as
 an overview, as a folder tree, as a list of large files, while cleaning up and in hidden areas such as the temporary
-folder of macOS. After the scan, every page gets by without any further disk access.
+folder of macOS. After the scan, every page gets by without any further disk access, except the duplicates: only
+files of equal size can be the same, and `DuplicateService` reads just those, in the background.
 
 ## <img src="assets/icons/dataflow.svg" height="33" align="absmiddle" alt="">How the data flows
 

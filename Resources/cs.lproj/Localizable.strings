@@ -227,6 +227,12 @@
 "infoLargeFiles" = "Všechny soubory od zvolené velikosti z posledního skenování. Dvojitým kliknutím se soubor zobrazí ve Finderu.";
 "infoTemporaryFiles" = "macOS tuto oblast vytváří pro každého uživatele v /private/var/folders. Ve Finderu je skrytá a v části „Spravovat úložiště“ se nerozepisuje.";
 "infoCopies" = "Při kontrole podpisu macOS někdy vytvoří úplné kopie aplikace ve složce X. Nejde o samostatné programy; macOS v případě potřeby vytvoří novou. Smazání je bezpečné, dokud je aplikace ukončená.";
+"paneDuplicates" = "Duplikáty";
+"infoDuplicates" = "Velké soubory od 10 MB, které existují vícekrát se stejným obsahem. Soubory stejné velikosti se porovnají podle obsahu. Nic se tu neodstraňuje; „Zobrazit ve Finderu“ k nim vede.";
+"noDuplicates" = "Žádné duplikáty";
+"searchingDuplicates" = "Porovnávání souborů …";
+"searchingDuplicatesDetail" = "Soubory stejné velikosti se čtou a porovnávají. U velkých souborů to chvíli trvá.";
+"duplicatesTotal" = "%@ souborů · uvolnit lze %@";
 "infoVolume" = "Kapacita tohoto svazku: co je využito, co může macOS v případě potřeby uvolnit sám a co je volné. Externí svazky lze naskenovat tady.";
 "aboutPage" = "O této stránce";
 "scanDetails" = "Skenování";

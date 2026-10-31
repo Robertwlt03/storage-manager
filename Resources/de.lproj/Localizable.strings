@@ -227,6 +227,12 @@
 "infoLargeFiles" = "Alle Dateien ab der gewählten Größe aus der letzten Messung. Ein Doppelklick zeigt die Datei im Finder.";
 "infoTemporaryFiles" = "macOS legt diesen Bereich für jeden Benutzer unter /private/var/folders an. Er ist im Finder versteckt und wird in „Speicher verwalten“ nicht aufgeschlüsselt.";
 "infoCopies" = "Beim Prüfen der Signatur legt macOS manchmal vollständige Kopien einer App im Ordner X an. Das sind keine eigenen Programme; macOS erstellt bei Bedarf eine neue. Löschen ist unbedenklich, solange die App beendet ist.";
+"paneDuplicates" = "Duplikate";
+"infoDuplicates" = "Große Dateien ab 10 MB, die mit gleichem Inhalt mehrfach vorhanden sind. Dateien gleicher Größe werden am Inhalt verglichen. Hier wird nichts entfernt; „Im Finder zeigen“ führt zu ihnen.";
+"noDuplicates" = "Keine Duplikate";
+"searchingDuplicates" = "Dateien werden verglichen …";
+"searchingDuplicatesDetail" = "Dateien gleicher Größe werden gelesen und verglichen. Bei großen Dateien dauert das einen Moment.";
+"duplicatesTotal" = "%@ Dateien · %@ lassen sich freigeben";
 "infoVolume" = "Kapazität dieses Datenträgers: was belegt ist, was macOS bei Bedarf selbst freigeben kann und was frei ist. Externe Datenträger lassen sich hier messen.";
 "aboutPage" = "Über diese Seite";
 "scanDetails" = "Messung";

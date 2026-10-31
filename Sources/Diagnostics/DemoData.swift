@@ -73,6 +73,7 @@ struct DemoData {
             folder("Downloads", in: home, smallFiles: 800, smallBytes: 2 * gigabyte) { downloads in
                 file("Installer.dmg", 3_200 * megabyte, in: downloads)
                 file("Photos export.zip", 1_800 * megabyte, in: downloads)
+                file("Holiday 2025 copy.mov", 8_400 * megabyte, in: downloads)
             }
             folder("Documents", in: home, smallFiles: 3_000, smallBytes: 6 * gigabyte) { folder in
                 file("Project archive.zip", 2_400 * megabyte, in: folder)

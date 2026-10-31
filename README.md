@@ -67,6 +67,9 @@ In **Clean Up** you remove files your system barely needs. These include caches 
 logs, old temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently
 running, and macOS itself, are left untouched.
 
+**Duplicates** lists large files from 10 MB that exist more than once with the same content. Only files of equal size
+are read and compared, in the background. Nothing is removed there; Show in Finder leads you to them.
+
 The **Unused Apps** page reminds you of apps you have not opened for a long time. The date comes from macOS itself,
 so the app records nothing. Anything you no longer need, you can move to the Trash from there.
 

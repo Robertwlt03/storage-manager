@@ -227,6 +227,12 @@
 "infoLargeFiles" = "Az utolsó vizsgálat összes fájlja a választott mérettől felfelé. Dupla kattintással a fájl megjelenik a Finderben.";
 "infoTemporaryFiles" = "A macOS ezt a területet minden felhasználónak a /private/var/folders alatt hozza létre. A Finderben rejtett, és a „Tárhely kezelése” sem bontja le.";
 "infoCopies" = "Az aláírás ellenőrzésekor a macOS néha egy app teljes másolatait helyezi az X mappába. Ezek nem különálló programok; a macOS szükség esetén újat készít. Törlésük biztonságos, amíg az app nem fut.";
+"paneDuplicates" = "Ismétlődések";
+"infoDuplicates" = "10 MB-nál nagyobb fájlok, amelyek azonos tartalommal többször is megvannak. Az azonos méretű fájlokat a tartalmuk alapján hasonlítja össze. Itt semmi sem törlődik; a „Megjelenítés a Finderben” elvezet hozzájuk.";
+"noDuplicates" = "Nincsenek ismétlődések";
+"searchingDuplicates" = "Fájlok összehasonlítása …";
+"searchingDuplicatesDetail" = "Az azonos méretű fájlok beolvasása és összehasonlítása. Nagy fájloknál ez eltart egy ideig.";
+"duplicatesTotal" = "%@ fájl · %@ szabadítható fel";
 "infoVolume" = "A kötet kapacitása: mennyi foglalt, mennyit tud a macOS szükség esetén magától felszabadítani, és mennyi szabad. A külső kötetek itt felmérhetők.";
 "aboutPage" = "Erről az oldalról";
 "scanDetails" = "Vizsgálat";

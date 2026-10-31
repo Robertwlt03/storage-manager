@@ -227,6 +227,12 @@
 "infoLargeFiles" = "上次扫描中达到所选大小的所有文件。双击可在访达中显示该文件。";
 "infoTemporaryFiles" = "macOS 会在 /private/var/folders 下为每位用户创建此区域。它在访达中是隐藏的，在“管理存储空间”中也不会细分显示。";
 "infoCopies" = "在检查签名时，macOS 有时会在文件夹 X 中创建 App 的完整副本。它们不是独立的程序；需要时 macOS 会重新创建。只要 App 已退出，就可以放心删除。";
+"paneDuplicates" = "重复文件";
+"infoDuplicates" = "内容相同且多次出现的 10 MB 以上大文件。大小相同的文件会按内容比较。这里不会删除任何内容；“在访达中显示”可以找到它们。";
+"noDuplicates" = "没有重复文件";
+"searchingDuplicates" = "正在比较文件 …";
+"searchingDuplicatesDetail" = "正在读取并比较大小相同的文件。大文件需要一点时间。";
+"duplicatesTotal" = "%@ 个文件 · 可释放 %@";
 "infoVolume" = "此宗卷的容量：已使用的空间、macOS 需要时可自行释放的空间，以及可用空间。外置宗卷可以在这里测量。";
 "aboutPage" = "关于此页面";
 "scanDetails" = "扫描";

@@ -227,6 +227,12 @@
 "infoLargeFiles" = "Kaikki tiedostot viimeisimmästä mittauksesta valitusta koosta alkaen. Kaksoisnapsautus näyttää tiedoston Finderissa.";
 "infoTemporaryFiles" = "macOS luo tämän alueen jokaiselle käyttäjälle kohteeseen /private/var/folders. Se on piilotettu Finderissa, eikä sitä eritellä kohdassa ”Hallitse tallennustilaa”.";
 "infoCopies" = "Allekirjoitusta tarkistaessaan macOS luo joskus apista täydellisiä kopioita kansioon X. Ne eivät ole omia ohjelmiaan; macOS luo tarvittaessa uuden. Niiden poistaminen on turvallista, kun app on suljettu.";
+"paneDuplicates" = "Kaksoiskappaleet";
+"infoDuplicates" = "Vähintään 10 Mt:n suuret tiedostot, jotka ovat olemassa monta kertaa samalla sisällöllä. Samankokoisia tiedostoja verrataan sisällön perusteella. Täällä ei poisteta mitään; ”Näytä Finderissa” vie niihin.";
+"noDuplicates" = "Ei kaksoiskappaleita";
+"searchingDuplicates" = "Verrataan tiedostoja …";
+"searchingDuplicatesDetail" = "Samankokoiset tiedostot luetaan ja verrataan. Suurilla tiedostoilla se kestää hetken.";
+"duplicatesTotal" = "%@ tiedostoa · %@ voidaan vapauttaa";
 "infoVolume" = "Tämän taltion kapasiteetti: mitä on käytetty, minkä macOS voi tarvittaessa vapauttaa itse ja mitä on vapaana. Ulkoisia taltioita voi mitata täällä.";
 "aboutPage" = "Tietoja tästä sivusta";
 "scanDetails" = "Mittaus";

@@ -227,6 +227,12 @@
 "infoLargeFiles" = "Alle filer fra den valgte størrelsen i den siste målingen. Dobbeltklikk viser filen i Finder.";
 "infoTemporaryFiles" = "macOS oppretter dette området for hver bruker under /private/var/folders. Det er skjult i Finder og blir ikke spesifisert i «Administrer lagring».";
 "infoCopies" = "Når macOS kontrollerer en signatur, legger det noen ganger komplette kopier av en app i mappen X. De er ikke egne programmer; macOS oppretter en ny ved behov. Det er trygt å slette dem så lenge appen er avsluttet.";
+"paneDuplicates" = "Duplikater";
+"infoDuplicates" = "Store filer fra 10 MB som finnes flere ganger med samme innhold. Filer med samme størrelse sammenlignes etter innhold. Ingenting fjernes her; «Vis i Finder» fører til dem.";
+"noDuplicates" = "Ingen duplikater";
+"searchingDuplicates" = "Sammenligner filer …";
+"searchingDuplicatesDetail" = "Filer med samme størrelse leses og sammenlignes. For store filer tar det et øyeblikk.";
+"duplicatesTotal" = "%@ filer · %@ kan frigjøres";
 "infoVolume" = "Kapasiteten til dette volumet: hva som er brukt, hva macOS kan frigjøre selv ved behov, og hva som er ledig. Eksterne volumer kan måles her.";
 "aboutPage" = "Om denne siden";
 "scanDetails" = "Måling";

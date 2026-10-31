@@ -78,6 +78,47 @@ struct ServiceTests {
         #expect(ScanService.withoutDuplicatesOrNesting(folders) == ["/a", "/c", "/ab"])
     }
 
+    private static func fileEntry(_ path: String, bytes: Int64) -> Entry {
+        Entry.file(FileItem(path: path, bytes: bytes))
+    }
+
+    @Test("Only files of equal size from the smallest size on can be duplicates, biggest first")
+    func sameSizeGroups() {
+        let big = DuplicateService.smallestBytes
+        let files = [
+            Self.fileEntry("/a", bytes: big), Self.fileEntry("/b", bytes: big),
+            Self.fileEntry("/c", bytes: big * 2), Self.fileEntry("/d", bytes: big * 2),
+            Self.fileEntry("/e", bytes: big * 3), Self.fileEntry("/f", bytes: big - 1),
+            Self.fileEntry("/g", bytes: big - 1),
+        ]
+        let groups = DuplicateService.sameSizeGroups(files)
+        #expect(
+            groups.map { group in Set(group.compactMap(\.path)) } == [["/c", "/d"], ["/a", "/b"]])
+    }
+
+    @Test("Files with the same content stay together, the others and unreadable ones drop out")
+    func duplicateContent() async throws {
+        let folder =
+            FileManager.default.temporaryDirectory.path + "/Duplicates-" + UUID().uuidString
+        try FileManager.default.createDirectory(atPath: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(atPath: folder) }
+        let size = Int(DuplicateService.smallestBytes)
+        let contents = ["same1": Data(count: size), "same2": Data(count: size)]
+        var different = Data(count: size)
+        different[size - 1] = 1  // differs only after the sample
+        for (name, data) in contents.merging(
+            ["other": different], uniquingKeysWith: { first, _ in first })
+        {
+            FileManager.default.createFile(atPath: folder + "/" + name, contents: data)
+        }
+        let group = ["same1", "same2", "other", "missing"]
+            .map { name in
+                Self.fileEntry(folder + "/" + name, bytes: Int64(size))
+            }
+        let groups = await DuplicateService.confirmed([group])
+        #expect(groups.map { group in Set(group.map(\.name)) } == [["same1", "same2"]])
+    }
+
     @Test("An excluded folder covers itself and everything inside it, not a similar name")
     func excludedRoots() {
         let excluded: Set<String> = ["/a"]

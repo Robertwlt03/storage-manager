@@ -29,6 +29,15 @@ struct DemoTests {
         #expect(model.cleanItems?.count == CleanKind.allCases.count)
     }
 
+    @Test("The demo has one pair of duplicates, found once per tree")
+    func duplicates() async {
+        let model = Self.demoModel()
+        await model.findDuplicates()
+        #expect(model.duplicateGroups?.map(\.count) == [2])
+        await model.findDuplicates()
+        #expect(model.duplicateGroups?.count == 1)
+    }
+
     @Test("Watching the volumes keeps the made-up one and ends with its task")
     func watchVolumes() async {
         let model = Self.demoModel()
