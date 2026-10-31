@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "stora filer från %@";
 "bucketValue" = "%@
 %@ filer";
-"settingsSystemNote" = "Utseende, språk och enheter hämtas från Systeminställningar. Ett eget språk för den här appen ställer du in där under Allmänt › Språk och region › Appar.";
+"settingsSystemNote" = "Utseende och enheter kommer från Systeminställningar.";
+"appLanguage" = "Språk";
+"languageLikeMac" = "Samma som på Mac";
+"languageRestartHint" = "Det nya språket visas efter en omstart.";

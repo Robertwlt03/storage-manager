@@ -81,5 +81,6 @@ nonisolated enum TextKey: String, CaseIterable {
 
     // Settings
     case autoScan
-    case extraFolders, none, add, remove, settingsSystemNote
+    case extraFolders, none, add, remove, settingsSystemNote, appLanguage, languageLikeMac
+    case languageRestartHint
 }

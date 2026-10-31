@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "%@ ve üzeri büyük dosyalar";
 "bucketValue" = "%@
 %@ dosya";
-"settingsSystemNote" = "Görünüm, dil ve birimler Sistem Ayarları'ndan alınır. Bu uygulama için ayrı bir dil, orada Genel › Dil ve Bölge › Uygulamalar altında ayarlanır.";
+"settingsSystemNote" = "Görünüm ve birimler Sistem Ayarları’ndan gelir.";
+"appLanguage" = "Dil";
+"languageLikeMac" = "Mac ile aynı";
+"languageRestartHint" = "Yeni dil yeniden başlatmadan sonra görünür.";

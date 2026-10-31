@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "grote bestanden vanaf %@";
 "bucketValue" = "%@
 %@ bestanden";
-"settingsSystemNote" = "Weergave, taal en eenheden neemt de app over uit Systeeminstellingen. Een aparte taal voor deze app stel je daar in onder Algemeen › Taal en regio › Apps.";
+"settingsSystemNote" = "Weergave en eenheden komen uit Systeeminstellingen.";
+"appLanguage" = "Taal";
+"languageLikeMac" = "Zoals op de Mac";
+"languageRestartHint" = "De nieuwe taal verschijnt na een herstart.";

@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Storage Manager"; /* same as English on purpose */
+"paneOverview" = "Áttekintés";
+"paneExplorer" = "Mappák";
+"paneLargeFiles" = "Nagy fájlok";
+"paneTemporaryFiles" = "Ideiglenes terület";
+"paneCopies" = "Appmásolatok";
+"sectionSystem" = "Rejtett területek";
+"sectionVolumes" = "Kötetek";
+"rescan" = "Újravizsgálás";
+"rescanHelp" = "Minden terület újravizsgálása (⌘R)";
+"cancelScan" = "Vizsgálat leállítása";
+
+/* Scan status and placeholders */
+"cancel" = "Mégsem";
+"filesAndSize" = "%@ fájl · %@";
+"measuredAt" = "Vizsgálva: %@";
+"scanNow" = "Vizsgálat indítása";
+"unreadable" = "%@ mappa nem olvasható – engedélyezd a teljes lemezhozzáférést …";
+"notMeasuredTitle" = "Még nincs megvizsgálva";
+"notMeasuredDetail" = "Egyetlen menet minden területet felmér; utána minden kattintás azonnali.";
+"scanningTitle" = "Vizsgálat …";
+"scanningDetail" = "Az eredmények megjelennek, amint az első terület elkészült.";
+"loadingSummaryTitle" = "Összefoglaló készül …";
+"loadingSummaryDetail" = "Ha minden terület fel van mérve, itt néhány mondatban olvashatod, hogyan áll a tárhelyed.";
+"loadingSizesTitle" = "Fájlok számlálása méret szerint …";
+"loadingSizesDetail" = "A diagram megjelenik, amint minden terület fel van mérve.";
+"loadingAppsTitle" = "Appok ellenőrzése …";
+"loadingAppsDetail" = "A méretek és az utolsó használat a vizsgálat végére véglegesek.";
+"showSidebar" = "Oldalsáv megjelenítése";
+"hideSidebar" = "Oldalsáv elrejtése";
+
+/* Overview and categories */
+"availableOf" = "%@ elérhető, összesen %@";
+"categories" = "Kategóriák";
+"freeSpace" = "Szabad";
+"temporaryAreaName" = "Ideiglenes rendszerterület";
+"categoryApps" = "Alkalmazások";
+"categoryDocuments" = "Dokumentumok és Íróasztal";
+"categoryDownloads" = "Letöltések";
+"categoryMedia" = "Fotók, zene és filmek";
+"categoryICloud" = "iCloud Drive"; /* same as English on purpose */
+"categoryMail" = "Mail és Üzenetek";
+"categoryDeveloper" = "Fejlesztés";
+"categoryCaches" = "Gyorsítótárak";
+"categoryAppData" = "Appadatok";
+"categoryTrash" = "Kuka";
+"categoryTemporary" = "Ideiglenes fájlok";
+"categoryUser" = "Egyéb felhasználói adatok";
+"categoryLibrary" = "Közös appadatok";
+"categoryOther" = "Egyéb mappák";
+"categoryPurgeable" = "macOS által felszabadítható";
+"categorySystem" = "Rendszer és egyéb";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Név";
+"columnSize" = "Méret";
+"columnShare" = "Arány";
+"columnFiles" = "Fájlok";
+"columnLocation" = "Hely";
+"smallerItems" = "%@ kisebb elem 1 MB alatt";
+"measuredTotal" = "%@ felmérve";
+"open" = "Megnyitás";
+"showInFinder" = "Megjelenítés a Finderben";
+"info" = "Információk";
+"copyPath" = "Útvonal másolása";
+"done" = "Kész";
+"allocated" = "Méret a lemezen";
+"kind" = "Típus";
+"modified" = "Módosítva";
+"created" = "Létrehozva";
+"contents" = "Tartalom";
+"files" = "Fájlok";
+"folders" = "Mappák";
+"packages" = "Appcsomagok";
+"modifiedBetween" = "Módosítási időszak";
+"dateRange" = "%@ – %@";
+"analyzing" = "Fájlok elemzése …";
+"typesBySize" = "Fájltípusok méret szerint";
+"fileCount" = "%@ fájl";
+"noExtension" = "nincs kiterjesztés";
+
+/* Large files */
+"minimumSize" = "Minimális méret";
+"fromSize" = "legalább %@";
+"noFilesFrom" = "Nincs legalább %@ méretű fájl";
+"filesTotal" = "%@ fájl · összesen %@";
+
+/* Temporary area */
+"location" = "Hely";
+"total" = "Összesen";
+"subfolders" = "Almappák";
+"viewCopies" = "Appmásolatok megtekintése …";
+"temporaryFolderT" = "Ideiglenes fájlok";
+"temporaryFolderTDetail" = "Újraindításkor nagyrészt kiürül.";
+"temporaryFolderC" = "Gyorsítótárak";
+"temporaryFolderCDetail" = "Appok és rendszerszolgáltatások gyorsítótárai.";
+"temporaryFolderX" = "Appmásolatok";
+"temporaryFolderXDetail" = "Másolatok, amelyeket a macOS az aláírások ellenőrzésekor készít.";
+"temporaryFolder0" = "Rendszerszolgáltatások";
+"temporaryFolder0Detail" = "Háttérszolgáltatások adatai.";
+
+/* Signature copies */
+"noCopies" = "Nincsenek appmásolatok";
+"noCopiesDetail" = "Az X mappában nincsenek appmásolatok.";
+"running" = "fut";
+"stopped" = "nem fut";
+"copiesLabel" = "Másolatok";
+"countedSize" = "Számolt méret";
+"installedVersion" = "Telepített verzió";
+"notFound" = "nem található";
+"versionLabel" = "Verzió: %@";
+"copiesOne" = "1 másolat";
+"copiesMany" = "%@ másolat";
+"current" = "aktuális";
+"old" = "régi";
+"unknown" = "ismeretlen";
+"createdOn" = "Létrehozva: %@";
+"freed" = "Ténylegesen felszabadult: %@";
+"deleteError" = "Nem sikerült mindent törölni: %@";
+"quitToDelete" = "A törléshez lépj ki ebből: %@ (⌘Q).";
+"openInExplorer" = "Megnyitás a Mappák nézetben";
+"deleteAll" = "Összes másolat törlése …";
+"deleteTitle" = "%2$@: %1$@ másolat törlése?";
+"deleteForever" = "Végleges törlés";
+"deleteMessage" = "A másolatok nem kerülnek a Kukába. A macOS szükség esetén újat készít.";
+
+/* Volumes */
+"capacity" = "Kapacitás";
+"used" = "Foglalt";
+"purgeable" = "macOS által felszabadítható";
+"available" = "Elérhető";
+"toOverview" = "Ugrás az áttekintéshez";
+"exploreContents" = "Tartalom felfedezése";
+"scanAndExplore" = "Vizsgálat és felfedezés";
+"volumeGone" = "A kötet már nincs csatlakoztatva";
+
+/* Search */
+"searchPrompt" = "Mappák és fájlok keresése";
+"scopeAll" = "Mind";
+"scopeFolders" = "Mappák";
+"scopeFiles" = "Fájlok";
+"searchResults" = "%@ találat";
+"noResults" = "Nincs találat: „%@”";
+"searchNote" = "Az utolsó vizsgálat legalább 1 MB-os mappái és fájljai között keres.";
+
+/* Full Disk Access */
+"accessTitle" = "Egyetlen engedély sok kérdés helyett";
+"accessDetail" = "Teljes lemezhozzáférés nélkül a macOS külön rákérdez az Íróasztalra, a Dokumentumokra, a Letöltésekre, az iCloud Drive-ra, más appok adataira és a külső kötetekre. A Rendszerbeállítások egyetlen kapcsolója kiváltja mindezeket a kérdéseket. Az app csak neveket, méreteket és dátumokat olvas, a dokumentumaid tartalmát soha, és semmit nem küld el sehová.";
+"accessOneSwitch" = "Adatvédelem és biztonság › Teljes lemezhozzáférés";
+"accessOpenSettings" = "Rendszerbeállítások megnyitása";
+"accessContinue" = "Folytatás teljes lemezhozzáférés nélkül";
+"accessGranted" = "Megadva";
+"accessRestart" = "App újraindítása";
+"accessRestartHint" = "Bekapcsoltad a kapcsolót? A macOS csak az app újraindítása után adja meg a hozzáférést. Kattints az „App újraindítása” gombra, vagy hagyd, hogy a macOS kilépjen az appból és újra megnyissa. Ha így sem működik, távolítsd el a bejegyzést a Rendszerbeállításokban a „–” gombbal, és add hozzá újra az appot.";
+"quitApp" = "Kilépés: %@";
+"fullDiskAccess" = "Teljes lemezhozzáférés";
+
+/* Settings */
+"autoScan" = "Automatikus vizsgálat indításkor";
+"extraFolders" = "További mappák";
+"none" = "Nincs";
+"add" = "Hozzáadás";
+"remove" = "Eltávolítás";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "Takarítás";
+"paneApps" = "Nem használt appok";
+"sectionTidy" = "Hely felszabadítása";
+"layoutList" = "Lista";
+"layoutGrid" = "Rács";
+"settings" = "Beállítások";
+"emptyFolder" = "Ez a mappa üres";
+"otherCategories" = "Egyéb";
+"cleanCaches" = "Appok gyorsítótárai";
+"cleanCachesDetail" = "Gyorsítótárak, amelyeket az appok szükség esetén újra létrehoznak. A futó appokat és magát a macOS-t nem érinti.";
+"cleanDeveloper" = "Fejlesztői gyorsítótárak";
+"cleanDeveloperDetail" = "Az Xcode buildadatai és csomaggyorsítótárak (pl. npm); a következő buildeléskor újra létrejönnek.";
+"cleanLogs" = "Régi naplók";
+"cleanLogsDetail" = "Egy hétnél régebbi appnaplók.";
+"cleanTemporary" = "Régi ideiglenes fájlok";
+"cleanTemporaryDetail" = "Legalább három napja nem módosított ideiglenes fájlok.";
+"cleanTrash" = "Kuka";
+"cleanTrashDetail" = "Véglegesen kiüríti a Kukát. Alapból nincs kijelölve.";
+"cleanFailed" = "%@ elem nem távolítható el, mert használatban van vagy védett.";
+"cleaning" = "Takarítás …";
+"cleanerRefresh" = "Keresés újra";
+"cleanSelected" = "Kijelöltek takarítása (%@)";
+"cleanConfirmTitle" = "%@ végleges eltávolítása?";
+"cleanConfirmMessage" = "A fájlok nem kerülnek a Kukába. Az appok szükség esetén újra létrehozzák a gyorsítótárukat. Utána az app mindent újra felmér.";
+"appsNoneUnused" = "Mostanában minden appot használtál";
+"unusedSince" = "Nem volt megnyitva";
+"daysOption" = "több mint %@ napja";
+"trashAppTitle" = "„%@” áthelyezése a Kukába?";
+"trashAppMessage" = "Az appot visszaállíthatod a Kukából, amíg ki nem üríted.";
+"moveToTrash" = "Áthelyezés a Kukába";
+"lastOpened" = "Utoljára megnyitva: %@";
+"trashAppFailed" = "„%@” nem helyezhető át. A Finderben a jelszavaddal sikerül.";
+"figureFiles" = "Fájlok";
+"figureUnusedApps" = "nem használt app";
+"bucketUnder1MB" = "1 MB alatt";
+"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
+"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
+"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
+"bucketOver1GB" = "1 GB felett";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ felmérve";
+"scanningArea" = "Terület: %@ / %@ · %@";
+"emptyValue" = "üres";
+
+/* Page info, scan details, summary */
+"infoOverview" = "A méretek a foglalt helyet mutatják, ahogy a „du” jelenti. Az APFS-klónok teljes méretükkel számítanak; a közös tárolóblokkokat használó másolatok valójában kevesebbet foglalnak. A „Rendszer és egyéb” a maradék a macOS által jelzett foglaltságig.";
+"infoCleaner" = "Távolítsd el azokat a fájlokat, amelyekre a rendszerednek alig vagy egyáltalán nincs szüksége: a maguktól újra létrejövő gyorsítótárakat, a régi naplókat és a régi ideiglenes fájlokat. Válaszd ki, mi mehet, és erősítsd meg.";
+"infoApps" = "Appok, amelyeket egy ideje nem nyitottál meg. A dátum magától a macOS-től származik; az app semmit nem rögzít. Amire már nincs szükséged, itt a Kukába helyezheted, és onnan vissza is állíthatod.";
+"infoExplorer" = "Minden felmért mappa méret szerint rendezve. Dupla kattintással megnyílik egy mappa; a helyi menü megjeleníti a fájlokat a Finderben, és információt ad róluk.";
+"infoLargeFiles" = "Az utolsó vizsgálat összes fájlja a választott mérettől felfelé. Dupla kattintással a fájl megjelenik a Finderben.";
+"infoTemporaryFiles" = "A macOS ezt a területet minden felhasználónak a /private/var/folders alatt hozza létre. A Finderben rejtett, és a „Tárhely kezelése” sem bontja le.";
+"infoCopies" = "Az aláírás ellenőrzésekor a macOS néha egy app teljes másolatait helyezi az X mappába. Ezek nem különálló programok; a macOS szükség esetén újat készít. Törlésük biztonságos, amíg az app nem fut.";
+"infoVolume" = "A kötet kapacitása: mennyi foglalt, mennyit tud a macOS szükség esetén magától felszabadítani, és mennyi szabad. A külső kötetek itt felmérhetők.";
+"aboutPage" = "Erről az oldalról";
+"scanDetails" = "Vizsgálat";
+"scanProgress" = "Előrehaladás";
+"scanArea" = "Terület";
+"scanFinished" = "Vizsgálat ideje";
+"accessMissingShort" = "Nincs megadva";
+"summaryTitle" = "Röviden";
+"summaryDisk" = "„%@” kötet: %@ foglalt az összesen %@ helyből, és %@ elérhető.";
+"summaryTop" = "A legtöbb helyet a következők foglalják: %@ (%@) és %@ (%@).";
+"summaryNotMeasured" = "A hely megoszlása az első vizsgálat után itt jelenik meg.";
+"summaryClean" = "Takarítással körülbelül %@ szabadítható fel.";
+"summaryCopies" = "Az appok másolatai, amelyeket a macOS ellenőrzéskor készít, %@ helyet foglalnak.";
+"summaryApps" = "%@ app egy ideje nem volt megnyitva.";
+"readAloud" = "Felolvasás";
+"stopReading" = "Felolvasás leállítása";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "Mekkorák a fájljaid?";
+"sizeClassesCaption" = "Mennyi helyet foglalnak az egyes méretkategóriák, és hány fájl van bennük. Néhány nagy fájl általában több helyet foglal, mint sok kicsi.";
+"figureLargeFilesFrom" = "nagy fájl, legalább %@";
+"bucketValue" = "%@
+%@ fájl";
+"settingsSystemNote" = "A megjelenést és a mértékegységeket a Rendszerbeállítások adják.";
+"appLanguage" = "Nyelv";
+"languageLikeMac" = "Ugyanaz, mint a Macen";
+"languageRestartHint" = "Az új nyelv újraindítás után jelenik meg.";

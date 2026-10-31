@@ -3,7 +3,7 @@ import Testing
 
 @testable import StorageManager
 
-/// The 20 translations under Resources, read straight from the project folder.
+/// The 28 translations under Resources, read straight from the project folder.
 @Suite("Translations")
 struct TranslationTests {
     private static let resources = URL(fileURLWithPath: #filePath)
@@ -53,10 +53,37 @@ struct TranslationTests {
         arguments: [
             ("de-DE", AppLanguage.german), ("en-GB", .english), ("zh-TW", .traditionalChinese),
             ("zh-Hans-CN", .simplifiedChinese), ("zh-HK", .traditionalChinese),
-            ("pt-PT", .brazilianPortuguese), ("no", .norwegian), ("nb-NO", .norwegian),
+            ("pt", .brazilianPortuguese), ("pt-BR", .brazilianPortuguese),
+            ("pt-PT", .europeanPortuguese), ("pt-AO", .europeanPortuguese),
+            ("no", .norwegian), ("nb-NO", .norwegian),
+            ("hi-IN", .hindi), ("el-GR", .greek),
         ])
     func languageMatching(systemLanguage: String, shipped: AppLanguage) {
         #expect(AppLanguage.match(systemLanguage) == shipped)
+    }
+
+    @Test("The language menu names every language in itself, sorted by that name")
+    func nativeNames() {
+        #expect(AppLanguage.german.nativeName == "Deutsch")
+        #expect(AppLanguage.japanese.nativeName == "日本語")
+        #expect(AppLanguage.greek.nativeName == "Ελληνικά")
+        let names = AppLanguage.byNativeName.map(\.nativeName)
+        #expect(Set(names).count == AppLanguage.allCases.count)
+        let sorted = names.sorted { left, right in
+            left.localizedStandardCompare(right) == .orderedAscending
+        }
+        #expect(names == sorted)
+    }
+
+    @Test("A text missing in a language shows in English, a present one in that language")
+    func missingTextFallsBackToEnglish() throws {
+        let english = try #require(Bundle(url: Self.resources.appendingPathComponent("en.lproj")))
+        let german = try #require(Bundle(url: Self.resources.appendingPathComponent("de.lproj")))
+        // The test folder holds no texts at all, like a language that lacks every one of them.
+        let testFolder = Self.resources.deletingLastPathComponent().appendingPathComponent("Tests")
+        let withoutTexts = try #require(Bundle(url: testFolder))
+        #expect(Localizer.text("rescan", in: withoutTexts, english: english) == "Rescan")
+        #expect(Localizer.text("rescan", in: german, english: english) != "Rescan")
     }
 
     @Test("An unknown language falls back to none, so English takes over")

@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "file grandi da %@";
 "bucketValue" = "%@
 %@ file";
-"settingsSystemNote" = "Aspetto, lingua e unità vengono prese da Impostazioni di Sistema. Una lingua separata per questa app si imposta lì, in Generali › Lingua e zona › Applicazioni.";
+"settingsSystemNote" = "L’aspetto e le unità vengono da Impostazioni di Sistema.";
+"appLanguage" = "Lingua";
+"languageLikeMac" = "Come sul Mac";
+"languageRestartHint" = "La nuova lingua appare dopo il riavvio.";

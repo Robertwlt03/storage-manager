@@ -73,7 +73,7 @@ use its names:
 ## <img src="assets/icons/translations.svg" height="33" align="absmiddle" alt="">Texts only through translations
 
 The code contains no text that you read in the app. Every visible text has an English key in `TextKey.swift`, for
-example `TextKey.categories.translated`, and the texts themselves live in the 20 files under `Resources`. That is
+example `TextKey.categories.translated`, and the texts themselves live in the 28 files under `Resources`. That is
 why German words appear nowhere in the code. Output for developers, for example from the self test, is in English.
 
 ## <img src="assets/icons/steps.svg" height="33" align="absmiddle" alt="">Small, clearly separated steps
@@ -191,7 +191,7 @@ The script runs twenty-three checks one after another:
    in the names of the Apple and Python interfaces the code uses, the commands macOS brings in its system folders
    (such as `codesign`), the project's file endings and the app's name. Only the forbidden abbreviations remain a list, because no source
    reliably tells whether a word is an abbreviation.
-17. **Translation files:** `plutil -lint` checks that all 20 translations and the `Info.plist` can be read.
+17. **Translation files:** `plutil -lint` checks that all 28 translations and the `Info.plist` can be read.
 18. **Complete translations:** A text that reads exactly like the English one in some language is reported when the
    macOS spell checker does not know one of its words in that language. Terms that read the same in most languages,
    such as "iCloud Drive", are left out, and so is a text whose line ends in `/* same as English on purpose */`,
@@ -245,7 +245,7 @@ the steps as small, named functions, and at the very bottom, under `MARK: Run`, 
 Search patterns are written over several lines with a comment per part, and names are spelled out, so `BUILD_FOLDER`
 instead of `BUILD_DIR`. The check pipeline itself is split up in `scripts/checks/`, one module per topic.
 
-Whether every text exists in all 20 languages and whether every color reaches the contrast is checked by the tests
+Whether every text exists in all 28 languages and whether every color reaches the contrast is checked by the tests
 in the fourth step. How much of the code the tests reach is shown per folder by `make coverage`.
 
 On GitHub the same check runs by itself on every pull request, as described in

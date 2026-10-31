@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "large files from %@";
 "bucketValue" = "%@
 %@ files";
-"settingsSystemNote" = "Appearance, language and units come from System Settings. A separate language for this app is set there under General › Language & Region › Applications.";
+"settingsSystemNote" = "Appearance and units come from System Settings.";
+"appLanguage" = "Language";
+"languageLikeMac" = "Same as the Mac";
+"languageRestartHint" = "The new language shows after a restart.";

@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Storage Manager"; /* same as English on purpose */
+"paneOverview" = "Tổng quan";
+"paneExplorer" = "Thư mục";
+"paneLargeFiles" = "Tệp lớn";
+"paneTemporaryFiles" = "Vùng tạm";
+"paneCopies" = "Bản sao ứng dụng";
+"sectionSystem" = "Vùng ẩn";
+"sectionVolumes" = "Ổ đĩa";
+"rescan" = "Quét lại";
+"rescanHelp" = "Quét lại mọi vùng (⌘R)";
+"cancelScan" = "Hủy quét";
+
+/* Scan status and placeholders */
+"cancel" = "Hủy";
+"filesAndSize" = "%@ tệp · %@";
+"measuredAt" = "Đã quét lúc %@";
+"scanNow" = "Quét ngay";
+"unreadable" = "Không đọc được %@ thư mục – hãy cho phép Truy cập toàn bộ ổ đĩa…";
+"notMeasuredTitle" = "Chưa quét";
+"notMeasuredDetail" = "Một lượt quét sẽ đo mọi vùng; sau đó mỗi cú bấm đều hiện ngay.";
+"scanningTitle" = "Đang quét…";
+"scanningDetail" = "Kết quả sẽ hiện ngay khi vùng đầu tiên xong.";
+"loadingSummaryTitle" = "Đang viết tóm tắt…";
+"loadingSummaryDetail" = "Khi mọi vùng đã được đo, vài câu ở đây sẽ cho bạn biết tình trạng dung lượng của mình.";
+"loadingSizesTitle" = "Đang đếm tệp theo kích thước…";
+"loadingSizesDetail" = "Biểu đồ sẽ hiện ngay khi mọi vùng đã được đo.";
+"loadingAppsTitle" = "Đang kiểm tra ứng dụng…";
+"loadingAppsDetail" = "Kích thước và lần dùng gần nhất sẽ chính xác khi quét xong.";
+"showSidebar" = "Hiển thị thanh bên";
+"hideSidebar" = "Ẩn thanh bên";
+
+/* Overview and categories */
+"availableOf" = "%@ khả dụng trong tổng số %@";
+"categories" = "Danh mục";
+"freeSpace" = "Trống";
+"temporaryAreaName" = "Vùng tạm của hệ thống";
+"categoryApps" = "Ứng dụng";
+"categoryDocuments" = "Tài liệu & Màn hình nền";
+"categoryDownloads" = "Tải về";
+"categoryMedia" = "Ảnh, Nhạc & Phim";
+"categoryICloud" = "iCloud Drive"; /* same as English on purpose */
+"categoryMail" = "Mail & Tin nhắn";
+"categoryDeveloper" = "Nhà phát triển";
+"categoryCaches" = "Bộ nhớ đệm";
+"categoryAppData" = "Dữ liệu ứng dụng";
+"categoryTrash" = "Thùng rác";
+"categoryTemporary" = "Tệp tạm";
+"categoryUser" = "Dữ liệu người dùng khác";
+"categoryLibrary" = "Dữ liệu ứng dụng dùng chung";
+"categoryOther" = "Thư mục khác";
+"categoryPurgeable" = "macOS có thể xóa";
+"categorySystem" = "Hệ thống & Khác";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Tên";
+"columnSize" = "Kích thước";
+"columnShare" = "Tỷ lệ";
+"columnFiles" = "Tệp";
+"columnLocation" = "Vị trí";
+"smallerItems" = "%@ mục nhỏ dưới 1 MB";
+"measuredTotal" = "Đã quét %@";
+"open" = "Mở";
+"showInFinder" = "Hiển thị trong Finder";
+"info" = "Lấy thông tin";
+"copyPath" = "Sao chép đường dẫn";
+"done" = "Xong";
+"allocated" = "Kích thước trên ổ đĩa";
+"kind" = "Loại";
+"modified" = "Đã sửa đổi";
+"created" = "Đã tạo";
+"contents" = "Nội dung";
+"files" = "Tệp";
+"folders" = "Thư mục";
+"packages" = "Gói ứng dụng";
+"modifiedBetween" = "Sửa đổi trong khoảng";
+"dateRange" = "%@ đến %@";
+"analyzing" = "Đang phân tích tệp…";
+"typesBySize" = "Loại tệp theo kích thước";
+"fileCount" = "%@ tệp";
+"noExtension" = "không có phần mở rộng";
+
+/* Large files */
+"minimumSize" = "Kích thước tối thiểu";
+"fromSize" = "từ %@";
+"noFilesFrom" = "Không có tệp từ %@";
+"filesTotal" = "%@ tệp · tổng %@";
+
+/* Temporary area */
+"location" = "Vị trí";
+"total" = "Tổng";
+"subfolders" = "Thư mục con";
+"viewCopies" = "Xem bản sao ứng dụng…";
+"temporaryFolderT" = "Tệp tạm";
+"temporaryFolderTDetail" = "Phần lớn được dọn khi khởi động lại.";
+"temporaryFolderC" = "Bộ nhớ đệm";
+"temporaryFolderCDetail" = "Bộ nhớ đệm của ứng dụng và dịch vụ hệ thống.";
+"temporaryFolderX" = "Bản sao ứng dụng";
+"temporaryFolderXDetail" = "Bản sao macOS tạo ra khi kiểm tra chữ ký.";
+"temporaryFolder0" = "Dịch vụ hệ thống";
+"temporaryFolder0Detail" = "Dữ liệu của các dịch vụ chạy nền.";
+
+/* Signature copies */
+"noCopies" = "Không có bản sao ứng dụng";
+"noCopiesDetail" = "Thư mục X không có bản sao ứng dụng nào.";
+"running" = "đang chạy";
+"stopped" = "đã thoát";
+"copiesLabel" = "Bản sao";
+"countedSize" = "Kích thước tính được";
+"installedVersion" = "Phiên bản đã cài";
+"notFound" = "không tìm thấy";
+"versionLabel" = "Phiên bản %@";
+"copiesOne" = "1 bản sao";
+"copiesMany" = "%@ bản sao";
+"current" = "hiện tại";
+"old" = "cũ";
+"unknown" = "không rõ";
+"createdOn" = "Tạo ngày %@";
+"freed" = "Dung lượng thực sự được giải phóng: %@";
+"deleteError" = "Không thể xóa hết: %@";
+"quitToDelete" = "Thoát %@ bằng ⌘Q để xóa.";
+"openInExplorer" = "Mở trong Thư mục";
+"deleteAll" = "Xóa tất cả bản sao…";
+"deleteTitle" = "Xóa %@ bản sao của %@?";
+"deleteForever" = "Xóa vĩnh viễn";
+"deleteMessage" = "Các bản sao không được chuyển vào Thùng rác. macOS sẽ tạo bản mới khi cần.";
+
+/* Volumes */
+"capacity" = "Dung lượng";
+"used" = "Đã dùng";
+"purgeable" = "macOS có thể xóa";
+"available" = "Khả dụng";
+"toOverview" = "Đến Tổng quan";
+"exploreContents" = "Khám phá nội dung";
+"scanAndExplore" = "Quét và khám phá";
+"volumeGone" = "Ổ đĩa không còn được kết nối";
+
+/* Search */
+"searchPrompt" = "Tìm thư mục và tệp";
+"scopeAll" = "Tất cả";
+"scopeFolders" = "Thư mục";
+"scopeFiles" = "Tệp";
+"searchResults" = "%@ kết quả";
+"noResults" = "Không có kết quả cho “%@”";
+"searchNote" = "Tìm thư mục và tệp từ 1 MB trong lần quét gần nhất.";
+
+/* Full Disk Access */
+"accessTitle" = "Một quyền thay cho nhiều lời hỏi";
+"accessDetail" = "Nếu không có quyền Truy cập toàn bộ ổ đĩa, macOS sẽ hỏi riêng cho Màn hình nền, Tài liệu, Tải về, iCloud Drive, dữ liệu của ứng dụng khác và ổ đĩa ngoài. Chỉ một công tắc trong Cài đặt hệ thống thay thế tất cả các lời hỏi này. Ứng dụng chỉ đọc tên, kích thước và ngày, không bao giờ đọc nội dung tài liệu của bạn và không gửi gì đi đâu cả.";
+"accessOneSwitch" = "Quyền riêng tư & Bảo mật › Truy cập toàn bộ ổ đĩa";
+"accessOpenSettings" = "Mở Cài đặt hệ thống";
+"accessContinue" = "Tiếp tục mà không cấp quyền";
+"accessGranted" = "Đã cấp";
+"accessRestart" = "Khởi động lại ứng dụng";
+"accessRestartHint" = "Đã bật công tắc? macOS chỉ cấp quyền sau khi ứng dụng khởi động lại. Hãy bấm “Khởi động lại ứng dụng” hoặc để macOS thoát và mở lại ứng dụng. Nếu vẫn không được, hãy xóa mục đó bằng “–” trong Cài đặt hệ thống rồi thêm lại ứng dụng.";
+"quitApp" = "Thoát %@";
+"fullDiskAccess" = "Truy cập toàn bộ ổ đĩa";
+
+/* Settings */
+"autoScan" = "Tự động quét khi mở";
+"extraFolders" = "Thư mục bổ sung";
+"none" = "Không có";
+"add" = "Thêm";
+"remove" = "Xóa";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "Dọn dẹp";
+"paneApps" = "Ứng dụng không dùng";
+"sectionTidy" = "Giải phóng dung lượng";
+"layoutList" = "Danh sách";
+"layoutGrid" = "Lưới";
+"settings" = "Cài đặt";
+"emptyFolder" = "Thư mục này trống";
+"otherCategories" = "Khác";
+"cleanCaches" = "Bộ nhớ đệm ứng dụng";
+"cleanCachesDetail" = "Bộ nhớ đệm mà ứng dụng tạo lại khi cần. Ứng dụng đang chạy và chính macOS không bị động đến.";
+"cleanDeveloper" = "Bộ nhớ đệm nhà phát triển";
+"cleanDeveloperDetail" = "Dữ liệu build của Xcode và bộ nhớ đệm gói như npm; chúng sẽ được tạo lại ở lần build tiếp theo.";
+"cleanLogs" = "Nhật ký cũ";
+"cleanLogsDetail" = "Nhật ký ứng dụng cũ hơn một tuần.";
+"cleanTemporary" = "Tệp tạm cũ";
+"cleanTemporaryDetail" = "Tệp tạm không thay đổi trong ít nhất ba ngày.";
+"cleanTrash" = "Thùng rác";
+"cleanTrashDetail" = "Dọn sạch Thùng rác vĩnh viễn. Không được chọn theo mặc định.";
+"cleanFailed" = "Không thể xóa %@ mục vì chúng đang được dùng hoặc được bảo vệ.";
+"cleaning" = "Đang dọn dẹp…";
+"cleanerRefresh" = "Tìm lại";
+"cleanSelected" = "Dọn mục đã chọn (%@)";
+"cleanConfirmTitle" = "Xóa vĩnh viễn %@?";
+"cleanConfirmMessage" = "Các tệp không được chuyển vào Thùng rác. Ứng dụng sẽ tạo lại bộ nhớ đệm khi cần. Sau đó, ứng dụng sẽ đo lại mọi thứ.";
+"appsNoneUnused" = "Mọi ứng dụng đều được dùng gần đây";
+"unusedSince" = "Không mở trong";
+"daysOption" = "hơn %@ ngày";
+"trashAppTitle" = "Chuyển “%@” vào Thùng rác?";
+"trashAppMessage" = "Bạn có thể khôi phục ứng dụng từ Thùng rác cho đến khi dọn sạch Thùng rác.";
+"moveToTrash" = "Chuyển vào Thùng rác";
+"lastOpened" = "Mở lần cuối ngày %@";
+"trashAppFailed" = "Không thể di chuyển “%@”. Trong Finder, bạn có thể làm việc này bằng mật khẩu của mình.";
+"figureFiles" = "Tệp";
+"figureUnusedApps" = "ứng dụng không dùng";
+"bucketUnder1MB" = "dưới 1 MB";
+"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
+"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
+"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
+"bucketOver1GB" = "trên 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "Đã quét %@";
+"scanningArea" = "Vùng %@ trên %@ · %@";
+"emptyValue" = "trống";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Kích thước là dung lượng đang dùng, theo báo cáo của “du”. Bản sao APFS (clone) được tính đầy đủ; các bản sao dùng chung khối lưu trữ thực ra chiếm ít hơn. “Hệ thống & Khác” là phần còn lại cho đến mức macOS báo là đã dùng.";
+"infoCleaner" = "Xóa các tệp mà hệ thống hầu như hoặc hoàn toàn không cần: bộ nhớ đệm tự tạo lại, nhật ký cũ và tệp tạm cũ. Chọn những gì có thể xóa rồi xác nhận.";
+"infoApps" = "Các ứng dụng bạn đã lâu không mở. Ngày này do chính macOS cung cấp; ứng dụng không ghi lại gì. Chuyển những gì bạn không còn cần vào Thùng rác tại đây; bạn có thể khôi phục từ đó.";
+"infoExplorer" = "Mọi thư mục đã đo, sắp xếp theo kích thước. Bấm hai lần để mở thư mục; menu ngữ cảnh hiển thị tệp trong Finder và cho biết thông tin về chúng.";
+"infoLargeFiles" = "Mọi tệp từ kích thước đã chọn trong lần quét gần nhất. Bấm hai lần để hiển thị tệp trong Finder.";
+"infoTemporaryFiles" = "macOS tạo vùng này cho mỗi người dùng trong /private/var/folders. Vùng này bị ẩn trong Finder và không được phân tích chi tiết trong “Quản lý dung lượng”.";
+"infoCopies" = "Khi kiểm tra chữ ký, đôi khi macOS đặt các bản sao đầy đủ của ứng dụng vào thư mục X. Đây không phải chương trình riêng; macOS sẽ tạo bản mới khi cần. Có thể xóa an toàn miễn là ứng dụng đã thoát.";
+"infoVolume" = "Dung lượng của ổ đĩa này: phần đã dùng, phần macOS có thể tự giải phóng khi cần và phần còn trống. Có thể đo ổ đĩa ngoài tại đây.";
+"aboutPage" = "Về trang này";
+"scanDetails" = "Quét";
+"scanProgress" = "Tiến trình";
+"scanArea" = "Vùng";
+"scanFinished" = "Đã quét lúc";
+"accessMissingShort" = "Chưa cấp";
+"summaryTitle" = "Tóm tắt";
+"summaryDisk" = "Trên “%@”, đã dùng %@ trong tổng số %@ và còn %@ khả dụng.";
+"summaryTop" = "Chiếm nhiều dung lượng nhất là %@ với %@ và %@ với %@.";
+"summaryNotMeasured" = "Cách phân chia dung lượng sẽ hiện ở đây sau lần quét đầu tiên.";
+"summaryClean" = "Dọn dẹp có thể giải phóng khoảng %@.";
+"summaryCopies" = "Bản sao ứng dụng mà macOS tạo khi kiểm tra chiếm %@.";
+"summaryApps" = "%@ ứng dụng đã lâu không được mở.";
+"readAloud" = "Đọc to";
+"stopReading" = "Dừng đọc";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "Tệp của bạn lớn cỡ nào?";
+"sizeClassesCaption" = "Mỗi nhóm kích thước chiếm bao nhiêu dung lượng và có bao nhiêu tệp. Vài tệp lớn thường chiếm nhiều chỗ hơn rất nhiều tệp nhỏ.";
+"figureLargeFilesFrom" = "tệp lớn từ %@";
+"bucketValue" = "%@
+%@ tệp";
+"settingsSystemNote" = "Giao diện và đơn vị lấy từ Cài đặt hệ thống.";
+"appLanguage" = "Ngôn ngữ";
+"languageLikeMac" = "Giống trên máy Mac";
+"languageRestartHint" = "Ngôn ngữ mới sẽ hiển thị sau khi khởi động lại.";

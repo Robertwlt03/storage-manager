@@ -240,4 +240,7 @@
 "figureLargeFilesFrom" = "%@ 이상의 큰 파일";
 "bucketValue" = "%@
 파일 %@개";
-"settingsSystemNote" = "화면 모드, 언어, 단위는 시스템 설정의 값을 따릅니다. 이 앱만의 언어는 시스템 설정의 일반 › 언어 및 지역 › 응용 프로그램에서 설정할 수 있습니다.";
+"settingsSystemNote" = "모양과 단위는 시스템 설정을 따릅니다.";
+"appLanguage" = "언어";
+"languageLikeMac" = "Mac과 동일";
+"languageRestartHint" = "새 언어는 다시 시작한 후에 표시됩니다.";

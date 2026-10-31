@@ -26,7 +26,7 @@ SHARED_SHARE = 0.5
 SHARED_MINIMUM = 3  # and in at least this many, so two languages alone never make a term shared
 WORD = re.compile(r"[^\W\d_]+")  # letters only: placeholders such as %@ and numbers do not count
 # The spell checker's names for languages whose folders are named differently.
-DICTIONARY_NAMES = {"pt-BR": "pt_BR"}
+DICTIONARY_NAMES = {"pt-BR": "pt_BR", "pt-PT": "pt_PT"}
 SAME_ON_PURPOSE = "/* same as English on purpose */"
 # The languages by their folder names, so a finding says "Danish" and not only "da".
 LANGUAGE_NAMES = {
@@ -34,7 +34,9 @@ LANGUAGE_NAMES = {
     "fr": "French", "it": "Italian", "ja": "Japanese", "ko": "Korean", "nb": "Norwegian",
     "nl": "Dutch", "pl": "Polish", "pt-BR": "Brazilian Portuguese", "ru": "Russian",
     "sv": "Swedish", "tr": "Turkish", "uk": "Ukrainian", "zh-Hans": "Simplified Chinese",
-    "zh-Hant": "Traditional Chinese",
+    "zh-Hant": "Traditional Chinese", "pt-PT": "European Portuguese", "hu": "Hungarian",
+    "ro": "Romanian", "el": "Greek", "id": "Indonesian", "vi": "Vietnamese", "th": "Thai",
+    "hi": "Hindi",
 }
 
 

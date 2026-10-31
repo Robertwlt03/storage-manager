@@ -107,4 +107,14 @@ struct ServiceTests {
             #expect(sentences.contains(key.translated), "\(key.rawValue)")
         }
     }
+
+    @Test("A restart keeps how the app was started, but not a language given at the start")
+    @MainActor
+    func restartArguments() {
+        let started = ["/App", "-demo", "YES", "-AppleLanguages", "(ar)", "-pane", "copies"]
+        let kept = LifecycleService.argumentsToKeep(from: started)
+        #expect(kept == ["-demo", "YES", "-pane", "copies"])
+        #expect(LifecycleService.argumentsToKeep(from: ["/Applications/App"]).isEmpty)
+        #expect(LifecycleService.argumentsToKeep(from: ["/App", "-AppleLanguages"]).isEmpty)
+    }
 }
