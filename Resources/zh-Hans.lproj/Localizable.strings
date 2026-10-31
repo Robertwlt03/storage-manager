@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "启动时自动扫描";
+"exportReport" = "导出报告 …";
+"reportTitle" = "%@ 的存储报告";
+"reportFileName" = "存储报告";
 "extraFolders" = "其他文件夹";
 "none" = "无";
 "add" = "添加";

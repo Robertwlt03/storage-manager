@@ -6,7 +6,6 @@ import SwiftUI
 /// The work itself happens in the services; this class only orchestrates them.
 @Observable final class AppModel {
     /// An estimate never claims "done" before the scan really is.
-    private static let largestEstimatedFraction = 0.99
     /// APFS reports freed blocks with a short delay.
     private static let waitForFreedSpace: Duration = .seconds(2)
 
@@ -47,15 +46,6 @@ import SwiftUI
     // The newest background refresh of each list; an older one that finishes later steps aside.
     private var appsRefreshID = UUID()
     private var cleanItemsRefreshID = UUID()
-
-    var startupVolume: VolumeInformation? { volumes.first(where: \.isRoot) }
-    /// Reads `revision`, because the tree itself is not observed.
-    var hasData: Bool {
-        _ = revision
-        return !root.children.isEmpty
-    }
-    var isSearching: Bool { !searchQuery.isEmpty }
-    var searchQuery: String { searchText.trimmingCharacters(in: .whitespaces) }
 
     /// Animated by SwiftUI, not AppKit (see ARCHITECTURE.md).
     func toggleSidebar() {
@@ -201,17 +191,6 @@ import SwiftUI
         treeChanged()
         refreshApps()
         refreshCleanItems()
-    }
-
-    /// How far the scan is, estimated from the file count of the last full scan; the first time
-    /// from the used space.
-    var scanFraction: Double {
-        let filesOfLastFullScan = UserDefaults.standard.integer(forKey: SettingsKey.lastScanFiles)
-        let estimate =
-            filesOfLastFullScan > 0
-            ? Double(progress.files) / Double(filesOfLastFullScan)
-            : Double(progress.bytes) / Double(max(startupVolume?.usedBytes ?? 1, 1))
-        return min(estimate, Self.largestEstimatedFraction)
     }
 
     /// The canceled task still finishes the scan, so the figures match the partial tree.

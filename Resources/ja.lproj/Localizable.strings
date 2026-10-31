@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "起動時に自動的にスキャン";
+"exportReport" = "レポートを書き出す …";
+"reportTitle" = "%@のストレージレポート";
+"reportFileName" = "ストレージレポート";
 "extraFolders" = "追加のフォルダ";
 "none" = "なし";
 "add" = "追加";

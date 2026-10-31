@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Açılışta otomatik tara";
+"exportReport" = "Raporu Dışa Aktar …";
+"reportTitle" = "%@ tarihli depolama raporu";
+"reportFileName" = "Depolama Raporu";
 "extraFolders" = "Ek Klasörler";
 "none" = "Yok";
 "add" = "Ekle";

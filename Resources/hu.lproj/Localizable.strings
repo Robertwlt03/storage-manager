@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Automatikus vizsgálat indításkor";
+"exportReport" = "Jelentés exportálása …";
+"reportTitle" = "Tárhelyjelentés: %@";
+"reportFileName" = "Tárhelyjelentés";
 "extraFolders" = "További mappák";
 "none" = "Nincs";
 "add" = "Hozzáadás";

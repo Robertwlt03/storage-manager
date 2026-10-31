@@ -75,6 +75,9 @@ Every page has an info button at the top right that explains what the page is fo
 dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have
 turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
 
+With File › Export Report (⇧⌘E) you save the summary, every category and the largest files as a text file, for
+keeping or passing on. Each line has the size first, so it also pastes into a spreadsheet.
+
 ## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Languages
 
 The app speaks 28 languages and follows the language of your Mac. To use it in a different one, pick it in the

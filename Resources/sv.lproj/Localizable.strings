@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mät automatiskt vid start";
+"exportReport" = "Exportera rapport …";
+"reportTitle" = "Lagringsrapport från %@";
+"reportFileName" = "Lagringsrapport";
 "extraFolders" = "Ytterligare mappar";
 "none" = "Inga";
 "add" = "Lägg till";

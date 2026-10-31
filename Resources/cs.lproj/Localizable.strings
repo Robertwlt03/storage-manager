@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Skenovat automaticky při spuštění";
+"exportReport" = "Exportovat zprávu …";
+"reportTitle" = "Zpráva o úložišti z %@";
+"reportFileName" = "Zpráva o úložišti";
 "extraFolders" = "Další složky";
 "none" = "Žádné";
 "add" = "Přidat";

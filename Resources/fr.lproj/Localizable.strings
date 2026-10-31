@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Analyser automatiquement au lancement";
+"exportReport" = "Exporter le rapport …";
+"reportTitle" = "Rapport de stockage du %@";
+"reportFileName" = "Rapport de stockage";
 "extraFolders" = "Dossiers supplémentaires";
 "none" = "Aucun";
 "add" = "Ajouter";
