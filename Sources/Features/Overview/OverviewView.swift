@@ -64,6 +64,10 @@ struct OverviewView: View {
         UI.Card {
             UI.VolumeSummary(
                 startupVolume, segments: segments, canSelect: canOpen, onSelect: open)
+            if startupVolume.isLow {
+                UI.Note(TextKey.lowSpaceWarning.translated, .warning(symbol: Symbols.lowSpace))
+                    .padding(.bottom, Space.row)
+            }
         }
     }
 

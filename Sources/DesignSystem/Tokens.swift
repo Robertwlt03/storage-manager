@@ -101,6 +101,7 @@ nonisolated enum Symbols {
     static let temporaryArea = "hourglass"
     static let copies = "checkmark.seal"
     static let internalDrive = "internaldrive"
+    static let lowSpace = "exclamationmark.triangle"
     static let externalDrive = "externaldrive"
     static let volumeGone = "externaldrive.badge.xmark"
     static let rescan = "arrow.clockwise"

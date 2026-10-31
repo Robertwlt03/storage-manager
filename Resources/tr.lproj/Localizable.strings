@@ -164,6 +164,7 @@
 "extraFolders" = "Ek Klasörler";
 "showInMenuBar" = "Boş alanı menü çubuğunda göster";
 "openApp" = "%@ uygulamasını aç";
+"lowSpaceWarning" = "Alan azalıyor. “Temizle” ve “Büyük Dosyalar” nelerin silinebileceğini gösterir.";
 "excludedFolders" = "Hariç Tutulan Klasörler";
 "none" = "Yok";
 "add" = "Ekle";

@@ -164,6 +164,7 @@
 "extraFolders" = "其他檔案夾";
 "showInMenuBar" = "在選單列中顯示可用空間";
 "openApp" = "打開 %@";
+"lowSpaceWarning" = "空間即將不足。「清理」和「大型檔案」會顯示可以刪除的內容。";
 "excludedFolders" = "排除的檔案夾";
 "none" = "無";
 "add" = "加入";

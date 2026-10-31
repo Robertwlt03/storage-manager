@@ -164,6 +164,7 @@
 "extraFolders" = "Flere mapper";
 "showInMenuBar" = "Vis ledig plass i menylinjen";
 "openApp" = "Åpne %@";
+"lowSpaceWarning" = "Plassen er i ferd med å ta slutt. «Rydd opp» og «Store filer» viser hva som kan fjernes.";
 "excludedFolders" = "Utelatte mapper";
 "none" = "Ingen";
 "add" = "Legg til";

@@ -164,6 +164,7 @@
 "extraFolders" = "Další složky";
 "showInMenuBar" = "Zobrazovat volné místo na řádku nabídek";
 "openApp" = "Otevřít %@";
+"lowSpaceWarning" = "Místo dochází. „Vyčistit“ a „Velké soubory“ ukazují, co může pryč.";
 "excludedFolders" = "Vyloučené složky";
 "none" = "Žádné";
 "add" = "Přidat";

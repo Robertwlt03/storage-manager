@@ -85,7 +85,8 @@ A widget shows the available space on your desktop or in Notification Center. Ad
 desktop with the right mouse button, choose Edit Widgets and look for Storage Manager.
 
 The menu bar shows how much space is available on your Mac, even with the window closed, and its menu opens the
-app or starts a new scan. You can turn it off in the settings.
+app or starts a new scan. When space runs low, a warning sign takes the place of the drive there, and the overview
+says so too. You can turn the menu bar item off in the settings.
 
 ## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Languages
 

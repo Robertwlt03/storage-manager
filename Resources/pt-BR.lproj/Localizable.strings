@@ -164,6 +164,7 @@
 "extraFolders" = "Pastas adicionais";
 "showInMenuBar" = "Mostrar o espaço livre na barra de menus";
 "openApp" = "Abrir %@";
+"lowSpaceWarning" = "O espaço está acabando. “Limpar” e “Arquivos grandes” mostram o que pode sair.";
 "excludedFolders" = "Pastas excluídas";
 "none" = "Nenhuma";
 "add" = "Adicionar";

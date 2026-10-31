@@ -164,6 +164,7 @@
 "extraFolders" = "Carpetas adicionales";
 "showInMenuBar" = "Mostrar el espacio libre en la barra de menús";
 "openApp" = "Abrir %@";
+"lowSpaceWarning" = "Queda poco espacio. «Limpiar» y «Archivos grandes» muestran lo que se puede quitar.";
 "excludedFolders" = "Carpetas excluidas";
 "none" = "Ninguna";
 "add" = "Añadir";

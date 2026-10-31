@@ -164,6 +164,7 @@
 "extraFolders" = "Folder Tambahan";
 "showInMenuBar" = "Tampilkan ruang kosong di bar menu";
 "openApp" = "Buka %@";
+"lowSpaceWarning" = "Ruang hampir habis. “Bersihkan” dan “File Besar” menunjukkan apa yang bisa dihapus.";
 "excludedFolders" = "Folder yang Dikecualikan";
 "none" = "Tidak Ada";
 "add" = "Tambah";

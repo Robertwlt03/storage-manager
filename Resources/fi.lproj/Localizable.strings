@@ -164,6 +164,7 @@
 "extraFolders" = "Lisäkansiot";
 "showInMenuBar" = "Näytä vapaa tila valikkorivillä";
 "openApp" = "Avaa %@";
+"lowSpaceWarning" = "Tila on vähissä. ”Siivoa” ja ”Suuret tiedostot” näyttävät, mistä voi luopua.";
 "excludedFolders" = "Ohitettavat kansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";
