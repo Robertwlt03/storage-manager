@@ -29,6 +29,21 @@ nonisolated enum CleanerService {
         }
     }
 
+    /// The clean-up items with their sizes: from the scanned tree where it has the entry, measured
+    /// on the disk where the tree folded it away (under 1 MB), so a folder of many small logs still
+    /// counts. The tree sizes are read by the caller, which owns the tree.
+    static func items(_ listed: [(kind: CleanKind, paths: [String], treeBytes: [Int64?])])
+        -> [CleanItem]
+    {
+        listed.map { kind, paths, treeBytes in
+            let bytes = zip(paths, treeBytes)
+                .reduce(0) { total, entry in
+                    total + (entry.1 ?? FileTreeWalker.allocatedBytes(of: entry.0))
+                }
+            return CleanItem(kind: kind, paths: paths, bytes: bytes)
+        }
+    }
+
     /// Removes what is listed and still removable now: an app may have started or a temporary file
     /// may have changed since the list was made. Returns how many entries could not be removed.
     static func clean(_ items: [CleanItem]) -> Int {

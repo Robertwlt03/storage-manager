@@ -157,6 +157,21 @@ struct ServiceTests {
         #expect(!ScanService.liesIn("/ab", anyOf: excluded))
     }
 
+    @Test("Small entries the tree folds away are measured on the disk, a folder with its files")
+    func allocatedBytes() throws {
+        let folder =
+            FileManager.default.temporaryDirectory.path + "/Allocated-" + UUID().uuidString
+        try FileManager.default.createDirectory(atPath: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(atPath: folder) }
+        let data = Data(count: Int(ScanLimits.smallestListedBytes / 4))
+        FileManager.default.createFile(atPath: folder + "/one", contents: data)
+        FileManager.default.createFile(atPath: folder + "/two", contents: data)
+        let one = FileTreeWalker.allocatedBytes(of: folder + "/one")
+        #expect(one >= Int64(data.count))
+        #expect(FileTreeWalker.allocatedBytes(of: folder) == one * 2)
+        #expect(FileTreeWalker.allocatedBytes(of: folder + "/missing") == 0)
+    }
+
     @Test("A scan leaves excluded folders out with everything inside")
     func excludedScan() throws {
         let folder =

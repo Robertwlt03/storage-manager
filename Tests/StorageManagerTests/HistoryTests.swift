@@ -11,12 +11,15 @@ struct HistoryTests {
     private static let earlierDate = Date(timeIntervalSince1970: 0)
     private static let laterDate = Date(timeIntervalSince1970: 86_400)
 
-    private static let areas = ["/a", "/c"]
+    private static let areas: Set<String> = ["/a", "/c"]
 
     private static func sizes(
-        _ bytes: [String: Int64], at date: Date, areas: [String] = areas, hadFullAccess: Bool = true
+        _ bytes: [String: Int64], at date: Date, areas: Set<String> = areas,
+        excluded: Set<String> = [], hadFullAccess: Bool = true
     ) -> FolderSizes {
-        FolderSizes(date: date, areas: areas, hadFullAccess: hadFullAccess, bytes: bytes)
+        FolderSizes(
+            date: date, areas: areas, excluded: excluded, hadFullAccess: hadFullAccess,
+            bytes: bytes)
     }
 
     @Test("Only the newest points are kept")
@@ -40,7 +43,8 @@ struct HistoryTests {
             TestTree.folder("tiny", in: area, fileBytes: enough / 2)
             TestTree.chain(["one", "two", "three", "four"], in: area, fileBytes: enough)
         }
-        let sizes = HistoryService.folderSizes(of: root, at: Self.laterDate, hadFullAccess: true)
+        let sizes = HistoryService.folderSizes(
+            of: root, at: Self.laterDate, excluded: [], hadFullAccess: true)
         #expect(sizes.date == Self.laterDate)
         #expect(sizes.areas == ["/area"])
         #expect(
@@ -90,8 +94,8 @@ struct HistoryTests {
         #expect(growth.folders.first?.path == "/folder\(count)")
     }
 
-    @Test("Scans of different areas or with different access are not compared")
-    func notComparable() {
+    @Test("Scans differing in areas, exclusions or access are not compared; order does not count")
+    func notComparable() throws {
         let earlier = Self.sizes([:], at: Self.earlierDate)
         let later = ["/a": 1_000 * Self.megabyte]
         #expect(
@@ -101,6 +105,14 @@ struct HistoryTests {
             HistoryService.growth(
                 from: earlier, to: Self.sizes(later, at: Self.laterDate, hadFullAccess: false))
                 == nil)
+        #expect(
+            HistoryService.growth(
+                from: earlier, to: Self.sizes(later, at: Self.laterDate, excluded: ["/a/b"]))
+                == nil)
+        // Areas come sorted by size, so the same areas may arrive in another order.
+        let reordered = Self.sizes(later, at: Self.laterDate, areas: ["/c", "/a"])
+        let growth = try #require(HistoryService.growth(from: earlier, to: reordered))
+        #expect(growth.folders.map(\.path) == ["/a"])
     }
 
     @Test("The store keeps the points and compares the two newest folder lists")

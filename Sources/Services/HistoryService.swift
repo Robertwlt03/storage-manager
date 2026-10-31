@@ -21,12 +21,14 @@ nonisolated enum HistoryService {
         Array((points + [point]).suffix(keptPoints))
     }
 
-    static func folderSizes(of root: Node, at date: Date, hadFullAccess: Bool) -> FolderSizes {
+    static func folderSizes(
+        of root: Node, at date: Date, excluded: Set<String>, hadFullAccess: Bool
+    ) -> FolderSizes {
         var bytes: [String: Int64] = [:]
         for area in root.children { collect(area, depth: 0, into: &bytes) }
         return FolderSizes(
-            date: date, areas: root.children.map(\.path), hadFullAccess: hadFullAccess,
-            bytes: bytes)
+            date: date, areas: Set(root.children.map(\.path)), excluded: excluded,
+            hadFullAccess: hadFullAccess, bytes: bytes)
     }
 
     private static func collect(_ folder: Node, depth: Int, into bytes: inout [String: Int64]) {
@@ -37,12 +39,12 @@ nonisolated enum HistoryService {
     }
 
     /// A folder missing from the earlier list was smaller than `smallestComparedBytes` then, so its
-    /// growth counts from zero. Nil when the two scans saw different areas or different access:
-    /// folders that only became visible would look grown.
+    /// growth counts from zero. Nil when the two scans saw different areas, excluded different
+    /// folders or had different access: folders that only became visible would look grown.
     static func growth(from earlier: FolderSizes, to later: FolderSizes) -> Growth? {
-        guard earlier.areas == later.areas, earlier.hadFullAccess == later.hadFullAccess else {
-            return nil
-        }
+        guard earlier.areas == later.areas, earlier.excluded == later.excluded,
+            earlier.hadFullAccess == later.hadFullAccess
+        else { return nil }
         // ponytail: overstates such a folder's growth by at most smallestComparedBytes; keep
         // smaller folders too if that ever shows in the list.
         let grown = later.bytes.compactMap { path, bytes -> GrownFolder? in

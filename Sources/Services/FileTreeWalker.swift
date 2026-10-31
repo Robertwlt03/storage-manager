@@ -54,6 +54,19 @@ nonisolated enum FileTreeWalker {
         }
     }
 
+    /// What a file or folder takes on disk, summed over its files; for small entries that the
+    /// tree folded away.
+    static func allocatedBytes(of path: String) -> Int64 {
+        var total: Int64 = 0
+        walk(path) { entry in
+            if kind(of: entry) == FTS_F, let fileStatus = entry.pointee.fts_statp?.pointee {
+                total += allocatedBytes(fileStatus)
+            }
+            return true
+        }
+        return total
+    }
+
     /// Allocated bytes on disk, like `du`.
     static func allocatedBytes(_ fileStatus: stat) -> Int64 {
         Int64(fileStatus.st_blocks) * bytesPerBlock

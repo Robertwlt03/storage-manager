@@ -187,7 +187,8 @@ import WidgetKit
                 HistoryPoint(date: now, usedBytes: usedBytes), to: history)
         }
         let sizes = HistoryService.folderSizes(
-            of: root, at: now, hadFullAccess: hasFullDiskAccess)
+            of: root, at: now, excluded: ScanService.excludedFolders(),
+            hadFullAccess: hasFullDiskAccess)
         let store = HistoryStore()
         store.record(history, latest: sizes)
         growth = store.growth
@@ -275,29 +276,39 @@ extension AppModel {
     }
 
     func refreshCleanItems() {
-        guard hasData, !isDemo else { return }
+        // A half-built tree lacks whole areas, which would then be walked on the disk.
+        guard hasData, !isDemo, !isScanning else { return }
         let refreshID = UUID()
         cleanItemsRefreshID = refreshID
         Task {
             let excluded = ScanService.excludedFolders()
-            let listing = Task.detached(priority: .utility) {
-                CleanerService.removablePaths(excluding: excluded)
-            }
-            let listed = await listing.value
+            let listed =
+                await Task.detached(priority: .utility) {
+                    CleanerService.removablePaths(excluding: excluded)
+                }
+                .value
             guard cleanItemsRefreshID == refreshID else { return }
-            let found = listed.map { kind, paths in
-                CleanItem(kind: kind, paths: paths, bytes: listedBytes(of: paths))
-            }
+            let withTreeSizes = treeSizes(of: listed)
+            let found =
+                await Task.detached(priority: .utility) {
+                    CleanerService.items(withTreeSizes)
+                }
+                .value
+            guard cleanItemsRefreshID == refreshID else { return }
             Motion.animate { cleanItems = found }
         }
     }
 
-    /// Entries under 1 MB are folded in the tree and count as zero, which is negligible here.
-    private func listedBytes(of paths: [String]) -> Int64 {
-        paths.reduce(0) { total, path in total + (root.entryBytes(at: path) ?? 0) }
+    /// The tree's size of each listed path, read here on the main actor that owns the tree; nil
+    /// where the tree folded the entry away.
+    private func treeSizes(of listed: [(kind: CleanKind, paths: [String])])
+        -> [(kind: CleanKind, paths: [String], treeBytes: [Int64?])]
+    {
+        listed.map { kind, paths in
+            (kind, paths, paths.map { path in root.entryBytes(at: path) })
+        }
     }
 
-    /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
     func moveToTrash(_ app: AppUsage) throws {
         guard !isDemo else { return }
         try AppUsageService.moveToTrash(app)

@@ -31,6 +31,7 @@ extension AppModel {
         isSearchPresented = false
     }
 
+    /// Double-click on a row or tile: folders open in the explorer, files show in Finder.
     func activate(_ entry: Entry) {
         if let node = entry.node {
             open(node)

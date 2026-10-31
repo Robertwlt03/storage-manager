@@ -152,6 +152,9 @@ def install(app: Path) -> None:
     shutil.rmtree(INSTALLED_APP, ignore_errors=True)
     INSTALLED_APP.parent.mkdir(exist_ok=True)
     shutil.copytree(app, INSTALLED_APP, symlinks=True)
+    # Both copies carry the widget under one identifier; only the installed one should offer it.
+    # Fails harmlessly when macOS never registered the built copy.
+    project.run(["pluginkit", "-r", str(app / "Contents" / "PlugIns" / WIDGET_NAME)])
 
 
 # MARK: Run
