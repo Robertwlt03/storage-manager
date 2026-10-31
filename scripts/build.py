@@ -35,8 +35,7 @@ def run(command: list[str | Path]) -> str:
     """Runs a command in the project folder and stops the script when it fails."""
     result = project.run([str(part) for part in command])
     if not result.succeeded:
-        console.failed("Failed", str(command[0]))
-        console.note(result.output.strip())
+        console.stopped("Failed", str(command[0]), (result.output.strip(),))
         sys.exit(1)
     return result.output
 

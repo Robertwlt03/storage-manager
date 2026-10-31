@@ -4,7 +4,9 @@ Start:  imported by the Python scripts; or one piece at a time, as make and the 
         python3 -m checks.console passed "Built" "build/…" (with scripts/ on PYTHONPATH)
 Needs:  nothing beyond Python
 A heading names the command; each result gets a line with a mark (✔ done, ✘ failed, › under way)
-and dimmed details; hints follow dimmed and a frame sums up at the end.
+and dimmed details; hints follow dimmed and a frame sums up at the end. A command that another
+one starts as one of its steps (CONSOLE_STEP set) ends with a result line instead, so only the
+outer command draws a frame.
 Sources/Diagnostics/Console.swift draws the same pieces for the app.
 Colors appear in a terminal and on GitHub; NO_COLOR=1 turns them off and FORCE_COLOR=1 turns them
 on (see no-color.org). Spacing follows one rule, so two blank lines never meet: only the heading
@@ -49,6 +51,7 @@ TABLE_WIDTH = 16  # the names of a table fill this many characters, so the texts
 ENTRY_INDENT = "       "
 ENTRY_LABEL_WIDTH = 5  # wide enough for a line number such as 12345
 HEADED = "CONSOLE_HEADED"  # set once a heading shows; what the command starts leaves out its own
+STEP = "CONSOLE_STEP"  # set for a command that runs as a step of another; it draws no frame
 CLEAR_LINE = "\r\x1b[K"  # back to the start of the line and erase it
 COLOR_CODE = re.compile(r"\x1b\[[0-9;]*m")
 
@@ -91,7 +94,7 @@ def heading(title: str, detail: str = "") -> None:
     if os.environ.get(HEADED):
         return
     os.environ[HEADED] = "1"
-    show(f"\n{paint(title, BOLD)}  {paint(detail, DIM)}\n")
+    show(f"\n{paint(title, BOLD)}" + (f"  {paint(detail, DIM)}" if detail else "") + "\n")
 
 
 class Spinner(threading.Thread):
@@ -174,6 +177,15 @@ def note(text: str) -> None:
     show(paint(f"{NOTE_INDENT}{text}", DIM))
 
 
+def stopped(text: str, detail: str = "", hints: tuple[str, ...] = ()) -> None:
+    """Ends a command that cannot go on: what failed, what to do about it, and the blank line that
+    ends every block, so the prompt does not stick to the last hint."""
+    failed(text, detail)
+    for hint in hints:
+        note(hint)
+    show("")
+
+
 def group(title: str) -> None:
     """The head of a group of entries, such as the findings in one file."""
     show(f"     {paint(GROUP_MARK, CYAN)} {paint(title, CYAN, BOLD)}")
@@ -185,13 +197,18 @@ def entry(label: str, text: str) -> None:
 
 
 def table(rows: list[tuple[str, str]]) -> None:
+    """A block of names and texts in two columns, such as the commands of make help."""
     for name, text in rows:
         show(f"  {paint(name.ljust(TABLE_WIDTH), CYAN, BOLD)} {text}")
+    show("")
 
 
 def frame(outcome: str, details: list[str], color: str) -> None:
     """Ends a command, the same shape everywhere: the outcome after its mark, then below it what
-    it concerns, such as the file or folder it made."""
+    it concerns, such as the file or folder it made. As a step of another command, one line."""
+    if os.environ.get(STEP):
+        (passed if color == SUCCESS else failed)(outcome, " · ".join(details))
+        return
     mark = PASSED_MARK if color == SUCCESS else FAILED_MARK
     lines = [paint(f"{mark} {outcome}", color, BOLD)] + [f"  {detail}" for detail in details]
     width = max(visible_length(line) for line in lines) + 2
@@ -305,6 +322,8 @@ def main(arguments: list[str]) -> int:
     match arguments:
         case [piece, *texts] if piece in pieces and 1 <= len(texts) <= pieces[piece][1]:
             pieces[piece][0](*texts)
+        case ["stopped", text, detail, *hints]:  # the detail may be "" when only hints follow
+            stopped(text, detail, tuple(hints))
         case ["table"]:  # reads "name<tab>text" lines
             table([line.rstrip("\n").partition("\t")[::2] for line in sys.stdin])
         case ["frame", kind, outcome, *details] if kind in FRAME_COLORS:
@@ -312,8 +331,8 @@ def main(arguments: list[str]) -> int:
         case ["wait", text, *command] if command:
             return wait(text, command)
         case _:
-            failed("Unknown piece", " ".join(arguments))
-            note("heading, passed, failed, step, note, table, frame <success|failure>, wait")
+            pieces_text = "heading, passed, failed, step, note, stopped, table, frame, wait"
+            stopped("Unknown piece", " ".join(arguments), (pieces_text,))
             return 2
     return 0
 

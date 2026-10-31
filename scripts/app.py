@@ -65,8 +65,9 @@ def main(arguments: list[str]) -> int:
         case ["selftest", app]:
             return selftest(Path(app))
         case _:
-            console.failed("Unknown command", " ".join(arguments))
-            console.note("scripts/app.py restart <app> | selftest <app>")
+            console.heading("Storage Manager · app")
+            console.stopped("Unknown command", " ".join(arguments),
+                            ("scripts/app.py restart <app> | selftest <app>",))
             return 2
 
 

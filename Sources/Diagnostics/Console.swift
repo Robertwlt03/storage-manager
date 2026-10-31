@@ -38,7 +38,7 @@ enum Console {
     static func heading(_ title: String, detail: String = "") {
         guard ProcessInfo.processInfo.environment[headedVariable] == nil else { return }
         setenv(headedVariable, "1", 1)
-        show("\n\(paint(title, .bold))  \(paint(detail, .dim))\n")
+        show("\n\(paint(title, .bold))" + (detail.isEmpty ? "" : "  \(paint(detail, .dim))") + "\n")
     }
 
     static func passed(_ text: String, detail: String = "") {
@@ -55,6 +55,14 @@ enum Console {
 
     static func note(_ text: String) {
         show(paint(noteIndent + text, .dim))
+    }
+
+    /// Ends a command that cannot go on: what failed, what to do about it, and the blank line that
+    /// ends every block, so the prompt does not stick to the last hint.
+    static func stopped(_ text: String, hints: [String]) {
+        failed(text)
+        hints.forEach(note)
+        show("")
     }
 
     /// Ends a command, the same shape everywhere: the outcome after its mark, green when it passed
