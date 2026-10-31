@@ -9,7 +9,8 @@ editor’s search. How to build and check is in the [contributing guide](CONTRIB
 
 Storage Manager measures once how much space the Mac’s folders take up, and shows the result on several pages: as
 an overview, as a folder tree, as a list of large files, while cleaning up and in hidden areas such as the temporary
-folder of macOS. After the scan, every page gets by without any further disk access.
+folder of macOS. After the scan, every page gets by without any further disk access, except the duplicates: only
+files of equal size can be the same, and `DuplicateService` reads just those, in the background.
 
 ## <img src="assets/icons/dataflow.svg" height="33" align="absmiddle" alt="">How the data flows
 
@@ -50,6 +51,12 @@ contain the texts.
 
 **`Sources/Diagnostics`:** The self test with real folders, the stress test that operates the running app, the
 made-up data of the demo mode and the page list that scripts ask for with `--list-pages`.
+
+**`Widget`:** The widget, a target of its own. `scripts/build.py` puts it into the app as
+`PlugIns/StorageWidget.appex`, with the app's identifier plus `.widget`, and signs it with the sandbox macOS requires
+for widgets. Because of that sandbox it cannot read the app's data, so it measures the startup volume itself.
+`WidgetStyle` is its small design system, `WidgetText` reads its texts from `Widget.strings`, and
+`--render-widget <file> [light|dark]` draws it into a picture for checking its look.
 
 **`Tests/StorageManagerTests`:** The tests, written with Swift Testing, for the folder tree, search, pages, design
 values, contrast and translations. They build their folder trees by hand and never touch the disk.

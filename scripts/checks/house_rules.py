@@ -24,6 +24,7 @@ THEME = "Sources/DesignSystem/Theme.swift"
 TOKENS = "Sources/DesignSystem/Tokens.swift"
 MOTION = "Sources/DesignSystem/Motion.swift"
 DEMO_DATA = "Sources/Diagnostics/DemoData.swift"  # made-up content, like test values
+WIDGET_STYLE = "Widget/WidgetStyle.swift"  # the widget's own design system
 
 ALLOWED_SHORT_NAMES = {"id", "x", "y", "_"}
 NUMBERS_THAT_NEED_NO_NAME = {"0", "1"}
@@ -138,7 +139,8 @@ HOUSE_RULES = [
 ]
 
 DESIGN_RULES = [
-    PatternRule("font set directly, use .textRole(...)", FONT, allowed_in=(DESIGN_SYSTEM,)),
+    PatternRule(
+        "font set directly, use .textRole(...)", FONT, allowed_in=(DESIGN_SYSTEM, WIDGET_STYLE)),
     PatternRule(
         "symbol name outside Symbols in Tokens.swift", SYMBOL_NAME, allowed_in=(TOKENS,),
         reads_comments_and_texts=True, fine_when=NOT_A_SYMBOL),
@@ -146,7 +148,7 @@ DESIGN_RULES = [
         "animation outside Motion.swift", ANIMATION, allowed_in=(MOTION,), fine_when=MOTION_TOKEN),
     PatternRule(
         "own glass, material or background, use .surface()", OWN_SURFACE,
-        allowed_in=(DESIGN_SYSTEM,)),
+        allowed_in=(DESIGN_SYSTEM, WIDGET_STYLE)),
     PatternRule(
         "output outside Diagnostics could show private names", OUTPUT, allowed_in=(DIAGNOSTICS,)),
 ]

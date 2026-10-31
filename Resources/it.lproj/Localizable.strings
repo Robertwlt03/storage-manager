@@ -119,7 +119,7 @@
 "freed" = "Spazio effettivamente liberato: %@";
 "deleteError" = "Non è stato possibile eliminare tutto: %@";
 "quitToDelete" = "Chiudi %@ con ⌘Q per poter eliminare.";
-"openInExplorer" = "Apri in Esplora";
+"openInExplorer" = "Mostra in Cartelle";
 "deleteAll" = "Elimina tutte le copie …";
 "deleteTitle" = "Eliminare %@ copie di %@?";
 "deleteForever" = "Elimina definitivamente";
@@ -158,8 +158,15 @@
 
 /* Settings */
 "autoScan" = "Analizza automaticamente all’avvio";
+"exportReport" = "Esporta rapporto …";
+"reportTitle" = "Rapporto spazio del %@";
+"reportFileName" = "Rapporto spazio";
 "rings" = "Anelli";
 "extraFolders" = "Cartelle aggiuntive";
+"showInMenuBar" = "Mostra lo spazio libero nella barra dei menu";
+"openApp" = "Apri %@";
+"lowSpaceWarning" = "Lo spazio sta finendo. «Pulisci» e «File di grandi dimensioni» mostrano cosa si può togliere.";
+"excludedFolders" = "Cartelle escluse";
 "none" = "Nessuna";
 "add" = "Aggiungi";
 "remove" = "Rimuovi";
@@ -183,12 +190,15 @@
 "cleanTemporaryDetail" = "File temporanei non modificati da almeno tre giorni.";
 "cleanTrash" = "Cestino";
 "cleanTrashDetail" = "Svuota il Cestino in modo definitivo. Non selezionato per impostazione predefinita.";
+"cleanInstallers" = "Vecchi installer";
+"cleanInstallersDetail" = "Immagini disco e pacchetti di installazione in Download più vecchi di un mese. Non selezionato per impostazione predefinita.";
 "cleanFailed" = "Non è stato possibile rimuovere %@ elementi perché sono in uso o protetti.";
 "cleaning" = "Pulizia in corso …";
 "cleanerRefresh" = "Cerca di nuovo";
 "cleanSelected" = "Pulisci la selezione (%@)";
 "cleanConfirmTitle" = "Rimuovere %@ definitivamente?";
 "cleanConfirmMessage" = "I file non vanno nel Cestino. Le app ricreano le loro cache quando serve. Dopo, l’app analizza di nuovo tutto.";
+"cleanConfirmInstallersMessage" = "I file non vanno nel Cestino. Le app ricreano le loro cache quando serve. Dopo, l’app analizza di nuovo tutto. Gli installer rimossi dovranno essere scaricati di nuovo.";
 "appsNoneUnused" = "Tutte le app sono state usate di recente";
 "unusedSince" = "Non aperta da";
 "daysOption" = "più di %@ giorni";
@@ -218,6 +228,12 @@
 "infoLargeFiles" = "Tutti i file dalla dimensione scelta in su nell’ultima analisi. Con un doppio clic il file viene mostrato nel Finder.";
 "infoTemporaryFiles" = "macOS crea quest’area per ogni utente in /private/var/folders. È nascosta nel Finder e non è suddivisa in “Gestisci spazio di archiviazione”.";
 "infoCopies" = "Durante la verifica di una firma, macOS a volte inserisce copie complete di un’app nella cartella X. Non sono programmi separati; macOS ne crea una nuova quando serve. Eliminarle è sicuro finché l’app è chiusa.";
+"paneDuplicates" = "Duplicati";
+"infoDuplicates" = "File grandi da 10 MB presenti più volte con lo stesso contenuto. I file della stessa dimensione vengono confrontati per contenuto. Qui non si rimuove nulla; «Mostra nel Finder» porta a loro.";
+"noDuplicates" = "Nessun duplicato";
+"searchingDuplicates" = "Confronto dei file …";
+"searchingDuplicatesDetail" = "I file della stessa dimensione vengono letti e confrontati. Con file grandi richiede un momento.";
+"duplicatesTotal" = "%@ file · %@ liberabili";
 "infoVolume" = "Capacità di questo volume: ciò che è utilizzato, ciò che macOS può liberare da solo quando serve e ciò che è libero. Qui è possibile analizzare i volumi esterni.";
 "aboutPage" = "Informazioni su questa pagina";
 "scanDetails" = "Analisi";
@@ -232,6 +248,7 @@
 "summaryClean" = "Con la pulizia si possono liberare circa %@.";
 "summaryCopies" = "Le copie delle app che macOS crea durante la verifica contano per %@.";
 "summaryApps" = "%@ app non vengono aperte da un po’.";
+"summaryFreed" = "Finora questa app ha liberato %@.";
 "readAloud" = "Leggi ad alta voce";
 "stopReading" = "Interrompi la lettura";
 
@@ -239,6 +256,12 @@
 "sizeClassesTitle" = "Quanto sono grandi i tuoi file?";
 "sizeClassesCaption" = "Quanto spazio occupa ogni classe di dimensioni e quanti file contiene. Pochi file grandi di solito occupano più spazio di tanti file piccoli.";
 "figureLargeFilesFrom" = "file grandi da %@";
+"historyTitle" = "Cronologia";
+"historyCaption" = "Spazio occupato dopo ogni analisi completa.";
+"historyAfterNextScan" = "La cronologia appare dopo la prossima analisi completa.";
+"grownSince" = "Crescita dal %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Nessuna cartella è cresciuta di più di %@.";
 "bucketValue" = "%@
 %@ file";
 "settingsSystemNote" = "L’aspetto e le unità vengono da Impostazioni di Sistema.";

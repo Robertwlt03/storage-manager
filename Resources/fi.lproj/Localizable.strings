@@ -119,7 +119,7 @@
 "freed" = "Todellisuudessa vapautunut: %@";
 "deleteError" = "Kaikkea ei voitu poistaa: %@";
 "quitToDelete" = "Lopeta %@ komennolla ⌘Q, niin voit poistaa kopiot.";
-"openInExplorer" = "Avaa Tallennustilan tutkijassa";
+"openInExplorer" = "Näytä Kansioissa";
 "deleteAll" = "Poista kaikki kopiot …";
 "deleteTitle" = "Poistetaanko %@ kopiota kohteesta %@?";
 "deleteForever" = "Poista pysyvästi";
@@ -158,8 +158,15 @@
 
 /* Settings */
 "autoScan" = "Mittaa automaattisesti käynnistyksessä";
+"exportReport" = "Vie raportti …";
+"reportTitle" = "Tallennustilaraportti %@";
+"reportFileName" = "Tallennustilaraportti";
 "rings" = "Renkaat";
 "extraFolders" = "Lisäkansiot";
+"showInMenuBar" = "Näytä vapaa tila valikkorivillä";
+"openApp" = "Avaa %@";
+"lowSpaceWarning" = "Tila on vähissä. ”Siivoa” ja ”Suuret tiedostot” näyttävät, mistä voi luopua.";
+"excludedFolders" = "Ohitettavat kansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";
 "remove" = "Poista";
@@ -183,12 +190,15 @@
 "cleanTemporaryDetail" = "Tilapäiset tiedostot, joita ei ole muutettu vähintään kolmeen päivään.";
 "cleanTrash" = "Roskakori";
 "cleanTrashDetail" = "Tyhjentää roskakorin pysyvästi. Ei valittuna oletuksena.";
+"cleanInstallers" = "Vanhat asennustiedostot";
+"cleanInstallersDetail" = "Yli kuukauden vanhat levykuvat ja asennuspaketit Latauksissa. Ei valittuna oletuksena.";
 "cleanFailed" = "%@ kohdetta ei voitu poistaa, koska ne ovat käytössä tai suojattuja.";
 "cleaning" = "Siivotaan …";
 "cleanerRefresh" = "Hae uudelleen";
 "cleanSelected" = "Siivoa valinta (%@)";
 "cleanConfirmTitle" = "Poistetaanko %@ pysyvästi?";
 "cleanConfirmMessage" = "Tiedostot eivät siirry roskakoriin. Apit luovat välimuistinsa tarvittaessa uudelleen. Sen jälkeen app mittaa kaiken uudelleen.";
+"cleanConfirmInstallersMessage" = "Tiedostot eivät siirry roskakoriin. Apit luovat välimuistinsa tarvittaessa uudelleen. Sen jälkeen app mittaa kaiken uudelleen. Poistetut asennustiedostot on ladattava uudelleen.";
 "appsNoneUnused" = "Kaikkia appeja on käytetty äskettäin";
 "unusedSince" = "Ei avattu";
 "daysOption" = "yli %@ päivään";
@@ -218,6 +228,12 @@
 "infoLargeFiles" = "Kaikki tiedostot viimeisimmästä mittauksesta valitusta koosta alkaen. Kaksoisnapsautus näyttää tiedoston Finderissa.";
 "infoTemporaryFiles" = "macOS luo tämän alueen jokaiselle käyttäjälle kohteeseen /private/var/folders. Se on piilotettu Finderissa, eikä sitä eritellä kohdassa ”Hallitse tallennustilaa”.";
 "infoCopies" = "Allekirjoitusta tarkistaessaan macOS luo joskus apista täydellisiä kopioita kansioon X. Ne eivät ole omia ohjelmiaan; macOS luo tarvittaessa uuden. Niiden poistaminen on turvallista, kun app on suljettu.";
+"paneDuplicates" = "Kaksoiskappaleet";
+"infoDuplicates" = "Vähintään 10 Mt:n suuret tiedostot, jotka ovat olemassa monta kertaa samalla sisällöllä. Samankokoisia tiedostoja verrataan sisällön perusteella. Täällä ei poisteta mitään; ”Näytä Finderissa” vie niihin.";
+"noDuplicates" = "Ei kaksoiskappaleita";
+"searchingDuplicates" = "Verrataan tiedostoja …";
+"searchingDuplicatesDetail" = "Samankokoiset tiedostot luetaan ja verrataan. Suurilla tiedostoilla se kestää hetken.";
+"duplicatesTotal" = "%@ tiedostoa · %@ voidaan vapauttaa";
 "infoVolume" = "Tämän taltion kapasiteetti: mitä on käytetty, minkä macOS voi tarvittaessa vapauttaa itse ja mitä on vapaana. Ulkoisia taltioita voi mitata täällä.";
 "aboutPage" = "Tietoja tästä sivusta";
 "scanDetails" = "Mittaus";
@@ -232,6 +248,7 @@
 "summaryClean" = "Siivoamalla voit vapauttaa noin %@.";
 "summaryCopies" = "Appien kopiot, jotka macOS luo tarkistuksen aikana, vievät laskettuna %@.";
 "summaryApps" = "%@ appia ei ole avattu pitkään aikaan.";
+"summaryFreed" = "Tähän mennessä sovellus on vapauttanut %@.";
 "readAloud" = "Lue ääneen";
 "stopReading" = "Lopeta lukeminen";
 
@@ -239,6 +256,12 @@
 "sizeClassesTitle" = "Kuinka suuria tiedostosi ovat?";
 "sizeClassesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
 "figureLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
+"historyTitle" = "Historia";
+"historyCaption" = "Käytetty tila jokaisen täyden mittauksen jälkeen.";
+"historyAfterNextScan" = "Historia näkyy seuraavan täyden mittauksen jälkeen.";
+"grownSince" = "Kasvu %@ lähtien";
+"grownBy" = "+%@";
+"nothingGrown" = "Mikään kansio ei kasvanut yli %@.";
 "bucketValue" = "%@
 %@ tiedostoa";
 "settingsSystemNote" = "Ulkoasu ja yksiköt tulevat Järjestelmäasetuksista.";

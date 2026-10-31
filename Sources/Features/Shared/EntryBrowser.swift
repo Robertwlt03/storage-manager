@@ -6,6 +6,7 @@ struct EntryBrowser: View {
     let entries: [Entry]
     let total: Int64
     var showsLocation = false
+    var showsFileCount = true
     let emptyTitle: String
     var emptyDetail: String?
     /// Changes when the whole content is replaced; the table is then rebuilt, not diffed (see
@@ -25,7 +26,7 @@ struct EntryBrowser: View {
             } else {
                 EntryTable(
                     entries: entries, total: total, showsLocation: showsLocation,
-                    informationEntry: $informationEntry
+                    showsFileCount: showsFileCount, informationEntry: $informationEntry
                 )
                 .id(contentKey)
             }

@@ -1,8 +1,8 @@
 import Charts
 import SwiftUI
 
-/// The start page: key figures, the disk split, a short summary, the size classes and every
-/// category. Figures and the chart come from the last finished scan.
+/// The start page: key figures, the disk split, a short summary, the history, the size classes and
+/// every category. Figures and the chart come from the last finished scan.
 struct OverviewView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
@@ -18,6 +18,7 @@ struct OverviewView: View {
             if hasStatistics { keyFigures }
             if let startupVolume = model.startupVolume { startupDiskCard(startupVolume) }
             SummaryCard()
+            HistoryCard()
             if hasStatistics { sizeClassesCard }
             categories
         }
@@ -63,6 +64,10 @@ struct OverviewView: View {
         UI.Card {
             UI.VolumeSummary(
                 startupVolume, segments: segments, canSelect: canOpen, onSelect: open)
+            if startupVolume.isLow {
+                UI.Note(TextKey.lowSpaceWarning.translated, .warning(symbol: Symbols.lowSpace))
+                    .padding(.bottom, Space.row)
+            }
         }
     }
 

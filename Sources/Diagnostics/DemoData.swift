@@ -8,6 +8,13 @@ struct DemoData {
     let volume: VolumeInformation
     let apps: [AppUsage]
     let cleanItems: [CleanItem]
+    let history: [HistoryPoint]
+    let growth: Growth
+    let totalFreedBytes = 23_400 * megabyte
+
+    /// What the temporary area's page shows as its place. The demo's folders lie under the real
+    /// path, so the app finds them where it looks, but the page shows nothing of this Mac.
+    static let shownTemporaryArea = "/private/var/folders/ab/demo0000000000000000000000gn"
 
     private static let megabyte: Int64 = 1_000_000
     private static let gigabyte: Int64 = 1_000_000_000
@@ -21,7 +28,42 @@ struct DemoData {
                 freeBytes: 96 * gigabyte, availableBytes: 118 * gigabyte, isInternal: true,
                 isRoot: true),
             apps: apps(now: now, in: scanRoots[1]),
-            cleanItems: cleanItems())
+            cleanItems: cleanItems(),
+            history: history(now: now),
+            growth: growth(now: now))
+    }
+
+    // MARK: The history
+
+    /// The used space in gigabytes after each made-up scan, the oldest first, one scan a week.
+    private static let usedGigabytesPerScan: [Int64] = [
+        372, 374, 373, 377, 379, 381, 380, 384, 389, 391, 393, 398,
+    ]
+    private static let daysBetweenScans = 7
+
+    private static func history(now: Date) -> [HistoryPoint] {
+        let lastIndex = usedGigabytesPerScan.count - 1
+        return usedGigabytesPerScan.enumerated()
+            .map { index, gigabytes in
+                let date =
+                    Calendar.current.date(
+                        byAdding: .day, value: (index - lastIndex) * daysBetweenScans, to: now)
+                    ?? now
+                return HistoryPoint(date: date, usedBytes: gigabytes * gigabyte)
+            }
+    }
+
+    /// The folders that grew since the scan a week before, all in the made-up tree.
+    private static func growth(now: Date) -> Growth {
+        let weekBefore =
+            Calendar.current.date(byAdding: .day, value: -daysBetweenScans, to: now) ?? now
+        return Growth(
+            since: weekBefore,
+            folders: [
+                GrownFolder(path: Paths.home + "/Movies", grownBytes: 8_400 * megabyte),
+                GrownFolder(path: Paths.home + "/Downloads", grownBytes: 3_200 * megabyte),
+                GrownFolder(path: Paths.home + "/Library/Caches", grownBytes: 1_600 * megabyte),
+            ])
     }
 
     // MARK: The tree
@@ -31,6 +73,7 @@ struct DemoData {
             folder("Downloads", in: home, smallFiles: 800, smallBytes: 2 * gigabyte) { downloads in
                 file("Installer.dmg", 3_200 * megabyte, in: downloads)
                 file("Photos export.zip", 1_800 * megabyte, in: downloads)
+                file("Holiday 2025 copy.mov", 8_400 * megabyte, in: downloads)
             }
             folder("Documents", in: home, smallFiles: 3_000, smallBytes: 6 * gigabyte) { folder in
                 file("Project archive.zip", 2_400 * megabyte, in: folder)
@@ -135,7 +178,7 @@ struct DemoData {
     private static func cleanItems() -> [CleanItem] {
         let sizes: [CleanKind: Int64] = [
             .caches: 6_800 * megabyte, .developer: 11 * gigabyte, .logs: 420 * megabyte,
-            .temporary: 900 * megabyte, .trash: 1_300 * megabyte,
+            .temporary: 900 * megabyte, .installers: 2_600 * megabyte, .trash: 1_300 * megabyte,
         ]
         return CleanKind.allCases.map { kind in
             CleanItem(

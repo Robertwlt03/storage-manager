@@ -52,18 +52,24 @@ without a terminal, and that you can share with others without having to wait fo
 The **Overview** is your home page. Right at the top are the most important numbers, such as how many files you
 have, how many of them are large and how many apps you have not opened for a long time, and clicking one takes you
 straight to the matching page. Below that, it shows your Mac with a colored bar and a legend. It then sums up in a
-few sentences how your storage is doing, and reads that out to you if you like. A chart also shows you how much space
+few sentences how your storage is doing, including how much space the app has freed so far, and reads that out to you
+if you like. After every full scan it keeps the used space, so a line shows how your storage changes over the weeks,
+and it lists the folders that grew most since the scan before; a click opens one. A chart also shows you how much space
 small and large files take up, and at the very bottom you find all categories, from applications and downloads to
 caches.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
 all files above a size you choose yourself, and **Search** finds folders and files by name. You can also show each of
 these lists as a grid of large tiles. With **Rings**, Folders shows the subfolders as rings around the current folder:
-the wider a piece, the bigger the folder, and a click opens it.
+the wider a piece, the bigger the folder, and a click opens it. In the settings you can add folders to measure, such
+as an external project folder, and exclude folders that the app should neither measure nor show nor clean up.
 
 In **Clean Up** you remove files your system barely needs. These include caches that apps rebuild on their own, old
-logs, old temporary files and, if you want, the Trash. Apps that are currently running, and macOS itself, are left
-untouched.
+logs, old temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently
+running, and macOS itself, are left untouched.
+
+**Duplicates** lists large files from 10 MB that exist more than once with the same content. Only files of equal size
+are read and compared, in the background. Nothing is removed there; Show in Finder leads you to them.
 
 The **Unused Apps** page reminds you of apps you have not opened for a long time. The date comes from macOS itself,
 so the app records nothing. Anything you no longer need, you can move to the Trash from there.
@@ -75,6 +81,16 @@ them.
 Every page has an info button at the top right that explains what the page is for. The app takes the light or
 dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have
 turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
+
+With File › Export Report (⇧⌘E) you save the summary, every category and the largest files as a text file, for
+keeping or passing on. Each line has the size first, so it also pastes into a spreadsheet.
+
+A widget shows the available space on your desktop or in Notification Center. Add it like any other widget: click the
+desktop with the right mouse button, choose Edit Widgets and look for Storage Manager.
+
+The menu bar shows how much space is available on your Mac, even with the window closed, and its menu opens the
+app or starts a new scan. When space runs low, a warning sign takes the place of the drive there, and the overview
+says so too. You can turn the menu bar item off in the settings.
 
 ## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Languages
 
@@ -213,6 +229,7 @@ The code is split into small parts, and every file has exactly one job:
 | `Sources/Core` | Constants and fixed choices such as pages and settings. |
 | `Sources/Localization` and `Resources` | All texts in 28 languages, with German and English as the source. |
 | `Sources/Diagnostics` | A self test with real data and a stress test for the running app. |
+| `Widget` | The widget for the desktop and Notification Center, a target of its own that the build puts into the app. |
 | `Tests` | The tests for the folder tree, categories, search, design, contrast and translations. |
 | `scripts` | The code inspection, your own signing certificate and building the DMG. |
 

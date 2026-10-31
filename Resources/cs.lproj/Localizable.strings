@@ -119,7 +119,7 @@
 "freed" = "Skutečně uvolněno: %@";
 "deleteError" = "Ne vše se podařilo smazat: %@";
 "quitToDelete" = "Ukončete %@ pomocí ⌘Q, pak půjde smazat.";
-"openInExplorer" = "Otevřít v Průzkumníku";
+"openInExplorer" = "Zobrazit ve Složkách";
 "deleteAll" = "Smazat všechny kopie …";
 "deleteTitle" = "Smazat kopie (%@) aplikace %@?";
 "deleteForever" = "Smazat trvale";
@@ -158,8 +158,15 @@
 
 /* Settings */
 "autoScan" = "Skenovat automaticky při spuštění";
+"exportReport" = "Exportovat zprávu …";
+"reportTitle" = "Zpráva o úložišti z %@";
+"reportFileName" = "Zpráva o úložišti";
 "rings" = "Prstence";
 "extraFolders" = "Další složky";
+"showInMenuBar" = "Zobrazovat volné místo na řádku nabídek";
+"openApp" = "Otevřít %@";
+"lowSpaceWarning" = "Místo dochází. „Vyčistit“ a „Velké soubory“ ukazují, co může pryč.";
+"excludedFolders" = "Vyloučené složky";
 "none" = "Žádné";
 "add" = "Přidat";
 "remove" = "Odebrat";
@@ -183,12 +190,15 @@
 "cleanTemporaryDetail" = "Dočasné soubory, které se nezměnily alespoň tři dny.";
 "cleanTrash" = "Koš";
 "cleanTrashDetail" = "Vysype Koš natrvalo. Ve výchozím nastavení není vybráno.";
+"cleanInstallers" = "Staré instalační soubory";
+"cleanInstallersDetail" = "Obrazy disků a instalační balíčky ve Stažených souborech starší než jeden měsíc. Ve výchozím nastavení není vybráno.";
 "cleanFailed" = "Položek, které se nepodařilo odstranit, protože se používají nebo jsou chráněné: %@.";
 "cleaning" = "Čistím …";
 "cleanerRefresh" = "Hledat znovu";
 "cleanSelected" = "Vyčistit výběr (%@)";
 "cleanConfirmTitle" = "Trvale odstranit %@?";
 "cleanConfirmMessage" = "Soubory nepřejdou do Koše. Aplikace si mezipaměti podle potřeby vytvoří znovu. Poté aplikace vše naskenuje znovu.";
+"cleanConfirmInstallersMessage" = "Soubory nepřejdou do Koše. Aplikace si mezipaměti podle potřeby vytvoří znovu. Poté aplikace vše naskenuje znovu. Odstraněné instalační soubory bude nutné stáhnout znovu.";
 "appsNoneUnused" = "Všechny aplikace byly nedávno použity";
 "unusedSince" = "Neotevřeno po dobu";
 "daysOption" = "více než %@ dní";
@@ -218,6 +228,12 @@
 "infoLargeFiles" = "Všechny soubory od zvolené velikosti z posledního skenování. Dvojitým kliknutím se soubor zobrazí ve Finderu.";
 "infoTemporaryFiles" = "macOS tuto oblast vytváří pro každého uživatele v /private/var/folders. Ve Finderu je skrytá a v části „Spravovat úložiště“ se nerozepisuje.";
 "infoCopies" = "Při kontrole podpisu macOS někdy vytvoří úplné kopie aplikace ve složce X. Nejde o samostatné programy; macOS v případě potřeby vytvoří novou. Smazání je bezpečné, dokud je aplikace ukončená.";
+"paneDuplicates" = "Duplikáty";
+"infoDuplicates" = "Velké soubory od 10 MB, které existují vícekrát se stejným obsahem. Soubory stejné velikosti se porovnají podle obsahu. Nic se tu neodstraňuje; „Zobrazit ve Finderu“ k nim vede.";
+"noDuplicates" = "Žádné duplikáty";
+"searchingDuplicates" = "Porovnávání souborů …";
+"searchingDuplicatesDetail" = "Soubory stejné velikosti se čtou a porovnávají. U velkých souborů to chvíli trvá.";
+"duplicatesTotal" = "%@ souborů · uvolnit lze %@";
 "infoVolume" = "Kapacita tohoto svazku: co je využito, co může macOS v případě potřeby uvolnit sám a co je volné. Externí svazky lze naskenovat tady.";
 "aboutPage" = "O této stránce";
 "scanDetails" = "Skenování";
@@ -232,6 +248,7 @@
 "summaryClean" = "Vyčištěním lze uvolnit asi %@.";
 "summaryCopies" = "Kopie aplikací, které macOS vytváří při kontrole, se započítávají do %@.";
 "summaryApps" = "Aplikací, které jste delší dobu neotevřeli: %@.";
+"summaryFreed" = "Tato aplikace zatím uvolnila %@.";
 "readAloud" = "Přečíst nahlas";
 "stopReading" = "Zastavit čtení";
 
@@ -239,6 +256,12 @@
 "sizeClassesTitle" = "Jak velké jsou vaše soubory?";
 "sizeClassesCaption" = "Kolik místa zabírá každá velikostní třída a kolik souborů v ní je. Několik velkých souborů obvykle zabírá víc než mnoho malých.";
 "figureLargeFilesFrom" = "velké soubory od %@";
+"historyTitle" = "Vývoj";
+"historyCaption" = "Obsazené místo po každém úplném skenování.";
+"historyAfterNextScan" = "Vývoj se zobrazí po příštím úplném skenování.";
+"grownSince" = "Narostlo od %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Žádná složka nenarostla o více než %@.";
 "bucketValue" = "%@
 Souborů: %@";
 "settingsSystemNote" = "Vzhled a jednotky přebírá aplikace z Nastavení systému.";

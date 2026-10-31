@@ -7,6 +7,7 @@ extension Pane {
         case .explorer: ExplorerView()
         case .largeFiles: LargeFilesView()
         case .cleaner: CleanerView()
+        case .duplicates: DuplicatesView()
         case .apps: UnusedAppsView()
         case .temporaryFiles: TemporaryFilesView()
         case .copies: CopiesView()

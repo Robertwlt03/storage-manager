@@ -119,7 +119,7 @@
 "freed" = "Faktisk frigjort: %@";
 "deleteError" = "Alt lot seg ikke slette: %@";
 "quitToDelete" = "Avslutt %@ med ⌘Q for å kunne slette.";
-"openInExplorer" = "Åpne i Lagringsutforsker";
+"openInExplorer" = "Vis i Mapper";
 "deleteAll" = "Slett alle kopier …";
 "deleteTitle" = "Vil du slette %@ kopier av %@?";
 "deleteForever" = "Slett permanent";
@@ -158,8 +158,15 @@
 
 /* Settings */
 "autoScan" = "Mål automatisk ved start";
+"exportReport" = "Eksporter rapport …";
+"reportTitle" = "Lagringsrapport fra %@";
+"reportFileName" = "Lagringsrapport";
 "rings" = "Ringer";
 "extraFolders" = "Flere mapper";
+"showInMenuBar" = "Vis ledig plass i menylinjen";
+"openApp" = "Åpne %@";
+"lowSpaceWarning" = "Plassen er i ferd med å ta slutt. «Rydd opp» og «Store filer» viser hva som kan fjernes.";
+"excludedFolders" = "Utelatte mapper";
 "none" = "Ingen";
 "add" = "Legg til";
 "remove" = "Fjern";
@@ -183,12 +190,15 @@
 "cleanTemporaryDetail" = "Midlertidige filer som ikke er endret på minst tre dager.";
 "cleanTrash" = "Papirkurv";
 "cleanTrashDetail" = "Tømmer papirkurven permanent. Er ikke valgt som standard.";
+"cleanInstallers" = "Gamle installasjonsfiler";
+"cleanInstallersDetail" = "Diskbilder og installasjonspakker i Nedlastinger som er eldre enn en måned. Er ikke valgt som standard.";
 "cleanFailed" = "%@ objekter kunne ikke fjernes fordi de er i bruk eller beskyttet.";
 "cleaning" = "Rydder opp …";
 "cleanerRefresh" = "Søk på nytt";
 "cleanSelected" = "Rydd opp i utvalget (%@)";
 "cleanConfirmTitle" = "Vil du fjerne %@ permanent?";
 "cleanConfirmMessage" = "Filene havner ikke i papirkurven. Apper oppretter hurtigbufferne sine på nytt ved behov. Etterpå måler appen alt på nytt.";
+"cleanConfirmInstallersMessage" = "Filene havner ikke i papirkurven. Apper oppretter hurtigbufferne sine på nytt ved behov. Etterpå måler appen alt på nytt. Fjernede installasjonsfiler må lastes ned på nytt.";
 "appsNoneUnused" = "Alle apper er brukt nylig";
 "unusedSince" = "Ikke åpnet på";
 "daysOption" = "mer enn %@ dager";
@@ -218,6 +228,12 @@
 "infoLargeFiles" = "Alle filer fra den valgte størrelsen i den siste målingen. Dobbeltklikk viser filen i Finder.";
 "infoTemporaryFiles" = "macOS oppretter dette området for hver bruker under /private/var/folders. Det er skjult i Finder og blir ikke spesifisert i «Administrer lagring».";
 "infoCopies" = "Når macOS kontrollerer en signatur, legger det noen ganger komplette kopier av en app i mappen X. De er ikke egne programmer; macOS oppretter en ny ved behov. Det er trygt å slette dem så lenge appen er avsluttet.";
+"paneDuplicates" = "Duplikater";
+"infoDuplicates" = "Store filer fra 10 MB som finnes flere ganger med samme innhold. Filer med samme størrelse sammenlignes etter innhold. Ingenting fjernes her; «Vis i Finder» fører til dem.";
+"noDuplicates" = "Ingen duplikater";
+"searchingDuplicates" = "Sammenligner filer …";
+"searchingDuplicatesDetail" = "Filer med samme størrelse leses og sammenlignes. For store filer tar det et øyeblikk.";
+"duplicatesTotal" = "%@ filer · %@ kan frigjøres";
 "infoVolume" = "Kapasiteten til dette volumet: hva som er brukt, hva macOS kan frigjøre selv ved behov, og hva som er ledig. Eksterne volumer kan måles her.";
 "aboutPage" = "Om denne siden";
 "scanDetails" = "Måling";
@@ -232,6 +248,7 @@
 "summaryClean" = "Ved å rydde opp kan du frigjøre omtrent %@.";
 "summaryCopies" = "Kopier av apper som macOS oppretter ved kontroll, utgjør %@.";
 "summaryApps" = "%@ apper har ikke vært åpnet på en stund.";
+"summaryFreed" = "Så langt har appen frigjort %@.";
 "readAloud" = "Les opp";
 "stopReading" = "Stopp opplesing";
 
@@ -239,6 +256,12 @@
 "sizeClassesTitle" = "Hvor store er filene dine?";
 "sizeClassesCaption" = "Hvor mye plass hver størrelsesklasse tar, og hvor mange filer som ligger i den. Noen få store filer tar vanligvis mer plass enn mange små.";
 "figureLargeFilesFrom" = "store filer fra %@";
+"historyTitle" = "Historikk";
+"historyCaption" = "Brukt plass etter hver full måling.";
+"historyAfterNextScan" = "Historikken vises etter neste fulle måling.";
+"grownSince" = "Vokst siden %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Ingen mappe har vokst med mer enn %@.";
 "bucketValue" = "%@
 %@ filer";
 "settingsSystemNote" = "Utseende og enheter kommer fra Systeminnstillinger.";

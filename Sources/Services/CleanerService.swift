@@ -1,11 +1,15 @@
 import AppKit
 
-/// Finds and removes files that regenerate by themselves (caches), are old (logs, temporary files)
-/// or already thrown away (Trash). Caches of running apps and of macOS itself are left alone.
+/// Finds and removes files that regenerate by themselves (caches), are old (logs, temporary files,
+/// installers) or already thrown away (Trash). Caches of running apps and of macOS itself are left
+/// alone.
 nonisolated enum CleanerService {
     private static let cachesFolder = Paths.home + "/Library/Caches"
     private static let logsFolder = Paths.home + "/Library/Logs"
     private static let trashFolder = Paths.home + "/.Trash"
+    private static let downloadsFolder = Paths.home + "/Downloads"
+    /// Disk images and installer packages; once the app is installed they are no longer needed.
+    private static let installerExtensions: Set<String> = ["dmg", "pkg", "mpkg", "xip"]
     private static var temporaryFolder: String {
         Paths.temporaryArea + "/" + TemporaryAreaPart.temporaryFiles.rawValue
     }
@@ -15,11 +19,14 @@ nonisolated enum CleanerService {
         "~/.npm/_cacache", "~/.gradle/caches", "~/.cache",
     ]
 
-    /// What could go, per kind; the sizes come from the scanned tree, so there is no second walk.
+    /// What could go, per kind, without the excluded folders and what lies in them; the sizes come
+    /// from the scanned tree, so there is no second walk.
     static func removablePaths(
-        of kinds: [CleanKind] = CleanKind.allCases
+        of kinds: [CleanKind] = CleanKind.allCases, excluding excluded: Set<String> = []
     ) -> [(kind: CleanKind, paths: [String])] {
-        kinds.map { kind in (kind, paths(for: kind)) }
+        kinds.map { kind in
+            (kind, paths(for: kind).filter { path in !ScanService.liesIn(path, anyOf: excluded) })
+        }
     }
 
     /// Removes what is listed and still removable now: an app may have started or a temporary file
@@ -45,9 +52,19 @@ nonisolated enum CleanerService {
         case .temporary:
             return entries(of: temporaryFolder)
                 .filter { path in isOlder(path, thanDays: CleanUpRules.temporaryMinimumAgeDays) }
+        case .installers:
+            return entries(of: downloadsFolder)
+                .filter { path in
+                    isInstaller(path)
+                        && wasAdded(path, beforeDays: CleanUpRules.installerMinimumAgeDays)
+                }
         case .trash:
             return entries(of: trashFolder)
         }
+    }
+
+    static func isInstaller(_ path: String) -> Bool {
+        installerExtensions.contains((path as NSString).pathExtension.lowercased())
     }
 
     private static func removableCaches() -> [String] {
@@ -64,6 +81,14 @@ nonisolated enum CleanerService {
 
     private static func entries(of folder: String) -> [String] {
         FileSystem.names(in: folder).map { name in folder + "/" + name }
+    }
+
+    /// When the file came into its folder, which download tools that keep the server's date do not
+    /// change; an unreadable date keeps the file.
+    private static func wasAdded(_ path: String, beforeDays days: Int) -> Bool {
+        let values = try? URL(filePath: path).resourceValues(forKeys: [.addedToDirectoryDateKey])
+        guard let added = values?.addedToDirectoryDate else { return false }
+        return added < FileSystem.date(daysBefore: days)
     }
 
     /// A folder counts as old only when nothing inside it changed either; the walk stops at the

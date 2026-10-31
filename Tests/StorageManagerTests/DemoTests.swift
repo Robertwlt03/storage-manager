@@ -29,6 +29,38 @@ struct DemoTests {
         #expect(model.cleanItems?.count == CleanKind.allCases.count)
     }
 
+    @Test("The demo has one pair of duplicates, found once per tree")
+    func duplicates() async {
+        let model = Self.demoModel()
+        await model.findDuplicates()
+        #expect(model.duplicateGroups?.map(\.count) == [2])
+        await model.findDuplicates()
+        #expect(model.duplicateGroups?.count == 1)
+    }
+
+    @Test("Watching the volumes keeps the made-up one and ends with its task")
+    func watchVolumes() async {
+        let model = Self.demoModel()
+        let volumes = model.volumes
+        let watch = Task { await model.watchVolumes() }
+        await Task.yield()
+        watch.cancel()
+        await watch.value
+        #expect(model.volumes == volumes)
+    }
+
+    @Test("The report holds the summary, every category and the largest files")
+    func report() {
+        let model = Self.demoModel()
+        let report = model.report()
+        #expect(report.contains(model.summary(unusedDays: AppSettings.unusedDays)))
+        for category in model.categories {
+            #expect(report.contains(category.kind.title.translated))
+        }
+        #expect(report.contains("Holiday 2025.mov"))
+        #expect(report.hasSuffix("\n"))
+    }
+
     @Test("Leaving the search clears it, and canceling without a running scan changes nothing")
     func searchAndCancel() {
         let model = Self.demoModel()

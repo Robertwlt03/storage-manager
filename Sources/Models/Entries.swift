@@ -55,6 +55,10 @@ nonisolated struct VolumeInformation: Identifiable, Hashable {
     var id: String { path }
     var purgeableBytes: Int64 { max(0, availableBytes - freeBytes) }
     var usedBytes: Int64 { max(0, totalBytes - freeBytes) }
+    var isLow: Bool {
+        let shareLimit = Int64(Double(totalBytes) * LowSpace.warningShare)
+        return availableBytes < min(shareLimit, LowSpace.largestWarningBytes)
+    }
     var symbol: String { isInternal ? Symbols.internalDrive : Symbols.externalDrive }
 }
 
