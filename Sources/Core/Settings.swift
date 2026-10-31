@@ -78,12 +78,16 @@ nonisolated enum AppLanguage: String, CaseIterable {
     case italian = "it"
     case dutch = "nl"
     case brazilianPortuguese = "pt-BR"
+    case europeanPortuguese = "pt-PT"
     case swedish = "sv"
     case danish = "da"
     case norwegian = "nb"
     case finnish = "fi"
     case polish = "pl"
     case czech = "cs"
+    case hungarian = "hu"
+    case romanian = "ro"
+    case greek = "el"
     case turkish = "tr"
     case russian = "ru"
     case ukrainian = "uk"
@@ -91,6 +95,10 @@ nonisolated enum AppLanguage: String, CaseIterable {
     case korean = "ko"
     case simplifiedChinese = "zh-Hans"
     case traditionalChinese = "zh-Hant"
+    case indonesian = "id"
+    case vietnamese = "vi"
+    case thai = "th"
+    case hindi = "hi"
 
     static let fallback = AppLanguage.english
 
@@ -139,7 +147,11 @@ nonisolated enum AppLanguage: String, CaseIterable {
         case "zh":
             let isTraditional = language.maximalIdentifier.contains("Hant")
             return isTraditional ? .traditionalChinese : .simplifiedChinese
-        case "pt": return .brazilianPortuguese
+        case "pt":
+            // Plain "pt" is Brazilian on Apple's systems; Portugal and the other countries get
+            // Portugal's Portuguese.
+            let region = language.region?.identifier
+            return region == nil || region == "BR" ? .brazilianPortuguese : .europeanPortuguese
         case "no", "nn": return .norwegian
         default: return AppLanguage(rawValue: code)
         }

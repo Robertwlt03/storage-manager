@@ -131,7 +131,7 @@ From then on, `git push` only sends commits for which the check chain is green. 
 folder, the hook refuses the push while changes are not committed yet or a branch other than the checked-out one
 is sent. Whoever has to push without the check for once writes `git push --no-verify`.
 
-The tests in the check chain also verify that every text exists in all 20 languages and has the same number of
+The tests in the check chain also verify that every text exists in all 28 languages and has the same number of
 placeholders, and that every text color reaches a contrast of at least 4.5 to 1 in light and dark appearance. If you
 change a rule, add the matching test, and `make coverage` shows you what is still untested.
 
@@ -185,7 +185,7 @@ from a fork, you start from this repository's `main` (`git remote add upstream <
   on the disk is private.
 - **Never delete without asking:** The app only removes something after a confirmation, and copies of an app only
   when that app is not running. Tests never delete anything.
-- **Texts in all languages:** Every new text gets an English key in `TextKey` and a line in all 20 files under
+- **Texts in all languages:** Every new text gets an English key in `TextKey` and a line in all 28 files under
   `Resources`. German and English are the source. For the other languages we are especially glad about improvements
   from native speakers.
 - **Everything in English:** You write names, comments, commit messages and guides in English with American

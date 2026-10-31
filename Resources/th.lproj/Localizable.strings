@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Storage Manager"; /* same as English on purpose */
+"paneOverview" = "ภาพรวม";
+"paneExplorer" = "โฟลเดอร์";
+"paneLargeFiles" = "ไฟล์ขนาดใหญ่";
+"paneTemporaryFiles" = "พื้นที่ชั่วคราว";
+"paneCopies" = "สำเนาแอป";
+"sectionSystem" = "พื้นที่ที่ซ่อนอยู่";
+"sectionVolumes" = "ไดรฟ์ข้อมูล";
+"rescan" = "สแกนใหม่";
+"rescanHelp" = "สแกนทุกส่วนใหม่ (⌘R)";
+"cancelScan" = "ยกเลิกการสแกน";
+
+/* Scan status and placeholders */
+"cancel" = "ยกเลิก";
+"filesAndSize" = "%@ ไฟล์ · %@";
+"measuredAt" = "สแกนเมื่อ %@";
+"scanNow" = "สแกนเลย";
+"unreadable" = "อ่านไม่ได้ %@ โฟลเดอร์ – อนุญาตการเข้าถึงดิสก์เต็มรูปแบบ…";
+"notMeasuredTitle" = "ยังไม่ได้สแกน";
+"notMeasuredDetail" = "สแกนครั้งเดียววัดได้ทุกส่วน หลังจากนั้นทุกการคลิกจะแสดงผลทันที";
+"scanningTitle" = "กำลังสแกน…";
+"scanningDetail" = "ผลลัพธ์จะแสดงทันทีที่ส่วนแรกเสร็จ";
+"loadingSummaryTitle" = "กำลังเขียนสรุป…";
+"loadingSummaryDetail" = "เมื่อวัดครบทุกส่วนแล้ว ที่นี่จะสรุปสั้นๆ ว่าพื้นที่จัดเก็บข้อมูลของคุณเป็นอย่างไร";
+"loadingSizesTitle" = "กำลังนับไฟล์ตามขนาด…";
+"loadingSizesDetail" = "แผนภูมิจะแสดงทันทีที่วัดครบทุกส่วน";
+"loadingAppsTitle" = "กำลังตรวจสอบแอป…";
+"loadingAppsDetail" = "ขนาดและการใช้ล่าสุดจะเป็นค่าสุดท้ายเมื่อสแกนเสร็จ";
+"showSidebar" = "แสดงแถบด้านข้าง";
+"hideSidebar" = "ซ่อนแถบด้านข้าง";
+
+/* Overview and categories */
+"availableOf" = "ว่าง %@ จาก %@";
+"categories" = "หมวดหมู่";
+"freeSpace" = "ว่าง";
+"temporaryAreaName" = "พื้นที่ชั่วคราวของระบบ";
+"categoryApps" = "แอปพลิเคชัน";
+"categoryDocuments" = "เอกสารและเดสก์ท็อป";
+"categoryDownloads" = "ดาวน์โหลด";
+"categoryMedia" = "รูปภาพ เพลง และภาพยนตร์";
+"categoryICloud" = "iCloud Drive"; /* same as English on purpose */
+"categoryMail" = "เมลและข้อความ";
+"categoryDeveloper" = "นักพัฒนา";
+"categoryCaches" = "แคช";
+"categoryAppData" = "ข้อมูลแอป";
+"categoryTrash" = "ถังขยะ";
+"categoryTemporary" = "ไฟล์ชั่วคราว";
+"categoryUser" = "ข้อมูลผู้ใช้อื่นๆ";
+"categoryLibrary" = "ข้อมูลแอปที่ใช้ร่วมกัน";
+"categoryOther" = "โฟลเดอร์อื่นๆ";
+"categoryPurgeable" = "macOS ล้างข้อมูลได้";
+"categorySystem" = "ระบบและอื่นๆ";
+
+/* Explorer, tables and info sheet */
+"columnName" = "ชื่อ";
+"columnSize" = "ขนาด";
+"columnShare" = "สัดส่วน";
+"columnFiles" = "ไฟล์";
+"columnLocation" = "ตำแหน่ง";
+"smallerItems" = "รายการเล็กกว่า 1 MB อีก %@ รายการ";
+"measuredTotal" = "สแกนแล้ว %@";
+"open" = "เปิด";
+"showInFinder" = "แสดงใน Finder";
+"info" = "ขอข้อมูล";
+"copyPath" = "คัดลอกพาธ";
+"done" = "เสร็จสิ้น";
+"allocated" = "ขนาดบนดิสก์";
+"kind" = "ชนิด";
+"modified" = "วันที่แก้ไข";
+"created" = "วันที่สร้าง";
+"contents" = "เนื้อหา";
+"files" = "ไฟล์";
+"folders" = "โฟลเดอร์";
+"packages" = "แพ็คเกจแอป";
+"modifiedBetween" = "แก้ไขระหว่าง";
+"dateRange" = "%@ ถึง %@";
+"analyzing" = "กำลังวิเคราะห์ไฟล์…";
+"typesBySize" = "ชนิดไฟล์ตามขนาด";
+"fileCount" = "%@ ไฟล์";
+"noExtension" = "ไม่มีนามสกุล";
+
+/* Large files */
+"minimumSize" = "ขนาดขั้นต่ำ";
+"fromSize" = "ตั้งแต่ %@";
+"noFilesFrom" = "ไม่มีไฟล์ตั้งแต่ %@";
+"filesTotal" = "%@ ไฟล์ · รวม %@";
+
+/* Temporary area */
+"location" = "ตำแหน่ง";
+"total" = "รวม";
+"subfolders" = "โฟลเดอร์ย่อย";
+"viewCopies" = "ดูสำเนาแอป…";
+"temporaryFolderT" = "ไฟล์ชั่วคราว";
+"temporaryFolderTDetail" = "ส่วนใหญ่จะถูกล้างเมื่อเริ่มระบบใหม่";
+"temporaryFolderC" = "แคช";
+"temporaryFolderCDetail" = "แคชของแอปและบริการระบบ";
+"temporaryFolderX" = "สำเนาแอป";
+"temporaryFolderXDetail" = "สำเนาที่ macOS สร้างขณะตรวจสอบลายเซ็น";
+"temporaryFolder0" = "บริการระบบ";
+"temporaryFolder0Detail" = "ข้อมูลของบริการเบื้องหลัง";
+
+/* Signature copies */
+"noCopies" = "ไม่มีสำเนาแอป";
+"noCopiesDetail" = "ไม่มีสำเนาแอปในโฟลเดอร์ X";
+"running" = "กำลังทำงาน";
+"stopped" = "ปิดแล้ว";
+"copiesLabel" = "สำเนา";
+"countedSize" = "ขนาดที่นับได้";
+"installedVersion" = "เวอร์ชันที่ติดตั้ง";
+"notFound" = "ไม่พบ";
+"versionLabel" = "เวอร์ชัน %@";
+"copiesOne" = "1 สำเนา";
+"copiesMany" = "%@ สำเนา";
+"current" = "ปัจจุบัน";
+"old" = "เก่า";
+"unknown" = "ไม่ทราบ";
+"createdOn" = "สร้างเมื่อ %@";
+"freed" = "พื้นที่ที่ได้คืนจริง: %@";
+"deleteError" = "ลบได้ไม่ทั้งหมด: %@";
+"quitToDelete" = "ปิด %@ ด้วย ⌘Q เพื่อลบ";
+"openInExplorer" = "เปิดในโฟลเดอร์";
+"deleteAll" = "ลบสำเนาทั้งหมด…";
+"deleteTitle" = "ลบสำเนา %@ รายการของ %@ ใช่ไหม";
+"deleteForever" = "ลบอย่างถาวร";
+"deleteMessage" = "สำเนาจะไม่ถูกย้ายไปที่ถังขยะ macOS จะสร้างใหม่เมื่อจำเป็น";
+
+/* Volumes */
+"capacity" = "ความจุ";
+"used" = "ใช้แล้ว";
+"purgeable" = "macOS ล้างข้อมูลได้";
+"available" = "ว่าง";
+"toOverview" = "ไปที่ภาพรวม";
+"exploreContents" = "สำรวจเนื้อหา";
+"scanAndExplore" = "สแกนและสำรวจ";
+"volumeGone" = "ไดรฟ์ข้อมูลไม่ได้เชื่อมต่ออยู่แล้ว";
+
+/* Search */
+"searchPrompt" = "ค้นหาโฟลเดอร์และไฟล์";
+"scopeAll" = "ทั้งหมด";
+"scopeFolders" = "โฟลเดอร์";
+"scopeFiles" = "ไฟล์";
+"searchResults" = "ผลลัพธ์ %@ รายการ";
+"noResults" = "ไม่มีผลลัพธ์สำหรับ “%@”";
+"searchNote" = "ค้นหาโฟลเดอร์และไฟล์ตั้งแต่ 1 MB จากการสแกนครั้งล่าสุด";
+
+/* Full Disk Access */
+"accessTitle" = "อนุญาตครั้งเดียวแทนการถามหลายครั้ง";
+"accessDetail" = "หากไม่มีการเข้าถึงดิสก์เต็มรูปแบบ macOS จะถามแยกกันสำหรับเดสก์ท็อป เอกสาร ดาวน์โหลด iCloud Drive ข้อมูลของแอปอื่น และไดรฟ์ข้อมูลภายนอก สวิตช์เดียวในการตั้งค่าระบบใช้แทนคำถามทั้งหมดนี้ได้ แอปนี้อ่านเฉพาะชื่อ ขนาด และวันที่ ไม่อ่านเนื้อหาในเอกสารของคุณ และไม่ส่งข้อมูลใดๆ ออกไป";
+"accessOneSwitch" = "ความเป็นส่วนตัวและความปลอดภัย › การเข้าถึงดิสก์เต็มรูปแบบ";
+"accessOpenSettings" = "เปิดการตั้งค่าระบบ";
+"accessContinue" = "ดำเนินการต่อโดยไม่อนุญาต";
+"accessGranted" = "อนุญาตแล้ว";
+"accessRestart" = "เปิดแอปใหม่";
+"accessRestartHint" = "เปิดสวิตช์แล้วใช่ไหม macOS จะให้สิทธิ์เข้าถึงหลังจากเปิดแอปใหม่เท่านั้น คลิก “เปิดแอปใหม่” หรือให้ macOS ปิดแล้วเปิดแอปอีกครั้ง หากยังใช้ไม่ได้ ให้เอารายการออกด้วย “–” ในการตั้งค่าระบบแล้วเพิ่มแอปอีกครั้ง";
+"quitApp" = "ปิด %@";
+"fullDiskAccess" = "การเข้าถึงดิสก์เต็มรูปแบบ";
+
+/* Settings */
+"autoScan" = "สแกนอัตโนมัติเมื่อเปิดแอป";
+"extraFolders" = "โฟลเดอร์เพิ่มเติม";
+"none" = "ไม่มี";
+"add" = "เพิ่ม";
+"remove" = "เอาออก";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "ล้างข้อมูล";
+"paneApps" = "แอปที่ไม่ได้ใช้";
+"sectionTidy" = "เพิ่มพื้นที่ว่าง";
+"layoutList" = "รายการ";
+"layoutGrid" = "ตาราง";
+"settings" = "การตั้งค่า";
+"emptyFolder" = "โฟลเดอร์นี้ว่างเปล่า";
+"otherCategories" = "อื่นๆ";
+"cleanCaches" = "แคชของแอป";
+"cleanCachesDetail" = "แคชที่แอปสร้างขึ้นใหม่ได้เมื่อจำเป็น แอปที่กำลังทำงานและตัว macOS เองจะไม่ถูกแตะต้อง";
+"cleanDeveloper" = "แคชของนักพัฒนา";
+"cleanDeveloperDetail" = "ข้อมูลบิลด์ของ Xcode และแคชแพ็คเกจ เช่น npm จะถูกสร้างใหม่ในการบิลด์ครั้งถัดไป";
+"cleanLogs" = "บันทึกเก่า";
+"cleanLogsDetail" = "บันทึกของแอปที่เก่ากว่าหนึ่งสัปดาห์";
+"cleanTemporary" = "ไฟล์ชั่วคราวเก่า";
+"cleanTemporaryDetail" = "ไฟล์ชั่วคราวที่ไม่มีการเปลี่ยนแปลงอย่างน้อยสามวัน";
+"cleanTrash" = "ถังขยะ";
+"cleanTrashDetail" = "ล้างถังขยะอย่างถาวร ไม่ได้เลือกไว้ตามค่าเริ่มต้น";
+"cleanFailed" = "เอาออกไม่ได้ %@ รายการ เนื่องจากกำลังใช้งานอยู่หรือได้รับการป้องกัน";
+"cleaning" = "กำลังล้างข้อมูล…";
+"cleanerRefresh" = "ค้นหาอีกครั้ง";
+"cleanSelected" = "ล้างรายการที่เลือก (%@)";
+"cleanConfirmTitle" = "เอา %@ ออกอย่างถาวรใช่ไหม";
+"cleanConfirmMessage" = "ไฟล์จะไม่ถูกย้ายไปที่ถังขยะ แอปจะสร้างแคชใหม่เมื่อจำเป็น หลังจากนั้นแอปจะวัดทุกอย่างอีกครั้ง";
+"appsNoneUnused" = "ทุกแอปถูกใช้งานเมื่อเร็วๆ นี้";
+"unusedSince" = "ไม่ได้เปิดมา";
+"daysOption" = "มากกว่า %@ วัน";
+"trashAppTitle" = "ย้าย “%@” ไปที่ถังขยะใช่ไหม";
+"trashAppMessage" = "คุณสามารถกู้คืนแอปจากถังขยะได้จนกว่าจะล้างถังขยะ";
+"moveToTrash" = "ย้ายไปที่ถังขยะ";
+"lastOpened" = "เปิดล่าสุดเมื่อ %@";
+"trashAppFailed" = "ย้าย “%@” ไม่ได้ ใน Finder ทำได้โดยใช้รหัสผ่านของคุณ";
+"figureFiles" = "ไฟล์";
+"figureUnusedApps" = "แอปที่ไม่ได้ใช้";
+"bucketUnder1MB" = "ต่ำกว่า 1 MB";
+"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
+"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
+"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
+"bucketOver1GB" = "มากกว่า 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "สแกนแล้ว %@";
+"scanningArea" = "ส่วนที่ %@ จาก %@ · %@";
+"emptyValue" = "ว่างเปล่า";
+
+/* Page info, scan details, summary */
+"infoOverview" = "ขนาดคือพื้นที่ที่ใช้อยู่ตามที่ “du” รายงาน โคลน APFS นับเต็มจำนวน สำเนาที่ใช้บล็อกข้อมูลร่วมกันจึงใช้พื้นที่จริงน้อยกว่านี้ “ระบบและอื่นๆ” คือส่วนที่เหลือจนครบตามที่ macOS รายงานว่าใช้แล้ว";
+"infoCleaner" = "เอาไฟล์ที่ระบบแทบไม่ต้องใช้หรือไม่ต้องใช้เลยออก เช่น แคชที่สร้างใหม่เองได้ บันทึกเก่า และไฟล์ชั่วคราวเก่า เลือกสิ่งที่จะเอาออกแล้วยืนยัน";
+"infoApps" = "แอปที่คุณไม่ได้เปิดมาสักระยะ วันที่มาจาก macOS เอง แอปนี้ไม่ได้บันทึกอะไรไว้ ย้ายสิ่งที่ไม่ต้องการแล้วไปที่ถังขยะได้ที่นี่ และกู้คืนจากถังขยะได้";
+"infoExplorer" = "โฟลเดอร์ทั้งหมดที่วัดแล้ว เรียงตามขนาด คลิกสองครั้งเพื่อเปิดโฟลเดอร์ เมนูคำสั่งลัดใช้แสดงไฟล์ใน Finder และดูข้อมูลของไฟล์";
+"infoLargeFiles" = "ไฟล์ทั้งหมดตั้งแต่ขนาดที่เลือกจากการสแกนครั้งล่าสุด คลิกสองครั้งเพื่อแสดงไฟล์ใน Finder";
+"infoTemporaryFiles" = "macOS สร้างพื้นที่นี้ให้ผู้ใช้ทุกคนใน /private/var/folders พื้นที่นี้ถูกซ่อนไว้ใน Finder และไม่ได้แยกรายละเอียดใน “จัดการพื้นที่จัดเก็บข้อมูล”";
+"infoCopies" = "ขณะตรวจสอบลายเซ็น บางครั้ง macOS จะวางสำเนาแอปทั้งชุดไว้ในโฟลเดอร์ X สำเนาเหล่านี้ไม่ใช่โปรแกรมแยกต่างหาก และ macOS จะสร้างใหม่เมื่อจำเป็น การลบจึงปลอดภัยตราบใดที่ปิดแอปแล้ว";
+"infoVolume" = "ความจุของไดรฟ์ข้อมูลนี้ ได้แก่ ส่วนที่ใช้แล้ว ส่วนที่ macOS ล้างได้เองเมื่อจำเป็น และส่วนที่ว่าง ไดรฟ์ข้อมูลภายนอกวัดได้ที่นี่";
+"aboutPage" = "เกี่ยวกับหน้านี้";
+"scanDetails" = "การสแกน";
+"scanProgress" = "ความคืบหน้า";
+"scanArea" = "ส่วน";
+"scanFinished" = "สแกนเมื่อ";
+"accessMissingShort" = "ยังไม่ได้อนุญาต";
+"summaryTitle" = "โดยสรุป";
+"summaryDisk" = "บน “%@” ใช้ไปแล้ว %@ จาก %@ และยังว่างอยู่ %@";
+"summaryTop" = "พื้นที่ส่วนใหญ่เป็นของ %@ ที่ %@ และ %@ ที่ %@";
+"summaryNotMeasured" = "การแบ่งพื้นที่จะแสดงที่นี่หลังการสแกนครั้งแรก";
+"summaryClean" = "การล้างข้อมูลจะเพิ่มพื้นที่ว่างได้ประมาณ %@";
+"summaryCopies" = "สำเนาแอปที่ macOS สร้างขณะตรวจสอบใช้พื้นที่ %@";
+"summaryApps" = "มี %@ แอปที่ไม่ได้เปิดมาสักระยะ";
+"readAloud" = "อ่านออกเสียง";
+"stopReading" = "หยุดอ่าน";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "ไฟล์ของคุณใหญ่แค่ไหน";
+"sizeClassesCaption" = "แต่ละกลุ่มขนาดใช้พื้นที่เท่าไรและมีไฟล์กี่ไฟล์ ไฟล์ใหญ่ไม่กี่ไฟล์มักใช้พื้นที่มากกว่าไฟล์เล็กจำนวนมาก";
+"figureLargeFilesFrom" = "ไฟล์ขนาดใหญ่ตั้งแต่ %@";
+"bucketValue" = "%@
+%@ ไฟล์";
+"settingsSystemNote" = "ลักษณะที่ปรากฏและหน่วยมาจากการตั้งค่าระบบ";
+"appLanguage" = "ภาษา";
+"languageLikeMac" = "เหมือนกับบน Mac";
+"languageRestartHint" = "ภาษาใหม่จะแสดงหลังจากเริ่มการทำงานใหม่";

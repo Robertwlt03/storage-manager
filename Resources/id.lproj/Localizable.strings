@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Storage Manager"; /* same as English on purpose */
+"paneOverview" = "Ikhtisar";
+"paneExplorer" = "Folder";
+"paneLargeFiles" = "File Besar";
+"paneTemporaryFiles" = "Area Sementara";
+"paneCopies" = "Salinan App";
+"sectionSystem" = "Area Tersembunyi";
+"sectionVolumes" = "Volume";
+"rescan" = "Pindai Ulang";
+"rescanHelp" = "Pindai ulang semua area (⌘R)";
+"cancelScan" = "Batalkan Pindai";
+
+/* Scan status and placeholders */
+"cancel" = "Batalkan";
+"filesAndSize" = "%@ file · %@";
+"measuredAt" = "Dipindai pukul %@";
+"scanNow" = "Pindai Sekarang";
+"unreadable" = "%@ folder tidak terbaca – izinkan Akses Disk Penuh …";
+"notMeasuredTitle" = "Belum Dipindai";
+"notMeasuredDetail" = "Satu kali pindai mengukur semua area; setelah itu setiap klik langsung tampil.";
+"scanningTitle" = "Memindai …";
+"scanningDetail" = "Hasil muncul begitu area pertama selesai.";
+"loadingSummaryTitle" = "Menulis ringkasan …";
+"loadingSummaryDetail" = "Setelah semua area diukur, beberapa kalimat di sini menjelaskan keadaan penyimpanan Anda.";
+"loadingSizesTitle" = "Menghitung file menurut ukuran …";
+"loadingSizesDetail" = "Grafik muncul begitu semua area selesai diukur.";
+"loadingAppsTitle" = "Memeriksa app …";
+"loadingAppsDetail" = "Ukuran dan waktu terakhir dipakai baru pasti setelah pemindaian selesai.";
+"showSidebar" = "Tampilkan Bar Samping";
+"hideSidebar" = "Sembunyikan Bar Samping";
+
+/* Overview and categories */
+"availableOf" = "%@ tersedia dari %@";
+"categories" = "Kategori";
+"freeSpace" = "Kosong";
+"temporaryAreaName" = "Area Sementara Sistem";
+"categoryApps" = "Aplikasi";
+"categoryDocuments" = "Dokumen & Desktop";
+"categoryDownloads" = "Unduhan";
+"categoryMedia" = "Foto, Musik & Film";
+"categoryICloud" = "iCloud Drive"; /* same as English on purpose */
+"categoryMail" = "Mail & Pesan";
+"categoryDeveloper" = "Pengembang";
+"categoryCaches" = "Cache";
+"categoryAppData" = "Data App";
+"categoryTrash" = "Tong Sampah";
+"categoryTemporary" = "File Sementara";
+"categoryUser" = "Data Pengguna Lainnya";
+"categoryLibrary" = "Data App Bersama";
+"categoryOther" = "Folder Lainnya";
+"categoryPurgeable" = "Dapat Dihapus oleh macOS";
+"categorySystem" = "Sistem & Lainnya";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Nama";
+"columnSize" = "Ukuran";
+"columnShare" = "Porsi";
+"columnFiles" = "File";
+"columnLocation" = "Lokasi";
+"smallerItems" = "%@ item lebih kecil di bawah 1 MB";
+"measuredTotal" = "%@ dipindai";
+"open" = "Buka";
+"showInFinder" = "Tampilkan di Finder";
+"info" = "Dapatkan Info";
+"copyPath" = "Salin Jalur";
+"done" = "Selesai";
+"allocated" = "Ukuran di Disk";
+"kind" = "Jenis";
+"modified" = "Diubah";
+"created" = "Dibuat";
+"contents" = "Isi";
+"files" = "File";
+"folders" = "Folder";
+"packages" = "Paket App";
+"modifiedBetween" = "Diubah Antara";
+"dateRange" = "%@ dan %@";
+"analyzing" = "Menganalisis file …";
+"typesBySize" = "Jenis File menurut Ukuran";
+"fileCount" = "%@ file";
+"noExtension" = "tanpa ekstensi";
+
+/* Large files */
+"minimumSize" = "Ukuran Minimum";
+"fromSize" = "mulai %@";
+"noFilesFrom" = "Tidak ada file mulai %@";
+"filesTotal" = "%@ file · total %@";
+
+/* Temporary area */
+"location" = "Lokasi";
+"total" = "Jumlah";
+"subfolders" = "Subfolder";
+"viewCopies" = "Lihat Salinan App …";
+"temporaryFolderT" = "File Sementara";
+"temporaryFolderTDetail" = "Sebagian besar dikosongkan saat mulai ulang.";
+"temporaryFolderC" = "Cache";
+"temporaryFolderCDetail" = "Cache app dan layanan sistem.";
+"temporaryFolderX" = "Salinan App";
+"temporaryFolderXDetail" = "Salinan yang dibuat macOS saat memeriksa tanda tangan.";
+"temporaryFolder0" = "Layanan Sistem";
+"temporaryFolder0Detail" = "Data layanan latar belakang.";
+
+/* Signature copies */
+"noCopies" = "Tidak Ada Salinan App";
+"noCopiesDetail" = "Tidak ada salinan app di folder X.";
+"running" = "berjalan";
+"stopped" = "ditutup";
+"copiesLabel" = "Salinan";
+"countedSize" = "Ukuran Terhitung";
+"installedVersion" = "Versi Terinstal";
+"notFound" = "tidak ditemukan";
+"versionLabel" = "Versi %@";
+"copiesOne" = "1 salinan";
+"copiesMany" = "%@ salinan";
+"current" = "terkini";
+"old" = "lama";
+"unknown" = "tidak diketahui";
+"createdOn" = "Dibuat pada %@";
+"freed" = "Ruang yang benar-benar dikosongkan: %@";
+"deleteError" = "Tidak semua dapat dihapus: %@";
+"quitToDelete" = "Tutup %@ dengan ⌘Q untuk menghapus.";
+"openInExplorer" = "Buka di Explorer";
+"deleteAll" = "Hapus Semua Salinan …";
+"deleteTitle" = "Hapus %@ salinan %@?";
+"deleteForever" = "Hapus Permanen";
+"deleteMessage" = "Salinan tidak masuk ke Tong Sampah. macOS membuat yang baru bila perlu.";
+
+/* Volumes */
+"capacity" = "Kapasitas";
+"used" = "Terpakai";
+"purgeable" = "Dapat Dihapus oleh macOS";
+"available" = "Tersedia";
+"toOverview" = "Ke Ikhtisar";
+"exploreContents" = "Jelajahi Isi";
+"scanAndExplore" = "Pindai dan Jelajahi";
+"volumeGone" = "Volume Tidak Lagi Terhubung";
+
+/* Search */
+"searchPrompt" = "Cari folder dan file";
+"scopeAll" = "Semua";
+"scopeFolders" = "Folder";
+"scopeFiles" = "File";
+"searchResults" = "%@ Hasil";
+"noResults" = "Tidak Ada Hasil untuk “%@”";
+"searchNote" = "Mencari folder dan file mulai 1 MB dalam pemindaian terakhir.";
+
+/* Full Disk Access */
+"accessTitle" = "Satu Izin, Bukan Banyak Permintaan";
+"accessDetail" = "Tanpa Akses Disk Penuh, macOS meminta izin terpisah untuk Desktop, Dokumen, Unduhan, iCloud Drive, data app lain, dan volume eksternal. Satu tombol di Pengaturan Sistem menggantikan semua permintaan itu. App ini hanya membaca nama, ukuran, dan tanggal, tidak pernah isi dokumen Anda, dan tidak mengirim apa pun ke mana pun.";
+"accessOneSwitch" = "Privasi & Keamanan › Akses Disk Penuh";
+"accessOpenSettings" = "Buka Pengaturan Sistem";
+"accessContinue" = "Lanjutkan Tanpa Akses Disk Penuh";
+"accessGranted" = "Diizinkan";
+"accessRestart" = "Mulai Ulang App";
+"accessRestartHint" = "Tombol sudah dinyalakan? macOS baru memberi akses setelah app dimulai ulang. Klik “Mulai Ulang App” atau biarkan macOS menutup dan membukanya kembali. Jika masih belum berhasil, hapus entri dengan “–” di Pengaturan Sistem lalu tambahkan app lagi.";
+"quitApp" = "Tutup %@";
+"fullDiskAccess" = "Akses Disk Penuh";
+
+/* Settings */
+"autoScan" = "Pindai otomatis saat dibuka";
+"extraFolders" = "Folder Tambahan";
+"none" = "Tidak Ada";
+"add" = "Tambah";
+"remove" = "Hapus";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "Bersihkan";
+"paneApps" = "App Tak Terpakai";
+"sectionTidy" = "Kosongkan Ruang";
+"layoutList" = "Daftar";
+"layoutGrid" = "Kisi";
+"settings" = "Pengaturan";
+"emptyFolder" = "Folder ini kosong";
+"otherCategories" = "Lainnya";
+"cleanCaches" = "Cache App";
+"cleanCachesDetail" = "Cache yang dibuat ulang oleh app bila perlu. App yang berjalan dan macOS sendiri tidak disentuh.";
+"cleanDeveloper" = "Cache Pengembang";
+"cleanDeveloperDetail" = "Data build Xcode dan cache paket seperti npm; dibuat ulang pada build berikutnya.";
+"cleanLogs" = "Log Lama";
+"cleanLogsDetail" = "Log app yang lebih lama dari satu minggu.";
+"cleanTemporary" = "File Sementara Lama";
+"cleanTemporaryDetail" = "File sementara yang tidak berubah setidaknya tiga hari.";
+"cleanTrash" = "Tong Sampah";
+"cleanTrashDetail" = "Mengosongkan Tong Sampah secara permanen. Tidak dipilih secara default.";
+"cleanFailed" = "%@ item tidak dapat dihapus karena sedang digunakan atau dilindungi.";
+"cleaning" = "Membersihkan …";
+"cleanerRefresh" = "Cari Lagi";
+"cleanSelected" = "Bersihkan Pilihan (%@)";
+"cleanConfirmTitle" = "Hapus %@ secara permanen?";
+"cleanConfirmMessage" = "File tidak masuk ke Tong Sampah. App membuat ulang cache-nya bila perlu. Setelah itu app mengukur semuanya lagi.";
+"appsNoneUnused" = "Semua app baru-baru ini digunakan";
+"unusedSince" = "Tidak dibuka selama";
+"daysOption" = "lebih dari %@ hari";
+"trashAppTitle" = "Pindahkan “%@” ke Tong Sampah?";
+"trashAppMessage" = "Anda dapat memulihkan app dari Tong Sampah selama belum dikosongkan.";
+"moveToTrash" = "Pindahkan ke Tong Sampah";
+"lastOpened" = "Terakhir dibuka pada %@";
+"trashAppFailed" = "“%@” tidak dapat dipindahkan. Di Finder, ini berhasil dengan kata sandi Anda.";
+"figureFiles" = "File";
+"figureUnusedApps" = "app tak terpakai";
+"bucketUnder1MB" = "di bawah 1 MB";
+"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
+"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
+"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
+"bucketOver1GB" = "di atas 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ dipindai";
+"scanningArea" = "Area %@ dari %@ · %@";
+"emptyValue" = "kosong";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Ukuran adalah ruang yang terpakai, seperti dilaporkan oleh “du”. Klon APFS dihitung penuh; salinan yang berbagi blok penyimpanan sebenarnya memakai lebih sedikit. “Sistem & Lainnya” adalah sisa hingga jumlah yang dilaporkan macOS sebagai terpakai.";
+"infoCleaner" = "Hapus file yang hampir tidak atau sama sekali tidak dibutuhkan sistem Anda: cache yang dibuat ulang sendiri, log lama, dan file sementara lama. Pilih yang boleh dihapus, lalu konfirmasi.";
+"infoApps" = "App yang sudah lama tidak Anda buka. Tanggalnya berasal dari macOS sendiri; app ini tidak mencatat apa pun. Pindahkan yang tidak lagi Anda perlukan ke Tong Sampah di sini; Anda dapat memulihkannya dari sana.";
+"infoExplorer" = "Semua folder yang diukur, diurutkan menurut ukuran. Klik dua kali membuka folder; menu konteks menampilkan file di Finder dan memberi informasi tentangnya.";
+"infoLargeFiles" = "Semua file mulai dari ukuran yang dipilih dalam pemindaian terakhir. Klik dua kali menampilkan file di Finder.";
+"infoTemporaryFiles" = "macOS membuat area ini untuk setiap pengguna di /private/var/folders. Area ini tersembunyi di Finder dan tidak dirinci di “Kelola Penyimpanan”.";
+"infoCopies" = "Saat memeriksa tanda tangan, macOS terkadang menaruh salinan lengkap sebuah app di folder X. Salinan ini bukan program tersendiri; macOS membuat yang baru bila perlu. Menghapusnya aman selama app sudah ditutup.";
+"infoVolume" = "Kapasitas volume ini: yang terpakai, yang dapat dikosongkan macOS sendiri bila perlu, dan yang tersedia. Volume eksternal dapat diukur di sini.";
+"aboutPage" = "Tentang Halaman Ini";
+"scanDetails" = "Pemindaian";
+"scanProgress" = "Kemajuan";
+"scanArea" = "Area"; /* same as English on purpose */
+"scanFinished" = "Dipindai pukul";
+"accessMissingShort" = "Belum diizinkan";
+"summaryTitle" = "Singkatnya";
+"summaryDisk" = "Di “%@”, %@ dari %@ terpakai dan %@ tersedia.";
+"summaryTop" = "Ruang terbanyak dipakai oleh %@ sebesar %@ dan %@ sebesar %@.";
+"summaryNotMeasured" = "Pembagian ruang akan tampil di sini setelah pemindaian pertama.";
+"summaryClean" = "Pembersihan dapat mengosongkan sekitar %@.";
+"summaryCopies" = "Salinan app yang dibuat macOS saat memeriksanya terhitung %@.";
+"summaryApps" = "%@ app sudah lama tidak dibuka.";
+"readAloud" = "Bacakan";
+"stopReading" = "Berhenti Membacakan";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "Seberapa besar file Anda?";
+"sizeClassesCaption" = "Berapa banyak ruang yang dipakai tiap kelas ukuran dan berapa file di dalamnya. Beberapa file besar biasanya memakan lebih banyak ruang daripada banyak file kecil.";
+"figureLargeFilesFrom" = "file besar mulai %@";
+"bucketValue" = "%@
+%@ file";
+"settingsSystemNote" = "Tampilan dan satuan mengikuti Pengaturan Sistem.";
+"appLanguage" = "Bahasa";
+"languageLikeMac" = "Sama seperti Mac";
+"languageRestartHint" = "Bahasa baru tampil setelah dimulai ulang.";

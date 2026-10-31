@@ -1,0 +1,246 @@
+/* App and sidebar */
+"appName" = "Storage Manager"; /* same as English on purpose */
+"paneOverview" = "Prezentare generală";
+"paneExplorer" = "Dosare";
+"paneLargeFiles" = "Fișiere mari";
+"paneTemporaryFiles" = "Zonă temporară";
+"paneCopies" = "Copii de aplicații";
+"sectionSystem" = "Zone ascunse";
+"sectionVolumes" = "Volume";
+"rescan" = "Rescanează";
+"rescanHelp" = "Rescanează toate zonele (⌘R)";
+"cancelScan" = "Anulează scanarea";
+
+/* Scan status and placeholders */
+"cancel" = "Anulează";
+"filesAndSize" = "%@ fișiere · %@";
+"measuredAt" = "Scanat la %@";
+"scanNow" = "Scanează acum";
+"unreadable" = "%@ dosare ilizibile – permite accesul complet la disc …";
+"notMeasuredTitle" = "Nescanat încă";
+"notMeasuredDetail" = "O singură trecere măsoară toate zonele; apoi fiecare clic răspunde instantaneu.";
+"scanningTitle" = "Se scanează …";
+"scanningDetail" = "Rezultatele apar imediat ce prima zonă este gata.";
+"loadingSummaryTitle" = "Se scrie rezumatul …";
+"loadingSummaryDetail" = "După ce toate zonele sunt măsurate, câteva propoziții de aici îți spun cum arată spațiul de stocare.";
+"loadingSizesTitle" = "Se numără fișierele după dimensiune …";
+"loadingSizesDetail" = "Graficul apare imediat ce toate zonele sunt măsurate.";
+"loadingAppsTitle" = "Se verifică aplicațiile …";
+"loadingAppsDetail" = "Dimensiunile și ultima utilizare sunt definitive după încheierea scanării.";
+"showSidebar" = "Afișează bara laterală";
+"hideSidebar" = "Ascunde bara laterală";
+
+/* Overview and categories */
+"availableOf" = "%@ disponibil din %@";
+"categories" = "Categorii";
+"freeSpace" = "Liber";
+"temporaryAreaName" = "Zonă temporară de sistem";
+"categoryApps" = "Aplicații";
+"categoryDocuments" = "Documente și Birou";
+"categoryDownloads" = "Descărcări";
+"categoryMedia" = "Poze, muzică și filme";
+"categoryICloud" = "iCloud Drive"; /* same as English on purpose */
+"categoryMail" = "Mail și Mesaje";
+"categoryDeveloper" = "Dezvoltare";
+"categoryCaches" = "Cache-uri";
+"categoryAppData" = "Date ale aplicațiilor";
+"categoryTrash" = "Coș";
+"categoryTemporary" = "Fișiere temporare";
+"categoryUser" = "Alte date ale utilizatorului";
+"categoryLibrary" = "Date partajate ale aplicațiilor";
+"categoryOther" = "Alte dosare";
+"categoryPurgeable" = "Poate fi eliberat de macOS";
+"categorySystem" = "Sistem și altele";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Nume";
+"columnSize" = "Dimensiune";
+"columnShare" = "Proporție";
+"columnFiles" = "Fișiere";
+"columnLocation" = "Locație";
+"smallerItems" = "%@ elemente mai mici de 1 MB";
+"measuredTotal" = "Scanat: %@";
+"open" = "Deschide";
+"showInFinder" = "Afișează în Finder";
+"info" = "Obține informații";
+"copyPath" = "Copiază calea";
+"done" = "Gata";
+"allocated" = "Spațiu pe disc";
+"kind" = "Tip";
+"modified" = "Modificat";
+"created" = "Creat";
+"contents" = "Conținut";
+"files" = "Fișiere";
+"folders" = "Dosare";
+"packages" = "Pachete de aplicații";
+"modifiedBetween" = "Modificat între";
+"dateRange" = "%@ și %@";
+"analyzing" = "Se analizează fișierele …";
+"typesBySize" = "Tipuri de fișiere după dimensiune";
+"fileCount" = "%@ fișiere";
+"noExtension" = "fără extensie";
+
+/* Large files */
+"minimumSize" = "Dimensiune minimă";
+"fromSize" = "de la %@";
+"noFilesFrom" = "Niciun fișier de la %@";
+"filesTotal" = "%@ fișiere · %@ în total";
+
+/* Temporary area */
+"location" = "Locație";
+"total" = "În total";
+"subfolders" = "Subdosare";
+"viewCopies" = "Vezi copiile de aplicații …";
+"temporaryFolderT" = "Fișiere temporare";
+"temporaryFolderTDetail" = "Se golește în mare parte la repornire.";
+"temporaryFolderC" = "Cache-uri";
+"temporaryFolderCDetail" = "Cache-urile aplicațiilor și ale serviciilor de sistem.";
+"temporaryFolderX" = "Copii de aplicații";
+"temporaryFolderXDetail" = "Copii create de macOS la verificarea semnăturilor.";
+"temporaryFolder0" = "Servicii de sistem";
+"temporaryFolder0Detail" = "Datele serviciilor din fundal.";
+
+/* Signature copies */
+"noCopies" = "Nicio copie de aplicație";
+"noCopiesDetail" = "Nu există copii de aplicații în dosarul X.";
+"running" = "rulează";
+"stopped" = "închisă";
+"copiesLabel" = "Copii";
+"countedSize" = "Dimensiune contabilizată";
+"installedVersion" = "Versiune instalată";
+"notFound" = "negăsită";
+"versionLabel" = "Versiunea %@";
+"copiesOne" = "1 copie";
+"copiesMany" = "%@ copii";
+"current" = "actuală";
+"old" = "veche";
+"unknown" = "necunoscută";
+"createdOn" = "Creată pe %@";
+"freed" = "Spațiu eliberat efectiv: %@";
+"deleteError" = "Nu s-a putut șterge totul: %@";
+"quitToDelete" = "Închide %@ cu ⌘Q pentru a șterge.";
+"openInExplorer" = "Deschide în Explorer";
+"deleteAll" = "Șterge toate copiile …";
+"deleteTitle" = "Ștergi %@ copii ale aplicației %@?";
+"deleteForever" = "Șterge definitiv";
+"deleteMessage" = "Copiile nu ajung în Coș. macOS creează una nouă la nevoie.";
+
+/* Volumes */
+"capacity" = "Capacitate";
+"used" = "Utilizat";
+"purgeable" = "Poate fi eliberat de macOS";
+"available" = "Disponibil";
+"toOverview" = "Mergi la Prezentare generală";
+"exploreContents" = "Explorează conținutul";
+"scanAndExplore" = "Scanează și explorează";
+"volumeGone" = "Volumul nu mai este conectat";
+
+/* Search */
+"searchPrompt" = "Caută dosare și fișiere";
+"scopeAll" = "Toate";
+"scopeFolders" = "Dosare";
+"scopeFiles" = "Fișiere";
+"searchResults" = "%@ rezultate";
+"noResults" = "Niciun rezultat pentru „%@”";
+"searchNote" = "Caută dosare și fișiere de la 1 MB în ultima scanare.";
+
+/* Full Disk Access */
+"accessTitle" = "O singură permisiune în loc de multe solicitări";
+"accessDetail" = "Fără acces complet la disc, macOS cere separat acces la Birou, Documente, Descărcări, iCloud Drive, datele altor aplicații și volumele externe. Un singur comutator din Configurări sistem înlocuiește toate aceste solicitări. Aplicația citește doar nume, dimensiuni și date, niciodată conținutul documentelor tale, și nu trimite nimic nicăieri.";
+"accessOneSwitch" = "Confidențialitate și securitate › Acces complet la disc";
+"accessOpenSettings" = "Deschide Configurări sistem";
+"accessContinue" = "Continuă fără acces complet la disc";
+"accessGranted" = "Acordat";
+"accessRestart" = "Repornește aplicația";
+"accessRestartHint" = "Ai activat comutatorul? macOS acordă accesul doar după ce aplicația a repornit. Fă clic pe „Repornește aplicația” sau lasă macOS să o închidă și să o redeschidă. Dacă tot nu funcționează, elimină intrarea cu „–” în Configurări sistem și adaugă din nou aplicația.";
+"quitApp" = "Închide %@";
+"fullDiskAccess" = "Acces complet la disc";
+
+/* Settings */
+"autoScan" = "Scanează automat la pornire";
+"extraFolders" = "Dosare suplimentare";
+"none" = "Niciunul";
+"add" = "Adaugă";
+"remove" = "Elimină";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "Curățare";
+"paneApps" = "Aplicații neutilizate";
+"sectionTidy" = "Eliberează spațiu";
+"layoutList" = "Listă";
+"layoutGrid" = "Grilă";
+"settings" = "Configurări";
+"emptyFolder" = "Acest dosar este gol";
+"otherCategories" = "Altele";
+"cleanCaches" = "Cache-uri de aplicații";
+"cleanCachesDetail" = "Cache-uri pe care aplicațiile le refac la nevoie. Aplicațiile deschise și macOS rămân neatinse.";
+"cleanDeveloper" = "Cache-uri pentru dezvoltatori";
+"cleanDeveloperDetail" = "Date de compilare Xcode și cache-uri de pachete precum npm; se recreează la următoarea compilare.";
+"cleanLogs" = "Jurnale vechi";
+"cleanLogsDetail" = "Jurnale ale aplicațiilor mai vechi de o săptămână.";
+"cleanTemporary" = "Fișiere temporare vechi";
+"cleanTemporaryDetail" = "Fișiere temporare nemodificate de cel puțin trei zile.";
+"cleanTrash" = "Coș";
+"cleanTrashDetail" = "Golește definitiv Coșul. Nu este selectat implicit.";
+"cleanFailed" = "%@ elemente nu au putut fi eliminate, fiindcă sunt în uz sau protejate.";
+"cleaning" = "Se curăță …";
+"cleanerRefresh" = "Caută din nou";
+"cleanSelected" = "Curăță selecția (%@)";
+"cleanConfirmTitle" = "Elimini definitiv %@?";
+"cleanConfirmMessage" = "Fișierele nu ajung în Coș. Aplicațiile își refac cache-urile la nevoie. Apoi aplicația măsoară totul din nou.";
+"appsNoneUnused" = "Toate aplicațiile au fost folosite recent";
+"unusedSince" = "Nedeschise de";
+"daysOption" = "mai mult de %@ zile";
+"trashAppTitle" = "Muți „%@” în Coș?";
+"trashAppMessage" = "Poți restaura aplicația din Coș până când îl golești.";
+"moveToTrash" = "Mută în Coș";
+"lastOpened" = "Deschisă ultima dată pe %@";
+"trashAppFailed" = "„%@” nu a putut fi mutată. În Finder funcționează cu parola ta.";
+"figureFiles" = "Fișiere";
+"figureUnusedApps" = "aplicații neutilizate";
+"bucketUnder1MB" = "sub 1 MB";
+"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
+"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
+"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
+"bucketOver1GB" = "peste 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ scanat";
+"scanningArea" = "Zona %@ din %@ · %@";
+"emptyValue" = "gol";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Dimensiunile reprezintă spațiul ocupat, așa cum îl raportează „du”. Clonele APFS se numără integral; copiile care partajează blocuri de stocare ocupă de fapt mai puțin. „Sistem și altele” este restul până la spațiul pe care macOS îl raportează ca utilizat.";
+"infoCleaner" = "Elimină fișierele de care sistemul are puțină nevoie sau deloc: cache-uri care se refac singure, jurnale vechi și fișiere temporare vechi. Alege ce poate fi șters și confirmă.";
+"infoApps" = "Aplicații pe care nu le-ai deschis de ceva timp. Data vine chiar de la macOS; aplicația nu înregistrează nimic. Mută aici în Coș ce nu mai folosești; de acolo le poți restaura.";
+"infoExplorer" = "Toate dosarele măsurate, sortate după dimensiune. Dublu clic deschide un dosar; meniul contextual afișează fișierele în Finder și oferă informații despre ele.";
+"infoLargeFiles" = "Toate fișierele de la dimensiunea aleasă din ultima scanare. Dublu clic afișează fișierul în Finder.";
+"infoTemporaryFiles" = "macOS creează această zonă pentru fiecare utilizator în /private/var/folders. Este ascunsă în Finder și nu este detaliată în „Gestionează spațiul de stocare”.";
+"infoCopies" = "La verificarea unei semnături, macOS plasează uneori copii complete ale unei aplicații în dosarul X. Nu sunt programe separate; macOS creează una nouă la nevoie. Ștergerea lor este sigură cât timp aplicația este închisă.";
+"infoVolume" = "Capacitatea acestui volum: ce este utilizat, ce poate elibera macOS singur la nevoie și ce este liber. Volumele externe pot fi măsurate aici.";
+"aboutPage" = "Despre această pagină";
+"scanDetails" = "Scanare";
+"scanProgress" = "Progres";
+"scanArea" = "Zonă";
+"scanFinished" = "Scanat la";
+"accessMissingShort" = "Neacordat";
+"summaryTitle" = "Pe scurt";
+"summaryDisk" = "Pe „%@” sunt ocupați %@ din %@, iar %@ sunt disponibili.";
+"summaryTop" = "Cel mai mult spațiu îl ocupă %@ cu %@ și %@ cu %@.";
+"summaryNotMeasured" = "Cum este împărțit spațiul apare aici după prima scanare.";
+"summaryClean" = "Curățarea poate elibera aproximativ %@.";
+"summaryCopies" = "Copiile de aplicații pe care macOS le face când le verifică ocupă %@.";
+"summaryApps" = "%@ aplicații nu au mai fost deschise de ceva timp.";
+"readAloud" = "Citește cu voce tare";
+"stopReading" = "Oprește citirea";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "Cât de mari sunt fișierele tale?";
+"sizeClassesCaption" = "Cât spațiu ocupă fiecare clasă de dimensiune și câte fișiere conține. De obicei, câteva fișiere mari ocupă mai mult decât multe fișiere mici.";
+"figureLargeFilesFrom" = "fișiere mari de la %@";
+"bucketValue" = "%@
+%@ fișiere";
+"settingsSystemNote" = "Aspectul și unitățile vin din Configurări sistem.";
+"appLanguage" = "Limbă";
+"languageLikeMac" = "La fel ca pe Mac";
+"languageRestartHint" = "Noua limbă apare după o repornire.";

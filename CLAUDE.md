@@ -84,7 +84,7 @@ changing code; do not repeat their content here or in comments.
 
 1. Read the files you touch and the rules in CODE_STYLE.md and ARCHITECTURE.md first.
 2. Keep the rules: spelled-out English names, no numbers without a name, colors only from `Theme`, fonts via
-   `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 20
+   `textRole`, symbols from `Symbols`, animations from `Motion`, visible text only via `TextKey` with all 28
    translations, no dead code, functions as lists of named steps. Never rename a `TextKey` case (it is the key in the
    translation files), a settings key, a launch argument or a page key. The app was called Speicher-Explorer before it
    became Storage Manager; its bundle identifier `local.speicher-explorer`, the signing keychain and the identity

@@ -45,7 +45,7 @@ icon sizes, text roles, measurements and symbol names, `Theme` the colors, `Surf
 **`Sources/Features`:** Every page in a folder of its own. `Pages.swift` maps each page to its view. `Shared`
 contains the shared table and the shared grid for folders, search results and large files.
 
-**`Sources/Localization` and `Resources`:** `TextKey` contains all English text keys, and the 20 language folders
+**`Sources/Localization` and `Resources`:** `TextKey` contains all English text keys, and the 28 language folders
 contain the texts.
 
 **`Sources/Diagnostics`:** The self test with real folders, the stress test that operates the running app, the

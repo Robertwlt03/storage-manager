@@ -23,7 +23,7 @@ Closes #
 
 - [ ] `make check` reports no error and no warning.
 - [ ] Visible changes were looked at in light and dark appearance.
-- [ ] New texts exist in all 20 languages.
+- [ ] New texts exist in all 28 languages.
 - [ ] No output shows file or folder names.
 
 <!-- Also say what could not be checked, and why. -->

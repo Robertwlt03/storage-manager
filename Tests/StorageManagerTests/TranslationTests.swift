@@ -3,7 +3,7 @@ import Testing
 
 @testable import StorageManager
 
-/// The 20 translations under Resources, read straight from the project folder.
+/// The 28 translations under Resources, read straight from the project folder.
 @Suite("Translations")
 struct TranslationTests {
     private static let resources = URL(fileURLWithPath: #filePath)
@@ -53,7 +53,10 @@ struct TranslationTests {
         arguments: [
             ("de-DE", AppLanguage.german), ("en-GB", .english), ("zh-TW", .traditionalChinese),
             ("zh-Hans-CN", .simplifiedChinese), ("zh-HK", .traditionalChinese),
-            ("pt-PT", .brazilianPortuguese), ("no", .norwegian), ("nb-NO", .norwegian),
+            ("pt", .brazilianPortuguese), ("pt-BR", .brazilianPortuguese),
+            ("pt-PT", .europeanPortuguese), ("pt-AO", .europeanPortuguese),
+            ("no", .norwegian), ("nb-NO", .norwegian),
+            ("hi-IN", .hindi), ("el-GR", .greek),
         ])
     func languageMatching(systemLanguage: String, shipped: AppLanguage) {
         #expect(AppLanguage.match(systemLanguage) == shipped)
@@ -63,6 +66,7 @@ struct TranslationTests {
     func nativeNames() {
         #expect(AppLanguage.german.nativeName == "Deutsch")
         #expect(AppLanguage.japanese.nativeName == "日本語")
+        #expect(AppLanguage.greek.nativeName == "Ελληνικά")
         let names = AppLanguage.byNativeName.map(\.nativeName)
         #expect(Set(names).count == AppLanguage.allCases.count)
         let sorted = names.sorted { left, right in

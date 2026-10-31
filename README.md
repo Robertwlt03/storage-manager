@@ -5,7 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-27%20or%20later-1D1D1F?style=flat-square&logo=apple&logoColor=white" alt="macOS 27 or later">
   <img src="https://img.shields.io/badge/-SwiftUI-1D1D1F?style=flat-square&logo=swift&logoColor=F05138" alt="SwiftUI">
-  <img src="https://img.shields.io/badge/Languages-20-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="20 languages">
+  <img src="https://img.shields.io/badge/Languages-28-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="28 languages">
   <img src="https://img.shields.io/badge/Price-free-1B7332?style=flat-square&labelColor=1D1D1F" alt="free">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="License: MIT"></a>
 </p>
@@ -71,8 +71,8 @@ The app also shows two areas you cannot see in Finder: the **temporary area** of
 macOS creates when it checks apps. External drives and USB sticks appear in the sidebar too, as soon as you connect
 them.
 
-Every page has an info button at the top right that explains what the page is for. The app speaks 20 languages,
-including German, English, French, Spanish, Japanese and Chinese, and follows the language of your Mac. If you want
+Every page has an info button at the top right that explains what the page is for. The app speaks 28 languages,
+including German, English, Spanish, Chinese, Japanese and Hindi, and follows the language of your Mac. If you want
 to use the app in a different language, pick it in the app's settings; it shows after a restart. It also takes
 the light or dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
 
@@ -196,7 +196,7 @@ The code is split into small parts, and every file has exactly one job:
 | `Sources/Services` | Scanning, categories, cleaning up, apps, search, summary and reading aloud. |
 | `Sources/State` | The app state that brings the services together. |
 | `Sources/Core` | Constants and fixed choices such as pages and settings. |
-| `Sources/Localization` and `Resources` | All texts in 20 languages, with German and English as the source. |
+| `Sources/Localization` and `Resources` | All texts in 28 languages, with German and English as the source. |
 | `Sources/Diagnostics` | A self test with real data and a stress test for the running app. |
 | `Tests` | The tests for the folder tree, categories, search, design, contrast and translations. |
 | `scripts` | The code inspection, your own signing certificate and building the DMG. |
