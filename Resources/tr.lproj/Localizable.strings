@@ -119,7 +119,7 @@
 "freed" = "Gerçekten boşalan alan: %@";
 "deleteError" = "Her şey silinemedi: %@";
 "quitToDelete" = "Silmek için %@ uygulamasından ⌘Q ile çıkın.";
-"openInExplorer" = "Gezgin'de Aç";
+"openInExplorer" = "Klasörler’de Göster";
 "deleteAll" = "Tüm Kopyaları Sil …";
 "deleteTitle" = "%@ kopya silinsin mi (%@)?";
 "deleteForever" = "Kalıcı Olarak Sil";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Açılışta otomatik tara";
+"exportReport" = "Raporu Dışa Aktar …";
+"reportTitle" = "%@ tarihli depolama raporu";
+"reportFileName" = "Depolama Raporu";
 "extraFolders" = "Ek Klasörler";
 "none" = "Yok";
 "add" = "Ekle";
@@ -231,6 +234,7 @@
 "summaryClean" = "Temizleyerek yaklaşık %@ boşaltılabilir.";
 "summaryCopies" = "macOS'un kontrol sırasında oluşturduğu uygulama kopyaları %@ yer sayılıyor.";
 "summaryApps" = "%@ uygulama bir süredir açılmadı.";
+"summaryFreed" = "Bu uygulama şimdiye kadar %@ yer açtı.";
 "readAloud" = "Sesli Oku";
 "stopReading" = "Okumayı Durdur";
 

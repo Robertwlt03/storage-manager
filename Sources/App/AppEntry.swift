@@ -72,6 +72,12 @@ struct StorageManagerApp: App {
                 .disabled(model.isScanning)
             Button(TextKey.cancelScan.translated) { model.cancelScan() }.keyboardShortcut(".")
                 .disabled(!model.isScanning)
+            Divider()
+            Button(TextKey.exportReport.translated) {
+                FinderService.save(model.report(), suggestedName: TextKey.reportFileName.translated)
+            }
+            .keyboardShortcut("e", modifiers: [.command, .shift])  // ⌘E is Use Selection for Find
+            .disabled(!model.hasData || model.isScanning)
         }
     }
 }

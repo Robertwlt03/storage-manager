@@ -119,7 +119,7 @@
 "freed" = "Espaço realmente liberado: %@";
 "deleteError" = "Nem tudo pôde ser excluído: %@";
 "quitToDelete" = "Encerre %@ com ⌘Q para poder excluir.";
-"openInExplorer" = "Abrir no explorador";
+"openInExplorer" = "Mostrar em Pastas";
 "deleteAll" = "Excluir todas as cópias …";
 "deleteTitle" = "Excluir %@ cópias de %@?";
 "deleteForever" = "Excluir permanentemente";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Analisar automaticamente ao abrir";
+"exportReport" = "Exportar relatório …";
+"reportTitle" = "Relatório de armazenamento de %@";
+"reportFileName" = "Relatório de armazenamento";
 "extraFolders" = "Pastas adicionais";
 "none" = "Nenhuma";
 "add" = "Adicionar";
@@ -231,6 +234,7 @@
 "summaryClean" = "Ao limpar, é possível liberar cerca de %@.";
 "summaryCopies" = "Cópias de apps que o macOS cria durante a verificação ocupam %@.";
 "summaryApps" = "%@ apps não são abertos há algum tempo.";
+"summaryFreed" = "Até agora, este app liberou %@.";
 "readAloud" = "Ler em voz alta";
 "stopReading" = "Parar leitura";
 

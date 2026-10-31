@@ -119,7 +119,7 @@
 "freed" = "Faktisk frigjort: %@";
 "deleteError" = "Det hele kunne ikke slettes: %@";
 "quitToDelete" = "Afslut %@ med ⌘Q for at kunne slette.";
-"openInExplorer" = "Åbn i Lagringsudforsker";
+"openInExplorer" = "Vis i Mapper";
 "deleteAll" = "Slet alle kopier …";
 "deleteTitle" = "Vil du slette %@ kopier af %@?";
 "deleteForever" = "Slet permanent";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mål automatisk ved start";
+"exportReport" = "Eksportér rapport …";
+"reportTitle" = "Lagerrapport fra %@";
+"reportFileName" = "Lagerrapport";
 "extraFolders" = "Yderligere mapper";
 "none" = "Ingen";
 "add" = "Tilføj";
@@ -231,6 +234,7 @@
 "summaryClean" = "Ved at rydde op kan du frigøre ca. %@.";
 "summaryCopies" = "Kopier af apps, som macOS opretter ved kontrol, fylder %@.";
 "summaryApps" = "%@ apps er ikke blevet åbnet i et stykke tid.";
+"summaryFreed" = "Indtil nu har appen frigjort %@.";
 "readAloud" = "Læs op";
 "stopReading" = "Stop oplæsning";
 

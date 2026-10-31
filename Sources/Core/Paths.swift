@@ -39,8 +39,13 @@ nonisolated enum Paths {
         return String(cString: resolvedPath)
     }
 
+    /// The temporary area goes by its name, also in front of what lies inside it, so its long
+    /// per-Mac path never shows, nor in the demo.
     static func displayName(_ path: String) -> String {
         if path == temporaryArea { return TextKey.temporaryAreaName.translated }
+        if path.hasPrefix(temporaryArea + "/") {
+            return TextKey.temporaryAreaName.translated + path.dropFirst(temporaryArea.count)
+        }
         let isInHome = path == home || path.hasPrefix(home + "/")
         return isInHome ? "~" + path.dropFirst(home.count) : path
     }

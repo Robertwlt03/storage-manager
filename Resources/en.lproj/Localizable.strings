@@ -119,7 +119,7 @@
 "freed" = "Space actually freed: %@";
 "deleteError" = "Not everything could be deleted: %@";
 "quitToDelete" = "Quit %@ with ⌘Q to delete.";
-"openInExplorer" = "Open in Explorer";
+"openInExplorer" = "Show in Folders";
 "deleteAll" = "Delete All Copies …";
 "deleteTitle" = "Delete %@ copies of %@?";
 "deleteForever" = "Delete Permanently";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Scan automatically at launch";
+"exportReport" = "Export Report …";
+"reportTitle" = "Storage report from %@";
+"reportFileName" = "Storage Report";
 "extraFolders" = "Additional Folders";
 "none" = "None";
 "add" = "Add";
@@ -231,6 +234,7 @@
 "summaryClean" = "Cleaning up can free about %@.";
 "summaryCopies" = "Copies of apps that macOS makes while checking them count for %@.";
 "summaryApps" = "%@ apps have not been opened for a while.";
+"summaryFreed" = "So far, this app has freed %@.";
 "readAloud" = "Read Aloud";
 "stopReading" = "Stop Reading";
 

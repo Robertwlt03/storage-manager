@@ -119,7 +119,7 @@
 "freed" = "Faktiskt frigjort utrymme: %@";
 "deleteError" = "Allt kunde inte tas bort: %@";
 "quitToDelete" = "Avsluta %@ med ⌘Q för att kunna ta bort.";
-"openInExplorer" = "Öppna i Lagringsutforskaren";
+"openInExplorer" = "Visa i Mappar";
 "deleteAll" = "Ta bort alla kopior …";
 "deleteTitle" = "Ta bort %@ kopior av %@?";
 "deleteForever" = "Ta bort permanent";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mät automatiskt vid start";
+"exportReport" = "Exportera rapport …";
+"reportTitle" = "Lagringsrapport från %@";
+"reportFileName" = "Lagringsrapport";
 "extraFolders" = "Ytterligare mappar";
 "none" = "Inga";
 "add" = "Lägg till";
@@ -231,6 +234,7 @@
 "summaryClean" = "Genom att rensa upp kan du frigöra cirka %@.";
 "summaryCopies" = "Kopior av appar som macOS skapar vid kontroll räknas för %@.";
 "summaryApps" = "%@ appar har inte öppnats på ett tag.";
+"summaryFreed" = "Hittills har appen frigjort %@.";
 "readAloud" = "Läs upp";
 "stopReading" = "Sluta läsa upp";
 

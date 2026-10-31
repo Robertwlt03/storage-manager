@@ -119,7 +119,7 @@
 "freed" = "Spațiu eliberat efectiv: %@";
 "deleteError" = "Nu s-a putut șterge totul: %@";
 "quitToDelete" = "Închide %@ cu ⌘Q pentru a șterge.";
-"openInExplorer" = "Deschide în Explorer";
+"openInExplorer" = "Afișează în Dosare";
 "deleteAll" = "Șterge toate copiile …";
 "deleteTitle" = "Ștergi %@ copii ale aplicației %@?";
 "deleteForever" = "Șterge definitiv";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Scanează automat la pornire";
+"exportReport" = "Exportă raportul …";
+"reportTitle" = "Raport de stocare din %@";
+"reportFileName" = "Raport de stocare";
 "extraFolders" = "Dosare suplimentare";
 "none" = "Niciunul";
 "add" = "Adaugă";
@@ -231,6 +234,7 @@
 "summaryClean" = "Curățarea poate elibera aproximativ %@.";
 "summaryCopies" = "Copiile de aplicații pe care macOS le face când le verifică ocupă %@.";
 "summaryApps" = "%@ aplicații nu au mai fost deschise de ceva timp.";
+"summaryFreed" = "Până acum, aplicația a eliberat %@.";
 "readAloud" = "Citește cu voce tare";
 "stopReading" = "Oprește citirea";
 

@@ -52,9 +52,9 @@ without a terminal, and that you can share with others without having to wait fo
 The **Overview** is your home page. Right at the top are the most important numbers, such as how many files you
 have, how many of them are large and how many apps you have not opened for a long time, and clicking one takes you
 straight to the matching page. Below that, it shows your Mac with a colored bar and a legend. It then sums up in a
-few sentences how your storage is doing, and reads that out to you if you like. A chart also shows you how much space
-small and large files take up, and at the very bottom you find all categories, from applications and downloads to
-caches.
+few sentences how your storage is doing, including how much space the app has freed so far, and reads that out to you
+if you like. A chart also shows you how much space small and large files take up, and at the very bottom you find all
+categories, from applications and downloads to caches.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
 all files above a size you choose yourself, and **Search** finds folders and files by name. You can also show each of
@@ -74,6 +74,9 @@ them.
 Every page has an info button at the top right that explains what the page is for. The app takes the light or
 dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have
 turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
+
+With File › Export Report (⇧⌘E) you save the summary, every category and the largest files as a text file, for
+keeping or passing on. Each line has the size first, so it also pastes into a spreadsheet.
 
 A widget shows the available space on your desktop or in Notification Center. Add it like any other widget: click the
 desktop with the right mouse button, choose Edit Widgets and look for Storage Manager.
