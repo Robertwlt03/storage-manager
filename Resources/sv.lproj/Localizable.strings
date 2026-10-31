@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "Hur stora är dina filer?";
 "sizeClassesCaption" = "Hur mycket plats varje storleksklass tar och hur många filer som finns i den. Några få stora filer tar oftast mer plats än många små.";
 "figureLargeFilesFrom" = "stora filer från %@";
+"historyTitle" = "Historik";
+"historyCaption" = "Använt utrymme efter varje fullständig mätning.";
+"historyAfterNextScan" = "Historiken visas efter nästa fullständiga mätning.";
+"grownSince" = "Vuxit sedan %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Ingen mapp har vuxit med mer än %@.";
 "bucketValue" = "%@
 %@ filer";
 "settingsSystemNote" = "Utseende och enheter kommer från Systeminställningar.";

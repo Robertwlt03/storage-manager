@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "Jak velké jsou vaše soubory?";
 "sizeClassesCaption" = "Kolik místa zabírá každá velikostní třída a kolik souborů v ní je. Několik velkých souborů obvykle zabírá víc než mnoho malých.";
 "figureLargeFilesFrom" = "velké soubory od %@";
+"historyTitle" = "Vývoj";
+"historyCaption" = "Obsazené místo po každém úplném skenování.";
+"historyAfterNextScan" = "Vývoj se zobrazí po příštím úplném skenování.";
+"grownSince" = "Narostlo od %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Žádná složka nenarostla o více než %@.";
 "bucketValue" = "%@
 Souborů: %@";
 "settingsSystemNote" = "Vzhled a jednotky přebírá aplikace z Nastavení systému.";

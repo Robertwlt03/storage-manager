@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "How big are your files?";
 "sizeClassesCaption" = "How much space each size class takes and how many files are in it. A few big files usually take more room than many small ones.";
 "figureLargeFilesFrom" = "large files from %@";
+"historyTitle" = "History";
+"historyCaption" = "Used space after each full scan.";
+"historyAfterNextScan" = "The history appears after the next full scan.";
+"grownSince" = "Grown since %@";
+"grownBy" = "+%@";
+"nothingGrown" = "No folder grew by more than %@.";
 "bucketValue" = "%@
 %@ files";
 "settingsSystemNote" = "Appearance and units come from System Settings.";

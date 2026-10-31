@@ -34,6 +34,9 @@ import WidgetKit
     private(set) var apps: [AppUsage] = []
     private(set) var cleanItems: [CleanItem]?
     private(set) var statistics: Statistics?  // key figures of the last finished scan
+    /// The used space after each full scan, and what grew between the last two.
+    private(set) var history = HistoryStore().points
+    private(set) var growth = HistoryStore().growth
     private(set) var totalFreedBytes = Int64(
         UserDefaults.standard.integer(forKey: SettingsKey.totalFreedBytes))
     /// Found once per tree change: each group asks Launch Services and reads an Info.plist.
@@ -106,6 +109,8 @@ import WidgetKit
         lastScan = Date()
         apps = demo.apps
         cleanItems = demo.cleanItems
+        history = demo.history
+        growth = demo.growth
         totalFreedBytes = demo.totalFreedBytes
         treeChanged()
     }
@@ -134,10 +139,10 @@ import WidgetKit
         progress = progressSoFar
         let areas = paths ?? ScanService.defaultRoots()
         scanTask = Task {
-            await measure(areas, scanID: id)
+            let measuredEveryArea = await measure(areas, scanID: id)
             // A newer scan took over; it finishes the state itself.
             guard scanID == id else { return }
-            finishScan(wasCanceled: Task.isCancelled, wasFullScan: reset)
+            finishScan(wasCanceled: Task.isCancelled, wasFullScan: reset && measuredEveryArea)
         }
     }
 
@@ -160,15 +165,17 @@ import WidgetKit
         .init(files: root.fileCount, bytes: root.bytes)
     }
 
-    private func measure(_ areas: [String], scanID id: UUID) async {
+    /// False when an area could not be measured and the ones after it were skipped.
+    private func measure(_ areas: [String], scanID id: UUID) async -> Bool {
         for (position, area) in areas.enumerated() {
             scanStep = (position + 1, areas.count, area)
             root.child(named: area)?.detach()
             guard let result = await measureInBackground(area, startingFrom: progress, scanID: id),
                 !Task.isCancelled, scanID == id
-            else { return }
+            else { return false }
             add(result, of: area)
         }
+        return true
     }
 
     private func add(_ result: ScanService.Result, of area: String) {
@@ -183,15 +190,29 @@ import WidgetKit
 
     private func finishScan(wasCanceled: Bool, wasFullScan: Bool) {
         isScanning = false
-        if !wasCanceled {
-            lastScan = Date()
-            if wasFullScan {
-                UserDefaults.standard.set(root.fileCount, forKey: SettingsKey.lastScanFiles)
-            }
+        if !wasCanceled { lastScan = Date() }
+        treeChanged()  // also reads the volumes again, which the history needs
+        if !wasCanceled && wasFullScan {
+            UserDefaults.standard.set(root.fileCount, forKey: SettingsKey.lastScanFiles)
+            recordHistory()
         }
-        treeChanged()
         refreshApps()
         refreshCleanItems()
+    }
+
+    /// Keeps the used space and the folder sizes of this full scan, then compares them with the
+    /// scan before.
+    private func recordHistory() {
+        let now = Date()
+        if let usedBytes = startupVolume?.usedBytes {
+            history = HistoryService.adding(
+                HistoryPoint(date: now, usedBytes: usedBytes), to: history)
+        }
+        let sizes = HistoryService.folderSizes(
+            of: root, at: now, hadFullAccess: hasFullDiskAccess)
+        let store = HistoryStore()
+        store.record(history, latest: sizes)
+        growth = store.growth
     }
 
     /// The canceled task still finishes the scan, so the figures match the partial tree.

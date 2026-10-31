@@ -78,6 +78,7 @@ nonisolated enum TextKey: String, CaseIterable {
 
     // Key figures and size classes in plain words
     case sizeClassesTitle, sizeClassesCaption, figureLargeFilesFrom, bucketValue
+    case historyTitle, historyCaption, historyAfterNextScan, grownSince, grownBy, nothingGrown
 
     // Settings
     case autoScan

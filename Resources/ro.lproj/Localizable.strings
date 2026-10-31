@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "Cât de mari sunt fișierele tale?";
 "sizeClassesCaption" = "Cât spațiu ocupă fiecare clasă de dimensiune și câte fișiere conține. De obicei, câteva fișiere mari ocupă mai mult decât multe fișiere mici.";
 "figureLargeFilesFrom" = "fișiere mari de la %@";
+"historyTitle" = "Istoric";
+"historyCaption" = "Spațiul ocupat după fiecare scanare completă.";
+"historyAfterNextScan" = "Istoricul apare după următoarea scanare completă.";
+"grownSince" = "Creștere din %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Niciun dosar nu a crescut cu mai mult de %@.";
 "bucketValue" = "%@
 %@ fișiere";
 "settingsSystemNote" = "Aspectul și unitățile vin din Configurări sistem.";

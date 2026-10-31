@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "Tệp của bạn lớn cỡ nào?";
 "sizeClassesCaption" = "Mỗi nhóm kích thước chiếm bao nhiêu dung lượng và có bao nhiêu tệp. Vài tệp lớn thường chiếm nhiều chỗ hơn rất nhiều tệp nhỏ.";
 "figureLargeFilesFrom" = "tệp lớn từ %@";
+"historyTitle" = "Lịch sử";
+"historyCaption" = "Dung lượng đã dùng sau mỗi lần quét đầy đủ.";
+"historyAfterNextScan" = "Lịch sử sẽ hiện sau lần quét đầy đủ tiếp theo.";
+"grownSince" = "Tăng từ %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Không thư mục nào tăng quá %@.";
 "bucketValue" = "%@
 %@ tệp";
 "settingsSystemNote" = "Giao diện và đơn vị lấy từ Cài đặt hệ thống.";

@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "¿Qué tamaño tienen tus archivos?";
 "sizeClassesCaption" = "Cuánto espacio ocupa cada clase de tamaño y cuántos archivos contiene. Unos pocos archivos grandes suelen ocupar más que muchos pequeños.";
 "figureLargeFilesFrom" = "archivos grandes desde %@";
+"historyTitle" = "Historial";
+"historyCaption" = "Espacio usado tras cada análisis completo.";
+"historyAfterNextScan" = "El historial aparece tras el próximo análisis completo.";
+"grownSince" = "Crecimiento desde %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Ninguna carpeta creció más de %@.";
 "bucketValue" = "%@
 %@ archivos";
 "settingsSystemNote" = "La apariencia y las unidades vienen de Ajustes del Sistema.";

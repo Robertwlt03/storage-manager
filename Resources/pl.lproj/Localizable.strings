@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "Jak duże są Twoje pliki?";
 "sizeClassesCaption" = "Ile miejsca zajmuje każda klasa rozmiaru i ile plików w niej jest. Kilka dużych plików zwykle zajmuje więcej niż wiele małych.";
 "figureLargeFilesFrom" = "dużych plików od %@";
+"historyTitle" = "Historia";
+"historyCaption" = "Zajęte miejsce po każdym pełnym pomiarze.";
+"historyAfterNextScan" = "Historia pojawi się po następnym pełnym pomiarze.";
+"grownSince" = "Przyrost od %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Żaden folder nie urósł o więcej niż %@.";
 "bucketValue" = "%@
 %@ plików";
 "settingsSystemNote" = "Wygląd i jednostki pochodzą z Ustawień systemowych.";

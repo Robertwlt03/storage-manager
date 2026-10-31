@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "你的檔案有多大？";
 "sizeClassesCaption" = "每個大小區間佔用多少空間，其中有多少個檔案。通常，少數大型檔案比許多小型檔案佔用的空間更多。";
 "figureLargeFilesFrom" = "%@ 以上的大型檔案";
+"historyTitle" = "歷史";
+"historyCaption" = "每次完整掃描後的已用空間。";
+"historyAfterNextScan" = "下次完整掃描後會顯示歷史。";
+"grownSince" = "自 %@ 以來增長";
+"grownBy" = "+%@";
+"nothingGrown" = "沒有檔案夾增長超過 %@。";
 "bucketValue" = "%@
 %@ 個檔案";
 "settingsSystemNote" = "外觀和單位來自「系統設定」。";

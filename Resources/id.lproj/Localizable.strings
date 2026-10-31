@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "Seberapa besar file Anda?";
 "sizeClassesCaption" = "Berapa banyak ruang yang dipakai tiap kelas ukuran dan berapa file di dalamnya. Beberapa file besar biasanya memakan lebih banyak ruang daripada banyak file kecil.";
 "figureLargeFilesFrom" = "file besar mulai %@";
+"historyTitle" = "Riwayat";
+"historyCaption" = "Ruang terpakai setelah setiap pemindaian penuh.";
+"historyAfterNextScan" = "Riwayat muncul setelah pemindaian penuh berikutnya.";
+"grownSince" = "Bertambah sejak %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Tidak ada folder yang bertambah lebih dari %@.";
 "bucketValue" = "%@
 %@ file";
 "settingsSystemNote" = "Tampilan dan satuan mengikuti Pengaturan Sistem.";

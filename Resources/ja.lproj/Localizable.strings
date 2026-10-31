@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "ファイルの大きさはどのくらいですか?";
 "sizeClassesCaption" = "各サイズ区分が使っている容量と、その区分に含まれるファイルの数です。多くの場合、小さなファイルがたくさんあるより、大きなファイルが少しあるほうが多くの容量を使います。";
 "figureLargeFilesFrom" = "%@以上の大きなファイル";
+"historyTitle" = "推移";
+"historyCaption" = "完全スキャンごとの使用容量です。";
+"historyAfterNextScan" = "次の完全スキャン後に推移が表示されます。";
+"grownSince" = "%@以降に増加";
+"grownBy" = "+%@";
+"nothingGrown" = "%@を超えて増えたフォルダはありません。";
 "bucketValue" = "%@
 %@個のファイル";
 "settingsSystemNote" = "外観と単位はシステム設定に従います。";

@@ -242,6 +242,12 @@
 "sizeClassesTitle" = "Hoe groot zijn je bestanden?";
 "sizeClassesCaption" = "Hoeveel ruimte elke groottecategorie inneemt en hoeveel bestanden erin zitten. Een paar grote bestanden nemen meestal meer ruimte in dan veel kleine.";
 "figureLargeFilesFrom" = "grote bestanden vanaf %@";
+"historyTitle" = "Geschiedenis";
+"historyCaption" = "Gebruikte ruimte na elke volledige scan.";
+"historyAfterNextScan" = "De geschiedenis verschijnt na de volgende volledige scan.";
+"grownSince" = "Gegroeid sinds %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Geen map is meer dan %@ gegroeid.";
 "bucketValue" = "%@
 %@ bestanden";
 "settingsSystemNote" = "Weergave en eenheden komen uit Systeeminstellingen.";
