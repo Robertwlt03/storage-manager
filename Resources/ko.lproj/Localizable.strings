@@ -161,6 +161,7 @@
 "exportReport" = "보고서 내보내기 …";
 "reportTitle" = "%@ 저장 공간 보고서";
 "reportFileName" = "저장 공간 보고서";
+"rings" = "링";
 "extraFolders" = "추가 폴더";
 "showInMenuBar" = "메뉴 막대에 여유 공간 표시";
 "openApp" = "%@ 열기";

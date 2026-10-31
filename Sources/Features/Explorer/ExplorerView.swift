@@ -16,6 +16,7 @@ struct ExplorerView: View {
 private struct FolderView: View {
     let node: Node
     @Environment(AppModel.self) private var model
+    @AppStorage(SettingsKey.showsRings) private var showsRings = false
     @State private var informationEntry: Entry?
 
     private var entries: [Entry] {
@@ -24,10 +25,16 @@ private struct FolderView: View {
     }
 
     var body: some View {
-        EntryBrowser(
-            entries: entries, total: node.bytes,
-            emptyTitle: TextKey.emptyFolder.translated, contentKey: node.path
-        )
+        Group {
+            if showsRings {
+                SunburstChart(folder: node)
+            } else {
+                EntryBrowser(
+                    entries: entries, total: node.bytes,
+                    emptyTitle: TextKey.emptyFolder.translated, contentKey: node.path)
+            }
+        }
+        .smoothChanges(of: showsRings)
         .navigationTitle(node.isVirtual ? TextKey.paneExplorer.translated : node.displayName)
         .navigationSubtitle(subtitle)
         .safeAreaInset(edge: .top, spacing: 0) {
@@ -37,6 +44,8 @@ private struct FolderView: View {
     }
 
     @ViewBuilder private var folderActions: some View {
+        Toggle(TextKey.rings.translated, systemImage: Symbols.rings, isOn: $showsRings)
+            .toggleStyle(.button)
         if !node.isVirtual {
             UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(node.path) }
             UI.ActionButton(TextKey.info.translated) { informationEntry = .folder(node) }

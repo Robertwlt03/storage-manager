@@ -161,6 +161,7 @@
 "exportReport" = "Exporter le rapport …";
 "reportTitle" = "Rapport de stockage du %@";
 "reportFileName" = "Rapport de stockage";
+"rings" = "Anneaux";
 "extraFolders" = "Dossiers supplémentaires";
 "showInMenuBar" = "Afficher l’espace libre dans la barre des menus";
 "openApp" = "Ouvrir %@";

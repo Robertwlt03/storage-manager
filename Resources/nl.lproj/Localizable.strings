@@ -161,6 +161,7 @@
 "exportReport" = "Rapport exporteren …";
 "reportTitle" = "Opslagrapport van %@";
 "reportFileName" = "Opslagrapport";
+"rings" = "Ringen";
 "extraFolders" = "Extra mappen";
 "showInMenuBar" = "Toon vrije ruimte in de menubalk";
 "openApp" = "Open %@";

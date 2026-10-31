@@ -161,6 +161,7 @@
 "exportReport" = "Exportar informe …";
 "reportTitle" = "Informe de almacenamiento del %@";
 "reportFileName" = "Informe de almacenamiento";
+"rings" = "Anillos";
 "extraFolders" = "Carpetas adicionales";
 "showInMenuBar" = "Mostrar el espacio libre en la barra de menús";
 "openApp" = "Abrir %@";

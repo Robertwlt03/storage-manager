@@ -161,6 +161,7 @@
 "exportReport" = "輸出報告 …";
 "reportTitle" = "%@ 的儲存空間報告";
 "reportFileName" = "儲存空間報告";
+"rings" = "圓環";
 "extraFolders" = "其他檔案夾";
 "showInMenuBar" = "在選單列中顯示可用空間";
 "openApp" = "打開 %@";

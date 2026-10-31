@@ -161,6 +161,7 @@
 "exportReport" = "ส่งออกรายงาน …";
 "reportTitle" = "รายงานพื้นที่จัดเก็บจาก %@";
 "reportFileName" = "รายงานพื้นที่จัดเก็บ";
+"rings" = "วงแหวน";
 "extraFolders" = "โฟลเดอร์เพิ่มเติม";
 "showInMenuBar" = "แสดงพื้นที่ว่างในแถบเมนู";
 "openApp" = "เปิด %@";

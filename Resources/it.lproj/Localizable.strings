@@ -161,6 +161,7 @@
 "exportReport" = "Esporta rapporto …";
 "reportTitle" = "Rapporto spazio del %@";
 "reportFileName" = "Rapporto spazio";
+"rings" = "Anelli";
 "extraFolders" = "Cartelle aggiuntive";
 "showInMenuBar" = "Mostra lo spazio libero nella barra dei menu";
 "openApp" = "Apri %@";

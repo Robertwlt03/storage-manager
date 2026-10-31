@@ -10,6 +10,7 @@ enum SettingsKey {
     static let largeFileMegabytes = "largeFileMB"
     static let unusedDays = "unusedDays"
     static let layoutMode = "layoutMode"
+    static let showsRings = "showsRings"  // the Folders page as rings instead of a table
     static let lastScanFiles = "lastScanFiles"
     /// The used space after each full scan, and the folder sizes of the last two (HistoryStore).
     static let historyPoints = "historyPoints"

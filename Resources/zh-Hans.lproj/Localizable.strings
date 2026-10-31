@@ -161,6 +161,7 @@
 "exportReport" = "导出报告 …";
 "reportTitle" = "%@ 的存储报告";
 "reportFileName" = "存储报告";
+"rings" = "圆环";
 "extraFolders" = "其他文件夹";
 "showInMenuBar" = "在菜单栏中显示可用空间";
 "openApp" = "打开 %@";

@@ -161,6 +161,7 @@
 "exportReport" = "Exportovat zprávu …";
 "reportTitle" = "Zpráva o úložišti z %@";
 "reportFileName" = "Zpráva o úložišti";
+"rings" = "Prstence";
 "extraFolders" = "Další složky";
 "showInMenuBar" = "Zobrazovat volné místo na řádku nabídek";
 "openApp" = "Otevřít %@";

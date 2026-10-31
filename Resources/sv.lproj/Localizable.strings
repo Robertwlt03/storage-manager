@@ -161,6 +161,7 @@
 "exportReport" = "Exportera rapport …";
 "reportTitle" = "Lagringsrapport från %@";
 "reportFileName" = "Lagringsrapport";
+"rings" = "Ringar";
 "extraFolders" = "Ytterligare mappar";
 "showInMenuBar" = "Visa ledigt utrymme i menyraden";
 "openApp" = "Öppna %@";

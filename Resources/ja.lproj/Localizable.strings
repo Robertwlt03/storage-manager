@@ -161,6 +161,7 @@
 "exportReport" = "レポートを書き出す …";
 "reportTitle" = "%@のストレージレポート";
 "reportFileName" = "ストレージレポート";
+"rings" = "リング";
 "extraFolders" = "追加のフォルダ";
 "showInMenuBar" = "メニューバーに空き容量を表示";
 "openApp" = "%@を開く";

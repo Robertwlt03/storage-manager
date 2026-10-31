@@ -161,6 +161,7 @@
 "exportReport" = "Export Report …";
 "reportTitle" = "Storage report from %@";
 "reportFileName" = "Storage Report";
+"rings" = "Rings";
 "extraFolders" = "Additional Folders";
 "showInMenuBar" = "Show free space in the menu bar";
 "openApp" = "Open %@";

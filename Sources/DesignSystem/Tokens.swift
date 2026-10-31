@@ -100,6 +100,7 @@ nonisolated enum Symbols {
     static let largeFiles = "doc.viewfinder"
     static let temporaryArea = "hourglass"
     static let copies = "checkmark.seal"
+    static let rings = "circle.circle"
     static let duplicates = "plus.square.on.square"
     static let internalDrive = "internaldrive"
     static let lowSpace = "exclamationmark.triangle"

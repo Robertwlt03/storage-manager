@@ -161,6 +161,7 @@
 "exportReport" = "Exportă raportul …";
 "reportTitle" = "Raport de stocare din %@";
 "reportFileName" = "Raport de stocare";
+"rings" = "Inele";
 "extraFolders" = "Dosare suplimentare";
 "showInMenuBar" = "Afișează spațiul liber în bara de meniu";
 "openApp" = "Deschide %@";

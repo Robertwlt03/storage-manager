@@ -161,6 +161,7 @@
 "exportReport" = "Jelentés exportálása …";
 "reportTitle" = "Tárhelyjelentés: %@";
 "reportFileName" = "Tárhelyjelentés";
+"rings" = "Gyűrűk";
 "extraFolders" = "További mappák";
 "showInMenuBar" = "Szabad hely mutatása a menüsoron";
 "openApp" = "%@ megnyitása";

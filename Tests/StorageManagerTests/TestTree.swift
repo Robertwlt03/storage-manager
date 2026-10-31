@@ -22,6 +22,14 @@ enum TestTree {
         return folder
     }
 
+    /// Each folder inside the one before, all holding one file of `fileBytes`.
+    static func chain(_ names: ArraySlice<String>, in parent: Node, fileBytes: Int64) {
+        guard let name = names.first else { return }
+        folder(name, in: parent, fileBytes: fileBytes) { inner in
+            chain(names.dropFirst(), in: inner, fileBytes: fileBytes)
+        }
+    }
+
     static func volume(totalBytes: Int64, freeBytes: Int64, availableBytes: Int64)
         -> VolumeInformation
     {

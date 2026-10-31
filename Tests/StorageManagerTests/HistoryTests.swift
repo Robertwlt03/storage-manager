@@ -19,14 +19,6 @@ struct HistoryTests {
         FolderSizes(date: date, areas: areas, hadFullAccess: hadFullAccess, bytes: bytes)
     }
 
-    /// Each folder inside the one before.
-    private static func chain(_ names: ArraySlice<String>, in parent: Node, fileBytes: Int64) {
-        guard let name = names.first else { return }
-        TestTree.folder(name, in: parent, fileBytes: fileBytes) { folder in
-            chain(names.dropFirst(), in: folder, fileBytes: fileBytes)
-        }
-    }
-
     @Test("Only the newest points are kept")
     func keptPoints() {
         let full = (0..<HistoryService.keptPoints)
@@ -46,7 +38,7 @@ struct HistoryTests {
         let enough = HistoryService.smallestComparedBytes
         TestTree.folder("/area", in: root, fileBytes: enough) { area in
             TestTree.folder("tiny", in: area, fileBytes: enough / 2)
-            Self.chain(["one", "two", "three", "four"], in: area, fileBytes: enough)
+            TestTree.chain(["one", "two", "three", "four"], in: area, fileBytes: enough)
         }
         let sizes = HistoryService.folderSizes(of: root, at: Self.laterDate, hadFullAccess: true)
         #expect(sizes.date == Self.laterDate)

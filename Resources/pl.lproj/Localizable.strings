@@ -161,6 +161,7 @@
 "exportReport" = "Eksportuj raport …";
 "reportTitle" = "Raport miejsca z %@";
 "reportFileName" = "Raport miejsca";
+"rings" = "Pierścienie";
 "extraFolders" = "Dodatkowe foldery";
 "showInMenuBar" = "Pokazuj wolne miejsce na pasku menu";
 "openApp" = "Otwórz %@";

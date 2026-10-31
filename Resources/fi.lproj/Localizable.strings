@@ -161,6 +161,7 @@
 "exportReport" = "Vie raportti …";
 "reportTitle" = "Tallennustilaraportti %@";
 "reportFileName" = "Tallennustilaraportti";
+"rings" = "Renkaat";
 "extraFolders" = "Lisäkansiot";
 "showInMenuBar" = "Näytä vapaa tila valikkorivillä";
 "openApp" = "Avaa %@";

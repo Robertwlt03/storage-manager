@@ -161,6 +161,7 @@
 "exportReport" = "Ekspor Laporan …";
 "reportTitle" = "Laporan penyimpanan dari %@";
 "reportFileName" = "Laporan Penyimpanan";
+"rings" = "Cincin";
 "extraFolders" = "Folder Tambahan";
 "showInMenuBar" = "Tampilkan ruang kosong di bar menu";
 "openApp" = "Buka %@";

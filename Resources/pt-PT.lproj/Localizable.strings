@@ -161,6 +161,7 @@
 "exportReport" = "Exportar relatório …";
 "reportTitle" = "Relatório de armazenamento de %@";
 "reportFileName" = "Relatório de armazenamento";
+"rings" = "Anéis";
 "extraFolders" = "Pastas adicionais";
 "showInMenuBar" = "Mostrar o espaço livre na barra de menus";
 "openApp" = "Abrir %@";

@@ -161,6 +161,7 @@
 "exportReport" = "Eksportér rapport …";
 "reportTitle" = "Lagerrapport fra %@";
 "reportFileName" = "Lagerrapport";
+"rings" = "Ringe";
 "extraFolders" = "Yderligere mapper";
 "showInMenuBar" = "Vis ledig plads i menulinjen";
 "openApp" = "Åbn %@";
