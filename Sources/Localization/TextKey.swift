@@ -74,7 +74,7 @@ nonisolated enum TextKey: String, CaseIterable {
         infoCopies,
         infoVolume, aboutPage, scanDetails, scanProgress, scanArea, scanFinished,
         accessMissingShort, summaryTitle, summaryDisk, summaryTop, summaryNotMeasured, summaryClean,
-        summaryCopies, summaryApps, readAloud, stopReading
+        summaryCopies, summaryApps, summaryFreed, readAloud, stopReading
 
     // Key figures and size classes in plain words
     case sizeClassesTitle, sizeClassesCaption, figureLargeFilesFrom, bucketValue
@@ -82,6 +82,7 @@ nonisolated enum TextKey: String, CaseIterable {
 
     // Settings
     case autoScan
+    case exportReport, reportTitle, reportFileName
     case extraFolders, none, add, remove, settingsSystemNote, appLanguage, languageLikeMac
     case languageRestartHint
 }

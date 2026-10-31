@@ -119,7 +119,7 @@
 "freed" = "Ténylegesen felszabadult: %@";
 "deleteError" = "Nem sikerült mindent törölni: %@";
 "quitToDelete" = "A törléshez lépj ki ebből: %@ (⌘Q).";
-"openInExplorer" = "Megnyitás a Mappák nézetben";
+"openInExplorer" = "Megjelenítés a Mappák nézetben";
 "deleteAll" = "Összes másolat törlése …";
 "deleteTitle" = "%2$@: %1$@ másolat törlése?";
 "deleteForever" = "Végleges törlés";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Automatikus vizsgálat indításkor";
+"exportReport" = "Jelentés exportálása …";
+"reportTitle" = "Tárhelyjelentés: %@";
+"reportFileName" = "Tárhelyjelentés";
 "extraFolders" = "További mappák";
 "none" = "Nincs";
 "add" = "Hozzáadás";
@@ -231,6 +234,7 @@
 "summaryClean" = "Takarítással körülbelül %@ szabadítható fel.";
 "summaryCopies" = "Az appok másolatai, amelyeket a macOS ellenőrzéskor készít, %@ helyet foglalnak.";
 "summaryApps" = "%@ app egy ideje nem volt megnyitva.";
+"summaryFreed" = "Az app eddig %@ helyet szabadított fel.";
 "readAloud" = "Felolvasás";
 "stopReading" = "Felolvasás leállítása";
 

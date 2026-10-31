@@ -119,7 +119,7 @@
 "freed" = "Faktycznie zwolniono: %@";
 "deleteError" = "Nie wszystko udało się usunąć: %@";
 "quitToDelete" = "Zamknij %@ za pomocą ⌘Q, aby móc usunąć.";
-"openInExplorer" = "Otwórz w Eksploratorze pamięci";
+"openInExplorer" = "Pokaż w Folderach";
 "deleteAll" = "Usuń wszystkie kopie …";
 "deleteTitle" = "Usunąć %@ kopii aplikacji %@?";
 "deleteForever" = "Usuń na stałe";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mierz automatycznie przy uruchomieniu";
+"exportReport" = "Eksportuj raport …";
+"reportTitle" = "Raport miejsca z %@";
+"reportFileName" = "Raport miejsca";
 "extraFolders" = "Dodatkowe foldery";
 "none" = "Brak";
 "add" = "Dodaj";
@@ -231,6 +234,7 @@
 "summaryClean" = "Porządkowanie może zwolnić około %@.";
 "summaryCopies" = "Kopie aplikacji, które macOS tworzy podczas sprawdzania, zajmują w sumie %@.";
 "summaryApps" = "Liczba aplikacji, których od dawna nie otwierano: %@.";
+"summaryFreed" = "Do tej pory aplikacja zwolniła %@.";
 "readAloud" = "Czytaj na głos";
 "stopReading" = "Przestań czytać";
 

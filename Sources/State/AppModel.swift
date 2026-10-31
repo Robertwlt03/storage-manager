@@ -1,12 +1,12 @@
 import Foundation
 import Observation
 import SwiftUI
+import WidgetKit
 
 /// App state: what is selected, the scanned tree and everything derived from it.
 /// The work itself happens in the services; this class only orchestrates them.
 @Observable final class AppModel {
     /// An estimate never claims "done" before the scan really is.
-    private static let largestEstimatedFraction = 0.99
     /// APFS reports freed blocks with a short delay.
     private static let waitForFreedSpace: Duration = .seconds(2)
 
@@ -37,24 +37,19 @@ import SwiftUI
     /// The used space after each full scan, and what grew between the last two.
     private(set) var history = HistoryStore().points
     private(set) var growth = HistoryStore().growth
+    private(set) var totalFreedBytes = Int64(
+        UserDefaults.standard.integer(forKey: SettingsKey.totalFreedBytes))
     /// Found once per tree change: each group asks Launch Services and reads an Info.plist.
     private(set) var copyGroups: [CopyGroup] = []
     /// Made-up data instead of a scan: nothing is read from the disk and nothing can be removed.
     private(set) var isDemo = false
+    /// The temporary area's path as its page shows it; the demo shows a made-up one.
+    var shownTemporaryArea: String { isDemo ? DemoData.shownTemporaryArea : Paths.temporaryArea }
     private var scanTask: Task<Void, Never>?
     private var scanID = UUID()  // the current scan; older, canceled runs check it and step aside
     // The newest background refresh of each list; an older one that finishes later steps aside.
     private var appsRefreshID = UUID()
     private var cleanItemsRefreshID = UUID()
-
-    var startupVolume: VolumeInformation? { volumes.first(where: \.isRoot) }
-    /// Reads `revision`, because the tree itself is not observed.
-    var hasData: Bool {
-        _ = revision
-        return !root.children.isEmpty
-    }
-    var isSearching: Bool { !searchQuery.isEmpty }
-    var searchQuery: String { searchText.trimmingCharacters(in: .whitespaces) }
 
     /// Animated by SwiftUI, not AppKit (see ARCHITECTURE.md).
     func toggleSidebar() {
@@ -116,6 +111,7 @@ import SwiftUI
         cleanItems = demo.cleanItems
         history = demo.history
         growth = demo.growth
+        totalFreedBytes = demo.totalFreedBytes
         treeChanged()
     }
 
@@ -217,17 +213,6 @@ import SwiftUI
         let store = HistoryStore()
         store.record(history, latest: sizes)
         growth = store.growth
-    }
-
-    /// How far the scan is, estimated from the file count of the last full scan; the first time
-    /// from the used space.
-    var scanFraction: Double {
-        let filesOfLastFullScan = UserDefaults.standard.integer(forKey: SettingsKey.lastScanFiles)
-        let estimate =
-            filesOfLastFullScan > 0
-            ? Double(progress.files) / Double(filesOfLastFullScan)
-            : Double(progress.bytes) / Double(max(startupVolume?.usedBytes ?? 1, 1))
-        return min(estimate, Self.largestEstimatedFraction)
     }
 
     /// The canceled task still finishes the scan, so the figures match the partial tree.
@@ -333,7 +318,8 @@ extension AppModel {
     func clean(_ items: [CleanItem]) async -> (freed: Int64, failed: Int) {
         guard !isDemo else { return (0, 0) }
         var failed = 0
-        let freed = await freeSpaceGained {
+        let removedBytes = items.reduce(0) { total, item in total + item.bytes }
+        let freed = await freeSpaceGained(removing: removedBytes) {
             failed = await Task.detached(priority: .utility) { CleanerService.clean(items) }.value
         }
         scan()
@@ -354,17 +340,28 @@ extension AppModel {
     /// Deletes all copies of one app and returns how much free space really grew.
     func delete(_ group: CopyGroup) async throws -> Int64 {
         guard !isDemo else { return 0 }
-        let freed = try await freeSpaceGained { try await CopyService.delete(group) }
+        let freed = try await freeSpaceGained(removing: group.node.bytes) {
+            try await CopyService.delete(group)
+        }
         group.node.detach()
         treeChanged()
         return freed
     }
 
-    private func freeSpaceGained(by removal: () async throws -> Void) async rethrows -> Int64 {
-        let freeBefore = VolumeService.startup()?.freeBytes ?? 0
+    /// Runs `removal` and returns what it really freed, which also goes into the total.
+    private func freeSpaceGained(
+        removing removedBytes: Int64, by removal: () async throws -> Void
+    ) async rethrows -> Int64 {
+        let freeBefore = VolumeService.startup()?.freeBytes
         try await removal()
         try? await Task.sleep(for: Self.waitForFreedSpace)
-        return (VolumeService.startup()?.freeBytes ?? freeBefore) - freeBefore
+        WidgetCenter.shared.reloadAllTimelines()  // the widget shows the new space at once
+        let freed = VolumeService.freedBytes(
+            before: freeBefore, after: VolumeService.startup()?.freeBytes,
+            removedBytes: removedBytes)
+        totalFreedBytes += freed
+        UserDefaults.standard.set(totalFreedBytes, forKey: SettingsKey.totalFreedBytes)
+        return freed
     }
 
     private func treeChanged() {

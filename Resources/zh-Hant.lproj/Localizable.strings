@@ -119,7 +119,7 @@
 "freed" = "實際釋放的空間：%@";
 "deleteError" = "無法刪除全部內容：%@";
 "quitToDelete" = "請按下 ⌘Q 結束「%@」後再刪除。";
-"openInExplorer" = "在瀏覽器中打開";
+"openInExplorer" = "在「檔案夾」中顯示";
 "deleteAll" = "刪除所有拷貝⋯";
 "deleteTitle" = "要刪除 %@ 個「%@」的拷貝嗎？";
 "deleteForever" = "永久刪除";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "啟動時自動掃描";
+"exportReport" = "輸出報告 …";
+"reportTitle" = "%@ 的儲存空間報告";
+"reportFileName" = "儲存空間報告";
 "extraFolders" = "其他檔案夾";
 "none" = "無";
 "add" = "加入";
@@ -231,6 +234,7 @@
 "summaryClean" = "清理後大約可以釋放 %@。";
 "summaryCopies" = "macOS 在檢查時建立的 App 拷貝計為 %@。";
 "summaryApps" = "有 %@ 個 App 已有一段時間沒有打開。";
+"summaryFreed" = "到目前為止，此 App 已釋放 %@。";
 "readAloud" = "朗讀";
 "stopReading" = "停止朗讀";
 

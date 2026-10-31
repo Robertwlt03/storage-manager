@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Dung lượng trống";
+"widgetDescription" = "Cho biết Mac của bạn còn bao nhiêu dung lượng.";
+"widgetAvailable" = "khả dụng";
+"widgetOfTotal" = "trên %@";
+"widgetUnreadable" = "Không thể đọc dung lượng trống.";

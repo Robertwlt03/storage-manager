@@ -13,6 +13,8 @@ enum SettingsKey {
     static let historyPoints = "historyPoints"
     static let latestFolderSizes = "latestFolderSizes"
     static let previousFolderSizes = "previousFolderSizes"
+    /// What clean-ups and deleted copies really freed, all together.
+    static let totalFreedBytes = "totalFreedBytes"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let opensSettingsAtLaunch = "openSettings"  // `open … --args -openSettings YES`
     /// `open … --args -skipAccessSheet YES` (screenshots, tests)
@@ -40,6 +42,7 @@ enum AppSettings {
 
     static var scansAutomatically: Bool { defaults.bool(forKey: SettingsKey.scansAutomatically) }
     static var largeFileMegabytes: Int { defaults.integer(forKey: SettingsKey.largeFileMegabytes) }
+    static var unusedDays: Int { defaults.integer(forKey: SettingsKey.unusedDays) }
     static var launchPane: Pane? {
         defaults.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:))
     }

@@ -7,15 +7,7 @@ struct SummaryCard: View {
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanUpRules.defaultUnusedDays
     private var speech: SpeechService { SpeechService.shared }
 
-    private var summary: String {
-        let cleanableBytes = model.cleanItems?.reduce(0) { total, item in total + item.bytes }
-        let copyBytes = model.copyGroups.reduce(0) { total, group in total + group.node.bytes }
-        let unusedApps = AppUsageService.unused(model.apps, days: unusedDays)
-        let facts = SummaryService.Input(
-            volume: model.startupVolume, categories: model.isScanning ? [] : model.categories,
-            cleanableBytes: cleanableBytes, copyBytes: copyBytes, unusedAppCount: unusedApps.count)
-        return SummaryService.text(facts)
-    }
+    private var summary: String { model.summary(unusedDays: unusedDays) }
 
     var body: some View {
         let summary = summary

@@ -97,15 +97,32 @@ struct ServiceTests {
     @Test("Without data the summary says so; with data it mentions only what there is to say")
     func summary() {
         let empty = SummaryService.Input(
-            volume: nil, categories: [], cleanableBytes: nil, copyBytes: 0, unusedAppCount: 0)
+            volume: nil, categories: [], cleanableBytes: nil, copyBytes: 0, unusedAppCount: 0,
+            freedBytes: 0)
         #expect(SummaryService.text(empty) == TextKey.summaryNotMeasured.translated)
         let full = SummaryService.Input(
             volume: TestTree.volume(totalBytes: 10, freeBytes: 4, availableBytes: 5),
-            categories: [], cleanableBytes: 1, copyBytes: 1, unusedAppCount: 1)
+            categories: [], cleanableBytes: 1, copyBytes: 1, unusedAppCount: 1, freedBytes: 1)
         let sentences = SummaryService.text(full)
-        for key in [TextKey.summaryDisk, .summaryClean, .summaryCopies, .summaryApps] {
+        for key in [
+            TextKey.summaryDisk, .summaryClean, .summaryCopies, .summaryApps, .summaryFreed,
+        ] {
             #expect(sentences.contains(key.translated), "\(key.rawValue)")
         }
+    }
+
+    @Test("Freed space counts at most what was removed, and nothing without both readings")
+    func freedBytes() {
+        let removed = Self.gigabyte
+        #expect(
+            VolumeService.freedBytes(before: 0, after: removed / 2, removedBytes: removed)
+                == removed / 2)
+        #expect(
+            VolumeService.freedBytes(before: 0, after: removed * 3, removedBytes: removed)
+                == removed)
+        #expect(VolumeService.freedBytes(before: removed, after: 0, removedBytes: removed) == 0)
+        #expect(VolumeService.freedBytes(before: nil, after: removed, removedBytes: removed) == 0)
+        #expect(VolumeService.freedBytes(before: 0, after: nil, removedBytes: removed) == 0)
     }
 
     @Test("A restart keeps how the app was started, but not a language given at the start")

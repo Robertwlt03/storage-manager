@@ -119,7 +119,7 @@
 "freed" = "Dung lượng thực sự được giải phóng: %@";
 "deleteError" = "Không thể xóa hết: %@";
 "quitToDelete" = "Thoát %@ bằng ⌘Q để xóa.";
-"openInExplorer" = "Mở trong Thư mục";
+"openInExplorer" = "Hiện trong Thư mục";
 "deleteAll" = "Xóa tất cả bản sao…";
 "deleteTitle" = "Xóa %@ bản sao của %@?";
 "deleteForever" = "Xóa vĩnh viễn";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Tự động quét khi mở";
+"exportReport" = "Xuất báo cáo …";
+"reportTitle" = "Báo cáo dung lượng từ %@";
+"reportFileName" = "Báo cáo dung lượng";
 "extraFolders" = "Thư mục bổ sung";
 "none" = "Không có";
 "add" = "Thêm";
@@ -231,6 +234,7 @@
 "summaryClean" = "Dọn dẹp có thể giải phóng khoảng %@.";
 "summaryCopies" = "Bản sao ứng dụng mà macOS tạo khi kiểm tra chiếm %@.";
 "summaryApps" = "%@ ứng dụng đã lâu không được mở.";
+"summaryFreed" = "Đến nay, ứng dụng đã giải phóng %@.";
 "readAloud" = "Đọc to";
 "stopReading" = "Dừng đọc";
 

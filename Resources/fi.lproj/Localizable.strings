@@ -119,7 +119,7 @@
 "freed" = "Todellisuudessa vapautunut: %@";
 "deleteError" = "Kaikkea ei voitu poistaa: %@";
 "quitToDelete" = "Lopeta %@ komennolla ⌘Q, niin voit poistaa kopiot.";
-"openInExplorer" = "Avaa Tallennustilan tutkijassa";
+"openInExplorer" = "Näytä Kansioissa";
 "deleteAll" = "Poista kaikki kopiot …";
 "deleteTitle" = "Poistetaanko %@ kopiota kohteesta %@?";
 "deleteForever" = "Poista pysyvästi";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mittaa automaattisesti käynnistyksessä";
+"exportReport" = "Vie raportti …";
+"reportTitle" = "Tallennustilaraportti %@";
+"reportFileName" = "Tallennustilaraportti";
 "extraFolders" = "Lisäkansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";
@@ -231,6 +234,7 @@
 "summaryClean" = "Siivoamalla voit vapauttaa noin %@.";
 "summaryCopies" = "Appien kopiot, jotka macOS luo tarkistuksen aikana, vievät laskettuna %@.";
 "summaryApps" = "%@ appia ei ole avattu pitkään aikaan.";
+"summaryFreed" = "Tähän mennessä sovellus on vapauttanut %@.";
 "readAloud" = "Lue ääneen";
 "stopReading" = "Lopeta lukeminen";
 

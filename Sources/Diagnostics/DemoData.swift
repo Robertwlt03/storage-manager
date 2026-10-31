@@ -10,6 +10,11 @@ struct DemoData {
     let cleanItems: [CleanItem]
     let history: [HistoryPoint]
     let growth: Growth
+    let totalFreedBytes = 23_400 * megabyte
+
+    /// What the temporary area's page shows as its place. The demo's folders lie under the real
+    /// path, so the app finds them where it looks, but the page shows nothing of this Mac.
+    static let shownTemporaryArea = "/private/var/folders/ab/demo0000000000000000000000gn"
 
     private static let megabyte: Int64 = 1_000_000
     private static let gigabyte: Int64 = 1_000_000_000
