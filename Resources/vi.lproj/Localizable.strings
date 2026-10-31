@@ -217,6 +217,12 @@
 "infoLargeFiles" = "Mọi tệp từ kích thước đã chọn trong lần quét gần nhất. Bấm hai lần để hiển thị tệp trong Finder.";
 "infoTemporaryFiles" = "macOS tạo vùng này cho mỗi người dùng trong /private/var/folders. Vùng này bị ẩn trong Finder và không được phân tích chi tiết trong “Quản lý dung lượng”.";
 "infoCopies" = "Khi kiểm tra chữ ký, đôi khi macOS đặt các bản sao đầy đủ của ứng dụng vào thư mục X. Đây không phải chương trình riêng; macOS sẽ tạo bản mới khi cần. Có thể xóa an toàn miễn là ứng dụng đã thoát.";
+"paneDuplicates" = "Tệp trùng lặp";
+"infoDuplicates" = "Các tệp lớn từ 10 MB tồn tại nhiều lần với cùng nội dung. Các tệp cùng kích thước được so sánh theo nội dung. Ở đây không xóa gì cả; “Hiển thị trong Finder” dẫn đến chúng.";
+"noDuplicates" = "Không có tệp trùng lặp";
+"searchingDuplicates" = "Đang so sánh tệp …";
+"searchingDuplicatesDetail" = "Các tệp cùng kích thước được đọc và so sánh. Với tệp lớn sẽ mất một lúc.";
+"duplicatesTotal" = "%@ tệp · có thể giải phóng %@";
 "infoVolume" = "Dung lượng của ổ đĩa này: phần đã dùng, phần macOS có thể tự giải phóng khi cần và phần còn trống. Có thể đo ổ đĩa ngoài tại đây.";
 "aboutPage" = "Về trang này";
 "scanDetails" = "Quét";

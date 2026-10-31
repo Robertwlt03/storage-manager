@@ -217,6 +217,12 @@
 "infoLargeFiles" = "Toate fișierele de la dimensiunea aleasă din ultima scanare. Dublu clic afișează fișierul în Finder.";
 "infoTemporaryFiles" = "macOS creează această zonă pentru fiecare utilizator în /private/var/folders. Este ascunsă în Finder și nu este detaliată în „Gestionează spațiul de stocare”.";
 "infoCopies" = "La verificarea unei semnături, macOS plasează uneori copii complete ale unei aplicații în dosarul X. Nu sunt programe separate; macOS creează una nouă la nevoie. Ștergerea lor este sigură cât timp aplicația este închisă.";
+"paneDuplicates" = "Duplicate";
+"infoDuplicates" = "Fișiere mari de la 10 MB care există de mai multe ori cu același conținut. Fișierele de aceeași dimensiune sunt comparate după conținut. Aici nu se șterge nimic; „Afișează în Finder” duce la ele.";
+"noDuplicates" = "Nicio dublură";
+"searchingDuplicates" = "Se compară fișierele …";
+"searchingDuplicatesDetail" = "Fișierele de aceeași dimensiune sunt citite și comparate. La fișiere mari durează puțin.";
+"duplicatesTotal" = "%@ fișiere · se pot elibera %@";
 "infoVolume" = "Capacitatea acestui volum: ce este utilizat, ce poate elibera macOS singur la nevoie și ce este liber. Volumele externe pot fi măsurate aici.";
 "aboutPage" = "Despre această pagină";
 "scanDetails" = "Scanare";

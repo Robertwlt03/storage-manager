@@ -217,6 +217,12 @@
 "infoLargeFiles" = "Alle bestanden vanaf de gekozen grootte uit de laatste scan. Dubbelklikken toont het bestand in de Finder.";
 "infoTemporaryFiles" = "macOS maakt dit gebied voor elke gebruiker aan onder /private/var/folders. Het is verborgen in de Finder en wordt niet uitgesplitst in “Beheer opslag”.";
 "infoCopies" = "Bij het controleren van een handtekening plaatst macOS soms complete kopieën van een app in map X. Het zijn geen aparte programma’s; macOS maakt zo nodig een nieuwe aan. Verwijderen is veilig zolang de app is gestopt.";
+"paneDuplicates" = "Duplicaten";
+"infoDuplicates" = "Grote bestanden vanaf 10 MB die meer dan eens met dezelfde inhoud bestaan. Bestanden van dezelfde grootte worden op inhoud vergeleken. Hier wordt niets verwijderd; ‘Toon in Finder’ leidt ernaartoe.";
+"noDuplicates" = "Geen duplicaten";
+"searchingDuplicates" = "Bestanden vergelijken …";
+"searchingDuplicatesDetail" = "Bestanden van dezelfde grootte worden gelezen en vergeleken. Bij grote bestanden duurt dat even.";
+"duplicatesTotal" = "%@ bestanden · %@ vrij te maken";
 "infoVolume" = "Capaciteit van dit volume: wat in gebruik is, wat macOS zo nodig zelf kan vrijmaken en wat vrij is. Externe volumes kunnen hier worden gescand.";
 "aboutPage" = "Over deze pagina";
 "scanDetails" = "Scan";

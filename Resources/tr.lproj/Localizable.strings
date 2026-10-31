@@ -217,6 +217,12 @@
 "infoLargeFiles" = "Son taramadaki seçilen boyut ve üzerindeki tüm dosyalar. Çift tıklama dosyayı Finder'da gösterir.";
 "infoTemporaryFiles" = "macOS bu alanı her kullanıcı için /private/var/folders altında oluşturur. Finder'da gizlidir ve “Depolamayı Yönet” içinde ayrıntılandırılmaz.";
 "infoCopies" = "Bir imzayı kontrol ederken macOS bazen bir uygulamanın tam kopyalarını X klasörüne yerleştirir. Bunlar ayrı programlar değildir; macOS gerektiğinde yenisini oluşturur. Uygulama kapalıyken silmek güvenlidir.";
+"paneDuplicates" = "Kopyalar";
+"infoDuplicates" = "Aynı içerikle birden çok kez bulunan 10 MB üzerindeki büyük dosyalar. Aynı boyuttaki dosyalar içeriklerine göre karşılaştırılır. Burada hiçbir şey silinmez; “Finder’da Göster” onlara götürür.";
+"noDuplicates" = "Kopya Yok";
+"searchingDuplicates" = "Dosyalar karşılaştırılıyor …";
+"searchingDuplicatesDetail" = "Aynı boyuttaki dosyalar okunup karşılaştırılır. Büyük dosyalarda bu biraz sürer.";
+"duplicatesTotal" = "%@ dosya · %@ boşaltılabilir";
 "infoVolume" = "Bu birimin kapasitesi: kullanılan, macOS'un gerektiğinde kendiliğinden boşaltabileceği ve boş olan alan. Harici birimler burada taranabilir.";
 "aboutPage" = "Bu Sayfa Hakkında";
 "scanDetails" = "Tarama";

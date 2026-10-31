@@ -217,6 +217,12 @@
 "infoLargeFiles" = "Semua file mulai dari ukuran yang dipilih dalam pemindaian terakhir. Klik dua kali menampilkan file di Finder.";
 "infoTemporaryFiles" = "macOS membuat area ini untuk setiap pengguna di /private/var/folders. Area ini tersembunyi di Finder dan tidak dirinci di “Kelola Penyimpanan”.";
 "infoCopies" = "Saat memeriksa tanda tangan, macOS terkadang menaruh salinan lengkap sebuah app di folder X. Salinan ini bukan program tersendiri; macOS membuat yang baru bila perlu. Menghapusnya aman selama app sudah ditutup.";
+"paneDuplicates" = "Duplikat";
+"infoDuplicates" = "File besar mulai 10 MB yang ada lebih dari sekali dengan isi yang sama. File berukuran sama dibandingkan isinya. Di sini tidak ada yang dihapus; “Tampilkan di Finder” membawa ke file tersebut.";
+"noDuplicates" = "Tidak Ada Duplikat";
+"searchingDuplicates" = "Membandingkan file …";
+"searchingDuplicatesDetail" = "File berukuran sama dibaca dan dibandingkan. Untuk file besar ini butuh waktu sebentar.";
+"duplicatesTotal" = "%@ file · %@ dapat dikosongkan";
 "infoVolume" = "Kapasitas volume ini: yang terpakai, yang dapat dikosongkan macOS sendiri bila perlu, dan yang tersedia. Volume eksternal dapat diukur di sini.";
 "aboutPage" = "Tentang Halaman Ini";
 "scanDetails" = "Pemindaian";

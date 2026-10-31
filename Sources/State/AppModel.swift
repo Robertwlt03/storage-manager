@@ -36,6 +36,9 @@ import SwiftUI
     private(set) var statistics: Statistics?  // key figures of the last finished scan
     /// Found once per tree change: each group asks Launch Services and reads an Info.plist.
     private(set) var copyGroups: [CopyGroup] = []
+    /// Large files with the same content, found for one tree revision; nil until searched.
+    private(set) var duplicateGroups: [[Entry]]?
+    private var duplicatesRevision: Int?
     /// Made-up data instead of a scan: nothing is read from the disk and nothing can be removed.
     private(set) var isDemo = false
     private var scanTask: Task<Void, Never>?
@@ -271,6 +274,24 @@ extension AppModel {
 
     /// What the cleaner could remove; computed once after each scan and shared by the overview and
     /// the cleaner. The folders are listed in the background, the sizes come from the tree.
+    /// Compares the large files of equal size once per finished tree; a visit to the page with an
+    /// unchanged tree reads nothing again. The demo's files do not exist, so there equal sizes
+    /// stand for equal content, without its nameless filler files.
+    func findDuplicates() async {
+        guard !isScanning, duplicatesRevision != revision else { return }
+        let searchedRevision = revision
+        duplicateGroups = nil
+        let files = SearchService.largeFiles(atLeast: DuplicateService.smallestBytes, in: root)
+        let groups =
+            isDemo
+            ? DuplicateService.sameSizeGroups(
+                files.filter { file in file.path?.hasSuffix("/") == false })
+            : await DuplicateService.confirmed(DuplicateService.sameSizeGroups(files))
+        guard !Task.isCancelled, revision == searchedRevision else { return }
+        duplicateGroups = groups
+        duplicatesRevision = searchedRevision
+    }
+
     func refreshCleanItems() {
         guard hasData, !isDemo else { return }
         let refreshID = UUID()

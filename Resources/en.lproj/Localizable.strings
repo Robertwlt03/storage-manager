@@ -217,6 +217,12 @@
 "infoLargeFiles" = "All files from the chosen size in the last scan. Double-click shows the file in Finder.";
 "infoTemporaryFiles" = "macOS creates this area for every user under /private/var/folders. It is hidden in Finder and not broken down in “Manage Storage”.";
 "infoCopies" = "While checking a signature, macOS sometimes places complete copies of an app in folder X. They are not separate programs; macOS creates a new one when needed. Deleting them is safe as long as the app is quit.";
+"paneDuplicates" = "Duplicates";
+"infoDuplicates" = "Large files from 10 MB that exist more than once with the same content. Files of the same size are compared by their content. Nothing is removed here; Show in Finder leads to them.";
+"noDuplicates" = "No Duplicates";
+"searchingDuplicates" = "Comparing files …";
+"searchingDuplicatesDetail" = "Files of the same size are read and compared. For large files this takes a moment.";
+"duplicatesTotal" = "%@ files · %@ could be freed";
 "infoVolume" = "Capacity of this volume: what is used, what macOS can free by itself when needed and what is free. External volumes can be measured here.";
 "aboutPage" = "About This Page";
 "scanDetails" = "Scan";

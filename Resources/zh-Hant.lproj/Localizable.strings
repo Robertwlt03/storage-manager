@@ -217,6 +217,12 @@
 "infoLargeFiles" = "上次掃描中達到所選大小的所有檔案。連按兩下可在 Finder 中顯示該檔案。";
 "infoTemporaryFiles" = "macOS 會在 /private/var/folders 下為每位使用者建立此區域。它在 Finder 中是隱藏的，在「管理儲存空間」中也不會細分顯示。";
 "infoCopies" = "在檢查簽名時，macOS 有時會在檔案夾 X 中建立 App 的完整拷貝。它們不是獨立的程式；需要時 macOS 會重新建立。只要 App 已結束，就可以放心刪除。";
+"paneDuplicates" = "重複檔案";
+"infoDuplicates" = "內容相同且多次出現的 10 MB 以上大型檔案。大小相同的檔案會依內容比較。這裡不會移除任何內容；「在 Finder 中顯示」可前往這些檔案。";
+"noDuplicates" = "沒有重複檔案";
+"searchingDuplicates" = "正在比較檔案 …";
+"searchingDuplicatesDetail" = "正在讀取並比較大小相同的檔案。大型檔案需要一點時間。";
+"duplicatesTotal" = "%@ 個檔案 · 可釋放 %@";
 "infoVolume" = "此磁碟機的容量：已使用的空間、macOS 需要時可自行釋放的空間，以及可用空間。外接磁碟機可以在這裡測量。";
 "aboutPage" = "關於此頁面";
 "scanDetails" = "掃描";

@@ -1,15 +1,17 @@
 /// Every page of the app; the sidebar is built from it. A new page needs a case here, its line in
 /// `details` and its view in `Pane.page` (Features/Pages.swift).
 enum Pane: Hashable {
-    case overview, explorer, largeFiles, cleaner, apps, temporaryFiles, copies
+    case overview, explorer, largeFiles, cleaner, duplicates, apps, temporaryFiles, copies
     case volume(String)
 
     static let main: [Pane] = [.overview, .explorer, .largeFiles]
-    static let tidy: [Pane] = [.cleaner, .apps]
+    static let tidy: [Pane] = [.cleaner, .duplicates, .apps]
     static let system: [Pane] = [.temporaryFiles, .copies]
     static let everyPage = main + tidy + system
 
-    var supportsGrid: Bool { [.overview, .explorer, .largeFiles, .apps].contains(self) }
+    var supportsGrid: Bool {
+        [.overview, .explorer, .largeFiles, .duplicates, .apps].contains(self)
+    }
 
     init?(launchKey: String) {
         if launchKey.hasPrefix("/") {  // a volume by its mount point, e.g. `-pane /`
@@ -50,6 +52,8 @@ enum Pane: Hashable {
         case .largeFiles:
             Details("largeFiles", .paneLargeFiles, .infoLargeFiles, Symbols.largeFiles)
         case .cleaner: Details("cleaner", .paneCleaner, .infoCleaner, Symbols.cleaner)
+        case .duplicates:
+            Details("duplicates", .paneDuplicates, .infoDuplicates, Symbols.duplicates)
         case .apps: Details("apps", .paneApps, .infoApps, Symbols.apps)
         case .temporaryFiles:
             Details(
