@@ -152,6 +152,31 @@ make selftest
 make stress
 ```
 
+## <img src="assets/icons/branches.svg" height="33" align="absmiddle" alt="">Branches and pull requests
+
+Nothing reaches `main` without a pull request whose checks are green, and that holds for the maintainer too. Working
+from a fork, you start from this repository's `main` (`git remote add upstream <this repository>`, then
+`git pull upstream main`), and the maintainer approves the checks' first run and merges.
+
+1. Start every piece of work on a new branch from an up-to-date `main`:
+   ```bash
+   git switch main && git pull && git switch -c 1239-scan-cancel
+   ```
+2. Name the branch after its task. When a GitHub issue describes it, the issue's number comes first, then a hyphen
+   and a few lowercase words joined by hyphens, as in `1239-scan-cancel`. Without an issue, it is best to open one
+   first that describes the problem or the wish; for a change too small for that, the words alone say what it is
+   about, as in `readme-typo`. The number stands without `#`, because the shell reads `#` at the start of a word as a
+   comment, and a branch name has no spaces. No kind such as `feat/` or `fix/` goes in front: one branch often holds
+   commits of several kinds, a feature and then a fix for it, and the kind already stands in every commit message.
+3. Commit, run `make check`, push the branch and open a pull request. `Closes #1239` in its description closes the
+   issue once the pull request is merged.
+4. Merge once the checks are green, with "Create a merge commit" rather than "Squash and merge", so every commit
+   keeps its own message.
+5. Then delete the branch on GitHub and on your Mac, and bring `main` up to date:
+   ```bash
+   git switch main && git pull && git branch -d 1239-scan-cancel && git fetch --prune
+   ```
+
 ## <img src="assets/icons/rules.svg" height="33" align="absmiddle" alt="">Rules that always apply
 
 - **Never print names:** Output, logs and tests never show names of files or folders, only counts and sizes. What is
