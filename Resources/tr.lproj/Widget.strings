@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Boş Alan";
+"widgetDescription" = "Mac’inizde ne kadar alan kaldığını gösterir.";
+"widgetAvailable" = "kullanılabilir";
+"widgetOfTotal" = "toplam %@";
+"widgetUnreadable" = "Boş alan okunamadı.";

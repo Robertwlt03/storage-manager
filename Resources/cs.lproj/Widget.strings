@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Volné místo";
+"widgetDescription" = "Ukazuje, kolik místa je na Macu k dispozici.";
+"widgetAvailable" = "k dispozici";
+"widgetOfTotal" = "z %@";
+"widgetUnreadable" = "Volné místo se nepodařilo zjistit.";

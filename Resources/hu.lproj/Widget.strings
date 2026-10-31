@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Szabad hely";
+"widgetDescription" = "Megmutatja, mennyi hely érhető el a Macen.";
+"widgetAvailable" = "elérhető";
+"widgetOfTotal" = "összesen %@";
+"widgetUnreadable" = "A szabad helyet nem sikerült kiolvasni.";

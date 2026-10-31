@@ -119,7 +119,7 @@
 "freed" = "Echt vrijgekomen ruimte: %@";
 "deleteError" = "Niet alles kon worden verwijderd: %@";
 "quitToDelete" = "Stop %@ met ⌘Q om te kunnen verwijderen.";
-"openInExplorer" = "Open in verkenner";
+"openInExplorer" = "Toon in Mappen";
 "deleteAll" = "Alle kopieën verwijderen …";
 "deleteTitle" = "%@ kopieën van %@ verwijderen?";
 "deleteForever" = "Definitief verwijderen";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Automatisch scannen bij het openen";
+"exportReport" = "Rapport exporteren …";
+"reportTitle" = "Opslagrapport van %@";
+"reportFileName" = "Opslagrapport";
 "extraFolders" = "Extra mappen";
 "none" = "Geen";
 "add" = "Voeg toe";
@@ -234,6 +237,7 @@
 "summaryClean" = "Door op te ruimen kun je ongeveer %@ vrijmaken.";
 "summaryCopies" = "Kopieën van apps die macOS maakt tijdens het controleren, tellen mee voor %@.";
 "summaryApps" = "%@ apps zijn al een tijd niet geopend.";
+"summaryFreed" = "Tot nu toe heeft deze app %@ vrijgemaakt.";
 "readAloud" = "Lees voor";
 "stopReading" = "Stop met voorlezen";
 
@@ -241,6 +245,12 @@
 "sizeClassesTitle" = "Hoe groot zijn je bestanden?";
 "sizeClassesCaption" = "Hoeveel ruimte elke groottecategorie inneemt en hoeveel bestanden erin zitten. Een paar grote bestanden nemen meestal meer ruimte in dan veel kleine.";
 "figureLargeFilesFrom" = "grote bestanden vanaf %@";
+"historyTitle" = "Geschiedenis";
+"historyCaption" = "Gebruikte ruimte na elke volledige scan.";
+"historyAfterNextScan" = "De geschiedenis verschijnt na de volgende volledige scan.";
+"grownSince" = "Gegroeid sinds %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Geen map is meer dan %@ gegroeid.";
 "bucketValue" = "%@
 %@ bestanden";
 "settingsSystemNote" = "Weergave en eenheden komen uit Systeeminstellingen.";

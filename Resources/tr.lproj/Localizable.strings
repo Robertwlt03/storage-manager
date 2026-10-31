@@ -119,7 +119,7 @@
 "freed" = "Gerçekten boşalan alan: %@";
 "deleteError" = "Her şey silinemedi: %@";
 "quitToDelete" = "Silmek için %@ uygulamasından ⌘Q ile çıkın.";
-"openInExplorer" = "Gezgin'de Aç";
+"openInExplorer" = "Klasörler’de Göster";
 "deleteAll" = "Tüm Kopyaları Sil …";
 "deleteTitle" = "%@ kopya silinsin mi (%@)?";
 "deleteForever" = "Kalıcı Olarak Sil";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Açılışta otomatik tara";
+"exportReport" = "Raporu Dışa Aktar …";
+"reportTitle" = "%@ tarihli depolama raporu";
+"reportFileName" = "Depolama Raporu";
 "extraFolders" = "Ek Klasörler";
 "none" = "Yok";
 "add" = "Ekle";
@@ -234,6 +237,7 @@
 "summaryClean" = "Temizleyerek yaklaşık %@ boşaltılabilir.";
 "summaryCopies" = "macOS'un kontrol sırasında oluşturduğu uygulama kopyaları %@ yer sayılıyor.";
 "summaryApps" = "%@ uygulama bir süredir açılmadı.";
+"summaryFreed" = "Bu uygulama şimdiye kadar %@ yer açtı.";
 "readAloud" = "Sesli Oku";
 "stopReading" = "Okumayı Durdur";
 
@@ -241,6 +245,12 @@
 "sizeClassesTitle" = "Dosyalarınız ne kadar büyük?";
 "sizeClassesCaption" = "Her boyut sınıfının ne kadar yer kapladığı ve içinde kaç dosya olduğu. Birkaç büyük dosya genellikle çok sayıda küçük dosyadan daha fazla yer kaplar.";
 "figureLargeFilesFrom" = "%@ ve üzeri büyük dosyalar";
+"historyTitle" = "Geçmiş";
+"historyCaption" = "Her tam taramadan sonra kullanılan alan.";
+"historyAfterNextScan" = "Geçmiş, bir sonraki tam taramadan sonra görünür.";
+"grownSince" = "%@ tarihinden beri büyüme";
+"grownBy" = "+%@";
+"nothingGrown" = "Hiçbir klasör %@ değerinden fazla büyümedi.";
 "bucketValue" = "%@
 %@ dosya";
 "settingsSystemNote" = "Görünüm ve birimler Sistem Ayarları’ndan gelir.";

@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "空き容量";
+"widgetDescription" = "Macで使用できる容量を表示します。";
+"widgetAvailable" = "使用可能";
+"widgetOfTotal" = "全体 %@";
+"widgetUnreadable" = "空き容量を読み取れませんでした。";

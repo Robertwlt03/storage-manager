@@ -119,7 +119,7 @@
 "freed" = "Spazio effettivamente liberato: %@";
 "deleteError" = "Non è stato possibile eliminare tutto: %@";
 "quitToDelete" = "Chiudi %@ con ⌘Q per poter eliminare.";
-"openInExplorer" = "Apri in Esplora";
+"openInExplorer" = "Mostra in Cartelle";
 "deleteAll" = "Elimina tutte le copie …";
 "deleteTitle" = "Eliminare %@ copie di %@?";
 "deleteForever" = "Elimina definitivamente";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Analizza automaticamente all’avvio";
+"exportReport" = "Esporta rapporto …";
+"reportTitle" = "Rapporto spazio del %@";
+"reportFileName" = "Rapporto spazio";
 "extraFolders" = "Cartelle aggiuntive";
 "none" = "Nessuna";
 "add" = "Aggiungi";
@@ -234,6 +237,7 @@
 "summaryClean" = "Con la pulizia si possono liberare circa %@.";
 "summaryCopies" = "Le copie delle app che macOS crea durante la verifica contano per %@.";
 "summaryApps" = "%@ app non vengono aperte da un po’.";
+"summaryFreed" = "Finora questa app ha liberato %@.";
 "readAloud" = "Leggi ad alta voce";
 "stopReading" = "Interrompi la lettura";
 
@@ -241,6 +245,12 @@
 "sizeClassesTitle" = "Quanto sono grandi i tuoi file?";
 "sizeClassesCaption" = "Quanto spazio occupa ogni classe di dimensioni e quanti file contiene. Pochi file grandi di solito occupano più spazio di tanti file piccoli.";
 "figureLargeFilesFrom" = "file grandi da %@";
+"historyTitle" = "Cronologia";
+"historyCaption" = "Spazio occupato dopo ogni analisi completa.";
+"historyAfterNextScan" = "La cronologia appare dopo la prossima analisi completa.";
+"grownSince" = "Crescita dal %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Nessuna cartella è cresciuta di più di %@.";
 "bucketValue" = "%@
 %@ file";
 "settingsSystemNote" = "L’aspetto e le unità vengono da Impostazioni di Sistema.";

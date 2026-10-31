@@ -119,7 +119,7 @@
 "freed" = "Todellisuudessa vapautunut: %@";
 "deleteError" = "Kaikkea ei voitu poistaa: %@";
 "quitToDelete" = "Lopeta %@ komennolla ⌘Q, niin voit poistaa kopiot.";
-"openInExplorer" = "Avaa Tallennustilan tutkijassa";
+"openInExplorer" = "Näytä Kansioissa";
 "deleteAll" = "Poista kaikki kopiot …";
 "deleteTitle" = "Poistetaanko %@ kopiota kohteesta %@?";
 "deleteForever" = "Poista pysyvästi";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mittaa automaattisesti käynnistyksessä";
+"exportReport" = "Vie raportti …";
+"reportTitle" = "Tallennustilaraportti %@";
+"reportFileName" = "Tallennustilaraportti";
 "extraFolders" = "Lisäkansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";
@@ -234,6 +237,7 @@
 "summaryClean" = "Siivoamalla voit vapauttaa noin %@.";
 "summaryCopies" = "Appien kopiot, jotka macOS luo tarkistuksen aikana, vievät laskettuna %@.";
 "summaryApps" = "%@ appia ei ole avattu pitkään aikaan.";
+"summaryFreed" = "Tähän mennessä sovellus on vapauttanut %@.";
 "readAloud" = "Lue ääneen";
 "stopReading" = "Lopeta lukeminen";
 
@@ -241,6 +245,12 @@
 "sizeClassesTitle" = "Kuinka suuria tiedostosi ovat?";
 "sizeClassesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
 "figureLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
+"historyTitle" = "Historia";
+"historyCaption" = "Käytetty tila jokaisen täyden mittauksen jälkeen.";
+"historyAfterNextScan" = "Historia näkyy seuraavan täyden mittauksen jälkeen.";
+"grownSince" = "Kasvu %@ lähtien";
+"grownBy" = "+%@";
+"nothingGrown" = "Mikään kansio ei kasvanut yli %@.";
 "bucketValue" = "%@
 %@ tiedostoa";
 "settingsSystemNote" = "Ulkoasu ja yksiköt tulevat Järjestelmäasetuksista.";

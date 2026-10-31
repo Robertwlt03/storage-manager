@@ -88,7 +88,9 @@ def app() -> Codebase:
         package=PROJECT,
         build_folder=BUILD_FOLDER,
         build_options=("--build-tests", *BUILD_OPTIONS),
-        swift_sources=files(PROJECT / "Sources", "*.swift"),
+        # The widget is app code too, so every rule applies to it as well.
+        swift_sources=(
+            *files(PROJECT / "Sources", "*.swift"), *files(PROJECT / "Widget", "*.swift")),
         swift_tests=files(PROJECT / "Tests", "*.swift"),
         swift_scripts=files(SCRIPTS, "*.swift"),
         # The hooks are Python too; only what git knows, never a cache Python leaves beside them.
