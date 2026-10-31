@@ -9,6 +9,8 @@ enum SettingsKey {
     static let unusedDays = "unusedDays"
     static let layoutMode = "layoutMode"
     static let lastScanFiles = "lastScanFiles"
+    /// What clean-ups and deleted copies really freed, all together.
+    static let totalFreedBytes = "totalFreedBytes"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let opensSettingsAtLaunch = "openSettings"  // `open … --args -openSettings YES`
     /// `open … --args -skipAccessSheet YES` (screenshots, tests)

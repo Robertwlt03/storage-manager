@@ -231,6 +231,7 @@
 "summaryClean" = "Ao limpar, é possível liberar cerca de %@.";
 "summaryCopies" = "Cópias de apps que o macOS cria durante a verificação ocupam %@.";
 "summaryApps" = "%@ apps não são abertos há algum tempo.";
+"summaryFreed" = "Até agora, este app liberou %@.";
 "readAloud" = "Ler em voz alta";
 "stopReading" = "Parar leitura";
 

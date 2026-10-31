@@ -13,7 +13,8 @@ struct SummaryCard: View {
         let unusedApps = AppUsageService.unused(model.apps, days: unusedDays)
         let facts = SummaryService.Input(
             volume: model.startupVolume, categories: model.isScanning ? [] : model.categories,
-            cleanableBytes: cleanableBytes, copyBytes: copyBytes, unusedAppCount: unusedApps.count)
+            cleanableBytes: cleanableBytes, copyBytes: copyBytes, unusedAppCount: unusedApps.count,
+            freedBytes: model.totalFreedBytes)
         return SummaryService.text(facts)
     }
 

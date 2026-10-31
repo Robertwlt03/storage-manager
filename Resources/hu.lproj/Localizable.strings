@@ -231,6 +231,7 @@
 "summaryClean" = "Takarítással körülbelül %@ szabadítható fel.";
 "summaryCopies" = "Az appok másolatai, amelyeket a macOS ellenőrzéskor készít, %@ helyet foglalnak.";
 "summaryApps" = "%@ app egy ideje nem volt megnyitva.";
+"summaryFreed" = "Az app eddig %@ helyet szabadított fel.";
 "readAloud" = "Felolvasás";
 "stopReading" = "Felolvasás leállítása";
 

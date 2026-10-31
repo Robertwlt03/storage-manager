@@ -231,6 +231,7 @@
 "summaryClean" = "Pembersihan dapat mengosongkan sekitar %@.";
 "summaryCopies" = "Salinan app yang dibuat macOS saat memeriksanya terhitung %@.";
 "summaryApps" = "%@ app sudah lama tidak dibuka.";
+"summaryFreed" = "Sejauh ini, app ini telah mengosongkan %@.";
 "readAloud" = "Bacakan";
 "stopReading" = "Berhenti Membacakan";
 

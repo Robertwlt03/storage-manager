@@ -231,6 +231,7 @@
 "summaryClean" = "Vyčištěním lze uvolnit asi %@.";
 "summaryCopies" = "Kopie aplikací, které macOS vytváří při kontrole, se započítávají do %@.";
 "summaryApps" = "Aplikací, které jste delší dobu neotevřeli: %@.";
+"summaryFreed" = "Tato aplikace zatím uvolnila %@.";
 "readAloud" = "Přečíst nahlas";
 "stopReading" = "Zastavit čtení";
 

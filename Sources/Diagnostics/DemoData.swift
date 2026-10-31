@@ -8,6 +8,7 @@ struct DemoData {
     let volume: VolumeInformation
     let apps: [AppUsage]
     let cleanItems: [CleanItem]
+    let totalFreedBytes = 23_400 * megabyte
 
     private static let megabyte: Int64 = 1_000_000
     private static let gigabyte: Int64 = 1_000_000_000

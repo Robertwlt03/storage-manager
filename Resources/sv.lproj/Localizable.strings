@@ -231,6 +231,7 @@
 "summaryClean" = "Genom att rensa upp kan du frigöra cirka %@.";
 "summaryCopies" = "Kopior av appar som macOS skapar vid kontroll räknas för %@.";
 "summaryApps" = "%@ appar har inte öppnats på ett tag.";
+"summaryFreed" = "Hittills har appen frigjort %@.";
 "readAloud" = "Läs upp";
 "stopReading" = "Sluta läsa upp";
 

@@ -231,6 +231,7 @@
 "summaryClean" = "クリーンアップすると、約%@を解放できます。";
 "summaryCopies" = "macOSが確認時に作成するAppのコピーは、%@として計上されています。";
 "summaryApps" = "%@個のAppがしばらく開かれていません。";
+"summaryFreed" = "これまでにこのアプリで%@を解放しました。";
 "readAloud" = "読み上げ";
 "stopReading" = "読み上げを停止";
 

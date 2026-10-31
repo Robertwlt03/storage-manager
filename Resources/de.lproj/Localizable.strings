@@ -231,6 +231,7 @@
 "summaryClean" = "Beim Aufräumen lassen sich etwa %@ freigeben.";
 "summaryCopies" = "Kopien von Apps, die macOS beim Prüfen anlegt, belegen gezählt %@.";
 "summaryApps" = "%@ Apps wurden länger nicht geöffnet.";
+"summaryFreed" = "Bisher wurden mit dieser App %@ freigegeben.";
 "readAloud" = "Vorlesen";
 "stopReading" = "Vorlesen beenden";
 

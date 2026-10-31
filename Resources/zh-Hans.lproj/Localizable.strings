@@ -231,6 +231,7 @@
 "summaryClean" = "清理后大约可以释放 %@。";
 "summaryCopies" = "macOS 在检查时创建的 App 副本计为 %@。";
 "summaryApps" = "有 %@ 个 App 已有一段时间没有打开。";
+"summaryFreed" = "到目前为止，此应用已释放 %@。";
 "readAloud" = "朗读";
 "stopReading" = "停止朗读";
 

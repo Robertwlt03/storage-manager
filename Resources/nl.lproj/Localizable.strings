@@ -231,6 +231,7 @@
 "summaryClean" = "Door op te ruimen kun je ongeveer %@ vrijmaken.";
 "summaryCopies" = "Kopieën van apps die macOS maakt tijdens het controleren, tellen mee voor %@.";
 "summaryApps" = "%@ apps zijn al een tijd niet geopend.";
+"summaryFreed" = "Tot nu toe heeft deze app %@ vrijgemaakt.";
 "readAloud" = "Lees voor";
 "stopReading" = "Stop met voorlezen";
 
