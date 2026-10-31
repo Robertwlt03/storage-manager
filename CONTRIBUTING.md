@@ -168,6 +168,7 @@ from a fork, you start from this repository's `main` (`git remote add upstream <
    about, as in `readme-typo`. The number stands without `#`, because the shell reads `#` at the start of a word as a
    comment, and a branch name has no spaces. No kind such as `feat/` or `fix/` goes in front: one branch often holds
    commits of several kinds, a feature and then a fix for it, and the kind already stands in every commit message.
+   A branch holds one topic; something that belongs to another one, however small, gets a branch of its own.
 3. Commit, run `make check`, push the branch and open a pull request. GitHub fills its description with the
    template from `.github/PULL_REQUEST_TEMPLATE.md`, in the same form as these guides: a banner, a section with its
    icon for what changes, why, the issue, the checks and the screenshots, and the footer. Fill in every section and
