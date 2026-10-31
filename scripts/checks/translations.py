@@ -6,7 +6,9 @@ A text that reads exactly like the English one is fine when the language uses th
 such as "Downloads" in German, or when it is shared by most languages, such as "iCloud Drive" or
 "1–10 MB". Otherwise one of its words is unknown to that language's dictionary, and the text is
 reported. For a language macOS has no dictionary for, every word counts as unknown, so a text
-copied into Japanese or Chinese never slips through.
+copied into Japanese or Chinese never slips through. Which dictionaries a Mac has differs, though
+(GitHub's Mac lacks the Danish one), so a text that is the same as English on purpose says so on
+its line, with the comment SAME_ON_PURPOSE.
 """
 
 import json
@@ -25,6 +27,7 @@ SHARED_MINIMUM = 3  # and in at least this many, so two languages alone never ma
 WORD = re.compile(r"[^\W\d_]+")  # letters only: placeholders such as %@ and numbers do not count
 # The spell checker's names for languages whose folders are named differently.
 DICTIONARY_NAMES = {"pt-BR": "pt_BR"}
+SAME_ON_PURPOSE = "/* same as English on purpose */"
 
 
 # MARK: Reading the translations
@@ -43,6 +46,11 @@ def key_line(strings: Path, key: str) -> int:
     marker = f'"{key}"'
     numbered = enumerate(lines_of(strings), start=1)
     return next((number for number, line in numbered if line.startswith(marker)), 1)
+
+
+def is_same_on_purpose(strings: Path, key: str) -> bool:
+    marker = f'"{key}"'
+    return any(line.startswith(marker) and SAME_ON_PURPOSE in line for line in lines_of(strings))
 
 
 # MARK: Judging
@@ -90,6 +98,6 @@ def translation_problems(codebase: Codebase) -> list[str]:
         findings += [
             f"{place(strings, key_line(strings, key))}: '{texts[language][key]}' ({key}) is still "
             f"English; translate it, unless {language} uses these very words"
-            for key in keys if words[key] & unknown
+            for key in keys if words[key] & unknown and not is_same_on_purpose(strings, key)
         ]
     return findings

@@ -198,7 +198,7 @@
 "trashAppFailed" = "”%@” kunde inte flyttas. I Finder fungerar det med ditt lösenord.";
 "figureFiles" = "Filer";
 "figureUnusedApps" = "oanvända appar";
-"bucketUnder1MB" = "under 1 MB";
+"bucketUnder1MB" = "under 1 MB"; /* same as English on purpose */
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
 "bucketTo1GB" = "100 MB–1 GB";
