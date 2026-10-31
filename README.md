@@ -70,8 +70,9 @@ In **Clean Up** you remove files your system barely needs. These include caches 
 logs, old temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently
 running, and macOS itself, are left untouched.
 
-**Duplicates** lists large files from 10 MB that exist more than once with the same content. Only files of equal size
-are read and compared, in the background. Nothing is removed there; Show in Finder leads you to them.
+**Duplicates** shows large files from 10 MB that exist more than once with the same content, each group as a card
+that says how much space the extra copies take. Only files of equal size are read and compared, in the background.
+Nothing is removed there; Show in Finder leads you to them, so you can keep one and delete the others.
 
 The **Unused Apps** page reminds you of apps you have not opened for a long time. The date comes from macOS itself,
 so the app records nothing. Anything you no longer need, you can move to the Trash from there.
@@ -80,9 +81,9 @@ The app also shows two areas you cannot see in Finder: the **temporary area** of
 macOS creates when it checks apps. External drives and USB sticks appear in the sidebar too, as soon as you connect
 them.
 
-Every page has an info button at the top right that explains what the page is for. The app takes the light or
-dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have
-turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
+Every page says in one sentence at the top what it is for and what you can do there, and the info button beside it
+explains more. The app takes the light or dark appearance from your Mac, and it uses Liquid Glass. New content appears
+with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
 
 With File › Export Report (⇧⌘E) you save the summary, every category and the largest files as a text file, for
 keeping or passing on. Each line has the size first, so it also pastes into a spreadsheet.

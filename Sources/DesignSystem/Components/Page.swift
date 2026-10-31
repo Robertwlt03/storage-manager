@@ -1,10 +1,11 @@
 import SwiftUI
 
 extension UI {
-    /// A scrolling page: its header with options and information button, then the content.
+    /// A scrolling page: its header with sentence, options and information button, then the
+    /// content.
     struct Page<Options: View, Content: View>: View {
         let title: String
-        let information: TextKey
+        let pane: Pane
         @ViewBuilder let options: Options
         @ViewBuilder let content: Content
 
@@ -13,7 +14,7 @@ extension UI {
             @ViewBuilder _ content: () -> Content
         ) {
             self.title = title ?? pane.title.translated
-            information = pane.information
+            self.pane = pane
             self.options = options()
             self.content = content()
         }
@@ -21,7 +22,7 @@ extension UI {
         var body: some View {
             ScrollView {
                 VStack(alignment: .leading, spacing: Space.section) {
-                    HeaderBar(information: information) { options }
+                    HeaderBar(guidance: pane.guidance, information: pane.information) { options }
                     content
                 }
                 .padding(Space.page)
@@ -36,16 +37,24 @@ extension UI {
 
     /// The page header on its own, above tables, which scroll by themselves.
     struct PageHeader<Options: View>: View {
-        let information: TextKey
+        let guidance: TextKey
+        let information: TextKey?
         @ViewBuilder let options: Options
 
-        init(_ information: TextKey, @ViewBuilder options: () -> Options) {
+        init(_ pane: Pane, @ViewBuilder options: () -> Options) {
+            self.init(guidance: pane.guidance, information: pane.information, options: options)
+        }
+
+        init(
+            guidance: TextKey, information: TextKey? = nil, @ViewBuilder options: () -> Options
+        ) {
+            self.guidance = guidance
             self.information = information
             self.options = options()
         }
 
         var body: some View {
-            HeaderBar(information: information) { options }
+            HeaderBar(guidance: guidance, information: information) { options }
                 .padding(.horizontal, Space.page)
                 .padding(.vertical, Space.row)
         }
@@ -98,23 +107,29 @@ extension UI.Page where Options == EmptyView {
     }
 }
 
-/// The page's options on the left, a button explaining the page on the right.
+/// The page's sentence with a button explaining more on the right, the options below it.
 private struct HeaderBar<Options: View>: View {
-    let information: TextKey
+    let guidance: TextKey
+    let information: TextKey?
     @ViewBuilder let options: Options
     @State private var isShowingInformation = false
 
     var body: some View {
-        HStack(spacing: Space.item) {
-            // Pickers in the header as tall as its buttons (`ButtonKind.size`).
-            options.controlSize(ButtonKind.normal.size)
-            Spacer(minLength: 0)
-            informationButton
+        VStack(alignment: .leading, spacing: Space.small) {
+            HStack(alignment: .firstTextBaseline, spacing: Space.item) {
+                Text(guidance.translated).fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 0)
+                if let information { informationButton(information) }
+            }
+            .frame(minHeight: Layout.headerHeight)
+            if Options.self != EmptyView.self {
+                // Pickers in the header as tall as its buttons (`ButtonKind.size`).
+                HStack(spacing: Space.item) { options.controlSize(ButtonKind.normal.size) }
+            }
         }
-        .frame(minHeight: Layout.headerHeight)
     }
 
-    private var informationButton: some View {
+    private func informationButton(_ information: TextKey) -> some View {
         Button {
             isShowingInformation.toggle()
         } label: {
@@ -124,10 +139,12 @@ private struct HeaderBar<Options: View>: View {
         .appButton(.quiet)
         .font(.title3)
         .help(TextKey.aboutPage.translated)
-        .popover(isPresented: $isShowingInformation, arrowEdge: .bottom) { informationText }
+        .popover(isPresented: $isShowingInformation, arrowEdge: .bottom) {
+            informationText(information)
+        }
     }
 
-    private var informationText: some View {
+    private func informationText(_ information: TextKey) -> some View {
         Text(information.translated)
             .fixedSize(horizontal: false, vertical: true)
             .padding(Space.card)

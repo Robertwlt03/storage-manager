@@ -18,6 +18,9 @@ struct CleanerView: View {
     private var chosenItems: [CleanItem] {
         (items ?? []).filter { item in selectedKinds.contains(item.kind) && item.bytes > 0 }
     }
+    private var hasNothingToClean: Bool {
+        !isLoading && listedItems.allSatisfy(\.paths.isEmpty)
+    }
     private var chosenBytes: Int64 { chosenItems.reduce(0) { total, item in total + item.bytes } }
 
     var body: some View {
@@ -94,7 +97,11 @@ struct CleanerView: View {
 
     private var cleanBar: some View {
         HStack {
-            if isCleaning { UI.Note(TextKey.cleaning.translated, .working) }
+            if isCleaning {
+                UI.Note(TextKey.cleaning.translated, .working)
+            } else if hasNothingToClean {
+                UI.Note(TextKey.cleanNothingLeft.translated, .good(symbol: Symbols.success))
+            }
             Spacer()
             UI.ActionButton(
                 TextKey.cleanSelected.translated(with: Format.bytes(chosenBytes)), .primary

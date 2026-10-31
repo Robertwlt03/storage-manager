@@ -34,7 +34,8 @@
 "availableOf" = "可用 %@，共 %@";
 "categories" = "類別";
 "freeSpace" = "可用";
-"temporaryAreaName" = "暫存系統區域";
+"temporaryAreaName" = "macOS 系統檔案";
+"homeFolderName" = "你的個人專屬檔案夾";
 "categoryApps" = "應用程式";
 "categoryDocuments" = "文件與桌面";
 "categoryDownloads" = "下載項目";
@@ -84,6 +85,7 @@
 "minimumSize" = "最小大小";
 "fromSize" = "%@ 起";
 "noFilesFrom" = "沒有 %@ 以上的檔案";
+"noFilesFromDetail" = "好消息：沒有這麼大的檔案。將最小大小調小即可看到更多檔案。";
 "filesTotal" = "%@ 個檔案 · 共 %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "背景服務的資料。";
 
 /* Signature copies */
-"noCopies" = "沒有 App 拷貝";
-"noCopiesDetail" = "檔案夾 X 中沒有 App 拷貝。";
-"running" = "執行中";
-"stopped" = "已結束";
+"noCopies" = "沒有殘留的拷貝";
+"noCopiesDetail" = "macOS 沒有留下任何 App 拷貝。這裡不需要做任何事。";
 "copiesLabel" = "拷貝";
 "countedSize" = "計入的大小";
 "installedVersion" = "已安裝的版本";
@@ -118,7 +118,9 @@
 "createdOn" = "建立於 %@";
 "freed" = "實際釋放的空間：%@";
 "deleteError" = "無法刪除全部內容：%@";
-"quitToDelete" = "請按下 ⌘Q 結束「%@」後再刪除。";
+"quitToDelete" = "殘留的拷貝佔用 %@。請先按下 ⌘Q 結束「%@」，然後就可以刪除這些拷貝。";
+"copiesSafeToDelete" = "殘留的拷貝佔用 %@。「%@」已結束，你可以放心刪除這些拷貝。";
+"technicalDetails" = "技術細節";
 "openInExplorer" = "在「檔案夾」中顯示";
 "deleteAll" = "刪除所有拷貝⋯";
 "deleteTitle" = "要刪除 %@ 個「%@」的拷貝嗎？";
@@ -182,18 +184,19 @@
 "emptyFolder" = "此檔案夾是空的";
 "otherCategories" = "其他";
 "cleanCaches" = "App 快取";
-"cleanCachesDetail" = "App 會在需要時重新產生的快取。執行中的 App 和 macOS 本身不受影響。";
-"cleanDeveloper" = "開發者快取";
-"cleanDeveloperDetail" = "Xcode 建置資料以及 npm 等套件快取；下次建置時會重新產生。";
+"cleanCachesDetail" = "App 僅為了更快啟動而保留的檔案。App 會在需要時重新建立；已打開的 App 不受影響。";
+"cleanDeveloper" = "程式設計工具的殘留檔案";
+"cleanDeveloperDetail" = "只有你自己開發 App 時才相關：下次會自動重新產生的中間檔案。";
 "cleanLogs" = "舊記錄檔";
-"cleanLogsDetail" = "超過一週的 App 記錄檔。";
+"cleanLogsDetail" = "App 用來記錄自己做過什麼的筆記。一週後就沒人需要了。";
 "cleanTemporary" = "舊暫存檔案";
-"cleanTemporaryDetail" = "至少三天未更改的暫存檔案。";
+"cleanTemporaryDetail" = "App 只為某項工作短暫需要、而且至少三天沒有再動過的檔案。";
 "cleanTrash" = "垃圾桶";
-"cleanTrashDetail" = "永久清空垃圾桶。預設不會選取。";
+"cleanTrashDetail" = "清空垃圾桶。裡面的項目之後會永久消失。預設不會選取。";
 "cleanInstallers" = "舊的安裝程式";
-"cleanInstallersDetail" = "「下載項目」中超過一個月的磁碟映像檔和安裝套件。預設不會選取。";
+"cleanInstallersDetail" = "「下載項目」中超過一個月的安裝檔案。已安裝的 App 本身不受影響。預設不會選取。";
 "cleanFailed" = "有 %@ 個項目無法移除，因為它們正在使用中或受到保護。";
+"cleanNothingLeft" = "一切都很乾淨：目前沒有需要清理的項目。";
 "cleaning" = "正在清理⋯";
 "cleanerRefresh" = "重新搜尋";
 "cleanSelected" = "清理所選項目（%@）";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "這些檔案不會移到垃圾桶。App 會在需要時重新產生快取。之後，本 App 會重新測量所有內容。";
 "cleanConfirmInstallersMessage" = "這些檔案不會移到垃圾桶。App 會在需要時重新產生快取。之後，本 App 會重新測量所有內容。已移除的安裝程式需要重新下載。";
 "appsNoneUnused" = "所有 App 最近都用過";
+"appsNoneUnusedDetail" = "你經常使用所有 App。這裡沒有需要整理的項目。";
 "unusedSince" = "未打開時間";
 "daysOption" = "超過 %@ 天";
 "trashAppTitle" = "要將「%@」移到垃圾桶嗎？";
@@ -232,10 +236,21 @@
 "paneDuplicates" = "重複檔案";
 "infoDuplicates" = "內容相同且多次出現的 10 MB 以上大型檔案。大小相同的檔案會依內容比較。這裡不會移除任何內容；「在 Finder 中顯示」可前往這些檔案。";
 "noDuplicates" = "沒有重複檔案";
+"duplicateGroupTitle" = "這 %@ 個檔案完全相同 – 多餘的拷貝佔用 %@";
+"noDuplicatesDetail" = "你的 Mac 上沒有存了兩份的大型檔案。這裡不需要做任何事。";
 "searchingDuplicates" = "正在比較檔案 …";
 "searchingDuplicatesDetail" = "正在讀取並比較大小相同的檔案。大型檔案需要一點時間。";
 "duplicatesTotal" = "%@ 個檔案 · 可釋放 %@";
 "infoVolume" = "此磁碟機的容量：已使用的空間、macOS 需要時可自行釋放的空間，以及可用空間。外接磁碟機可以在這裡測量。";
+"guideOverview" = "一眼看清是什麼佔用了你的儲存空間，以及還剩多少可用空間。";
+"guideExplorer" = "最大的檔案夾排在最前面。打開檔案夾即可查看裡面的內容。";
+"guideLargeFiles" = "你 Mac 上最大的檔案。將不再需要的檔案在 Finder 中顯示，然後在那裡刪除。";
+"guideCleaner" = "你的 Mac 不需要的檔案。選擇可以移除的項目，按一下即可清理。";
+"guideDuplicates" = "這些檔案內容相同，存了不只一份。每組保留一個，在 Finder 中刪除其餘的。";
+"guideApps" = "你很久沒有打開過的 App。將不再需要的移到垃圾桶。";
+"guideTemporaryFiles" = "macOS 短暫存放檔案的隱藏位置。它通常會自動清空；只有殘留的 App 拷貝值得你自己刪除。";
+"guideCopies" = "macOS 檢查 App 時，有時會留下它的拷貝。App 結束後，你可以放心刪除這些拷貝。";
+"guideVolume" = "這個磁碟機有多滿，以及 macOS 自己能釋放多少空間。";
 "aboutPage" = "關於此頁面";
 "scanDetails" = "掃描";
 "scanProgress" = "進度";

@@ -34,7 +34,8 @@
 "availableOf" = "%@ tilgjengelig av %@";
 "categories" = "Kategorier";
 "freeSpace" = "Ledig";
-"temporaryAreaName" = "Midlertidig systemområde";
+"temporaryAreaName" = "Systemfiler fra macOS";
+"homeFolderName" = "Din hjemmemappe";
 "categoryApps" = "Programmer";
 "categoryDocuments" = "Dokumenter og Skrivebord";
 "categoryDownloads" = "Nedlastinger";
@@ -84,6 +85,7 @@
 "minimumSize" = "Minstestørrelse";
 "fromSize" = "fra %@";
 "noFilesFrom" = "Ingen filer fra %@";
+"noFilesFromDetail" = "Gode nyheter: Ingen filer er så store. Velg en lavere minstestørrelse for å se flere.";
 "filesTotal" = "%@ filer · %@ totalt";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Data fra bakgrunnstjenester.";
 
 /* Signature copies */
-"noCopies" = "Ingen appkopier";
-"noCopiesDetail" = "Det finnes ingen appkopier i mappen X.";
-"running" = "kjører";
-"stopped" = "avsluttet";
+"noCopies" = "Ingen gjenværende kopier";
+"noCopiesDetail" = "macOS har ikke latt igjen noen appkopier. Det er ingenting å gjøre her.";
 "copiesLabel" = "Kopier";
 "countedSize" = "Regnet størrelse";
 "installedVersion" = "Installert versjon";
@@ -118,7 +118,9 @@
 "createdOn" = "Opprettet %@";
 "freed" = "Faktisk frigjort: %@";
 "deleteError" = "Alt lot seg ikke slette: %@";
-"quitToDelete" = "Avslutt %@ med ⌘Q for å kunne slette.";
+"quitToDelete" = "Gjenværende kopier tar opp %@. Avslutt først %@ med ⌘Q, så kan du slette dem.";
+"copiesSafeToDelete" = "Gjenværende kopier tar opp %@. %@ er lukket, så du kan trygt slette dem.";
+"technicalDetails" = "Tekniske detaljer";
 "openInExplorer" = "Vis i Mapper";
 "deleteAll" = "Slett alle kopier …";
 "deleteTitle" = "Vil du slette %@ kopier av %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Denne mappen er tom";
 "otherCategories" = "Andre";
 "cleanCaches" = "Hurtigbuffere for apper";
-"cleanCachesDetail" = "Hurtigbuffere som apper oppretter på nytt ved behov. Apper som kjører og macOS selv blir ikke rørt.";
-"cleanDeveloper" = "Utviklerbuffere";
-"cleanDeveloperDetail" = "Byggdata fra Xcode og pakkebuffere som npm; de opprettes på nytt ved neste bygg.";
+"cleanCachesDetail" = "Filer apper bare tar vare på for å starte raskere. Apper lager dem på nytt ved behov; åpne apper blir ikke rørt.";
+"cleanDeveloper" = "Rester fra programmeringsverktøy";
+"cleanDeveloperDetail" = "Betyr bare noe hvis du lager apper selv: mellomfiler som oppstår av seg selv igjen neste gang.";
 "cleanLogs" = "Gamle logger";
-"cleanLogsDetail" = "Applogger som er eldre enn en uke.";
+"cleanLogsDetail" = "Notater der apper skriver ned hva de har gjort. Etter en uke trenger ingen dem.";
 "cleanTemporary" = "Gamle midlertidige filer";
-"cleanTemporaryDetail" = "Midlertidige filer som ikke er endret på minst tre dager.";
+"cleanTemporaryDetail" = "Filer apper bare trengte en kort stund til en oppgave og ikke har rørt på minst tre dager.";
 "cleanTrash" = "Papirkurv";
-"cleanTrashDetail" = "Tømmer papirkurven permanent. Er ikke valgt som standard.";
+"cleanTrashDetail" = "Tømmer papirkurven. Det som ligger der, er da borte for godt. Er ikke valgt som standard.";
 "cleanInstallers" = "Gamle installasjonsfiler";
-"cleanInstallersDetail" = "Diskbilder og installasjonspakker i Nedlastinger som er eldre enn en måned. Er ikke valgt som standard.";
+"cleanInstallersDetail" = "Installasjonsfiler i Nedlastinger som er eldre enn en måned. Selve appene forblir installert. Er ikke valgt som standard.";
 "cleanFailed" = "%@ objekter kunne ikke fjernes fordi de er i bruk eller beskyttet.";
+"cleanNothingLeft" = "Alt er rent: Det er ingenting å rydde opp akkurat nå.";
 "cleaning" = "Rydder opp …";
 "cleanerRefresh" = "Søk på nytt";
 "cleanSelected" = "Rydd opp i utvalget (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "Filene havner ikke i papirkurven. Apper oppretter hurtigbufferne sine på nytt ved behov. Etterpå måler appen alt på nytt.";
 "cleanConfirmInstallersMessage" = "Filene havner ikke i papirkurven. Apper oppretter hurtigbufferne sine på nytt ved behov. Etterpå måler appen alt på nytt. Fjernede installasjonsfiler må lastes ned på nytt.";
 "appsNoneUnused" = "Alle apper er brukt nylig";
+"appsNoneUnusedDetail" = "Du bruker alle appene dine jevnlig. Det er ingenting å rydde opp her.";
 "unusedSince" = "Ikke åpnet på";
 "daysOption" = "mer enn %@ dager";
 "trashAppTitle" = "Vil du flytte «%@» til papirkurven?";
@@ -231,11 +235,22 @@
 "infoCopies" = "Når macOS kontrollerer en signatur, legger det noen ganger komplette kopier av en app i mappen X. De er ikke egne programmer; macOS oppretter en ny ved behov. Det er trygt å slette dem så lenge appen er avsluttet.";
 "paneDuplicates" = "Duplikater";
 "infoDuplicates" = "Store filer fra 10 MB som finnes flere ganger med samme innhold. Filer med samme størrelse sammenlignes etter innhold. Ingenting fjernes her; «Vis i Finder» fører til dem.";
-"noDuplicates" = "Ingen duplikater";
+"noDuplicates" = "Ingen dupliserte filer";
+"duplicateGroupTitle" = "Disse %@ filene er like – %@ i ekstra kopier";
+"noDuplicatesDetail" = "Ingen store filer ligger to ganger på Macen din. Det er ingenting å gjøre her.";
 "searchingDuplicates" = "Sammenligner filer …";
 "searchingDuplicatesDetail" = "Filer med samme størrelse leses og sammenlignes. For store filer tar det et øyeblikk.";
 "duplicatesTotal" = "%@ filer · %@ kan frigjøres";
 "infoVolume" = "Kapasiteten til dette volumet: hva som er brukt, hva macOS kan frigjøre selv ved behov, og hva som er ledig. Eksterne volumer kan måles her.";
+"guideOverview" = "Se med et blikk hva som fyller lagringsplassen din, og hvor mye plass som fortsatt er ledig.";
+"guideExplorer" = "De største mappene står øverst. Åpne en mappe for å se hva som er i den.";
+"guideLargeFiles" = "De største filene på Macen din. Vis dem du ikke trenger lenger i Finder, og slett dem der.";
+"guideCleaner" = "Filer Macen din ikke trenger. Velg hva som kan fjernes, og rydd opp med ett klikk.";
+"guideDuplicates" = "Disse filene finnes flere ganger med samme innhold. Behold én av hver, og slett de andre i Finder.";
+"guideApps" = "Apper du ikke har åpnet på lenge. Flytt dem du ikke trenger lenger til papirkurven.";
+"guideTemporaryFiles" = "Et skjult sted der macOS oppbevarer filer en kort stund. Det tømmer seg som regel selv; bare gjenværende appkopier er verdt å slette selv.";
+"guideCopies" = "Når macOS sjekker en app, blir det noen ganger liggende igjen kopier av den. Når appen er lukket, kan du trygt slette dem.";
+"guideVolume" = "Hvor fullt dette volumet er, og hvor mye macOS kan frigjøre på egen hånd.";
 "aboutPage" = "Om denne siden";
 "scanDetails" = "Måling";
 "scanProgress" = "Framdrift";

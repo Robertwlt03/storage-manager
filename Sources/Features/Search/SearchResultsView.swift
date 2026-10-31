@@ -25,7 +25,7 @@ struct SearchResultsView: View {
     }
 
     private var header: some View {
-        UI.PageHeader(.searchNote) {
+        UI.PageHeader(guidance: .searchNote) {
             scopePicker
             UI.ActionButton(TextKey.cancel.translated) { model.endSearch() }
                 .keyboardShortcut(.cancelAction)

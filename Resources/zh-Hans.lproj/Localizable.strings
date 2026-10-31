@@ -34,7 +34,8 @@
 "availableOf" = "可用 %@，共 %@";
 "categories" = "类别";
 "freeSpace" = "可用";
-"temporaryAreaName" = "临时系统区域";
+"temporaryAreaName" = "macOS 系统文件";
+"homeFolderName" = "你的个人文件夹";
 "categoryApps" = "应用程序";
 "categoryDocuments" = "文稿与桌面";
 "categoryDownloads" = "下载";
@@ -84,6 +85,7 @@
 "minimumSize" = "最小大小";
 "fromSize" = "%@ 起";
 "noFilesFrom" = "没有 %@ 以上的文件";
+"noFilesFromDetail" = "好消息：没有这么大的文件。把最小大小调小即可看到更多文件。";
 "filesTotal" = "%@ 个文件 · 共 %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "后台服务的数据。";
 
 /* Signature copies */
-"noCopies" = "没有 App 副本";
-"noCopiesDetail" = "文件夹 X 中没有 App 副本。";
-"running" = "正在运行";
-"stopped" = "已退出";
+"noCopies" = "没有遗留的副本";
+"noCopiesDetail" = "macOS 没有留下任何 App 副本。这里无需任何操作。";
 "copiesLabel" = "副本";
 "countedSize" = "计入的大小";
 "installedVersion" = "已安装的版本";
@@ -118,7 +118,9 @@
 "createdOn" = "创建于 %@";
 "freed" = "实际释放的空间：%@";
 "deleteError" = "无法删除全部内容：%@";
-"quitToDelete" = "请按 ⌘Q 退出“%@”后再删除。";
+"quitToDelete" = "遗留的副本占用 %@。请先按 ⌘Q 退出“%@”，然后就可以删除这些副本。";
+"copiesSafeToDelete" = "遗留的副本占用 %@。“%@”已关闭，你可以放心删除这些副本。";
+"technicalDetails" = "技术详细信息";
 "openInExplorer" = "在“文件夹”中显示";
 "deleteAll" = "删除所有副本…";
 "deleteTitle" = "要删除 %@ 个“%@”的副本吗？";
@@ -182,18 +184,19 @@
 "emptyFolder" = "此文件夹为空";
 "otherCategories" = "其他";
 "cleanCaches" = "App 缓存";
-"cleanCachesDetail" = "App 会在需要时重新生成的缓存。正在运行的 App 和 macOS 本身不受影响。";
-"cleanDeveloper" = "开发者缓存";
-"cleanDeveloperDetail" = "Xcode 构建数据以及 npm 等软件包缓存；下次构建时会重新生成。";
+"cleanCachesDetail" = "App 仅为了更快启动而保存的文件。App 会在需要时重新创建它们；已打开的 App 不受影响。";
+"cleanDeveloper" = "编程工具的残留文件";
+"cleanDeveloperDetail" = "只有你自己开发 App 时才相关：下次会自动重新生成的中间文件。";
 "cleanLogs" = "旧日志";
-"cleanLogsDetail" = "超过一周的 App 日志。";
+"cleanLogsDetail" = "App 用来记录自己做过什么的笔记。一周之后就没人需要了。";
 "cleanTemporary" = "旧临时文件";
-"cleanTemporaryDetail" = "至少三天未更改的临时文件。";
+"cleanTemporaryDetail" = "App 只为某项任务短暂需要、并且至少三天没有再动过的文件。";
 "cleanTrash" = "废纸篓";
-"cleanTrashDetail" = "永久清倒废纸篓。默认不选中。";
+"cleanTrashDetail" = "清倒废纸篓。里面的内容之后将永久消失。默认不选中。";
 "cleanInstallers" = "旧安装程序";
-"cleanInstallersDetail" = "“下载”中超过一个月的磁盘映像和安装包。默认不选中。";
+"cleanInstallersDetail" = "“下载”中超过一个月的安装文件。已安装的 App 本身不受影响。默认不选中。";
 "cleanFailed" = "有 %@ 个项目无法移除，因为它们正在使用中或受到保护。";
+"cleanNothingLeft" = "一切都很干净：目前没有需要清理的内容。";
 "cleaning" = "正在清理…";
 "cleanerRefresh" = "重新搜索";
 "cleanSelected" = "清理所选项目（%@）";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "这些文件不会进入废纸篓。App 会在需要时重新生成缓存。之后，本 App 会重新测量所有内容。";
 "cleanConfirmInstallersMessage" = "这些文件不会进入废纸篓。App 会在需要时重新生成缓存。之后，本 App 会重新测量所有内容。已移除的安装程序需要重新下载。";
 "appsNoneUnused" = "所有 App 最近都用过";
+"appsNoneUnusedDetail" = "你经常使用所有 App。这里没有需要整理的内容。";
 "unusedSince" = "未打开时间";
 "daysOption" = "超过 %@ 天";
 "trashAppTitle" = "要将“%@”移到废纸篓吗？";
@@ -232,10 +236,21 @@
 "paneDuplicates" = "重复文件";
 "infoDuplicates" = "内容相同且多次出现的 10 MB 以上大文件。大小相同的文件会按内容比较。这里不会删除任何内容；“在访达中显示”可以找到它们。";
 "noDuplicates" = "没有重复文件";
+"duplicateGroupTitle" = "这 %@ 个文件完全相同 – 多余的副本占用 %@";
+"noDuplicatesDetail" = "你的 Mac 上没有存了两份的大文件。这里无需任何操作。";
 "searchingDuplicates" = "正在比较文件 …";
 "searchingDuplicatesDetail" = "正在读取并比较大小相同的文件。大文件需要一点时间。";
 "duplicatesTotal" = "%@ 个文件 · 可释放 %@";
 "infoVolume" = "此宗卷的容量：已使用的空间、macOS 需要时可自行释放的空间，以及可用空间。外置宗卷可以在这里测量。";
+"guideOverview" = "一眼看清是什么占用了你的存储空间，以及还剩多少可用空间。";
+"guideExplorer" = "最大的文件夹排在最前面。打开文件夹即可查看里面的内容。";
+"guideLargeFiles" = "你的 Mac 上最大的文件。把不再需要的文件在访达中显示，然后在那里删除。";
+"guideCleaner" = "你的 Mac 不需要的文件。选择可以删除的内容，一键清理。";
+"guideDuplicates" = "这些文件内容相同，存了不止一份。每组保留一个，在访达中删除其余的。";
+"guideApps" = "你很久没有打开过的 App。把不再需要的移到废纸篓。";
+"guideTemporaryFiles" = "macOS 短暂存放文件的隐藏位置。它通常会自动清空；只有遗留的 App 副本值得你自己删除。";
+"guideCopies" = "macOS 检查 App 时，有时会留下它的副本。App 关闭后，你可以放心删除这些副本。";
+"guideVolume" = "这个宗卷有多满，以及 macOS 自己能释放多少空间。";
 "aboutPage" = "关于此页面";
 "scanDetails" = "扫描";
 "scanProgress" = "进度";

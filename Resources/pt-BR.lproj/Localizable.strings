@@ -34,7 +34,8 @@
 "availableOf" = "%@ disponíveis de %@";
 "categories" = "Categorias";
 "freeSpace" = "Livre";
-"temporaryAreaName" = "Área temporária do sistema";
+"temporaryAreaName" = "Arquivos do sistema macOS";
+"homeFolderName" = "Sua pasta pessoal";
 "categoryApps" = "Aplicativos";
 "categoryDocuments" = "Documentos e Mesa";
 "categoryDownloads" = "Downloads";
@@ -84,6 +85,7 @@
 "minimumSize" = "Tamanho mínimo";
 "fromSize" = "a partir de %@";
 "noFilesFrom" = "Nenhum arquivo a partir de %@";
+"noFilesFromDetail" = "Boa notícia: nenhum arquivo é tão grande. Escolha um tamanho mínimo menor para ver mais.";
 "filesTotal" = "%@ arquivos · %@ no total";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Dados de serviços em segundo plano.";
 
 /* Signature copies */
-"noCopies" = "Nenhuma cópia de app";
-"noCopiesDetail" = "Não há cópias de apps na pasta X.";
-"running" = "em execução";
-"stopped" = "encerrado";
+"noCopies" = "Nenhuma cópia deixada para trás";
+"noCopiesDetail" = "O macOS não deixou cópias de apps para trás. Não há nada a fazer aqui.";
 "copiesLabel" = "Cópias";
 "countedSize" = "Tamanho contabilizado";
 "installedVersion" = "Versão instalada";
@@ -118,7 +118,9 @@
 "createdOn" = "Criada em %@";
 "freed" = "Espaço realmente liberado: %@";
 "deleteError" = "Nem tudo pôde ser excluído: %@";
-"quitToDelete" = "Encerre %@ com ⌘Q para poder excluir.";
+"quitToDelete" = "Cópias deixadas para trás ocupam %@. Primeiro encerre %@ com ⌘Q, depois você pode excluí-las.";
+"copiesSafeToDelete" = "Cópias deixadas para trás ocupam %@. %@ está fechado, então você pode excluí-las com segurança.";
+"technicalDetails" = "Detalhes técnicos";
 "openInExplorer" = "Mostrar em Pastas";
 "deleteAll" = "Excluir todas as cópias …";
 "deleteTitle" = "Excluir %@ cópias de %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Esta pasta está vazia";
 "otherCategories" = "Outras";
 "cleanCaches" = "Caches de apps";
-"cleanCachesDetail" = "Caches que os apps recriam quando necessário. Apps em execução e o próprio macOS não são afetados.";
-"cleanDeveloper" = "Caches de desenvolvimento";
-"cleanDeveloperDetail" = "Dados de build do Xcode e caches de pacotes, como o npm; eles são recriados na próxima build.";
+"cleanCachesDetail" = "Arquivos que os apps guardam só para abrir mais rápido. Os apps os criam de novo quando necessário; apps abertos não são afetados.";
+"cleanDeveloper" = "Sobras de ferramentas de programação";
+"cleanDeveloperDetail" = "Só importa se você mesmo cria apps: arquivos intermediários que voltam sozinhos da próxima vez.";
 "cleanLogs" = "Registros antigos";
-"cleanLogsDetail" = "Registros de apps com mais de uma semana.";
+"cleanLogsDetail" = "Anotações em que os apps registram o que fizeram. Depois de uma semana, ninguém precisa mais delas.";
 "cleanTemporary" = "Arquivos temporários antigos";
-"cleanTemporaryDetail" = "Arquivos temporários não modificados há pelo menos três dias.";
+"cleanTemporaryDetail" = "Arquivos de que os apps precisaram só por pouco tempo para uma tarefa e que não são tocados há pelo menos três dias.";
 "cleanTrash" = "Lixo";
-"cleanTrashDetail" = "Esvazia o Lixo permanentemente. Não selecionado por padrão.";
+"cleanTrashDetail" = "Esvazia o Lixo. O que estiver nele desaparece para sempre. Não selecionado por padrão.";
 "cleanInstallers" = "Instaladores antigos";
-"cleanInstallersDetail" = "Imagens de disco e pacotes de instalação em Downloads com mais de um mês. Não selecionado por padrão.";
+"cleanInstallersDetail" = "Arquivos de instalação em Downloads com mais de um mês. Os próprios apps continuam instalados. Não selecionado por padrão.";
 "cleanFailed" = "%@ itens não puderam ser removidos porque estão em uso ou protegidos.";
+"cleanNothingLeft" = "Tudo limpo: não há nada para limpar agora.";
 "cleaning" = "Limpando …";
 "cleanerRefresh" = "Procurar novamente";
 "cleanSelected" = "Limpar seleção (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "Os arquivos não vão para o Lixo. Os apps recriam seus caches quando necessário. Depois, o app analisa tudo novamente.";
 "cleanConfirmInstallersMessage" = "Os arquivos não vão para o Lixo. Os apps recriam seus caches quando necessário. Depois, o app analisa tudo novamente. Os instaladores removidos precisarão ser baixados novamente.";
 "appsNoneUnused" = "Todos os apps foram usados recentemente";
+"appsNoneUnusedDetail" = "Você usa todos os seus apps com frequência. Não há nada para arrumar aqui.";
 "unusedSince" = "Não aberto há";
 "daysOption" = "mais de %@ dias";
 "trashAppTitle" = "Mover “%@” para o Lixo?";
@@ -231,11 +235,22 @@
 "infoCopies" = "Ao verificar uma assinatura, o macOS às vezes coloca cópias completas de um app na pasta X. Elas não são programas independentes; o macOS cria uma nova quando necessário. Excluí-las é seguro enquanto o app estiver encerrado.";
 "paneDuplicates" = "Duplicatas";
 "infoDuplicates" = "Arquivos grandes a partir de 10 MB que existem mais de uma vez com o mesmo conteúdo. Arquivos do mesmo tamanho são comparados pelo conteúdo. Nada é removido aqui; “Mostrar no Finder” leva até eles.";
-"noDuplicates" = "Nenhuma duplicata";
+"noDuplicates" = "Nenhum arquivo duplicado";
+"duplicateGroupTitle" = "Estes %@ arquivos são idênticos – %@ em cópias extras";
+"noDuplicatesDetail" = "Nenhum arquivo grande está salvo duas vezes no seu Mac. Não há nada a fazer aqui.";
 "searchingDuplicates" = "Comparando arquivos …";
 "searchingDuplicatesDetail" = "Arquivos do mesmo tamanho são lidos e comparados. Com arquivos grandes isso leva um momento.";
 "duplicatesTotal" = "%@ arquivos · %@ podem ser liberados";
 "infoVolume" = "Capacidade deste volume: o que está em uso, o que o macOS pode liberar sozinho quando necessário e o que está livre. Volumes externos podem ser analisados aqui.";
+"guideOverview" = "Veja de relance o que ocupa seu armazenamento e quanto espaço ainda está livre.";
+"guideExplorer" = "As maiores pastas aparecem primeiro. Abra uma pasta para ver o que tem dentro.";
+"guideLargeFiles" = "Os maiores arquivos do seu Mac. Mostre no Finder os que você não precisa mais e exclua-os lá.";
+"guideCleaner" = "Arquivos de que seu Mac não precisa. Escolha o que pode sair e limpe com um clique.";
+"guideDuplicates" = "Estes arquivos existem mais de uma vez com o mesmo conteúdo. Mantenha um de cada e exclua os outros no Finder.";
+"guideApps" = "Apps que você não abre há muito tempo. Mova para o Lixo os que você não precisa mais.";
+"guideTemporaryFiles" = "Um lugar oculto onde o macOS guarda arquivos por pouco tempo. Ele costuma se esvaziar sozinho; só vale a pena você mesmo excluir as cópias de apps deixadas para trás.";
+"guideCopies" = "Quando o macOS verifica um app, às vezes deixa cópias dele para trás. Depois que o app for fechado, você pode excluí-las com segurança.";
+"guideVolume" = "Quão cheio está este volume e quanto dele o macOS consegue liberar sozinho.";
 "aboutPage" = "Sobre esta página";
 "scanDetails" = "Análise";
 "scanProgress" = "Progresso";

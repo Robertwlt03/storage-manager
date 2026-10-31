@@ -34,7 +34,8 @@
 "availableOf" = "%@利用可能(全体%@)";
 "categories" = "カテゴリ";
 "freeSpace" = "空き";
-"temporaryAreaName" = "一時システム領域";
+"temporaryAreaName" = "macOSのシステムファイル";
+"homeFolderName" = "ホームフォルダ";
 "categoryApps" = "アプリケーション";
 "categoryDocuments" = "書類とデスクトップ";
 "categoryDownloads" = "ダウンロード";
@@ -84,6 +85,7 @@
 "minimumSize" = "最小サイズ";
 "fromSize" = "%@以上";
 "noFilesFrom" = "%@以上のファイルはありません";
+"noFilesFromDetail" = "良いお知らせです。そこまで大きなファイルはありません。最小サイズを小さくすると、もっと表示されます。";
 "filesTotal" = "%@個のファイル · 合計%@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "バックグラウンドサービスのデータです。";
 
 /* Signature copies */
-"noCopies" = "Appのコピーはありません";
-"noCopiesDetail" = "フォルダ XにはAppのコピーがありません。";
-"running" = "実行中";
-"stopped" = "終了済み";
+"noCopies" = "残っているコピーはありません";
+"noCopiesDetail" = "macOSはAppのコピーを残していません。ここでは何もする必要はありません。";
 "copiesLabel" = "コピー";
 "countedSize" = "集計サイズ";
 "installedVersion" = "インストール済みのバージョン";
@@ -118,7 +118,9 @@
 "createdOn" = "作成日: %@";
 "freed" = "実際に解放された容量: %@";
 "deleteError" = "すべてを削除できませんでした: %@";
-"quitToDelete" = "削除するには、%@を⌘Qで終了してください。";
+"quitToDelete" = "残っているコピーが%@を使っています。まず%@を⌘Qで終了すると、削除できるようになります。";
+"copiesSafeToDelete" = "残っているコピーが%@を使っています。%@は終了しているので、安全に削除できます。";
+"technicalDetails" = "技術的な詳細";
 "openInExplorer" = "フォルダで表示";
 "deleteAll" = "すべてのコピーを削除…";
 "deleteTitle" = "%@個の「%@」のコピーを削除しますか?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "このフォルダは空です";
 "otherCategories" = "その他";
 "cleanCaches" = "Appのキャッシュ";
-"cleanCachesDetail" = "必要に応じてAppが再作成するキャッシュです。実行中のAppとmacOS自体は対象外です。";
-"cleanDeveloper" = "開発用キャッシュ";
-"cleanDeveloperDetail" = "Xcodeのビルドデータと、npmなどのパッケージキャッシュです。次回のビルド時に再作成されます。";
+"cleanCachesDetail" = "Appがすばやく起動するためだけに保存しているファイルです。必要になればAppが作り直します。開いているAppのものはそのままです。";
+"cleanDeveloper" = "プログラミングツールの残り";
+"cleanDeveloperDetail" = "自分でAppを開発する場合のみ関係します。次回また自動で作られる途中のファイルです。";
 "cleanLogs" = "古いログ";
-"cleanLogsDetail" = "1週間より前のAppのログです。";
+"cleanLogsDetail" = "Appが何をしたかを書き留めた記録です。1週間たてば誰も必要としません。";
 "cleanTemporary" = "古い一時ファイル";
-"cleanTemporaryDetail" = "3日以上変更されていない一時ファイルです。";
+"cleanTemporaryDetail" = "Appが作業のために短い間だけ使い、少なくとも3日間触れていないファイルです。";
 "cleanTrash" = "ゴミ箱";
-"cleanTrashDetail" = "ゴミ箱を完全に空にします。初期設定では選択されていません。";
+"cleanTrashDetail" = "ゴミ箱を空にします。中身は完全に消えます。初期設定では選択されていません。";
 "cleanInstallers" = "古いインストーラ";
-"cleanInstallersDetail" = "ダウンロード内の1か月以上前のディスクイメージとインストーラパッケージ。初期設定では選択されていません。";
+"cleanInstallersDetail" = "ダウンロード内の1か月以上前のインストール用ファイルです。App自体はインストールされたままです。初期設定では選択されていません。";
 "cleanFailed" = "使用中または保護されているため、%@個の項目を削除できませんでした。";
+"cleanNothingLeft" = "すっきりしています。今はクリーンアップするものはありません。";
 "cleaning" = "クリーンアップ中…";
 "cleanerRefresh" = "再検索";
 "cleanSelected" = "選択した項目をクリーンアップ(%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "ファイルはゴミ箱に入りません。Appは必要に応じてキャッシュを再作成します。完了後、このAppはすべてをもう一度スキャンします。";
 "cleanConfirmInstallersMessage" = "ファイルはゴミ箱に入りません。Appは必要に応じてキャッシュを再作成します。完了後、このAppはすべてをもう一度スキャンします。削除したインストーラは再ダウンロードが必要です。";
 "appsNoneUnused" = "すべてのAppが最近使用されています";
+"appsNoneUnusedDetail" = "すべてのAppを定期的に使っています。ここで整理するものはありません。";
 "unusedSince" = "未使用の期間";
 "daysOption" = "%@日より長い";
 "trashAppTitle" = "「%@」をゴミ箱に入れますか?";
@@ -231,11 +235,22 @@
 "infoCopies" = "署名を確認するとき、macOSはAppの完全なコピーをフォルダ Xに作成することがあります。これらは独立したプログラムではなく、必要に応じてmacOSが新しく作成します。Appを終了していれば、削除しても問題ありません。";
 "paneDuplicates" = "重複ファイル";
 "infoDuplicates" = "同じ内容で複数存在する10 MB以上の大きなファイルです。同じサイズのファイルを内容で比較します。ここでは何も削除しません。「Finderに表示」でファイルを開けます。";
-"noDuplicates" = "重複はありません";
+"noDuplicates" = "重複ファイルはありません";
+"duplicateGroupTitle" = "この%@個のファイルは同じ内容です – 余分なコピーで%@";
+"noDuplicatesDetail" = "Mac上に2回保存されている大きなファイルはありません。ここでは何もする必要はありません。";
 "searchingDuplicates" = "ファイルを比較しています …";
 "searchingDuplicatesDetail" = "同じサイズのファイルを読み込んで比較します。大きなファイルでは少し時間がかかります。";
 "duplicatesTotal" = "%@個のファイル · %@を解放可能";
 "infoVolume" = "このボリュームの容量です。使用中の容量、必要に応じてmacOSが自動的に解放できる容量、空き容量を表示します。外部ボリュームもここでスキャンできます。";
+"guideOverview" = "ストレージを何が使っているか、空き容量がどれだけ残っているかをひと目で確認できます。";
+"guideExplorer" = "大きいフォルダから順に並んでいます。フォルダを開くと中身を見られます。";
+"guideLargeFiles" = "Mac内の特に大きなファイルです。不要なものはFinderで表示して、そこで削除してください。";
+"guideCleaner" = "Macに必要のないファイルです。削除してよいものを選んで、ワンクリックでクリーンアップできます。";
+"guideDuplicates" = "同じ内容のファイルが複数あります。それぞれ1つだけ残して、ほかはFinderで削除してください。";
+"guideApps" = "長い間開いていないAppです。不要なものはゴミ箱に入れてください。";
+"guideTemporaryFiles" = "macOSがファイルを短期間だけ保管する隠れた場所です。たいてい自動で空になります。自分で削除する価値があるのは、残ったAppのコピーだけです。";
+"guideCopies" = "macOSがAppを確認するときに、そのコピーが残ることがあります。Appを終了していれば、安全に削除できます。";
+"guideVolume" = "このボリュームがどれだけいっぱいか、macOSが自分でどれだけ空けられるかを示します。";
 "aboutPage" = "このページについて";
 "scanDetails" = "スキャン";
 "scanProgress" = "進行状況";

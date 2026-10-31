@@ -112,9 +112,11 @@ struct TreeTests {
         #expect(Paths.expand("/Applications") == "/Applications")
     }
 
-    @Test("Only the home folder itself and what lies inside it are shown with ~")
-    func homeShownWithTilde() {
-        #expect(Paths.displayName(Paths.home + "/Downloads") == "~/Downloads")
+    @Test("Only the home folder itself and what lies inside it go by the home folder's name")
+    func homeShownByName() {
+        let name = TextKey.homeFolderName.translated
+        #expect(Paths.displayName(Paths.home + "/Downloads") == name + "/Downloads")
+        #expect(Paths.displayName(Paths.applications) == TextKey.categoryApps.translated)
         #expect(Paths.displayName(Paths.home + "-backup") == Paths.home + "-backup")
     }
 

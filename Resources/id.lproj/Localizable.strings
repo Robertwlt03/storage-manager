@@ -34,7 +34,8 @@
 "availableOf" = "%@ tersedia dari %@";
 "categories" = "Kategori";
 "freeSpace" = "Kosong";
-"temporaryAreaName" = "Area Sementara Sistem";
+"temporaryAreaName" = "File Sistem macOS";
+"homeFolderName" = "Folder Rumah Anda";
 "categoryApps" = "Aplikasi";
 "categoryDocuments" = "Dokumen & Desktop";
 "categoryDownloads" = "Unduhan";
@@ -84,6 +85,7 @@
 "minimumSize" = "Ukuran Minimum";
 "fromSize" = "mulai %@";
 "noFilesFrom" = "Tidak ada file mulai %@";
+"noFilesFromDetail" = "Kabar baik: tidak ada file sebesar itu. Pilih ukuran minimum yang lebih kecil untuk melihat lebih banyak.";
 "filesTotal" = "%@ file · total %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Data layanan latar belakang.";
 
 /* Signature copies */
-"noCopies" = "Tidak Ada Salinan App";
-"noCopiesDetail" = "Tidak ada salinan app di folder X.";
-"running" = "berjalan";
-"stopped" = "ditutup";
+"noCopies" = "Tidak Ada Salinan yang Tertinggal";
+"noCopiesDetail" = "macOS tidak meninggalkan salinan app. Tidak ada yang perlu dilakukan di sini.";
 "copiesLabel" = "Salinan";
 "countedSize" = "Ukuran Terhitung";
 "installedVersion" = "Versi Terinstal";
@@ -118,7 +118,9 @@
 "createdOn" = "Dibuat pada %@";
 "freed" = "Ruang yang benar-benar dikosongkan: %@";
 "deleteError" = "Tidak semua dapat dihapus: %@";
-"quitToDelete" = "Tutup %@ dengan ⌘Q untuk menghapus.";
+"quitToDelete" = "Salinan yang tertinggal memakan %@. Tutup %@ dengan ⌘Q terlebih dahulu, lalu Anda dapat menghapusnya.";
+"copiesSafeToDelete" = "Salinan yang tertinggal memakan %@. %@ sudah ditutup, jadi Anda dapat menghapusnya dengan aman.";
+"technicalDetails" = "Detail Teknis";
 "openInExplorer" = "Tampilkan di Folder";
 "deleteAll" = "Hapus Semua Salinan …";
 "deleteTitle" = "Hapus %@ salinan %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Folder ini kosong";
 "otherCategories" = "Lainnya";
 "cleanCaches" = "Cache App";
-"cleanCachesDetail" = "Cache yang dibuat ulang oleh app bila perlu. App yang berjalan dan macOS sendiri tidak disentuh.";
-"cleanDeveloper" = "Cache Pengembang";
-"cleanDeveloperDetail" = "Data build Xcode dan cache paket seperti npm; dibuat ulang pada build berikutnya.";
+"cleanCachesDetail" = "File yang disimpan app hanya agar dapat dibuka lebih cepat. App membuatnya lagi bila perlu; app yang sedang terbuka tidak disentuh.";
+"cleanDeveloper" = "Sisa dari Alat Pemrograman";
+"cleanDeveloperDetail" = "Hanya penting jika Anda membuat app sendiri: file sementara yang akan muncul lagi dengan sendirinya lain kali.";
 "cleanLogs" = "Log Lama";
-"cleanLogsDetail" = "Log app yang lebih lama dari satu minggu.";
+"cleanLogsDetail" = "Catatan tempat app menulis apa yang telah dilakukannya. Setelah seminggu, tidak ada yang memerlukannya lagi.";
 "cleanTemporary" = "File Sementara Lama";
-"cleanTemporaryDetail" = "File sementara yang tidak berubah setidaknya tiga hari.";
+"cleanTemporaryDetail" = "File yang hanya diperlukan app sebentar untuk suatu tugas dan tidak disentuh lagi setidaknya selama tiga hari.";
 "cleanTrash" = "Tong Sampah";
-"cleanTrashDetail" = "Mengosongkan Tong Sampah secara permanen. Tidak dipilih secara default.";
+"cleanTrashDetail" = "Mengosongkan Tong Sampah. Isinya akan hilang untuk selamanya. Tidak dipilih secara default.";
 "cleanInstallers" = "Penginstal Lama";
-"cleanInstallersDetail" = "Image disk dan paket penginstal di Unduhan yang berumur lebih dari satu bulan. Tidak dipilih secara default.";
+"cleanInstallersDetail" = "File penginstal di Unduhan yang berumur lebih dari satu bulan. App itu sendiri tetap terinstal. Tidak dipilih secara default.";
 "cleanFailed" = "%@ item tidak dapat dihapus karena sedang digunakan atau dilindungi.";
+"cleanNothingLeft" = "Semua bersih: saat ini tidak ada yang perlu dibersihkan.";
 "cleaning" = "Membersihkan …";
 "cleanerRefresh" = "Cari Lagi";
 "cleanSelected" = "Bersihkan Pilihan (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "File tidak masuk ke Tong Sampah. App membuat ulang cache-nya bila perlu. Setelah itu app mengukur semuanya lagi.";
 "cleanConfirmInstallersMessage" = "File tidak masuk ke Tong Sampah. App membuat ulang cache-nya bila perlu. Setelah itu app mengukur semuanya lagi. Penginstal yang dihapus harus diunduh lagi.";
 "appsNoneUnused" = "Semua app baru-baru ini digunakan";
+"appsNoneUnusedDetail" = "Anda menggunakan semua app secara rutin. Tidak ada yang perlu dirapikan di sini.";
 "unusedSince" = "Tidak dibuka selama";
 "daysOption" = "lebih dari %@ hari";
 "trashAppTitle" = "Pindahkan “%@” ke Tong Sampah?";
@@ -231,11 +235,22 @@
 "infoCopies" = "Saat memeriksa tanda tangan, macOS terkadang menaruh salinan lengkap sebuah app di folder X. Salinan ini bukan program tersendiri; macOS membuat yang baru bila perlu. Menghapusnya aman selama app sudah ditutup.";
 "paneDuplicates" = "Duplikat";
 "infoDuplicates" = "File besar mulai 10 MB yang ada lebih dari sekali dengan isi yang sama. File berukuran sama dibandingkan isinya. Di sini tidak ada yang dihapus; “Tampilkan di Finder” membawa ke file tersebut.";
-"noDuplicates" = "Tidak Ada Duplikat";
+"noDuplicates" = "Tidak Ada File Duplikat";
+"duplicateGroupTitle" = "%@ file ini identik – %@ dalam salinan tambahan";
+"noDuplicatesDetail" = "Tidak ada file besar yang tersimpan dua kali di Mac Anda. Tidak ada yang perlu dilakukan di sini.";
 "searchingDuplicates" = "Membandingkan file …";
 "searchingDuplicatesDetail" = "File berukuran sama dibaca dan dibandingkan. Untuk file besar ini butuh waktu sebentar.";
 "duplicatesTotal" = "%@ file · %@ dapat dikosongkan";
 "infoVolume" = "Kapasitas volume ini: yang terpakai, yang dapat dikosongkan macOS sendiri bila perlu, dan yang tersedia. Volume eksternal dapat diukur di sini.";
+"guideOverview" = "Lihat sekilas apa yang memenuhi penyimpanan Anda dan berapa banyak ruang yang masih kosong.";
+"guideExplorer" = "Folder terbesar ada di atas. Buka folder untuk melihat isinya.";
+"guideLargeFiles" = "File terbesar di Mac Anda. Tampilkan yang tidak lagi Anda perlukan di Finder, lalu hapus di sana.";
+"guideCleaner" = "File yang tidak diperlukan Mac Anda. Pilih apa yang boleh dihapus, lalu bersihkan dengan satu klik.";
+"guideDuplicates" = "File ini ada lebih dari sekali dengan isi yang sama. Simpan satu dari masing-masing dan hapus sisanya di Finder.";
+"guideApps" = "App yang sudah lama tidak Anda buka. Pindahkan yang tidak lagi Anda perlukan ke Tong Sampah.";
+"guideTemporaryFiles" = "Tempat tersembunyi tempat macOS menyimpan file untuk sementara. Biasanya tempat ini kosong dengan sendirinya; hanya salinan app yang tertinggal yang layak Anda hapus sendiri.";
+"guideCopies" = "Saat macOS memeriksa app, terkadang salinannya tertinggal. Setelah app ditutup, Anda dapat menghapusnya dengan aman.";
+"guideVolume" = "Seberapa penuh volume ini dan berapa banyak ruang yang dapat dikosongkan macOS sendiri.";
 "aboutPage" = "Tentang Halaman Ini";
 "scanDetails" = "Pemindaian";
 "scanProgress" = "Kemajuan";

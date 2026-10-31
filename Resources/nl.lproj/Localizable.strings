@@ -34,7 +34,8 @@
 "availableOf" = "%@ beschikbaar van %@";
 "categories" = "Categorieën";
 "freeSpace" = "Vrij";
-"temporaryAreaName" = "Tijdelijk systeemgebied";
+"temporaryAreaName" = "Systeembestanden van macOS";
+"homeFolderName" = "Je thuismap";
 "categoryApps" = "Apps";
 "categoryDocuments" = "Documenten en bureaublad";
 "categoryDownloads" = "Downloads";
@@ -84,6 +85,7 @@
 "minimumSize" = "Minimale grootte";
 "fromSize" = "vanaf %@";
 "noFilesFrom" = "Geen bestanden vanaf %@";
+"noFilesFromDetail" = "Goed nieuws: geen enkel bestand is zo groot. Kies een kleinere minimale grootte om meer te zien.";
 "filesTotal" = "%@ bestanden · %@ in totaal";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Gegevens van achtergronddiensten.";
 
 /* Signature copies */
-"noCopies" = "Geen app-kopieën";
-"noCopiesDetail" = "In map X staan geen app-kopieën.";
-"running" = "actief";
-"stopped" = "gestopt";
+"noCopies" = "Geen achtergebleven kopieën";
+"noCopiesDetail" = "macOS heeft geen kopieën van apps achtergelaten. Hier hoef je niets te doen.";
 "copiesLabel" = "Kopieën";
 "countedSize" = "Getelde grootte";
 "installedVersion" = "Geïnstalleerde versie";
@@ -118,7 +118,9 @@
 "createdOn" = "Aangemaakt op %@";
 "freed" = "Echt vrijgekomen ruimte: %@";
 "deleteError" = "Niet alles kon worden verwijderd: %@";
-"quitToDelete" = "Stop %@ met ⌘Q om te kunnen verwijderen.";
+"quitToDelete" = "Achtergebleven kopieën nemen %@ in beslag. Stop %@ eerst met ⌘Q, daarna kun je ze verwijderen.";
+"copiesSafeToDelete" = "Achtergebleven kopieën nemen %@ in beslag. %@ is gesloten, dus je kunt ze veilig verwijderen.";
+"technicalDetails" = "Technische details";
 "openInExplorer" = "Toon in Mappen";
 "deleteAll" = "Alle kopieën verwijderen …";
 "deleteTitle" = "%@ kopieën van %@ verwijderen?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Deze map is leeg";
 "otherCategories" = "Overig";
 "cleanCaches" = "App-caches";
-"cleanCachesDetail" = "Caches die apps zo nodig opnieuw aanmaken. Actieve apps en macOS zelf blijven met rust gelaten.";
-"cleanDeveloper" = "Ontwikkelaarscaches";
-"cleanDeveloperDetail" = "Buildgegevens van Xcode en pakketcaches zoals npm; ze worden bij de volgende build opnieuw aangemaakt.";
+"cleanCachesDetail" = "Bestanden die apps alleen bewaren om sneller te starten. Apps maken ze zo nodig opnieuw aan; geopende apps blijven met rust gelaten.";
+"cleanDeveloper" = "Restjes van programmeertools";
+"cleanDeveloperDetail" = "Alleen van belang als je zelf apps maakt: tussenbestanden die de volgende keer vanzelf terugkomen.";
 "cleanLogs" = "Oude logbestanden";
-"cleanLogsDetail" = "Logbestanden van apps die ouder zijn dan een week.";
+"cleanLogsDetail" = "Notities waarin apps bijhouden wat ze hebben gedaan. Na een week heeft niemand ze meer nodig.";
 "cleanTemporary" = "Oude tijdelijke bestanden";
-"cleanTemporaryDetail" = "Tijdelijke bestanden die al minstens drie dagen niet zijn gewijzigd.";
+"cleanTemporaryDetail" = "Bestanden die apps maar even nodig hadden voor een taak en die al minstens drie dagen niet zijn aangeraakt.";
 "cleanTrash" = "Prullenmand";
-"cleanTrashDetail" = "Leegt de prullenmand definitief. Standaard niet geselecteerd.";
+"cleanTrashDetail" = "Leegt de prullenmand. Wat erin zit, is daarna voorgoed weg. Standaard niet geselecteerd.";
 "cleanInstallers" = "Oude installatiebestanden";
-"cleanInstallersDetail" = "Schijfkopieën en installatiepakketten in Downloads die ouder zijn dan een maand. Standaard niet geselecteerd.";
+"cleanInstallersDetail" = "Installatiebestanden in Downloads die ouder zijn dan een maand. De apps zelf blijven geïnstalleerd. Standaard niet geselecteerd.";
 "cleanFailed" = "%@ onderdelen konden niet worden verwijderd omdat ze in gebruik of beveiligd zijn.";
+"cleanNothingLeft" = "Alles is schoon: er valt nu niets op te ruimen.";
 "cleaning" = "Bezig met opruimen …";
 "cleanerRefresh" = "Opnieuw zoeken";
 "cleanSelected" = "Selectie opruimen (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "De bestanden gaan niet naar de prullenmand. Apps maken hun caches zo nodig opnieuw aan. Daarna scant de app alles opnieuw.";
 "cleanConfirmInstallersMessage" = "De bestanden gaan niet naar de prullenmand. Apps maken hun caches zo nodig opnieuw aan. Daarna scant de app alles opnieuw. Verwijderde installatiebestanden moeten opnieuw worden gedownload.";
 "appsNoneUnused" = "Alle apps zijn onlangs gebruikt";
+"appsNoneUnusedDetail" = "Je gebruikt al je apps regelmatig. Hier valt niets op te ruimen.";
 "unusedSince" = "Niet geopend gedurende";
 "daysOption" = "meer dan %@ dagen";
 "trashAppTitle" = "“%@” naar de prullenmand verplaatsen?";
@@ -231,11 +235,22 @@
 "infoCopies" = "Bij het controleren van een handtekening plaatst macOS soms complete kopieën van een app in map X. Het zijn geen aparte programma’s; macOS maakt zo nodig een nieuwe aan. Verwijderen is veilig zolang de app is gestopt.";
 "paneDuplicates" = "Duplicaten";
 "infoDuplicates" = "Grote bestanden vanaf 10 MB die meer dan eens met dezelfde inhoud bestaan. Bestanden van dezelfde grootte worden op inhoud vergeleken. Hier wordt niets verwijderd; ‘Toon in Finder’ leidt ernaartoe.";
-"noDuplicates" = "Geen duplicaten";
+"noDuplicates" = "Geen dubbele bestanden";
+"duplicateGroupTitle" = "Deze %@ bestanden zijn gelijk – %@ aan extra kopieën";
+"noDuplicatesDetail" = "Geen enkel groot bestand staat twee keer op je Mac. Hier hoef je niets te doen.";
 "searchingDuplicates" = "Bestanden vergelijken …";
 "searchingDuplicatesDetail" = "Bestanden van dezelfde grootte worden gelezen en vergeleken. Bij grote bestanden duurt dat even.";
 "duplicatesTotal" = "%@ bestanden · %@ vrij te maken";
 "infoVolume" = "Capaciteit van dit volume: wat in gebruik is, wat macOS zo nodig zelf kan vrijmaken en wat vrij is. Externe volumes kunnen hier worden gescand.";
+"guideOverview" = "Zie in één oogopslag wat je opslag vult en hoeveel ruimte er nog vrij is.";
+"guideExplorer" = "De grootste mappen staan bovenaan. Open een map om erin te kijken.";
+"guideLargeFiles" = "De grootste bestanden op je Mac. Toon wat je niet meer nodig hebt in de Finder en verwijder het daar.";
+"guideCleaner" = "Bestanden die je Mac niet nodig heeft. Kies wat weg mag en ruim op met één klik.";
+"guideDuplicates" = "Deze bestanden staan er meer dan eens met dezelfde inhoud. Bewaar er telkens één en verwijder de andere in de Finder.";
+"guideApps" = "Apps die je lang niet hebt geopend. Wat je niet meer nodig hebt, zet je in de prullenmand.";
+"guideTemporaryFiles" = "Een verborgen plek waar macOS bestanden even bewaart. Die maakt zichzelf meestal leeg; alleen achtergebleven app-kopieën zijn het waard om zelf te verwijderen.";
+"guideCopies" = "Als macOS een app controleert, blijven er soms kopieën van achter. Zodra de app gesloten is, kun je ze veilig verwijderen.";
+"guideVolume" = "Hoe vol dit volume is en hoeveel macOS er zelf van kan vrijmaken.";
 "aboutPage" = "Over deze pagina";
 "scanDetails" = "Scan";
 "scanProgress" = "Voortgang";

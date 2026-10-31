@@ -34,7 +34,8 @@
 "availableOf" = "%@ disponibil din %@";
 "categories" = "Categorii";
 "freeSpace" = "Liber";
-"temporaryAreaName" = "Zonă temporară de sistem";
+"temporaryAreaName" = "Fișiere de sistem macOS";
+"homeFolderName" = "Dosarul tău personal";
 "categoryApps" = "Aplicații";
 "categoryDocuments" = "Documente și Birou";
 "categoryDownloads" = "Descărcări";
@@ -84,6 +85,7 @@
 "minimumSize" = "Dimensiune minimă";
 "fromSize" = "de la %@";
 "noFilesFrom" = "Niciun fișier de la %@";
+"noFilesFromDetail" = "Vești bune: niciun fișier nu este atât de mare. Alege o dimensiune minimă mai mică pentru a vedea mai multe.";
 "filesTotal" = "%@ fișiere · %@ în total";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Datele serviciilor din fundal.";
 
 /* Signature copies */
-"noCopies" = "Nicio copie de aplicație";
-"noCopiesDetail" = "Nu există copii de aplicații în dosarul X.";
-"running" = "rulează";
-"stopped" = "închisă";
+"noCopies" = "Nicio copie rămasă";
+"noCopiesDetail" = "macOS nu a lăsat în urmă nicio copie de aplicație. Nu ai nimic de făcut aici.";
 "copiesLabel" = "Copii";
 "countedSize" = "Dimensiune contabilizată";
 "installedVersion" = "Versiune instalată";
@@ -118,7 +118,9 @@
 "createdOn" = "Creată pe %@";
 "freed" = "Spațiu eliberat efectiv: %@";
 "deleteError" = "Nu s-a putut șterge totul: %@";
-"quitToDelete" = "Închide %@ cu ⌘Q pentru a șterge.";
+"quitToDelete" = "Copiile rămase ocupă %@. Închide mai întâi %@ cu ⌘Q, apoi le poți șterge.";
+"copiesSafeToDelete" = "Copiile rămase ocupă %@. %@ este închisă, așa că le poți șterge fără grijă.";
+"technicalDetails" = "Detalii tehnice";
 "openInExplorer" = "Afișează în Dosare";
 "deleteAll" = "Șterge toate copiile …";
 "deleteTitle" = "Ștergi %@ copii ale aplicației %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Acest dosar este gol";
 "otherCategories" = "Altele";
 "cleanCaches" = "Cache-uri de aplicații";
-"cleanCachesDetail" = "Cache-uri pe care aplicațiile le refac la nevoie. Aplicațiile deschise și macOS rămân neatinse.";
-"cleanDeveloper" = "Cache-uri pentru dezvoltatori";
-"cleanDeveloperDetail" = "Date de compilare Xcode și cache-uri de pachete precum npm; se recreează la următoarea compilare.";
+"cleanCachesDetail" = "Fișiere pe care aplicațiile le păstrează doar ca să pornească mai repede. Aplicațiile le refac la nevoie; aplicațiile deschise rămân neatinse.";
+"cleanDeveloper" = "Resturi de la instrumente de programare";
+"cleanDeveloperDetail" = "Contează doar dacă programezi tu aplicații: fișiere intermediare care apar din nou singure data viitoare.";
 "cleanLogs" = "Jurnale vechi";
-"cleanLogsDetail" = "Jurnale ale aplicațiilor mai vechi de o săptămână.";
+"cleanLogsDetail" = "Notițe în care aplicațiile notează ce au făcut. După o săptămână nu mai are nimeni nevoie de ele.";
 "cleanTemporary" = "Fișiere temporare vechi";
-"cleanTemporaryDetail" = "Fișiere temporare nemodificate de cel puțin trei zile.";
+"cleanTemporaryDetail" = "Fișiere de care aplicațiile au avut nevoie doar puțin pentru o sarcină și pe care nu le-au mai atins de cel puțin trei zile.";
 "cleanTrash" = "Coș";
-"cleanTrashDetail" = "Golește definitiv Coșul. Nu este selectat implicit.";
+"cleanTrashDetail" = "Golește Coșul. Ce se află în el dispare apoi definitiv. Nu este selectat implicit.";
 "cleanInstallers" = "Programe de instalare vechi";
-"cleanInstallersDetail" = "Imagini de disc și pachete de instalare din Descărcări mai vechi de o lună. Nu este selectat implicit.";
+"cleanInstallersDetail" = "Fișiere de instalare din Descărcări mai vechi de o lună. Aplicațiile în sine rămân instalate. Nu este selectat implicit.";
 "cleanFailed" = "%@ elemente nu au putut fi eliminate, fiindcă sunt în uz sau protejate.";
+"cleanNothingLeft" = "Totul e curat: acum nu e nimic de curățat.";
 "cleaning" = "Se curăță …";
 "cleanerRefresh" = "Caută din nou";
 "cleanSelected" = "Curăță selecția (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "Fișierele nu ajung în Coș. Aplicațiile își refac cache-urile la nevoie. Apoi aplicația măsoară totul din nou.";
 "cleanConfirmInstallersMessage" = "Fișierele nu ajung în Coș. Aplicațiile își refac cache-urile la nevoie. Apoi aplicația măsoară totul din nou. Programele de instalare eliminate trebuie descărcate din nou.";
 "appsNoneUnused" = "Toate aplicațiile au fost folosite recent";
+"appsNoneUnusedDetail" = "Îți folosești toate aplicațiile în mod regulat. Nu e nimic de curățat aici.";
 "unusedSince" = "Nedeschise de";
 "daysOption" = "mai mult de %@ zile";
 "trashAppTitle" = "Muți „%@” în Coș?";
@@ -231,11 +235,22 @@
 "infoCopies" = "La verificarea unei semnături, macOS plasează uneori copii complete ale unei aplicații în dosarul X. Nu sunt programe separate; macOS creează una nouă la nevoie. Ștergerea lor este sigură cât timp aplicația este închisă.";
 "paneDuplicates" = "Duplicate";
 "infoDuplicates" = "Fișiere mari de la 10 MB care există de mai multe ori cu același conținut. Fișierele de aceeași dimensiune sunt comparate după conținut. Aici nu se șterge nimic; „Afișează în Finder” duce la ele.";
-"noDuplicates" = "Nicio dublură";
+"noDuplicates" = "Niciun fișier dublat";
+"duplicateGroupTitle" = "Aceste fișiere (%@) sunt identice – %@ în copii în plus";
+"noDuplicatesDetail" = "Niciun fișier mare nu este salvat de două ori pe Mac-ul tău. Nu ai nimic de făcut aici.";
 "searchingDuplicates" = "Se compară fișierele …";
 "searchingDuplicatesDetail" = "Fișierele de aceeași dimensiune sunt citite și comparate. La fișiere mari durează puțin.";
 "duplicatesTotal" = "%@ fișiere · se pot elibera %@";
 "infoVolume" = "Capacitatea acestui volum: ce este utilizat, ce poate elibera macOS singur la nevoie și ce este liber. Volumele externe pot fi măsurate aici.";
+"guideOverview" = "Vezi dintr-o privire ce îți ocupă spațiul de stocare și cât spațiu mai este liber.";
+"guideExplorer" = "Cele mai mari dosare sunt primele. Deschide un dosar ca să vezi ce conține.";
+"guideLargeFiles" = "Cele mai mari fișiere de pe Mac-ul tău. Pe cele de care nu mai ai nevoie afișează-le în Finder și șterge-le acolo.";
+"guideCleaner" = "Fișiere de care Mac-ul tău nu are nevoie. Alege ce poate pleca și fă curat cu un singur clic.";
+"guideDuplicates" = "Aceste fișiere există de mai multe ori, cu același conținut. Păstrează câte unul și șterge-le pe celelalte în Finder.";
+"guideApps" = "Aplicații pe care nu le-ai mai deschis de mult. Pe cele de care nu mai ai nevoie mută-le în Coș.";
+"guideTemporaryFiles" = "Un loc ascuns în care macOS păstrează fișiere pentru scurt timp. De obicei se golește singur; merită să ștergi tu doar copiile de aplicații rămase.";
+"guideCopies" = "Când macOS verifică o aplicație, uneori rămân în urmă copii ale ei. După ce aplicația este închisă, le poți șterge fără grijă.";
+"guideVolume" = "Cât de plin este acest volum și cât spațiu poate elibera macOS singur.";
 "aboutPage" = "Despre această pagină";
 "scanDetails" = "Scanare";
 "scanProgress" = "Progres";

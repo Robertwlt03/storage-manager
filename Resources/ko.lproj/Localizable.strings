@@ -34,7 +34,8 @@
 "availableOf" = "%@ 사용 가능(전체 %@)";
 "categories" = "카테고리";
 "freeSpace" = "여유 공간";
-"temporaryAreaName" = "임시 시스템 영역";
+"temporaryAreaName" = "macOS 시스템 파일";
+"homeFolderName" = "내 홈 폴더";
 "categoryApps" = "응용 프로그램";
 "categoryDocuments" = "문서 및 데스크탑";
 "categoryDownloads" = "다운로드";
@@ -84,6 +85,7 @@
 "minimumSize" = "최소 크기";
 "fromSize" = "%@ 이상";
 "noFilesFrom" = "%@ 이상인 파일 없음";
+"noFilesFromDetail" = "좋은 소식입니다. 그렇게 큰 파일은 없습니다. 더 보려면 최소 크기를 더 작게 선택하십시오.";
 "filesTotal" = "파일 %@개 · 총 %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "백그라운드 서비스의 데이터입니다.";
 
 /* Signature copies */
-"noCopies" = "앱 사본 없음";
-"noCopiesDetail" = "X 폴더에 앱 사본이 없습니다.";
-"running" = "실행 중";
-"stopped" = "종료됨";
+"noCopies" = "남은 사본 없음";
+"noCopiesDetail" = "macOS가 남긴 앱 사본이 없습니다. 여기서 할 일은 없습니다.";
 "copiesLabel" = "사본";
 "countedSize" = "집계된 크기";
 "installedVersion" = "설치된 버전";
@@ -118,7 +118,9 @@
 "createdOn" = "생성일: %@";
 "freed" = "실제로 확보된 공간: %@";
 "deleteError" = "일부 항목을 삭제하지 못했습니다: %@";
-"quitToDelete" = "삭제하려면 %@을(를) ⌘Q로 종료하십시오.";
+"quitToDelete" = "남은 사본의 크기는 %@입니다. 먼저 ⌘Q로 %@을(를) 종료하면 삭제할 수 있습니다.";
+"copiesSafeToDelete" = "남은 사본의 크기는 %@입니다. %@이(가) 종료되어 있으므로 안전하게 삭제할 수 있습니다.";
+"technicalDetails" = "기술 세부 정보";
 "openInExplorer" = "폴더에서 보기";
 "deleteAll" = "모든 사본 삭제…";
 "deleteTitle" = "%@개의 “%@” 사본을 삭제하시겠습니까?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "이 폴더는 비어 있습니다";
 "otherCategories" = "기타";
 "cleanCaches" = "앱 캐시";
-"cleanCachesDetail" = "필요할 때 앱이 다시 만드는 캐시입니다. 실행 중인 앱과 macOS 자체는 건드리지 않습니다.";
-"cleanDeveloper" = "개발자용 캐시";
-"cleanDeveloperDetail" = "Xcode 빌드 데이터와 npm 같은 패키지 캐시입니다. 다음 빌드 때 다시 만들어집니다.";
+"cleanCachesDetail" = "앱이 더 빨리 시작하려고 보관하는 파일입니다. 필요하면 앱이 다시 만들며, 열려 있는 앱은 건드리지 않습니다.";
+"cleanDeveloper" = "프로그래밍 도구의 남은 파일";
+"cleanDeveloperDetail" = "직접 앱을 개발하는 경우에만 해당됩니다. 다음 번에 저절로 다시 생기는 중간 파일입니다.";
 "cleanLogs" = "오래된 로그";
-"cleanLogsDetail" = "일주일보다 오래된 앱 로그입니다.";
+"cleanLogsDetail" = "앱이 한 일을 적어 두는 기록입니다. 일주일이 지나면 아무도 필요로 하지 않습니다.";
 "cleanTemporary" = "오래된 임시 파일";
-"cleanTemporaryDetail" = "3일 이상 변경되지 않은 임시 파일입니다.";
+"cleanTemporaryDetail" = "앱이 작업을 위해 잠깐만 사용했고 최소 3일 동안 건드리지 않은 파일입니다.";
 "cleanTrash" = "휴지통";
-"cleanTrashDetail" = "휴지통을 영구적으로 비웁니다. 기본적으로 선택되어 있지 않습니다.";
+"cleanTrashDetail" = "휴지통을 비웁니다. 그 안에 있던 항목은 완전히 사라집니다. 기본적으로 선택되어 있지 않습니다.";
 "cleanInstallers" = "오래된 설치 파일";
-"cleanInstallersDetail" = "다운로드에 있는 한 달이 지난 디스크 이미지와 설치 패키지입니다. 기본적으로 선택되어 있지 않습니다.";
+"cleanInstallersDetail" = "다운로드에 있는 한 달이 지난 설치 파일입니다. 앱 자체는 그대로 설치되어 있습니다. 기본적으로 선택되어 있지 않습니다.";
 "cleanFailed" = "사용 중이거나 보호되어 있어 항목 %@개를 제거하지 못했습니다.";
+"cleanNothingLeft" = "모두 깨끗합니다. 지금은 정리할 것이 없습니다.";
 "cleaning" = "정리 중…";
 "cleanerRefresh" = "다시 검색";
 "cleanSelected" = "선택 항목 정리(%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "파일은 휴지통으로 이동하지 않습니다. 앱은 필요할 때 캐시를 다시 만듭니다. 이후 이 앱이 모든 항목을 다시 검사합니다.";
 "cleanConfirmInstallersMessage" = "파일은 휴지통으로 이동하지 않습니다. 앱은 필요할 때 캐시를 다시 만듭니다. 이후 이 앱이 모든 항목을 다시 검사합니다. 삭제한 설치 파일은 다시 다운로드해야 합니다.";
 "appsNoneUnused" = "모든 앱을 최근에 사용했습니다";
+"appsNoneUnusedDetail" = "모든 앱을 꾸준히 사용하고 있습니다. 여기서 정리할 것은 없습니다.";
 "unusedSince" = "열지 않은 기간";
 "daysOption" = "%@일 이상";
 "trashAppTitle" = "“%@” 앱을 휴지통으로 이동하시겠습니까?";
@@ -231,11 +235,22 @@
 "infoCopies" = "서명을 확인할 때 macOS가 X 폴더에 앱의 전체 사본을 만들기도 합니다. 이는 별도의 프로그램이 아니며, 필요하면 macOS가 새로 만듭니다. 앱이 종료되어 있다면 삭제해도 안전합니다.";
 "paneDuplicates" = "중복 파일";
 "infoDuplicates" = "같은 내용으로 여러 번 존재하는 10MB 이상의 큰 파일입니다. 크기가 같은 파일은 내용으로 비교합니다. 여기서는 아무것도 삭제하지 않으며, ‘Finder에서 보기’로 이동할 수 있습니다.";
-"noDuplicates" = "중복 없음";
+"noDuplicates" = "중복 파일 없음";
+"duplicateGroupTitle" = "내용이 같은 파일 %@개 – 여분의 사본 %@";
+"noDuplicatesDetail" = "Mac에 두 번 저장된 큰 파일이 없습니다. 여기서 할 일은 없습니다.";
 "searchingDuplicates" = "파일 비교 중 …";
 "searchingDuplicatesDetail" = "크기가 같은 파일을 읽고 비교합니다. 큰 파일은 잠시 걸립니다.";
 "duplicatesTotal" = "파일 %@개 · %@ 확보 가능";
 "infoVolume" = "이 볼륨의 용량입니다. 사용 중인 공간, 필요할 때 macOS가 자동으로 확보할 수 있는 공간, 여유 공간을 보여 줍니다. 외장 볼륨도 여기에서 검사할 수 있습니다.";
+"guideOverview" = "무엇이 저장 공간을 채우고 있는지, 여유 공간이 얼마나 남았는지 한눈에 볼 수 있습니다.";
+"guideExplorer" = "가장 큰 폴더가 맨 위에 있습니다. 폴더를 열면 안을 볼 수 있습니다.";
+"guideLargeFiles" = "Mac에서 가장 큰 파일입니다. 더 이상 필요 없는 파일은 Finder에서 보고 그곳에서 삭제하십시오.";
+"guideCleaner" = "Mac에 필요 없는 파일입니다. 지워도 되는 항목을 선택하고 클릭 한 번으로 정리하십시오.";
+"guideDuplicates" = "내용이 같은 파일이 여러 개 있습니다. 각각 하나만 남기고 나머지는 Finder에서 삭제하십시오.";
+"guideApps" = "오랫동안 열지 않은 앱입니다. 더 이상 필요 없는 앱은 휴지통으로 옮기십시오.";
+"guideTemporaryFiles" = "macOS가 파일을 잠시 보관하는 숨겨진 곳입니다. 대부분 저절로 비워지며, 직접 삭제할 만한 것은 남은 앱 사본뿐입니다.";
+"guideCopies" = "macOS가 앱을 확인할 때 앱의 사본이 남는 경우가 있습니다. 앱이 종료되어 있으면 안전하게 삭제할 수 있습니다.";
+"guideVolume" = "이 볼륨이 얼마나 찼는지, macOS가 스스로 얼마나 비울 수 있는지 보여 줍니다.";
 "aboutPage" = "이 페이지 정보";
 "scanDetails" = "검사";
 "scanProgress" = "진행 상황";

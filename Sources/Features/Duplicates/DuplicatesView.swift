@@ -1,14 +1,15 @@
 import SwiftUI
 
-/// Large files that exist more than once with the same content, each group one after another.
+/// Large files that exist more than once with the same content, each group as a card of its own.
 /// Nothing is removed here; Show in Finder leads to them.
 struct DuplicatesView: View {
     @Environment(AppModel.self) private var model
+    @State private var informationEntry: Entry?
 
     var body: some View {
-        Group {
+        UI.Page(.duplicates) {
             if let groups = model.duplicateGroups {
-                list(groups)
+                cards(groups)
             } else {
                 UI.Placeholder(
                     .loading(
@@ -17,28 +18,64 @@ struct DuplicatesView: View {
                     in: .page)
             }
         }
-        .navigationTitle(TextKey.paneDuplicates.translated)
-        .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(Pane.duplicates.information) {
-                LayoutSwitcher(pane: .duplicates)
-            }
-        }
+        .navigationSubtitle(subtitle)
+        .sheet(item: $informationEntry) { entry in InformationSheet(entry: entry) }
         // Waits for a running scan; the search starts once the tree is complete.
         .task(id: model.isScanning ? nil : model.revision) { await model.findDuplicates() }
     }
 
-    private func list(_ groups: [[Entry]]) -> some View {
-        let files = groups.flatMap(\.self)
-        let spareBytes = groups.reduce(0) { total, group in
-            total + group[0].bytes * Int64(group.count - 1)
+    private var subtitle: String {
+        guard let groups = model.duplicateGroups else { return "" }
+        let spareBytes = groups.reduce(0) { total, files in total + Self.spareBytes(files) }
+        return TextKey.duplicatesTotal.translated(
+            with: Format.count(groups.reduce(0) { total, files in total + files.count }),
+            Format.bytes(spareBytes))
+    }
+
+    @ViewBuilder private func cards(_ groups: [[Entry]]) -> some View {
+        if groups.isEmpty {
+            UI.Placeholder(
+                .emptyAfterScan(
+                    title: TextKey.noDuplicates.translated, symbol: Symbols.success,
+                    detail: TextKey.noDuplicatesDetail.translated),
+                in: .page)
         }
-        return EntryBrowser(
-            entries: files, total: files.reduce(0) { total, file in total + file.bytes },
-            showsLocation: true, emptyTitle: TextKey.noDuplicates.translated,
-            contentKey: "\(model.revision)"
-        )
-        .navigationSubtitle(
-            TextKey.duplicatesTotal.translated(
-                with: Format.count(files.count), Format.bytes(spareBytes)))
+        // The most space to win first; lazy, so hundreds of groups only build the cards in view.
+        let mostSpareFirst = groups.sorted { first, second in
+            Self.spareBytes(first) > Self.spareBytes(second)
+        }
+        LazyVStack(alignment: .leading, spacing: Space.section) {
+            ForEach(mostSpareFirst, id: \.[0].id) { files in card(files) }
+        }
+    }
+
+    private func card(_ files: [Entry]) -> some View {
+        UI.Card(
+            TextKey.duplicateGroupTitle.translated(
+                with: Format.count(files.count), Format.bytes(Self.spareBytes(files)))
+        ) {
+            UI.Rows(files) { file in row(file) }
+        }
+    }
+
+    /// What all copies but one take up.
+    private static func spareBytes(_ files: [Entry]) -> Int64 {
+        files[0].bytes * Int64(files.count - 1)
+    }
+
+    private func row(_ file: Entry) -> some View {
+        HStack(spacing: Space.item) {
+            UI.Icon(file.path.map(IconKind.preview) ?? .symbol(Symbols.files))
+            VStack(alignment: .leading, spacing: Space.hairline) {
+                Text(file.name).lineLimit(1).truncationMode(.middle)
+                Text(file.location).textRole(.hint).lineLimit(1).truncationMode(.middle)
+            }
+            Spacer(minLength: Space.item)
+            if let path = file.path {
+                UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(path) }
+            }
+        }
+        .contentShape(Rectangle())
+        .contextMenu { EntryMenu(entry: file, informationEntry: $informationEntry) }
     }
 }
