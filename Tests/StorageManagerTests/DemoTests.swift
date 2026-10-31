@@ -29,6 +29,18 @@ struct DemoTests {
         #expect(model.cleanItems?.count == CleanKind.allCases.count)
     }
 
+    @Test("The report holds the summary, every category and the largest files")
+    func report() {
+        let model = Self.demoModel()
+        let report = model.report()
+        #expect(report.contains(model.summary(unusedDays: AppSettings.unusedDays)))
+        for category in model.categories {
+            #expect(report.contains(category.kind.title.translated))
+        }
+        #expect(report.contains("Holiday 2025.mov"))
+        #expect(report.hasSuffix("\n"))
+    }
+
     @Test("Leaving the search clears it, and canceling without a running scan changes nothing")
     func searchAndCancel() {
         let model = Self.demoModel()

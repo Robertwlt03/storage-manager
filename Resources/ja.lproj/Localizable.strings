@@ -119,7 +119,7 @@
 "freed" = "実際に解放された容量: %@";
 "deleteError" = "すべてを削除できませんでした: %@";
 "quitToDelete" = "削除するには、%@を⌘Qで終了してください。";
-"openInExplorer" = "エクスプローラで開く";
+"openInExplorer" = "フォルダで表示";
 "deleteAll" = "すべてのコピーを削除…";
 "deleteTitle" = "%@個の「%@」のコピーを削除しますか?";
 "deleteForever" = "完全に削除";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "起動時に自動的にスキャン";
+"exportReport" = "レポートを書き出す …";
+"reportTitle" = "%@のストレージレポート";
+"reportFileName" = "ストレージレポート";
 "extraFolders" = "追加のフォルダ";
 "excludedFolders" = "除外するフォルダ";
 "none" = "なし";
@@ -183,12 +186,15 @@
 "cleanTemporaryDetail" = "3日以上変更されていない一時ファイルです。";
 "cleanTrash" = "ゴミ箱";
 "cleanTrashDetail" = "ゴミ箱を完全に空にします。初期設定では選択されていません。";
+"cleanInstallers" = "古いインストーラ";
+"cleanInstallersDetail" = "ダウンロード内の1か月以上前のディスクイメージとインストーラパッケージ。初期設定では選択されていません。";
 "cleanFailed" = "使用中または保護されているため、%@個の項目を削除できませんでした。";
 "cleaning" = "クリーンアップ中…";
 "cleanerRefresh" = "再検索";
 "cleanSelected" = "選択した項目をクリーンアップ(%@)";
 "cleanConfirmTitle" = "%@を完全に削除しますか?";
 "cleanConfirmMessage" = "ファイルはゴミ箱に入りません。Appは必要に応じてキャッシュを再作成します。完了後、このAppはすべてをもう一度スキャンします。";
+"cleanConfirmInstallersMessage" = "ファイルはゴミ箱に入りません。Appは必要に応じてキャッシュを再作成します。完了後、このAppはすべてをもう一度スキャンします。削除したインストーラは再ダウンロードが必要です。";
 "appsNoneUnused" = "すべてのAppが最近使用されています";
 "unusedSince" = "未使用の期間";
 "daysOption" = "%@日より長い";
@@ -232,6 +238,7 @@
 "summaryClean" = "クリーンアップすると、約%@を解放できます。";
 "summaryCopies" = "macOSが確認時に作成するAppのコピーは、%@として計上されています。";
 "summaryApps" = "%@個のAppがしばらく開かれていません。";
+"summaryFreed" = "これまでにこのアプリで%@を解放しました。";
 "readAloud" = "読み上げ";
 "stopReading" = "読み上げを停止";
 
@@ -239,6 +246,12 @@
 "sizeClassesTitle" = "ファイルの大きさはどのくらいですか?";
 "sizeClassesCaption" = "各サイズ区分が使っている容量と、その区分に含まれるファイルの数です。多くの場合、小さなファイルがたくさんあるより、大きなファイルが少しあるほうが多くの容量を使います。";
 "figureLargeFilesFrom" = "%@以上の大きなファイル";
+"historyTitle" = "推移";
+"historyCaption" = "完全スキャンごとの使用容量です。";
+"historyAfterNextScan" = "次の完全スキャン後に推移が表示されます。";
+"grownSince" = "%@以降に増加";
+"grownBy" = "+%@";
+"nothingGrown" = "%@を超えて増えたフォルダはありません。";
 "bucketValue" = "%@
 %@個のファイル";
 "settingsSystemNote" = "外観と単位はシステム設定に従います。";

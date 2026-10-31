@@ -60,7 +60,7 @@ nonisolated enum TextKey: String, CaseIterable {
     case paneCleaner, paneApps, sectionTidy, layoutList, layoutGrid, settings, emptyFolder,
         otherCategories, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail,
         cleanLogs, cleanLogsDetail, cleanTemporary, cleanTemporaryDetail, cleanTrash,
-        cleanTrashDetail,
+        cleanTrashDetail, cleanInstallers, cleanInstallersDetail, cleanConfirmInstallersMessage,
         cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle,
         cleanConfirmMessage, appsNoneUnused, unusedSince, daysOption, trashAppTitle,
         trashAppMessage, moveToTrash, lastOpened, trashAppFailed, figureFiles, figureUnusedApps,
@@ -74,13 +74,15 @@ nonisolated enum TextKey: String, CaseIterable {
         infoCopies,
         infoVolume, aboutPage, scanDetails, scanProgress, scanArea, scanFinished,
         accessMissingShort, summaryTitle, summaryDisk, summaryTop, summaryNotMeasured, summaryClean,
-        summaryCopies, summaryApps, readAloud, stopReading
+        summaryCopies, summaryApps, summaryFreed, readAloud, stopReading
 
     // Key figures and size classes in plain words
     case sizeClassesTitle, sizeClassesCaption, figureLargeFilesFrom, bucketValue
+    case historyTitle, historyCaption, historyAfterNextScan, grownSince, grownBy, nothingGrown
 
     // Settings
     case autoScan
+    case exportReport, reportTitle, reportFileName
     case extraFolders, excludedFolders, none, add, remove, settingsSystemNote, appLanguage,
         languageLikeMac
     case languageRestartHint

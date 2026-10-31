@@ -119,7 +119,7 @@
 "freed" = "Space actually freed: %@";
 "deleteError" = "Not everything could be deleted: %@";
 "quitToDelete" = "Quit %@ with ⌘Q to delete.";
-"openInExplorer" = "Open in Explorer";
+"openInExplorer" = "Show in Folders";
 "deleteAll" = "Delete All Copies …";
 "deleteTitle" = "Delete %@ copies of %@?";
 "deleteForever" = "Delete Permanently";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Scan automatically at launch";
+"exportReport" = "Export Report …";
+"reportTitle" = "Storage report from %@";
+"reportFileName" = "Storage Report";
 "extraFolders" = "Additional Folders";
 "excludedFolders" = "Excluded Folders";
 "none" = "None";
@@ -183,12 +186,15 @@
 "cleanTemporaryDetail" = "Temporary files not changed for at least three days.";
 "cleanTrash" = "Trash";
 "cleanTrashDetail" = "Empties the Trash permanently. Not selected by default.";
+"cleanInstallers" = "Old Installers";
+"cleanInstallersDetail" = "Disk images and installer packages in Downloads older than one month. Not selected by default.";
 "cleanFailed" = "%@ items could not be removed because they are in use or protected.";
 "cleaning" = "Cleaning up …";
 "cleanerRefresh" = "Search Again";
 "cleanSelected" = "Clean Up Selection (%@)";
 "cleanConfirmTitle" = "Remove %@ permanently?";
 "cleanConfirmMessage" = "The files do not go to the Trash. Apps rebuild their caches when needed. Afterwards the app measures everything again.";
+"cleanConfirmInstallersMessage" = "The files do not go to the Trash. Apps rebuild their caches when needed. Afterwards the app measures everything again. Removed installers have to be downloaded again.";
 "appsNoneUnused" = "All apps were used recently";
 "unusedSince" = "Not opened for";
 "daysOption" = "more than %@ days";
@@ -232,6 +238,7 @@
 "summaryClean" = "Cleaning up can free about %@.";
 "summaryCopies" = "Copies of apps that macOS makes while checking them count for %@.";
 "summaryApps" = "%@ apps have not been opened for a while.";
+"summaryFreed" = "So far, this app has freed %@.";
 "readAloud" = "Read Aloud";
 "stopReading" = "Stop Reading";
 
@@ -239,6 +246,12 @@
 "sizeClassesTitle" = "How big are your files?";
 "sizeClassesCaption" = "How much space each size class takes and how many files are in it. A few big files usually take more room than many small ones.";
 "figureLargeFilesFrom" = "large files from %@";
+"historyTitle" = "History";
+"historyCaption" = "Used space after each full scan.";
+"historyAfterNextScan" = "The history appears after the next full scan.";
+"grownSince" = "Grown since %@";
+"grownBy" = "+%@";
+"nothingGrown" = "No folder grew by more than %@.";
 "bucketValue" = "%@
 %@ files";
 "settingsSystemNote" = "Appearance and units come from System Settings.";

@@ -18,7 +18,7 @@ struct LargeFilesView: View {
         let files = largeFiles
         let totalBytes = files.reduce(0) { total, file in total + file.bytes }
         EntryBrowser(
-            entries: files, total: totalBytes, showsLocation: true,
+            entries: files, total: totalBytes, showsLocation: true, showsFileCount: false,
             emptyTitle: TextKey.noFilesFrom.translated(with: thresholdText(minimumMegabytes)),
             contentKey: "\(minimumMegabytes)"
         )

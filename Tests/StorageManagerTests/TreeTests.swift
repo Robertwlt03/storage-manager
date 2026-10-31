@@ -118,6 +118,14 @@ struct TreeTests {
         #expect(Paths.displayName(Paths.home + "-backup") == Paths.home + "-backup")
     }
 
+    @Test("The temporary area goes by its name, also in front of what lies inside it")
+    func temporaryAreaShownByName() {
+        let name = TextKey.temporaryAreaName.translated
+        #expect(Paths.displayName(Paths.temporaryArea) == name)
+        #expect(Paths.displayName(Paths.temporaryArea + "/T") == name + "/T")
+        #expect(!Paths.displayName(Paths.temporaryArea + "-other").hasPrefix(name))
+    }
+
     @Test("A folder or listed file has a size; a folded file has none")
     func entrySizes() {
         let tree = Self.sampleTree()

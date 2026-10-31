@@ -119,7 +119,7 @@
 "freed" = "Ténylegesen felszabadult: %@";
 "deleteError" = "Nem sikerült mindent törölni: %@";
 "quitToDelete" = "A törléshez lépj ki ebből: %@ (⌘Q).";
-"openInExplorer" = "Megnyitás a Mappák nézetben";
+"openInExplorer" = "Megjelenítés a Mappák nézetben";
 "deleteAll" = "Összes másolat törlése …";
 "deleteTitle" = "%2$@: %1$@ másolat törlése?";
 "deleteForever" = "Végleges törlés";
@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Automatikus vizsgálat indításkor";
+"exportReport" = "Jelentés exportálása …";
+"reportTitle" = "Tárhelyjelentés: %@";
+"reportFileName" = "Tárhelyjelentés";
 "extraFolders" = "További mappák";
 "excludedFolders" = "Kizárt mappák";
 "none" = "Nincs";
@@ -183,12 +186,15 @@
 "cleanTemporaryDetail" = "Legalább három napja nem módosított ideiglenes fájlok.";
 "cleanTrash" = "Kuka";
 "cleanTrashDetail" = "Véglegesen kiüríti a Kukát. Alapból nincs kijelölve.";
+"cleanInstallers" = "Régi telepítők";
+"cleanInstallersDetail" = "Egy hónapnál régebbi lemezképek és telepítőcsomagok a Letöltésekben. Alapból nincs kijelölve.";
 "cleanFailed" = "%@ elem nem távolítható el, mert használatban van vagy védett.";
 "cleaning" = "Takarítás …";
 "cleanerRefresh" = "Keresés újra";
 "cleanSelected" = "Kijelöltek takarítása (%@)";
 "cleanConfirmTitle" = "%@ végleges eltávolítása?";
 "cleanConfirmMessage" = "A fájlok nem kerülnek a Kukába. Az appok szükség esetén újra létrehozzák a gyorsítótárukat. Utána az app mindent újra felmér.";
+"cleanConfirmInstallersMessage" = "A fájlok nem kerülnek a Kukába. Az appok szükség esetén újra létrehozzák a gyorsítótárukat. Utána az app mindent újra felmér. Az eltávolított telepítőket újra le kell tölteni.";
 "appsNoneUnused" = "Mostanában minden appot használtál";
 "unusedSince" = "Nem volt megnyitva";
 "daysOption" = "több mint %@ napja";
@@ -232,6 +238,7 @@
 "summaryClean" = "Takarítással körülbelül %@ szabadítható fel.";
 "summaryCopies" = "Az appok másolatai, amelyeket a macOS ellenőrzéskor készít, %@ helyet foglalnak.";
 "summaryApps" = "%@ app egy ideje nem volt megnyitva.";
+"summaryFreed" = "Az app eddig %@ helyet szabadított fel.";
 "readAloud" = "Felolvasás";
 "stopReading" = "Felolvasás leállítása";
 
@@ -239,6 +246,12 @@
 "sizeClassesTitle" = "Mekkorák a fájljaid?";
 "sizeClassesCaption" = "Mennyi helyet foglalnak az egyes méretkategóriák, és hány fájl van bennük. Néhány nagy fájl általában több helyet foglal, mint sok kicsi.";
 "figureLargeFilesFrom" = "nagy fájl, legalább %@";
+"historyTitle" = "Előzmények";
+"historyCaption" = "Foglalt hely minden teljes vizsgálat után.";
+"historyAfterNextScan" = "Az előzmények a következő teljes vizsgálat után jelennek meg.";
+"grownSince" = "Növekedés %@ óta";
+"grownBy" = "+%@";
+"nothingGrown" = "Egyik mappa sem nőtt többet, mint %@.";
 "bucketValue" = "%@
 %@ fájl";
 "settingsSystemNote" = "A megjelenést és a mértékegységeket a Rendszerbeállítások adják.";

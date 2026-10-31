@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Vapaa tila";
+"widgetDescription" = "Näyttää, paljonko Macissa on tilaa käytettävissä.";
+"widgetAvailable" = "käytettävissä";
+"widgetOfTotal" = "yhteensä %@";
+"widgetUnreadable" = "Vapaata tilaa ei voitu lukea.";
