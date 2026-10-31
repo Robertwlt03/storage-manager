@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Grote bestanden";
 "paneTemporaryFiles" = "Tijdelijk gebied";
 "paneCopies" = "App-kopieën";
-"sectionSystem" = "Verborgen gebieden";
 "sectionVolumes" = "Volumes";
 "rescan" = "Opnieuw scannen";
 "rescanHelp" = "Alle gebieden opnieuw scannen (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Verplaats naar prullenmand";
 "lastOpened" = "Laatst geopend op %@";
 "trashAppFailed" = "“%@” kon niet worden verplaatst. In de Finder lukt het met je wachtwoord.";
-"figureFiles" = "Bestanden";
-"figureUnusedApps" = "ongebruikte apps";
 "bucketUnder1MB" = "onder 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Hoe groot zijn je bestanden?";
 "sizeClassesCaption" = "Hoeveel ruimte elke groottecategorie inneemt en hoeveel bestanden erin zitten. Een paar grote bestanden nemen meestal meer ruimte in dan veel kleine.";
-"figureLargeFilesFrom" = "grote bestanden vanaf %@";
 "historyTitle" = "Geschiedenis";
 "historyCaption" = "Gebruikte ruimte na elke volledige scan.";
 "historyAfterNextScan" = "De geschiedenis verschijnt na de volgende volledige scan.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Taal";
 "languageLikeMac" = "Zoals op de Mac";
 "languageRestartHint" = "De nieuwe taal verschijnt na een herstart.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Je kunt ongeveer %@ vrijmaken";
+"freeUpCaption" = "Doorloop deze stappen na elkaar. Er wordt niets verwijderd voordat je het bevestigt.";
+"freeUpNothing" = "Er valt nu niets noemenswaardigs vrij te maken. Je Mac is netjes opgeruimd.";
+"freeUpLoadingTitle" = "Berekenen wat weg kan …";
+"freeUpLoadingDetail" = "Zo meteen zie je hier hoeveel ruimte je kunt vrijmaken, en hoe.";
+"freeUpCleanerDetail" = "Caches, oude logbestanden, oude installers, de prullenmand en meer";
+"freeUpDuplicatesDetail" = "Grote bestanden die meer dan eens bestaan";
+"freeUpDuplicatesNotSearched" = "Nog niet gezocht: het zoeken begint als je de pagina opent";
+"freeUpAppsDetail" = "Apps die je al een tijd niet hebt geopend: %@";
+"sectionAdvanced" = "Voor gevorderden";
+"showAdvancedPages" = "Toon geavanceerde gebieden";

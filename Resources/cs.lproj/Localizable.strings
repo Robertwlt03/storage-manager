@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Velké soubory";
 "paneTemporaryFiles" = "Dočasná oblast";
 "paneCopies" = "Kopie aplikací";
-"sectionSystem" = "Skryté oblasti";
 "sectionVolumes" = "Svazky";
 "rescan" = "Znovu skenovat";
 "rescanHelp" = "Znovu naskenovat všechny oblasti (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Přesunout do Koše";
 "lastOpened" = "Naposledy otevřeno %@";
 "trashAppFailed" = "Aplikaci „%@“ se nepodařilo přesunout. Ve Finderu to půjde po zadání hesla.";
-"figureFiles" = "Soubory";
-"figureUnusedApps" = "nepoužívané aplikace";
 "bucketUnder1MB" = "do 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Jak velké jsou vaše soubory?";
 "sizeClassesCaption" = "Kolik místa zabírá každá velikostní třída a kolik souborů v ní je. Několik velkých souborů obvykle zabírá víc než mnoho malých.";
-"figureLargeFilesFrom" = "velké soubory od %@";
 "historyTitle" = "Vývoj";
 "historyCaption" = "Obsazené místo po každém úplném skenování.";
 "historyAfterNextScan" = "Vývoj se zobrazí po příštím úplném skenování.";
@@ -284,3 +280,16 @@ Souborů: %@";
 "appLanguage" = "Jazyk";
 "languageLikeMac" = "Stejný jako na Macu";
 "languageRestartHint" = "Nový jazyk se zobrazí po restartu.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Můžete uvolnit asi %@";
+"freeUpCaption" = "Projděte tyto kroky postupně. Nic se neodstraní, dokud to nepotvrdíte.";
+"freeUpNothing" = "Momentálně není co podstatného uvolnit. Váš Mac je uklizený.";
+"freeUpLoadingTitle" = "Zjišťuje se, co může pryč …";
+"freeUpLoadingDetail" = "Za chvíli zde uvidíte, kolik místa můžete uvolnit a jak.";
+"freeUpCleanerDetail" = "Mezipaměti, staré protokoly, staré instalátory, koš a další";
+"freeUpDuplicatesDetail" = "Velké soubory, které existují vícekrát";
+"freeUpDuplicatesNotSearched" = "Zatím nehledáno: hledání začne, když stránku otevřete";
+"freeUpAppsDetail" = "Aplikace, které jste delší dobu neotevřeli: %@";
+"sectionAdvanced" = "Pro pokročilé";
+"showAdvancedPages" = "Zobrazovat pokročilé oblasti";

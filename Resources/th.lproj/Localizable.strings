@@ -5,7 +5,6 @@
 "paneLargeFiles" = "ไฟล์ขนาดใหญ่";
 "paneTemporaryFiles" = "พื้นที่ชั่วคราว";
 "paneCopies" = "สำเนาแอป";
-"sectionSystem" = "พื้นที่ที่ซ่อนอยู่";
 "sectionVolumes" = "ไดรฟ์ข้อมูล";
 "rescan" = "สแกนใหม่";
 "rescanHelp" = "สแกนทุกส่วนใหม่ (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "ย้ายไปที่ถังขยะ";
 "lastOpened" = "เปิดล่าสุดเมื่อ %@";
 "trashAppFailed" = "ย้าย “%@” ไม่ได้ ใน Finder ทำได้โดยใช้รหัสผ่านของคุณ";
-"figureFiles" = "ไฟล์";
-"figureUnusedApps" = "แอปที่ไม่ได้ใช้";
 "bucketUnder1MB" = "ต่ำกว่า 1 MB";
 "bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
 "bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "ไฟล์ของคุณใหญ่แค่ไหน";
 "sizeClassesCaption" = "แต่ละกลุ่มขนาดใช้พื้นที่เท่าไรและมีไฟล์กี่ไฟล์ ไฟล์ใหญ่ไม่กี่ไฟล์มักใช้พื้นที่มากกว่าไฟล์เล็กจำนวนมาก";
-"figureLargeFilesFrom" = "ไฟล์ขนาดใหญ่ตั้งแต่ %@";
 "historyTitle" = "ประวัติ";
 "historyCaption" = "พื้นที่ที่ใช้หลังการสแกนเต็มแต่ละครั้ง";
 "historyAfterNextScan" = "ประวัติจะแสดงหลังการสแกนเต็มครั้งถัดไป";
@@ -284,3 +280,16 @@
 "appLanguage" = "ภาษา";
 "languageLikeMac" = "เหมือนกับบน Mac";
 "languageRestartHint" = "ภาษาใหม่จะแสดงหลังจากเริ่มการทำงานใหม่";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "คุณสามารถเพิ่มพื้นที่ว่างได้ประมาณ %@";
+"freeUpCaption" = "ทำตามขั้นตอนเหล่านี้ทีละขั้น จะไม่มีสิ่งใดถูกลบจนกว่าคุณจะยืนยัน";
+"freeUpNothing" = "ตอนนี้ไม่มีอะไรที่ควรล้างออก Mac ของคุณเป็นระเบียบดี";
+"freeUpLoadingTitle" = "กำลังคำนวณสิ่งที่ลบได้…";
+"freeUpLoadingDetail" = "อีกสักครู่คุณจะเห็นที่นี่ว่าเพิ่มพื้นที่ว่างได้เท่าไรและทำอย่างไร";
+"freeUpCleanerDetail" = "แคช บันทึกเก่า ตัวติดตั้งเก่า ถังขยะ และอื่นๆ";
+"freeUpDuplicatesDetail" = "ไฟล์ขนาดใหญ่ที่มีมากกว่าหนึ่งชุด";
+"freeUpDuplicatesNotSearched" = "ยังไม่ได้ค้นหา: การค้นหาจะเริ่มเมื่อคุณเปิดหน้านี้";
+"freeUpAppsDetail" = "%@ แอปที่คุณไม่ได้เปิดมาสักระยะ";
+"sectionAdvanced" = "สำหรับผู้ใช้ขั้นสูง";
+"showAdvancedPages" = "แสดงส่วนขั้นสูง";

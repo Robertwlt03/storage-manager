@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Arquivos grandes";
 "paneTemporaryFiles" = "Área temporária";
 "paneCopies" = "Cópias de apps";
-"sectionSystem" = "Áreas ocultas";
 "sectionVolumes" = "Volumes";
 "rescan" = "Analisar novamente";
 "rescanHelp" = "Analisar todas as áreas novamente (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Mover para o Lixo";
 "lastOpened" = "Última abertura em %@";
 "trashAppFailed" = "Não foi possível mover “%@”. No Finder, isso funciona com a sua senha.";
-"figureFiles" = "Arquivos";
-"figureUnusedApps" = "apps não usados";
 "bucketUnder1MB" = "menos de 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Qual é o tamanho dos seus arquivos?";
 "sizeClassesCaption" = "Quanto espaço cada faixa de tamanho ocupa e quantos arquivos há nela. Poucos arquivos grandes costumam ocupar mais espaço do que muitos pequenos.";
-"figureLargeFilesFrom" = "arquivos grandes a partir de %@";
 "historyTitle" = "Histórico";
 "historyCaption" = "Espaço usado após cada análise completa.";
 "historyAfterNextScan" = "O histórico aparece após a próxima análise completa.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Idioma";
 "languageLikeMac" = "Igual ao Mac";
 "languageRestartHint" = "O novo idioma aparece após reiniciar.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Você pode liberar cerca de %@";
+"freeUpCaption" = "Siga estas etapas uma após a outra. Nada é removido antes de você confirmar.";
+"freeUpNothing" = "No momento não há nada relevante para liberar. Seu Mac está em ordem.";
+"freeUpLoadingTitle" = "Calculando o que pode sair …";
+"freeUpLoadingDetail" = "Em instantes você verá aqui quanto espaço pode liberar e como.";
+"freeUpCleanerDetail" = "Caches, logs antigos, instaladores antigos, a Lixeira e mais";
+"freeUpDuplicatesDetail" = "Arquivos grandes que existem mais de uma vez";
+"freeUpDuplicatesNotSearched" = "Ainda não pesquisado: a busca começa quando você abre a página";
+"freeUpAppsDetail" = "Apps que você não abre há algum tempo: %@";
+"sectionAdvanced" = "Para usuários avançados";
+"showAdvancedPages" = "Mostrar áreas avançadas";

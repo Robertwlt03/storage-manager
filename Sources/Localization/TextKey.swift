@@ -4,7 +4,6 @@
 nonisolated enum TextKey: String, CaseIterable {
     // App and sidebar
     case appName, paneOverview, paneExplorer, paneLargeFiles, paneTemporaryFiles, paneCopies,
-        sectionSystem,
         sectionVolumes
     case rescan, rescanHelp, cancelScan
 
@@ -56,15 +55,14 @@ nonisolated enum TextKey: String, CaseIterable {
     case accessTitle, accessDetail, accessOneSwitch, accessOpenSettings, accessContinue
     case accessGranted, fullDiskAccess, accessRestart, accessRestartHint, quitApp
 
-    // Key figures, cleaner, unused apps, layout
+    // Cleaner, unused apps, layout
     case paneCleaner, paneApps, sectionTidy, layoutList, layoutGrid, settings, emptyFolder,
         otherCategories, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail,
         cleanLogs, cleanLogsDetail, cleanTemporary, cleanTemporaryDetail, cleanTrash,
         cleanTrashDetail, cleanInstallers, cleanInstallersDetail, cleanConfirmInstallersMessage,
         cleanFailed, cleanNothingLeft, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle,
         cleanConfirmMessage, appsNoneUnused, appsNoneUnusedDetail, unusedSince, daysOption,
-        trashAppTitle,
-        trashAppMessage, moveToTrash, lastOpened, trashAppFailed, figureFiles, figureUnusedApps,
+        trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed,
         bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
 
     // Scan progress and empty values
@@ -79,8 +77,8 @@ nonisolated enum TextKey: String, CaseIterable {
         accessMissingShort, summaryTitle, summaryDisk, summaryTop, summaryNotMeasured, summaryClean,
         summaryCopies, summaryApps, summaryFreed, readAloud, stopReading
 
-    // Key figures and size classes in plain words
-    case sizeClassesTitle, sizeClassesCaption, figureLargeFilesFrom, bucketValue
+    // Size classes in plain words
+    case sizeClassesTitle, sizeClassesCaption, bucketValue
     case historyTitle, historyCaption, historyAfterNextScan, grownSince, grownBy, nothingGrown
 
     // Settings
@@ -95,4 +93,9 @@ nonisolated enum TextKey: String, CaseIterable {
         settingsSystemNote, appLanguage,
         languageLikeMac
     case languageRestartHint
+
+    // Free-up guide on the overview, advanced pages
+    case freeUpTitle, freeUpCaption, freeUpNothing, freeUpLoadingTitle, freeUpLoadingDetail
+    case freeUpCleanerDetail, freeUpDuplicatesDetail, freeUpDuplicatesNotSearched, freeUpAppsDetail
+    case sectionAdvanced, showAdvancedPages
 }

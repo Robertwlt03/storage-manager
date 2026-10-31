@@ -90,7 +90,5 @@ enum SizeBucket: CaseIterable, Identifiable {
 }
 
 struct Statistics {
-    var fileCount = 0
-    var largeFileCount = 0
     var sizeClasses: [(sizeClass: SizeBucket, count: Int, bytes: Int64)] = []
 }

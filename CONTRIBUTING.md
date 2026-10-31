@@ -226,7 +226,7 @@ block has a few fixed variants, so that the same things look the same everywhere
 | `UI.Icon` | every symbol and image | kind and size, from very small to large |
 | `UI.Note` | one line of information | hint, in progress, good, warning, error |
 | `UI.Placeholder` | stand-in for missing content | empty, loading, not measured, on a page or card |
-| `UI.Tile`, `UI.KeyFigure` | tiles | grid tile or key figure |
+| `UI.Tile` | tiles | grid tile |
 | `UI.ActionButton` | a button with text | prominent (one per page), normal, small inside rows and cards, quiet, content; red when destructive |
 
 Take spacing from `Space`, icon sizes from `IconSize` and fonts via `textRole` from `TextRole`. We avoid fixed

@@ -5,7 +5,6 @@
 "paneLargeFiles" = "बड़ी फ़ाइलें";
 "paneTemporaryFiles" = "अस्थायी क्षेत्र";
 "paneCopies" = "ऐप कॉपी";
-"sectionSystem" = "छिपे हुए क्षेत्र";
 "sectionVolumes" = "वॉल्यूम";
 "rescan" = "फिर से स्कैन करें";
 "rescanHelp" = "सभी क्षेत्र फिर से स्कैन करें (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "ट्रैश में ले जाएँ";
 "lastOpened" = "अंतिम बार %@ को खोला गया";
 "trashAppFailed" = "“%@” को ले जाया नहीं जा सका। Finder में यह आपके पासवर्ड से हो जाता है।";
-"figureFiles" = "फ़ाइलें";
-"figureUnusedApps" = "अप्रयुक्त ऐप्स";
 "bucketUnder1MB" = "1 MB से कम";
 "bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
 "bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "आपकी फ़ाइलें कितनी बड़ी हैं?";
 "sizeClassesCaption" = "हर आकार वर्ग कितनी जगह लेता है और उसमें कितनी फ़ाइलें हैं। आमतौर पर कुछ बड़ी फ़ाइलें बहुत सारी छोटी फ़ाइलों से ज़्यादा जगह लेती हैं।";
-"figureLargeFilesFrom" = "%@ से बड़ी फ़ाइलें";
 "historyTitle" = "इतिहास";
 "historyCaption" = "हर पूरे स्कैन के बाद इस्तेमाल की गई जगह।";
 "historyAfterNextScan" = "अगले पूरे स्कैन के बाद इतिहास दिखेगा।";
@@ -284,3 +280,16 @@
 "appLanguage" = "भाषा";
 "languageLikeMac" = "Mac के समान";
 "languageRestartHint" = "नई भाषा रीस्टार्ट के बाद दिखेगी।";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "आप लगभग %@ खाली कर सकते हैं";
+"freeUpCaption" = "इन चरणों को एक-एक करके पूरा करें। आपकी पुष्टि के बिना कुछ भी नहीं हटाया जाता।";
+"freeUpNothing" = "अभी खाली करने लायक कुछ खास नहीं है। आपका Mac व्यवस्थित है।";
+"freeUpLoadingTitle" = "हिसाब लगाया जा रहा है कि क्या हटाया जा सकता है …";
+"freeUpLoadingDetail" = "थोड़ी देर में यहाँ दिखेगा कि आप कितनी जगह खाली कर सकते हैं और कैसे।";
+"freeUpCleanerDetail" = "कैश, पुराने लॉग, पुराने इंस्टॉलर, ट्रैश और भी बहुत कुछ";
+"freeUpDuplicatesDetail" = "बड़ी फ़ाइलें जो एक से अधिक बार मौजूद हैं";
+"freeUpDuplicatesNotSearched" = "अभी खोजा नहीं गया: पेज खोलने पर खोज शुरू होती है";
+"freeUpAppsDetail" = "ऐप्स जिन्हें आपने कुछ समय से नहीं खोला: %@";
+"sectionAdvanced" = "उन्नत उपयोगकर्ताओं के लिए";
+"showAdvancedPages" = "उन्नत क्षेत्र दिखाएँ";

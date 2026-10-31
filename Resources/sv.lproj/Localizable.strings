@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Stora filer";
 "paneTemporaryFiles" = "Tillfälligt område";
 "paneCopies" = "Appkopior";
-"sectionSystem" = "Dolda områden";
 "sectionVolumes" = "Volymer";
 "rescan" = "Mät igen";
 "rescanHelp" = "Mät alla områden igen (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Flytta till papperskorgen";
 "lastOpened" = "Senast öppnad den %@";
 "trashAppFailed" = "”%@” kunde inte flyttas. I Finder fungerar det med ditt lösenord.";
-"figureFiles" = "Filer";
-"figureUnusedApps" = "oanvända appar";
 "bucketUnder1MB" = "under 1 MB"; /* same as English on purpose */
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Hur stora är dina filer?";
 "sizeClassesCaption" = "Hur mycket plats varje storleksklass tar och hur många filer som finns i den. Några få stora filer tar oftast mer plats än många små.";
-"figureLargeFilesFrom" = "stora filer från %@";
 "historyTitle" = "Historik";
 "historyCaption" = "Använt utrymme efter varje fullständig mätning.";
 "historyAfterNextScan" = "Historiken visas efter nästa fullständiga mätning.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Språk";
 "languageLikeMac" = "Samma som på Mac";
 "languageRestartHint" = "Det nya språket visas efter en omstart.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Du kan frigöra ungefär %@";
+"freeUpCaption" = "Gå igenom stegen i tur och ordning. Inget tas bort innan du bekräftar det.";
+"freeUpNothing" = "Just nu finns inget värt att frigöra. Din Mac är välstädad.";
+"freeUpLoadingTitle" = "Räknar ut vad som kan tas bort …";
+"freeUpLoadingDetail" = "Snart ser du här hur mycket utrymme du kan frigöra, och hur.";
+"freeUpCleanerDetail" = "Cacheminnen, gamla loggar, gamla installerare, papperskorgen och mer";
+"freeUpDuplicatesDetail" = "Stora filer som finns mer än en gång";
+"freeUpDuplicatesNotSearched" = "Inte sökt än: sökningen startar när du öppnar sidan";
+"freeUpAppsDetail" = "Appar som du inte har öppnat på ett tag: %@";
+"sectionAdvanced" = "För avancerade användare";
+"showAdvancedPages" = "Visa avancerade områden";

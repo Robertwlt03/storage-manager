@@ -20,6 +20,11 @@ nonisolated enum DuplicateService {
             .sorted { first, second in first[0].bytes > second[0].bytes }
     }
 
+    /// What keeping one file of each group and removing the others would free.
+    static func spareBytes(_ groups: [[Entry]]) -> Int64 {
+        groups.reduce(0) { total, group in total + group[0].bytes * Int64(group.count - 1) }
+    }
+
     /// The groups whose files really have the same content, read in the background; ends early
     /// when the calling task is canceled.
     static func confirmed(_ groups: [[Entry]]) async -> [[Entry]] {

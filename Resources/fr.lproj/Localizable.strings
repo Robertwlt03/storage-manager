@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Fichiers volumineux";
 "paneTemporaryFiles" = "Zone temporaire";
 "paneCopies" = "Copies d’apps";
-"sectionSystem" = "Zones masquées";
 "sectionVolumes" = "Volumes";
 "rescan" = "Réanalyser";
 "rescanHelp" = "Réanalyser toutes les zones (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Placer dans la Corbeille";
 "lastOpened" = "Dernière ouverture le %@";
 "trashAppFailed" = "« %@ » n’a pas pu être déplacée. Dans le Finder, cela fonctionne avec votre mot de passe.";
-"figureFiles" = "Fichiers";
-"figureUnusedApps" = "apps inutilisées";
 "bucketUnder1MB" = "moins de 1 Mo";
 "bucketTo10MB" = "1–10 Mo";
 "bucketTo100MB" = "10–100 Mo";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Quelle est la taille de vos fichiers ?";
 "sizeClassesCaption" = "L’espace que prend chaque classe de taille et le nombre de fichiers qu’elle contient. Quelques gros fichiers occupent généralement plus de place que beaucoup de petits.";
-"figureLargeFilesFrom" = "fichiers volumineux à partir de %@";
 "historyTitle" = "Historique";
 "historyCaption" = "Espace utilisé après chaque analyse complète.";
 "historyAfterNextScan" = "L’historique apparaît après la prochaine analyse complète.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Langue";
 "languageLikeMac" = "Comme sur le Mac";
 "languageRestartHint" = "La nouvelle langue s’affiche après un redémarrage.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Tu peux libérer environ %@";
+"freeUpCaption" = "Suis ces étapes l’une après l’autre. Rien n’est supprimé sans ta confirmation.";
+"freeUpNothing" = "Rien d’important à libérer pour le moment. Ton Mac est bien rangé.";
+"freeUpLoadingTitle" = "Calcul de ce qui peut partir …";
+"freeUpLoadingDetail" = "Dans un instant, tu vois ici combien d’espace tu peux libérer, et comment.";
+"freeUpCleanerDetail" = "Caches, anciens journaux, anciens installateurs, la Corbeille et plus";
+"freeUpDuplicatesDetail" = "Gros fichiers présents en plusieurs exemplaires";
+"freeUpDuplicatesNotSearched" = "Pas encore cherché : la recherche démarre quand tu ouvres la page";
+"freeUpAppsDetail" = "Apps que tu n’as pas ouvertes depuis un moment : %@";
+"sectionAdvanced" = "Pour utilisateurs avancés";
+"showAdvancedPages" = "Afficher les zones avancées";

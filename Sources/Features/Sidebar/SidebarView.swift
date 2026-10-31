@@ -24,19 +24,27 @@ struct SidebarView: View {
 private struct SidebarList: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanUpRules.defaultUnusedDays
+    @AppStorage(SettingsKey.showsAdvancedPages) private var showsAdvancedPages = false
 
     var body: some View {
         @Bindable var model = model
         List(selection: $model.pane) {
             Section { ForEach(Pane.main, id: \.self, content: row) }
             Section(TextKey.sectionTidy.translated) { ForEach(Pane.tidy, id: \.self, content: row) }
-            Section(TextKey.sectionSystem.translated) {
-                ForEach(Pane.system, id: \.self, content: row)
-            }
+            advancedSection
             volumesSection
         }
         .listStyle(.sidebar)
         .safeAreaInset(edge: .bottom, spacing: 0) { SidebarFooter() }
+    }
+
+    /// Only when switched on in the settings; a launch argument or a link opens its pages anyway.
+    @ViewBuilder private var advancedSection: some View {
+        if showsAdvancedPages {
+            Section(TextKey.sectionAdvanced.translated) {
+                ForEach(Pane.advanced, id: \.self, content: row)
+            }
+        }
     }
 
     /// The startup disk is the overview; only other volumes (USB sticks, external drives) get their

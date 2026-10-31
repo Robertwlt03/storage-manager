@@ -6,8 +6,9 @@ enum Pane: Hashable {
 
     static let main: [Pane] = [.overview, .explorer, .largeFiles]
     static let tidy: [Pane] = [.cleaner, .duplicates, .apps]
-    static let system: [Pane] = [.temporaryFiles, .copies]
-    static let everyPage = main + tidy + system
+    /// Expert pages: the sidebar lists them only when the settings ask for it (see `SidebarList`).
+    static let advanced: [Pane] = [.temporaryFiles, .copies]
+    static let everyPage = main + tidy + advanced
 
     var supportsGrid: Bool {
         [.overview, .explorer, .largeFiles, .apps].contains(self)

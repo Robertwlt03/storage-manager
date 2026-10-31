@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Duże pliki";
 "paneTemporaryFiles" = "Obszar tymczasowy";
 "paneCopies" = "Kopie aplikacji";
-"sectionSystem" = "Ukryte obszary";
 "sectionVolumes" = "Woluminy";
 "rescan" = "Zmierz ponownie";
 "rescanHelp" = "Zmierz wszystkie obszary ponownie (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Przenieś do Kosza";
 "lastOpened" = "Ostatnio otwarto %@";
 "trashAppFailed" = "Nie udało się przenieść „%@”. W Finderze zadziała to po podaniu hasła.";
-"figureFiles" = "Pliki";
-"figureUnusedApps" = "nieużywanych aplikacji";
 "bucketUnder1MB" = "poniżej 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Jak duże są Twoje pliki?";
 "sizeClassesCaption" = "Ile miejsca zajmuje każda klasa rozmiaru i ile plików w niej jest. Kilka dużych plików zwykle zajmuje więcej niż wiele małych.";
-"figureLargeFilesFrom" = "dużych plików od %@";
 "historyTitle" = "Historia";
 "historyCaption" = "Zajęte miejsce po każdym pełnym pomiarze.";
 "historyAfterNextScan" = "Historia pojawi się po następnym pełnym pomiarze.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Język";
 "languageLikeMac" = "Taki jak na Macu";
 "languageRestartHint" = "Nowy język pojawi się po ponownym uruchomieniu.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Możesz zwolnić około %@";
+"freeUpCaption" = "Przejdź przez te kroki po kolei. Nic nie zostanie usunięte bez Twojego potwierdzenia.";
+"freeUpNothing" = "Teraz nie ma nic istotnego do zwolnienia. Twój Mac jest uporządkowany.";
+"freeUpLoadingTitle" = "Obliczanie, co można usunąć …";
+"freeUpLoadingDetail" = "Za chwilę zobaczysz tu, ile miejsca możesz zwolnić i jak.";
+"freeUpCleanerDetail" = "Pamięć podręczna, stare logi, stare instalatory, kosz i więcej";
+"freeUpDuplicatesDetail" = "Duże pliki, które występują więcej niż raz";
+"freeUpDuplicatesNotSearched" = "Jeszcze nie wyszukano: wyszukiwanie zaczyna się po otwarciu strony";
+"freeUpAppsDetail" = "Aplikacje nieotwierane od dawna: %@";
+"sectionAdvanced" = "Dla zaawansowanych";
+"showAdvancedPages" = "Pokazuj obszary zaawansowane";

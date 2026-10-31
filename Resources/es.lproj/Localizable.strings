@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Archivos grandes";
 "paneTemporaryFiles" = "Zona temporal";
 "paneCopies" = "Copias de apps";
-"sectionSystem" = "Zonas ocultas";
 "sectionVolumes" = "Volúmenes";
 "rescan" = "Volver a analizar";
 "rescanHelp" = "Volver a analizar todas las zonas (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Mover a la Papelera";
 "lastOpened" = "Última apertura el %@";
 "trashAppFailed" = "No se pudo mover “%@”. En el Finder funciona con tu contraseña.";
-"figureFiles" = "Archivos";
-"figureUnusedApps" = "apps sin usar";
 "bucketUnder1MB" = "menos de 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "¿Qué tamaño tienen tus archivos?";
 "sizeClassesCaption" = "Cuánto espacio ocupa cada clase de tamaño y cuántos archivos contiene. Unos pocos archivos grandes suelen ocupar más que muchos pequeños.";
-"figureLargeFilesFrom" = "archivos grandes desde %@";
 "historyTitle" = "Historial";
 "historyCaption" = "Espacio usado tras cada análisis completo.";
 "historyAfterNextScan" = "El historial aparece tras el próximo análisis completo.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Idioma";
 "languageLikeMac" = "Igual que en el Mac";
 "languageRestartHint" = "El nuevo idioma aparece tras reiniciar.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Puedes liberar unos %@";
+"freeUpCaption" = "Sigue estos pasos uno tras otro. No se elimina nada hasta que lo confirmes.";
+"freeUpNothing" = "Ahora mismo no hay nada importante que liberar. Tu Mac está en orden.";
+"freeUpLoadingTitle" = "Calculando qué se puede quitar …";
+"freeUpLoadingDetail" = "En un momento verás aquí cuánto espacio puedes liberar y cómo.";
+"freeUpCleanerDetail" = "Cachés, registros antiguos, instaladores antiguos, la Papelera y más";
+"freeUpDuplicatesDetail" = "Archivos grandes que existen más de una vez";
+"freeUpDuplicatesNotSearched" = "Aún no buscado: la búsqueda empieza al abrir la página";
+"freeUpAppsDetail" = "Apps que no has abierto desde hace tiempo: %@";
+"sectionAdvanced" = "Para usuarios avanzados";
+"showAdvancedPages" = "Mostrar las zonas avanzadas";

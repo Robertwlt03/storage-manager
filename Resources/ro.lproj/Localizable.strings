@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Fișiere mari";
 "paneTemporaryFiles" = "Zonă temporară";
 "paneCopies" = "Copii de aplicații";
-"sectionSystem" = "Zone ascunse";
 "sectionVolumes" = "Volume";
 "rescan" = "Rescanează";
 "rescanHelp" = "Rescanează toate zonele (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Mută în Coș";
 "lastOpened" = "Deschisă ultima dată pe %@";
 "trashAppFailed" = "„%@” nu a putut fi mutată. În Finder funcționează cu parola ta.";
-"figureFiles" = "Fișiere";
-"figureUnusedApps" = "aplicații neutilizate";
 "bucketUnder1MB" = "sub 1 MB";
 "bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
 "bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Cât de mari sunt fișierele tale?";
 "sizeClassesCaption" = "Cât spațiu ocupă fiecare clasă de dimensiune și câte fișiere conține. De obicei, câteva fișiere mari ocupă mai mult decât multe fișiere mici.";
-"figureLargeFilesFrom" = "fișiere mari de la %@";
 "historyTitle" = "Istoric";
 "historyCaption" = "Spațiul ocupat după fiecare scanare completă.";
 "historyAfterNextScan" = "Istoricul apare după următoarea scanare completă.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Limbă";
 "languageLikeMac" = "La fel ca pe Mac";
 "languageRestartHint" = "Noua limbă apare după o repornire.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Poți elibera aproximativ %@";
+"freeUpCaption" = "Parcurge acești pași unul după altul. Nimic nu se șterge până nu confirmi.";
+"freeUpNothing" = "Momentan nu e nimic important de eliberat. Mac-ul tău e în ordine.";
+"freeUpLoadingTitle" = "Se calculează ce poate pleca …";
+"freeUpLoadingDetail" = "Imediat vezi aici cât spațiu poți elibera și cum.";
+"freeUpCleanerDetail" = "Cache-uri, jurnale vechi, programe de instalare vechi, coșul și altele";
+"freeUpDuplicatesDetail" = "Fișiere mari care există de mai multe ori";
+"freeUpDuplicatesNotSearched" = "Încă necăutate: căutarea pornește când deschizi pagina";
+"freeUpAppsDetail" = "Aplicații pe care nu le-ai mai deschis de ceva timp: %@";
+"sectionAdvanced" = "Pentru avansați";
+"showAdvancedPages" = "Afișează zonele avansate";

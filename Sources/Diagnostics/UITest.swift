@@ -9,7 +9,7 @@ import SwiftUI
 enum UITest {
     private static let changedSettingKeys = [
         SettingsKey.layoutMode, SettingsKey.showsRings, SettingsKey.largeFileMegabytes,
-        SettingsKey.unusedDays,
+        SettingsKey.unusedDays, SettingsKey.showsAdvancedPages,
     ]
     private static let roundsDuringScan = 3
     /// While the first scan runs, every fifth step also types a search.
@@ -194,6 +194,14 @@ enum UITest {
             changeSetting(SettingsKey.unusedDays, to: days)
             await step("Days \(days)", model, wait: Pause.perSetting, picture: false)
         }
+        // Hiding the advanced section while one of its pages is open leads back to the overview.
+        model.pane = .copies
+        changeSetting(SettingsKey.showsAdvancedPages, to: true)
+        await step("Advanced pages shown", model, wait: Pause.perSetting, picture: false)
+        check(model.pane == .copies, "Showing advanced pages left the open one")
+        changeSetting(SettingsKey.showsAdvancedPages, to: false)
+        await step("Advanced pages hidden", model, wait: Pause.perSetting, picture: false)
+        check(model.pane == .overview, "Hidden advanced page stayed open")
         model.pane = .cleaner
         for _ in 0..<cleanerRefreshes { model.refreshCleanItems() }
         await step("Cleaner refresh", model, wait: Pause.afterCleanerRefresh)
@@ -263,7 +271,7 @@ enum UITest {
 extension UITest {
     private static func allPanes(_ model: AppModel) -> [Pane] {
         let otherVolumes = model.volumes.filter { volume in !volume.isRoot }
-        return Pane.main + Pane.tidy + Pane.system
+        return Pane.everyPage
             + otherVolumes.map { volume in .volume(volume.path) }
     }
 

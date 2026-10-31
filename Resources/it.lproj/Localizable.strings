@@ -5,7 +5,6 @@
 "paneLargeFiles" = "File di grandi dimensioni";
 "paneTemporaryFiles" = "Area temporanea";
 "paneCopies" = "Copie delle app";
-"sectionSystem" = "Aree nascoste";
 "sectionVolumes" = "Volumi";
 "rescan" = "Analizza di nuovo";
 "rescanHelp" = "Analizza di nuovo tutte le aree (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Sposta nel Cestino";
 "lastOpened" = "Ultima apertura il %@";
 "trashAppFailed" = "Non è stato possibile spostare “%@”. Nel Finder funziona con la tua password.";
-"figureFiles" = "File";
-"figureUnusedApps" = "app inutilizzate";
 "bucketUnder1MB" = "meno di 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Quanto sono grandi i tuoi file?";
 "sizeClassesCaption" = "Quanto spazio occupa ogni classe di dimensioni e quanti file contiene. Pochi file grandi di solito occupano più spazio di tanti file piccoli.";
-"figureLargeFilesFrom" = "file grandi da %@";
 "historyTitle" = "Cronologia";
 "historyCaption" = "Spazio occupato dopo ogni analisi completa.";
 "historyAfterNextScan" = "La cronologia appare dopo la prossima analisi completa.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Lingua";
 "languageLikeMac" = "Come sul Mac";
 "languageRestartHint" = "La nuova lingua appare dopo il riavvio.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Puoi liberare circa %@";
+"freeUpCaption" = "Segui questi passi uno dopo l’altro. Nulla viene eliminato finché non confermi.";
+"freeUpNothing" = "Al momento non c’è niente di rilevante da liberare. Il tuo Mac è in ordine.";
+"freeUpLoadingTitle" = "Calcolo di cosa può andare via …";
+"freeUpLoadingDetail" = "Tra un attimo vedrai qui quanto spazio puoi liberare e come.";
+"freeUpCleanerDetail" = "Cache, vecchi log, vecchi installer, il Cestino e altro";
+"freeUpDuplicatesDetail" = "File grandi presenti più di una volta";
+"freeUpDuplicatesNotSearched" = "Non ancora cercati: la ricerca parte quando apri la pagina";
+"freeUpAppsDetail" = "App che non apri da un po’: %@";
+"sectionAdvanced" = "Per utenti esperti";
+"showAdvancedPages" = "Mostra le aree avanzate";

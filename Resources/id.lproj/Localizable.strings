@@ -5,7 +5,6 @@
 "paneLargeFiles" = "File Besar";
 "paneTemporaryFiles" = "Area Sementara";
 "paneCopies" = "Salinan App";
-"sectionSystem" = "Area Tersembunyi";
 "sectionVolumes" = "Volume";
 "rescan" = "Pindai Ulang";
 "rescanHelp" = "Pindai ulang semua area (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Pindahkan ke Tong Sampah";
 "lastOpened" = "Terakhir dibuka pada %@";
 "trashAppFailed" = "“%@” tidak dapat dipindahkan. Di Finder, ini berhasil dengan kata sandi Anda.";
-"figureFiles" = "File";
-"figureUnusedApps" = "app tak terpakai";
 "bucketUnder1MB" = "di bawah 1 MB";
 "bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
 "bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Seberapa besar file Anda?";
 "sizeClassesCaption" = "Berapa banyak ruang yang dipakai tiap kelas ukuran dan berapa file di dalamnya. Beberapa file besar biasanya memakan lebih banyak ruang daripada banyak file kecil.";
-"figureLargeFilesFrom" = "file besar mulai %@";
 "historyTitle" = "Riwayat";
 "historyCaption" = "Ruang terpakai setelah setiap pemindaian penuh.";
 "historyAfterNextScan" = "Riwayat muncul setelah pemindaian penuh berikutnya.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Bahasa";
 "languageLikeMac" = "Sama seperti Mac";
 "languageRestartHint" = "Bahasa baru tampil setelah dimulai ulang.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Anda dapat mengosongkan sekitar %@";
+"freeUpCaption" = "Ikuti langkah-langkah ini satu per satu. Tidak ada yang dihapus sebelum Anda mengonfirmasi.";
+"freeUpNothing" = "Saat ini tidak ada yang perlu dikosongkan. Mac Anda sudah rapi.";
+"freeUpLoadingTitle" = "Menghitung apa yang bisa dihapus …";
+"freeUpLoadingDetail" = "Sebentar lagi Anda melihat di sini berapa banyak ruang yang bisa dikosongkan, dan caranya.";
+"freeUpCleanerDetail" = "Cache, log lama, penginstal lama, Tong Sampah, dan lainnya";
+"freeUpDuplicatesDetail" = "File besar yang ada lebih dari sekali";
+"freeUpDuplicatesNotSearched" = "Belum dicari: pencarian dimulai saat Anda membuka halaman";
+"freeUpAppsDetail" = "%@ app yang sudah lama tidak Anda buka";
+"sectionAdvanced" = "Untuk Pengguna Mahir";
+"showAdvancedPages" = "Tampilkan area lanjutan";

@@ -49,14 +49,15 @@ without a terminal, and that you can share with others without having to wait fo
 
 ## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">What the app can do
 
-The **Overview** is your home page. Right at the top are the most important numbers, such as how many files you
-have, how many of them are large and how many apps you have not opened for a long time, and clicking one takes you
-straight to the matching page. Below that, it shows your Mac with a colored bar and a legend. It then sums up in a
-few sentences how your storage is doing, including how much space the app has freed so far, and reads that out to you
-if you like. After every full scan it keeps the used space, so a line shows how your storage changes over the weeks,
-and it lists the folders that grew most since the scan before; a click opens one. A chart also shows you how much space
-small and large files take up, and at the very bottom you find all categories, from applications and downloads to
-caches.
+The **Overview** is your home page. Right at the top it answers the real question: how much space you can free up. It
+then lists the steps to get there in a sensible order, cleaning up, duplicates and unused apps, each with what it
+frees and a button that takes you to its page; duplicates count once their page has searched them, and once nothing
+worth freeing is left, it says so. Below that, it shows your Mac with a colored bar and a legend. It then sums up in
+a few sentences how your storage is doing, including how much space the app has freed so far, and reads that out to
+you if you like. After every full scan it keeps the used space, so a line shows how your storage changes over the
+weeks, and it lists the folders that grew most since the scan before; a click opens one. A chart also shows you how
+much space small and large files take up, and at the very bottom you find all categories, from applications and
+downloads to caches.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
 all files above a size you choose yourself, and **Search** finds folders and files by name. Each of these lists can
@@ -77,9 +78,9 @@ Nothing is removed there; Show in Finder leads you to them, so you can keep one 
 The **Unused Apps** page reminds you of apps you have not opened for a long time. The date comes from macOS itself,
 so the app records nothing. Anything you no longer need, you can move to the Trash from there.
 
-The app also shows two areas you cannot see in Finder: the **temporary area** of macOS and the **app copies** that
-macOS creates when it checks apps. External drives and USB sticks appear in the sidebar too, as soon as you connect
-them.
+For advanced users, the app also shows two areas you cannot see in Finder: the **temporary area** of macOS and the
+**app copies** that macOS creates when it checks apps. They appear in the sidebar once you switch on “Show advanced
+areas” in the settings. External drives and USB sticks appear in the sidebar too, as soon as you connect them.
 
 Every page says in one sentence at the top what it is for and what you can do there, and the info button beside it
 explains more. The app takes the light or dark appearance from your Mac, and it uses Liquid Glass. New content appears
