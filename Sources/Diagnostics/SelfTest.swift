@@ -1,53 +1,136 @@
 import Foundation
 
-/// `--selftest`: scans real data, compares every area with `du` and prints only counts, sizes and times –
-/// never file or folder names.
+/// `--selftest`: scans real data, compares every area with `du` and prints only counts, sizes and
+/// times – never file or folder names.
 enum SelfTest {
-    static let areas = [Paths.home, Paths.applications, Paths.tempArea]
+    private static let areas = [Paths.home, Paths.applications, Paths.temporaryArea]
+    /// How far the scanner may differ from `du`, as a fraction.
+    private static let tolerance = 0.02
+    private static let sampleQuery = "a"
+    private static let percent = 100.0
+    private static let millisecondsPerSecond = 1000.0
+    private static let microsecondsPerSecond = 1e6
+    /// `du -k` counts in blocks of this many bytes.
+    private static let bytesPerKilobyte: Int64 = 1024
 
-    static func run() {
-        let root = Node.virtualRoot()
-        for (i, path) in areas.enumerated() {
-            let (start, cpu0) = (Date(), cpuSeconds())
-            guard let result = ScanService.scan(path, progress: { _ in }) else { fatalError("scan failed") }
-            let (secs, cpu) = (Date().timeIntervalSince(start), cpuSeconds() - cpu0)
-            result.root.attach(to: root)
-            let reference = du(path)
-            let diff = abs(Double(result.root.bytes - reference)) / Double(max(reference, 1))
-            print("Bereich \(i + 1): \(Fmt.count(result.root.fileCount)) Dateien, \(Fmt.bytes(result.root.bytes))"
-                + " (du \(Fmt.bytes(reference)), Abweichung \(String(format: "%.2f", diff * 100)) %),"
-                + " \(result.unreadable) nicht lesbar, \(String(format: "%.1f", secs)) s, CPU \(String(format: "%.1f", cpu)) s")
-            precondition(diff < ScanConfig.selfTestTolerance, "scanner and du differ too much")
+    /// Stops before touching a single protected folder when Full Disk Access is missing: without
+    /// it, macOS would ask once for every app's data folder. `make selftest` therefore starts the
+    /// built app, which holds the access, instead of the bare program.
+    static func run() -> Bool {
+        Console.heading("Storage Manager · self test", detail: "counts and sizes only")
+        guard PermissionService.hasFullDiskAccess else {
+            Console.failed(
+                "Full Disk Access is missing, so the self test stops before macOS asks per folder")
+            Console.note(
+                "Grant it to Storage Manager in System Settings, then run make selftest.")
+            return false
         }
-        let cats = CategoryService.compute(root: root, volume: VolumeService.startup())
-        precondition(!cats.isEmpty && zip(cats, cats.dropFirst()).allSatisfy { $0.bytes >= $1.bytes })
-        print("Kategorien: \(cats.count), zusammen \(Fmt.bytes(cats.reduce(0) { $0 + $1.bytes }))")
+        let root = Node.virtualRoot()
+        measureEveryArea(into: root)
+        checkCategories(of: root)
+        checkSearch(in: root)
+        reportLargeFiles(in: root)
+        reportCopies(in: root)
+        reportVolumes()
+        Console.frame("Self test passed", details: ["every area matches du"], passed: true)
+        return true
+    }
 
-        let folders = SearchService.search("a", scope: .folders, in: root)
-        let files = SearchService.search("a", scope: .files, in: root)
-        precondition(folders.allSatisfy(\.isFolder) && files.allSatisfy { !$0.isFolder })
-        print("Suche: \(folders.count) Ordner, \(files.count) Dateien (Grenze \(ScanConfig.searchLimit))")
-        print("Große Dateien ab \(LargeFileThreshold.defaultMB) MB: \(SearchService.largeFiles(atLeast: LargeFileThreshold.bytes(LargeFileThreshold.defaultMB), in: root).count)")
-        print("Prüfkopien-Gruppen: \(CopyService.groups(in: root.descendant(at: Paths.tempCopies)).count)")
-        print("Datenträger: \(VolumeService.all().count), Vollzugriff: \(PermissionService.hasFullDiskAccess)")
+    private static func measureEveryArea(into root: Node) {
+        for (index, path) in areas.enumerated() {
+            let (startTime, cpuAtStart) = (Date(), cpuSeconds())
+            guard let result = ScanService.scan(path, progress: { _ in }) else {
+                fatalError("scan failed")
+            }
+            let seconds = Date().timeIntervalSince(startTime)
+            let cpuTime = cpuSeconds() - cpuAtStart
+            result.root.attach(to: root)
+            let reference = measureWithDiskUsage(path)
+            let deviation =
+                abs(Double(result.root.bytes - reference)) / Double(max(reference, 1))
+            let deviationText = String(format: "%.2f", deviation * percent)
+            let secondsText = String(format: "%.1f", seconds)
+            let cpuText = String(format: "%.1f", cpuTime)
+            let isClose = deviation < tolerance
+            let report = isClose ? Console.passed : Console.failed
+            report(
+                "Area \(index + 1)",
+                "\(Format.count(result.root.fileCount)) files,"
+                    + " \(Format.bytes(result.root.bytes)) (du \(Format.bytes(reference)),"
+                    + " deviation \(deviationText) %), \(result.unreadableCount) unreadable,"
+                    + " \(secondsText) s, CPU \(cpuText) s"
+            )
+            precondition(isClose, "scanner and du differ too much")
+        }
+    }
+
+    private static func checkCategories(of root: Node) {
+        let categories = CategoryService.compute(root: root, volume: VolumeService.startup())
+        let isSortedBySize = zip(categories, categories.dropFirst())
+            .allSatisfy { larger, smaller in larger.bytes >= smaller.bytes }
+        precondition(!categories.isEmpty && isSortedBySize)
+        let totalBytes = categories.reduce(0) { total, category in total + category.bytes }
+        Console.passed(
+            "Categories", detail: "\(categories.count), total \(Format.bytes(totalBytes))")
+    }
+
+    private static func checkSearch(in root: Node) {
+        let searchStart = Date()
+        let folders = SearchService.search(sampleQuery, scope: .folders, in: root)
+        let files = SearchService.search(sampleQuery, scope: .files, in: root)
+        let searchCount = 2.0
+        let millisecondsPerSearch =
+            Date().timeIntervalSince(searchStart) * millisecondsPerSecond / searchCount
+        precondition(folders.allSatisfy(\.isFolder) && files.allSatisfy { file in !file.isFolder })
+        Console.passed(
+            "Search",
+            detail: "\(folders.count) folders, \(files.count) files"
+                + " (limit \(ScanLimits.maximumSearchResults)),"
+                + " \(Int(millisecondsPerSearch)) ms per search"
+        )
+    }
+
+    private static func reportLargeFiles(in root: Node) {
+        let threshold = LargeFileThreshold.bytes(LargeFileThreshold.defaultMegabytes)
+        let largeFiles = SearchService.largeFiles(atLeast: threshold, in: root)
+        Console.step(
+            "Large files",
+            detail: "\(largeFiles.count) from \(LargeFileThreshold.defaultMegabytes) MB")
+    }
+
+    private static func reportCopies(in root: Node) {
+        let groups = CopyService.groups(in: root.descendant(at: Paths.temporaryCopies))
+        Console.step("Signature copy groups", detail: "\(groups.count)")
+    }
+
+    private static func reportVolumes() {
+        Console.step(
+            "Volumes",
+            detail: "\(VolumeService.all().count), Full Disk Access: "
+                + "\(PermissionService.hasFullDiskAccess)")
     }
 
     private static func cpuSeconds() -> Double {
-        var u = rusage()
-        getrusage(RUSAGE_SELF, &u)
-        return Double(u.ru_utime.tv_sec + u.ru_stime.tv_sec) + Double(u.ru_utime.tv_usec + u.ru_stime.tv_usec) / 1e6
+        var usage = rusage()
+        getrusage(RUSAGE_SELF, &usage)
+        let wholeSeconds = usage.ru_utime.tv_sec + usage.ru_stime.tv_sec
+        let microseconds = usage.ru_utime.tv_usec + usage.ru_stime.tv_usec
+        return Double(wholeSeconds) + Double(microseconds) / microsecondsPerSecond
     }
 
-    private static func du(_ path: String) -> Int64 {
-        let p = Process()
-        p.executableURL = URL(fileURLWithPath: "/usr/bin/du")
-        p.arguments = ["-sk", path]
-        let out = Pipe()
-        p.standardOutput = out
-        p.standardError = FileHandle.nullDevice
-        try? p.run()
-        let s = String(decoding: out.fileHandleForReading.readDataToEndOfFile(), as: UTF8.self)
-        p.waitUntilExit()
-        return (Int64(s.prefix { $0 != "\t" }) ?? 0) * 1024
+    /// The size `du` reports for a folder, as a reference for the scanner.
+    private static func measureWithDiskUsage(_ path: String) -> Int64 {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/du")
+        process.arguments = ["-sk", path]
+        let output = Pipe()
+        process.standardOutput = output
+        process.standardError = FileHandle.nullDevice
+        try? process.run()
+        let outputData = output.fileHandleForReading.readDataToEndOfFile()
+        let text = String(bytes: outputData, encoding: .utf8) ?? ""
+        process.waitUntilExit()
+        let kilobytes = Int64(text.prefix { character in character != "\t" }) ?? 0
+        return kilobytes * bytesPerKilobyte
     }
 }

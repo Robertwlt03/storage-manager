@@ -1,51 +1,56 @@
 /* App and sidebar */
-"appName" = "Speicher-Explorer";
+"appName" = "Storage Manager";
 "paneOverview" = "Überblick";
 "paneExplorer" = "Ordner";
 "paneLargeFiles" = "Große Dateien";
-"paneTemp" = "Temporärer Bereich";
-"paneCopies" = "Prüfkopien";
-"sectionSystem" = "macOS";
+"paneTemporaryFiles" = "Temporärer Bereich";
+"paneCopies" = "App-Kopien";
+"sectionSystem" = "Versteckte Bereiche";
 "sectionVolumes" = "Datenträger";
 "rescan" = "Neu messen";
 "rescanHelp" = "Alle Bereiche neu messen (⌘R)";
 "cancelScan" = "Messung abbrechen";
 
 /* Scan status and placeholders */
-"scanning" = "Messe …";
 "cancel" = "Abbrechen";
 "filesAndSize" = "%@ Dateien · %@";
 "measuredAt" = "Gemessen um %@";
 "scanNow" = "Jetzt messen";
 "unreadable" = "%@ Ordner nicht lesbar – Vollzugriff erlauben …";
-"unreadableHelp" = "Mit Festplattenvollzugriff misst die App auch geschützte Ordner, zum Beispiel von Mail oder Safari.";
 "notMeasuredTitle" = "Noch nicht gemessen";
 "notMeasuredDetail" = "Ein Durchgang misst alle Bereiche; danach ist jeder Klick sofort da.";
 "scanningTitle" = "Wird gemessen …";
 "scanningDetail" = "Die Ergebnisse erscheinen, sobald der erste Bereich fertig ist.";
+"loadingSummaryTitle" = "Zusammenfassung wird geschrieben …";
+"loadingSummaryDetail" = "Wenn alle Bereiche gemessen sind, steht hier in wenigen Sätzen, wie es um deinen Speicher steht.";
+"loadingSizesTitle" = "Dateien werden nach Größe gezählt …";
+"loadingSizesDetail" = "Das Diagramm erscheint, sobald alle Bereiche gemessen sind.";
+"loadingAppsTitle" = "Apps werden geprüft …";
+"loadingAppsDetail" = "Größen und letzte Nutzung stehen fest, sobald die Messung fertig ist.";
+"showSidebar" = "Seitenleiste einblenden";
+"hideSidebar" = "Seitenleiste ausblenden";
 
 /* Overview and categories */
 "availableOf" = "%@ verfügbar von %@";
 "categories" = "Kategorien";
-"overviewNote" = "Gemessen wird der belegte Platz wie mit „du“. APFS-Klone zählen dabei voll mit, Kopien mit gemeinsamen Speicherblöcken belegen real weniger. „System & Sonstiges“ ist der Rest bis zur Belegung, die macOS meldet.";
 "freeSpace" = "Frei";
-"tempAreaName" = "Temporärer Systembereich";
-"catApps" = "Programme";
-"catDocuments" = "Dokumente & Schreibtisch";
-"catDownloads" = "Downloads";
-"catMedia" = "Fotos, Musik & Filme";
-"catICloud" = "iCloud Drive";
-"catMail" = "Mail & Nachrichten";
-"catDeveloper" = "Entwicklung";
-"catCaches" = "Caches";
-"catAppData" = "App-Daten";
-"catTrash" = "Papierkorb";
-"catTemp" = "Temporäre Dateien";
-"catUser" = "Weitere Benutzerdaten";
-"catLibrary" = "Library (systemweit)";
-"catOther" = "Weitere Ordner";
-"catPurgeable" = "Von macOS löschbar";
-"catSystem" = "System & Sonstiges";
+"temporaryAreaName" = "Temporärer Systembereich";
+"categoryApps" = "Programme";
+"categoryDocuments" = "Dokumente & Schreibtisch";
+"categoryDownloads" = "Downloads";
+"categoryMedia" = "Fotos, Musik & Filme";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail & Nachrichten";
+"categoryDeveloper" = "Entwicklung";
+"categoryCaches" = "Zwischenspeicher";
+"categoryAppData" = "App-Daten";
+"categoryTrash" = "Papierkorb";
+"categoryTemporary" = "Temporäre Dateien";
+"categoryUser" = "Weitere Benutzerdaten";
+"categoryLibrary" = "Gemeinsame App-Daten";
+"categoryOther" = "Weitere Ordner";
+"categoryPurgeable" = "Von macOS löschbar";
+"categorySystem" = "System & Sonstiges";
 
 /* Explorer, tables and info sheet */
 "columnName" = "Name";
@@ -76,29 +81,27 @@
 "noExtension" = "ohne Endung";
 
 /* Large files */
-"minSize" = "Mindestgröße";
+"minimumSize" = "Mindestgröße";
 "fromSize" = "ab %@";
 "noFilesFrom" = "Keine Dateien ab %@";
 "filesTotal" = "%@ Dateien · zusammen %@";
 
 /* Temporary area */
-"tempIntro" = "macOS legt diesen Bereich für jeden Benutzer unter /private/var/folders an. Er ist im Finder versteckt und wird in „Speicher verwalten“ nicht aufgeschlüsselt.";
 "location" = "Ort";
 "total" = "Zusammen";
 "subfolders" = "Unterordner";
-"viewCopies" = "Prüfkopien ansehen …";
-"tempT" = "Temporäre Dateien";
-"tempTDetail" = "Wird beim Neustart größtenteils geleert.";
-"tempC" = "Caches";
-"tempCDetail" = "Zwischenspeicher von Apps und Systemdiensten.";
-"tempX" = "Prüfkopien von Apps";
-"tempXDetail" = "Kopien, die macOS beim Prüfen von Signaturen anlegt.";
-"temp0" = "Systemdienste";
-"temp0Detail" = "Daten von Hintergrunddiensten.";
+"viewCopies" = "App-Kopien ansehen …";
+"temporaryFolderT" = "Temporäre Dateien";
+"temporaryFolderTDetail" = "Wird beim Neustart größtenteils geleert.";
+"temporaryFolderC" = "Zwischenspeicher";
+"temporaryFolderCDetail" = "Zwischenspeicher von Apps und Systemdiensten.";
+"temporaryFolderX" = "Kopien von Apps";
+"temporaryFolderXDetail" = "Kopien, die macOS beim Prüfen von Signaturen anlegt.";
+"temporaryFolder0" = "Systemdienste";
+"temporaryFolder0Detail" = "Daten von Hintergrunddiensten.";
 
 /* Signature copies */
-"copiesIntro" = "Beim Prüfen der Signatur legt macOS manchmal vollständige Kopien einer App im Ordner X an. Das sind keine eigenen Programme; macOS erstellt bei Bedarf eine neue. Löschen ist unbedenklich, solange die App beendet ist.";
-"noCopies" = "Keine Prüfkopien";
+"noCopies" = "Keine App-Kopien";
 "noCopiesDetail" = "Im Ordner X liegen keine Kopien von Apps.";
 "running" = "läuft";
 "stopped" = "beendet";
@@ -118,7 +121,7 @@
 "quitToDelete" = "Beende %@ mit ⌘Q, dann lässt sich löschen.";
 "openInExplorer" = "Im Explorer öffnen";
 "deleteAll" = "Alle Kopien löschen …";
-"deleteTitle" = "%@ Prüfkopien von %@ löschen?";
+"deleteTitle" = "%@ Kopien von %@ löschen?";
 "deleteForever" = "Endgültig löschen";
 "deleteMessage" = "Die Kopien landen nicht im Papierkorb. macOS legt bei Bedarf eine neue an.";
 
@@ -143,41 +146,98 @@
 
 /* Full Disk Access */
 "accessTitle" = "Eine Freigabe statt vieler Abfragen";
-"accessDetail" = "Ohne Festplattenvollzugriff fragt macOS einzeln nach Schreibtisch, Dokumenten, Downloads, iCloud Drive, den Daten anderer Apps und externen Datenträgern. Mit einem einzigen Schalter in den Systemeinstellungen entfallen alle diese Abfragen. Die App liest nur Größen und schickt nichts weg.";
+"accessDetail" = "Ohne Festplattenvollzugriff fragt macOS einzeln nach Schreibtisch, Dokumenten, Downloads, iCloud Drive, den Daten anderer Apps und externen Datenträgern. Mit einem einzigen Schalter in den Systemeinstellungen entfallen alle diese Abfragen. Die App liest nur Namen, Größen und Datumsangaben, nie den Inhalt deiner Dokumente, und schickt nichts weg.";
 "accessOneSwitch" = "Datenschutz & Sicherheit › Festplattenvollzugriff";
 "accessOpenSettings" = "Systemeinstellungen öffnen";
 "accessContinue" = "Ohne Vollzugriff fortfahren";
 "accessGranted" = "Erteilt";
 "accessRestart" = "App neu starten";
-"accessRestartHint" = "Schalter eingeschaltet? macOS gibt den Zugriff erst nach einem Neustart der App frei. Wirkt er danach immer noch nicht, stammt der Eintrag von einem früheren Build: dann in den Systemeinstellungen mit „–“ entfernen und neu hinzufügen.";
+"accessRestartHint" = "Schalter eingeschaltet? macOS gibt den Zugriff erst frei, wenn die App neu gestartet wurde. Klicke dazu auf „App neu starten“ oder lass macOS die App beenden und neu öffnen. Wirkt er danach immer noch nicht, entferne den Eintrag in den Systemeinstellungen mit „–“ und füge die App neu hinzu.";
+"quitApp" = "%@ beenden";
 "fullDiskAccess" = "Festplattenvollzugriff";
 
 /* Settings */
-"tabGeneral" = "Allgemein";
-"tabAppearance" = "Darstellung";
-"tabScanning" = "Messen";
-"language" = "Sprache";
-"languageSystem" = "Wie das System (%@)";
-"languageNote" = "Ohne eigene Wahl folgt die App der Sprache des Systems; Deutsch und Englisch sind enthalten.";
-"appearance" = "Erscheinungsbild";
-"appearanceSystem" = "Wie das System";
-"appearanceLight" = "Hell";
-"appearanceDark" = "Dunkel";
-"liquidGlass" = "Liquid Glass";
-"liquidGlassDetail" = "Gläserne Flächen im Stil von macOS 26. Aus spart etwas Grafikleistung und Energie.";
-"liquidGlassUnavailable" = "Benötigt macOS 26 oder neuer.";
-"chartColors" = "Diagrammfarben";
-"paletteColourful" = "Bunt";
-"paletteAccent" = "Akzentfarbe";
-"paletteGrey" = "Grautöne";
-"binaryUnits" = "Binäre Einheiten (GiB)";
-"binaryUnitsDetail" = "Aus: Größen wie im Finder, 1 GB = 1000 MB.";
 "autoScan" = "Beim Start automatisch messen";
-"pauseLowPower" = "Im Stromsparmodus nicht automatisch messen";
-"pauseLowPowerDetail" = "Dann misst die App erst, wenn du auf „Neu messen“ klickst.";
-"eco" = "Energiesparend messen";
-"ecoDetail" = "Misst mit niedriger Priorität auf den Effizienzkernen. Das dauert etwas länger, braucht aber deutlich weniger Strom und hält den Mac kühl.";
 "extraFolders" = "Zusätzliche Ordner";
 "none" = "Keine";
 "add" = "Hinzufügen";
 "remove" = "Entfernen";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "Aufräumen";
+"paneApps" = "Ungenutzte Apps";
+"sectionTidy" = "Platz schaffen";
+"layoutList" = "Liste";
+"layoutGrid" = "Raster";
+"settings" = "Einstellungen";
+"emptyFolder" = "Dieser Ordner ist leer";
+"otherCategories" = "Weitere";
+"cleanCaches" = "Zwischenspeicher von Apps";
+"cleanCachesDetail" = "Zwischenspeicher, die Apps bei Bedarf neu anlegen. Laufende Apps und macOS selbst bleiben unberührt.";
+"cleanDeveloper" = "Zwischenspeicher für Entwickler";
+"cleanDeveloperDetail" = "Build-Daten von Xcode und Paket-Caches wie npm; sie entstehen beim nächsten Bauen neu.";
+"cleanLogs" = "Alte Protokolle";
+"cleanLogsDetail" = "Protokolle von Apps, die älter als eine Woche sind.";
+"cleanTemporary" = "Alte temporäre Dateien";
+"cleanTemporaryDetail" = "Temporäre Dateien, die seit mindestens drei Tagen nicht mehr geändert wurden.";
+"cleanTrash" = "Papierkorb";
+"cleanTrashDetail" = "Leert den Papierkorb endgültig. Standardmäßig nicht ausgewählt.";
+"cleanFailed" = "%@ Einträge ließen sich nicht entfernen, weil sie gerade benutzt werden oder geschützt sind.";
+"cleaning" = "Räume auf …";
+"cleanerRefresh" = "Neu suchen";
+"cleanSelected" = "Auswahl aufräumen (%@)";
+"cleanConfirmTitle" = "%@ endgültig entfernen?";
+"cleanConfirmMessage" = "Die Dateien landen nicht im Papierkorb. Apps legen ihre Zwischenspeicher bei Bedarf neu an. Danach misst die App alles neu.";
+"appsNoneUnused" = "Alle Apps wurden in letzter Zeit benutzt";
+"unusedSince" = "Nicht geöffnet seit";
+"daysOption" = "mehr als %@ Tagen";
+"trashAppTitle" = "„%@“ in den Papierkorb legen?";
+"trashAppMessage" = "Aus dem Papierkorb lässt sich die App wiederherstellen, bis du ihn leerst.";
+"moveToTrash" = "In den Papierkorb";
+"lastOpened" = "Zuletzt geöffnet am %@";
+"trashAppFailed" = "„%@“ ließ sich nicht verschieben. Im Finder geht es mit deinem Passwort.";
+"figureFiles" = "Dateien";
+"figureUnusedApps" = "ungenutzte Apps";
+"bucketUnder1MB" = "unter 1 MB";
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "über 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ gemessen";
+"scanningArea" = "Bereich %@ von %@ · %@";
+"emptyValue" = "leer";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Gemessen wird der belegte Platz wie mit „du“. APFS-Klone zählen dabei voll mit, Kopien mit gemeinsamen Speicherblöcken belegen real weniger. „System & Sonstiges“ ist der Rest bis zur Belegung, die macOS meldet.";
+"infoCleaner" = "Hier entfernst du Dateien, die dein System kaum oder gar nicht brauchen: Zwischenspeicher, die von selbst neu entstehen, alte Protokolle und alte temporäre Dateien. Wähle aus, was weg darf, und bestätige.";
+"infoApps" = "Apps, die du länger nicht geöffnet hast. Das Datum stammt von macOS selbst; die App zeichnet nichts auf. Was du nicht mehr brauchst, legst du hier in den Papierkorb und kannst es von dort wiederherstellen.";
+"infoExplorer" = "Alle gemessenen Ordner, sortiert nach Größe. Ein Doppelklick öffnet einen Ordner, das Kontextmenü zeigt Dateien im Finder und Informationen dazu.";
+"infoLargeFiles" = "Alle Dateien ab der gewählten Größe aus der letzten Messung. Ein Doppelklick zeigt die Datei im Finder.";
+"infoTemporaryFiles" = "macOS legt diesen Bereich für jeden Benutzer unter /private/var/folders an. Er ist im Finder versteckt und wird in „Speicher verwalten“ nicht aufgeschlüsselt.";
+"infoCopies" = "Beim Prüfen der Signatur legt macOS manchmal vollständige Kopien einer App im Ordner X an. Das sind keine eigenen Programme; macOS erstellt bei Bedarf eine neue. Löschen ist unbedenklich, solange die App beendet ist.";
+"infoVolume" = "Kapazität dieses Datenträgers: was belegt ist, was macOS bei Bedarf selbst freigeben kann und was frei ist. Externe Datenträger lassen sich hier messen.";
+"aboutPage" = "Über diese Seite";
+"scanDetails" = "Messung";
+"scanProgress" = "Fortschritt";
+"scanArea" = "Bereich";
+"scanFinished" = "Gemessen um";
+"accessMissingShort" = "Nicht erteilt";
+"summaryTitle" = "Kurz gesagt";
+"summaryDisk" = "Auf „%@“ sind %@ von %@ belegt, %@ sind verfügbar.";
+"summaryTop" = "Am meisten Platz brauchen %@ mit %@ und %@ mit %@.";
+"summaryNotMeasured" = "Wie sich der Platz verteilt, steht nach der ersten Messung hier.";
+"summaryClean" = "Beim Aufräumen lassen sich etwa %@ freigeben.";
+"summaryCopies" = "Kopien von Apps, die macOS beim Prüfen anlegt, belegen gezählt %@.";
+"summaryApps" = "%@ Apps wurden länger nicht geöffnet.";
+"readAloud" = "Vorlesen";
+"stopReading" = "Vorlesen beenden";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "Wie groß sind deine Dateien?";
+"sizeClassesCaption" = "Wie viel Platz jede Größenklasse belegt und wie viele Dateien darin liegen. Meist belegen wenige große Dateien mehr als viele kleine.";
+"figureLargeFilesFrom" = "große Dateien ab %@";
+"bucketValue" = "%@
+%@ Dateien";
+"settingsSystemNote" = "Erscheinungsbild, Sprache und Einheiten übernimmt die App aus den Systemeinstellungen. Eine eigene Sprache für diese App stellst du dort unter Allgemein › Sprache & Region › Apps ein.";

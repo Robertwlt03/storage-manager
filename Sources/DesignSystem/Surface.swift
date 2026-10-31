@@ -1,38 +1,25 @@
 import AppKit
 import SwiftUI
 
-/// Liquid Glass is available from macOS 26; below that, or when switched off, surfaces fall back to classic cards.
-enum Glass {
-    static var isAvailable: Bool {
-        if #available(macOS 26.0, *) { true } else { false }
-    }
-}
-
-/// Card background: Liquid Glass or a classic opaque card, chosen by the setting.
+/// Card background: Liquid Glass, which follows the system's own setting (clear or tinted, System
+/// Settings › Appearance).
 private struct SurfaceModifier: ViewModifier {
-    @AppStorage(SettingsKey.liquidGlass) private var glass = true
-    let radius: CGFloat
-
     func body(content: Content) -> some View {
-        let shape = RoundedRectangle(cornerRadius: radius, style: .continuous)
-        if #available(macOS 26.0, *), glass {
-            content.glassEffect(.regular, in: shape)
-        } else {
-            content
-                .background(Color(nsColor: .controlBackgroundColor), in: shape)
-                .overlay(shape.strokeBorder(.separator, lineWidth: 0.5))
-        }
+        let shape = RoundedRectangle(cornerRadius: Layout.cardRadius, style: .continuous)
+        content.glassEffect(.regular, in: shape)
     }
 }
 
-/// Button roles with their own colour, so several buttons side by side stay distinguishable.
+/// Button roles with their own color, so several buttons side by side stay distinguishable.
+/// `quiet` is a bare symbol button (sidebar footer, information button); `content` makes a
+/// whole row, tile or legend entry clickable without drawing a button around it.
 enum ButtonKind {
-    case normal, primary, confirm
+    case normal, primary, confirm, quiet, content
 
-    /// Fill behind white text; nil = neutral system button.
+    /// The fill behind white text, if the kind has one.
     var fill: Tone? {
         switch self {
-        case .normal: nil
+        case .normal, .quiet, .content: nil
         case .primary: Theme.primaryFill
         case .confirm: Theme.confirmFill
         }
@@ -40,36 +27,35 @@ enum ButtonKind {
 }
 
 private struct AppButtonModifier: ViewModifier {
-    @AppStorage(SettingsKey.liquidGlass) private var glass = true
     let kind: ButtonKind
 
     func body(content: Content) -> some View {
+        switch kind {
+        case .quiet: content.buttonStyle(.borderless)
+        case .content: content.buttonStyle(.plain)
+        case .normal, .primary, .confirm: framed(content)
+        }
+    }
+
+    @ViewBuilder private func framed(_ content: Content) -> some View {
         if let fill = kind.fill {
-            if #available(macOS 26.0, *), glass { content.buttonStyle(.glassProminent).tint(fill.color) }
-            else { content.buttonStyle(.borderedProminent).tint(fill.color) }
+            content.buttonStyle(.glassProminent).tint(fill.color)
         } else {
-            if #available(macOS 26.0, *), glass { content.buttonStyle(.glass) } else { content.buttonStyle(.bordered) }
+            content.buttonStyle(.glass)
         }
     }
 }
 
-/// Calm, static page background. With Liquid Glass a light accent tint gives the glass something to refract.
+/// Plain window background behind pages, like other Apple apps.
 struct Backdrop: View {
-    @AppStorage(SettingsKey.liquidGlass) private var glass = true
-
-    var body: some View {
-        ZStack {
-            Color(nsColor: .windowBackgroundColor)
-            if glass && Glass.isAvailable {
-                LinearGradient(colors: [Color.accentColor.opacity(Layout.backdropOpacity), .clear],
-                               startPoint: .topLeading, endPoint: .bottomTrailing)
-            }
-        }
-        .ignoresSafeArea()
-    }
+    var body: some View { Theme.windowBackground.ignoresSafeArea() }
 }
 
 extension View {
-    func surface(radius: CGFloat = Layout.cardRadius) -> some View { modifier(SurfaceModifier(radius: radius)) }
-    func appButton(_ kind: ButtonKind = .normal) -> some View { modifier(AppButtonModifier(kind: kind)) }
+    func surface() -> some View { modifier(SurfaceModifier()) }
+    /// A round glass button for the toolbar, drawn by the button itself (see ARCHITECTURE.md).
+    func glassCircle() -> some View { buttonStyle(.glass).buttonBorderShape(.circle) }
+    func appButton(_ kind: ButtonKind = .normal) -> some View {
+        modifier(AppButtonModifier(kind: kind))
+    }
 }

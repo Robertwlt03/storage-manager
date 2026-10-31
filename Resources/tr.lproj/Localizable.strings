@@ -1,0 +1,243 @@
+/* App and sidebar */
+"appName" = "Storage Manager";
+"paneOverview" = "Genel Bakış";
+"paneExplorer" = "Klasörler";
+"paneLargeFiles" = "Büyük Dosyalar";
+"paneTemporaryFiles" = "Geçici Alan";
+"paneCopies" = "Uygulama Kopyaları";
+"sectionSystem" = "Gizli Alanlar";
+"sectionVolumes" = "Birimler";
+"rescan" = "Yeniden Tara";
+"rescanHelp" = "Tüm alanları yeniden tara (⌘R)";
+"cancelScan" = "Taramayı İptal Et";
+
+/* Scan status and placeholders */
+"cancel" = "İptal";
+"filesAndSize" = "%@ dosya · %@";
+"measuredAt" = "%@ saatinde tarandı";
+"scanNow" = "Şimdi Tara";
+"unreadable" = "%@ klasör okunamıyor – Tam Disk Erişimine izin ver …";
+"notMeasuredTitle" = "Henüz Taranmadı";
+"notMeasuredDetail" = "Tek bir geçiş tüm alanları ölçer; ardından her tıklama anında yanıt verir.";
+"scanningTitle" = "Taranıyor …";
+"scanningDetail" = "İlk alan tamamlanır tamamlanmaz sonuçlar görünür.";
+"loadingSummaryTitle" = "Özet yazılıyor …";
+"loadingSummaryDetail" = "Tüm alanlar ölçüldüğünde burada depolamanın durumunu birkaç cümleyle görürsün.";
+"loadingSizesTitle" = "Dosyalar boyuta göre sayılıyor …";
+"loadingSizesDetail" = "Tüm alanlar ölçülür ölçülmez grafik görünür.";
+"loadingAppsTitle" = "Uygulamalar kontrol ediliyor …";
+"loadingAppsDetail" = "Boyutlar ve son kullanım, tarama bittiğinde kesinleşir.";
+"showSidebar" = "Kenar Çubuğunu Göster";
+"hideSidebar" = "Kenar Çubuğunu Gizle";
+
+/* Overview and categories */
+"availableOf" = "%@ kullanılabilir, toplam %@";
+"categories" = "Kategoriler";
+"freeSpace" = "Boş";
+"temporaryAreaName" = "Geçici Sistem Alanı";
+"categoryApps" = "Uygulamalar";
+"categoryDocuments" = "Belgeler ve Masaüstü";
+"categoryDownloads" = "İndirilenler";
+"categoryMedia" = "Fotoğraflar, Müzik ve Filmler";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail ve Mesajlar";
+"categoryDeveloper" = "Geliştirici";
+"categoryCaches" = "Önbellekler";
+"categoryAppData" = "Uygulama Verileri";
+"categoryTrash" = "Çöp Sepeti";
+"categoryTemporary" = "Geçici Dosyalar";
+"categoryUser" = "Diğer Kullanıcı Verileri";
+"categoryLibrary" = "Paylaşılan Uygulama Verileri";
+"categoryOther" = "Diğer Klasörler";
+"categoryPurgeable" = "macOS Tarafından Temizlenebilir";
+"categorySystem" = "Sistem ve Diğer";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Ad";
+"columnSize" = "Boyut";
+"columnShare" = "Pay";
+"columnFiles" = "Dosyalar";
+"columnLocation" = "Konum";
+"smallerItems" = "1 MB altında %@ küçük öğe";
+"measuredTotal" = "%@ tarandı";
+"open" = "Aç";
+"showInFinder" = "Finder'da Göster";
+"info" = "Bilgi Al";
+"copyPath" = "Yolu Kopyala";
+"done" = "Bitti";
+"allocated" = "Diskteki Boyut";
+"kind" = "Tür";
+"modified" = "Değiştirilme";
+"created" = "Oluşturulma";
+"contents" = "İçerik";
+"files" = "Dosyalar";
+"folders" = "Klasörler";
+"packages" = "Uygulama Paketleri";
+"modifiedBetween" = "Değiştirilme Aralığı";
+"dateRange" = "%@ ile %@ arasında";
+"analyzing" = "Dosyalar çözümleniyor …";
+"typesBySize" = "Boyuta Göre Dosya Türleri";
+"fileCount" = "%@ dosya";
+"noExtension" = "uzantısız";
+
+/* Large files */
+"minimumSize" = "Minimum Boyut";
+"fromSize" = "%@ ve üzeri";
+"noFilesFrom" = "%@ ve üzeri dosya yok";
+"filesTotal" = "%@ dosya · toplam %@";
+
+/* Temporary area */
+"location" = "Konum";
+"total" = "Toplam";
+"subfolders" = "Alt Klasörler";
+"viewCopies" = "Uygulama Kopyalarını Göster …";
+"temporaryFolderT" = "Geçici Dosyalar";
+"temporaryFolderTDetail" = "Çoğunlukla yeniden başlatmada boşaltılır.";
+"temporaryFolderC" = "Önbellekler";
+"temporaryFolderCDetail" = "Uygulamaların ve sistem hizmetlerinin önbellekleri.";
+"temporaryFolderX" = "Uygulama Kopyaları";
+"temporaryFolderXDetail" = "macOS'un imzaları kontrol ederken oluşturduğu kopyalar.";
+"temporaryFolder0" = "Sistem Hizmetleri";
+"temporaryFolder0Detail" = "Arka plan hizmetlerinin verileri.";
+
+/* Signature copies */
+"noCopies" = "Uygulama Kopyası Yok";
+"noCopiesDetail" = "X klasöründe uygulama kopyası yok.";
+"running" = "çalışıyor";
+"stopped" = "kapalı";
+"copiesLabel" = "Kopyalar";
+"countedSize" = "Sayılan Boyut";
+"installedVersion" = "Yüklü Sürüm";
+"notFound" = "bulunamadı";
+"versionLabel" = "Sürüm %@";
+"copiesOne" = "1 kopya";
+"copiesMany" = "%@ kopya";
+"current" = "güncel";
+"old" = "eski";
+"unknown" = "bilinmiyor";
+"createdOn" = "%@ tarihinde oluşturuldu";
+"freed" = "Gerçekten boşalan alan: %@";
+"deleteError" = "Her şey silinemedi: %@";
+"quitToDelete" = "Silmek için %@ uygulamasından ⌘Q ile çıkın.";
+"openInExplorer" = "Gezgin'de Aç";
+"deleteAll" = "Tüm Kopyaları Sil …";
+"deleteTitle" = "%@ kopya silinsin mi (%@)?";
+"deleteForever" = "Kalıcı Olarak Sil";
+"deleteMessage" = "Kopyalar Çöp Sepeti'ne gitmez. macOS gerektiğinde yenisini oluşturur.";
+
+/* Volumes */
+"capacity" = "Kapasite";
+"used" = "Kullanılan";
+"purgeable" = "macOS Tarafından Temizlenebilir";
+"available" = "Kullanılabilir";
+"toOverview" = "Genel Bakışa Git";
+"exploreContents" = "İçeriği Keşfet";
+"scanAndExplore" = "Tara ve Keşfet";
+"volumeGone" = "Birim Artık Bağlı Değil";
+
+/* Search */
+"searchPrompt" = "Klasörleri ve dosyaları ara";
+"scopeAll" = "Tümü";
+"scopeFolders" = "Klasörler";
+"scopeFiles" = "Dosyalar";
+"searchResults" = "%@ Sonuç";
+"noResults" = "“%@” için sonuç yok";
+"searchNote" = "Son taramadaki 1 MB ve üzeri klasörlerde ve dosyalarda arar.";
+
+/* Full Disk Access */
+"accessTitle" = "Çok Sayıda İstem Yerine Tek İzin";
+"accessDetail" = "Tam Disk Erişimi olmadan macOS; Masaüstü, Belgeler, İndirilenler, iCloud Drive, diğer uygulamaların verileri ve harici birimler için ayrı ayrı sorar. Sistem Ayarları'ndaki tek bir anahtar bu istemlerin hepsinin yerini alır. Uygulama yalnızca adları, boyutları ve tarihleri okur, belgelerinizin içeriğini asla okumaz ve hiçbir yere bir şey göndermez.";
+"accessOneSwitch" = "Gizlilik ve Güvenlik › Tam Disk Erişimi";
+"accessOpenSettings" = "Sistem Ayarları'nı Aç";
+"accessContinue" = "Tam Disk Erişimi Olmadan Devam Et";
+"accessGranted" = "İzin Verildi";
+"accessRestart" = "Uygulamayı Yeniden Başlat";
+"accessRestartHint" = "Anahtarı açtınız mı? macOS erişimi ancak uygulama yeniden başladıktan sonra verir. “Uygulamayı Yeniden Başlat”ı tıklayın ya da macOS'in uygulamayı kapatıp yeniden açmasına izin verin. Yine de çalışmıyorsa girişi Sistem Ayarları'nda “–” ile kaldırın ve uygulamayı yeniden ekleyin.";
+"quitApp" = "%@ Uygulamasından Çık";
+"fullDiskAccess" = "Tam Disk Erişimi";
+
+/* Settings */
+"autoScan" = "Açılışta otomatik tara";
+"extraFolders" = "Ek Klasörler";
+"none" = "Yok";
+"add" = "Ekle";
+"remove" = "Kaldır";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "Temizle";
+"paneApps" = "Kullanılmayan Uygulamalar";
+"sectionTidy" = "Yer Aç";
+"layoutList" = "Liste";
+"layoutGrid" = "Izgara";
+"settings" = "Ayarlar";
+"emptyFolder" = "Bu klasör boş";
+"otherCategories" = "Diğer";
+"cleanCaches" = "Uygulama Önbellekleri";
+"cleanCachesDetail" = "Uygulamaların gerektiğinde yeniden oluşturduğu önbellekler. Çalışan uygulamalara ve macOS'un kendisine dokunulmaz.";
+"cleanDeveloper" = "Geliştirici Önbellekleri";
+"cleanDeveloperDetail" = "Xcode derleme verileri ve npm gibi paket önbellekleri; bir sonraki derlemede yeniden oluşturulurlar.";
+"cleanLogs" = "Eski Günlükler";
+"cleanLogsDetail" = "Bir haftadan eski uygulama günlükleri.";
+"cleanTemporary" = "Eski Geçici Dosyalar";
+"cleanTemporaryDetail" = "En az üç gündür değiştirilmemiş geçici dosyalar.";
+"cleanTrash" = "Çöp Sepeti";
+"cleanTrashDetail" = "Çöp Sepeti'ni kalıcı olarak boşaltır. Varsayılan olarak seçili değildir.";
+"cleanFailed" = "%@ öğe, kullanımda olduğu veya korumalı olduğu için kaldırılamadı.";
+"cleaning" = "Temizleniyor …";
+"cleanerRefresh" = "Yeniden Ara";
+"cleanSelected" = "Seçimi Temizle (%@)";
+"cleanConfirmTitle" = "%@ kalıcı olarak kaldırılsın mı?";
+"cleanConfirmMessage" = "Dosyalar Çöp Sepeti'ne gitmez. Uygulamalar önbelleklerini gerektiğinde yeniden oluşturur. Ardından uygulama her şeyi yeniden tarar.";
+"appsNoneUnused" = "Tüm uygulamalar yakın zamanda kullanıldı";
+"unusedSince" = "Şu süredir açılmadı";
+"daysOption" = "%@ günden fazla";
+"trashAppTitle" = "“%@” Çöp Sepeti'ne taşınsın mı?";
+"trashAppMessage" = "Çöp Sepeti'ni boşaltana kadar uygulamayı oradan geri yükleyebilirsiniz.";
+"moveToTrash" = "Çöp Sepeti'ne Taşı";
+"lastOpened" = "Son açılış: %@";
+"trashAppFailed" = "“%@” taşınamadı. Finder'da parolanızla çalışır.";
+"figureFiles" = "Dosyalar";
+"figureUnusedApps" = "kullanılmayan uygulama";
+"bucketUnder1MB" = "1 MB altı";
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "1 GB üzeri";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ tarandı";
+"scanningArea" = "Alan %@ / %@ · %@";
+"emptyValue" = "boş";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Boyutlar, “du” komutunun bildirdiği gibi kullanılan alandır. APFS klonları tam sayılır; depolama bloklarını paylaşan kopyalar gerçekte daha az yer kaplar. “Sistem ve Diğer”, macOS'un kullanılan olarak bildirdiği miktara kadar kalan kısımdır.";
+"infoCleaner" = "Sisteminizin pek ya da hiç ihtiyaç duymadığı dosyaları kaldırın: kendiliğinden yeniden oluşan önbellekler, eski günlükler ve eski geçici dosyalar. Nelerin gidebileceğini seçin ve onaylayın.";
+"infoApps" = "Bir süredir açmadığınız uygulamalar. Tarih macOS'un kendisinden gelir; uygulama hiçbir şey kaydetmez. Artık ihtiyacınız olmayanları buradan Çöp Sepeti'ne taşıyın; oradan geri yükleyebilirsiniz.";
+"infoExplorer" = "Ölçülen tüm klasörler, boyuta göre sıralı. Çift tıklama bir klasörü açar; bağlam menüsü dosyaları Finder'da gösterir ve bunlar hakkında bilgi verir.";
+"infoLargeFiles" = "Son taramadaki seçilen boyut ve üzerindeki tüm dosyalar. Çift tıklama dosyayı Finder'da gösterir.";
+"infoTemporaryFiles" = "macOS bu alanı her kullanıcı için /private/var/folders altında oluşturur. Finder'da gizlidir ve “Depolamayı Yönet” içinde ayrıntılandırılmaz.";
+"infoCopies" = "Bir imzayı kontrol ederken macOS bazen bir uygulamanın tam kopyalarını X klasörüne yerleştirir. Bunlar ayrı programlar değildir; macOS gerektiğinde yenisini oluşturur. Uygulama kapalıyken silmek güvenlidir.";
+"infoVolume" = "Bu birimin kapasitesi: kullanılan, macOS'un gerektiğinde kendiliğinden boşaltabileceği ve boş olan alan. Harici birimler burada taranabilir.";
+"aboutPage" = "Bu Sayfa Hakkında";
+"scanDetails" = "Tarama";
+"scanProgress" = "İlerleme";
+"scanArea" = "Alan";
+"scanFinished" = "Tarama zamanı";
+"accessMissingShort" = "Verilmedi";
+"summaryTitle" = "Kısaca";
+"summaryDisk" = "“%@” üzerinde %@ / %@ kullanılıyor ve %@ kullanılabilir.";
+"summaryTop" = "En çok yeri %@ (%@) ve %@ (%@) kaplıyor.";
+"summaryNotMeasured" = "Alanın nasıl dağıldığı ilk taramadan sonra burada görünür.";
+"summaryClean" = "Temizleyerek yaklaşık %@ boşaltılabilir.";
+"summaryCopies" = "macOS'un kontrol sırasında oluşturduğu uygulama kopyaları %@ yer sayılıyor.";
+"summaryApps" = "%@ uygulama bir süredir açılmadı.";
+"readAloud" = "Sesli Oku";
+"stopReading" = "Okumayı Durdur";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "Dosyalarınız ne kadar büyük?";
+"sizeClassesCaption" = "Her boyut sınıfının ne kadar yer kapladığı ve içinde kaç dosya olduğu. Birkaç büyük dosya genellikle çok sayıda küçük dosyadan daha fazla yer kaplar.";
+"figureLargeFilesFrom" = "%@ ve üzeri büyük dosyalar";
+"bucketValue" = "%@
+%@ dosya";
+"settingsSystemNote" = "Görünüm, dil ve birimler Sistem Ayarları'ndan alınır. Bu uygulama için ayrı bir dil, orada Genel › Dil ve Bölge › Uygulamalar altında ayarlanır.";

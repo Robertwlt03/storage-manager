@@ -4,3 +4,8 @@ build/
 .swiftpm/
 .idea/
 dist/
+local.mk
+snapshots/
+__pycache__/
+CLAUDE.local.md
+assets/local/

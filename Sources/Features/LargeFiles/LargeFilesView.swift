@@ -3,28 +3,44 @@ import SwiftUI
 /// All files from a chosen size, straight from the last scan.
 struct LargeFilesView: View {
     @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.largeFileMB) private var minMB = LargeFileThreshold.defaultMB
-    @State private var entries: [Entry] = []
+    @AppStorage(SettingsKey.largeFileMegabytes) private var minimumMegabytes = LargeFileThreshold
+        .defaultMegabytes
 
-    var body: some View {
-        let sum = entries.reduce(0) { $0 + $1.bytes }
-        EntryTable(entries: entries, total: sum, showLocation: true)
-            .overlay {
-                if !model.hasData { UI.notMeasured() }
-                else if entries.isEmpty { UI.empty(Loc.noFilesFrom.f(threshold(minMB)), symbol: Symbols.search) }
-            }
-            .navigationTitle(Loc.paneLargeFiles.s)
-            .navigationSubtitle(Loc.filesTotal.f(Fmt.count(entries.count), Fmt.bytes(sum)))
-            .toolbar {
-                Picker(Loc.minSize.s, selection: $minMB) {
-                    ForEach(LargeFileThreshold.optionsMB, id: \.self) { Text(Loc.fromSize.f(threshold($0))).tag($0) }
-                }
-                .pickerStyle(.menu)
-            }
-            .task(id: "\(minMB)-\(model.revision)") {
-                entries = SearchService.largeFiles(atLeast: LargeFileThreshold.bytes(minMB), in: model.root)
-            }
+    /// Computed right away, so the table starts with its rows instead of diffing thousands in
+    /// later.
+    private var largeFiles: [Entry] {
+        _ = model.revision
+        let minimumBytes = LargeFileThreshold.bytes(minimumMegabytes)
+        return SearchService.largeFiles(atLeast: minimumBytes, in: model.root)
     }
 
-    private func threshold(_ mb: Int) -> String { Fmt.bytes(LargeFileThreshold.bytes(mb)) }
+    var body: some View {
+        let files = largeFiles
+        let totalBytes = files.reduce(0) { total, file in total + file.bytes }
+        EntryBrowser(
+            entries: files, total: totalBytes, showsLocation: true,
+            emptyTitle: TextKey.noFilesFrom.translated(with: thresholdText(minimumMegabytes)),
+            contentKey: "\(minimumMegabytes)"
+        )
+        .navigationTitle(TextKey.paneLargeFiles.translated)
+        .navigationSubtitle(
+            TextKey.filesTotal.translated(
+                with: Format.count(files.count), Format.bytes(totalBytes))
+        )
+        .safeAreaInset(edge: .top, spacing: 0) {
+            UI.PageHeader(Pane.largeFiles.information) { minimumSizePicker }
+        }
+    }
+
+    private var minimumSizePicker: some View {
+        UI.MenuPicker(.minimumSize, selection: $minimumMegabytes) {
+            ForEach(LargeFileThreshold.megabyteOptions, id: \.self) { megabytes in
+                Text(TextKey.fromSize.translated(with: thresholdText(megabytes))).tag(megabytes)
+            }
+        }
+    }
+
+    private func thresholdText(_ megabytes: Int) -> String {
+        Format.bytes(LargeFileThreshold.bytes(megabytes))
+    }
 }

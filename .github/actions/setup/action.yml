@@ -1,0 +1,29 @@
+# Prepares a Mac for the checks, the same for every job of .github/workflows/checks.yml: a fixed
+# Python and a fixed SwiftLint. The job checks out the code first, as GitHub reads this file from
+# it.
+name: Set up the checks
+description: Python 3.14 and SwiftLint in a fixed version, checked by checksum
+
+runs:
+  using: composite
+  steps:
+    # The scripts need Python 3.13 or newer; a fixed one, so a new release never changes a run.
+    # Pinned to a commit, which nobody can move; for a newer version, pin its commit here.
+    - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+      with:
+        python-version: "3.14"
+    # A fixed version, so a new SwiftLint never turns the checks red on unchanged code. The
+    # download must match the checksum GitHub shows for the release, or the job stops here.
+    - name: Install SwiftLint
+      shell: bash
+      env:
+        SWIFTLINT_RELEASES: https://github.com/realm/SwiftLint/releases/download
+        SWIFTLINT_VERSION: 0.65.1
+        SWIFTLINT_CHECKSUM: c1e429b0599cf1b516f369a2d9ec04eaf0e436f3c12b637df8851fa52ff694d0
+      run: |
+        archive="$RUNNER_TEMP/swiftlint.zip"
+        curl --fail --silent --show-error --location --output "$archive" \
+          "$SWIFTLINT_RELEASES/$SWIFTLINT_VERSION/portable_swiftlint.zip"
+        echo "$SWIFTLINT_CHECKSUM  $archive" | shasum --algorithm 256 --check
+        unzip -q "$archive" -d "$RUNNER_TEMP/swiftlint"
+        echo "$RUNNER_TEMP/swiftlint" >> "$GITHUB_PATH"

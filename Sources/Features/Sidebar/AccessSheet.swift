@@ -1,36 +1,52 @@
 import AppKit
 import SwiftUI
 
-/// Shown at every launch until Full Disk Access works: one switch in System Settings instead of many single prompts.
+/// Shown at every launch until Full Disk Access works: one switch in System Settings instead of
+/// many single prompts.
 struct AccessSheet: View {
     @Environment(AppModel.self) private var model
-    @State private var visitedSettings = false
+    @State private var hasVisitedSettings = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Layout.spacing) {
-            UI.header(Loc.accessTitle.s, subtitle: Loc.accessOneSwitch.s, icon: .file(Bundle.main.bundlePath))
-            UI.note(Loc.accessDetail.s)
-            if visitedSettings { UI.status(Loc.accessRestartHint.s, symbol: Symbols.warning, .warn) }
-            HStack {
-                UI.button(Loc.accessContinue.s) { model.finishAccessSheet() }
-                Spacer()
-                UI.button(Loc.accessOpenSettings.s, .primary) {
-                    visitedSettings = true
-                    FinderService.openFullDiskAccessSettings()
-                }
-                .keyboardShortcut(visitedSettings ? nil : .defaultAction)
-                if visitedSettings {
-                    UI.button(Loc.accessRestart.s, .confirm) { LifecycleService.relaunch() }
-                        .keyboardShortcut(.defaultAction)
-                }
+        VStack(alignment: .leading, spacing: Space.section) {
+            UI.TitleRow(
+                TextKey.accessTitle.translated, subtitle: TextKey.accessOneSwitch.translated,
+                icon: .file(Bundle.main.bundlePath))
+            UI.Note(TextKey.accessDetail.translated)
+            if hasVisitedSettings {
+                UI.Note(TextKey.accessRestartHint.translated, .warning(symbol: Symbols.warning))
             }
+            buttons
         }
-        .padding(Layout.pagePadding)
+        .padding(Space.page)
         .frame(width: Layout.sheetWidth)
-        // Back from System Settings: close if access works already, otherwise the hint above explains the restart.
-        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+        // Back from System Settings: close if access works already, otherwise the hint above
+        // explains the restart.
+        .onReceive(
+            NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)
+        ) { _ in
             model.refreshAccess()
             if model.hasFullDiskAccess { model.finishAccessSheet() }
         }
+    }
+
+    private var buttons: some View {
+        HStack {
+            UI.ActionButton(TextKey.accessContinue.translated) { model.finishAccessSheet() }
+            Spacer()
+            UI.ActionButton(TextKey.accessOpenSettings.translated, .primary) {
+                hasVisitedSettings = true
+                FinderService.openFullDiskAccessSettings()
+            }
+            .keyboardShortcut(hasVisitedSettings ? nil : .defaultAction)
+            if hasVisitedSettings { restartButton }
+        }
+    }
+
+    private var restartButton: some View {
+        UI.ActionButton(TextKey.accessRestart.translated, .confirm) {
+            LifecycleService.relaunch()
+        }
+        .keyboardShortcut(.defaultAction)
     }
 }

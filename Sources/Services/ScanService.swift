@@ -1,90 +1,119 @@
 import Foundation
 
 /// Measures a folder in one fts pass and returns the folder tree.
-enum ScanService {
+nonisolated enum ScanService {
     struct Progress {
         var files = 0
         var bytes: Int64 = 0
-        static func + (a: Progress, b: Progress) -> Progress { Progress(files: a.files + b.files, bytes: a.bytes + b.bytes) }
+        static func + (left: Progress, right: Progress) -> Progress {
+            Progress(files: left.files + right.files, bytes: left.bytes + right.bytes)
+        }
     }
 
     struct Result {
         let root: Node
-        let unreadable: Int
+        let unreadableCount: Int
     }
 
-    /// Roots measured by "Rescan": the default areas plus the folders from the settings, without duplicates
-    /// and without folders that lie inside another root (nothing counts twice).
-    static func defaultRoots() -> [String] {
-        let all = (Paths.defaultScanRoots + AppSettings.extraFolders).map(Paths.real).filter(Paths.exists)
-        return all.enumerated().filter { i, p in
-            all.firstIndex(of: p) == i && !all.contains { $0 != p && p.hasPrefix($0 + "/") }
-        }.map(\.element)
+    /// Roots measured by "Rescan": the default areas plus the folders from the settings, without
+    /// duplicates and without folders that lie inside another root (nothing counts twice).
+    @MainActor static func defaultRoots() -> [String] {
+        let wantedFolders = Paths.defaultScanRoots + AppSettings.extraFolders
+        let existingFolders = wantedFolders.map(Paths.withoutSymlinks).filter(Paths.exists)
+        return withoutDuplicatesOrNesting(existingFolders)
     }
 
-    /// Runs on the caller's thread; call it from a low-priority task. Nil when cancelled.
-    static func scan(_ path: String, progress: (Progress) -> Void) -> Result? {
+    /// Keeps each folder once, in its order, and drops folders that lie inside another one.
+    static func withoutDuplicatesOrNesting(_ folders: [String]) -> [String] {
+        func liesInsideAnother(_ folder: String) -> Bool {
+            folders.contains { other in other != folder && folder.hasPrefix(other + "/") }
+        }
+        return folders.enumerated()
+            .filter { index, folder in
+                folders.firstIndex(of: folder) == index && !liesInsideAnother(folder)
+            }
+            .map(\.element)
+    }
+
+    /// Runs on the caller's thread; call it from a low-priority task. Nil when canceled.
+    static func scan(_ path: String, progress reportProgress: (Progress) -> Void) -> Result? {
         var builder = TreeBuilder()
-        var unreadable = 0
-        var counter = 0
+        var visitedEntries = 0
         var lastReport = Date()
 
-        let finished = FTS.walk(path) { ent in
-            counter += 1
-            if counter & ScanConfig.cancelCheckMask == 0 {
-                if Task.isCancelled { return false }
-                if Date().timeIntervalSince(lastReport) > ScanConfig.progressInterval {
-                    progress(builder.progress)
-                    lastReport = Date()
-                }
+        let isComplete = FileTreeWalker.walk(path) { entry in
+            visitedEntries += 1
+            let isCheckpoint = visitedEntries & ScanLimits.cancelCheckMask == 0
+            if isCheckpoint && Task.isCancelled { return false }
+            if isCheckpoint && Date().timeIntervalSince(lastReport) > ScanLimits.progressInterval {
+                reportProgress(builder.progress)
+                lastReport = Date()
             }
-            switch FTS.info(ent) {
-            case FTS_D:
-                builder.enter(builder.root == nil ? path : FTS.name(ent))
-            case FTS_DP:
-                builder.leave()
-            case FTS_DNR:  // an unreadable folder arrives as FTS_D first and as FTS_DNR instead of FTS_DP
-                unreadable += 1
-                builder.leave()
-            case FTS_F, FTS_SL, FTS_SLNONE, FTS_DEFAULT:
-                if let st = ent.pointee.fts_statp?.pointee { builder.addFile(st) { FTS.name(ent) } }
-            case FTS_ERR, FTS_NS:
-                unreadable += 1
-            default:
-                break
-            }
+            builder.add(entry, scanRoot: path)
             return true
         }
-        guard finished, let root = builder.root else { return nil }
-        progress(builder.progress)
-        return Result(root: root, unreadable: unreadable)
+        if Task.isCancelled { return nil }
+        if !isComplete { builder.closeAfterError() }
+        guard let root = builder.root else { return nil }
+        reportProgress(builder.progress)
+        return Result(root: root, unreadableCount: builder.unreadableCount)
     }
 }
 
 /// Builds the folder tree while fts walks the disk.
-private struct TreeBuilder {
-    private var stack: [Node] = []
-    private var seenLinks = Set<UInt64>()  // hard-linked files count once, like du
+private nonisolated struct TreeBuilder {
+    private var openFolders: [Node] = []
+    /// Hard-linked files count once, like du.
+    private var seenLinkedFiles = Set<UInt64>()
     private(set) var root: Node?
     private(set) var progress = ScanService.Progress()
+    private(set) var unreadableCount = 0
 
-    mutating func enter(_ name: String) {
-        let node = Node(name: name, parent: stack.last)
+    mutating func add(_ entry: UnsafeMutablePointer<FTSENT>, scanRoot: String) {
+        switch FileTreeWalker.kind(of: entry) {
+        case FTS_D:
+            enter(root == nil ? scanRoot : FileTreeWalker.name(of: entry))
+        case FTS_DP:
+            leave()
+        // An unreadable folder arrives as FTS_D first and as FTS_DNR instead of FTS_DP.
+        case FTS_DNR:
+            unreadableCount += 1
+            leave()
+        case FTS_F, FTS_SL, FTS_SLNONE, FTS_DEFAULT:
+            if let fileStatus = entry.pointee.fts_statp?.pointee {
+                addFile(fileStatus) { FileTreeWalker.name(of: entry) }
+            }
+        case FTS_ERR, FTS_NS:
+            unreadableCount += 1
+        default:
+            break
+        }
+    }
+
+    /// An fts error ends the walk with folders still open; closing them keeps what was measured.
+    mutating func closeAfterError() {
+        unreadableCount += 1
+        while !openFolders.isEmpty { leave() }
+    }
+
+    private mutating func enter(_ name: String) {
+        let node = Node(name: name, parent: openFolders.last)
         if root == nil { root = node }
-        stack.append(node)
+        openFolders.append(node)
     }
 
-    mutating func leave() {
-        guard let node = stack.popLast() else { return }
+    private mutating func leave() {
+        guard let node = openFolders.popLast() else { return }
         node.finish()
-        stack.last?.adopt(node)
+        openFolders.last?.adopt(node)
     }
 
-    mutating func addFile(_ st: stat, name: () -> String) {
-        guard let dir = stack.last else { return }
-        if st.st_nlink > 1 && !seenLinks.insert(UInt64(st.st_ino)).inserted { return }
-        let size = FTS.allocated(st)
-        dir.addFile(size, name: name)
+    private mutating func addFile(_ fileStatus: stat, name: () -> String) {
+        guard let folder = openFolders.last else { return }
+        let isHardLinked = fileStatus.st_nlink > 1
+        if isHardLinked && !seenLinkedFiles.insert(UInt64(fileStatus.st_ino)).inserted { return }
+        let size = FileTreeWalker.allocatedBytes(fileStatus)
+        folder.addFile(size, name: name)
         progress.files += 1
         progress.bytes += size
     }

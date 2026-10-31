@@ -1,0 +1,243 @@
+/* App and sidebar */
+"appName" = "Storage Manager";
+"paneOverview" = "概览";
+"paneExplorer" = "文件夹";
+"paneLargeFiles" = "大文件";
+"paneTemporaryFiles" = "临时区域";
+"paneCopies" = "App 副本";
+"sectionSystem" = "隐藏区域";
+"sectionVolumes" = "宗卷";
+"rescan" = "重新扫描";
+"rescanHelp" = "重新扫描所有区域（⌘R）";
+"cancelScan" = "取消扫描";
+
+/* Scan status and placeholders */
+"cancel" = "取消";
+"filesAndSize" = "%@ 个文件 · %@";
+"measuredAt" = "扫描时间：%@";
+"scanNow" = "立即扫描";
+"unreadable" = "%@ 个文件夹无法读取 – 允许完全磁盘访问权限…";
+"notMeasuredTitle" = "尚未扫描";
+"notMeasuredDetail" = "一次扫描即可测量所有区域，之后每次点按都会立即显示。";
+"scanningTitle" = "正在扫描…";
+"scanningDetail" = "第一个区域完成后，结果就会显示。";
+"loadingSummaryTitle" = "正在撰写摘要…";
+"loadingSummaryDetail" = "所有区域测量完成后，这里会用几句话说明你的存储空间情况。";
+"loadingSizesTitle" = "正在按大小统计文件…";
+"loadingSizesDetail" = "所有区域测量完成后，图表就会显示。";
+"loadingAppsTitle" = "正在检查应用…";
+"loadingAppsDetail" = "扫描完成后，大小和上次使用时间才会确定。";
+"showSidebar" = "显示边栏";
+"hideSidebar" = "隐藏边栏";
+
+/* Overview and categories */
+"availableOf" = "可用 %@，共 %@";
+"categories" = "类别";
+"freeSpace" = "可用";
+"temporaryAreaName" = "临时系统区域";
+"categoryApps" = "应用程序";
+"categoryDocuments" = "文稿与桌面";
+"categoryDownloads" = "下载";
+"categoryMedia" = "照片、音乐与影片";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "邮件与信息";
+"categoryDeveloper" = "开发";
+"categoryCaches" = "缓存";
+"categoryAppData" = "App 数据";
+"categoryTrash" = "废纸篓";
+"categoryTemporary" = "临时文件";
+"categoryUser" = "其他用户数据";
+"categoryLibrary" = "共享 App 数据";
+"categoryOther" = "其他文件夹";
+"categoryPurgeable" = "可由 macOS 清除";
+"categorySystem" = "系统与其他";
+
+/* Explorer, tables and info sheet */
+"columnName" = "名称";
+"columnSize" = "大小";
+"columnShare" = "占比";
+"columnFiles" = "文件";
+"columnLocation" = "位置";
+"smallerItems" = "%@ 个小于 1 MB 的较小项目";
+"measuredTotal" = "已扫描 %@";
+"open" = "打开";
+"showInFinder" = "在访达中显示";
+"info" = "显示简介";
+"copyPath" = "拷贝路径";
+"done" = "完成";
+"allocated" = "磁盘占用大小";
+"kind" = "种类";
+"modified" = "修改日期";
+"created" = "创建日期";
+"contents" = "内容";
+"files" = "文件";
+"folders" = "文件夹";
+"packages" = "App 包";
+"modifiedBetween" = "修改日期介于";
+"dateRange" = "%@ 和 %@";
+"analyzing" = "正在分析文件…";
+"typesBySize" = "按大小排列的文件类型";
+"fileCount" = "%@ 个文件";
+"noExtension" = "无扩展名";
+
+/* Large files */
+"minimumSize" = "最小大小";
+"fromSize" = "%@ 起";
+"noFilesFrom" = "没有 %@ 以上的文件";
+"filesTotal" = "%@ 个文件 · 共 %@";
+
+/* Temporary area */
+"location" = "位置";
+"total" = "总计";
+"subfolders" = "子文件夹";
+"viewCopies" = "查看 App 副本…";
+"temporaryFolderT" = "临时文件";
+"temporaryFolderTDetail" = "大部分会在重新启动时清空。";
+"temporaryFolderC" = "缓存";
+"temporaryFolderCDetail" = "App 和系统服务的缓存。";
+"temporaryFolderX" = "App 副本";
+"temporaryFolderXDetail" = "macOS 在检查签名时创建的副本。";
+"temporaryFolder0" = "系统服务";
+"temporaryFolder0Detail" = "后台服务的数据。";
+
+/* Signature copies */
+"noCopies" = "没有 App 副本";
+"noCopiesDetail" = "文件夹 X 中没有 App 副本。";
+"running" = "正在运行";
+"stopped" = "已退出";
+"copiesLabel" = "副本";
+"countedSize" = "计入的大小";
+"installedVersion" = "已安装的版本";
+"notFound" = "未找到";
+"versionLabel" = "版本 %@";
+"copiesOne" = "1 个副本";
+"copiesMany" = "%@ 个副本";
+"current" = "当前";
+"old" = "旧";
+"unknown" = "未知";
+"createdOn" = "创建于 %@";
+"freed" = "实际释放的空间：%@";
+"deleteError" = "无法删除全部内容：%@";
+"quitToDelete" = "请按 ⌘Q 退出“%@”后再删除。";
+"openInExplorer" = "在浏览器中打开";
+"deleteAll" = "删除所有副本…";
+"deleteTitle" = "要删除 %@ 个“%@”的副本吗？";
+"deleteForever" = "永久删除";
+"deleteMessage" = "这些副本不会进入废纸篓。需要时，macOS 会重新创建。";
+
+/* Volumes */
+"capacity" = "容量";
+"used" = "已使用";
+"purgeable" = "可由 macOS 清除";
+"available" = "可用";
+"toOverview" = "前往概览";
+"exploreContents" = "浏览内容";
+"scanAndExplore" = "扫描并浏览";
+"volumeGone" = "宗卷已断开连接";
+
+/* Search */
+"searchPrompt" = "搜索文件夹和文件";
+"scopeAll" = "全部";
+"scopeFolders" = "文件夹";
+"scopeFiles" = "文件";
+"searchResults" = "%@ 个结果";
+"noResults" = "没有“%@”的结果";
+"searchNote" = "在上次扫描中搜索 1 MB 以上的文件夹和文件。";
+
+/* Full Disk Access */
+"accessTitle" = "一次授权，取代多次询问";
+"accessDetail" = "没有完全磁盘访问权限时，macOS 会分别询问桌面、文稿、下载、iCloud Drive、其他 App 的数据以及外置宗卷的访问权限。在“系统设置”中打开一个开关，就可以省去所有这些询问。本 App 只读取名称、大小和日期，从不读取你的文稿内容，也不会向任何地方发送任何内容。";
+"accessOneSwitch" = "隐私与安全性 › 完全磁盘访问权限";
+"accessOpenSettings" = "打开“系统设置”";
+"accessContinue" = "不使用完全磁盘访问权限，继续";
+"accessGranted" = "已授权";
+"accessRestart" = "重新启动 App";
+"accessRestartHint" = "已打开开关？macOS 要在 App 重新启动后才会授予访问权限。请点按“重新启动 App”，或者让 macOS 退出并重新打开它。如果之后仍然无效，请在“系统设置”中用“–”移除该条目，然后重新添加 App。";
+"quitApp" = "退出%@";
+"fullDiskAccess" = "完全磁盘访问权限";
+
+/* Settings */
+"autoScan" = "启动时自动扫描";
+"extraFolders" = "其他文件夹";
+"none" = "无";
+"add" = "添加";
+"remove" = "移除";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "清理";
+"paneApps" = "未使用的 App";
+"sectionTidy" = "腾出空间";
+"layoutList" = "列表";
+"layoutGrid" = "网格";
+"settings" = "设置";
+"emptyFolder" = "此文件夹为空";
+"otherCategories" = "其他";
+"cleanCaches" = "App 缓存";
+"cleanCachesDetail" = "App 会在需要时重新生成的缓存。正在运行的 App 和 macOS 本身不受影响。";
+"cleanDeveloper" = "开发者缓存";
+"cleanDeveloperDetail" = "Xcode 构建数据以及 npm 等软件包缓存；下次构建时会重新生成。";
+"cleanLogs" = "旧日志";
+"cleanLogsDetail" = "超过一周的 App 日志。";
+"cleanTemporary" = "旧临时文件";
+"cleanTemporaryDetail" = "至少三天未更改的临时文件。";
+"cleanTrash" = "废纸篓";
+"cleanTrashDetail" = "永久清倒废纸篓。默认不选中。";
+"cleanFailed" = "有 %@ 个项目无法移除，因为它们正在使用中或受到保护。";
+"cleaning" = "正在清理…";
+"cleanerRefresh" = "重新搜索";
+"cleanSelected" = "清理所选项目（%@）";
+"cleanConfirmTitle" = "要永久移除 %@ 吗？";
+"cleanConfirmMessage" = "这些文件不会进入废纸篓。App 会在需要时重新生成缓存。之后，本 App 会重新测量所有内容。";
+"appsNoneUnused" = "所有 App 最近都用过";
+"unusedSince" = "未打开时间";
+"daysOption" = "超过 %@ 天";
+"trashAppTitle" = "要将“%@”移到废纸篓吗？";
+"trashAppMessage" = "在清倒废纸篓之前，你可以从废纸篓中还原此 App。";
+"moveToTrash" = "移到废纸篓";
+"lastOpened" = "上次打开时间：%@";
+"trashAppFailed" = "无法移动“%@”。在访达中，输入你的密码即可移动。";
+"figureFiles" = "文件";
+"figureUnusedApps" = "未使用的 App";
+"bucketUnder1MB" = "小于 1 MB";
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "大于 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "已扫描 %@";
+"scanningArea" = "区域 %@/%@ · %@";
+"emptyValue" = "空";
+
+/* Page info, scan details, summary */
+"infoOverview" = "大小是已占用的空间，测量方式与“du”相同。APFS 克隆按完整大小计算；共享存储块的副本实际占用的空间更少。“系统与其他”是 macOS 报告的已用空间中减去以上各项后的剩余部分。";
+"infoCleaner" = "移除系统几乎用不到或完全用不到的文件：会自动重新生成的缓存、旧日志和旧临时文件。请选择可以删除的内容并确认。";
+"infoApps" = "你已有一段时间没有打开的 App。日期来自 macOS 本身；本 App 不会记录任何内容。你可以在这里将不再需要的 App 移到废纸篓，也可以从废纸篓中还原。";
+"infoExplorer" = "所有已测量的文件夹，按大小排序。双击可打开文件夹；快捷菜单可在访达中显示文件并查看其信息。";
+"infoLargeFiles" = "上次扫描中达到所选大小的所有文件。双击可在访达中显示该文件。";
+"infoTemporaryFiles" = "macOS 会在 /private/var/folders 下为每位用户创建此区域。它在访达中是隐藏的，在“管理存储空间”中也不会细分显示。";
+"infoCopies" = "在检查签名时，macOS 有时会在文件夹 X 中创建 App 的完整副本。它们不是独立的程序；需要时 macOS 会重新创建。只要 App 已退出，就可以放心删除。";
+"infoVolume" = "此宗卷的容量：已使用的空间、macOS 需要时可自行释放的空间，以及可用空间。外置宗卷可以在这里测量。";
+"aboutPage" = "关于此页面";
+"scanDetails" = "扫描";
+"scanProgress" = "进度";
+"scanArea" = "区域";
+"scanFinished" = "扫描时间";
+"accessMissingShort" = "未授权";
+"summaryTitle" = "简要说明";
+"summaryDisk" = "在“%@”上，已使用 %@（共 %@），可用 %@。";
+"summaryTop" = "占用空间最多的是 %@（%@）和 %@（%@）。";
+"summaryNotMeasured" = "空间的分配情况会在首次扫描后显示在这里。";
+"summaryClean" = "清理后大约可以释放 %@。";
+"summaryCopies" = "macOS 在检查时创建的 App 副本计为 %@。";
+"summaryApps" = "有 %@ 个 App 已有一段时间没有打开。";
+"readAloud" = "朗读";
+"stopReading" = "停止朗读";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "你的文件有多大？";
+"sizeClassesCaption" = "每个大小区间占用多少空间，其中有多少个文件。通常，少数大文件比许多小文件占用的空间更多。";
+"figureLargeFilesFrom" = "%@ 以上的大文件";
+"bucketValue" = "%@
+%@ 个文件";
+"settingsSystemNote" = "外观、语言和单位由“系统设置”决定。你可以在“系统设置”的“通用 › 语言与地区 › 应用程序”中，为本 App 单独设置语言。";

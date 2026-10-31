@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install Storage Manager</title>
+<style>
+  :root { color-scheme: light dark; --text: #1d1d1f; --muted: #55555a; --card: #ffffff; --bg: #f5f5f7; --line: #e5e5ea; --accent: #0a5bc4; }
+  @media (prefers-color-scheme: dark) { :root { --text: #f2f2f7; --muted: #b4b4bc; --card: #1e1e20; --bg: #000000; --line: #38383a; --accent: #6cb6ff; } }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 20px 64px; }
+  h1 { font-size: 34px; margin: 0 0 8px; }
+  h2 { font-size: 22px; margin: 40px 0 12px; }
+  p.lead { color: var(--muted); margin: 0 0 32px; }
+  ol { padding: 0; list-style: none; counter-reset: step; }
+  li { counter-increment: step; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; margin: 0 0 18px; }
+  li::before { content: counter(step); display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #0a5bc4; color: #fff; font-weight: 600; margin-right: 10px; }
+  li img { display: block; width: 100%; height: auto; margin-top: 14px; border-radius: 12px; }
+  pre { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; overflow-x: auto; font-size: 14px; }
+  .note { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Install Storage Manager</h1>
+  <p class="lead">Five short steps, all with the mouse. The app is free and sends nothing to the internet.</p>
+  <ol>
+    <li><b>Drag Storage Manager into the “Applications” folder.</b> Then you can close this window.
+      <img src="images/1-disk-image.svg" alt="Dragging the app into the Applications folder"></li>
+    <li><b>Open the app from the “Applications” folder.</b> The first time, macOS reports that it could not verify the app. Click “Done”.
+      <img src="images/2-warning.svg" alt="The macOS notice: click Done"></li>
+    <li><b>Allow the first start.</b> Open System Settings › Privacy &amp; Security, scroll all the way down and click “Open Anyway”. Then the app starts; this is needed only once.
+      <img src="images/3-open-anyway.svg" alt="Open Anyway in System Settings"></li>
+    <li><b>Grant Full Disk Access.</b> The app offers “Open System Settings” for it. Turn Storage Manager on there; if it is missing from the list, add it with “+”.
+      <img src="images/4-full-disk-access.svg" alt="Turning on Full Disk Access"></li>
+    <li><b>Click “Restart App” in the app.</b> From now on it measures everything without further questions.
+      <img src="images/5-access-window.png" alt="The app’s access window"></li>
+  </ol>
+  <h2>Rather use the Terminal?</h2>
+  <p class="note">In the Terminal you copy the app and allow the first start in one go. Not even the Terminal can grant Full Disk Access; the last command opens the matching System Settings pane for it.</p>
+  <pre>cp -R "/Volumes/Storage Manager/Storage Manager.app" /Applications/
+xattr -dr com.apple.quarantine "/Applications/Storage Manager.app"
+open "/Applications/Storage Manager.app"
+open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"</pre>
+</main>
+</body>
+</html>

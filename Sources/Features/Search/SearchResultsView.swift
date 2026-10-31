@@ -1,21 +1,50 @@
 import SwiftUI
 
-/// Results of the search field in the toolbar; replaces the page while a term is entered.
+/// Results of the search field in the toolbar; replaces the page once something is typed.
+/// The header holds the scope and Cancel, so the toolbar stays a single slim field.
 struct SearchResultsView: View {
     @Environment(AppModel.self) private var model
     @State private var results: [Entry] = []
+    @State private var resultsKey = ""  // query and scope the results belong to
+
+    /// The query and scope as they are now.
+    private var searchKey: String { "\(model.searchText)|\(model.searchScope)" }
 
     var body: some View {
-        EntryTable(entries: results, total: results.reduce(0) { $0 + $1.bytes }, showLocation: true)
-            .overlay {
-                if !model.hasData { UI.notMeasured() }
-                else if results.isEmpty { UI.empty(Loc.noResults.f(model.searchText), symbol: Symbols.search, detail: Loc.searchNote.s) }
+        EntryBrowser(
+            entries: results,
+            total: results.reduce(0) { total, result in total + result.bytes },
+            showsLocation: true,
+            emptyTitle: TextKey.noResults.translated(with: model.searchQuery),
+            emptyDetail: TextKey.searchNote.translated,
+            contentKey: resultsKey
+        )
+        .navigationTitle(TextKey.searchResults.translated(with: Format.count(results.count)))
+        .safeAreaInset(edge: .top, spacing: 0) { header }
+        .task(id: "\(searchKey)|\(model.revision)") { await searchOnceTypingPauses() }
+    }
+
+    private var header: some View {
+        UI.PageHeader(.searchNote) {
+            scopePicker
+            UI.ActionButton(TextKey.cancel.translated) { model.endSearch() }
+                .keyboardShortcut(.cancelAction)
+        }
+    }
+
+    private var scopePicker: some View {
+        @Bindable var model = model
+        return UI.SegmentPicker(selection: $model.searchScope) {
+            ForEach(SearchScope.allCases) { scope in
+                Text(scope.title.translated).tag(scope)
             }
-            .navigationTitle(Loc.searchResults.f(Fmt.count(results.count)))
-            .task(id: "\(model.searchText)|\(model.searchScope)|\(model.revision)") {
-                try? await Task.sleep(for: ScanConfig.searchDebounce)  // wait until typing pauses
-                guard !Task.isCancelled else { return }
-                results = SearchService.search(model.searchText, scope: model.searchScope, in: model.root)
-            }
+        }
+    }
+
+    private func searchOnceTypingPauses() async {
+        try? await Task.sleep(for: ScanLimits.searchDebounce)
+        guard !Task.isCancelled else { return }
+        results = SearchService.search(model.searchText, scope: model.searchScope, in: model.root)
+        resultsKey = searchKey
     }
 }

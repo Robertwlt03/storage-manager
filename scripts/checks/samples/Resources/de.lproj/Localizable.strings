@@ -1,0 +1,3 @@
+"moveToTrash" = "Move to Trash"; /* expect: is still English */
+"downloads" = "Downloads";
+"smallFiles" = "tiny files"; /* same as English on purpose */

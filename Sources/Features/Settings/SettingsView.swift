@@ -1,49 +1,56 @@
 import SwiftUI
 
+/// Only what macOS does not already cover: appearance, language and units come from System
+/// Settings.
 struct SettingsView: View {
-    var body: some View {
-        TabView {
-            GeneralSettings().tabItem { Label(Loc.tabGeneral.s, systemImage: Symbols.tabGeneral) }
-            AppearanceSettings().tabItem { Label(Loc.tabAppearance.s, systemImage: Symbols.tabAppearance) }
-            ScanSettings().tabItem { Label(Loc.tabScanning.s, systemImage: Symbols.tabScanning) }
-        }
-        .formStyle(.grouped)
-        .frame(width: Layout.settingsWidth)
-        .syncPreferences()
-    }
-}
-
-/// A toggle with a muted explanation below.
-struct DetailToggle: View {
-    let title: Loc
-    let detail: String
-    @Binding var isOn: Bool
-
-    var body: some View {
-        Toggle(isOn: $isOn) {
-            Text(title.s)
-            Text(detail).foregroundStyle(.muted)
-        }
-    }
-}
-
-struct GeneralSettings: View {
-    @Environment(AppModel.self) private var model
-    @AppStorage(SettingsKey.language) private var language = AppLanguage.system
+    @AppStorage(SettingsKey.scansAutomatically) private var scansAtLaunch = true
+    @AppStorage(SettingsKey.extraFolders) private var extraFolders = ""
+    @State private var selectedFolder: String?
 
     var body: some View {
         Form {
-            Picker(Loc.language.s, selection: $language) {
-                ForEach(AppLanguage.allCases) { Text($0.title).tag($0) }
+            Toggle(TextKey.autoScan.translated, isOn: $scansAtLaunch)
+            LabeledContent(TextKey.extraFolders.translated) {
+                folderEditor(AppSettings.folders(from: extraFolders))
             }
-            Text(Loc.languageNote.s).foregroundStyle(.muted)
-            LabeledContent(Loc.fullDiskAccess.s) {
-                if model.hasFullDiskAccess { UI.status(Loc.accessGranted.s, symbol: Symbols.success, .good) } else {
-                    UI.button(Loc.accessOpenSettings.s) { FinderService.openFullDiskAccessSettings() }
-                }
-            }
+            Text(TextKey.settingsSystemNote.translated).textRole(.hint)
         }
-        .frame(height: Layout.settingsGeneralHeight)
-        .onAppear { model.refreshAccess() }
+        .formStyle(.grouped)
+        .frame(width: Layout.settingsWidth, height: Layout.settingsHeight)
+        .appLocale()
+    }
+
+    private func folderEditor(_ folders: [String]) -> some View {
+        VStack(alignment: .leading, spacing: Space.small) {
+            List(folders, id: \.self, selection: $selectedFolder) { folder in
+                Text(Paths.displayName(folder)).lineLimit(1).truncationMode(.middle)
+            }
+            .frame(height: Layout.folderListHeight)
+            .overlay {
+                if folders.isEmpty { Text(TextKey.none.translated).textRole(.hint) }
+            }
+            folderButtons(folders)
+        }
+    }
+
+    private func folderButtons(_ folders: [String]) -> some View {
+        HStack(spacing: Space.extraSmall) {
+            Button(TextKey.add.translated, systemImage: Symbols.add) {
+                addChosenFolders(to: folders)
+            }
+            Button(TextKey.remove.translated, systemImage: Symbols.remove) {
+                let remaining = folders.filter { folder in folder != selectedFolder }
+                extraFolders = AppSettings.store(remaining)
+            }
+            .disabled(selectedFolder == nil)
+        }
+        .labelStyle(.iconOnly)
+    }
+
+    /// Adds the folders picked in the open panel; a folder already in the list stays once.
+    private func addChosenFolders(to folders: [String]) {
+        let allFolders = NSOrderedSet(array: folders + FinderService.chooseFolders())
+        let withoutDuplicates = allFolders.array.compactMap { folder in folder as? String }
+        extraFolders = AppSettings.store(withoutDuplicates)
     }
 }

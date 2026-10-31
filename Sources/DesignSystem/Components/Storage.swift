@@ -1,88 +1,171 @@
-import Charts
 import SwiftUI
 
 struct StorageSegment: Identifiable {
     let id: String
     let title: String
     let bytes: Int64
-    let colorIndex: Int?  // nil = free space
+    let colorIndex: Int?  // nil for free space
+
+    static let usedID = "used"  // used space no category covers yet
+    static let otherID = "other"
+    /// When the legend is full, the last place goes to the entry that groups the rest.
+    private static let namedEntryLimit = Layout.legendMaximumEntries - 1
+
+    /// The legend's rows: at most a few categories by name, the smaller ones grouped as "other",
+    /// then free space and used space that no category covers.
+    static func legend(of segments: [StorageSegment]) -> [StorageSegment] {
+        let named = segments.filter { segment in !segment.isListedLast }
+        let listedLast = segments.filter(\.isListedLast)
+        guard named.count > Layout.legendMaximumEntries else { return named + listedLast }
+        let rest = named.dropFirst(namedEntryLimit)
+        let other = StorageSegment(
+            id: otherID, title: TextKey.otherCategories.translated,
+            bytes: rest.reduce(0) { total, segment in total + segment.bytes },
+            colorIndex: rest.first?.colorIndex)
+        return Array(named.prefix(namedEntryLimit)) + [other] + listedLast
+    }
+
+    private var isListedLast: Bool { colorIndex == nil || id == Self.usedID }
 }
 
-/// Stacked bar like in System Settings › Storage.
-struct StorageBar: View {
+extension UI {
+    /// Volume name, available space, the stacked bar and its legend, like System Settings ›
+    /// Storage.
+    struct VolumeSummary: View {
+        let volume: VolumeInformation
+        let segments: [StorageSegment]
+        var canSelect: (StorageSegment) -> Bool
+        var onSelect: ((StorageSegment) -> Void)?
+
+        init(
+            _ volume: VolumeInformation, segments: [StorageSegment],
+            canSelect: @escaping (StorageSegment) -> Bool = { _ in false },
+            onSelect: ((StorageSegment) -> Void)? = nil
+        ) {
+            self.volume = volume
+            self.segments = segments
+            self.canSelect = canSelect
+            self.onSelect = onSelect
+        }
+
+        var body: some View {
+            VStack(alignment: .leading, spacing: Space.section) {
+                TitleRow(
+                    volume.name,
+                    subtitle: TextKey.availableOf.translated(
+                        with: Format.bytes(volume.availableBytes), Format.bytes(volume.totalBytes)),
+                    icon: .file(volume.path))
+                StorageBar(segments: wholeVolume, total: volume.totalBytes)
+                StorageLegend(segments: wholeVolume, onSelect: onSelect, canSelect: canSelect)
+            }
+            .padding(.vertical, Space.row)
+        }
+
+        /// Every part of the volume: the categories, used space they do not cover, and free space.
+        private var wholeVolume: [StorageSegment] {
+            let freeSpace = StorageSegment(
+                id: "free", title: TextKey.freeSpace.translated, bytes: volume.freeBytes,
+                colorIndex: nil
+            )
+            return withUncoveredSpace + [freeSpace]
+        }
+
+        /// Used space no category covers yet stays one piece, so the bar always spans the whole
+        /// volume.
+        private var withUncoveredSpace: [StorageSegment] {
+            let covered = segments.reduce(0) { total, segment in total + segment.bytes }
+            let uncovered = volume.usedBytes - covered
+            guard uncovered > 0 else { return segments }
+            let uncoveredSpace = StorageSegment(
+                id: StorageSegment.usedID, title: TextKey.used.translated, bytes: uncovered,
+                colorIndex: CategoryKind.system.rawValue)
+            return segments + [uncoveredSpace]
+        }
+    }
+}
+
+/// Plain shapes instead of a chart: they follow width changes frame by frame without redrawing a
+/// chart.
+private struct StorageBar: View {
     let segments: [StorageSegment]
     let total: Int64
-    @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
-    private static let row = "volume"
 
     var body: some View {
-        Chart(segments) { s in
-            BarMark(x: .value(Loc.columnSize.s, s.bytes), y: .value(Self.row, Self.row))  // one category row: a stacked bar
-                .foregroundStyle(s.colorIndex.map { Theme.color($0, palette) } ?? Theme.freeSegment)
-                .accessibilityLabel(s.title)
-                .accessibilityValue(Fmt.bytes(s.bytes))
+        let barBytes = self.barBytes
+        GeometryReader { geometry in
+            segmentRow(width: geometry.size.width, barBytes: barBytes)
         }
-        .chartXScale(domain: 0...max(total, segments.reduce(0) { $0 + $1.bytes }))
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
-        .chartLegend(.hidden)
         .frame(height: Layout.storageBarHeight)
         .clipShape(RoundedRectangle(cornerRadius: Layout.storageBarRadius, style: .continuous))
     }
+
+    private func segmentRow(width: CGFloat, barBytes: CGFloat) -> some View {
+        HStack(spacing: 0) {
+            ForEach(segments) { segment in
+                Rectangle()
+                    .fill(segment.color)
+                    .frame(width: width * segment.shownBytes / barBytes)
+                    .accessibilityElement()
+                    .accessibilityLabel(segment.title)
+                    .accessibilityValue(Format.bytes(segment.bytes))
+            }
+        }
+    }
+
+    /// The bytes the whole bar stands for: the volume, or more if the parts add up to more.
+    private var barBytes: CGFloat {
+        let parts = segments.reduce(0) { total, segment in total + max(segment.bytes, 0) }
+        return CGFloat(max(total, parts, 1))
+    }
 }
 
-/// Volume name, available space and the stacked bar.
-struct VolumeSummary: View {
-    let volume: VolumeInfo
+extension StorageSegment {
+    /// Free space is gray, every other part has its category color.
+    fileprivate var color: Color { colorIndex.map(Theme.categoryColor) ?? Theme.freeSegment }
+
+    /// A negative size, which a measurement can briefly report, shows as nothing.
+    fileprivate var shownBytes: CGFloat { CGFloat(max(bytes, 0)) }
+}
+
+/// The biggest parts by name, the rest grouped, free space last; in a fixed number of columns,
+/// because an adaptive grid jumps between two and three columns during the sidebar animation.
+private struct StorageLegend: View {
     let segments: [StorageSegment]
+    var onSelect: ((StorageSegment) -> Void)?
+    var canSelect: (StorageSegment) -> Bool
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Layout.spacing) {
-            HeaderRow(icon: .file(volume.path), title: volume.name,
-                      subtitle: Loc.availableOf.f(Fmt.bytes(volume.available), Fmt.bytes(volume.total)))
-            StorageBar(segments: shown + [StorageSegment(id: "free", title: Loc.freeSpace.s, bytes: volume.free, colorIndex: nil)],
-                       total: volume.total)
-        }
-        .padding(.vertical, Layout.rowPadding)
-    }
-
-    /// Before the first scan there are no categories yet; then the bar shows the whole used space in one piece.
-    private var shown: [StorageSegment] {
-        segments.isEmpty
-            ? [StorageSegment(id: "used", title: Loc.used.s, bytes: volume.used, colorIndex: CategoryKind.system.rawValue)]
-            : segments
-    }
-}
-
-/// Size share as a native progress bar plus percentage, for table cells.
-struct ShareCell: View {
-    let fraction: Double
-
-    var body: some View {
-        HStack(spacing: 8) {
-            ProgressView(value: min(max(fraction, 0), 1)).progressViewStyle(.linear)
-            Text(Fmt.percent(fraction)).monospacedDigit().frame(width: Layout.percentWidth, alignment: .trailing)
+        let columns = Array(
+            repeating: GridItem(.flexible(), alignment: .leading), count: Layout.legendColumns)
+        LazyVGrid(columns: columns, alignment: .leading, spacing: Space.small) {
+            ForEach(StorageSegment.legend(of: segments)) { segment in entry(for: segment) }
         }
     }
-}
 
-/// Finder icon and name, for table cells.
-struct FileCell: View {
-    let name: String
-    let path: String?
-
-    var body: some View {
-        Label {
-            Text(name).lineLimit(1).truncationMode(.middle)
-        } icon: {
-            if let path { FinderService.icon(path).resizable().frame(width: Layout.listIcon, height: Layout.listIcon) }
-            else { Image(systemName: Symbols.rest) }
+    private func entry(for segment: StorageSegment) -> some View {
+        let leadsSomewhere = leadsSomewhere(segment)
+        return Button {
+            onSelect?(segment)
+        } label: {
+            HStack(spacing: Space.small) {
+                UI.Icon(.dot(segment.color), size: .extraSmall)
+                Text(segment.title).lineLimit(1)
+                Text(Format.bytes(segment.bytes)).foregroundStyle(.muted).monospacedDigit()
+                    .lineLimit(1)
+                    .contentTransition(.numericText())
+                if leadsSomewhere { UI.Chevron() }
+            }
+            .contentShape(Rectangle())
         }
+        .appButton(.content)
+        .allowsHitTesting(leadsSomewhere)
+        .font(.callout)
+        .accessibilityElement(children: .combine)
     }
-}
 
-/// Right-aligned number for table cells.
-struct NumberCell: View {
-    let text: String
-    var body: some View { Text(text).monospacedDigit().frame(maxWidth: .infinity, alignment: .trailing) }
+    /// Categories lead to their page; free space, uncovered space and the grouped rest do not.
+    private func leadsSomewhere(_ segment: StorageSegment) -> Bool {
+        let isCategory = segment.colorIndex != nil && segment.id != StorageSegment.otherID
+        return onSelect != nil && isCategory && canSelect(segment)
+    }
 }

@@ -1,10 +1,11 @@
 import AppKit
-import SwiftUI
 
-/// Everything that talks to Finder, the pasteboard or System Settings.
+/// Everything the user does with Finder, the pasteboard or System Settings; Finder's icons come
+/// from `PreviewService`, which may run off the main thread.
 enum FinderService {
-    static func icon(_ path: String) -> Image { Image(nsImage: NSWorkspace.shared.icon(forFile: path)) }
-    static func reveal(_ path: String) { NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)]) }
+    static func reveal(_ path: String) {
+        NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)])
+    }
 
     static func copyPath(_ path: String) {
         NSPasteboard.general.clearContents()
@@ -18,6 +19,7 @@ enum FinderService {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = true
-        return panel.runModal() == .OK ? panel.urls.map { Paths.real($0.path) } : []
+        return panel.runModal() == .OK
+            ? panel.urls.map { url in Paths.withoutSymlinks(url.path) } : []
     }
 }

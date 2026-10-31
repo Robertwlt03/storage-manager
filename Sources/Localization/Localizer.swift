@@ -1,38 +1,38 @@
-import Foundation
-import Observation
+import SwiftUI
 
-/// Looks up texts in `Resources/<code>.lproj/Localizable.strings` for the chosen language.
-/// Views read it while rendering, so switching the language updates every window right away.
-@Observable final class Localizer {
+/// Looks up texts in `Resources/<code>.lproj/Localizable.strings` for the system's language.
+nonisolated final class Localizer: Sendable {
     static let shared = Localizer()
 
-    private(set) var language = AppLanguage.system
-    private(set) var locale = Locale.current
-    private var bundle = Bundle.main
+    let locale: Locale
+    private let bundle: Bundle
 
-    private init() { apply(AppSettings.language) }
-
-    func apply(_ choice: AppLanguage) {
-        language = choice
-        locale = Locale(identifier: choice.code)
-        bundle = Self.bundle(for: choice.code) ?? .main
+    private init() {
+        let languageCode = AppLanguage.current.rawValue
+        locale = Locale(identifier: languageCode)
+        bundle = Self.bundle(for: languageCode) ?? .main
     }
 
     func string(_ key: String) -> String {
         bundle.localizedString(forKey: key, value: nil, table: nil)
     }
 
-    static func bundle(for code: String) -> Bundle? {
+    private static func bundle(for code: String) -> Bundle? {
         Bundle.main.path(forResource: code, ofType: "lproj").flatMap(Bundle.init(path:))
     }
 }
 
-extension Loc {
+nonisolated extension TextKey {
     /// The text in the current language.
-    var s: String { Localizer.shared.string(rawValue) }
+    var translated: String { Localizer.shared.string(rawValue) }
 
     /// The text with `%@` placeholders filled in.
-    func f(_ args: CVarArg...) -> String {
-        String(format: s, locale: Localizer.shared.locale, arguments: args)
+    func translated(with values: CVarArg...) -> String {
+        String(format: translated, locale: Localizer.shared.locale, arguments: values)
     }
+}
+
+extension View {
+    /// Gives a window the app's locale for dates and numbers; every window calls it.
+    func appLocale() -> some View { environment(\.locale, Localizer.shared.locale) }
 }

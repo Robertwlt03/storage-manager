@@ -5,15 +5,18 @@ struct CopiesView: View {
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        let groups = model.copyGroups
-        UI.page(Loc.paneCopies.s) {
-            UI.note(Loc.copiesIntro.s)
-            if !model.hasData {
-                UI.notMeasured().frame(minHeight: Layout.placeholderHeight)
-            } else if groups.isEmpty {
-                UI.empty(Loc.noCopies.s, symbol: Symbols.copies, detail: Loc.noCopiesDetail.s).frame(minHeight: Layout.placeholderHeight)
+        let copyGroups = model.copyGroups
+        UI.Page(.copies) {
+            // The temporary area is measured last, so copies show up only at the end of a scan.
+            if !model.hasData || (model.isScanning && copyGroups.isEmpty) {
+                UI.Placeholder(.notMeasured, in: .page)
+            } else if copyGroups.isEmpty {
+                UI.Placeholder(
+                    .empty(
+                        title: TextKey.noCopies.translated, symbol: Symbols.copies,
+                        detail: TextKey.noCopiesDetail.translated), in: .page)
             }
-            ForEach(groups) { CopyGroupCard(group: $0) }
+            ForEach(copyGroups) { group in CopyGroupCard(group: group) }
         }
     }
 }

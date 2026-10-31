@@ -1,47 +1,60 @@
 import Foundation
 
 /// One row in a folder table or search result: a folder, a file or the folded rest of a folder.
-struct Entry: Identifiable {
-    enum Kind { case folder(Node), file, rest }
+nonisolated struct Entry: Identifiable {
+    enum Kind {
+        case folder(Node)
+        case file, rest
+    }
 
     let id: String
     let name: String
     let path: String?
     let bytes: Int64
-    let items: Int
+    let itemCount: Int
     let kind: Kind
 
-    var node: Node? { if case .folder(let n) = kind { n } else { nil } }
+    var node: Node? { if case .folder(let folderNode) = kind { folderNode } else { nil } }
     var isFolder: Bool { node != nil }
 
-    static func folder(_ n: Node) -> Entry {
-        Entry(id: n.path, name: n.displayName, path: n.path, bytes: n.bytes, items: n.fileCount, kind: .folder(n))
+    static func folder(_ node: Node) -> Entry {
+        Entry(
+            id: node.path, name: node.displayName, path: node.path, bytes: node.bytes,
+            itemCount: node.fileCount, kind: .folder(node))
     }
 
-    static func file(_ f: FileItem) -> Entry {
-        Entry(id: f.path, name: f.name, path: f.path, bytes: f.bytes, items: 1, kind: .file)
+    static func file(_ file: FileItem) -> Entry {
+        Entry(
+            id: file.path, name: file.name, path: file.path, bytes: file.bytes, itemCount: 1,
+            kind: .file)
     }
 
-    static func rest(of n: Node) -> Entry {
-        Entry(id: n.path + "/\u{0}rest", name: Loc.smallerItems.f(Fmt.count(n.restCount)), path: nil,
-              bytes: n.restBytes, items: n.restCount, kind: .rest)
+    static func rest(of node: Node) -> Entry {
+        Entry(
+            id: node.path + "/\u{0}rest",
+            name: TextKey.smallerItems.translated(with: Format.count(node.restCount)), path: nil,
+            bytes: node.restBytes, itemCount: node.restCount, kind: .rest)
     }
 
     /// Everything directly inside a folder.
-    static func contents(of n: Node) -> [Entry] {
-        n.children.map(folder) + n.files.map(file) + (n.restCount > 0 ? [rest(of: n)] : [])
+    static func contents(of node: Node) -> [Entry] {
+        let folders = node.children.map(folder)
+        let files = node.files.map(file)
+        let smallerItems = node.restCount > 0 ? [rest(of: node)] : []
+        return folders + files + smallerItems
     }
 }
 
-struct VolumeInfo: Identifiable, Hashable {
+nonisolated struct VolumeInformation: Identifiable, Hashable {
     let path: String
     let name: String
     let format: String
-    let total, free, available: Int64  // available = free + what macOS can purge on demand
+    /// `availableBytes` is `freeBytes` plus what macOS can purge on demand.
+    let totalBytes, freeBytes, availableBytes: Int64
     let isInternal, isRoot: Bool
     var id: String { path }
-    var purgeable: Int64 { max(0, available - free) }
-    var used: Int64 { max(0, total - free) }
+    var purgeableBytes: Int64 { max(0, availableBytes - freeBytes) }
+    var usedBytes: Int64 { max(0, totalBytes - freeBytes) }
     var symbol: String { isInternal ? Symbols.internalDrive : Symbols.externalDrive }
 }
 
@@ -52,8 +65,9 @@ struct Category: Identifiable {
     var id: CategoryKind { kind }
 }
 
-/// Folders like `X/com.google.Chrome.code_sign_clone` that macOS fills with copies of an app while checking it.
-struct CopyGroup: Identifiable {
+/// Folders like `X/com.google.Chrome.code_sign_clone` that macOS fills with copies of an app while
+/// checking it.
+nonisolated struct CopyGroup: Identifiable {
     let node: Node
     let bundleID: String
     let appPath: String?
@@ -62,14 +76,21 @@ struct CopyGroup: Identifiable {
     var id: String { node.path }
 }
 
-struct CopyDetails {
-    var count = 0
+nonisolated struct CopyDetails {
+    var copyCount = 0
     var versions: [(version: String, count: Int)] = []
     var days: [(day: Date, count: Int)] = []
 }
 
-struct FolderProfile {
+/// What macOS knows about a file or folder beyond its size, for the info sheet.
+nonisolated struct FileBasics {
+    var kind: String?
+    var modified: Date?
+    var created: Date?
+}
+
+nonisolated struct FolderProfile {
     var files = 0, folders = 0, packages = 0
     var oldest: Date?, newest: Date?
-    var types: [(ext: String, bytes: Int64, count: Int)] = []
+    var types: [(fileExtension: String, bytes: Int64, count: Int)] = []
 }

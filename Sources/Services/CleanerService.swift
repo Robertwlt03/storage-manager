@@ -1,0 +1,81 @@
+import AppKit
+
+/// Finds and removes files that regenerate by themselves (caches), are old (logs, temporary files)
+/// or already thrown away (Trash). Caches of running apps and of macOS itself are left alone.
+nonisolated enum CleanerService {
+    private static let cachesFolder = Paths.home + "/Library/Caches"
+    private static let logsFolder = Paths.home + "/Library/Logs"
+    private static let trashFolder = Paths.home + "/.Trash"
+    private static var temporaryFolder: String {
+        Paths.temporaryArea + "/" + TemporaryAreaPart.temporaryFiles.rawValue
+    }
+    private static let systemPrefix = "com.apple."
+    private static let developerFolders = [
+        "~/Library/Developer/Xcode/DerivedData", "~/Library/Developer/CoreSimulator/Caches",
+        "~/.npm/_cacache", "~/.gradle/caches", "~/.cache",
+    ]
+
+    /// What could go, per kind; the sizes come from the scanned tree, so there is no second walk.
+    static func removablePaths(
+        of kinds: [CleanKind] = CleanKind.allCases
+    ) -> [(kind: CleanKind, paths: [String])] {
+        kinds.map { kind in (kind, paths(for: kind)) }
+    }
+
+    /// Removes what is listed and still removable now: an app may have started or a temporary file
+    /// may have changed since the list was made. Returns how many entries could not be removed.
+    static func clean(_ items: [CleanItem]) -> Int {
+        let stillRemovable = Set(removablePaths(of: items.map(\.kind)).flatMap(\.paths))
+        var failed = 0
+        for path in items.flatMap(\.paths) where stillRemovable.contains(path) {
+            do { try FileManager.default.removeItem(atPath: path) } catch { failed += 1 }
+        }
+        return failed
+    }
+
+    private static func paths(for kind: CleanKind) -> [String] {
+        switch kind {
+        case .caches:
+            return removableCaches()
+        case .developer:
+            return developerFolders.map(Paths.expand).filter(Paths.exists)
+        case .logs:
+            return entries(of: logsFolder)
+                .filter { path in isOlder(path, thanDays: CleanUpRules.logMinimumAgeDays) }
+        case .temporary:
+            return entries(of: temporaryFolder)
+                .filter { path in isOlder(path, thanDays: CleanUpRules.temporaryMinimumAgeDays) }
+        case .trash:
+            return entries(of: trashFolder)
+        }
+    }
+
+    private static func removableCaches() -> [String] {
+        let runningApps = NSWorkspace.shared.runningApplications
+        let runningBundleIDs = Set(runningApps.compactMap(\.bundleIdentifier))
+        let ownBundleID = Bundle.main.bundleIdentifier ?? ""
+        return entries(of: cachesFolder)
+            .filter { path in
+                let name = (path as NSString).lastPathComponent
+                return !name.hasPrefix(systemPrefix) && !runningBundleIDs.contains(name)
+                    && name != ownBundleID
+            }
+    }
+
+    private static func entries(of folder: String) -> [String] {
+        FileSystem.names(in: folder).map { name in folder + "/" + name }
+    }
+
+    /// A folder counts as old only when nothing inside it changed either; the walk stops at the
+    /// first recent entry.
+    private static func isOlder(_ path: String, thanDays days: Int) -> Bool {
+        let cutoff = Int(FileSystem.date(daysBefore: days).timeIntervalSince1970)
+        return FileTreeWalker.walk(path) { entry in
+            // An entry whose date cannot be read could be new, so it keeps the folder.
+            guard let fileStatus = entry.pointee.fts_statp?.pointee,
+                FileTreeWalker.kind(of: entry) != FTS_NS
+            else { return false }
+            return fileStatus.st_mtimespec.tv_sec < cutoff
+        }
+    }
+}

@@ -1,0 +1,243 @@
+/* App and sidebar */
+"appName" = "Storage Manager";
+"paneOverview" = "Översikt";
+"paneExplorer" = "Mappar";
+"paneLargeFiles" = "Stora filer";
+"paneTemporaryFiles" = "Tillfälligt område";
+"paneCopies" = "Appkopior";
+"sectionSystem" = "Dolda områden";
+"sectionVolumes" = "Volymer";
+"rescan" = "Mät igen";
+"rescanHelp" = "Mät alla områden igen (⌘R)";
+"cancelScan" = "Avbryt mätning";
+
+/* Scan status and placeholders */
+"cancel" = "Avbryt";
+"filesAndSize" = "%@ filer · %@";
+"measuredAt" = "Mätt kl. %@";
+"scanNow" = "Mät nu";
+"unreadable" = "%@ mappar kan inte läsas – tillåt full skivåtkomst …";
+"notMeasuredTitle" = "Inte mätt ännu";
+"notMeasuredDetail" = "En genomgång mäter alla områden. Därefter går varje klick direkt.";
+"scanningTitle" = "Mäter …";
+"scanningDetail" = "Resultaten visas så snart det första området är klart.";
+"loadingSummaryTitle" = "Skriver sammanfattningen …";
+"loadingSummaryDetail" = "När alla områden är mätta står det här i några meningar hur din lagring ser ut.";
+"loadingSizesTitle" = "Räknar filer efter storlek …";
+"loadingSizesDetail" = "Diagrammet visas så snart alla områden är mätta.";
+"loadingAppsTitle" = "Kontrollerar appar …";
+"loadingAppsDetail" = "Storlekar och senaste användning är slutgiltiga när mätningen är klar.";
+"showSidebar" = "Visa sidofält";
+"hideSidebar" = "Göm sidofält";
+
+/* Overview and categories */
+"availableOf" = "%@ tillgängligt av %@";
+"categories" = "Kategorier";
+"freeSpace" = "Ledigt";
+"temporaryAreaName" = "Tillfälligt systemområde";
+"categoryApps" = "Program";
+"categoryDocuments" = "Dokument och Skrivbord";
+"categoryDownloads" = "Hämtade filer";
+"categoryMedia" = "Bilder, musik och filmer";
+"categoryICloud" = "iCloud Drive";
+"categoryMail" = "Mail och meddelanden";
+"categoryDeveloper" = "Utveckling";
+"categoryCaches" = "Cacheminnen";
+"categoryAppData" = "Appdata";
+"categoryTrash" = "Papperskorgen";
+"categoryTemporary" = "Tillfälliga filer";
+"categoryUser" = "Övriga användardata";
+"categoryLibrary" = "Delad appdata";
+"categoryOther" = "Övriga mappar";
+"categoryPurgeable" = "Kan rensas av macOS";
+"categorySystem" = "System och övrigt";
+
+/* Explorer, tables and info sheet */
+"columnName" = "Namn";
+"columnSize" = "Storlek";
+"columnShare" = "Andel";
+"columnFiles" = "Filer";
+"columnLocation" = "Plats";
+"smallerItems" = "%@ mindre objekt under 1 MB";
+"measuredTotal" = "%@ mätt";
+"open" = "Öppna";
+"showInFinder" = "Visa i Finder";
+"info" = "Visa info";
+"copyPath" = "Kopiera sökväg";
+"done" = "Klar";
+"allocated" = "Upptaget på disken";
+"kind" = "Typ";
+"modified" = "Ändrad";
+"created" = "Skapad";
+"contents" = "Innehåll";
+"files" = "Filer";
+"folders" = "Mappar";
+"packages" = "Apppaket";
+"modifiedBetween" = "Ändrad mellan";
+"dateRange" = "%@ och %@";
+"analyzing" = "Analyserar filer …";
+"typesBySize" = "Filtyper efter storlek";
+"fileCount" = "%@ filer";
+"noExtension" = "utan filändelse";
+
+/* Large files */
+"minimumSize" = "Minsta storlek";
+"fromSize" = "från %@";
+"noFilesFrom" = "Inga filer från %@";
+"filesTotal" = "%@ filer · %@ totalt";
+
+/* Temporary area */
+"location" = "Plats";
+"total" = "Totalt";
+"subfolders" = "Undermappar";
+"viewCopies" = "Visa appkopior …";
+"temporaryFolderT" = "Tillfälliga filer";
+"temporaryFolderTDetail" = "Töms för det mesta vid omstart.";
+"temporaryFolderC" = "Cacheminnen";
+"temporaryFolderCDetail" = "Cacheminnen för appar och systemtjänster.";
+"temporaryFolderX" = "Appkopior";
+"temporaryFolderXDetail" = "Kopior som macOS skapar när signaturer kontrolleras.";
+"temporaryFolder0" = "Systemtjänster";
+"temporaryFolder0Detail" = "Data från bakgrundstjänster.";
+
+/* Signature copies */
+"noCopies" = "Inga appkopior";
+"noCopiesDetail" = "Det finns inga appkopior i mappen X.";
+"running" = "körs";
+"stopped" = "avslutad";
+"copiesLabel" = "Kopior";
+"countedSize" = "Räknad storlek";
+"installedVersion" = "Installerad version";
+"notFound" = "hittades inte";
+"versionLabel" = "Version %@";
+"copiesOne" = "1 kopia";
+"copiesMany" = "%@ kopior";
+"current" = "aktuell";
+"old" = "gammal";
+"unknown" = "okänd";
+"createdOn" = "Skapad den %@";
+"freed" = "Faktiskt frigjort utrymme: %@";
+"deleteError" = "Allt kunde inte tas bort: %@";
+"quitToDelete" = "Avsluta %@ med ⌘Q för att kunna ta bort.";
+"openInExplorer" = "Öppna i Lagringsutforskaren";
+"deleteAll" = "Ta bort alla kopior …";
+"deleteTitle" = "Ta bort %@ kopior av %@?";
+"deleteForever" = "Ta bort permanent";
+"deleteMessage" = "Kopiorna hamnar inte i papperskorgen. macOS skapar en ny vid behov.";
+
+/* Volumes */
+"capacity" = "Kapacitet";
+"used" = "Använt";
+"purgeable" = "Kan rensas av macOS";
+"available" = "Tillgängligt";
+"toOverview" = "Till översikten";
+"exploreContents" = "Utforska innehåll";
+"scanAndExplore" = "Mät och utforska";
+"volumeGone" = "Volymen är inte längre ansluten";
+
+/* Search */
+"searchPrompt" = "Sök efter mappar och filer";
+"scopeAll" = "Alla";
+"scopeFolders" = "Mappar";
+"scopeFiles" = "Filer";
+"searchResults" = "%@ träffar";
+"noResults" = "Inga träffar för ”%@”";
+"searchNote" = "Söker i mappar och filer från 1 MB i den senaste mätningen.";
+
+/* Full Disk Access */
+"accessTitle" = "En behörighet i stället för många frågor";
+"accessDetail" = "Utan full skivåtkomst frågar macOS separat efter Skrivbord, Dokument, Hämtade filer, iCloud Drive, andra appars data och externa volymer. Med ett enda reglage i Systeminställningar försvinner alla dessa frågor. Appen läser bara namn, storlekar och datum, aldrig innehållet i dina dokument, och skickar ingenting någonstans.";
+"accessOneSwitch" = "Integritet och säkerhet › Full skivåtkomst";
+"accessOpenSettings" = "Öppna Systeminställningar";
+"accessContinue" = "Fortsätt utan full skivåtkomst";
+"accessGranted" = "Beviljad";
+"accessRestart" = "Starta om appen";
+"accessRestartHint" = "Har du aktiverat reglaget? macOS ger åtkomst först när appen har startats om. Klicka på ”Starta om appen” eller låt macOS avsluta och öppna den igen. Om det fortfarande inte fungerar tar du bort posten med ”–” i Systeminställningar och lägger till appen igen.";
+"quitApp" = "Avsluta %@";
+"fullDiskAccess" = "Full skivåtkomst";
+
+/* Settings */
+"autoScan" = "Mät automatiskt vid start";
+"extraFolders" = "Ytterligare mappar";
+"none" = "Inga";
+"add" = "Lägg till";
+"remove" = "Ta bort";
+
+/* Statistics, cleaner, unused apps, layout */
+"paneCleaner" = "Rensa upp";
+"paneApps" = "Oanvända appar";
+"sectionTidy" = "Frigör utrymme";
+"layoutList" = "Lista";
+"layoutGrid" = "Rutnät";
+"settings" = "Inställningar";
+"emptyFolder" = "Den här mappen är tom";
+"otherCategories" = "Övrigt";
+"cleanCaches" = "Appars cacheminnen";
+"cleanCachesDetail" = "Cacheminnen som appar bygger upp igen vid behov. Appar som körs och macOS själv lämnas ifred.";
+"cleanDeveloper" = "Cacheminnen för utveckling";
+"cleanDeveloperDetail" = "Byggdata från Xcode och paketcacher som npm; de skapas på nytt vid nästa bygge.";
+"cleanLogs" = "Gamla loggar";
+"cleanLogsDetail" = "Apploggar som är äldre än en vecka.";
+"cleanTemporary" = "Gamla tillfälliga filer";
+"cleanTemporaryDetail" = "Tillfälliga filer som inte har ändrats på minst tre dagar.";
+"cleanTrash" = "Papperskorgen";
+"cleanTrashDetail" = "Tömmer papperskorgen permanent. Inte markerad som standard.";
+"cleanFailed" = "%@ objekt kunde inte tas bort eftersom de används eller är skyddade.";
+"cleaning" = "Rensar upp …";
+"cleanerRefresh" = "Sök igen";
+"cleanSelected" = "Rensa markeringen (%@)";
+"cleanConfirmTitle" = "Ta bort %@ permanent?";
+"cleanConfirmMessage" = "Filerna hamnar inte i papperskorgen. Appar bygger upp sina cacheminnen igen vid behov. Därefter mäter appen allt på nytt.";
+"appsNoneUnused" = "Alla appar har använts nyligen";
+"unusedSince" = "Inte öppnad på";
+"daysOption" = "mer än %@ dagar";
+"trashAppTitle" = "Flytta ”%@” till papperskorgen?";
+"trashAppMessage" = "Du kan återställa appen från papperskorgen tills du tömmer den.";
+"moveToTrash" = "Flytta till papperskorgen";
+"lastOpened" = "Senast öppnad den %@";
+"trashAppFailed" = "”%@” kunde inte flyttas. I Finder fungerar det med ditt lösenord.";
+"figureFiles" = "Filer";
+"figureUnusedApps" = "oanvända appar";
+"bucketUnder1MB" = "under 1 MB"; /* same as English on purpose */
+"bucketTo10MB" = "1–10 MB";
+"bucketTo100MB" = "10–100 MB";
+"bucketTo1GB" = "100 MB–1 GB";
+"bucketOver1GB" = "över 1 GB";
+
+/* Scan progress and empty values */
+"scanningPercent" = "%@ mätt";
+"scanningArea" = "Område %@ av %@ · %@";
+"emptyValue" = "tom";
+
+/* Page info, scan details, summary */
+"infoOverview" = "Storlekarna är det upptagna utrymmet, mätt som med ”du”. APFS-kloner räknas fullt ut; kopior som delar lagringsblock tar i verkligheten mindre plats. ”System och övrigt” är resten upp till det macOS anger som använt.";
+"infoCleaner" = "Här tar du bort filer som systemet knappt eller inte alls behöver: cacheminnen som byggs upp av sig själva, gamla loggar och gamla tillfälliga filer. Välj vad som får försvinna och bekräfta.";
+"infoApps" = "Appar som du inte har öppnat på ett tag. Datumet kommer från macOS självt; appen registrerar ingenting. Det du inte längre behöver flyttar du härifrån till papperskorgen och kan återställa därifrån.";
+"infoExplorer" = "Alla uppmätta mappar, sorterade efter storlek. Dubbelklicka för att öppna en mapp; snabbmenyn visar filer i Finder och ger information om dem.";
+"infoLargeFiles" = "Alla filer från den valda storleken i den senaste mätningen. Dubbelklicka för att visa filen i Finder.";
+"infoTemporaryFiles" = "macOS skapar det här området för varje användare under /private/var/folders. Det är dolt i Finder och specificeras inte i ”Hantera lagring”.";
+"infoCopies" = "När macOS kontrollerar en signatur lägger det ibland kompletta kopior av en app i mappen X. De är inga egna program; macOS skapar en ny vid behov. Det är ofarligt att ta bort dem så länge appen är avslutad.";
+"infoVolume" = "Kapaciteten för den här volymen: vad som är upptaget, vad macOS kan frigöra själv vid behov och vad som är ledigt. Externa volymer kan mätas här.";
+"aboutPage" = "Om den här sidan";
+"scanDetails" = "Mätning";
+"scanProgress" = "Förlopp";
+"scanArea" = "Område";
+"scanFinished" = "Mätt kl.";
+"accessMissingShort" = "Inte beviljad";
+"summaryTitle" = "I korthet";
+"summaryDisk" = "På ”%@” är %@ av %@ använt och %@ är tillgängligt.";
+"summaryTop" = "Mest utrymme går till %@ med %@ och %@ med %@.";
+"summaryNotMeasured" = "Hur utrymmet fördelas visas här efter den första mätningen.";
+"summaryClean" = "Genom att rensa upp kan du frigöra cirka %@.";
+"summaryCopies" = "Kopior av appar som macOS skapar vid kontroll räknas för %@.";
+"summaryApps" = "%@ appar har inte öppnats på ett tag.";
+"readAloud" = "Läs upp";
+"stopReading" = "Sluta läsa upp";
+
+/* Statistics in plain words */
+"sizeClassesTitle" = "Hur stora är dina filer?";
+"sizeClassesCaption" = "Hur mycket plats varje storleksklass tar och hur många filer som finns i den. Några få stora filer tar oftast mer plats än många små.";
+"figureLargeFilesFrom" = "stora filer från %@";
+"bucketValue" = "%@
+%@ filer";
+"settingsSystemNote" = "Utseende, språk och enheter hämtas från Systeminställningar. Ett eget språk för den här appen ställer du in där under Allmänt › Språk och region › Appar.";

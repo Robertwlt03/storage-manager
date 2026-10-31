@@ -1,101 +1,120 @@
 import SwiftUI
 
-/// What sits at the start of a row.
-enum RowIcon {
-    case badge(symbol: String, colorIndex: Int)  // white symbol on a coloured square, like System Settings
-    case letter(String)  // a short code on a neutral square (T, C, X, 0)
-    case file(String)  // the Finder icon of a path
-}
+extension UI {
+    /// Icon, title, optional detail, value and, if it leads somewhere, a chevron.
+    struct NavigationRow: View {
+        let title: String
+        var icon: IconKind?
+        var detail: String?
+        var value: String?
+        var action: (() -> Void)?
 
-struct RowIconView: View {
-    let icon: RowIcon
-    var size = Layout.badgeSize
-    @AppStorage(SettingsKey.palette) private var palette = ChartPalette.colourful
-
-    var body: some View {
-        let shape = RoundedRectangle(cornerRadius: Layout.badgeRadius, style: .continuous)
-        switch icon {
-        case .badge(let symbol, let index):
-            Image(systemName: symbol).font(.system(size: size / 2, weight: .semibold)).foregroundStyle(.white)
-                .frame(width: size, height: size).background(Theme.color(index, palette), in: shape)
-        case .letter(let text):
-            Text(text).font(.system(.body, design: .monospaced).weight(.semibold))
-                .frame(width: size, height: size).background(.quaternary, in: shape)
-        case .file(let path):
-            FinderService.icon(path).resizable().frame(width: size, height: size)
+        init(
+            _ title: String, icon: IconKind? = nil, detail: String? = nil, value: String? = nil,
+            action: (() -> Void)? = nil
+        ) {
+            self.title = title
+            self.icon = icon
+            self.detail = detail
+            self.value = value
+            self.action = action
         }
-    }
-}
 
-/// Icon, title, optional detail line, value and – if there is an action – a chevron.
-struct NavRow: View {
-    let icon: RowIcon?
-    let title: String
-    var detail: String?
-    var value: String?
-    var action: (() -> Void)?
+        var body: some View {
+            Button {
+                action?()
+            } label: {
+                rowContent
+            }
+            .appButton(.content)
+            .allowsHitTesting(action != nil)  // not .disabled, which would dim the text below 4.5:1
+            .accessibilityElement(children: .combine)
+        }
 
-    var body: some View {
-        Button { action?() } label: {
-            HStack(spacing: Layout.rowSpacing) {
-                if let icon { RowIconView(icon: icon) }
-                VStack(alignment: .leading, spacing: 1) {
+        private var rowContent: some View {
+            HStack(spacing: Space.item) {
+                if let icon { Icon(icon) }
+                VStack(alignment: .leading, spacing: Space.hairline) {
                     Text(title)
-                    if let detail { Text(detail).font(.callout).foregroundStyle(.muted) }
+                    if let detail { Text(detail).textRole(.hint) }
                 }
-                Spacer(minLength: Layout.rowSpacing)
-                if let value { Text(value).monospacedDigit().foregroundStyle(.muted) }
-                Image(systemName: Symbols.chevron).font(.caption.weight(.semibold)).foregroundStyle(.muted)
-                    .opacity(action == nil ? 0 : 1)
+                Spacer(minLength: Space.item)
+                if let value { Text(value).textRole(.value).contentTransition(.numericText()) }
+                Chevron().opacity(action == nil ? Opacity.hidden : Opacity.full)
             }
             .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .allowsHitTesting(action != nil)  // not .disabled: that would dim the text below 4.5:1
-        .accessibilityElement(children: .combine)
-    }
-}
-
-struct FieldItem: Identifiable {
-    let label: String
-    let value: String
-    var id: String { label }
-
-    init(_ label: Loc, _ value: String) { self.init(label.s, value) }
-    init(_ label: String, _ value: String) {
-        self.label = label
-        self.value = value
-    }
-}
-
-/// Label on the left, value on the right.
-struct FieldRow: View {
-    let label: String
-    let value: String
-
-    var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: Layout.rowSpacing) {
-            Text(label)
-            Spacer(minLength: Layout.rowSpacing)
-            Text(value).foregroundStyle(.muted).monospacedDigit().multilineTextAlignment(.trailing).textSelection(.enabled)
+            .modifier(RowHighlight(isActive: action != nil))
         }
     }
-}
 
-/// Large icon with title and subtitle, used at the top of volume cards and the info sheet.
-struct HeaderRow: View {
-    let icon: RowIcon
-    let title: String
-    let subtitle: String
-    var iconSize = Layout.headerIcon
+    /// A label and its value; a value of nil is still being calculated.
+    struct Field: Identifiable {
+        let label: String
+        let value: String?
+        var id: String { label }
 
-    var body: some View {
-        HStack(spacing: Layout.rowSpacing) {
-            RowIconView(icon: icon, size: iconSize)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.title2.weight(.semibold)).lineLimit(2)
-                Text(subtitle).foregroundStyle(.muted).lineLimit(2).textSelection(.enabled)
+        init(_ label: TextKey, _ value: String?) { self.init(label.translated, value) }
+        init(_ label: String, _ value: String?) {
+            self.label = label
+            self.value = value
+        }
+    }
+
+    /// Label/value rows with dividers; optional fields are passed as nil.
+    struct Fields: View {
+        let fields: [Field]
+
+        init(_ fields: [Field?]) { self.fields = fields.compactMap(\.self) }
+
+        var body: some View {
+            Rows(fields) { field in
+                HStack(alignment: .firstTextBaseline, spacing: Space.item) {
+                    Text(field.label)
+                    Spacer(minLength: Space.item)
+                    Text(field.value ?? StandInText.figure).textRole(.value)
+                        .multilineTextAlignment(.trailing)
+                        .textSelection(.enabled)
+                        .calculating(field.value == nil, alignment: .trailing)
+                }
             }
         }
+    }
+
+    /// A large icon with title and subtitle, at the top of volume cards and sheets.
+    struct TitleRow: View {
+        let title: String
+        let subtitle: String
+        let icon: IconKind
+
+        init(_ title: String, subtitle: String, icon: IconKind) {
+            self.title = title
+            self.subtitle = subtitle
+            self.icon = icon
+        }
+
+        var body: some View {
+            HStack(spacing: Space.item) {
+                Icon(icon, size: .large)
+                VStack(alignment: .leading, spacing: Space.hairline) {
+                    Text(title).textRole(.title).lineLimit(Layout.maximumWrappedLines)
+                    Text(subtitle).foregroundStyle(.muted).lineLimit(Layout.maximumWrappedLines)
+                        .textSelection(.enabled)
+                }
+            }
+        }
+    }
+}
+
+/// Only rows that lead somewhere light up under the mouse. The highlight reaches a little beyond
+/// the row without changing its layout.
+private struct RowHighlight: ViewModifier {
+    let isActive: Bool
+
+    func body(content: Content) -> some View {
+        let widened = content.padding(.horizontal, Space.small).padding(.vertical, Space.extraSmall)
+        Group {
+            if isActive { widened.hoverHighlight() } else { widened }
+        }
+        .padding(.horizontal, -Space.small).padding(.vertical, -Space.extraSmall)
     }
 }

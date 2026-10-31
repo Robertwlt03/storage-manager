@@ -1,96 +1,119 @@
 import AppKit
 
 /// UserDefaults keys; views bind them with @AppStorage, services read them through `AppSettings`.
+/// Appearance, language and units come from System Settings, so the app keeps no switches for them.
 enum SettingsKey {
-    static let language = "language"
-    static let appearance = "appearance"
-    static let liquidGlass = "liquidGlass"
-    static let palette = "palette"
-    static let binaryUnits = "binaryUnits"
-    static let autoScan = "autoScan"
-    static let eco = "eco"
-    static let pauseOnLowPower = "pauseOnLowPower"
-    static let largeFileMB = "largeFileMB"
+    static let scansAutomatically = "autoScan"
     static let extraFolders = "extraFolders"
+    static let largeFileMegabytes = "largeFileMB"
+    static let unusedDays = "unusedDays"
+    static let layoutMode = "layoutMode"
+    static let lastScanFiles = "lastScanFiles"
     static let launchPane = "pane"  // `open … --args -pane copies`
-    static let launchSettings = "openSettings"  // `open … --args -openSettings YES`
-    static let launchSkipAccess = "skipAccessSheet"  // `open … --args -skipAccessSheet YES` (screenshots, tests)
+    static let opensSettingsAtLaunch = "openSettings"  // `open … --args -openSettings YES`
+    /// `open … --args -skipAccessSheet YES` (screenshots, tests)
+    static let launchSkipAccessSheet = "skipAccessSheet"
+    /// `open … --args -demo YES` shows made-up data instead of measuring (see DemoData).
+    static let launchDemo = "demo"
+    /// `open … --args -uiTest <folder>` runs the stress test.
+    static let uiTestReportFolder = "uiTest"
+    /// `open … --args -appearance dark` (or `light`) overrides System Settings, for snapshots.
+    static let launchAppearance = "appearance"
 }
 
 enum AppSettings {
-    private static var d: UserDefaults { .standard }
+    private static var defaults: UserDefaults { .standard }
 
     static func registerDefaults() {
-        d.register(defaults: [SettingsKey.autoScan: true, SettingsKey.eco: true, SettingsKey.pauseOnLowPower: true,
-                              SettingsKey.liquidGlass: true, SettingsKey.largeFileMB: LargeFileThreshold.defaultMB])
+        defaults.register(defaults: [
+            SettingsKey.scansAutomatically: true,
+            SettingsKey.largeFileMegabytes: LargeFileThreshold.defaultMegabytes,
+            SettingsKey.unusedDays: CleanUpRules.defaultUnusedDays,
+        ])
     }
 
-    static var autoScan: Bool { d.bool(forKey: SettingsKey.autoScan) }
-    static var eco: Bool { d.bool(forKey: SettingsKey.eco) }
-    static var pauseOnLowPower: Bool { d.bool(forKey: SettingsKey.pauseOnLowPower) }
-    static var binaryUnits: Bool { d.bool(forKey: SettingsKey.binaryUnits) }
-    static var language: AppLanguage { AppLanguage(rawValue: d.string(forKey: SettingsKey.language) ?? "") ?? .system }
-    static var launchPane: Pane? { d.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:)) }
-    static var launchSettings: Bool { d.bool(forKey: SettingsKey.launchSettings) }
-    static var launchSkipAccess: Bool { d.bool(forKey: SettingsKey.launchSkipAccess) }
+    static var scansAutomatically: Bool { defaults.bool(forKey: SettingsKey.scansAutomatically) }
+    static var largeFileMegabytes: Int { defaults.integer(forKey: SettingsKey.largeFileMegabytes) }
+    static var launchPane: Pane? {
+        defaults.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:))
+    }
+    static var opensSettingsAtLaunch: Bool {
+        defaults.bool(forKey: SettingsKey.opensSettingsAtLaunch)
+    }
+    static var shouldSkipAccessSheet: Bool {
+        defaults.bool(forKey: SettingsKey.launchSkipAccessSheet)
+    }
+    static var showsDemo: Bool { defaults.bool(forKey: SettingsKey.launchDemo) }
+    static var uiTestReportFolder: String? {
+        defaults.string(forKey: SettingsKey.uiTestReportFolder)
+    }
+    static var launchAppearance: NSAppearance? {
+        switch defaults.string(forKey: SettingsKey.launchAppearance) {
+        case "light": NSAppearance(named: .aqua)
+        case "dark": NSAppearance(named: .darkAqua)
+        default: nil  // follows System Settings
+        }
+    }
 
     /// Extra folders are stored as one string, one path per line (AppStorage cannot hold arrays).
-    static func folders(from stored: String) -> [String] { stored.split(separator: "\n").map(String.init) }
+    static func folders(from stored: String) -> [String] {
+        stored.split(separator: "\n").map(String.init)
+    }
     static func store(_ folders: [String]) -> String { folders.joined(separator: "\n") }
-    static var extraFolders: [String] { folders(from: d.string(forKey: SettingsKey.extraFolders) ?? "") }
-}
-
-enum AppLanguage: String, CaseIterable, Identifiable {
-    case system, de, en
-    var id: Self { self }
-
-    static let supported: [AppLanguage] = [.de, .en]
-    static let fallback = AppLanguage.en
-
-    /// The language code actually used: for `.system` the first preferred system language the app supports.
-    var code: String {
-        guard self == .system else { return rawValue }
-        let preferred = Locale.preferredLanguages.compactMap { Locale(identifier: $0).language.languageCode?.identifier }
-        return preferred.first { code in Self.supported.contains { $0.rawValue == code } } ?? Self.fallback.rawValue
-    }
-
-    /// Each language names itself ("Deutsch", "English"); the system entry names the language it resolves to.
-    var title: String {
-        let own = { (code: String) in Locale(identifier: code).localizedString(forLanguageCode: code)?.capitalized ?? code }
-        return self == .system ? Loc.languageSystem.f(own(code)) : own(rawValue)
+    static var extraFolders: [String] {
+        folders(from: defaults.string(forKey: SettingsKey.extraFolders) ?? "")
     }
 }
 
-enum AppAppearance: Int, CaseIterable, Identifiable {
-    case system, light, dark
-    var id: Self { self }
+/// Languages the app ships; the raw value is the name of the `.lproj` folder. Which one is used
+/// comes from macOS, which also allows a language per app (System Settings › General › Language &
+/// Region › Applications).
+nonisolated enum AppLanguage: String, CaseIterable {
+    case german = "de"
+    case english = "en"
+    case french = "fr"
+    case spanish = "es"
+    case italian = "it"
+    case dutch = "nl"
+    case brazilianPortuguese = "pt-BR"
+    case swedish = "sv"
+    case danish = "da"
+    case norwegian = "nb"
+    case finnish = "fi"
+    case polish = "pl"
+    case czech = "cs"
+    case turkish = "tr"
+    case russian = "ru"
+    case ukrainian = "uk"
+    case japanese = "ja"
+    case korean = "ko"
+    case simplifiedChinese = "zh-Hans"
+    case traditionalChinese = "zh-Hant"
 
-    var title: Loc {
-        switch self {
-        case .system: .appearanceSystem
-        case .light: .appearanceLight
-        case .dark: .appearanceDark
-        }
+    static let fallback = AppLanguage.english
+
+    /// The first preferred system language the app supports.
+    static var current: AppLanguage {
+        Locale.preferredLanguages.lazy.compactMap(match).first ?? fallback
     }
 
-    var nsAppearance: NSAppearance? {
-        switch self {
-        case .system: nil
-        case .light: NSAppearance(named: .aqua)
-        case .dark: NSAppearance(named: .darkAqua)
+    /// Maps a system language like "zh-TW", "pt-PT" or "no" to one of the shipped languages.
+    static func match(_ identifier: String) -> AppLanguage? {
+        let language = Locale.Language(identifier: identifier)
+        guard let code = language.languageCode?.identifier else { return nil }
+        switch code {
+        case "zh":
+            let isTraditional = language.maximalIdentifier.contains("Hant")
+            return isTraditional ? .traditionalChinese : .simplifiedChinese
+        case "pt": return .brazilianPortuguese
+        case "no", "nn": return .norwegian
+        default: return AppLanguage(rawValue: code)
         }
     }
 }
 
-enum ChartPalette: Int, CaseIterable, Identifiable {
-    case colourful, accent, greys
+enum LayoutMode: Int, CaseIterable, Identifiable {
+    case list, grid
     var id: Self { self }
-
-    var title: Loc {
-        switch self {
-        case .colourful: .paletteColourful
-        case .accent: .paletteAccent
-        case .greys: .paletteGrey
-        }
-    }
+    var title: TextKey { self == .list ? .layoutList : .layoutGrid }
 }

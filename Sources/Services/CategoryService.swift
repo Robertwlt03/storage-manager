@@ -1,48 +1,54 @@
-/// Storage categories like in System Settings › Storage. Each kind owns its folders; the most specific folder wins.
-/// Folders that do not exist on a Mac simply stay empty, so the same rules work everywhere.
+/// Storage categories like in System Settings › Storage. Each kind owns its folders; the most
+/// specific folder wins. Folders that do not exist on a Mac simply stay empty, so the same rules
+/// work everywhere.
 enum CategoryKind: Int, CaseIterable {
-    case apps, documents, downloads, media, iCloud, mail, developer, caches, appData, trash, temp, user, library
+    case apps, documents, downloads, media, iCloud, mail, developer, caches, appData, trash,
+        temporary,
+        user, library
     case other, purgeable, system
 
-    var title: Loc {
+    /// Kinds that come from what macOS reports, not from the scan.
+    static let estimated: Set<CategoryKind> = [.purgeable, .system]
+
+    var title: TextKey {
         switch self {
-        case .apps: .catApps
-        case .documents: .catDocuments
-        case .downloads: .catDownloads
-        case .media: .catMedia
-        case .iCloud: .catICloud
-        case .mail: .catMail
-        case .developer: .catDeveloper
-        case .caches: .catCaches
-        case .appData: .catAppData
-        case .trash: .catTrash
-        case .temp: .catTemp
-        case .user: .catUser
-        case .library: .catLibrary
-        case .other: .catOther
-        case .purgeable: .catPurgeable
-        case .system: .catSystem
+        case .apps: .categoryApps
+        case .documents: .categoryDocuments
+        case .downloads: .categoryDownloads
+        case .media: .categoryMedia
+        case .iCloud: .categoryICloud
+        case .mail: .categoryMail
+        case .developer: .categoryDeveloper
+        case .caches: .categoryCaches
+        case .appData: .categoryAppData
+        case .trash: .categoryTrash
+        case .temporary: .categoryTemporary
+        case .user: .categoryUser
+        case .library: .categoryLibrary
+        case .other: .categoryOther
+        case .purgeable: .categoryPurgeable
+        case .system: .categorySystem
         }
     }
 
     var symbol: String {
         switch self {
-        case .apps: "square.grid.2x2"
-        case .documents: "doc.text"
-        case .downloads: "arrow.down.circle"
-        case .media: "photo.on.rectangle"
-        case .iCloud: "icloud"
-        case .mail: "envelope"
-        case .developer: "hammer"
-        case .caches: "archivebox"
-        case .appData: "shippingbox"
-        case .trash: "trash"
-        case .temp: "hourglass"
-        case .user: "person.crop.circle"
-        case .library: "gearshape"
-        case .other: "folder"
-        case .purgeable: "arrow.3.trianglepath"
-        case .system: "internaldrive"
+        case .apps: Symbols.appCollection
+        case .documents: Symbols.documents
+        case .downloads: Symbols.downloads
+        case .media: Symbols.media
+        case .iCloud: Symbols.iCloud
+        case .mail: Symbols.mail
+        case .developer: Symbols.developer
+        case .caches: Symbols.caches
+        case .appData: Symbols.appData
+        case .trash: Symbols.trash
+        case .temporary: Symbols.temporaryArea
+        case .user: Symbols.user
+        case .library: Symbols.library
+        case .other: Symbols.otherFiles
+        case .purgeable: Symbols.purgeable
+        case .system: Symbols.internalDrive
         }
     }
 
@@ -55,13 +61,18 @@ enum CategoryKind: Int, CaseIterable {
         case .media: ["~/Pictures", "~/Music", "~/Movies"]
         case .iCloud: ["~/Library/Mobile Documents"]
         case .mail: ["~/Library/Mail", "~/Library/Messages"]
-        case .developer: ["~/Library/Developer", "~/.npm", "~/.cache", "~/.docker", "~/.gradle", "~/.m2", "~/.cargo",
-                          "~/.rustup", "~/go", "~/.pub-cache", "~/.composer", "~/.local",
-                          "~/Library/Containers/com.docker.docker", Paths.opt, Paths.usrLocal]
+        case .developer:
+            [
+                "~/Library/Developer", "~/.npm", "~/.cache", "~/.docker", "~/.gradle", "~/.m2",
+                "~/.cargo",
+                "~/.rustup", "~/go", "~/.pub-cache", "~/.composer", "~/.local",
+                "~/Library/Containers/com.docker.docker", Paths.opt, Paths.usrLocal,
+            ]
         case .caches: ["~/Library/Caches"]
-        case .appData: ["~/Library/Application Support", "~/Library/Containers", "~/Library/Group Containers"]
+        case .appData:
+            ["~/Library/Application Support", "~/Library/Containers", "~/Library/Group Containers"]
         case .trash: ["~/.Trash"]
-        case .temp: [Paths.tempArea]
+        case .temporary: [Paths.temporaryArea]
         case .user: [Paths.home]
         case .library: [Paths.library]
         case .other, .purgeable, .system: []
@@ -72,30 +83,48 @@ enum CategoryKind: Int, CaseIterable {
 enum CategoryService {
     /// Sums the tree into categories. With a volume it adds what macOS can purge and the remainder
     /// ("System & Other"); without one (while scanning) the remainder would be misleading.
-    static func compute(root: Node, volume: VolumeInfo?) -> [Category] {
-        var byPath: [String: CategoryKind] = [:]
-        for kind in CategoryKind.allCases { for p in kind.paths { byPath[Paths.expand(p)] = kind } }
-        var cats = CategoryKind.allCases.map { Category(kind: $0) }
+    static func compute(root: Node, volume: VolumeInformation?) -> [Category] {
+        let kindByPath = kindsByExpandedPath()
+        var categories = CategoryKind.allCases.map { kind in Category(kind: kind) }
 
-        func walk(_ n: Node, _ path: String, _ inherited: CategoryKind) {
-            let hit = byPath[path]
-            let kind = hit ?? inherited
-            if hit != nil && cats[kind.rawValue].node == nil { cats[kind.rawValue].node = n }
-            var own = n.bytes
-            for ch in n.children {
-                walk(ch, path + "/" + ch.name, kind)
-                own -= ch.bytes
+        func addBytes(of node: Node, at path: String, inheritedKind: CategoryKind) {
+            let matchedKind = kindByPath[path]
+            let kind = matchedKind ?? inheritedKind
+            if matchedKind != nil && categories[kind.rawValue].node == nil {
+                categories[kind.rawValue].node = node
             }
-            cats[kind.rawValue].bytes += own
+            var ownBytes = node.bytes
+            for child in node.children {
+                addBytes(of: child, at: path + "/" + child.name, inheritedKind: kind)
+                ownBytes -= child.bytes
+            }
+            categories[kind.rawValue].bytes += ownBytes
         }
-        for r in root.children { walk(r, r.name, .other) }
+        // A volume measured on its own page belongs to that volume, not to the startup disk.
+        for scanRoot in root.children where !scanRoot.name.hasPrefix(Paths.otherVolumes + "/") {
+            addBytes(of: scanRoot, at: scanRoot.name, inheritedKind: .other)
+        }
 
-        if let v = volume {
-            let scanned = cats.reduce(0) { $0 + $1.bytes }
-            cats[CategoryKind.purgeable.rawValue].bytes = v.purgeable
-            // Clones count in full while scanning, so this can go below zero; then it stays empty.
-            cats[CategoryKind.system.rawValue].bytes = max(0, v.used - v.purgeable - scanned)
+        if let volume { addEstimatedKinds(from: volume, to: &categories) }
+        return categories.filter { category in category.bytes > 0 }
+            .sorted { left, right in left.bytes > right.bytes }
+    }
+
+    private static func kindsByExpandedPath() -> [String: CategoryKind] {
+        var kindByPath: [String: CategoryKind] = [:]
+        for kind in CategoryKind.allCases {
+            for path in kind.paths { kindByPath[Paths.expand(path)] = kind }
         }
-        return cats.filter { $0.bytes > 0 }.sorted { $0.bytes > $1.bytes }
+        return kindByPath
+    }
+
+    private static func addEstimatedKinds(
+        from volume: VolumeInformation, to categories: inout [Category]
+    ) {
+        let scannedBytes = categories.reduce(0) { total, category in total + category.bytes }
+        categories[CategoryKind.purgeable.rawValue].bytes = volume.purgeableBytes
+        // Clones count in full while scanning, so this can go below zero; then it stays empty.
+        categories[CategoryKind.system.rawValue].bytes = max(
+            0, volume.usedBytes - volume.purgeableBytes - scannedBytes)
     }
 }

@@ -1,189 +1,226 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Speicher-Explorer – Sieh auf einen Blick, wo dein Speicher steckt." width="100%">
+  <img src="assets/banner.svg" alt="Storage Manager. See at a glance where your storage goes." width="100%">
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/macOS-14%20oder%20neuer-1D1D1F?style=flat-square&logo=apple&logoColor=white" alt="macOS 14 oder neuer">
+  <img src="https://img.shields.io/badge/macOS-27%20or%20later-1D1D1F?style=flat-square&logo=apple&logoColor=white" alt="macOS 27 or later">
   <img src="https://img.shields.io/badge/-SwiftUI-1D1D1F?style=flat-square&logo=swift&logoColor=F05138" alt="SwiftUI">
-  <img src="https://img.shields.io/badge/Sprachen-Deutsch%20%C2%B7%20English-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="Deutsch und Englisch">
-  <img src="https://img.shields.io/badge/Preis-kostenlos-1B7332?style=flat-square&labelColor=1D1D1F" alt="kostenlos">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/Lizenz-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="Lizenz: MIT"></a>
+  <img src="https://img.shields.io/badge/Languages-20-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="20 languages">
+  <img src="https://img.shields.io/badge/Price-free-1B7332?style=flat-square&labelColor=1D1D1F" alt="free">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="License: MIT"></a>
 </p>
 
-Der **Speicher-Explorer** zeigt dir, wo auf deinem Mac der Speicherplatz steckt. Er misst alle wichtigen Bereiche,
-sortiert sie wie die Systemeinstellungen in verständliche Kategorien und findet auch das, was macOS sonst versteckt.
-Alles bleibt auf deinem Mac: Die App liest nur Größen und schickt nichts ins Internet.
+**Storage Manager** shows you where the storage on your Mac goes. It measures all the important areas, sorts them
+into categories that make sense, and also finds what macOS otherwise hides from you. Everything stays on your Mac,
+because the app only reads sizes and sends nothing to the internet.
 
-## <img src="assets/icons/about.svg" height="33" align="absmiddle" alt="">Wofür ist die App?
+## <img src="assets/icons/about.svg" height="33" align="absmiddle" alt="">Why this app exists
 
-Wenn macOS meldet, dass der Speicher fast voll ist, verrät „Speicher verwalten“ oft nur einen großen Block namens
-„Systemdaten“. Der Speicher-Explorer schaut genauer hin. Er zeigt, welche Ordner wirklich groß sind, findet einzelne
-riesige Dateien und deckt versteckte Ecken auf. Eine davon sind die **Prüfkopien**: Beim Prüfen von Apps legt macOS
-manchmal vollständige Kopien an, im Fall von Chrome schon einmal über hundert Stück. Die App zeigt sie an und löscht
-sie auf Wunsch, aber nur nach Rückfrage und nur, wenn die App dazu beendet ist.
+I always wanted to know exactly how the storage on my Mac is split up. macOS only shows this very roughly, though,
+and a large part often just ends up in a block called “System Data” without you ever learning what is inside. Until
+now, if you wanted to know more, you either had to work in the terminal or write yourself a script that makes it
+easier to move through the folders.
 
-## <img src="assets/icons/screens.svg" height="33" align="absmiddle" alt="">So sieht der Speicher-Explorer aus
+A script like that was my first step, too. With it I found out, for example, that macOS had created over a hundred
+copies of Google Chrome that together took up more than a hundred gigabytes. But a script is not something you can
+simply hand on to others. So I turned it into a proper app that is much friendlier to use, that anyone can work with
+without a terminal, and that you can share with others without having to wait for an update from Apple.
+
+## <img src="assets/icons/screens.svg" height="33" align="absmiddle" alt="">What Storage Manager looks like
 
 <table>
   <tr>
-    <td width="50%" valign="top"><img src="assets/screenshots/ueberblick-hell.png" alt="Überblick im hellen Erscheinungsbild"></td>
-    <td width="50%" valign="top"><img src="assets/screenshots/ueberblick-dunkel.png" alt="Überblick im dunklen Erscheinungsbild"></td>
+    <td width="50%" valign="top"><img src="assets/screenshots/overview.png" alt="Overview with storage bar, legend and summary"></td>
+    <td width="50%" valign="top"><img src="assets/screenshots/clean-up.png" alt="Clean Up in dark appearance"></td>
   </tr>
   <tr>
-    <td align="center"><sub><b>Überblick</b> – Speicherbalken und Kategorien, hell …</sub></td>
-    <td align="center"><sub>… oder dunkel, ganz wie dein Mac</sub></td>
+    <td align="center"><sub>The <b>Overview</b> with storage bar, legend and a short summary</sub></td>
+    <td align="center"><sub>In <b>Clean Up</b> you choose what may go, shown here in dark appearance</sub></td>
   </tr>
   <tr>
-    <td valign="top"><img src="assets/screenshots/pruefkopien.png" alt="Prüfkopien von Google Chrome"></td>
-    <td valign="top"><img src="assets/screenshots/einstellungen.png" alt="Einstellungen"></td>
+    <td colspan="2" align="center" valign="top"><img src="assets/screenshots/unused-apps.png" width="50%" alt="Unused Apps with the time since each app was last opened"></td>
   </tr>
   <tr>
-    <td align="center"><sub><b>Prüfkopien</b> – Anzahl, Versionen und Löschen per Klick</sub></td>
-    <td align="center"><sub><b>Einstellungen</b> – Sprache, Aussehen und Messen</sub></td>
+    <td colspan="2" align="center"><sub><b>Unused Apps</b> lists the apps you have not opened for a long time</sub></td>
   </tr>
 </table>
 
-## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">Was die App kann
+<sub>The pictures show the demo with made-up data, which `make demo` opens.</sub>
 
-- **Überblick** – dein Startvolume mit einem farbigen Balken und allen Kategorien, von Programmen über Downloads bis zu Caches.
-- **Ordner** – klick dich wie im Finder durch alle Ordner, sortiert nach Größe.
-- **Große Dateien** – alle Dateien ab einer Größe, die du selbst wählst.
-- **Suche** – finde Ordner und Dateien nach ihrem Namen.
-- **Versteckte Bereiche** – der temporäre Bereich von macOS und die Prüfkopien von Apps.
-- **Datenträger** – auch externe Festplatten und USB-Sticks.
-- **Einstellungen** – Deutsch oder Englisch, hell oder dunkel, Liquid Glass an oder aus und eigene Diagrammfarben.
+## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">What the app can do
 
-## <img src="assets/icons/install.svg" height="33" align="absmiddle" alt="">Installieren
+The **Overview** is your home page. Right at the top are the most important numbers, such as how many files you
+have, how many of them are large and how many apps you have not opened for a long time, and clicking one takes you
+straight to the matching page. Below that, it shows your Mac with a colored bar and a legend. It then sums up in a
+few sentences how your storage is doing, and reads that out to you if you like. A chart also shows you how much space
+small and large files take up, and at the very bottom you find all categories, from applications and downloads to
+caches.
 
-Du brauchst einen Mac mit macOS 14 oder neuer und die Datei **Speicher-Explorer-1.0.dmg**. Alles Weitere geht mit der Maus.
+In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
+all files above a size you choose yourself, and **Search** finds folders and files by name. You can also show each of
+these lists as a grid of large tiles.
 
-**1. Öffne die DMG-Datei und ziehe den Speicher-Explorer in den Ordner „Programme“.**
+In **Clean Up** you remove files your system barely needs. These include caches that apps rebuild on their own, old
+logs, old temporary files and, if you want, the Trash. Apps that are currently running, and macOS itself, are left
+untouched.
 
-<p align="center"><img src="docs/anleitung/bilder/1-dmg.svg" alt="Die App in den Ordner Programme ziehen" width="620"></p>
+The **Unused Apps** page reminds you of apps you have not opened for a long time. The date comes from macOS itself,
+so the app records nothing. Anything you no longer need, you can move to the Trash from there.
 
-**2. Öffne die App.** Beim ersten Mal meldet macOS, dass die App nicht überprüft werden konnte. Das liegt daran, dass
-sie nicht über Apples kostenpflichtiges Entwicklerprogramm verteilt wird. Klicke auf „Fertig“.
+The app also shows two areas you cannot see in Finder: the **temporary area** of macOS and the **app copies** that
+macOS creates when it checks apps. External drives and USB sticks appear in the sidebar too, as soon as you connect
+them.
 
-<p align="center"><img src="docs/anleitung/bilder/2-warnung.svg" alt="Hinweis von macOS: auf Fertig klicken" width="620"></p>
+Every page has an info button at the top right that explains what the page is for. The app speaks 20 languages,
+including German, English, French, Spanish, Japanese and Chinese, and follows the language of your Mac. If you want
+to use the app in a different language, set it in System Settings under General, Language & Region and then
+Applications. It also takes the light or dark appearance from your Mac, and it uses Liquid Glass. New content appears
+with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
 
-**3. Erlaube den ersten Start.** Öffne Systemeinstellungen › Datenschutz & Sicherheit, scrolle ganz nach unten und
-klicke auf „Trotzdem öffnen“. Das ist nur ein einziges Mal nötig, auch bei späteren Updates nicht mehr.
+## <img src="assets/icons/install.svg" height="33" align="absmiddle" alt="">Installing
 
-<p align="center"><img src="docs/anleitung/bilder/3-trotzdem-oeffnen.svg" alt="Trotzdem öffnen in den Systemeinstellungen" width="620"></p>
+You need a Mac with Apple silicon, meaning M1 or newer, running macOS 27 or later, and the file **Storage-Manager-1.0.dmg**. Everything else you do
+with the mouse.
 
-**4. Erteile den Festplattenvollzugriff.** Die App fragt danach und öffnet auf Wunsch die richtige Stelle in den
-Systemeinstellungen. Schalte dort den Speicher-Explorer ein. Fehlt er in der Liste, fügst du ihn mit „+“ hinzu.
+**1. Open the DMG file and drag Storage Manager into the “Applications” folder.**
 
-<p align="center"><img src="docs/anleitung/bilder/4-vollzugriff.svg" alt="Festplattenvollzugriff einschalten" width="620"></p>
+<p align="center"><img src="docs/guide/images/1-disk-image.svg" alt="Drag the app into the Applications folder" width="620"></p>
 
-**5. Klicke in der App auf „App neu starten“.** Fertig: Ab jetzt misst sie alles ohne weitere Fragen.
+**2. Open the app.** The first time, macOS reports that it could not verify the app. That is because I do not
+distribute it through Apple’s paid developer program. Just click “Done” here.
 
-<p align="center"><img src="docs/anleitung/bilder/5-freigabe.png" alt="Das Freigabe-Fenster der App" width="560"></p>
+<p align="center"><img src="docs/guide/images/2-warning.svg" alt="Notice from macOS: click Done" width="620"></p>
 
-<sub>Die Bilder zu den Schritten 1 bis 4 sind nachgezeichnete Skizzen; je nach macOS-Version sieht das Original leicht anders aus.</sub>
+**3. Allow the first launch.** Open System Settings and go to “Privacy & Security”. Right at the bottom you will find
+a notice about Storage Manager with the button “Open Anyway”. You only have to do this once, and never again for
+later updates.
 
-## <img src="assets/icons/terminal.svg" height="33" align="absmiddle" alt="">Installieren mit der Konsole
+<p align="center"><img src="docs/guide/images/3-open-anyway.svg" alt="Open Anyway in System Settings" width="620"></p>
 
-Wer lieber das Terminal benutzt, kopiert diese Befehle einzeln hinein. Sie öffnen die DMG aus dem Download-Ordner,
-kopieren die App nach „Programme“ und erlauben den ersten Start.
+**4. Grant Full Disk Access.** The app asks for it at launch and, if you like, opens the right place in System
+Settings. Turn Storage Manager on there. If it is missing from the list, add it with the plus button.
+
+<p align="center"><img src="docs/guide/images/4-full-disk-access.svg" alt="Turn on Full Disk Access" width="620"></p>
+
+**5. In the app, click “Restart App”.** From now on it measures everything without asking you again.
+
+<p align="center"><img src="docs/guide/images/5-access-window.png" alt="The app’s access window" width="560"></p>
+
+<sub>The pictures for steps 1 to 4 are redrawn sketches, and they show the English interface. Depending on your macOS version, the original looks a little different.</sub>
+
+## <img src="assets/icons/terminal.svg" height="33" align="absmiddle" alt="">Installing from the terminal
+
+If you prefer working in the terminal, paste these commands in one after another. They open the DMG from your
+Downloads folder, copy the app to “Applications” and allow the first launch.
 
 ```bash
-hdiutil attach ~/Downloads/Speicher-Explorer-1.0.dmg
+hdiutil attach ~/Downloads/Storage-Manager-1.0.dmg
 ```
 
 ```bash
-cp -R "/Volumes/Speicher-Explorer/Speicher-Explorer.app" /Applications/
+cp -R "/Volumes/Storage Manager/Storage Manager.app" /Applications/
 ```
 
 ```bash
-hdiutil detach "/Volumes/Speicher-Explorer"
+hdiutil detach "/Volumes/Storage Manager"
 ```
 
 ```bash
-xattr -dr com.apple.quarantine /Applications/Speicher-Explorer.app
+xattr -dr com.apple.quarantine "/Applications/Storage Manager.app"
 ```
 
 ```bash
-open /Applications/Speicher-Explorer.app
+open "/Applications/Storage Manager.app"
 ```
 
-Den Festplattenvollzugriff kann auch die Konsole nicht erteilen. Dieser Befehl öffnet dafür die passende Stelle in den
-Systemeinstellungen:
+Not even the terminal can grant Full Disk Access; that only works with the switch. This command opens the right place
+in System Settings for it:
 
 ```bash
 open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
 ```
 
-## <img src="assets/icons/access.svg" height="33" align="absmiddle" alt="">Warum der Festplattenvollzugriff?
+## <img src="assets/icons/access.svg" height="33" align="absmiddle" alt="">Why Full Disk Access?
 
-Ohne ihn fragt macOS für jeden geschützten Ort einzeln nach: Schreibtisch, Dokumente, Downloads, iCloud Drive, die
-Daten anderer Apps und externe Datenträger. Der Festplattenvollzugriff ersetzt all diese Fragen durch einen einzigen
-Schalter. Du kannst auch ohne ihn fortfahren und die einzelnen Fragen beantworten; dann fehlen nur die Bereiche, die
-du ablehnst.
+Without it, macOS asks separately for every protected location, that is for the Desktop, Documents, Downloads, iCloud
+Drive, the data of other apps and external drives. Full Disk Access replaces all of these questions with a single
+switch. You can also carry on without it and answer the individual questions. Then the scan only misses the areas you
+decline.
 
-## <img src="assets/icons/privacy.svg" height="33" align="absmiddle" alt="">Deine Daten bleiben bei dir
+## <img src="assets/icons/privacy.svg" height="33" align="absmiddle" alt="">Your data stays with you
 
-Die App liest nur Namen und Größen, nicht den Inhalt deiner Dateien, und schickt nichts ins Internet. Gelöscht wird nur
-an einer einzigen Stelle, bei den Prüfkopien, und auch dort erst, nachdem du es ausdrücklich bestätigt hast.
+The app only reads names and sizes, never the contents of your files, and it sends nothing to the internet.
+Something is only deleted when you explicitly confirm it in Clean Up or for the app copies. Apps you no longer need
+go to the Trash and can be restored from there.
 
-## <img src="assets/icons/energy.svg" height="33" align="absmiddle" alt="">Sparsam mit Energie
+## <img src="assets/icons/energy.svg" height="33" align="absmiddle" alt="">Easy on energy
 
-Der Speicher-Explorer misst einmal alles in einem Durchgang, auf den stromsparenden Kernen deines Macs, und merkt sich
-das Ergebnis. Klicken, Sortieren und Suchen kosten danach keine neue Messung, und wenn die App nur offen ist, braucht
-sie praktisch keine Rechenleistung. Im Stromsparmodus misst sie nicht von selbst.
+Storage Manager measures everything once, in a single pass. To do that it uses the energy-efficient cores of your
+Mac and then remembers the result. Clicking, sorting and searching therefore never trigger a new scan. When the app is
+simply open, it needs practically no computing power, and in Low Power Mode it does not scan on its own.
 
-## <img src="assets/icons/build.svg" height="33" align="absmiddle" alt="">Wie die App gebaut wurde
+## <img src="assets/icons/build.svg" height="33" align="absmiddle" alt="">How the app was built
 
-Der Speicher-Explorer ist eine echte Mac-App, geschrieben in Swift mit SwiftUI, Apples eigenem Werkzeug für
-Mac-Oberflächen. Deshalb sieht sie aus wie die Apps von macOS selbst, passt sich an hell und dunkel an und nutzt ab
-macOS 26 auf Wunsch Liquid Glass. Entstanden ist sie aus einem kleinen Terminal-Skript und wurde zusammen mit Claude
-Schritt für Schritt zu einer vollständigen App ausgebaut.
+Storage Manager is a real Mac app, written in Swift with SwiftUI, Apple’s own toolkit for Mac interfaces. That is
+why it looks like the apps that come with macOS and adapts to light and dark. It grew out of my small terminal
+script, which I expanded step by step into a complete app together with Claude.
 
 <details>
-<summary><b>Für Entwickler: selbst bauen</b></summary>
+<summary><b>For developers: build it yourself</b></summary>
 
-Voraussetzung sind die Command Line Tools von Apple (`xcode-select --install`); Xcode ist nicht nötig.
-
-```bash
-./build.sh
-```
-
-Für eine DMG zum Weitergeben gibt es ein eigenes Skript. Es signiert mit einem kostenlosen, eigenen Zertifikat
-(einmalig anzulegen mit `scripts/create-signing-identity.sh`), damit der Festplattenvollzugriff bei allen Updates
-erhalten bleibt. Mit einer Developer ID von Apple beglaubigt es die DMG zusätzlich, dann entfallen die Schritte 2 und 3.
+You need Xcode 27 from the App Store, but only as a toolbox: building happens in the terminal, and you can use any
+editor you like. After installing it, switch the tools over to Xcode once.
 
 ```bash
-scripts/release.sh
+sudo xcode-select --switch /Applications/Xcode.app
 ```
 
-So ist der Code aufgeteilt; jede Datei hat eine Aufgabe und bleibt kurz:
+```bash
+make run
+```
 
-| Ordner | Inhalt |
+`make` shows you all the short commands, and the [contributing guide](CONTRIBUTING.md) explains them. There is a
+separate script for a DMG to pass on. It signs the app with a free certificate of your own, which you create once
+with `make identity`. That way Full Disk Access survives every update. With a Developer ID from Apple, the script
+also notarizes the DMG, and then steps 2 and 3 of the installation are no longer needed.
+
+```bash
+make release
+```
+
+The code is split into small parts, and every file has exactly one job:
+
+| Folder | Contents |
 | --- | --- |
-| `Sources/Features` | je Bereich der App ein Ordner, zum Beispiel Überblick, Ordner, Suche, Einstellungen |
-| `Sources/DesignSystem` | alle Bausteine der Oberfläche an einer Stelle (`UI`), Farben, Liquid Glass |
-| `Sources/Services` | Messen, Datenträger, Kategorien, Prüfkopien, Suche, Berechtigungen |
-| `Sources/State` | der Zustand der App, der die Services zusammenführt |
-| `Sources/Core` | Konstanten und feste Auswahlwerte wie Seiten, Farben und Einstellungen |
-| `Sources/Localization` und `Resources` | alle Texte, auf Deutsch und Englisch |
-| `Sources/Diagnostics` | Prüfungen für Kontrast, Texte und einen Selbsttest mit echten Daten |
+| `Sources/Features` | One folder for each page of the app, for example Overview, Folders and Clean Up. `Pages.swift` maps each page to its view. |
+| `Sources/DesignSystem` | All interface building blocks in the `UI` namespace, with fixed variants, plus spacing, fonts and colors. |
+| `Sources/Services` | Scanning, categories, cleaning up, apps, search, summary and reading aloud. |
+| `Sources/State` | The app state that brings the services together. |
+| `Sources/Core` | Constants and fixed choices such as pages and settings. |
+| `Sources/Localization` and `Resources` | All texts in 20 languages, with German and English as the source. |
+| `Sources/Diagnostics` | A self test with real data and a stress test for the running app. |
+| `Tests` | The tests for the folder tree, categories, search, design, contrast and translations. |
+| `scripts` | The code inspection, your own signing certificate and building the DMG. |
 
 </details>
 
-## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">Mitmachen
+## <img src="assets/icons/community.svg" height="33" align="absmiddle" alt="">Contributing
 
-Der Speicher-Explorer ist Open Source: Jeder kann den Code ansehen, verbessern und eigene Ideen einbringen. Fehler
-und Wünsche gehören in die [Issues](../../issues), Verbesserungen gern als Pull Request. Der Code ist in kleine,
-klar benannte Teile gegliedert; wo was liegt, steht im Abschnitt „Für Entwickler“. Neue Texte bitte immer auf
-Deutsch und Englisch anlegen, die Prüfung beim Bauen meldet sonst, was fehlt.
+Storage Manager is open source. Anyone can read the code, improve it and bring in their own ideas. You can report
+bugs and wishes in the [issues](../../issues), and I am happy to take improvements as pull requests. How to get
+started is in the [contributing guide](CONTRIBUTING.md), where to find what in the code is in the
+[architecture description](ARCHITECTURE.md), and how we write code is in the [code rules](CODE_STYLE.md). For how we treat each other, the [code of conduct](CODE_OF_CONDUCT.md) applies.
+Please add new texts in all languages, because otherwise the check during the build reports what is missing. Most
+translations were made by machine, so I am especially glad about improvements from native speakers.
 
-> <img src="assets/icons/windows.svg" height="22" align="absmiddle" alt=""> **Windows:** Eine Version für Windows ist geplant, aber noch nicht umgesetzt.
+> <img src="assets/icons/windows.svg" height="22" align="absmiddle" alt=""> A version for **Windows** is planned, but not built yet.
 
 <p align="center">
   <img src="assets/banner-footer.svg" alt="" width="480">
 </p>
 
 <p align="center">
-  <b>Speicher-Explorer · Sieh auf einen Blick, wo dein Speicher steckt.</b><br>
-  <sub>© 2026 Robertwlt03 · Veröffentlicht unter der <a href="LICENSE">MIT-Lizenz</a> · Für macOS 14 oder neuer</sub>
+  <b>Storage Manager · See at a glance where your storage goes.</b><br>
+  <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
+  <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

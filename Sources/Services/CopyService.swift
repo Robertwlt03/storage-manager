@@ -1,13 +1,18 @@
 import AppKit
 
 /// Code-signature copies in the temporary folder X, for any app.
-enum CopyService {
-    static let folderSuffix = ".code_sign_clone"
-    static let appSuffixes = [".app", ".app.bundle"]
-    static let versionKey = "CFBundleShortVersionString"
+nonisolated enum CopyService {
+    private static let folderSuffix = ".code_sign_clone"
+    private static let appSuffixes = [".app", ".app.bundle"]
+    private static let versionKey = "CFBundleShortVersionString"
+    private static let copyKeys: Set<URLResourceKey> = [
+        .isDirectoryKey, .contentModificationDateKey,
+    ]
 
-    static func groups(in folderX: Node?) -> [CopyGroup] {
-        (folderX?.children ?? []).filter { $0.name.hasSuffix(folderSuffix) }.map(group)
+    static func groups(in copiesFolder: Node?) -> [CopyGroup] {
+        let groupFolders = (copiesFolder?.children ?? [])
+            .filter { folder in folder.name.hasSuffix(folderSuffix) }
+        return groupFolders.map(group)
     }
 
     static func isRunning(_ bundleID: String) -> Bool {
@@ -16,34 +21,53 @@ enum CopyService {
 
     /// Reads one Info.plist and one date per copy, on demand.
     static func details(_ group: CopyGroup) -> CopyDetails {
-        let fm = FileManager.default
-        var d = CopyDetails()
-        var versions: [String: Int] = [:], days: [Date: Int] = [:]
-        let keys: Set<URLResourceKey> = [.isDirectoryKey, .contentModificationDateKey]
-        for dir in (try? fm.contentsOfDirectory(at: group.node.url, includingPropertiesForKeys: Array(keys))) ?? [] {
-            let v = try? dir.resourceValues(forKeys: keys)
-            guard v?.isDirectory == true else { continue }
-            d.count += 1
-            if let date = v?.contentModificationDate { days[Calendar.current.startOfDay(for: date), default: 0] += 1 }
-            let app = (try? fm.contentsOfDirectory(atPath: dir.path))?.first { n in appSuffixes.contains(where: n.hasSuffix) }
-            versions[app.flatMap { version(at: dir.path + "/" + $0) } ?? Loc.unknown.s, default: 0] += 1
+        var details = CopyDetails()
+        var copiesPerVersion: [String: Int] = [:]
+        var copiesPerDay: [Date: Int] = [:]
+        for copyFolder in contents(of: group.node.url) {
+            let values = try? copyFolder.resourceValues(forKeys: copyKeys)
+            guard values?.isDirectory == true else { continue }
+            details.copyCount += 1
+            if let modified = values?.contentModificationDate {
+                copiesPerDay[Calendar.current.startOfDay(for: modified), default: 0] += 1
+            }
+            copiesPerVersion[appVersion(inCopy: copyFolder), default: 0] += 1
         }
-        d.versions = versions.sorted { $0.value > $1.value }.map { ($0.key, $0.value) }
-        d.days = days.sorted { $0.key < $1.key }.map { ($0.key, $0.value) }
-        return d
+        details.versions = copiesPerVersion.sorted { left, right in left.value > right.value }
+            .map { version in (version.key, version.value) }
+        details.days = copiesPerDay.sorted { left, right in left.key < right.key }
+            .map { day in (day.key, day.value) }
+        return details
     }
 
+    /// Off the main thread, as it reads and writes the disk.
+    @concurrent
     static func delete(_ group: CopyGroup) async throws {
-        let url = group.node.url
-        try await Task.detached(priority: .utility) { try FileManager.default.removeItem(at: url) }.value
+        try FileManager.default.removeItem(at: group.node.url)
     }
 
     private static func group(_ node: Node) -> CopyGroup {
         let bundleID = String(node.name.dropLast(folderSuffix.count))
         let appPath = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID)?.path
-        return CopyGroup(node: node, bundleID: bundleID, appPath: appPath,
-                         appName: appPath.map { FileManager.default.displayName(atPath: $0) } ?? bundleID,
-                         installedVersion: appPath.flatMap(version))
+        return CopyGroup(
+            node: node, bundleID: bundleID, appPath: appPath,
+            appName: appPath.map { path in FileManager.default.displayName(atPath: path) }
+                ?? bundleID,
+            installedVersion: appPath.flatMap(version))
+    }
+
+    private static func contents(of folder: URL) -> [URL] {
+        let fileManager = FileManager.default
+        let copyFolders = try? fileManager.contentsOfDirectory(
+            at: folder, includingPropertiesForKeys: Array(copyKeys))
+        return copyFolders ?? []
+    }
+
+    private static func appVersion(inCopy copyFolder: URL) -> String {
+        let appName = (try? FileManager.default.contentsOfDirectory(atPath: copyFolder.path))?
+            .first { name in appSuffixes.contains(where: name.hasSuffix) }
+        let copiedVersion = appName.flatMap { name in version(at: copyFolder.path + "/" + name) }
+        return copiedVersion ?? TextKey.unknown.translated
     }
 
     private static func version(at appPath: String) -> String? {
@@ -51,6 +75,6 @@ enum CopyService {
     }
 }
 
-private extension Node {
-    var url: URL { URL(fileURLWithPath: path) }
+nonisolated extension Node {
+    fileprivate var url: URL { URL(fileURLWithPath: path) }
 }

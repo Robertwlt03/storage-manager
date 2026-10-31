@@ -1,70 +1,88 @@
-/// Every page of the app. The sidebar is built from this enum, so a new page cannot be forgotten there.
+/// Every page of the app; the sidebar is built from it. A new page needs a case here, its line in
+/// `details` and its view in `Pane.page` (Features/Pages.swift).
 enum Pane: Hashable {
-    case overview, explorer, largeFiles, temp, copies
+    case overview, explorer, largeFiles, cleaner, apps, temporaryFiles, copies
     case volume(String)
 
     static let main: [Pane] = [.overview, .explorer, .largeFiles]
-    static let system: [Pane] = [.temp, .copies]
+    static let tidy: [Pane] = [.cleaner, .apps]
+    static let system: [Pane] = [.temporaryFiles, .copies]
+    static let everyPage = main + tidy + system
+
+    var supportsGrid: Bool { [.overview, .explorer, .largeFiles, .apps].contains(self) }
 
     init?(launchKey: String) {
-        guard let p = (Self.main + Self.system).first(where: { $0.launchKey == launchKey }) else { return nil }
-        self = p
+        if launchKey.hasPrefix("/") {  // a volume by its mount point, e.g. `-pane /`
+            self = .volume(launchKey)
+            return
+        }
+        guard let page = Self.everyPage.first(where: { page in page.launchKey == launchKey }) else {
+            return nil
+        }
+        self = page
     }
 
-    var launchKey: String {
-        switch self {
-        case .overview: "overview"
-        case .explorer: "explorer"
-        case .largeFiles: "largeFiles"
-        case .temp: "temp"
-        case .copies: "copies"
-        case .volume(let path): path
+    var launchKey: String { details.key }
+    var title: TextKey { details.title }
+    /// What the page is for, shown by its information button.
+    var information: TextKey { details.information }
+    var symbol: String { details.symbol }
+
+    /// One row of the page table.
+    private struct Details {
+        let key: String
+        let title: TextKey
+        let information: TextKey
+        let symbol: String
+
+        init(_ key: String, _ title: TextKey, _ information: TextKey, _ symbol: String) {
+            self.key = key
+            self.title = title
+            self.information = information
+            self.symbol = symbol
         }
     }
 
-    var title: Loc {
+    private var details: Details {
         switch self {
-        case .overview: .paneOverview
-        case .explorer: .paneExplorer
-        case .largeFiles: .paneLargeFiles
-        case .temp: .paneTemp
-        case .copies: .paneCopies
-        case .volume: .sectionVolumes
-        }
-    }
-
-    var symbol: String {
-        switch self {
-        case .overview: Symbols.overview
-        case .explorer: Symbols.explorer
-        case .largeFiles: Symbols.largeFiles
-        case .temp: Symbols.temp
-        case .copies: Symbols.copies
-        case .volume: Symbols.internalDrive
+        case .overview: Details("overview", .paneOverview, .infoOverview, Symbols.overview)
+        case .explorer: Details("explorer", .paneExplorer, .infoExplorer, Symbols.explorer)
+        case .largeFiles:
+            Details("largeFiles", .paneLargeFiles, .infoLargeFiles, Symbols.largeFiles)
+        case .cleaner: Details("cleaner", .paneCleaner, .infoCleaner, Symbols.cleaner)
+        case .apps: Details("apps", .paneApps, .infoApps, Symbols.apps)
+        case .temporaryFiles:
+            Details(
+                "temporaryFiles", .paneTemporaryFiles, .infoTemporaryFiles, Symbols.temporaryArea)
+        case .copies: Details("copies", .paneCopies, .infoCopies, Symbols.copies)
+        case .volume(let path): Details(path, .sectionVolumes, .infoVolume, Symbols.internalDrive)
         }
     }
 }
 
 /// The four subfolders of the per-user temporary area.
-enum TempPart: String, CaseIterable, Identifiable {
-    case t = "T", c = "C", x = "X", zero = "0"
+nonisolated enum TemporaryAreaPart: String, CaseIterable, Identifiable {
+    case temporaryFiles = "T"
+    case caches = "C"
+    case appCopies = "X"
+    case systemServices = "0"
     var id: Self { self }
 
-    var title: Loc {
+    var title: TextKey {
         switch self {
-        case .t: .tempT
-        case .c: .tempC
-        case .x: .tempX
-        case .zero: .temp0
+        case .temporaryFiles: .temporaryFolderT
+        case .caches: .temporaryFolderC
+        case .appCopies: .temporaryFolderX
+        case .systemServices: .temporaryFolder0
         }
     }
 
-    var detail: Loc {
+    var detail: TextKey {
         switch self {
-        case .t: .tempTDetail
-        case .c: .tempCDetail
-        case .x: .tempXDetail
-        case .zero: .temp0Detail
+        case .temporaryFiles: .temporaryFolderTDetail
+        case .caches: .temporaryFolderCDetail
+        case .appCopies: .temporaryFolderXDetail
+        case .systemServices: .temporaryFolder0Detail
         }
     }
 }
@@ -73,7 +91,7 @@ enum SearchScope: CaseIterable, Identifiable {
     case all, folders, files
     var id: Self { self }
 
-    var title: Loc {
+    var title: TextKey {
         switch self {
         case .all: .scopeAll
         case .folders: .scopeFolders
@@ -82,10 +100,9 @@ enum SearchScope: CaseIterable, Identifiable {
     }
 }
 
-/// Command-line switches of the binary (used by build.sh and for checks).
+/// Command-line switches of the binary (used by scripts/build.py and for checks).
 enum LaunchCommand: String {
-    case checkContrast = "--check-contrast"
-    case checkStrings = "--check-strings"
     case selfTest = "--selftest"
     case renderIcon = "--render-icon"
+    case listPages = "--list-pages"
 }

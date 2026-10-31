@@ -5,35 +5,65 @@ struct VolumeView: View {
     let path: String
     @Environment(AppModel.self) private var model
 
+    private var volume: VolumeInformation? { model.volumes.first { volume in volume.path == path } }
+
     var body: some View {
-        if let v = model.volumes.first(where: { $0.path == path }) {
-            UI.page(v.name) {
-                UI.card {
-                    UI.volume(v, segments: [StorageSegment(id: "used", title: Loc.used.s, bytes: v.used - v.purgeable, colorIndex: CategoryKind.system.rawValue),
-                                            StorageSegment(id: "purgeable", title: Loc.purgeable.s, bytes: v.purgeable, colorIndex: CategoryKind.purgeable.rawValue)])
-                    Divider()
-                    UI.fields([FieldItem(.capacity, Fmt.bytes(v.total)), FieldItem(.used, Fmt.bytes(v.used - v.purgeable)),
-                               FieldItem(.purgeable, Fmt.bytes(v.purgeable)), FieldItem(.freeSpace, Fmt.bytes(v.free)),
-                               FieldItem(.available, Fmt.bytes(v.available)), FieldItem(.kind, v.format)])
-                }
-                action(v)
-            }
+        if let volume {
+            UI.Page(
+                .volume(path), title: volume.name, options: { primaryAction(volume) },
+                { volumeCard(volume) })
         } else {
-            UI.empty(Loc.volumeGone.s, symbol: Symbols.volumeGone)
+            UI.Placeholder(
+                .empty(title: TextKey.volumeGone.translated, symbol: Symbols.volumeGone), in: .page)
         }
     }
 
-    @ViewBuilder private func action(_ v: VolumeInfo) -> some View {
-        if v.isRoot {
-            UI.button(Loc.toOverview.s) { model.pane = .overview }
-        } else if let node = model.root.descendant(at: v.path) {
-            UI.button(Loc.exploreContents.s) { model.open(node) }
+    private func volumeCard(_ volume: VolumeInformation) -> some View {
+        UI.Card {
+            UI.VolumeSummary(volume, segments: segments(of: volume))
+            Divider()
+            UI.Fields(fields(of: volume))
+        }
+    }
+
+    /// Used space without what macOS can purge on demand.
+    private func usedBytes(of volume: VolumeInformation) -> Int64 {
+        volume.usedBytes - volume.purgeableBytes
+    }
+
+    private func segments(of volume: VolumeInformation) -> [StorageSegment] {
+        [
+            StorageSegment(
+                id: StorageSegment.usedID, title: TextKey.used.translated,
+                bytes: usedBytes(of: volume), colorIndex: CategoryKind.apps.rawValue),
+            StorageSegment(
+                id: "purgeable", title: TextKey.purgeable.translated,
+                bytes: volume.purgeableBytes, colorIndex: CategoryKind.purgeable.rawValue),
+        ]
+    }
+
+    private func fields(of volume: VolumeInformation) -> [UI.Field?] {
+        [
+            UI.Field(.capacity, Format.bytes(volume.totalBytes)),
+            UI.Field(.used, Format.bytes(usedBytes(of: volume))),
+            UI.Field(.purgeable, Format.bytes(volume.purgeableBytes)),
+            UI.Field(.freeSpace, Format.bytes(volume.freeBytes)),
+            UI.Field(.available, Format.bytes(volume.availableBytes)),
+            UI.Field(.kind, volume.format),
+        ]
+    }
+
+    @ViewBuilder private func primaryAction(_ volume: VolumeInformation) -> some View {
+        if volume.isRoot {
+            UI.ActionButton(TextKey.toOverview.translated) { model.pane = .overview }
+        } else if let node = model.root.descendant(at: volume.path) {
+            UI.ActionButton(TextKey.exploreContents.translated) { model.open(node) }
         } else {
-            UI.button(Loc.scanAndExplore.s, .primary) {
-                model.scan([v.path], reset: false)
+            UI.ActionButton(TextKey.scanAndExplore.translated, .primary) {
+                model.scan([volume.path], reset: false)
                 model.pane = .explorer
             }
-            .disabled(model.scanning)
+            .disabled(model.isScanning)
         }
     }
 }

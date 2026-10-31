@@ -1,31 +1,35 @@
-/// Searches folder and file names in the scanned tree. Instant and without disk access;
-/// files under `ScanConfig.keepBytes` are folded during the scan and therefore not searchable.
+/// Searches folder and file names in the scanned tree. Instant and without disk access; files
+/// under `ScanLimits.smallestListedBytes` are folded during the scan and therefore not searchable.
 enum SearchService {
     static func search(_ query: String, scope: SearchScope, in root: Node) -> [Entry] {
-        let q = query.trimmingCharacters(in: .whitespaces)
-        guard !q.isEmpty else { return [] }
-        var hits: [Entry] = []
+        let trimmedQuery = query.trimmingCharacters(in: .whitespaces)
+        guard !trimmedQuery.isEmpty else { return [] }
+        var matches: [Entry] = []
 
-        func walk(_ n: Node) {
-            for child in n.children {
-                if scope != .files && child.name.localizedStandardContains(q) { hits.append(.folder(child)) }
-                walk(child)
+        func collectMatches(in folder: Node) {
+            for child in folder.children {
+                let isMatch = scope != .files && child.name.localizedStandardContains(trimmedQuery)
+                if isMatch { matches.append(.folder(child)) }
+                collectMatches(in: child)
             }
             if scope != .folders {
-                hits += n.files.filter { $0.name.localizedStandardContains(q) }.map(Entry.file)
+                matches += folder.files
+                    .filter { file in file.name.localizedStandardContains(trimmedQuery) }
+                    .map(Entry.file)
             }
         }
-        walk(root)
-        return Array(hits.sorted { $0.bytes > $1.bytes }.prefix(ScanConfig.searchLimit))
+        collectMatches(in: root)
+        let biggestFirst = matches.sorted { left, right in left.bytes > right.bytes }
+        return Array(biggestFirst.prefix(ScanLimits.maximumSearchResults))
     }
 
-    static func largeFiles(atLeast min: Int64, in root: Node) -> [Entry] {
-        var out: [Entry] = []
-        func walk(_ n: Node) {
-            out += n.files.filter { $0.bytes >= min }.map(Entry.file)
-            n.children.forEach(walk)
+    static func largeFiles(atLeast minimumBytes: Int64, in root: Node) -> [Entry] {
+        var largeFiles: [Entry] = []
+        func collectLargeFiles(in folder: Node) {
+            largeFiles += folder.files.filter { file in file.bytes >= minimumBytes }.map(Entry.file)
+            folder.children.forEach(collectLargeFiles)
         }
-        walk(root)
-        return out.sorted { $0.bytes > $1.bytes }
+        collectLargeFiles(in: root)
+        return largeFiles.sorted { left, right in left.bytes > right.bytes }
     }
 }
