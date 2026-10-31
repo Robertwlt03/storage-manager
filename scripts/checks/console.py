@@ -8,7 +8,8 @@ and dimmed details; hints follow dimmed and a frame sums up at the end.
 Sources/Diagnostics/Console.swift draws the same pieces for the app.
 Colors appear in a terminal and on GitHub; NO_COLOR=1 turns them off and FORCE_COLOR=1 turns them
 on (see no-color.org). Spacing follows one rule, so two blank lines never meet: only the heading
-starts with a blank line, and every block (heading, question, group, frame) ends with one.
+starts with a blank line, and every block (heading, question, group, frame) ends with one; only
+the frame at the end leaves it out where no prompt follows, such as in GitHub's log.
 A command that asks something uses the questions at the end: yes or no,
 a line of text, or a list to walk with the arrow keys.
 """
@@ -199,7 +200,7 @@ def frame(outcome: str, details: list[str], color: str) -> None:
     for line in lines:
         padding = " " * (width - visible_length(line) - 1)
         show(f" {side} {line}{padding}{side}")
-    show(" " + paint("╰" + "─" * width + "╯", color) + "\n")
+    show(" " + paint("╰" + "─" * width + "╯", color) + ("\n" if IN_TERMINAL else ""))
 
 
 def data(text: str) -> None:
