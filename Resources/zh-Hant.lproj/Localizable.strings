@@ -119,7 +119,7 @@
 "freed" = "實際釋放的空間：%@";
 "deleteError" = "無法刪除全部內容：%@";
 "quitToDelete" = "請按下 ⌘Q 結束「%@」後再刪除。";
-"openInExplorer" = "在瀏覽器中打開";
+"openInExplorer" = "在「檔案夾」中顯示";
 "deleteAll" = "刪除所有拷貝⋯";
 "deleteTitle" = "要刪除 %@ 個「%@」的拷貝嗎？";
 "deleteForever" = "永久刪除";
@@ -158,7 +158,14 @@
 
 /* Settings */
 "autoScan" = "啟動時自動掃描";
+"exportReport" = "輸出報告 …";
+"reportTitle" = "%@ 的儲存空間報告";
+"reportFileName" = "儲存空間報告";
 "extraFolders" = "其他檔案夾";
+"showInMenuBar" = "在選單列中顯示可用空間";
+"openApp" = "打開 %@";
+"lowSpaceWarning" = "空間即將不足。「清理」和「大型檔案」會顯示可以刪除的內容。";
+"excludedFolders" = "排除的檔案夾";
 "none" = "無";
 "add" = "加入";
 "remove" = "移除";
@@ -182,12 +189,15 @@
 "cleanTemporaryDetail" = "至少三天未更改的暫存檔案。";
 "cleanTrash" = "垃圾桶";
 "cleanTrashDetail" = "永久清空垃圾桶。預設不會選取。";
+"cleanInstallers" = "舊的安裝程式";
+"cleanInstallersDetail" = "「下載項目」中超過一個月的磁碟映像檔和安裝套件。預設不會選取。";
 "cleanFailed" = "有 %@ 個項目無法移除，因為它們正在使用中或受到保護。";
 "cleaning" = "正在清理⋯";
 "cleanerRefresh" = "重新搜尋";
 "cleanSelected" = "清理所選項目（%@）";
 "cleanConfirmTitle" = "要永久移除 %@ 嗎？";
 "cleanConfirmMessage" = "這些檔案不會移到垃圾桶。App 會在需要時重新產生快取。之後，本 App 會重新測量所有內容。";
+"cleanConfirmInstallersMessage" = "這些檔案不會移到垃圾桶。App 會在需要時重新產生快取。之後，本 App 會重新測量所有內容。已移除的安裝程式需要重新下載。";
 "appsNoneUnused" = "所有 App 最近都用過";
 "unusedSince" = "未打開時間";
 "daysOption" = "超過 %@ 天";
@@ -237,6 +247,7 @@
 "summaryClean" = "清理後大約可以釋放 %@。";
 "summaryCopies" = "macOS 在檢查時建立的 App 拷貝計為 %@。";
 "summaryApps" = "有 %@ 個 App 已有一段時間沒有打開。";
+"summaryFreed" = "到目前為止，此 App 已釋放 %@。";
 "readAloud" = "朗讀";
 "stopReading" = "停止朗讀";
 
@@ -244,6 +255,12 @@
 "sizeClassesTitle" = "你的檔案有多大？";
 "sizeClassesCaption" = "每個大小區間佔用多少空間，其中有多少個檔案。通常，少數大型檔案比許多小型檔案佔用的空間更多。";
 "figureLargeFilesFrom" = "%@ 以上的大型檔案";
+"historyTitle" = "歷史";
+"historyCaption" = "每次完整掃描後的已用空間。";
+"historyAfterNextScan" = "下次完整掃描後會顯示歷史。";
+"grownSince" = "自 %@ 以來增長";
+"grownBy" = "+%@";
+"nothingGrown" = "沒有檔案夾增長超過 %@。";
 "bucketValue" = "%@
 %@ 個檔案";
 "settingsSystemNote" = "外觀和單位來自「系統設定」。";

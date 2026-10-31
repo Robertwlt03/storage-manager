@@ -52,6 +52,12 @@ contain the texts.
 **`Sources/Diagnostics`:** The self test with real folders, the stress test that operates the running app, the
 made-up data of the demo mode and the page list that scripts ask for with `--list-pages`.
 
+**`Widget`:** The widget, a target of its own. `scripts/build.py` puts it into the app as
+`PlugIns/StorageWidget.appex`, with the app's identifier plus `.widget`, and signs it with the sandbox macOS requires
+for widgets. Because of that sandbox it cannot read the app's data, so it measures the startup volume itself.
+`WidgetStyle` is its small design system, `WidgetText` reads its texts from `Widget.strings`, and
+`--render-widget <file> [light|dark]` draws it into a picture for checking its look.
+
 **`Tests/StorageManagerTests`:** The tests, written with Swift Testing, for the folder tree, search, pages, design
 values, contrast and translations. They build their folder trees by hand and never touch the disk.
 

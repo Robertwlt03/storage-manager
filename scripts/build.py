@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds Storage Manager.app with its icon, translations and signature.
+"""Builds Storage Manager.app with its icon, translations, widget and signature.
 
 Start:  make build, or make build INSTALL_APP=1 to copy the app to ~/Applications as well
 Needs:  Xcode 27; settings come from the environment (the Makefile passes them on):
@@ -10,6 +10,7 @@ release.py builds through build() and signs the disk image through sign().
 """
 
 import os
+import plistlib
 import shutil
 import sys
 from pathlib import Path
@@ -21,6 +22,11 @@ from checks.project import PROJECT, has_xcode
 
 APP_NAME = "Storage Manager.app"
 BINARY = PROJECT / ".build" / "release" / "StorageManager"
+WIDGET_BINARY = PROJECT / ".build" / "release" / "StorageWidget"
+WIDGET_FOLDER = PROJECT / "Widget"  # its Info.plist and the sandbox the widget must run in
+WIDGET_NAME = "StorageWidget.appex"
+WIDGET_TEXTS = "Widget.strings"  # only the widget reads them, so the app leaves them out
+WIDGET_ID_SUFFIX = ".widget"  # an extension's identifier starts with its app's
 # The sizes in points macOS asks for in an app icon; each one also comes twice as large for
 # Retina screens.
 ICON_SIZES = (16, 32, 128, 256, 512)
@@ -60,13 +66,34 @@ def assemble(app: Path, bundle_id: str) -> None:
     shutil.copy2(BINARY, app / "Contents" / "MacOS")
     shutil.copy2(PROJECT / "Info.plist", app / "Contents")
     for translation in sorted((PROJECT / "Resources").glob("*.lproj")):
-        shutil.copytree(translation, app / "Contents" / "Resources" / translation.name)
+        shutil.copytree(translation, app / "Contents" / "Resources" / translation.name,
+                        ignore=shutil.ignore_patterns(WIDGET_TEXTS))
     # A build with another bundle identifier (the demo) gets its own permissions and settings, so
     # it never takes over the Full Disk Access of the signed app.
     if bundle_id:
         run(["/usr/libexec/PlistBuddy", "-c", f"Set :CFBundleIdentifier {bundle_id}",
              app / "Contents" / "Info.plist"])
     console.passed("Put together", bundle_id or "the identifier from Info.plist")
+
+
+def add_widget(app: Path, bundle_id: str) -> Path:
+    """Puts the widget extension into PlugIns, with the app's identifier and version."""
+    widget = app / "Contents" / "PlugIns" / WIDGET_NAME
+    for folder in ("MacOS", "Resources"):
+        (widget / "Contents" / folder).mkdir(parents=True)
+    shutil.copy2(WIDGET_BINARY, widget / "Contents" / "MacOS")
+    app_info = plistlib.loads((app / "Contents" / "Info.plist").read_bytes())
+    info = plistlib.loads((WIDGET_FOLDER / "Info.plist").read_bytes())
+    info["CFBundleIdentifier"] = (bundle_id or app_info["CFBundleIdentifier"]) + WIDGET_ID_SUFFIX
+    for key in ("CFBundleShortVersionString", "CFBundleVersion"):
+        info[key] = app_info[key]
+    (widget / "Contents" / "Info.plist").write_bytes(plistlib.dumps(info))
+    for translation in sorted((PROJECT / "Resources").glob("*.lproj")):
+        language = widget / "Contents" / "Resources" / translation.name
+        language.mkdir()
+        shutil.copy2(translation / WIDGET_TEXTS, language)
+    console.passed("Widget added", info["CFBundleIdentifier"])
+    return widget
 
 
 def add_icon(app: Path, build_folder: Path) -> None:
@@ -87,10 +114,12 @@ def scale_icon(picture: Path, pixels: int, destination: Path) -> None:
     run(["sips", "--resampleHeightWidth", str(pixels), str(pixels), picture, "--out", destination])
 
 
-def sign(target: Path, identity: str) -> None:
+def sign(target: Path, identity: str, entitlements: Path | None = None) -> None:
     """With a fixed identity macOS keeps granted permissions across rebuilds; ad hoc it asks
     again after every build. make identity creates one and writes it to local.mk."""
     options = ["--force", "--options", "runtime", "--sign", identity]
+    if entitlements:
+        options += ["--entitlements", entitlements]
     keychain = os.environ.get("SIGNING_KEYCHAIN", "")
     if keychain and identity != AD_HOC_IDENTITY:
         password = os.environ.get("SIGNING_KEYCHAIN_PASSWORD", "")
@@ -99,7 +128,8 @@ def sign(target: Path, identity: str) -> None:
     # codesign talks even when it succeeds ("replacing existing signature"); run() shows it only
     # when it fails.
     run(["codesign", *options, target])
-    console.passed("Signed", "ad hoc" if identity == AD_HOC_IDENTITY else identity)
+    signer = "ad hoc" if identity == AD_HOC_IDENTITY else identity
+    console.passed("Signed", f"{target.name}, {signer}")
 
 
 def build(build_folder: Path, identity: str, bundle_id: str = "") -> Path:
@@ -107,6 +137,8 @@ def build(build_folder: Path, identity: str, bundle_id: str = "") -> Path:
     compile_app()
     assemble(app, bundle_id)
     add_icon(app, build_folder)
+    # Inside out: the widget first, so the app's signature covers the signed widget.
+    sign(add_widget(app, bundle_id), identity, WIDGET_FOLDER / "Widget.entitlements")
     sign(app, identity)
     return app
 

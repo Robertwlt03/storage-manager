@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Ledigt utrymme";
+"widgetDescription" = "Visar hur mycket utrymme som är tillgängligt på din Mac.";
+"widgetAvailable" = "tillgängligt";
+"widgetOfTotal" = "av %@";
+"widgetUnreadable" = "Det lediga utrymmet kunde inte läsas.";

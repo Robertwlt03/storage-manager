@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Ruang Kosong";
+"widgetDescription" = "Menampilkan berapa banyak ruang yang tersedia di Mac Anda.";
+"widgetAvailable" = "tersedia";
+"widgetOfTotal" = "dari %@";
+"widgetUnreadable" = "Ruang kosong tidak dapat dibaca.";

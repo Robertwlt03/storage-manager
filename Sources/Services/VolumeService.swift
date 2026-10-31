@@ -18,6 +18,14 @@ nonisolated enum VolumeService {
 
     static func startup() -> VolumeInformation? { all().first(where: \.isRoot) }
 
+    /// What a removal of `removedBytes` really freed, from the free space before and after it. At
+    /// most what was removed: other removals and macOS itself may free space at the same time.
+    /// Nothing when either reading is missing.
+    static func freedBytes(before: Int64?, after: Int64?, removedBytes: Int64) -> Int64 {
+        guard let before, let after else { return 0 }
+        return min(max(after - before, 0), removedBytes)
+    }
+
     private static func isListedBefore(_ left: VolumeInformation, _ right: VolumeInformation)
         -> Bool
     {

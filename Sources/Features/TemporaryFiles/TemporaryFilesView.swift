@@ -23,7 +23,7 @@ struct TemporaryFilesView: View {
         if let temporaryArea {
             UI.Card {
                 UI.Fields([
-                    UI.Field(.location, Paths.temporaryArea),
+                    UI.Field(.location, model.shownTemporaryArea),
                     UI.Field(.total, Format.bytes(temporaryArea.bytes)),
                 ])
             }

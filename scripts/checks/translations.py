@@ -28,6 +28,7 @@ WORD = re.compile(r"[^\W\d_]+")  # letters only: placeholders such as %@ and num
 # The spell checker's names for languages whose folders are named differently.
 DICTIONARY_NAMES = {"pt-BR": "pt_BR", "pt-PT": "pt_PT"}
 SAME_ON_PURPOSE = "/* same as English on purpose */"
+TABLES = ("Localizable", "Widget")  # the app's texts and the widget's
 # The languages by their folder names, so a finding says "Danish" and not only "da".
 LANGUAGE_NAMES = {
     "cs": "Czech", "da": "Danish", "de": "German", "es": "Spanish", "fi": "Finnish",
@@ -43,10 +44,10 @@ LANGUAGE_NAMES = {
 # MARK: Reading the translations
 
 
-def translations(folder: Path) -> dict[str, dict[str, str]]:
+def translations(folder: Path, table: str) -> dict[str, dict[str, str]]:
     """Each language's texts by key, read with plutil, which understands the .strings format."""
     texts = {}
-    for strings in sorted(folder.glob("*.lproj/Localizable.strings")):
+    for strings in sorted(folder.glob(f"*.lproj/{table}.strings")):
         result = run(["plutil", "-convert", "json", "-o", "-", str(strings)])
         texts[strings.parent.stem] = json.loads(result.output)
     return texts
@@ -99,10 +100,16 @@ def translation_findings() -> list[str]:
 def translation_problems(codebase: Codebase) -> list[str]:
     if codebase.translations is None:
         return []
-    texts = translations(codebase.translations)
+    return [finding for table in TABLES for finding in table_problems(codebase.translations, table)]
+
+
+def table_problems(folder: Path, table: str) -> list[str]:
+    texts = translations(folder, table)
+    if SOURCE_LANGUAGE not in texts:  # a project without this table, such as the samples
+        return []
     findings = []
     for language, keys in copied_texts(texts).items():
-        strings = codebase.translations / f"{language}.lproj" / "Localizable.strings"
+        strings = folder / f"{language}.lproj" / f"{table}.strings"
         words = {key: set(WORD.findall(texts[language][key])) for key in keys}
         unknown = unknown_in(language, set().union(*words.values())) if words else set()
         findings += [

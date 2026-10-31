@@ -55,7 +55,6 @@ enum Layout {
     static let sheetWidth: CGFloat = 560
     static let sheetHeight: CGFloat = 600
     static let folderListHeight: CGFloat = 90
-    static let settingsHeight: CGFloat = 380
     static let placeholderHeight: CGFloat = 320
     static let gridTileSize: CGFloat = 170
     static let legendMaximumEntries = 6
@@ -103,6 +102,7 @@ nonisolated enum Symbols {
     static let copies = "checkmark.seal"
     static let duplicates = "plus.square.on.square"
     static let internalDrive = "internaldrive"
+    static let lowSpace = "exclamationmark.triangle"
     static let externalDrive = "externaldrive"
     static let volumeGone = "externaldrive.badge.xmark"
     static let rescan = "arrow.clockwise"

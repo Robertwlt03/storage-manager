@@ -119,7 +119,7 @@
 "freed" = "Faktiskt frigjort utrymme: %@";
 "deleteError" = "Allt kunde inte tas bort: %@";
 "quitToDelete" = "Avsluta %@ med ⌘Q för att kunna ta bort.";
-"openInExplorer" = "Öppna i Lagringsutforskaren";
+"openInExplorer" = "Visa i Mappar";
 "deleteAll" = "Ta bort alla kopior …";
 "deleteTitle" = "Ta bort %@ kopior av %@?";
 "deleteForever" = "Ta bort permanent";
@@ -158,7 +158,14 @@
 
 /* Settings */
 "autoScan" = "Mät automatiskt vid start";
+"exportReport" = "Exportera rapport …";
+"reportTitle" = "Lagringsrapport från %@";
+"reportFileName" = "Lagringsrapport";
 "extraFolders" = "Ytterligare mappar";
+"showInMenuBar" = "Visa ledigt utrymme i menyraden";
+"openApp" = "Öppna %@";
+"lowSpaceWarning" = "Utrymmet håller på att ta slut. ”Rensa upp” och ”Stora filer” visar vad som kan tas bort.";
+"excludedFolders" = "Undantagna mappar";
 "none" = "Inga";
 "add" = "Lägg till";
 "remove" = "Ta bort";
@@ -182,12 +189,15 @@
 "cleanTemporaryDetail" = "Tillfälliga filer som inte har ändrats på minst tre dagar.";
 "cleanTrash" = "Papperskorgen";
 "cleanTrashDetail" = "Tömmer papperskorgen permanent. Inte markerad som standard.";
+"cleanInstallers" = "Gamla installationsfiler";
+"cleanInstallersDetail" = "Skivavbilder och installationspaket i Hämtade filer som är äldre än en månad. Inte markerad som standard.";
 "cleanFailed" = "%@ objekt kunde inte tas bort eftersom de används eller är skyddade.";
 "cleaning" = "Rensar upp …";
 "cleanerRefresh" = "Sök igen";
 "cleanSelected" = "Rensa markeringen (%@)";
 "cleanConfirmTitle" = "Ta bort %@ permanent?";
 "cleanConfirmMessage" = "Filerna hamnar inte i papperskorgen. Appar bygger upp sina cacheminnen igen vid behov. Därefter mäter appen allt på nytt.";
+"cleanConfirmInstallersMessage" = "Filerna hamnar inte i papperskorgen. Appar bygger upp sina cacheminnen igen vid behov. Därefter mäter appen allt på nytt. Borttagna installationsfiler måste hämtas igen.";
 "appsNoneUnused" = "Alla appar har använts nyligen";
 "unusedSince" = "Inte öppnad på";
 "daysOption" = "mer än %@ dagar";
@@ -237,6 +247,7 @@
 "summaryClean" = "Genom att rensa upp kan du frigöra cirka %@.";
 "summaryCopies" = "Kopior av appar som macOS skapar vid kontroll räknas för %@.";
 "summaryApps" = "%@ appar har inte öppnats på ett tag.";
+"summaryFreed" = "Hittills har appen frigjort %@.";
 "readAloud" = "Läs upp";
 "stopReading" = "Sluta läsa upp";
 
@@ -244,6 +255,12 @@
 "sizeClassesTitle" = "Hur stora är dina filer?";
 "sizeClassesCaption" = "Hur mycket plats varje storleksklass tar och hur många filer som finns i den. Några få stora filer tar oftast mer plats än många små.";
 "figureLargeFilesFrom" = "stora filer från %@";
+"historyTitle" = "Historik";
+"historyCaption" = "Använt utrymme efter varje fullständig mätning.";
+"historyAfterNextScan" = "Historiken visas efter nästa fullständiga mätning.";
+"grownSince" = "Vuxit sedan %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Ingen mapp har vuxit med mer än %@.";
 "bucketValue" = "%@
 %@ filer";
 "settingsSystemNote" = "Utseende och enheter kommer från Systeminställningar.";
