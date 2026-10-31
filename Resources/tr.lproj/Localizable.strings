@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Büyük Dosyalar";
 "paneTemporaryFiles" = "Geçici Alan";
 "paneCopies" = "Uygulama Kopyaları";
-"sectionSystem" = "Gizli Alanlar";
 "sectionVolumes" = "Birimler";
 "rescan" = "Yeniden Tara";
 "rescanHelp" = "Tüm alanları yeniden tara (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Çöp Sepeti'ne Taşı";
 "lastOpened" = "Son açılış: %@";
 "trashAppFailed" = "“%@” taşınamadı. Finder'da parolanızla çalışır.";
-"figureFiles" = "Dosyalar";
-"figureUnusedApps" = "kullanılmayan uygulama";
 "bucketUnder1MB" = "1 MB altı";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Dosyalarınız ne kadar büyük?";
 "sizeClassesCaption" = "Her boyut sınıfının ne kadar yer kapladığı ve içinde kaç dosya olduğu. Birkaç büyük dosya genellikle çok sayıda küçük dosyadan daha fazla yer kaplar.";
-"figureLargeFilesFrom" = "%@ ve üzeri büyük dosyalar";
 "historyTitle" = "Geçmiş";
 "historyCaption" = "Her tam taramadan sonra kullanılan alan.";
 "historyAfterNextScan" = "Geçmiş, bir sonraki tam taramadan sonra görünür.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Dil";
 "languageLikeMac" = "Mac ile aynı";
 "languageRestartHint" = "Yeni dil yeniden başlatmadan sonra görünür.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Yaklaşık %@ yer açabilirsin";
+"freeUpCaption" = "Bu adımları sırayla izle. Sen onaylamadan hiçbir şey silinmez.";
+"freeUpNothing" = "Şu anda açılacak kayda değer bir yer yok. Mac’in düzenli.";
+"freeUpLoadingTitle" = "Neyin gidebileceği hesaplanıyor …";
+"freeUpLoadingDetail" = "Birazdan burada ne kadar yer açabileceğini ve nasıl yapacağını görürsün.";
+"freeUpCleanerDetail" = "Önbellekler, eski günlükler, eski yükleyiciler, Çöp Sepeti ve daha fazlası";
+"freeUpDuplicatesDetail" = "Birden fazla kez bulunan büyük dosyalar";
+"freeUpDuplicatesNotSearched" = "Henüz aranmadı: arama sayfayı açtığında başlar";
+"freeUpAppsDetail" = "Bir süredir açmadığın %@ uygulama";
+"sectionAdvanced" = "İleri Düzey";
+"showAdvancedPages" = "İleri düzey alanları göster";

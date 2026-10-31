@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Nagy fájlok";
 "paneTemporaryFiles" = "Ideiglenes terület";
 "paneCopies" = "Appmásolatok";
-"sectionSystem" = "Rejtett területek";
 "sectionVolumes" = "Kötetek";
 "rescan" = "Újravizsgálás";
 "rescanHelp" = "Minden terület újravizsgálása (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Áthelyezés a Kukába";
 "lastOpened" = "Utoljára megnyitva: %@";
 "trashAppFailed" = "„%@” nem helyezhető át. A Finderben a jelszavaddal sikerül.";
-"figureFiles" = "Fájlok";
-"figureUnusedApps" = "nem használt app";
 "bucketUnder1MB" = "1 MB alatt";
 "bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
 "bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Mekkorák a fájljaid?";
 "sizeClassesCaption" = "Mennyi helyet foglalnak az egyes méretkategóriák, és hány fájl van bennük. Néhány nagy fájl általában több helyet foglal, mint sok kicsi.";
-"figureLargeFilesFrom" = "nagy fájl, legalább %@";
 "historyTitle" = "Előzmények";
 "historyCaption" = "Foglalt hely minden teljes vizsgálat után.";
 "historyAfterNextScan" = "Az előzmények a következő teljes vizsgálat után jelennek meg.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Nyelv";
 "languageLikeMac" = "Ugyanaz, mint a Macen";
 "languageRestartHint" = "Az új nyelv újraindítás után jelenik meg.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Nagyjából %@ helyet szabadíthatsz fel";
+"freeUpCaption" = "Haladj végig ezeken a lépéseken sorban. Semmi sem törlődik, amíg meg nem erősíted.";
+"freeUpNothing" = "Most nincs mit érdemben felszabadítani. A Maced rendben van.";
+"freeUpLoadingTitle" = "Számolás, mi mehet …";
+"freeUpLoadingDetail" = "Egy pillanat, és itt látod, mennyi helyet szabadíthatsz fel, és hogyan.";
+"freeUpCleanerDetail" = "Gyorsítótárak, régi naplók, régi telepítők, a Kuka és más";
+"freeUpDuplicatesDetail" = "Nagy fájlok, amelyek többször is megvannak";
+"freeUpDuplicatesNotSearched" = "Még nincs keresve: a keresés az oldal megnyitásakor indul";
+"freeUpAppsDetail" = "%@ app, amelyet egy ideje nem nyitottál meg";
+"sectionAdvanced" = "Haladóknak";
+"showAdvancedPages" = "Haladó területek mutatása";

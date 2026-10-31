@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Suuret tiedostot";
 "paneTemporaryFiles" = "Tilapäinen alue";
 "paneCopies" = "Appien kopiot";
-"sectionSystem" = "Piilotetut alueet";
 "sectionVolumes" = "Taltiot";
 "rescan" = "Mittaa uudelleen";
 "rescanHelp" = "Mittaa kaikki alueet uudelleen (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Siirrä roskakoriin";
 "lastOpened" = "Viimeksi avattu %@";
 "trashAppFailed" = "Kohdetta ”%@” ei voitu siirtää. Finderissa se onnistuu salasanallasi.";
-"figureFiles" = "Tiedostot";
-"figureUnusedApps" = "käyttämätöntä appia";
 "bucketUnder1MB" = "alle 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Kuinka suuria tiedostosi ovat?";
 "sizeClassesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
-"figureLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
 "historyTitle" = "Historia";
 "historyCaption" = "Käytetty tila jokaisen täyden mittauksen jälkeen.";
 "historyAfterNextScan" = "Historia näkyy seuraavan täyden mittauksen jälkeen.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Kieli";
 "languageLikeMac" = "Sama kuin Macissa";
 "languageRestartHint" = "Uusi kieli näkyy uudelleenkäynnistyksen jälkeen.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Voit vapauttaa noin %@";
+"freeUpCaption" = "Käy nämä vaiheet läpi yksi kerrallaan. Mitään ei poisteta ennen kuin vahvistat sen.";
+"freeUpNothing" = "Juuri nyt ei ole mitään mainittavaa vapautettavaa. Macisi on siisti.";
+"freeUpLoadingTitle" = "Lasketaan, mitä voi poistaa …";
+"freeUpLoadingDetail" = "Hetken kuluttua näet tässä, kuinka paljon tilaa voit vapauttaa ja miten.";
+"freeUpCleanerDetail" = "Välimuistit, vanhat lokit, vanhat asennusohjelmat, roskakori ja muuta";
+"freeUpDuplicatesDetail" = "Suuret tiedostot, joita on useampi kuin yksi";
+"freeUpDuplicatesNotSearched" = "Ei vielä haettu: haku alkaa, kun avaat sivun";
+"freeUpAppsDetail" = "Appeja, joita et ole avannut pitkään aikaan: %@";
+"sectionAdvanced" = "Edistyneille";
+"showAdvancedPages" = "Näytä edistyneet alueet";

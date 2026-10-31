@@ -91,6 +91,7 @@ func launch(_ app: URL, showing picture: Picture) async throws -> NSRunningAppli
         "-demo", "YES", "-pane", picture.page, "-appearance", picture.appearance,
         "-ApplePersistenceIgnoreState", "YES",  // do not reopen the windows of the last run
         "-NSWindow Frame main", windowFrame,  // the saved frame of the window named "main"
+        "-showsAdvancedPages", "NO",  // the same sidebar whoever takes the pictures
     ]
     return try await NSWorkspace.shared.openApplication(at: app, configuration: configuration)
 }

@@ -1,14 +1,12 @@
 import Charts
 import SwiftUI
 
-/// The start page: key figures, the disk split, a short summary, the history, the size classes and
-/// every category. Figures and the chart come from the last finished scan.
+/// The start page: first how much space can be freed and how, then the disk split, a short
+/// summary, the history, the size classes and every category. The chart comes from the last
+/// finished scan.
 struct OverviewView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(SettingsKey.layoutMode) private var layout = LayoutMode.list
-    @AppStorage(SettingsKey.unusedDays) private var unusedDays = CleanUpRules.defaultUnusedDays
-    @AppStorage(SettingsKey.largeFileMegabytes) private var largeFileMegabytes =
-        LargeFileThreshold.defaultMegabytes
 
     /// Statistics exist already or are being made by the running scan.
     private var hasStatistics: Bool { model.isScanning || model.statistics != nil }
@@ -17,47 +15,16 @@ struct OverviewView: View {
         UI.Page(.overview) {
             LayoutSwitcher(pane: .overview)
         } _: {
-            if hasStatistics { keyFigures }
+            FreeUpCard()
             if let startupVolume = model.startupVolume { startupDiskCard(startupVolume) }
             SummaryCard()
             HistoryCard()
             if hasStatistics { sizeClassesCard }
-            categories
+            // Until a scan fills them, the free-up card at the top offers to start one.
+            if !model.categories.isEmpty { categories }
         }
         .smoothChanges(of: layout)
         .smoothChanges(of: model.categories.isEmpty)
-        .onChange(of: largeFileMegabytes) { if !model.isScanning { model.refreshStatistics() } }
-    }
-
-    // MARK: Key figures
-
-    private var isLoadingFigures: Bool { model.isScanning || model.statistics == nil }
-
-    /// Each figure leads to the page with the details; the used space is already in the disk card
-    /// below.
-    private var keyFigures: some View {
-        let unusedApps = AppUsageService.unused(model.apps, days: unusedDays)
-        let largeFileThreshold = Format.bytes(LargeFileThreshold.bytes(largeFileMegabytes))
-        return UI.FixedGrid(columns: Layout.keyFigureColumns) {
-            UI.KeyFigure(
-                figureText(model.statistics?.fileCount), TextKey.figureFiles.translated,
-                symbol: Symbols.files, isLoading: isLoadingFigures
-            ) { model.pane = .explorer }
-            UI.KeyFigure(
-                figureText(model.statistics?.largeFileCount),
-                TextKey.figureLargeFilesFrom.translated(with: largeFileThreshold),
-                symbol: Symbols.largeFiles, isLoading: isLoadingFigures
-            ) { model.pane = .largeFiles }
-            UI.KeyFigure(
-                figureText(unusedApps.count), TextKey.figureUnusedApps.translated,
-                symbol: Symbols.apps, isLoading: isLoadingFigures
-            ) { model.pane = .apps }
-        }
-    }
-
-    private func figureText(_ count: Int?) -> String {
-        guard !isLoadingFigures, let count else { return StandInText.figure }
-        return Format.count(count)
     }
 
     // MARK: Disk
@@ -137,9 +104,7 @@ struct OverviewView: View {
     // MARK: Categories
 
     @ViewBuilder private var categories: some View {
-        if model.categories.isEmpty {
-            UI.Card(TextKey.categories.translated) { UI.Placeholder(.notMeasured, in: .card) }
-        } else if layout == .grid {
+        if layout == .grid {
             categoryTiles
         } else {
             categoryRows

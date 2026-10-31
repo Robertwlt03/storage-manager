@@ -5,7 +5,6 @@
 "paneLargeFiles" = "大文件";
 "paneTemporaryFiles" = "临时区域";
 "paneCopies" = "App 副本";
-"sectionSystem" = "隐藏区域";
 "sectionVolumes" = "宗卷";
 "rescan" = "重新扫描";
 "rescanHelp" = "重新扫描所有区域（⌘R）";
@@ -212,8 +211,6 @@
 "moveToTrash" = "移到废纸篓";
 "lastOpened" = "上次打开时间：%@";
 "trashAppFailed" = "无法移动“%@”。在访达中，输入你的密码即可移动。";
-"figureFiles" = "文件";
-"figureUnusedApps" = "未使用的 App";
 "bucketUnder1MB" = "小于 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "你的文件有多大？";
 "sizeClassesCaption" = "每个大小区间占用多少空间，其中有多少个文件。通常，少数大文件比许多小文件占用的空间更多。";
-"figureLargeFilesFrom" = "%@ 以上的大文件";
 "historyTitle" = "历史";
 "historyCaption" = "每次完整扫描后的已用空间。";
 "historyAfterNextScan" = "下次完整扫描后会显示历史。";
@@ -284,3 +280,16 @@
 "appLanguage" = "语言";
 "languageLikeMac" = "与 Mac 相同";
 "languageRestartHint" = "新语言将在重新启动后显示。";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "你可以释放约 %@";
+"freeUpCaption" = "请按顺序完成以下步骤。在你确认之前，不会删除任何内容。";
+"freeUpNothing" = "目前没有值得释放的空间。你的 Mac 很整洁。";
+"freeUpLoadingTitle" = "正在计算可以删除的内容…";
+"freeUpLoadingDetail" = "稍后这里会显示你可以释放多少空间以及如何释放。";
+"freeUpCleanerDetail" = "缓存、旧日志、旧安装器、废纸篓等";
+"freeUpDuplicatesDetail" = "存在多份的大文件";
+"freeUpDuplicatesNotSearched" = "尚未搜索：打开该页面时开始搜索";
+"freeUpAppsDetail" = "有 %@ 个 App 已有一段时间没有打开";
+"sectionAdvanced" = "高级";
+"showAdvancedPages" = "显示高级区域";

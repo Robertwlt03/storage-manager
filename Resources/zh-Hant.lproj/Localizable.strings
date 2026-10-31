@@ -5,7 +5,6 @@
 "paneLargeFiles" = "大型檔案";
 "paneTemporaryFiles" = "暫存區域";
 "paneCopies" = "App 拷貝";
-"sectionSystem" = "隱藏區域";
 "sectionVolumes" = "磁碟機";
 "rescan" = "重新掃描";
 "rescanHelp" = "重新掃描所有區域（⌘R）";
@@ -212,8 +211,6 @@
 "moveToTrash" = "移到垃圾桶";
 "lastOpened" = "上次打開時間：%@";
 "trashAppFailed" = "無法移動「%@」。在 Finder 中，輸入你的密碼即可移動。";
-"figureFiles" = "檔案";
-"figureUnusedApps" = "未使用的 App";
 "bucketUnder1MB" = "小於 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "你的檔案有多大？";
 "sizeClassesCaption" = "每個大小區間佔用多少空間，其中有多少個檔案。通常，少數大型檔案比許多小型檔案佔用的空間更多。";
-"figureLargeFilesFrom" = "%@ 以上的大型檔案";
 "historyTitle" = "歷史";
 "historyCaption" = "每次完整掃描後的已用空間。";
 "historyAfterNextScan" = "下次完整掃描後會顯示歷史。";
@@ -284,3 +280,16 @@
 "appLanguage" = "語言";
 "languageLikeMac" = "與 Mac 相同";
 "languageRestartHint" = "新語言會在重新啟動後顯示。";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "你可以釋放約 %@";
+"freeUpCaption" = "請依序完成以下步驟。在你確認之前，不會刪除任何內容。";
+"freeUpNothing" = "目前沒有值得釋放的空間。你的 Mac 很整潔。";
+"freeUpLoadingTitle" = "正在計算可以刪除的內容⋯";
+"freeUpLoadingDetail" = "稍後這裡會顯示你可以釋放多少空間以及如何釋放。";
+"freeUpCleanerDetail" = "快取、舊記錄檔、舊安裝程式、垃圾桶等";
+"freeUpDuplicatesDetail" = "存在多份的大型檔案";
+"freeUpDuplicatesNotSearched" = "尚未搜尋：打開該頁面時開始搜尋";
+"freeUpAppsDetail" = "有 %@ 個 App 已有一段時間沒有打開";
+"sectionAdvanced" = "進階";
+"showAdvancedPages" = "顯示進階區域";

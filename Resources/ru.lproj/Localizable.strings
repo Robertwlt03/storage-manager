@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Большие файлы";
 "paneTemporaryFiles" = "Временная область";
 "paneCopies" = "Копии приложений";
-"sectionSystem" = "Скрытые области";
 "sectionVolumes" = "Тома";
 "rescan" = "Сканировать заново";
 "rescanHelp" = "Заново просканировать все области (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Переместить в Корзину";
 "lastOpened" = "Последний раз открыто %@";
 "trashAppFailed" = "Не удалось переместить «%@». В Finder это получится после ввода пароля.";
-"figureFiles" = "Файлы";
-"figureUnusedApps" = "неиспользуемые приложения";
 "bucketUnder1MB" = "меньше 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Насколько велики ваши файлы?";
 "sizeClassesCaption" = "Сколько места занимает каждый класс размера и сколько в нём файлов. Несколько больших файлов обычно занимают больше места, чем много маленьких.";
-"figureLargeFilesFrom" = "большие файлы от %@";
 "historyTitle" = "История";
 "historyCaption" = "Занятое место после каждого полного сканирования.";
 "historyAfterNextScan" = "История появится после следующего полного сканирования.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Язык";
 "languageLikeMac" = "Как на Mac";
 "languageRestartHint" = "Новый язык появится после перезапуска.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Можно освободить около %@";
+"freeUpCaption" = "Пройдите эти шаги по порядку. Ничего не удаляется без вашего подтверждения.";
+"freeUpNothing" = "Сейчас освобождать почти нечего. Ваш Mac в порядке.";
+"freeUpLoadingTitle" = "Подсчитывается, что можно удалить …";
+"freeUpLoadingDetail" = "Скоро здесь будет видно, сколько места можно освободить и как.";
+"freeUpCleanerDetail" = "Кэши, старые журналы, старые установщики, Корзина и другое";
+"freeUpDuplicatesDetail" = "Большие файлы, которые есть в нескольких экземплярах";
+"freeUpDuplicatesNotSearched" = "Поиск ещё не выполнялся: он начнётся, когда вы откроете страницу";
+"freeUpAppsDetail" = "Приложений, которые давно не открывались: %@";
+"sectionAdvanced" = "Для опытных";
+"showAdvancedPages" = "Показывать разделы для опытных";

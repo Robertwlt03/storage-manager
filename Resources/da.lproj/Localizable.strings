@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Store filer";
 "paneTemporaryFiles" = "Midlertidigt område";
 "paneCopies" = "Appkopier";
-"sectionSystem" = "Skjulte områder";
 "sectionVolumes" = "Diske";
 "rescan" = "Mål igen";
 "rescanHelp" = "Mål alle områder igen (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Flyt til papirkurv";
 "lastOpened" = "Sidst åbnet den %@";
 "trashAppFailed" = "»%@« kunne ikke flyttes. I Finder virker det med din adgangskode.";
-"figureFiles" = "Filer";
-"figureUnusedApps" = "ubrugte apps";
 "bucketUnder1MB" = "under 1 MB"; /* same as English on purpose */
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Hvor store er dine filer?";
 "sizeClassesCaption" = "Hvor meget plads hver størrelsesklasse fylder, og hvor mange filer der er i den. Nogle få store filer fylder som regel mere end mange små.";
-"figureLargeFilesFrom" = "store filer fra %@";
 "historyTitle" = "Historik";
 "historyCaption" = "Brugt plads efter hver fuld måling.";
 "historyAfterNextScan" = "Historikken vises efter næste fulde måling.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Sprog";
 "languageLikeMac" = "Som på Mac’en";
 "languageRestartHint" = "Det nye sprog vises efter en genstart.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Du kan frigøre omkring %@";
+"freeUpCaption" = "Gå trinnene igennem ét ad gangen. Intet fjernes, før du bekræfter det.";
+"freeUpNothing" = "Der er ikke noget værd at frigøre lige nu. Din Mac er ryddelig.";
+"freeUpLoadingTitle" = "Beregner, hvad der kan fjernes …";
+"freeUpLoadingDetail" = "Om et øjeblik ser du her, hvor meget plads du kan frigøre, og hvordan.";
+"freeUpCleanerDetail" = "Cachelagre, gamle logfiler, gamle installationsprogrammer, papirkurven og mere";
+"freeUpDuplicatesDetail" = "Store filer, der findes mere end én gang";
+"freeUpDuplicatesNotSearched" = "Ikke søgt endnu: søgningen starter, når du åbner siden";
+"freeUpAppsDetail" = "Apps, som du ikke har åbnet i et stykke tid: %@";
+"sectionAdvanced" = "For øvede";
+"showAdvancedPages" = "Vis avancerede områder";

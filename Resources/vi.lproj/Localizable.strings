@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Tệp lớn";
 "paneTemporaryFiles" = "Vùng tạm";
 "paneCopies" = "Bản sao ứng dụng";
-"sectionSystem" = "Vùng ẩn";
 "sectionVolumes" = "Ổ đĩa";
 "rescan" = "Quét lại";
 "rescanHelp" = "Quét lại mọi vùng (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Chuyển vào Thùng rác";
 "lastOpened" = "Mở lần cuối ngày %@";
 "trashAppFailed" = "Không thể di chuyển “%@”. Trong Finder, bạn có thể làm việc này bằng mật khẩu của mình.";
-"figureFiles" = "Tệp";
-"figureUnusedApps" = "ứng dụng không dùng";
 "bucketUnder1MB" = "dưới 1 MB";
 "bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
 "bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Tệp của bạn lớn cỡ nào?";
 "sizeClassesCaption" = "Mỗi nhóm kích thước chiếm bao nhiêu dung lượng và có bao nhiêu tệp. Vài tệp lớn thường chiếm nhiều chỗ hơn rất nhiều tệp nhỏ.";
-"figureLargeFilesFrom" = "tệp lớn từ %@";
 "historyTitle" = "Lịch sử";
 "historyCaption" = "Dung lượng đã dùng sau mỗi lần quét đầy đủ.";
 "historyAfterNextScan" = "Lịch sử sẽ hiện sau lần quét đầy đủ tiếp theo.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Ngôn ngữ";
 "languageLikeMac" = "Giống trên máy Mac";
 "languageRestartHint" = "Ngôn ngữ mới sẽ hiển thị sau khi khởi động lại.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Bạn có thể giải phóng khoảng %@";
+"freeUpCaption" = "Hãy làm lần lượt các bước sau. Không có gì bị xóa cho đến khi bạn xác nhận.";
+"freeUpNothing" = "Hiện không có gì đáng kể để giải phóng. Máy Mac của bạn rất gọn gàng.";
+"freeUpLoadingTitle" = "Đang tính những gì có thể xóa…";
+"freeUpLoadingDetail" = "Lát nữa bạn sẽ thấy ở đây có thể giải phóng bao nhiêu dung lượng và cách làm.";
+"freeUpCleanerDetail" = "Bộ nhớ đệm, nhật ký cũ, trình cài đặt cũ, Thùng rác và hơn thế";
+"freeUpDuplicatesDetail" = "Tệp lớn có nhiều hơn một bản";
+"freeUpDuplicatesNotSearched" = "Chưa tìm: việc tìm kiếm bắt đầu khi bạn mở trang";
+"freeUpAppsDetail" = "%@ ứng dụng bạn đã lâu không mở";
+"sectionAdvanced" = "Dành cho người dùng nâng cao";
+"showAdvancedPages" = "Hiện các vùng nâng cao";

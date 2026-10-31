@@ -25,9 +25,11 @@ extension AppModel {
         return min(estimate, Self.largestEstimatedFraction)
     }
 
+    /// What the clean-up suggestions would free; nil until they are listed.
+    var cleanableBytes: Int64? { cleanItems?.reduce(0) { total, item in total + item.bytes } }
+
     /// The storage in a few sentences, from the last scan and the clean-up suggestions.
     func summary(unusedDays: Int) -> String {
-        let cleanableBytes = cleanItems?.reduce(0) { total, item in total + item.bytes }
         let copyBytes = copyGroups.reduce(0) { total, group in total + group.node.bytes }
         let unusedApps = AppUsageService.unused(apps, days: unusedDays)
         let facts = SummaryService.Input(

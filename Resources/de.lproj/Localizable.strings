@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Große Dateien";
 "paneTemporaryFiles" = "Temporärer Bereich";
 "paneCopies" = "App-Kopien";
-"sectionSystem" = "Versteckte Bereiche";
 "sectionVolumes" = "Datenträger";
 "rescan" = "Neu messen";
 "rescanHelp" = "Alle Bereiche neu messen (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "In den Papierkorb";
 "lastOpened" = "Zuletzt geöffnet am %@";
 "trashAppFailed" = "„%@“ ließ sich nicht verschieben. Im Finder geht es mit deinem Passwort.";
-"figureFiles" = "Dateien";
-"figureUnusedApps" = "ungenutzte Apps";
 "bucketUnder1MB" = "unter 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Wie groß sind deine Dateien?";
 "sizeClassesCaption" = "Wie viel Platz jede Größenklasse belegt und wie viele Dateien darin liegen. Meist belegen wenige große Dateien mehr als viele kleine.";
-"figureLargeFilesFrom" = "große Dateien ab %@";
 "historyTitle" = "Verlauf";
 "historyCaption" = "Belegter Platz nach jeder vollständigen Messung.";
 "historyAfterNextScan" = "Der Verlauf erscheint nach der nächsten vollständigen Messung.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Sprache";
 "languageLikeMac" = "Wie auf dem Mac";
 "languageRestartHint" = "Die neue Sprache erscheint nach einem Neustart.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Du kannst etwa %@ freigeben";
+"freeUpCaption" = "Geh diese Schritte der Reihe nach durch. Gelöscht wird erst, wenn du es bestätigst.";
+"freeUpNothing" = "Gerade gibt es nichts Nennenswertes freizugeben. Dein Mac ist gut aufgeräumt.";
+"freeUpLoadingTitle" = "Es wird berechnet, was weg kann …";
+"freeUpLoadingDetail" = "Gleich siehst du hier, wie viel Platz du freigeben kannst und wie.";
+"freeUpCleanerDetail" = "Zwischenspeicher, alte Protokolle, alte Installationsdateien, Papierkorb und mehr";
+"freeUpDuplicatesDetail" = "Große Dateien, die es mehrfach gibt";
+"freeUpDuplicatesNotSearched" = "Noch nicht gesucht: Die Suche startet, wenn du die Seite öffnest";
+"freeUpAppsDetail" = "Länger nicht geöffnete Apps: %@";
+"sectionAdvanced" = "Für Fortgeschrittene";
+"showAdvancedPages" = "Fortgeschrittene Bereiche zeigen";

@@ -63,13 +63,11 @@ struct ServiceTests {
         TestTree.folder("/scan", in: root, fileBytes: TestTree.small) { scan in
             TestTree.folder("film", in: scan, fileBytes: 2 * Self.gigabyte)
         }
-        let statistics = StatisticsService.compute(root: root, largeFileBytes: Self.gigabyte)
+        let statistics = StatisticsService.compute(root: root)
         let bySizeClass = Dictionary(
             uniqueKeysWithValues: statistics.sizeClasses.map { row in (row.sizeClass, row.count) })
         #expect(bySizeClass[.under1MB] == 1)
         #expect(bySizeClass[.over1GB] == 1)
-        #expect(statistics.largeFileCount == 1)
-        #expect(statistics.fileCount == 2)
     }
 
     @Test("Each scan root is measured once, and never inside another one")
@@ -124,6 +122,15 @@ struct ServiceTests {
         let groups = DuplicateService.sameSizeGroups(files)
         #expect(
             groups.map { group in Set(group.compactMap(\.path)) } == [["/c", "/d"], ["/a", "/b"]])
+    }
+
+    @Test("Keeping one file of each duplicate group frees the size of all the others")
+    func duplicateSpareBytes() {
+        let big = DuplicateService.smallestBytes
+        let threeCopies = ["/a", "/b", "/c"].map { path in Self.fileEntry(path, bytes: big) }
+        let twoCopies = ["/d", "/e"].map { path in Self.fileEntry(path, bytes: big * 2) }
+        #expect(DuplicateService.spareBytes([threeCopies, twoCopies]) == big * 4)
+        #expect(DuplicateService.spareBytes([]) == 0)
     }
 
     @Test("Files with the same content stay together, the others and unreadable ones drop out")

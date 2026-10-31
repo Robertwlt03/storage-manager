@@ -29,11 +29,13 @@ struct DemoTests {
         #expect(model.cleanItems?.count == CleanKind.allCases.count)
     }
 
-    @Test("The demo has one pair of duplicates, found once per tree")
+    @Test("The demo has one pair of duplicates, found once per tree and counted once searched")
     func duplicates() async {
         let model = Self.demoModel()
+        #expect(model.duplicateSpareBytes == nil)
         await model.findDuplicates()
         #expect(model.duplicateGroups?.map(\.count) == [2])
+        #expect(model.duplicateSpareBytes == model.duplicateGroups?.first?.first?.bytes)
         await model.findDuplicates()
         #expect(model.duplicateGroups?.count == 1)
     }

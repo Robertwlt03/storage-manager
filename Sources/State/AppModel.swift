@@ -35,7 +35,7 @@ import WidgetKit
     private(set) var hasFullDiskAccess = PermissionService.hasFullDiskAccess
     private(set) var apps: [AppUsage] = []
     private(set) var cleanItems: [CleanItem]?
-    private(set) var statistics: Statistics?  // key figures of the last finished scan
+    private(set) var statistics: Statistics?  // size classes of the last finished scan
     /// The used space after each full scan, and what grew between the last two.
     private(set) var history = HistoryStore().points
     private(set) var growth = HistoryStore().growth
@@ -249,12 +249,6 @@ extension AppModel {
         }
     }
 
-    /// Also called when the large-file threshold changes, which one figure depends on.
-    func refreshStatistics() {
-        let largeFileBytes = LargeFileThreshold.bytes(AppSettings.largeFileMegabytes)
-        statistics = StatisticsService.compute(root: root, largeFileBytes: largeFileBytes)
-    }
-
     /// What the cleaner could remove; computed once after each scan and shared by the overview and
     /// the cleaner. The folders are listed in the background, the sizes come from the tree.
     /// Compares the large files of equal size once per finished tree; a visit to the page with an
@@ -273,6 +267,13 @@ extension AppModel {
         guard !Task.isCancelled, revision == searchedRevision else { return }
         duplicateGroups = groups
         duplicatesRevision = searchedRevision
+    }
+
+    /// What removing all but one file of each duplicate group would free; nil until the
+    /// duplicates of the current tree were searched, which only their page starts.
+    var duplicateSpareBytes: Int64? {
+        guard duplicatesRevision == revision else { return nil }
+        return duplicateGroups.map(DuplicateService.spareBytes)
     }
 
     func refreshCleanItems() {
@@ -383,8 +384,8 @@ extension AppModel {
         let measuredCategories = CategoryService.compute(
             root: root, volume: isScanning ? nil : startupVolume)
         Motion.animate { categories = measuredCategories }
-        // Figures only from complete data, so they never jump.
-        if !isScanning { refreshStatistics() }
+        // Size classes only from complete data, so they never jump.
+        if !isScanning { statistics = StatisticsService.compute(root: root) }
         copyGroups = CopyService.groups(in: root.descendant(at: Paths.temporaryCopies))
         // Drives the tables, which must not update inside an animation (NSTableView reentrancy).
         revision += 1

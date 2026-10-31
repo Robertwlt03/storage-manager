@@ -17,7 +17,7 @@ files of equal size can be the same, and `DuplicateService` reads just those, in
 1. `ScanService` walks over one area of the disk once with `FileTreeWalker`, on the processor’s efficiency cores.
 2. This produces a tree of `Node`. Each folder merges its subfolders and files under one megabyte into a single row.
    That keeps the tree small.
-3. `AppModel` holds this tree and everything that follows from it: categories, key figures, cleanup suggestions and
+3. `AppModel` holds this tree and everything that follows from it: categories, size classes, cleanup suggestions and
    apps. It increments `revision` as soon as the tree changes.
 4. The pages only read from `AppModel` and calculate with the services. They never touch the disk themselves.
 
@@ -34,8 +34,8 @@ the adjustable numbers of the scan.
 and app usage.
 
 **`Sources/Services`:** The actual work, each without any interface. This includes scanning, categories, search,
-cleaning up, app copies, key figures, summary, reading aloud, thumbnails and everything that talks to Finder or
-System Settings.
+cleaning up, the steps to free space, app copies, size classes, summary, reading aloud, thumbnails and everything
+that talks to Finder or System Settings.
 
 **`Sources/State`:** `AppModel`, which brings the services together and holds the state of the interface.
 
@@ -102,6 +102,9 @@ The button draws its glass circle itself, so that macOS does not leave an empty 
 resize of the window, `SidebarState` compares whether the sidebar should be open, because at the threshold macOS
 sometimes closes it by itself. For this `AppModel` reads the width directly from the window, because the width from SwiftUI
 briefly jumps past the threshold during the motion.
+
+**Advanced pages:** The temporary area and the app copies are for experts, so the sidebar lists them only when the
+settings switch them on. They stay pages like any other: a launch argument or a link opens them either way.
 
 **Floating sidebar:** In narrow windows the sidebar floats above the page. It is only slid in and out, never
 removed, because otherwise the list inside it disappears abruptly. It is not hidden either, so that the glass effect

@@ -24,7 +24,7 @@ enum Space {
 /// One icon size per role, so icons of the same role always match.
 enum IconSize: CGFloat {
     case extraSmall = 10  // accents inside text: chevrons, color dots of a legend
-    case small = 16  // beside text: sidebar footer, table cells, key figures
+    case small = 16  // beside text: sidebar footer, table cells
     case medium = 26  // at the start of a row: categories, cleaner, apps
     case large = 52  // headers, sheets and tiles in the grid view
 }
@@ -60,8 +60,6 @@ enum Layout {
     static let legendMaximumEntries = 6
     static let legendColumns = 2
     static let chartHeight: CGFloat = 220
-    static let keyFigureColumns = 3
-    static let keyFigureMinimumScale = 0.7
     static let popoverWidth: CGFloat = 340
     static let headerHeight: CGFloat = 28
     static let placeholderPageShare = 0.72
@@ -138,12 +136,11 @@ nonisolated enum Symbols {
 /// One text style per role, built on Apple's text styles so Dynamic Type and accessibility keep
 /// working.
 enum TextRole {
-    case title, figure, section, body, label, hint, value, caption
+    case title, section, body, label, hint, value, caption
 
     var font: Font {
         switch self {
         case .title: .title2.weight(.semibold)
-        case .figure: .title2.weight(.semibold).monospacedDigit()
         case .section: .headline
         case .body: .body
         case .label, .hint: .callout

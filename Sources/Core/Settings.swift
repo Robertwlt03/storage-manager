@@ -6,6 +6,7 @@ enum SettingsKey {
     static let scansAutomatically = "autoScan"
     static let extraFolders = "extraFolders"
     static let showsMenuBarItem = "showsMenuBarItem"
+    static let showsAdvancedPages = "showsAdvancedPages"
     static let excludedFolders = "excludedFolders"
     static let largeFileMegabytes = "largeFileMB"
     static let unusedDays = "unusedDays"

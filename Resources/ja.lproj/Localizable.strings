@@ -5,7 +5,6 @@
 "paneLargeFiles" = "大きなファイル";
 "paneTemporaryFiles" = "一時領域";
 "paneCopies" = "Appのコピー";
-"sectionSystem" = "非表示の領域";
 "sectionVolumes" = "ボリューム";
 "rescan" = "再スキャン";
 "rescanHelp" = "すべての領域を再スキャン(⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "ゴミ箱に入れる";
 "lastOpened" = "最後に開いた日: %@";
 "trashAppFailed" = "「%@」を移動できませんでした。Finderでは、パスワードを入力すれば移動できます。";
-"figureFiles" = "ファイル";
-"figureUnusedApps" = "未使用のApp";
 "bucketUnder1MB" = "1 MB未満";
 "bucketTo10MB" = "1～10 MB";
 "bucketTo100MB" = "10～100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "ファイルの大きさはどのくらいですか?";
 "sizeClassesCaption" = "各サイズ区分が使っている容量と、その区分に含まれるファイルの数です。多くの場合、小さなファイルがたくさんあるより、大きなファイルが少しあるほうが多くの容量を使います。";
-"figureLargeFilesFrom" = "%@以上の大きなファイル";
 "historyTitle" = "推移";
 "historyCaption" = "完全スキャンごとの使用容量です。";
 "historyAfterNextScan" = "次の完全スキャン後に推移が表示されます。";
@@ -284,3 +280,16 @@
 "appLanguage" = "言語";
 "languageLikeMac" = "Macと同じ";
 "languageRestartHint" = "新しい言語は再起動後に表示されます。";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "約%@を解放できます";
+"freeUpCaption" = "次の手順を順番に進めてください。確認するまで何も削除されません。";
+"freeUpNothing" = "今は解放できるものがほとんどありません。Macは整理されています。";
+"freeUpLoadingTitle" = "削除できるものを計算中…";
+"freeUpLoadingDetail" = "まもなく、解放できる容量とその方法がここに表示されます。";
+"freeUpCleanerDetail" = "キャッシュ、古いログ、古いインストーラ、ゴミ箱など";
+"freeUpDuplicatesDetail" = "複数存在する大きなファイル";
+"freeUpDuplicatesNotSearched" = "まだ検索していません: ページを開くと検索が始まります";
+"freeUpAppsDetail" = "しばらく開いていない%@個のApp";
+"sectionAdvanced" = "上級者向け";
+"showAdvancedPages" = "上級者向けの領域を表示";

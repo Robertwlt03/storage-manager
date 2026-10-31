@@ -7,6 +7,7 @@ struct RootView: View {
 
     @Environment(AppModel.self) private var model
     @Environment(\.openSettings) private var openSettings
+    @AppStorage(SettingsKey.showsAdvancedPages) private var showsAdvancedPages = false
 
     var body: some View {
         @Bindable var model = model
@@ -26,8 +27,17 @@ struct RootView: View {
         .appLocale()
         .onExitCommand(perform: closeSidebarOrSearch)
         .onChange(of: model.pane, leaveSearchAndSidebar)
+        .onChange(of: showsAdvancedPages, leaveHiddenPage)
         .onAppear(perform: start)
         .modifier(SystemEvents(model: model))
+    }
+
+    /// An open advanced page whose sidebar section was just switched off would have no way back.
+    private func leaveHiddenPage() {
+        guard !showsAdvancedPages, let pane = model.pane, Pane.advanced.contains(pane) else {
+            return
+        }
+        model.pane = .overview
     }
 
     private var scanStatus: ScanStatus {

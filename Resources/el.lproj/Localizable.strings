@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Μεγάλα αρχεία";
 "paneTemporaryFiles" = "Προσωρινή περιοχή";
 "paneCopies" = "Αντίγραφα εφαρμογών";
-"sectionSystem" = "Κρυφές περιοχές";
 "sectionVolumes" = "Τόμοι";
 "rescan" = "Νέα σάρωση";
 "rescanHelp" = "Νέα σάρωση όλων των περιοχών (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Μεταφορά στον Κάδο";
 "lastOpened" = "Άνοιξε τελευταία φορά στις %@";
 "trashAppFailed" = "Δεν ήταν δυνατή η μεταφορά του «%@». Στο Finder λειτουργεί με τον κωδικό σας.";
-"figureFiles" = "Αρχεία";
-"figureUnusedApps" = "αχρησιμοποίητες εφαρμογές";
 "bucketUnder1MB" = "κάτω από 1 MB";
 "bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
 "bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Πόσο μεγάλα είναι τα αρχεία σας;";
 "sizeClassesCaption" = "Πόσο χώρο καταλαμβάνει κάθε κατηγορία μεγέθους και πόσα αρχεία περιέχει. Λίγα μεγάλα αρχεία συνήθως πιάνουν περισσότερο χώρο από πολλά μικρά.";
-"figureLargeFilesFrom" = "μεγάλα αρχεία από %@";
 "historyTitle" = "Ιστορικό";
 "historyCaption" = "Χρησιμοποιημένος χώρος μετά από κάθε πλήρη σάρωση.";
 "historyAfterNextScan" = "Το ιστορικό εμφανίζεται μετά την επόμενη πλήρη σάρωση.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Γλώσσα";
 "languageLikeMac" = "Όπως στο Mac";
 "languageRestartHint" = "Η νέα γλώσσα εμφανίζεται μετά από επανεκκίνηση.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Μπορείτε να ελευθερώσετε περίπου %@";
+"freeUpCaption" = "Ακολουθήστε αυτά τα βήματα με τη σειρά. Τίποτα δεν διαγράφεται πριν το επιβεβαιώσετε.";
+"freeUpNothing" = "Αυτή τη στιγμή δεν υπάρχει κάτι αξιόλογο για ελευθέρωση. Το Mac σας είναι τακτοποιημένο.";
+"freeUpLoadingTitle" = "Υπολογίζεται τι μπορεί να φύγει …";
+"freeUpLoadingDetail" = "Σε λίγο θα δείτε εδώ πόσο χώρο μπορείτε να ελευθερώσετε και πώς.";
+"freeUpCleanerDetail" = "Κρυφές μνήμες, παλιά αρχεία καταγραφής, παλιά προγράμματα εγκατάστασης, ο κάδος και άλλα";
+"freeUpDuplicatesDetail" = "Μεγάλα αρχεία που υπάρχουν περισσότερες από μία φορές";
+"freeUpDuplicatesNotSearched" = "Δεν έχει γίνει αναζήτηση ακόμη: ξεκινά όταν ανοίξετε τη σελίδα";
+"freeUpAppsDetail" = "Εφαρμογές που δεν έχετε ανοίξει εδώ και καιρό: %@";
+"sectionAdvanced" = "Για προχωρημένους";
+"showAdvancedPages" = "Εμφάνιση περιοχών για προχωρημένους";

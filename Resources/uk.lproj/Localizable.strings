@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Великі файли";
 "paneTemporaryFiles" = "Тимчасова область";
 "paneCopies" = "Копії програм";
-"sectionSystem" = "Приховані області";
 "sectionVolumes" = "Томи";
 "rescan" = "Сканувати знову";
 "rescanHelp" = "Просканувати всі області знову (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Перемістити до Смітника";
 "lastOpened" = "Востаннє відкрито %@";
 "trashAppFailed" = "Не вдалося перемістити «%@». У Finder це вдасться після введення пароля.";
-"figureFiles" = "Файли";
-"figureUnusedApps" = "невикористовувані програми";
 "bucketUnder1MB" = "менше ніж 1 MB";
 "bucketTo10MB" = "1–10 MB";
 "bucketTo100MB" = "10–100 MB";
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Наскільки великі ваші файли?";
 "sizeClassesCaption" = "Скільки місця займає кожен клас розміру і скільки файлів у ньому. Кілька великих файлів зазвичай займають більше місця, ніж багато маленьких.";
-"figureLargeFilesFrom" = "великі файли від %@";
 "historyTitle" = "Історія";
 "historyCaption" = "Зайняте місце після кожного повного сканування.";
 "historyAfterNextScan" = "Історія з’явиться після наступного повного сканування.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Мова";
 "languageLikeMac" = "Як на Mac";
 "languageRestartHint" = "Нова мова з’явиться після перезапуску.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Можна звільнити близько %@";
+"freeUpCaption" = "Пройдіть ці кроки по черзі. Нічого не видаляється без вашого підтвердження.";
+"freeUpNothing" = "Зараз звільняти майже нічого. Ваш Mac у порядку.";
+"freeUpLoadingTitle" = "Обчислюється, що можна видалити …";
+"freeUpLoadingDetail" = "Незабаром тут буде видно, скільки місця можна звільнити і як.";
+"freeUpCleanerDetail" = "Кеші, старі журнали, старі інсталятори, Кошик та інше";
+"freeUpDuplicatesDetail" = "Великі файли, які є в кількох примірниках";
+"freeUpDuplicatesNotSearched" = "Пошук ще не виконувався: він почнеться, коли ви відкриєте сторінку";
+"freeUpAppsDetail" = "Програм, які давно не відкривалися: %@";
+"sectionAdvanced" = "Для досвідчених";
+"showAdvancedPages" = "Показувати розділи для досвідчених";

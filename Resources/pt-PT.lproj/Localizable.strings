@@ -5,7 +5,6 @@
 "paneLargeFiles" = "Ficheiros grandes";
 "paneTemporaryFiles" = "Área temporária";
 "paneCopies" = "Cópias de apps";
-"sectionSystem" = "Áreas ocultas";
 "sectionVolumes" = "Volumes"; /* same as English on purpose */
 "rescan" = "Analisar novamente";
 "rescanHelp" = "Analisar novamente todas as áreas (⌘R)";
@@ -212,8 +211,6 @@
 "moveToTrash" = "Mover para o Lixo";
 "lastOpened" = "Aberta pela última vez a %@";
 "trashAppFailed" = "Não foi possível mover «%@». No Finder, funciona com a sua palavra-passe.";
-"figureFiles" = "Ficheiros";
-"figureUnusedApps" = "apps não utilizadas";
 "bucketUnder1MB" = "menos de 1 MB";
 "bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
 "bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
@@ -271,7 +268,6 @@
 /* Statistics in plain words */
 "sizeClassesTitle" = "Qual é o tamanho dos seus ficheiros?";
 "sizeClassesCaption" = "Quanto espaço ocupa cada classe de tamanho e quantos ficheiros contém. Normalmente, poucos ficheiros grandes ocupam mais espaço do que muitos pequenos.";
-"figureLargeFilesFrom" = "ficheiros grandes a partir de %@";
 "historyTitle" = "Histórico";
 "historyCaption" = "Espaço utilizado após cada análise completa.";
 "historyAfterNextScan" = "O histórico aparece depois da próxima análise completa.";
@@ -284,3 +280,16 @@
 "appLanguage" = "Idioma";
 "languageLikeMac" = "Igual ao Mac";
 "languageRestartHint" = "O novo idioma aparece depois de reiniciar.";
+
+/* Free-up guide on the overview, advanced pages */
+"freeUpTitle" = "Pode libertar cerca de %@";
+"freeUpCaption" = "Siga estes passos um após o outro. Nada é removido antes de confirmar.";
+"freeUpNothing" = "Neste momento não há nada relevante para libertar. O seu Mac está arrumado.";
+"freeUpLoadingTitle" = "A calcular o que pode sair …";
+"freeUpLoadingDetail" = "Dentro de instantes verá aqui quanto espaço pode libertar e como.";
+"freeUpCleanerDetail" = "Caches, registos antigos, instaladores antigos, o Lixo e mais";
+"freeUpDuplicatesDetail" = "Ficheiros grandes que existem mais do que uma vez";
+"freeUpDuplicatesNotSearched" = "Ainda não pesquisado: a pesquisa começa quando abre a página";
+"freeUpAppsDetail" = "Apps que não abre há algum tempo: %@";
+"sectionAdvanced" = "Para utilizadores avançados";
+"showAdvancedPages" = "Mostrar áreas avançadas";
