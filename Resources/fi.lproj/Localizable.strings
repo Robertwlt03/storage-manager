@@ -34,7 +34,8 @@
 "availableOf" = "%@ käytettävissä (yhteensä %@)";
 "categories" = "Luokat";
 "freeSpace" = "Vapaana";
-"temporaryAreaName" = "Tilapäinen järjestelmäalue";
+"temporaryAreaName" = "macOS:n järjestelmätiedostot";
+"homeFolderName" = "Kotikansiosi";
 "categoryApps" = "Ohjelmat";
 "categoryDocuments" = "Dokumentit ja Työpöytä";
 "categoryDownloads" = "Lataukset";
@@ -84,6 +85,7 @@
 "minimumSize" = "Vähimmäiskoko";
 "fromSize" = "vähintään %@";
 "noFilesFrom" = "Ei tiedostoja, jotka ovat vähintään %@";
+"noFilesFromDetail" = "Hyviä uutisia: yksikään tiedosto ei ole noin suuri. Valitse pienempi vähimmäiskoko, niin näet enemmän.";
 "filesTotal" = "%@ tiedostoa · yhteensä %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Taustapalvelujen tiedot.";
 
 /* Signature copies */
-"noCopies" = "Ei appien kopioita";
-"noCopiesDetail" = "Kansiossa X ei ole appien kopioita.";
-"running" = "käynnissä";
-"stopped" = "suljettu";
+"noCopies" = "Ei jääneitä kopioita";
+"noCopiesDetail" = "macOS ei ole jättänyt appien kopioita. Täällä ei ole mitään tehtävää.";
 "copiesLabel" = "Kopiot";
 "countedSize" = "Laskettu koko";
 "installedVersion" = "Asennettu versio";
@@ -118,7 +118,9 @@
 "createdOn" = "Luotu %@";
 "freed" = "Todellisuudessa vapautunut: %@";
 "deleteError" = "Kaikkea ei voitu poistaa: %@";
-"quitToDelete" = "Lopeta %@ komennolla ⌘Q, niin voit poistaa kopiot.";
+"quitToDelete" = "Jääneet kopiot vievät %@. Lopeta ensin %@ komennolla ⌘Q, sitten voit poistaa ne.";
+"copiesSafeToDelete" = "Jääneet kopiot vievät %@. %@ on suljettu, joten voit poistaa ne turvallisesti.";
+"technicalDetails" = "Tekniset tiedot";
 "openInExplorer" = "Näytä Kansioissa";
 "deleteAll" = "Poista kaikki kopiot …";
 "deleteTitle" = "Poistetaanko %@ kopiota kohteesta %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Tämä kansio on tyhjä";
 "otherCategories" = "Muut";
 "cleanCaches" = "Appien välimuistit";
-"cleanCachesDetail" = "Välimuistit, jotka apit luovat tarvittaessa uudelleen. Käynnissä olevia appeja ja macOS:ää itseään ei kosketa.";
-"cleanDeveloper" = "Kehittäjän välimuistit";
-"cleanDeveloperDetail" = "Xcoden koontitiedot ja pakettien välimuistit, kuten npm; ne syntyvät uudelleen seuraavassa koonnissa.";
+"cleanCachesDetail" = "Tiedostoja, joita apit säilyttävät vain käynnistyäkseen nopeammin. Apit luovat ne tarvittaessa uudelleen; avoimiin appeihin ei kosketa.";
+"cleanDeveloper" = "Ohjelmointityökalujen jäänteet";
+"cleanDeveloperDetail" = "Merkitsee jotain vain, jos teet itse appeja: välitiedostoja, jotka syntyvät itsestään uudelleen seuraavalla kerralla.";
 "cleanLogs" = "Vanhat lokit";
-"cleanLogsDetail" = "Appien lokit, jotka ovat yli viikon vanhoja.";
+"cleanLogsDetail" = "Muistiinpanoja, joihin apit kirjaavat, mitä ovat tehneet. Viikon jälkeen kukaan ei tarvitse niitä.";
 "cleanTemporary" = "Vanhat tilapäiset tiedostot";
-"cleanTemporaryDetail" = "Tilapäiset tiedostot, joita ei ole muutettu vähintään kolmeen päivään.";
+"cleanTemporaryDetail" = "Tiedostoja, joita apit tarvitsivat vain hetken johonkin tehtävään ja joihin ne eivät ole koskeneet vähintään kolmeen päivään.";
 "cleanTrash" = "Roskakori";
-"cleanTrashDetail" = "Tyhjentää roskakorin pysyvästi. Ei valittuna oletuksena.";
+"cleanTrashDetail" = "Tyhjentää roskakorin. Sen sisältö katoaa sen jälkeen lopullisesti. Ei valittuna oletuksena.";
 "cleanInstallers" = "Vanhat asennustiedostot";
-"cleanInstallersDetail" = "Yli kuukauden vanhat levykuvat ja asennuspaketit Latauksissa. Ei valittuna oletuksena.";
+"cleanInstallersDetail" = "Yli kuukauden vanhat asennustiedostot Latauksissa. Itse apit pysyvät asennettuina. Ei valittuna oletuksena.";
 "cleanFailed" = "%@ kohdetta ei voitu poistaa, koska ne ovat käytössä tai suojattuja.";
+"cleanNothingLeft" = "Kaikki puhdasta: juuri nyt ei ole mitään siivottavaa.";
 "cleaning" = "Siivotaan …";
 "cleanerRefresh" = "Hae uudelleen";
 "cleanSelected" = "Siivoa valinta (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "Tiedostot eivät siirry roskakoriin. Apit luovat välimuistinsa tarvittaessa uudelleen. Sen jälkeen app mittaa kaiken uudelleen.";
 "cleanConfirmInstallersMessage" = "Tiedostot eivät siirry roskakoriin. Apit luovat välimuistinsa tarvittaessa uudelleen. Sen jälkeen app mittaa kaiken uudelleen. Poistetut asennustiedostot on ladattava uudelleen.";
 "appsNoneUnused" = "Kaikkia appeja on käytetty äskettäin";
+"appsNoneUnusedDetail" = "Käytät kaikkia appejasi säännöllisesti. Täällä ei ole mitään siivottavaa.";
 "unusedSince" = "Ei avattu";
 "daysOption" = "yli %@ päivään";
 "trashAppTitle" = "Siirretäänkö ”%@” roskakoriin?";
@@ -232,10 +236,21 @@
 "paneDuplicates" = "Kaksoiskappaleet";
 "infoDuplicates" = "Vähintään 10 Mt:n suuret tiedostot, jotka ovat olemassa monta kertaa samalla sisällöllä. Samankokoisia tiedostoja verrataan sisällön perusteella. Täällä ei poisteta mitään; ”Näytä Finderissa” vie niihin.";
 "noDuplicates" = "Ei kaksoiskappaleita";
+"duplicateGroupTitle" = "Nämä %@ tiedostoa ovat täsmälleen samat – %@ ylimääräisissä kopioissa";
+"noDuplicatesDetail" = "Macillasi ei ole yhtään suurta tiedostoa kahteen kertaan. Täällä ei ole mitään tehtävää.";
 "searchingDuplicates" = "Verrataan tiedostoja …";
 "searchingDuplicatesDetail" = "Samankokoiset tiedostot luetaan ja verrataan. Suurilla tiedostoilla se kestää hetken.";
 "duplicatesTotal" = "%@ tiedostoa · %@ voidaan vapauttaa";
 "infoVolume" = "Tämän taltion kapasiteetti: mitä on käytetty, minkä macOS voi tarvittaessa vapauttaa itse ja mitä on vapaana. Ulkoisia taltioita voi mitata täällä.";
+"guideOverview" = "Näet yhdellä silmäyksellä, mikä täyttää tallennustilasi ja paljonko tilaa on vielä vapaana.";
+"guideExplorer" = "Suurimmat kansiot ovat ylimpänä. Avaa kansio, niin näet sen sisällön.";
+"guideLargeFiles" = "Macisi suurimmat tiedostot. Näytä tarpeettomat Finderissa ja poista ne siellä.";
+"guideCleaner" = "Tiedostoja, joita Macisi ei tarvitse. Valitse, mitä saa poistaa, ja siivoa yhdellä klikkauksella.";
+"guideDuplicates" = "Näitä tiedostoja on useampaan kertaan samalla sisällöllä. Säilytä yksi kustakin ja poista muut Finderissa.";
+"guideApps" = "Appeja, joita et ole avannut pitkään aikaan. Siirrä tarpeettomat roskakoriin.";
+"guideTemporaryFiles" = "Piilotettu paikka, jossa macOS säilyttää tiedostoja lyhyen aikaa. Se tyhjenee yleensä itsestään; vain jääneet appien kopiot kannattaa poistaa itse.";
+"guideCopies" = "Kun macOS tarkistaa apin, siitä jää joskus kopioita. Kun appi on suljettu, voit poistaa ne turvallisesti.";
+"guideVolume" = "Kuinka täynnä tämä taltio on ja paljonko macOS voi vapauttaa siitä itse.";
 "aboutPage" = "Tietoja tästä sivusta";
 "scanDetails" = "Mittaus";
 "scanProgress" = "Eteneminen";

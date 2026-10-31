@@ -34,7 +34,8 @@
 "availableOf" = "%@ khả dụng trong tổng số %@";
 "categories" = "Danh mục";
 "freeSpace" = "Trống";
-"temporaryAreaName" = "Vùng tạm của hệ thống";
+"temporaryAreaName" = "Tệp hệ thống của macOS";
+"homeFolderName" = "Thư mục người dùng của bạn";
 "categoryApps" = "Ứng dụng";
 "categoryDocuments" = "Tài liệu & Màn hình nền";
 "categoryDownloads" = "Tải về";
@@ -84,6 +85,7 @@
 "minimumSize" = "Kích thước tối thiểu";
 "fromSize" = "từ %@";
 "noFilesFrom" = "Không có tệp từ %@";
+"noFilesFromDetail" = "Tin vui: không có tệp nào lớn đến vậy. Chọn kích thước tối thiểu nhỏ hơn để xem thêm.";
 "filesTotal" = "%@ tệp · tổng %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Dữ liệu của các dịch vụ chạy nền.";
 
 /* Signature copies */
-"noCopies" = "Không có bản sao ứng dụng";
-"noCopiesDetail" = "Thư mục X không có bản sao ứng dụng nào.";
-"running" = "đang chạy";
-"stopped" = "đã thoát";
+"noCopies" = "Không có bản sao còn sót lại";
+"noCopiesDetail" = "macOS không để lại bản sao ứng dụng nào. Không có gì cần làm ở đây.";
 "copiesLabel" = "Bản sao";
 "countedSize" = "Kích thước tính được";
 "installedVersion" = "Phiên bản đã cài";
@@ -118,7 +118,9 @@
 "createdOn" = "Tạo ngày %@";
 "freed" = "Dung lượng thực sự được giải phóng: %@";
 "deleteError" = "Không thể xóa hết: %@";
-"quitToDelete" = "Thoát %@ bằng ⌘Q để xóa.";
+"quitToDelete" = "Các bản sao còn sót lại chiếm %@. Trước tiên hãy thoát %@ bằng ⌘Q, sau đó bạn có thể xóa chúng.";
+"copiesSafeToDelete" = "Các bản sao còn sót lại chiếm %@. %@ đã đóng, nên bạn có thể xóa chúng một cách an toàn.";
+"technicalDetails" = "Chi tiết kỹ thuật";
 "openInExplorer" = "Hiện trong Thư mục";
 "deleteAll" = "Xóa tất cả bản sao…";
 "deleteTitle" = "Xóa %@ bản sao của %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Thư mục này trống";
 "otherCategories" = "Khác";
 "cleanCaches" = "Bộ nhớ đệm ứng dụng";
-"cleanCachesDetail" = "Bộ nhớ đệm mà ứng dụng tạo lại khi cần. Ứng dụng đang chạy và chính macOS không bị động đến.";
-"cleanDeveloper" = "Bộ nhớ đệm nhà phát triển";
-"cleanDeveloperDetail" = "Dữ liệu build của Xcode và bộ nhớ đệm gói như npm; chúng sẽ được tạo lại ở lần build tiếp theo.";
+"cleanCachesDetail" = "Các tệp mà ứng dụng chỉ giữ lại để khởi động nhanh hơn. Ứng dụng sẽ tạo lại chúng khi cần; các ứng dụng đang mở không bị ảnh hưởng.";
+"cleanDeveloper" = "Phần còn sót lại của công cụ lập trình";
+"cleanDeveloperDetail" = "Chỉ quan trọng nếu bạn tự viết ứng dụng: các tệp trung gian sẽ tự xuất hiện lại vào lần sau.";
 "cleanLogs" = "Nhật ký cũ";
-"cleanLogsDetail" = "Nhật ký ứng dụng cũ hơn một tuần.";
+"cleanLogsDetail" = "Ghi chép mà ứng dụng dùng để lưu lại những gì chúng đã làm. Sau một tuần thì không ai cần đến nữa.";
 "cleanTemporary" = "Tệp tạm cũ";
-"cleanTemporaryDetail" = "Tệp tạm không thay đổi trong ít nhất ba ngày.";
+"cleanTemporaryDetail" = "Các tệp mà ứng dụng chỉ cần trong chốc lát cho một việc và đã không đụng đến trong ít nhất ba ngày.";
 "cleanTrash" = "Thùng rác";
-"cleanTrashDetail" = "Dọn sạch Thùng rác vĩnh viễn. Không được chọn theo mặc định.";
+"cleanTrashDetail" = "Dọn sạch Thùng rác. Những gì trong đó sẽ mất vĩnh viễn. Không được chọn theo mặc định.";
 "cleanInstallers" = "Trình cài đặt cũ";
-"cleanInstallersDetail" = "Ảnh đĩa và gói cài đặt trong Tải về cũ hơn một tháng. Không được chọn theo mặc định.";
+"cleanInstallersDetail" = "Các tệp cài đặt trong Tải về cũ hơn một tháng. Bản thân các ứng dụng vẫn được cài đặt. Không được chọn theo mặc định.";
 "cleanFailed" = "Không thể xóa %@ mục vì chúng đang được dùng hoặc được bảo vệ.";
+"cleanNothingLeft" = "Sạch sẽ cả rồi: hiện không có gì cần dọn dẹp.";
 "cleaning" = "Đang dọn dẹp…";
 "cleanerRefresh" = "Tìm lại";
 "cleanSelected" = "Dọn mục đã chọn (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "Các tệp không được chuyển vào Thùng rác. Ứng dụng sẽ tạo lại bộ nhớ đệm khi cần. Sau đó, ứng dụng sẽ đo lại mọi thứ.";
 "cleanConfirmInstallersMessage" = "Các tệp không được chuyển vào Thùng rác. Ứng dụng sẽ tạo lại bộ nhớ đệm khi cần. Sau đó, ứng dụng sẽ đo lại mọi thứ. Các trình cài đặt đã xóa sẽ phải tải về lại.";
 "appsNoneUnused" = "Mọi ứng dụng đều được dùng gần đây";
+"appsNoneUnusedDetail" = "Bạn dùng tất cả ứng dụng của mình thường xuyên. Không có gì cần dọn ở đây.";
 "unusedSince" = "Không mở trong";
 "daysOption" = "hơn %@ ngày";
 "trashAppTitle" = "Chuyển “%@” vào Thùng rác?";
@@ -232,10 +236,21 @@
 "paneDuplicates" = "Tệp trùng lặp";
 "infoDuplicates" = "Các tệp lớn từ 10 MB tồn tại nhiều lần với cùng nội dung. Các tệp cùng kích thước được so sánh theo nội dung. Ở đây không xóa gì cả; “Hiển thị trong Finder” dẫn đến chúng.";
 "noDuplicates" = "Không có tệp trùng lặp";
+"duplicateGroupTitle" = "%@ tệp này giống hệt nhau – các bản thừa chiếm %@";
+"noDuplicatesDetail" = "Không có tệp lớn nào được lưu hai lần trên máy Mac của bạn. Không có gì cần làm ở đây.";
 "searchingDuplicates" = "Đang so sánh tệp …";
 "searchingDuplicatesDetail" = "Các tệp cùng kích thước được đọc và so sánh. Với tệp lớn sẽ mất một lúc.";
 "duplicatesTotal" = "%@ tệp · có thể giải phóng %@";
 "infoVolume" = "Dung lượng của ổ đĩa này: phần đã dùng, phần macOS có thể tự giải phóng khi cần và phần còn trống. Có thể đo ổ đĩa ngoài tại đây.";
+"guideOverview" = "Xem nhanh những gì đang chiếm dung lượng của bạn và còn trống bao nhiêu.";
+"guideExplorer" = "Thư mục lớn nhất nằm ở trên cùng. Mở một thư mục để xem bên trong.";
+"guideLargeFiles" = "Các tệp lớn nhất trên máy Mac của bạn. Hiển thị những tệp bạn không cần nữa trong Finder rồi xóa ở đó.";
+"guideCleaner" = "Những tệp mà máy Mac của bạn không cần. Chọn những gì có thể bỏ đi và dọn dẹp chỉ với một cú bấm.";
+"guideDuplicates" = "Những tệp này có nhiều bản với cùng nội dung. Giữ lại một bản cho mỗi tệp và xóa các bản còn lại trong Finder.";
+"guideApps" = "Các ứng dụng bạn đã lâu không mở. Chuyển những ứng dụng bạn không cần nữa vào Thùng rác.";
+"guideTemporaryFiles" = "Một nơi ẩn mà macOS giữ tệp trong thời gian ngắn. Nơi này thường tự trống; chỉ các bản sao ứng dụng còn sót lại là đáng để bạn tự xóa.";
+"guideCopies" = "Khi macOS kiểm tra một ứng dụng, đôi khi còn sót lại bản sao của nó. Khi ứng dụng đã đóng, bạn có thể xóa chúng một cách an toàn.";
+"guideVolume" = "Ổ đĩa này đầy đến mức nào và macOS có thể tự giải phóng bao nhiêu.";
 "aboutPage" = "Về trang này";
 "scanDetails" = "Quét";
 "scanProgress" = "Tiến trình";

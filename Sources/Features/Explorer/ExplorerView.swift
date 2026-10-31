@@ -30,7 +30,7 @@ private struct FolderView: View {
                 SunburstChart(folder: node)
             } else {
                 EntryBrowser(
-                    entries: entries, total: node.bytes,
+                    entries: entries, total: node.bytes, showsFileCount: false,
                     emptyTitle: TextKey.emptyFolder.translated, contentKey: node.path)
             }
         }
@@ -38,7 +38,7 @@ private struct FolderView: View {
         .navigationTitle(node.isVirtual ? TextKey.paneExplorer.translated : node.displayName)
         .navigationSubtitle(subtitle)
         .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(Pane.explorer.information) { folderActions }
+            UI.PageHeader(.explorer) { folderActions }
         }
         .sheet(item: $informationEntry) { entry in InformationSheet(entry: entry) }
     }

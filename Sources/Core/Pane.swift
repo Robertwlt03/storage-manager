@@ -10,7 +10,7 @@ enum Pane: Hashable {
     static let everyPage = main + tidy + system
 
     var supportsGrid: Bool {
-        [.overview, .explorer, .largeFiles, .duplicates, .apps].contains(self)
+        [.overview, .explorer, .largeFiles, .apps].contains(self)
     }
     /// Only Folders can show its contents as rings.
     var supportsRings: Bool { self == .explorer }
@@ -28,7 +28,9 @@ enum Pane: Hashable {
 
     var launchKey: String { details.key }
     var title: TextKey { details.title }
-    /// What the page is for, shown by its information button.
+    /// One sentence at the top of the page: what it is for and what to do there.
+    var guidance: TextKey { details.guidance }
+    /// More about the page, shown by its information button.
     var information: TextKey { details.information }
     var symbol: String { details.symbol }
 
@@ -36,12 +38,17 @@ enum Pane: Hashable {
     private struct Details {
         let key: String
         let title: TextKey
+        let guidance: TextKey
         let information: TextKey
         let symbol: String
 
-        init(_ key: String, _ title: TextKey, _ information: TextKey, _ symbol: String) {
+        init(
+            _ key: String, _ title: TextKey, _ guidance: TextKey, _ information: TextKey,
+            _ symbol: String
+        ) {
             self.key = key
             self.title = title
+            self.guidance = guidance
             self.information = information
             self.symbol = symbol
         }
@@ -49,19 +56,28 @@ enum Pane: Hashable {
 
     private var details: Details {
         switch self {
-        case .overview: Details("overview", .paneOverview, .infoOverview, Symbols.overview)
-        case .explorer: Details("explorer", .paneExplorer, .infoExplorer, Symbols.explorer)
+        case .overview:
+            Details("overview", .paneOverview, .guideOverview, .infoOverview, Symbols.overview)
+        case .explorer:
+            Details("explorer", .paneExplorer, .guideExplorer, .infoExplorer, Symbols.explorer)
         case .largeFiles:
-            Details("largeFiles", .paneLargeFiles, .infoLargeFiles, Symbols.largeFiles)
-        case .cleaner: Details("cleaner", .paneCleaner, .infoCleaner, Symbols.cleaner)
+            Details(
+                "largeFiles", .paneLargeFiles, .guideLargeFiles, .infoLargeFiles,
+                Symbols.largeFiles)
+        case .cleaner:
+            Details("cleaner", .paneCleaner, .guideCleaner, .infoCleaner, Symbols.cleaner)
         case .duplicates:
-            Details("duplicates", .paneDuplicates, .infoDuplicates, Symbols.duplicates)
-        case .apps: Details("apps", .paneApps, .infoApps, Symbols.apps)
+            Details(
+                "duplicates", .paneDuplicates, .guideDuplicates, .infoDuplicates,
+                Symbols.duplicates)
+        case .apps: Details("apps", .paneApps, .guideApps, .infoApps, Symbols.apps)
         case .temporaryFiles:
             Details(
-                "temporaryFiles", .paneTemporaryFiles, .infoTemporaryFiles, Symbols.temporaryArea)
-        case .copies: Details("copies", .paneCopies, .infoCopies, Symbols.copies)
-        case .volume(let path): Details(path, .sectionVolumes, .infoVolume, Symbols.internalDrive)
+                "temporaryFiles", .paneTemporaryFiles, .guideTemporaryFiles, .infoTemporaryFiles,
+                Symbols.temporaryArea)
+        case .copies: Details("copies", .paneCopies, .guideCopies, .infoCopies, Symbols.copies)
+        case .volume(let path):
+            Details(path, .sectionVolumes, .guideVolume, .infoVolume, Symbols.internalDrive)
         }
     }
 }

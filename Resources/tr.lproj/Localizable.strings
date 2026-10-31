@@ -34,7 +34,8 @@
 "availableOf" = "%@ kullanılabilir, toplam %@";
 "categories" = "Kategoriler";
 "freeSpace" = "Boş";
-"temporaryAreaName" = "Geçici Sistem Alanı";
+"temporaryAreaName" = "macOS Sistem Dosyaları";
+"homeFolderName" = "Ana Klasörünüz";
 "categoryApps" = "Uygulamalar";
 "categoryDocuments" = "Belgeler ve Masaüstü";
 "categoryDownloads" = "İndirilenler";
@@ -84,6 +85,7 @@
 "minimumSize" = "Minimum Boyut";
 "fromSize" = "%@ ve üzeri";
 "noFilesFrom" = "%@ ve üzeri dosya yok";
+"noFilesFromDetail" = "İyi haber: Hiçbir dosya bu kadar büyük değil. Daha fazlasını görmek için daha küçük bir minimum boyut seçin.";
 "filesTotal" = "%@ dosya · toplam %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Arka plan hizmetlerinin verileri.";
 
 /* Signature copies */
-"noCopies" = "Uygulama Kopyası Yok";
-"noCopiesDetail" = "X klasöründe uygulama kopyası yok.";
-"running" = "çalışıyor";
-"stopped" = "kapalı";
+"noCopies" = "Geride Kalan Kopya Yok";
+"noCopiesDetail" = "macOS geride hiç uygulama kopyası bırakmadı. Burada yapılacak bir şey yok.";
 "copiesLabel" = "Kopyalar";
 "countedSize" = "Sayılan Boyut";
 "installedVersion" = "Yüklü Sürüm";
@@ -118,7 +118,9 @@
 "createdOn" = "%@ tarihinde oluşturuldu";
 "freed" = "Gerçekten boşalan alan: %@";
 "deleteError" = "Her şey silinemedi: %@";
-"quitToDelete" = "Silmek için %@ uygulamasından ⌘Q ile çıkın.";
+"quitToDelete" = "Geride kalan kopyalar %@ yer kaplıyor. Önce ⌘Q ile %@ uygulamasından çıkın, ardından bunları silebilirsiniz.";
+"copiesSafeToDelete" = "Geride kalan kopyalar %@ yer kaplıyor. %@ kapalı, bu yüzden bunları güvenle silebilirsiniz.";
+"technicalDetails" = "Teknik Ayrıntılar";
 "openInExplorer" = "Klasörler’de Göster";
 "deleteAll" = "Tüm Kopyaları Sil …";
 "deleteTitle" = "%@ kopya silinsin mi (%@)?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Bu klasör boş";
 "otherCategories" = "Diğer";
 "cleanCaches" = "Uygulama Önbellekleri";
-"cleanCachesDetail" = "Uygulamaların gerektiğinde yeniden oluşturduğu önbellekler. Çalışan uygulamalara ve macOS'un kendisine dokunulmaz.";
-"cleanDeveloper" = "Geliştirici Önbellekleri";
-"cleanDeveloperDetail" = "Xcode derleme verileri ve npm gibi paket önbellekleri; bir sonraki derlemede yeniden oluşturulurlar.";
+"cleanCachesDetail" = "Uygulamaların yalnızca daha hızlı açılmak için sakladığı dosyalar. Uygulamalar bunları gerektiğinde yeniden oluşturur; açık uygulamalara dokunulmaz.";
+"cleanDeveloper" = "Programlama Araçlarından Kalanlar";
+"cleanDeveloperDetail" = "Yalnızca kendiniz uygulama yazıyorsanız önemlidir: Bir sonraki sefer kendiliğinden yeniden oluşan ara dosyalar.";
 "cleanLogs" = "Eski Günlükler";
-"cleanLogsDetail" = "Bir haftadan eski uygulama günlükleri.";
+"cleanLogsDetail" = "Uygulamaların ne yaptıklarını kaydettiği notlar. Bir hafta sonra kimsenin bunlara ihtiyacı kalmaz.";
 "cleanTemporary" = "Eski Geçici Dosyalar";
-"cleanTemporaryDetail" = "En az üç gündür değiştirilmemiş geçici dosyalar.";
+"cleanTemporaryDetail" = "Uygulamaların bir iş için yalnızca kısa süre ihtiyaç duyduğu ve en az üç gündür dokunmadığı dosyalar.";
 "cleanTrash" = "Çöp Sepeti";
-"cleanTrashDetail" = "Çöp Sepeti'ni kalıcı olarak boşaltır. Varsayılan olarak seçili değildir.";
+"cleanTrashDetail" = "Çöp Sepeti'ni boşaltır. İçindeki her şey kalıcı olarak silinir. Varsayılan olarak seçili değildir.";
 "cleanInstallers" = "Eski Yükleyiciler";
-"cleanInstallersDetail" = "İndirilenler’deki bir aydan eski disk görüntüleri ve yükleme paketleri. Varsayılan olarak seçili değildir.";
+"cleanInstallersDetail" = "İndirilenler’deki bir aydan eski yükleme dosyaları. Uygulamaların kendisi yüklü kalır. Varsayılan olarak seçili değildir.";
 "cleanFailed" = "%@ öğe, kullanımda olduğu veya korumalı olduğu için kaldırılamadı.";
+"cleanNothingLeft" = "Her şey temiz: Şu anda temizlenecek bir şey yok.";
 "cleaning" = "Temizleniyor …";
 "cleanerRefresh" = "Yeniden Ara";
 "cleanSelected" = "Seçimi Temizle (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "Dosyalar Çöp Sepeti'ne gitmez. Uygulamalar önbelleklerini gerektiğinde yeniden oluşturur. Ardından uygulama her şeyi yeniden tarar.";
 "cleanConfirmInstallersMessage" = "Dosyalar Çöp Sepeti'ne gitmez. Uygulamalar önbelleklerini gerektiğinde yeniden oluşturur. Ardından uygulama her şeyi yeniden tarar. Kaldırılan yükleyicilerin yeniden indirilmesi gerekir.";
 "appsNoneUnused" = "Tüm uygulamalar yakın zamanda kullanıldı";
+"appsNoneUnusedDetail" = "Tüm uygulamalarınızı düzenli olarak kullanıyorsunuz. Burada toparlanacak bir şey yok.";
 "unusedSince" = "Şu süredir açılmadı";
 "daysOption" = "%@ günden fazla";
 "trashAppTitle" = "“%@” Çöp Sepeti'ne taşınsın mı?";
@@ -231,11 +235,22 @@
 "infoCopies" = "Bir imzayı kontrol ederken macOS bazen bir uygulamanın tam kopyalarını X klasörüne yerleştirir. Bunlar ayrı programlar değildir; macOS gerektiğinde yenisini oluşturur. Uygulama kapalıyken silmek güvenlidir.";
 "paneDuplicates" = "Kopyalar";
 "infoDuplicates" = "Aynı içerikle birden çok kez bulunan 10 MB üzerindeki büyük dosyalar. Aynı boyuttaki dosyalar içeriklerine göre karşılaştırılır. Burada hiçbir şey silinmez; “Finder’da Göster” onlara götürür.";
-"noDuplicates" = "Kopya Yok";
+"noDuplicates" = "Yinelenen Dosya Yok";
+"duplicateGroupTitle" = "Bu %@ dosya aynı – fazla kopyalar %@ yer kaplıyor";
+"noDuplicatesDetail" = "Mac'inizde iki kez saklanan büyük bir dosya yok. Burada yapılacak bir şey yok.";
 "searchingDuplicates" = "Dosyalar karşılaştırılıyor …";
 "searchingDuplicatesDetail" = "Aynı boyuttaki dosyalar okunup karşılaştırılır. Büyük dosyalarda bu biraz sürer.";
 "duplicatesTotal" = "%@ dosya · %@ boşaltılabilir";
 "infoVolume" = "Bu birimin kapasitesi: kullanılan, macOS'un gerektiğinde kendiliğinden boşaltabileceği ve boş olan alan. Harici birimler burada taranabilir.";
+"guideOverview" = "Depolama alanınızı neyin doldurduğunu ve ne kadar boş yer kaldığını bir bakışta görün.";
+"guideExplorer" = "En büyük klasörler en üstte yer alır. İçine bakmak için bir klasörü açın.";
+"guideLargeFiles" = "Mac'inizdeki en büyük dosyalar. Artık ihtiyacınız olmayanları Finder'da gösterin ve orada silin.";
+"guideCleaner" = "Mac'inizin ihtiyaç duymadığı dosyalar. Nelerin gidebileceğini seçin ve tek tıklamayla temizleyin.";
+"guideDuplicates" = "Bu dosyalar aynı içerikle birden fazla kez var. Her birinden birini saklayın, diğerlerini Finder'da silin.";
+"guideApps" = "Uzun süredir açmadığınız uygulamalar. Artık ihtiyacınız olmayanları Çöp Sepeti'ne taşıyın.";
+"guideTemporaryFiles" = "macOS'un dosyaları kısa bir süre sakladığı gizli bir yer. Çoğunlukla kendi kendine boşalır; yalnızca geride kalan uygulama kopyalarını kendiniz silmeye değer.";
+"guideCopies" = "macOS bir uygulamayı denetlerken bazen onun kopyalarını geride bırakır. Uygulama kapandıktan sonra bunları güvenle silebilirsiniz.";
+"guideVolume" = "Bu birimin ne kadar dolu olduğu ve macOS'un ne kadarını kendisi boşaltabileceği.";
 "aboutPage" = "Bu Sayfa Hakkında";
 "scanDetails" = "Tarama";
 "scanProgress" = "İlerleme";

@@ -34,7 +34,8 @@
 "availableOf" = "%@ elérhető, összesen %@";
 "categories" = "Kategóriák";
 "freeSpace" = "Szabad";
-"temporaryAreaName" = "Ideiglenes rendszerterület";
+"temporaryAreaName" = "A macOS rendszerfájljai";
+"homeFolderName" = "Saját mappád";
 "categoryApps" = "Alkalmazások";
 "categoryDocuments" = "Dokumentumok és Íróasztal";
 "categoryDownloads" = "Letöltések";
@@ -84,6 +85,7 @@
 "minimumSize" = "Minimális méret";
 "fromSize" = "legalább %@";
 "noFilesFrom" = "Nincs legalább %@ méretű fájl";
+"noFilesFromDetail" = "Jó hír: egyik fájl sem ekkora. Válassz kisebb minimális méretet, ha többet szeretnél látni.";
 "filesTotal" = "%@ fájl · összesen %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Háttérszolgáltatások adatai.";
 
 /* Signature copies */
-"noCopies" = "Nincsenek appmásolatok";
-"noCopiesDetail" = "Az X mappában nincsenek appmásolatok.";
-"running" = "fut";
-"stopped" = "nem fut";
+"noCopies" = "Nincsenek hátramaradt másolatok";
+"noCopiesDetail" = "A macOS nem hagyott hátra appmásolatokat. Itt nincs semmi teendőd.";
 "copiesLabel" = "Másolatok";
 "countedSize" = "Számolt méret";
 "installedVersion" = "Telepített verzió";
@@ -118,7 +118,9 @@
 "createdOn" = "Létrehozva: %@";
 "freed" = "Ténylegesen felszabadult: %@";
 "deleteError" = "Nem sikerült mindent törölni: %@";
-"quitToDelete" = "A törléshez lépj ki ebből: %@ (⌘Q).";
+"quitToDelete" = "A hátramaradt másolatok %@ helyet foglalnak. Előbb lépj ki ebből: %@ (⌘Q), utána törölheted őket.";
+"copiesSafeToDelete" = "A hátramaradt másolatok %@ helyet foglalnak. %@ be van zárva, így nyugodtan törölheted őket.";
+"technicalDetails" = "Műszaki részletek";
 "openInExplorer" = "Megjelenítés a Mappák nézetben";
 "deleteAll" = "Összes másolat törlése …";
 "deleteTitle" = "%2$@: %1$@ másolat törlése?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Ez a mappa üres";
 "otherCategories" = "Egyéb";
 "cleanCaches" = "Appok gyorsítótárai";
-"cleanCachesDetail" = "Gyorsítótárak, amelyeket az appok szükség esetén újra létrehoznak. A futó appokat és magát a macOS-t nem érinti.";
-"cleanDeveloper" = "Fejlesztői gyorsítótárak";
-"cleanDeveloperDetail" = "Az Xcode buildadatai és csomaggyorsítótárak (pl. npm); a következő buildeléskor újra létrejönnek.";
+"cleanCachesDetail" = "Fájlok, amelyeket az appok csak a gyorsabb indulás miatt tartanak meg. Szükség esetén az appok újra létrehozzák őket; a megnyitott appok érintetlenek maradnak.";
+"cleanDeveloper" = "Programozóeszközök maradványai";
+"cleanDeveloperDetail" = "Csak akkor számít, ha magad írsz appokat: köztes fájlok, amelyek legközelebb maguktól újra létrejönnek.";
 "cleanLogs" = "Régi naplók";
-"cleanLogsDetail" = "Egy hétnél régebbi appnaplók.";
+"cleanLogsDetail" = "Feljegyzések, amelyekbe az appok beírják, mit csináltak. Egy hét után senkinek sincs rájuk szüksége.";
 "cleanTemporary" = "Régi ideiglenes fájlok";
-"cleanTemporaryDetail" = "Legalább három napja nem módosított ideiglenes fájlok.";
+"cleanTemporaryDetail" = "Fájlok, amelyekre az appoknak csak rövid ideig volt szükségük egy feladathoz, és legalább három napja nem nyúltak hozzájuk.";
 "cleanTrash" = "Kuka";
-"cleanTrashDetail" = "Véglegesen kiüríti a Kukát. Alapból nincs kijelölve.";
+"cleanTrashDetail" = "Kiüríti a Kukát. Ami benne van, az utána végleg eltűnik. Alapból nincs kijelölve.";
 "cleanInstallers" = "Régi telepítők";
-"cleanInstallersDetail" = "Egy hónapnál régebbi lemezképek és telepítőcsomagok a Letöltésekben. Alapból nincs kijelölve.";
+"cleanInstallersDetail" = "Egy hónapnál régebbi telepítőfájlok a Letöltésekben. Maguk az appok telepítve maradnak. Alapból nincs kijelölve.";
 "cleanFailed" = "%@ elem nem távolítható el, mert használatban van vagy védett.";
+"cleanNothingLeft" = "Minden tiszta: most nincs mit kitakarítani.";
 "cleaning" = "Takarítás …";
 "cleanerRefresh" = "Keresés újra";
 "cleanSelected" = "Kijelöltek takarítása (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "A fájlok nem kerülnek a Kukába. Az appok szükség esetén újra létrehozzák a gyorsítótárukat. Utána az app mindent újra felmér.";
 "cleanConfirmInstallersMessage" = "A fájlok nem kerülnek a Kukába. Az appok szükség esetén újra létrehozzák a gyorsítótárukat. Utána az app mindent újra felmér. Az eltávolított telepítőket újra le kell tölteni.";
 "appsNoneUnused" = "Mostanában minden appot használtál";
+"appsNoneUnusedDetail" = "Minden appodat rendszeresen használod. Itt nincs mit rendbe tenni.";
 "unusedSince" = "Nem volt megnyitva";
 "daysOption" = "több mint %@ napja";
 "trashAppTitle" = "„%@” áthelyezése a Kukába?";
@@ -231,11 +235,22 @@
 "infoCopies" = "Az aláírás ellenőrzésekor a macOS néha egy app teljes másolatait helyezi az X mappába. Ezek nem különálló programok; a macOS szükség esetén újat készít. Törlésük biztonságos, amíg az app nem fut.";
 "paneDuplicates" = "Ismétlődések";
 "infoDuplicates" = "10 MB-nál nagyobb fájlok, amelyek azonos tartalommal többször is megvannak. Az azonos méretű fájlokat a tartalmuk alapján hasonlítja össze. Itt semmi sem törlődik; a „Megjelenítés a Finderben” elvezet hozzájuk.";
-"noDuplicates" = "Nincsenek ismétlődések";
+"noDuplicates" = "Nincsenek ismétlődő fájlok";
+"duplicateGroupTitle" = "%@ egyforma fájl – %@ fölösleges másolatokban";
+"noDuplicatesDetail" = "Egyetlen nagy fájl sincs kétszer a Maceden. Itt nincs semmi teendőd.";
 "searchingDuplicates" = "Fájlok összehasonlítása …";
 "searchingDuplicatesDetail" = "Az azonos méretű fájlok beolvasása és összehasonlítása. Nagy fájloknál ez eltart egy ideig.";
 "duplicatesTotal" = "%@ fájl · %@ szabadítható fel";
 "infoVolume" = "A kötet kapacitása: mennyi foglalt, mennyit tud a macOS szükség esetén magától felszabadítani, és mennyi szabad. A külső kötetek itt felmérhetők.";
+"guideOverview" = "Egy pillantással láthatod, mi tölti meg a tárhelyedet, és mennyi hely szabad még.";
+"guideExplorer" = "A legnagyobb mappák vannak legfelül. Nyiss meg egy mappát, hogy belenézz.";
+"guideLargeFiles" = "A legnagyobb fájlok a Maceden. Amire már nincs szükséged, azt jelenítsd meg a Finderben, és ott töröld.";
+"guideCleaner" = "Fájlok, amelyekre a Macednek nincs szüksége. Válaszd ki, mi mehet, és takaríts egy kattintással.";
+"guideDuplicates" = "Ezek a fájlok többször is megvannak, ugyanazzal a tartalommal. Mindegyikből tarts meg egyet, a többit pedig töröld a Finderben.";
+"guideApps" = "Appok, amelyeket régóta nem nyitottál meg. Amelyekre már nincs szükséged, azokat tedd a Kukába.";
+"guideTemporaryFiles" = "Egy rejtett hely, ahol a macOS rövid ideig fájlokat tárol. Többnyire magától kiürül; csak a hátramaradt appmásolatokat érdemes magadnak törölnöd.";
+"guideCopies" = "Amikor a macOS ellenőriz egy appot, néha másolatokat hagy hátra belőle. Ha az app be van zárva, nyugodtan törölheted őket.";
+"guideVolume" = "Mennyire van tele ez a kötet, és mennyi helyet tud rajta a macOS magától felszabadítani.";
 "aboutPage" = "Erről az oldalról";
 "scanDetails" = "Vizsgálat";
 "scanProgress" = "Előrehaladás";

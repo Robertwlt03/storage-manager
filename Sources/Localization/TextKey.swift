@@ -15,7 +15,7 @@ nonisolated enum TextKey: String, CaseIterable {
         loadingAppsTitle, loadingAppsDetail, showSidebar, hideSidebar
 
     // Overview and categories
-    case availableOf, categories, freeSpace, temporaryAreaName
+    case availableOf, categories, freeSpace, temporaryAreaName, homeFolderName
     case categoryApps, categoryDocuments, categoryDownloads, categoryMedia, categoryICloud,
         categoryMail, categoryDeveloper, categoryCaches, categoryAppData
     case categoryTrash, categoryTemporary, categoryUser, categoryLibrary, categoryOther,
@@ -30,7 +30,7 @@ nonisolated enum TextKey: String, CaseIterable {
     case analyzing, typesBySize, fileCount, noExtension
 
     // Large files
-    case minimumSize, fromSize, noFilesFrom, filesTotal
+    case minimumSize, fromSize, noFilesFrom, noFilesFromDetail, filesTotal
 
     // Temporary area
     case location, total, subfolders, viewCopies
@@ -39,10 +39,10 @@ nonisolated enum TextKey: String, CaseIterable {
         temporaryFolderXDetail, temporaryFolder0, temporaryFolder0Detail
 
     // Signature copies
-    case noCopies, noCopiesDetail, running, stopped, copiesLabel, countedSize, installedVersion,
+    case noCopies, noCopiesDetail, copiesLabel, countedSize, installedVersion,
         notFound
     case versionLabel, copiesOne, copiesMany, current, old, unknown, createdOn, freed, deleteError,
-        quitToDelete
+        quitToDelete, copiesSafeToDelete, technicalDetails
     case openInExplorer, deleteAll, deleteTitle, deleteForever, deleteMessage
 
     // Volumes
@@ -61,8 +61,9 @@ nonisolated enum TextKey: String, CaseIterable {
         otherCategories, cleanCaches, cleanCachesDetail, cleanDeveloper, cleanDeveloperDetail,
         cleanLogs, cleanLogsDetail, cleanTemporary, cleanTemporaryDetail, cleanTrash,
         cleanTrashDetail, cleanInstallers, cleanInstallersDetail, cleanConfirmInstallersMessage,
-        cleanFailed, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle,
-        cleanConfirmMessage, appsNoneUnused, unusedSince, daysOption, trashAppTitle,
+        cleanFailed, cleanNothingLeft, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle,
+        cleanConfirmMessage, appsNoneUnused, appsNoneUnusedDetail, unusedSince, daysOption,
+        trashAppTitle,
         trashAppMessage, moveToTrash, lastOpened, trashAppFailed, figureFiles, figureUnusedApps,
         bucketUnder1MB, bucketTo10MB, bucketTo100MB, bucketTo1GB, bucketOver1GB
 
@@ -72,7 +73,9 @@ nonisolated enum TextKey: String, CaseIterable {
     // Page info, scan details, summary
     case infoOverview, infoCleaner, infoApps, infoExplorer, infoLargeFiles, infoTemporaryFiles,
         infoCopies,
-        infoVolume, aboutPage, scanDetails, scanProgress, scanArea, scanFinished,
+        infoVolume, guideOverview, guideExplorer, guideLargeFiles, guideCleaner, guideDuplicates,
+        guideApps, guideTemporaryFiles, guideCopies, guideVolume, aboutPage, scanDetails,
+        scanProgress, scanArea, scanFinished,
         accessMissingShort, summaryTitle, summaryDisk, summaryTop, summaryNotMeasured, summaryClean,
         summaryCopies, summaryApps, summaryFreed, readAloud, stopReading
 
@@ -82,7 +85,8 @@ nonisolated enum TextKey: String, CaseIterable {
 
     // Settings
     case autoScan
-    case paneDuplicates, infoDuplicates, noDuplicates, searchingDuplicates
+    case paneDuplicates, infoDuplicates, noDuplicates, noDuplicatesDetail, duplicateGroupTitle,
+        searchingDuplicates
     case searchingDuplicatesDetail, duplicatesTotal
     case rings, layoutSwitch
     case exportReport, reportTitle, reportFileName

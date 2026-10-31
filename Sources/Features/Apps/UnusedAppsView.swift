@@ -48,8 +48,10 @@ struct UnusedAppsView: View {
             }
         } else if unusedApps.isEmpty {
             UI.Placeholder(
-                .empty(title: TextKey.appsNoneUnused.translated, symbol: Symbols.success), in: .page
-            )
+                .empty(
+                    title: TextKey.appsNoneUnused.translated, symbol: Symbols.success,
+                    detail: TextKey.appsNoneUnusedDetail.translated),
+                in: .page)
         } else if layout == .grid {
             UI.TileGrid(unusedApps) { app in tile(app) }
         } else {

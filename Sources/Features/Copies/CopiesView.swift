@@ -13,7 +13,7 @@ struct CopiesView: View {
             } else if copyGroups.isEmpty {
                 UI.Placeholder(
                     .empty(
-                        title: TextKey.noCopies.translated, symbol: Symbols.copies,
+                        title: TextKey.noCopies.translated, symbol: Symbols.success,
                         detail: TextKey.noCopiesDetail.translated), in: .page)
             }
             ForEach(copyGroups) { group in CopyGroupCard(group: group) }

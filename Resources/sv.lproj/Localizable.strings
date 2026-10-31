@@ -34,7 +34,8 @@
 "availableOf" = "%@ tillgängligt av %@";
 "categories" = "Kategorier";
 "freeSpace" = "Ledigt";
-"temporaryAreaName" = "Tillfälligt systemområde";
+"temporaryAreaName" = "Systemfiler för macOS";
+"homeFolderName" = "Din hemmapp";
 "categoryApps" = "Program";
 "categoryDocuments" = "Dokument och Skrivbord";
 "categoryDownloads" = "Hämtade filer";
@@ -84,6 +85,7 @@
 "minimumSize" = "Minsta storlek";
 "fromSize" = "från %@";
 "noFilesFrom" = "Inga filer från %@";
+"noFilesFromDetail" = "Goda nyheter: ingen fil är så stor. Sänk minsta storlek för att se fler.";
 "filesTotal" = "%@ filer · %@ totalt";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Data från bakgrundstjänster.";
 
 /* Signature copies */
-"noCopies" = "Inga appkopior";
-"noCopiesDetail" = "Det finns inga appkopior i mappen X.";
-"running" = "körs";
-"stopped" = "avslutad";
+"noCopies" = "Inga kvarlämnade kopior";
+"noCopiesDetail" = "macOS har inte lämnat kvar några appkopior. Det finns inget att göra här.";
 "copiesLabel" = "Kopior";
 "countedSize" = "Räknad storlek";
 "installedVersion" = "Installerad version";
@@ -118,7 +118,9 @@
 "createdOn" = "Skapad den %@";
 "freed" = "Faktiskt frigjort utrymme: %@";
 "deleteError" = "Allt kunde inte tas bort: %@";
-"quitToDelete" = "Avsluta %@ med ⌘Q för att kunna ta bort.";
+"quitToDelete" = "Kvarlämnade kopior tar upp %@. Avsluta först %@ med ⌘Q, sedan kan du ta bort dem.";
+"copiesSafeToDelete" = "Kvarlämnade kopior tar upp %@. %@ är stängd, så du kan tryggt ta bort dem.";
+"technicalDetails" = "Tekniska detaljer";
 "openInExplorer" = "Visa i Mappar";
 "deleteAll" = "Ta bort alla kopior …";
 "deleteTitle" = "Ta bort %@ kopior av %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Den här mappen är tom";
 "otherCategories" = "Övrigt";
 "cleanCaches" = "Appars cacheminnen";
-"cleanCachesDetail" = "Cacheminnen som appar bygger upp igen vid behov. Appar som körs och macOS själv lämnas ifred.";
-"cleanDeveloper" = "Cacheminnen för utveckling";
-"cleanDeveloperDetail" = "Byggdata från Xcode och paketcacher som npm; de skapas på nytt vid nästa bygge.";
+"cleanCachesDetail" = "Filer som appar sparar bara för att starta snabbare. Appar skapar dem igen vid behov; öppna appar lämnas ifred.";
+"cleanDeveloper" = "Rester från programmeringsverktyg";
+"cleanDeveloperDetail" = "Spelar bara roll om du själv skriver appar: mellanfiler som kommer tillbaka av sig själva nästa gång.";
 "cleanLogs" = "Gamla loggar";
-"cleanLogsDetail" = "Apploggar som är äldre än en vecka.";
+"cleanLogsDetail" = "Anteckningar där appar skriver ner vad de har gjort. Efter en vecka behöver ingen dem.";
 "cleanTemporary" = "Gamla tillfälliga filer";
-"cleanTemporaryDetail" = "Tillfälliga filer som inte har ändrats på minst tre dagar.";
+"cleanTemporaryDetail" = "Filer som appar bara behövde en kort stund för en uppgift och inte har rört på minst tre dagar.";
 "cleanTrash" = "Papperskorgen";
-"cleanTrashDetail" = "Tömmer papperskorgen permanent. Inte markerad som standard.";
+"cleanTrashDetail" = "Tömmer papperskorgen. Det som ligger där är sedan borta för alltid. Inte markerad som standard.";
 "cleanInstallers" = "Gamla installationsfiler";
-"cleanInstallersDetail" = "Skivavbilder och installationspaket i Hämtade filer som är äldre än en månad. Inte markerad som standard.";
+"cleanInstallersDetail" = "Installationsfiler i Hämtade filer som är äldre än en månad. Själva apparna förblir installerade. Inte markerad som standard.";
 "cleanFailed" = "%@ objekt kunde inte tas bort eftersom de används eller är skyddade.";
+"cleanNothingLeft" = "Allt är rent: det finns inget att rensa just nu.";
 "cleaning" = "Rensar upp …";
 "cleanerRefresh" = "Sök igen";
 "cleanSelected" = "Rensa markeringen (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "Filerna hamnar inte i papperskorgen. Appar bygger upp sina cacheminnen igen vid behov. Därefter mäter appen allt på nytt.";
 "cleanConfirmInstallersMessage" = "Filerna hamnar inte i papperskorgen. Appar bygger upp sina cacheminnen igen vid behov. Därefter mäter appen allt på nytt. Borttagna installationsfiler måste hämtas igen.";
 "appsNoneUnused" = "Alla appar har använts nyligen";
+"appsNoneUnusedDetail" = "Du använder alla dina appar regelbundet. Det finns inget att rensa här.";
 "unusedSince" = "Inte öppnad på";
 "daysOption" = "mer än %@ dagar";
 "trashAppTitle" = "Flytta ”%@” till papperskorgen?";
@@ -231,11 +235,22 @@
 "infoCopies" = "När macOS kontrollerar en signatur lägger det ibland kompletta kopior av en app i mappen X. De är inga egna program; macOS skapar en ny vid behov. Det är ofarligt att ta bort dem så länge appen är avslutad.";
 "paneDuplicates" = "Dubbletter";
 "infoDuplicates" = "Stora filer från 10 MB som finns flera gånger med samma innehåll. Filer av samma storlek jämförs efter innehåll. Inget tas bort här; ”Visa i Finder” leder till dem.";
-"noDuplicates" = "Inga dubbletter";
+"noDuplicates" = "Inga dubblettfiler";
+"duplicateGroupTitle" = "De här %@ filerna är identiska – %@ i extra kopior";
+"noDuplicatesDetail" = "Ingen stor fil finns två gånger på din Mac. Det finns inget att göra här.";
 "searchingDuplicates" = "Jämför filer …";
 "searchingDuplicatesDetail" = "Filer av samma storlek läses och jämförs. För stora filer tar det en stund.";
 "duplicatesTotal" = "%@ filer · %@ kan frigöras";
 "infoVolume" = "Kapaciteten för den här volymen: vad som är upptaget, vad macOS kan frigöra själv vid behov och vad som är ledigt. Externa volymer kan mätas här.";
+"guideOverview" = "Se direkt vad som fyller din lagring och hur mycket utrymme som fortfarande är ledigt.";
+"guideExplorer" = "De största mapparna kommer först. Öppna en mapp för att titta i den.";
+"guideLargeFiles" = "De största filerna på din Mac. Visa de du inte längre behöver i Finder och ta bort dem där.";
+"guideCleaner" = "Filer som din Mac inte behöver. Välj vad som får försvinna och rensa upp med ett klick.";
+"guideDuplicates" = "De här filerna finns flera gånger med samma innehåll. Behåll en av varje och ta bort de andra i Finder.";
+"guideApps" = "Appar som du inte har öppnat på länge. Flytta de du inte längre behöver till papperskorgen.";
+"guideTemporaryFiles" = "En dold plats där macOS sparar filer en kort tid. Den tömmer sig oftast själv; bara kvarlämnade appkopior är värda att ta bort själv.";
+"guideCopies" = "När macOS kontrollerar en app blir det ibland kopior av den kvar. När appen är stängd kan du tryggt ta bort dem.";
+"guideVolume" = "Hur full den här volymen är och hur mycket macOS kan frigöra själv.";
 "aboutPage" = "Om den här sidan";
 "scanDetails" = "Mätning";
 "scanProgress" = "Förlopp";

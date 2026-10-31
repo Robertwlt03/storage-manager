@@ -39,16 +39,19 @@ nonisolated enum Paths {
         return String(cString: resolvedPath)
     }
 
-    /// The temporary area goes by its name, also in front of what lies inside it, so its long
-    /// per-Mac path never shows, nor in the demo.
+    /// The measured areas by their everyday name, also in front of what lies inside them, so no
+    /// `~`, `/Applications` or the temporary area's long per-Mac path shows, nor in the demo.
     static func displayName(_ path: String) -> String {
-        if path == temporaryArea { return TextKey.temporaryAreaName.translated }
-        if path.hasPrefix(temporaryArea + "/") {
-            return TextKey.temporaryAreaName.translated + path.dropFirst(temporaryArea.count)
+        for (root, name) in namedRoots where path == root || path.hasPrefix(root + "/") {
+            return name.translated + path.dropFirst(root.count)
         }
-        let isInHome = path == home || path.hasPrefix(home + "/")
-        return isInHome ? "~" + path.dropFirst(home.count) : path
+        return path
     }
+
+    private static let namedRoots: [(path: String, name: TextKey)] = [
+        (home, .homeFolderName), (applications, .categoryApps), (library, .categoryLibrary),
+        (temporaryArea, .temporaryAreaName),
+    ]
 
     static func exists(_ path: String) -> Bool { FileManager.default.fileExists(atPath: path) }
 }

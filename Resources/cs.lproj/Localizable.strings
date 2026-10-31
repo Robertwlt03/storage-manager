@@ -34,7 +34,8 @@
 "availableOf" = "K dispozici %@ z %@";
 "categories" = "Kategorie";
 "freeSpace" = "Volné";
-"temporaryAreaName" = "Dočasná systémová oblast";
+"temporaryAreaName" = "Systémové soubory macOS";
+"homeFolderName" = "Vaše domovská složka";
 "categoryApps" = "Aplikace";
 "categoryDocuments" = "Dokumenty a Plocha";
 "categoryDownloads" = "Stažené soubory";
@@ -84,6 +85,7 @@
 "minimumSize" = "Minimální velikost";
 "fromSize" = "od %@";
 "noFilesFrom" = "Žádné soubory od %@";
+"noFilesFromDetail" = "Dobrá zpráva: tak velký soubor tu není. Chcete-li vidět víc, zvolte menší minimální velikost.";
 "filesTotal" = "Souborů: %@ · celkem %@";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Data služeb běžících na pozadí.";
 
 /* Signature copies */
-"noCopies" = "Žádné kopie aplikací";
-"noCopiesDetail" = "Ve složce X nejsou žádné kopie aplikací.";
-"running" = "spuštěno";
-"stopped" = "ukončeno";
+"noCopies" = "Žádné zbylé kopie";
+"noCopiesDetail" = "macOS po sobě nenechal žádné kopie aplikací. Tady není co dělat.";
 "copiesLabel" = "Kopie";
 "countedSize" = "Započtená velikost";
 "installedVersion" = "Nainstalovaná verze";
@@ -118,7 +118,9 @@
 "createdOn" = "Vytvořeno %@";
 "freed" = "Skutečně uvolněno: %@";
 "deleteError" = "Ne vše se podařilo smazat: %@";
-"quitToDelete" = "Ukončete %@ pomocí ⌘Q, pak půjde smazat.";
+"quitToDelete" = "Zbylé kopie zabírají %@. Nejprve ukončete %@ pomocí ⌘Q, pak je můžete smazat.";
+"copiesSafeToDelete" = "Zbylé kopie zabírají %@. Aplikace %@ je zavřená, takže je můžete bez obav smazat.";
+"technicalDetails" = "Technické podrobnosti";
 "openInExplorer" = "Zobrazit ve Složkách";
 "deleteAll" = "Smazat všechny kopie …";
 "deleteTitle" = "Smazat kopie (%@) aplikace %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "Tato složka je prázdná";
 "otherCategories" = "Ostatní";
 "cleanCaches" = "Mezipaměti aplikací";
-"cleanCachesDetail" = "Mezipaměti, které si aplikace podle potřeby vytvoří znovu. Spuštěných aplikací ani samotného macOS se to netýká.";
-"cleanDeveloper" = "Mezipaměti pro vývojáře";
-"cleanDeveloperDetail" = "Data sestavení Xcode a mezipaměti balíčků, například npm; při příštím sestavení se vytvoří znovu.";
+"cleanCachesDetail" = "Soubory, které si aplikace uchovávají jen kvůli rychlejšímu spuštění. Aplikace si je v případě potřeby vytvoří znovu; otevřených aplikací se to nedotkne.";
+"cleanDeveloper" = "Zbytky z programátorských nástrojů";
+"cleanDeveloperDetail" = "Důležité, jen pokud sami programujete aplikace: rozpracované soubory, které příště samy vzniknou znovu.";
 "cleanLogs" = "Staré protokoly";
-"cleanLogsDetail" = "Protokoly aplikací starší než jeden týden.";
+"cleanLogsDetail" = "Záznamy, do kterých si aplikace zapisují, co dělaly. Po týdnu je už nikdo nepotřebuje.";
 "cleanTemporary" = "Staré dočasné soubory";
-"cleanTemporaryDetail" = "Dočasné soubory, které se nezměnily alespoň tři dny.";
+"cleanTemporaryDetail" = "Soubory, které aplikace potřebovaly jen krátce pro nějaký úkol a nejméně tři dny na ně nesáhly.";
 "cleanTrash" = "Koš";
-"cleanTrashDetail" = "Vysype Koš natrvalo. Ve výchozím nastavení není vybráno.";
+"cleanTrashDetail" = "Vysype Koš. Co v něm je, bude pak nadobro pryč. Ve výchozím nastavení není vybráno.";
 "cleanInstallers" = "Staré instalační soubory";
-"cleanInstallersDetail" = "Obrazy disků a instalační balíčky ve Stažených souborech starší než jeden měsíc. Ve výchozím nastavení není vybráno.";
+"cleanInstallersDetail" = "Instalační soubory ve Stažených souborech starší než jeden měsíc. Samotné aplikace zůstanou nainstalované. Ve výchozím nastavení není vybráno.";
 "cleanFailed" = "Položek, které se nepodařilo odstranit, protože se používají nebo jsou chráněné: %@.";
+"cleanNothingLeft" = "Vše čisté: právě teď není co uklízet.";
 "cleaning" = "Čistím …";
 "cleanerRefresh" = "Hledat znovu";
 "cleanSelected" = "Vyčistit výběr (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "Soubory nepřejdou do Koše. Aplikace si mezipaměti podle potřeby vytvoří znovu. Poté aplikace vše naskenuje znovu.";
 "cleanConfirmInstallersMessage" = "Soubory nepřejdou do Koše. Aplikace si mezipaměti podle potřeby vytvoří znovu. Poté aplikace vše naskenuje znovu. Odstraněné instalační soubory bude nutné stáhnout znovu.";
 "appsNoneUnused" = "Všechny aplikace byly nedávno použity";
+"appsNoneUnusedDetail" = "Všechny své aplikace používáte pravidelně. Tady není co uklízet.";
 "unusedSince" = "Neotevřeno po dobu";
 "daysOption" = "více než %@ dní";
 "trashAppTitle" = "Přesunout „%@“ do Koše?";
@@ -231,11 +235,22 @@
 "infoCopies" = "Při kontrole podpisu macOS někdy vytvoří úplné kopie aplikace ve složce X. Nejde o samostatné programy; macOS v případě potřeby vytvoří novou. Smazání je bezpečné, dokud je aplikace ukončená.";
 "paneDuplicates" = "Duplikáty";
 "infoDuplicates" = "Velké soubory od 10 MB, které existují vícekrát se stejným obsahem. Soubory stejné velikosti se porovnají podle obsahu. Nic se tu neodstraňuje; „Zobrazit ve Finderu“ k nim vede.";
-"noDuplicates" = "Žádné duplikáty";
+"noDuplicates" = "Žádné duplicitní soubory";
+"duplicateGroupTitle" = "Shodné soubory: %@ – kopie navíc zabírají %@";
+"noDuplicatesDetail" = "Na vašem Macu není žádný velký soubor uložen dvakrát. Tady není co dělat.";
 "searchingDuplicates" = "Porovnávání souborů …";
 "searchingDuplicatesDetail" = "Soubory stejné velikosti se čtou a porovnávají. U velkých souborů to chvíli trvá.";
 "duplicatesTotal" = "%@ souborů · uvolnit lze %@";
 "infoVolume" = "Kapacita tohoto svazku: co je využito, co může macOS v případě potřeby uvolnit sám a co je volné. Externí svazky lze naskenovat tady.";
+"guideOverview" = "Na první pohled uvidíte, co zaplňuje vaše úložiště a kolik místa je ještě volné.";
+"guideExplorer" = "Největší složky jsou nahoře. Otevřete složku a podívejte se dovnitř.";
+"guideLargeFiles" = "Největší soubory na vašem Macu. Ty, které už nepotřebujete, zobrazte ve Finderu a tam je smažte.";
+"guideCleaner" = "Soubory, které váš Mac nepotřebuje. Vyberte, co může pryč, a ukliďte jedním kliknutím.";
+"guideDuplicates" = "Tyto soubory jsou tu vícekrát se stejným obsahem. Od každého si jeden nechte a ostatní smažte ve Finderu.";
+"guideApps" = "Aplikace, které jste dlouho neotevřeli. Ty, které už nepotřebujete, přesuňte do Koše.";
+"guideTemporaryFiles" = "Skryté místo, kde macOS na krátkou dobu ukládá soubory. Většinou se vyprázdní samo; smazat sami se vyplatí jen zbylé kopie aplikací.";
+"guideCopies" = "Když macOS kontroluje aplikaci, občas po ní zůstanou kopie. Jakmile je aplikace zavřená, můžete je bez obav smazat.";
+"guideVolume" = "Jak plný je tento svazek a kolik místa na něm dokáže macOS uvolnit sám.";
 "aboutPage" = "O této stránce";
 "scanDetails" = "Skenování";
 "scanProgress" = "Průběh";

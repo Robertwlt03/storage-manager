@@ -20,6 +20,7 @@ struct LargeFilesView: View {
         EntryBrowser(
             entries: files, total: totalBytes, showsLocation: true, showsFileCount: false,
             emptyTitle: TextKey.noFilesFrom.translated(with: thresholdText(minimumMegabytes)),
+            emptyDetail: TextKey.noFilesFromDetail.translated,
             contentKey: "\(minimumMegabytes)"
         )
         .navigationTitle(TextKey.paneLargeFiles.translated)
@@ -28,7 +29,7 @@ struct LargeFilesView: View {
                 with: Format.count(files.count), Format.bytes(totalBytes))
         )
         .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(Pane.largeFiles.information) {
+            UI.PageHeader(.largeFiles) {
                 LayoutSwitcher(pane: .largeFiles)
                 minimumSizePicker
             }

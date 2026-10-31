@@ -34,7 +34,8 @@
 "availableOf" = "%@ available of %@";
 "categories" = "Categories";
 "freeSpace" = "Free";
-"temporaryAreaName" = "Temporary System Area";
+"temporaryAreaName" = "macOS System Files";
+"homeFolderName" = "Your Home Folder";
 "categoryApps" = "Applications";
 "categoryDocuments" = "Documents & Desktop";
 "categoryDownloads" = "Downloads";
@@ -84,6 +85,7 @@
 "minimumSize" = "Minimum Size";
 "fromSize" = "from %@";
 "noFilesFrom" = "No files from %@";
+"noFilesFromDetail" = "Good news: no file is that big. Choose a smaller minimum size to see more.";
 "filesTotal" = "%@ files · %@ total";
 
 /* Temporary area */
@@ -101,10 +103,8 @@
 "temporaryFolder0Detail" = "Data of background services.";
 
 /* Signature copies */
-"noCopies" = "No App Copies";
-"noCopiesDetail" = "There are no app copies in folder X.";
-"running" = "running";
-"stopped" = "quit";
+"noCopies" = "No Leftover Copies";
+"noCopiesDetail" = "macOS has not left any app copies behind. There is nothing to do here.";
 "copiesLabel" = "Copies";
 "countedSize" = "Counted Size";
 "installedVersion" = "Installed Version";
@@ -118,7 +118,9 @@
 "createdOn" = "Created on %@";
 "freed" = "Space actually freed: %@";
 "deleteError" = "Not everything could be deleted: %@";
-"quitToDelete" = "Quit %@ with ⌘Q to delete.";
+"quitToDelete" = "Leftover copies take up %@. Quit %@ with ⌘Q first, then you can delete them.";
+"copiesSafeToDelete" = "Leftover copies take up %@. %@ is closed, so you can delete them safely.";
+"technicalDetails" = "Technical Details";
 "openInExplorer" = "Show in Folders";
 "deleteAll" = "Delete All Copies …";
 "deleteTitle" = "Delete %@ copies of %@?";
@@ -182,18 +184,19 @@
 "emptyFolder" = "This folder is empty";
 "otherCategories" = "Other";
 "cleanCaches" = "App Caches";
-"cleanCachesDetail" = "Caches that apps rebuild when needed. Running apps and macOS itself are left alone.";
-"cleanDeveloper" = "Developer Caches";
-"cleanDeveloperDetail" = "Xcode build data and package caches such as npm; they are recreated on the next build.";
+"cleanCachesDetail" = "Files apps keep only to start faster. Apps create them again when needed; open apps stay untouched.";
+"cleanDeveloper" = "Leftovers from Programming Tools";
+"cleanDeveloperDetail" = "Only matters if you write apps yourself: interim files that come back by themselves next time.";
 "cleanLogs" = "Old Logs";
-"cleanLogsDetail" = "App logs older than one week.";
+"cleanLogsDetail" = "Notes in which apps record what they did. Nobody needs them after a week.";
 "cleanTemporary" = "Old Temporary Files";
-"cleanTemporaryDetail" = "Temporary files not changed for at least three days.";
+"cleanTemporaryDetail" = "Files apps needed only briefly for a task and have left untouched for at least three days.";
 "cleanTrash" = "Trash";
-"cleanTrashDetail" = "Empties the Trash permanently. Not selected by default.";
+"cleanTrashDetail" = "Empties the Trash. What is in it is then gone for good. Not selected by default.";
 "cleanInstallers" = "Old Installers";
-"cleanInstallersDetail" = "Disk images and installer packages in Downloads older than one month. Not selected by default.";
+"cleanInstallersDetail" = "Installer files in Downloads older than one month. The apps themselves stay installed. Not selected by default.";
 "cleanFailed" = "%@ items could not be removed because they are in use or protected.";
+"cleanNothingLeft" = "All clean: there is nothing to clean up right now.";
 "cleaning" = "Cleaning up …";
 "cleanerRefresh" = "Search Again";
 "cleanSelected" = "Clean Up Selection (%@)";
@@ -201,6 +204,7 @@
 "cleanConfirmMessage" = "The files do not go to the Trash. Apps rebuild their caches when needed. Afterwards the app measures everything again.";
 "cleanConfirmInstallersMessage" = "The files do not go to the Trash. Apps rebuild their caches when needed. Afterwards the app measures everything again. Removed installers have to be downloaded again.";
 "appsNoneUnused" = "All apps were used recently";
+"appsNoneUnusedDetail" = "You use all your apps regularly. There is nothing to tidy up here.";
 "unusedSince" = "Not opened for";
 "daysOption" = "more than %@ days";
 "trashAppTitle" = "Move “%@” to the Trash?";
@@ -231,11 +235,22 @@
 "infoCopies" = "While checking a signature, macOS sometimes places complete copies of an app in folder X. They are not separate programs; macOS creates a new one when needed. Deleting them is safe as long as the app is quit.";
 "paneDuplicates" = "Duplicates";
 "infoDuplicates" = "Large files from 10 MB that exist more than once with the same content. Files of the same size are compared by their content. Nothing is removed here; Show in Finder leads to them.";
-"noDuplicates" = "No Duplicates";
+"noDuplicates" = "No Duplicate Files";
+"duplicateGroupTitle" = "These %@ files are identical – %@ in extra copies";
+"noDuplicatesDetail" = "No large file is stored twice on your Mac. There is nothing to do here.";
 "searchingDuplicates" = "Comparing files …";
 "searchingDuplicatesDetail" = "Files of the same size are read and compared. For large files this takes a moment.";
 "duplicatesTotal" = "%@ files · %@ could be freed";
 "infoVolume" = "Capacity of this volume: what is used, what macOS can free by itself when needed and what is free. External volumes can be measured here.";
+"guideOverview" = "See at a glance what fills your storage and how much space is still free.";
+"guideExplorer" = "The biggest folders come first. Open a folder to look inside.";
+"guideLargeFiles" = "The biggest files on your Mac. Show the ones you no longer need in Finder and delete them there.";
+"guideCleaner" = "Files your Mac does not need. Choose what may go and clean up with one click.";
+"guideDuplicates" = "These files exist more than once with the same content. Keep one of each and delete the others in Finder.";
+"guideApps" = "Apps you have not opened in a long time. Move the ones you no longer need to the Trash.";
+"guideTemporaryFiles" = "A hidden place where macOS keeps files for a short time. It mostly empties itself; only leftover app copies are worth deleting yourself.";
+"guideCopies" = "When macOS checks an app, it sometimes leaves copies of it behind. Once the app is closed, you can delete them safely.";
+"guideVolume" = "How full this drive is, and how much of it macOS can free by itself.";
 "aboutPage" = "About This Page";
 "scanDetails" = "Scan";
 "scanProgress" = "Progress";
