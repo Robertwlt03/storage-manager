@@ -123,7 +123,8 @@ with it.
 
 Before every contribution you run the check chain. It must not report a single error or a single warning. Behind it
 is the script `scripts/check.py`. You run individual steps by their names, for example
-`scripts/check.py tests rules`.
+`scripts/check.py tests rules`, or one of its four groups (`tools`, `code`, `texts`, `safety`), such as
+`scripts/check.py texts`.
 
 ```bash
 make check
@@ -247,7 +248,9 @@ Whether every text exists in all 20 languages and whether every color reaches th
 in the fourth step. How much of the code the tests reach is shown per folder by `make coverage`.
 
 On GitHub the same check runs by itself on every pull request, as described in
-`.github/workflows/checks.yml`. If it reports even a single finding, the pull request turns red, and the
+`.github/workflows/checks.yml`: the four groups side by side, each on a Mac of its own, the app's build beside them,
+and at the end the job `checks`, which is green only when all of them are. If it reports even a single finding, the
+pull request turns red, and the
 contribution has to be improved before it is merged. Whether names are understandable and whether a step is cut
 well, no script can judge, and only the eye can see what the glass looks like: for that, open the changed pages with
 `make demo`. We pay attention to these things when we read a contribution.

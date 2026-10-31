@@ -1,5 +1,6 @@
-# Runs the whole check pipeline on every pull request and on main. A pull request with one finding
-# turns red, so it has to be fixed before it can be merged.
+# Runs the whole check pipeline on every pull request and on main, its groups side by side, each on
+# a Mac of its own. A pull request with one finding turns red, so it has to be fixed before it can
+# be merged.
 name: Checks
 
 on:
@@ -17,7 +18,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
+  steps:
+    # The groups of scripts/check.py (GROUPS), by the same names; a new group goes here too. A
+    # failing group does not stop the others.
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [tools, code, texts, safety]
+    name: Steps (${{ matrix.group }})
     # The app needs macOS 27 and Xcode 27: GitHub's own Mac image for them, on Apple silicon. Each
     # run gets a fresh Mac that GitHub throws away afterwards, so a fork's pull request may run too.
     runs-on: xcode-27
@@ -46,7 +54,37 @@ jobs:
           echo "$SWIFTLINT_CHECKSUM  $archive" | shasum --algorithm 256 --check
           unzip -q "$archive" -d "$RUNNER_TEMP/swiftlint"
           echo "$RUNNER_TEMP/swiftlint" >> "$GITHUB_PATH"
-      - name: The whole check pipeline (every step of scripts/check.py)
-        run: make check
-      - name: Build the app and its icon
-        run: make build
+      - name: The steps of this group
+        env:
+          GROUP: ${{ matrix.group }}
+          PYTHONPATH: scripts
+        run: python scripts/check.py "$GROUP"
+
+  app:
+    name: Build the app and its icon
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: "3.14"
+      - run: make build
+
+  checks:
+    # One result for the rule that protects main: green only when every group and the build are.
+    # It only compares results, so a small Linux machine does and no Mac waits for it.
+    # It also runs when a job failed, but not for a run a newer push replaced.
+    needs: [steps, app]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Every group and the build passed
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Results: $RESULTS"
+          [[ " $RESULTS " != *" failure "* && " $RESULTS " != *" cancelled "* ]]

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """The check pipeline: every rule from CODE_STYLE.md that a tool can check, one step after another.
 
-Start:  make check, or scripts/check.py tests rules for single steps
+Start:  make check, or scripts/check.py tests rules for single steps, or a group such as
+        scripts/check.py texts (GitHub runs the groups side by side)
 Needs:  Xcode 27 and SwiftLint (`brew install swiftlint`)
 It ends with status 1 as soon as one finding is left, so it guards every pull request. Each step
 lives in scripts/checks/; samples.py tests the checks themselves on planted mistakes, and
@@ -61,6 +62,18 @@ STEPS = [
     Step("commits", "Commit messages in the shared form", commits.commit_findings),
     Step("samples", "Every planted mistake found (checks/samples)", samples.sample_findings),
 ]
+# The steps in groups that GitHub runs side by side, each on a Mac of its own; the workflow's
+# matrix lists the same names. Every step belongs to exactly one group, which the line after the
+# table makes sure of.
+GROUPS = {
+    "tools": ["format", "lint", "compiler", "tests", "coverage"],
+    "code": ["rules", "design", "accessibility", "nesting", "duplicates", "architecture",
+             "promises", "disk", "deadcode", "language"],
+    "texts": ["files", "plists", "translations", "guides", "english"],
+    "safety": ["secrets", "security", "scripts", "deadscripts", "output", "commits", "samples"],
+}
+GROUPED_STEPS = sorted(name for names in GROUPS.values() for name in names)
+assert GROUPED_STEPS == sorted(step.name for step in STEPS), "each step belongs to one group"
 # Reports that only run when asked for by name, like `scripts/check.py coverage-report`.
 EXTRA_STEPS = [
     Step("coverage-report", "Test coverage per folder", tools.coverage_report),
@@ -73,14 +86,16 @@ PASSED, FAILED, UNKNOWN_STEP = 0, 1, 2  # the exit status of the script
 
 
 def chosen_steps(names: list[str]) -> list[Step] | None:
-    """The steps named on the command line, every regular step without names, None for a typo."""
+    """The steps or groups named on the command line, every regular step without names, None for
+    a typo."""
     known = {step.name: step for step in STEPS + EXTRA_STEPS}
-    unknown = [name for name in names if name not in known]
+    step_names = [step for name in names for step in GROUPS.get(name, [name])]
+    unknown = [name for name in step_names if name not in known]
     if unknown:
         console.failed(f"Unknown step: {', '.join(unknown)}")
-        console.note(f"Steps: {', '.join(known)}")
+        console.note(f"Steps: {', '.join(known)}; groups: {', '.join(GROUPS)}")
         return None
-    return [known[name] for name in names] if names else STEPS
+    return [known[name] for name in step_names] if names else STEPS
 
 
 def run_steps(steps: list[Step]) -> list[tuple[str, int]]:
