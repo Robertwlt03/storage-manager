@@ -9,6 +9,10 @@ enum SettingsKey {
     static let unusedDays = "unusedDays"
     static let layoutMode = "layoutMode"
     static let lastScanFiles = "lastScanFiles"
+    /// The used space after each full scan, and the folder sizes of the last two (HistoryStore).
+    static let historyPoints = "historyPoints"
+    static let latestFolderSizes = "latestFolderSizes"
+    static let previousFolderSizes = "previousFolderSizes"
     static let launchPane = "pane"  // `open … --args -pane copies`
     static let opensSettingsAtLaunch = "openSettings"  // `open … --args -openSettings YES`
     /// `open … --args -skipAccessSheet YES` (screenshots, tests)

@@ -238,6 +238,12 @@
 "sizeClassesTitle" = "Kuinka suuria tiedostosi ovat?";
 "sizeClassesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
 "figureLargeFilesFrom" = "suurta tiedostoa, vähintään %@";
+"historyTitle" = "Historia";
+"historyCaption" = "Käytetty tila jokaisen täyden mittauksen jälkeen.";
+"historyAfterNextScan" = "Historia näkyy seuraavan täyden mittauksen jälkeen.";
+"grownSince" = "Kasvu %@ lähtien";
+"grownBy" = "+%@";
+"nothingGrown" = "Mikään kansio ei kasvanut yli %@.";
 "bucketValue" = "%@
 %@ tiedostoa";
 "settingsSystemNote" = "Ulkoasu ja yksiköt tulevat Järjestelmäasetuksista.";

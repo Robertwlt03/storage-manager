@@ -238,6 +238,12 @@
 "sizeClassesTitle" = "파일은 얼마나 큰가요?";
 "sizeClassesCaption" = "각 크기 구간이 차지하는 공간과 그 구간에 있는 파일 수입니다. 보통은 작은 파일이 많은 것보다 큰 파일 몇 개가 더 많은 공간을 차지합니다.";
 "figureLargeFilesFrom" = "%@ 이상의 큰 파일";
+"historyTitle" = "기록";
+"historyCaption" = "전체 검사마다 사용된 공간입니다.";
+"historyAfterNextScan" = "다음 전체 검사 후에 기록이 표시됩니다.";
+"grownSince" = "%@ 이후 증가";
+"grownBy" = "+%@";
+"nothingGrown" = "%@ 넘게 늘어난 폴더가 없습니다.";
 "bucketValue" = "%@
 파일 %@개";
 "settingsSystemNote" = "모양과 단위는 시스템 설정을 따릅니다.";

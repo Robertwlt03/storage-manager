@@ -238,6 +238,12 @@
 "sizeClassesTitle" = "Wie groß sind deine Dateien?";
 "sizeClassesCaption" = "Wie viel Platz jede Größenklasse belegt und wie viele Dateien darin liegen. Meist belegen wenige große Dateien mehr als viele kleine.";
 "figureLargeFilesFrom" = "große Dateien ab %@";
+"historyTitle" = "Verlauf";
+"historyCaption" = "Belegter Platz nach jeder vollständigen Messung.";
+"historyAfterNextScan" = "Der Verlauf erscheint nach der nächsten vollständigen Messung.";
+"grownSince" = "Gewachsen seit %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Kein Ordner ist um mehr als %@ gewachsen.";
 "bucketValue" = "%@
 %@ Dateien";
 "settingsSystemNote" = "Erscheinungsbild und Einheiten übernimmt die App aus den Systemeinstellungen.";

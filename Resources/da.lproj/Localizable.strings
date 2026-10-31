@@ -238,6 +238,12 @@
 "sizeClassesTitle" = "Hvor store er dine filer?";
 "sizeClassesCaption" = "Hvor meget plads hver størrelsesklasse fylder, og hvor mange filer der er i den. Nogle få store filer fylder som regel mere end mange små.";
 "figureLargeFilesFrom" = "store filer fra %@";
+"historyTitle" = "Historik";
+"historyCaption" = "Brugt plads efter hver fuld måling.";
+"historyAfterNextScan" = "Historikken vises efter næste fulde måling.";
+"grownSince" = "Vokset siden %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Ingen mappe er vokset med mere end %@.";
 "bucketValue" = "%@
 %@ filer";
 "settingsSystemNote" = "Udseende og enheder kommer fra Systemindstillinger.";

@@ -238,6 +238,12 @@
 "sizeClassesTitle" = "Quelle est la taille de vos fichiers ?";
 "sizeClassesCaption" = "L’espace que prend chaque classe de taille et le nombre de fichiers qu’elle contient. Quelques gros fichiers occupent généralement plus de place que beaucoup de petits.";
 "figureLargeFilesFrom" = "fichiers volumineux à partir de %@";
+"historyTitle" = "Historique";
+"historyCaption" = "Espace utilisé après chaque analyse complète.";
+"historyAfterNextScan" = "L’historique apparaît après la prochaine analyse complète.";
+"grownSince" = "Croissance depuis %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Aucun dossier n’a grossi de plus de %@.";
 "bucketValue" = "%@
 %@ fichiers";
 "settingsSystemNote" = "L’apparence et les unités viennent des Réglages Système.";

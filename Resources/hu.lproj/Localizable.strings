@@ -238,6 +238,12 @@
 "sizeClassesTitle" = "Mekkorák a fájljaid?";
 "sizeClassesCaption" = "Mennyi helyet foglalnak az egyes méretkategóriák, és hány fájl van bennük. Néhány nagy fájl általában több helyet foglal, mint sok kicsi.";
 "figureLargeFilesFrom" = "nagy fájl, legalább %@";
+"historyTitle" = "Előzmények";
+"historyCaption" = "Foglalt hely minden teljes vizsgálat után.";
+"historyAfterNextScan" = "Az előzmények a következő teljes vizsgálat után jelennek meg.";
+"grownSince" = "Növekedés %@ óta";
+"grownBy" = "+%@";
+"nothingGrown" = "Egyik mappa sem nőtt többet, mint %@.";
 "bucketValue" = "%@
 %@ fájl";
 "settingsSystemNote" = "A megjelenést és a mértékegységeket a Rendszerbeállítások adják.";

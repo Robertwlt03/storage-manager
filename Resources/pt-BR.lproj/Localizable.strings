@@ -238,6 +238,12 @@
 "sizeClassesTitle" = "Qual é o tamanho dos seus arquivos?";
 "sizeClassesCaption" = "Quanto espaço cada faixa de tamanho ocupa e quantos arquivos há nela. Poucos arquivos grandes costumam ocupar mais espaço do que muitos pequenos.";
 "figureLargeFilesFrom" = "arquivos grandes a partir de %@";
+"historyTitle" = "Histórico";
+"historyCaption" = "Espaço usado após cada análise completa.";
+"historyAfterNextScan" = "O histórico aparece após a próxima análise completa.";
+"grownSince" = "Crescimento desde %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Nenhuma pasta cresceu mais de %@.";
 "bucketValue" = "%@
 %@ arquivos";
 "settingsSystemNote" = "A aparência e as unidades vêm dos Ajustes do Sistema.";

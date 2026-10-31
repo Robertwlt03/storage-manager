@@ -238,6 +238,12 @@
 "sizeClassesTitle" = "你的文件有多大？";
 "sizeClassesCaption" = "每个大小区间占用多少空间，其中有多少个文件。通常，少数大文件比许多小文件占用的空间更多。";
 "figureLargeFilesFrom" = "%@ 以上的大文件";
+"historyTitle" = "历史";
+"historyCaption" = "每次完整扫描后的已用空间。";
+"historyAfterNextScan" = "下次完整扫描后会显示历史。";
+"grownSince" = "自 %@ 以来增长";
+"grownBy" = "+%@";
+"nothingGrown" = "没有文件夹增长超过 %@。";
 "bucketValue" = "%@
 %@ 个文件";
 "settingsSystemNote" = "外观和单位来自“系统设置”。";
