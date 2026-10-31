@@ -71,10 +71,24 @@ The app also shows two areas you cannot see in Finder: the **temporary area** of
 macOS creates when it checks apps. External drives and USB sticks appear in the sidebar too, as soon as you connect
 them.
 
-Every page has an info button at the top right that explains what the page is for. The app speaks 28 languages,
-including German, English, Spanish, Chinese, Japanese and Hindi, and follows the language of your Mac. If you want
-to use the app in a different language, pick it in the app's settings; it shows after a restart. It also takes
-the light or dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
+Every page has an info button at the top right that explains what the page is for. The app takes the light or
+dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have
+turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
+
+## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Languages
+
+The app speaks 28 languages and follows the language of your Mac. To use it in a different one, pick it in the
+app's settings; it shows after a restart.
+
+<table>
+<tr><td>🇨🇳 Chinese (Simplified)</td><td>🇹🇼 Chinese (Traditional)</td><td>🇨🇿 Czech</td><td>🇩🇰 Danish</td></tr>
+<tr><td>🇳🇱 Dutch</td><td>🇺🇸 English</td><td>🇫🇮 Finnish</td><td>🇫🇷 French</td></tr>
+<tr><td>🇩🇪 German</td><td>🇬🇷 Greek</td><td>🇮🇳 Hindi</td><td>🇭🇺 Hungarian</td></tr>
+<tr><td>🇮🇩 Indonesian</td><td>🇮🇹 Italian</td><td>🇯🇵 Japanese</td><td>🇰🇷 Korean</td></tr>
+<tr><td>🇳🇴 Norwegian</td><td>🇵🇱 Polish</td><td>🇧🇷 Portuguese (Brazil)</td><td>🇵🇹 Portuguese (Portugal)</td></tr>
+<tr><td>🇷🇴 Romanian</td><td>🇷🇺 Russian</td><td>🇪🇸 Spanish</td><td>🇸🇪 Swedish</td></tr>
+<tr><td>🇹🇭 Thai</td><td>🇹🇷 Turkish</td><td>🇺🇦 Ukrainian</td><td>🇻🇳 Vietnamese</td></tr>
+</table>
 
 ## <img src="assets/icons/install.svg" height="33" align="absmiddle" alt="">Installing
 
