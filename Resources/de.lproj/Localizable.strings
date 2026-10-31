@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Beim Start automatisch messen";
+"exportReport" = "Bericht exportieren …";
+"reportTitle" = "Speicherbericht vom %@";
+"reportFileName" = "Speicherbericht";
 "extraFolders" = "Zusätzliche Ordner";
 "none" = "Keine";
 "add" = "Hinzufügen";

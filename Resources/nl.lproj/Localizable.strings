@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Automatisch scannen bij het openen";
+"exportReport" = "Rapport exporteren …";
+"reportTitle" = "Opslagrapport van %@";
+"reportFileName" = "Opslagrapport";
 "extraFolders" = "Extra mappen";
 "none" = "Geen";
 "add" = "Voeg toe";

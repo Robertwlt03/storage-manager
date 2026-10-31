@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mierz automatycznie przy uruchomieniu";
+"exportReport" = "Eksportuj raport …";
+"reportTitle" = "Raport miejsca z %@";
+"reportFileName" = "Raport miejsca";
 "extraFolders" = "Dodatkowe foldery";
 "none" = "Brak";
 "add" = "Dodaj";

@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Pindai otomatis saat dibuka";
+"exportReport" = "Ekspor Laporan …";
+"reportTitle" = "Laporan penyimpanan dari %@";
+"reportFileName" = "Laporan Penyimpanan";
 "extraFolders" = "Folder Tambahan";
 "none" = "Tidak Ada";
 "add" = "Tambah";

@@ -36,6 +36,7 @@ enum AppSettings {
 
     static var scansAutomatically: Bool { defaults.bool(forKey: SettingsKey.scansAutomatically) }
     static var largeFileMegabytes: Int { defaults.integer(forKey: SettingsKey.largeFileMegabytes) }
+    static var unusedDays: Int { defaults.integer(forKey: SettingsKey.unusedDays) }
     static var launchPane: Pane? {
         defaults.string(forKey: SettingsKey.launchPane).flatMap(Pane.init(launchKey:))
     }

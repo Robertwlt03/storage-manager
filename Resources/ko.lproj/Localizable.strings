@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "실행할 때 자동으로 검사";
+"exportReport" = "보고서 내보내기 …";
+"reportTitle" = "%@ 저장 공간 보고서";
+"reportFileName" = "저장 공간 보고서";
 "extraFolders" = "추가 폴더";
 "none" = "없음";
 "add" = "추가";

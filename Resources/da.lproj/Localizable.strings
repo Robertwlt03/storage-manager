@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mål automatisk ved start";
+"exportReport" = "Eksportér rapport …";
+"reportTitle" = "Lagerrapport fra %@";
+"reportFileName" = "Lagerrapport";
 "extraFolders" = "Yderligere mapper";
 "none" = "Ingen";
 "add" = "Tilføj";

@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Scan automatically at launch";
+"exportReport" = "Export Report …";
+"reportTitle" = "Storage report from %@";
+"reportFileName" = "Storage Report";
 "extraFolders" = "Additional Folders";
 "none" = "None";
 "add" = "Add";

@@ -319,6 +319,27 @@ extension AppModel {
         return (freed, failed)
     }
 
+    /// The storage in a few sentences, from the last scan and the clean-up suggestions.
+    func summary(unusedDays: Int) -> String {
+        let cleanableBytes = cleanItems?.reduce(0) { total, item in total + item.bytes }
+        let copyBytes = copyGroups.reduce(0) { total, group in total + group.node.bytes }
+        let unusedApps = AppUsageService.unused(apps, days: unusedDays)
+        let facts = SummaryService.Input(
+            volume: startupVolume, categories: isScanning ? [] : categories,
+            cleanableBytes: cleanableBytes, copyBytes: copyBytes, unusedAppCount: unusedApps.count)
+        return SummaryService.text(facts)
+    }
+
+    /// The last scan as a report, with the large files from the threshold chosen on their page.
+    func report() -> String {
+        let minimumBytes = LargeFileThreshold.bytes(AppSettings.largeFileMegabytes)
+        return ReportService.text(
+            .init(
+                date: lastScan ?? Date(), summary: summary(unusedDays: AppSettings.unusedDays),
+                categories: categories,
+                largeFiles: SearchService.largeFiles(atLeast: minimumBytes, in: root)))
+    }
+
     func refreshVolumes() {
         guard !isDemo else { return }
         volumes = VolumeService.all()

@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Analizza automaticamente all’avvio";
+"exportReport" = "Esporta rapporto …";
+"reportTitle" = "Rapporto spazio del %@";
+"reportFileName" = "Rapporto spazio";
 "extraFolders" = "Cartelle aggiuntive";
 "none" = "Nessuna";
 "add" = "Aggiungi";

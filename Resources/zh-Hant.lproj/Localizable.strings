@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "啟動時自動掃描";
+"exportReport" = "輸出報告 …";
+"reportTitle" = "%@ 的儲存空間報告";
+"reportFileName" = "儲存空間報告";
 "extraFolders" = "其他檔案夾";
 "none" = "無";
 "add" = "加入";

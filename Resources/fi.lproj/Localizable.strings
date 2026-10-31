@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Mittaa automaattisesti käynnistyksessä";
+"exportReport" = "Vie raportti …";
+"reportTitle" = "Tallennustilaraportti %@";
+"reportFileName" = "Tallennustilaraportti";
 "extraFolders" = "Lisäkansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";

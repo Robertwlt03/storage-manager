@@ -158,6 +158,9 @@
 
 /* Settings */
 "autoScan" = "Scanează automat la pornire";
+"exportReport" = "Exportă raportul …";
+"reportTitle" = "Raport de stocare din %@";
+"reportFileName" = "Raport de stocare";
 "extraFolders" = "Dosare suplimentare";
 "none" = "Niciunul";
 "add" = "Adaugă";
