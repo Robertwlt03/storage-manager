@@ -161,6 +161,7 @@
 "extraFolders" = "Ytterligare mappar";
 "showInMenuBar" = "Visa ledigt utrymme i menyraden";
 "openApp" = "Öppna %@";
+"lowSpaceWarning" = "Utrymmet håller på att ta slut. ”Rensa upp” och ”Stora filer” visar vad som kan tas bort.";
 "none" = "Inga";
 "add" = "Lägg till";
 "remove" = "Ta bort";

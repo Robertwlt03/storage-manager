@@ -161,6 +161,7 @@
 "extraFolders" = "Zusätzliche Ordner";
 "showInMenuBar" = "Freien Platz in der Menüleiste zeigen";
 "openApp" = "%@ öffnen";
+"lowSpaceWarning" = "Der Platz wird knapp. „Aufräumen“ und „Große Dateien“ zeigen, was weg kann.";
 "none" = "Keine";
 "add" = "Hinzufügen";
 "remove" = "Entfernen";

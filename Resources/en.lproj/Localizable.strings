@@ -161,6 +161,7 @@
 "extraFolders" = "Additional Folders";
 "showInMenuBar" = "Show free space in the menu bar";
 "openApp" = "Open %@";
+"lowSpaceWarning" = "Space is running low. Clean Up and Large Files show what can go.";
 "none" = "None";
 "add" = "Add";
 "remove" = "Remove";

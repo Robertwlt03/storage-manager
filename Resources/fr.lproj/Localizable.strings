@@ -161,6 +161,7 @@
 "extraFolders" = "Dossiers supplémentaires";
 "showInMenuBar" = "Afficher l’espace libre dans la barre des menus";
 "openApp" = "Ouvrir %@";
+"lowSpaceWarning" = "L’espace se fait rare. « Nettoyer » et « Fichiers volumineux » montrent ce qui peut partir.";
 "none" = "Aucun";
 "add" = "Ajouter";
 "remove" = "Supprimer";

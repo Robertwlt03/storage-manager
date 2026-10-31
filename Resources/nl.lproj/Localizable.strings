@@ -161,6 +161,7 @@
 "extraFolders" = "Extra mappen";
 "showInMenuBar" = "Toon vrije ruimte in de menubalk";
 "openApp" = "Open %@";
+"lowSpaceWarning" = "De ruimte raakt op. ‘Opruimen’ en ‘Grote bestanden’ laten zien wat weg kan.";
 "none" = "Geen";
 "add" = "Voeg toe";
 "remove" = "Verwijder";

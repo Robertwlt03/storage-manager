@@ -161,6 +161,7 @@
 "extraFolders" = "Dosare suplimentare";
 "showInMenuBar" = "Afișează spațiul liber în bara de meniu";
 "openApp" = "Deschide %@";
+"lowSpaceWarning" = "Spațiul se termină. „Curățare” și „Fișiere mari” arată ce poate fi șters.";
 "none" = "Niciunul";
 "add" = "Adaugă";
 "remove" = "Elimină";

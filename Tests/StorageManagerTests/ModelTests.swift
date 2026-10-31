@@ -14,6 +14,22 @@ struct ModelTests {
         #expect(Set(preselected) == Set(CleanKind.allCases).subtracting([.trash]))
     }
 
+    @Test("A volume runs low below a share of its capacity, but never above the fixed amount")
+    func lowSpace() {
+        let total = 100 * Self.gigabyte
+        let limit = Int64(Double(total) * LowSpace.warningShare)
+        func volume(available: Int64, total: Int64 = total) -> VolumeInformation {
+            VolumeInformation(
+                path: "/", name: "Disk", format: "APFS", totalBytes: total, freeBytes: available,
+                availableBytes: available, isInternal: true, isRoot: true)
+        }
+        #expect(volume(available: limit - 1).isLow)
+        #expect(!volume(available: limit).isLow)
+        let bigDisk = LowSpace.largestWarningBytes * 100
+        #expect(!volume(available: LowSpace.largestWarningBytes, total: bigDisk).isLow)
+        #expect(volume(available: LowSpace.largestWarningBytes - 1, total: bigDisk).isLow)
+    }
+
     @Test("Used and purgeable space never become negative")
     func volumeSpace() {
         let volume = VolumeInformation(

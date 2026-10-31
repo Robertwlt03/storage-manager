@@ -161,6 +161,7 @@
 "extraFolders" = "Dodatkowe foldery";
 "showInMenuBar" = "Pokazuj wolne miejsce na pasku menu";
 "openApp" = "Otwórz %@";
+"lowSpaceWarning" = "Kończy się miejsce. „Porządkowanie” i „Duże pliki” pokazują, co można usunąć.";
 "none" = "Brak";
 "add" = "Dodaj";
 "remove" = "Usuń";

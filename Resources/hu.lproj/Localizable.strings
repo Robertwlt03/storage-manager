@@ -161,6 +161,7 @@
 "extraFolders" = "További mappák";
 "showInMenuBar" = "Szabad hely mutatása a menüsoron";
 "openApp" = "%@ megnyitása";
+"lowSpaceWarning" = "Fogy a hely. A „Takarítás” és a „Nagy fájlok” megmutatja, mi mehet.";
 "none" = "Nincs";
 "add" = "Hozzáadás";
 "remove" = "Eltávolítás";

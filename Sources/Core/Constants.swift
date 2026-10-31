@@ -12,6 +12,13 @@ nonisolated enum ScanLimits {
     static let maximumCachedImages = 2_000
 }
 
+/// A volume runs low below this share of its capacity, but never above the fixed amount: on a big
+/// disk a tenth is still plenty.
+nonisolated enum LowSpace {
+    static let warningShare = 0.1
+    static let largestWarningBytes: Int64 = 25_000_000_000
+}
+
 /// What the cleaner may remove and how old things must be.
 nonisolated enum CleanUpRules {
     static let temporaryMinimumAgeDays = 3

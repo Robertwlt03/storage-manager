@@ -161,6 +161,7 @@
 "extraFolders" = "其他文件夹";
 "showInMenuBar" = "在菜单栏中显示可用空间";
 "openApp" = "打开 %@";
+"lowSpaceWarning" = "空间即将不足。“清理”和“大文件”会显示可以删除的内容。";
 "none" = "无";
 "add" = "添加";
 "remove" = "移除";

@@ -161,6 +161,7 @@
 "extraFolders" = "Cartelle aggiuntive";
 "showInMenuBar" = "Mostra lo spazio libero nella barra dei menu";
 "openApp" = "Apri %@";
+"lowSpaceWarning" = "Lo spazio sta finendo. «Pulisci» e «File di grandi dimensioni» mostrano cosa si può togliere.";
 "none" = "Nessuna";
 "add" = "Aggiungi";
 "remove" = "Rimuovi";

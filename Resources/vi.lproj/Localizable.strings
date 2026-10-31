@@ -161,6 +161,7 @@
 "extraFolders" = "Thư mục bổ sung";
 "showInMenuBar" = "Hiện dung lượng trống trên thanh menu";
 "openApp" = "Mở %@";
+"lowSpaceWarning" = "Sắp hết dung lượng. “Dọn dẹp” và “Tệp lớn” cho thấy những gì có thể xóa.";
 "none" = "Không có";
 "add" = "Thêm";
 "remove" = "Xóa";
