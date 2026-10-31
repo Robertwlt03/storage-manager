@@ -75,6 +75,9 @@ Every page has an info button at the top right that explains what the page is fo
 dark appearance from your Mac, and it uses Liquid Glass. New content appears with gentle motion, and if you have
 turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
 
+A widget shows the available space on your desktop or in Notification Center. Add it like any other widget: click the
+desktop with the right mouse button, choose Edit Widgets and look for Storage Manager.
+
 ## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Languages
 
 The app speaks 28 languages and follows the language of your Mac. To use it in a different one, pick it in the
@@ -212,6 +215,7 @@ The code is split into small parts, and every file has exactly one job:
 | `Sources/Core` | Constants and fixed choices such as pages and settings. |
 | `Sources/Localization` and `Resources` | All texts in 28 languages, with German and English as the source. |
 | `Sources/Diagnostics` | A self test with real data and a stress test for the running app. |
+| `Widget` | The widget for the desktop and Notification Center, a target of its own that the build puts into the app. |
 | `Tests` | The tests for the folder tree, categories, search, design, contrast and translations. |
 | `scripts` | The code inspection, your own signing certificate and building the DMG. |
 

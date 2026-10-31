@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "Spazio libero";
+"widgetDescription" = "Mostra quanto spazio è disponibile sul Mac.";
+"widgetAvailable" = "disponibili";
+"widgetOfTotal" = "su %@";
+"widgetUnreadable" = "Impossibile leggere lo spazio libero.";

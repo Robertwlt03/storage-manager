@@ -16,8 +16,12 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "StorageManager", path: "Sources", swiftSettings: mainActorByDefault),
+        // The widget extension; build.py puts it into the app as PlugIns/StorageWidget.appex.
+        .executableTarget(
+            name: "StorageWidget", path: "Widget", exclude: ["Info.plist", "Widget.entitlements"],
+            swiftSettings: mainActorByDefault),
         .testTarget(
-            name: "StorageManagerTests", dependencies: ["StorageManager"],
+            name: "StorageManagerTests", dependencies: ["StorageManager", "StorageWidget"],
             path: "Tests/StorageManagerTests", swiftSettings: mainActorByDefault),
     ],
     swiftLanguageModes: [.v6]

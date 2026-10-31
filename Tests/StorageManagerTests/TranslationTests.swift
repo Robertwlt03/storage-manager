@@ -12,9 +12,14 @@ struct TranslationTests {
         .deletingLastPathComponent()
         .appendingPathComponent("Resources")
 
-    private static func texts(of language: AppLanguage) -> [String: String]? {
+    private static let appTable = "Localizable"
+    private static let widgetTable = "Widget"
+
+    private static func texts(of language: AppLanguage, table: String = appTable)
+        -> [String: String]?
+    {
         let file = resources.appendingPathComponent(
-            language.rawValue + ".lproj/Localizable.strings")
+            language.rawValue + ".lproj/" + table + ".strings")
         return NSDictionary(contentsOf: file) as? [String: String]
     }
 
@@ -30,6 +35,20 @@ struct TranslationTests {
             let translatedText = translated[key] ?? ""
             #expect(
                 Self.placeholderCount(translatedText) == Self.placeholderCount(englishText),
+                "\(language.rawValue): \(key)")
+        }
+    }
+
+    @Test(
+        "The widget's texts have the same keys and placeholders in every language",
+        arguments: AppLanguage.allCases)
+    func widgetTexts(language: AppLanguage) throws {
+        let english = try #require(Self.texts(of: .english, table: Self.widgetTable))
+        let translated = try #require(Self.texts(of: language, table: Self.widgetTable))
+        #expect(Set(translated.keys) == Set(english.keys), "\(language.rawValue)")
+        for (key, englishText) in english {
+            #expect(
+                Self.placeholderCount(translated[key] ?? "") == Self.placeholderCount(englishText),
                 "\(language.rawValue): \(key)")
         }
     }
