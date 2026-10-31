@@ -8,6 +8,9 @@ import Observation
     private static let siriMarker = "siri"
 
     private(set) var isSpeaking = false
+    /// False when macOS has no voice for the app's language; then nothing is
+    /// offered for reading aloud, as another language's voice would garble the text.
+    let canSpeak = bestVoice(for: Localizer.shared.locale) != nil
     private let synthesizer = AVSpeechSynthesizer()
 
     override private init() {

@@ -23,7 +23,7 @@ struct SummaryCard: View {
         UI.Card(TextKey.summaryTitle.translated) {
             VStack(alignment: .leading, spacing: Space.item) {
                 summaryText(summary, isLoading: isLoading)
-                readAloudButton(summary).disabled(isLoading)
+                if speech.canSpeak { readAloudButton(summary).disabled(isLoading) }
             }
             .padding(.vertical, Space.row)
         }
