@@ -119,7 +119,7 @@
 "freed" = "Ruang yang benar-benar dikosongkan: %@";
 "deleteError" = "Tidak semua dapat dihapus: %@";
 "quitToDelete" = "Tutup %@ dengan ⌘Q untuk menghapus.";
-"openInExplorer" = "Buka di Explorer";
+"openInExplorer" = "Tampilkan di Folder";
 "deleteAll" = "Hapus Semua Salinan …";
 "deleteTitle" = "Hapus %@ salinan %@?";
 "deleteForever" = "Hapus Permanen";

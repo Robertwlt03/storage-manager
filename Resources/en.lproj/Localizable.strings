@@ -119,7 +119,7 @@
 "freed" = "Space actually freed: %@";
 "deleteError" = "Not everything could be deleted: %@";
 "quitToDelete" = "Quit %@ with ⌘Q to delete.";
-"openInExplorer" = "Open in Explorer";
+"openInExplorer" = "Show in Folders";
 "deleteAll" = "Delete All Copies …";
 "deleteTitle" = "Delete %@ copies of %@?";
 "deleteForever" = "Delete Permanently";

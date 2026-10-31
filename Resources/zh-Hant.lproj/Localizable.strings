@@ -119,7 +119,7 @@
 "freed" = "實際釋放的空間：%@";
 "deleteError" = "無法刪除全部內容：%@";
 "quitToDelete" = "請按下 ⌘Q 結束「%@」後再刪除。";
-"openInExplorer" = "在瀏覽器中打開";
+"openInExplorer" = "在「檔案夾」中顯示";
 "deleteAll" = "刪除所有拷貝⋯";
 "deleteTitle" = "要刪除 %@ 個「%@」的拷貝嗎？";
 "deleteForever" = "永久刪除";

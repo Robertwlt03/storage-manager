@@ -119,7 +119,7 @@
 "freed" = "실제로 확보된 공간: %@";
 "deleteError" = "일부 항목을 삭제하지 못했습니다: %@";
 "quitToDelete" = "삭제하려면 %@을(를) ⌘Q로 종료하십시오.";
-"openInExplorer" = "탐색기에서 열기";
+"openInExplorer" = "폴더에서 보기";
 "deleteAll" = "모든 사본 삭제…";
 "deleteTitle" = "%@개의 “%@” 사본을 삭제하시겠습니까?";
 "deleteForever" = "영구 삭제";

@@ -119,7 +119,7 @@
 "freed" = "Espacio realmente liberado: %@";
 "deleteError" = "No se pudo eliminar todo: %@";
 "quitToDelete" = "Cierra %@ con ⌘Q para poder eliminar.";
-"openInExplorer" = "Abrir en el explorador";
+"openInExplorer" = "Mostrar en Carpetas";
 "deleteAll" = "Eliminar todas las copias …";
 "deleteTitle" = "¿Eliminar %@ copias de %@?";
 "deleteForever" = "Eliminar definitivamente";

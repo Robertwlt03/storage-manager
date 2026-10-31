@@ -119,7 +119,7 @@
 "freed" = "Spațiu eliberat efectiv: %@";
 "deleteError" = "Nu s-a putut șterge totul: %@";
 "quitToDelete" = "Închide %@ cu ⌘Q pentru a șterge.";
-"openInExplorer" = "Deschide în Explorer";
+"openInExplorer" = "Afișează în Dosare";
 "deleteAll" = "Șterge toate copiile …";
 "deleteTitle" = "Ștergi %@ copii ale aplicației %@?";
 "deleteForever" = "Șterge definitiv";

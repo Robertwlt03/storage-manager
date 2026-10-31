@@ -119,7 +119,7 @@
 "freed" = "Faktisk frigjort: %@";
 "deleteError" = "Det hele kunne ikke slettes: %@";
 "quitToDelete" = "Afslut %@ med ⌘Q for at kunne slette.";
-"openInExplorer" = "Åbn i Lagringsudforsker";
+"openInExplorer" = "Vis i Mapper";
 "deleteAll" = "Slet alle kopier …";
 "deleteTitle" = "Vil du slette %@ kopier af %@?";
 "deleteForever" = "Slet permanent";

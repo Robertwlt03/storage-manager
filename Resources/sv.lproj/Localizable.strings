@@ -119,7 +119,7 @@
 "freed" = "Faktiskt frigjort utrymme: %@";
 "deleteError" = "Allt kunde inte tas bort: %@";
 "quitToDelete" = "Avsluta %@ med ⌘Q för att kunna ta bort.";
-"openInExplorer" = "Öppna i Lagringsutforskaren";
+"openInExplorer" = "Visa i Mappar";
 "deleteAll" = "Ta bort alla kopior …";
 "deleteTitle" = "Ta bort %@ kopior av %@?";
 "deleteForever" = "Ta bort permanent";
