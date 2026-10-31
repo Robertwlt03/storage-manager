@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Pindai otomatis saat dibuka";
 "extraFolders" = "Folder Tambahan";
+"excludedFolders" = "Folder yang Dikecualikan";
 "none" = "Tidak Ada";
 "add" = "Tambah";
 "remove" = "Hapus";

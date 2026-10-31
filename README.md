@@ -58,7 +58,8 @@ caches.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
 all files above a size you choose yourself, and **Search** finds folders and files by name. You can also show each of
-these lists as a grid of large tiles.
+these lists as a grid of large tiles. In the settings you can add folders to measure, such as an external project
+folder, and exclude folders that the app should neither measure nor show nor clean up.
 
 In **Clean Up** you remove files your system barely needs. These include caches that apps rebuild on their own, old
 logs, old temporary files and, if you want, the Trash. Apps that are currently running, and macOS itself, are left

@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Automatikus vizsgálat indításkor";
 "extraFolders" = "További mappák";
+"excludedFolders" = "Kizárt mappák";
 "none" = "Nincs";
 "add" = "Hozzáadás";
 "remove" = "Eltávolítás";

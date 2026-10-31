@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Analizza automaticamente all’avvio";
 "extraFolders" = "Cartelle aggiuntive";
+"excludedFolders" = "Cartelle escluse";
 "none" = "Nessuna";
 "add" = "Aggiungi";
 "remove" = "Rimuovi";

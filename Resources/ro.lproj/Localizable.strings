@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Scanează automat la pornire";
 "extraFolders" = "Dosare suplimentare";
+"excludedFolders" = "Dosare excluse";
 "none" = "Niciunul";
 "add" = "Adaugă";
 "remove" = "Elimină";

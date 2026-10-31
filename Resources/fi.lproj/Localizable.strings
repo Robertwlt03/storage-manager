@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Mittaa automaattisesti käynnistyksessä";
 "extraFolders" = "Lisäkansiot";
+"excludedFolders" = "Ohitettavat kansiot";
 "none" = "Ei mitään";
 "add" = "Lisää";
 "remove" = "Poista";

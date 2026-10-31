@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "啟動時自動掃描";
 "extraFolders" = "其他檔案夾";
+"excludedFolders" = "排除的檔案夾";
 "none" = "無";
 "add" = "加入";
 "remove" = "移除";

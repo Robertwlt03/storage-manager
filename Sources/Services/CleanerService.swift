@@ -15,11 +15,14 @@ nonisolated enum CleanerService {
         "~/.npm/_cacache", "~/.gradle/caches", "~/.cache",
     ]
 
-    /// What could go, per kind; the sizes come from the scanned tree, so there is no second walk.
+    /// What could go, per kind, without the excluded folders and what lies in them; the sizes come
+    /// from the scanned tree, so there is no second walk.
     static func removablePaths(
-        of kinds: [CleanKind] = CleanKind.allCases
+        of kinds: [CleanKind] = CleanKind.allCases, excluding excluded: Set<String> = []
     ) -> [(kind: CleanKind, paths: [String])] {
-        kinds.map { kind in (kind, paths(for: kind)) }
+        kinds.map { kind in
+            (kind, paths(for: kind).filter { path in !ScanService.liesIn(path, anyOf: excluded) })
+        }
     }
 
     /// Removes what is listed and still removable now: an app may have started or a temporary file

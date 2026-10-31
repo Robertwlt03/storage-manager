@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Mål automatisk ved start";
 "extraFolders" = "Yderligere mapper";
+"excludedFolders" = "Udelukkede mapper";
 "none" = "Ingen";
 "add" = "Tilføj";
 "remove" = "Fjern";

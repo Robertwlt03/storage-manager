@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "लॉन्च पर अपने-आप स्कैन करें";
 "extraFolders" = "अतिरिक्त फ़ोल्डर";
+"excludedFolders" = "बाहर रखे गए फ़ोल्डर";
 "none" = "कोई नहीं";
 "add" = "जोड़ें";
 "remove" = "हटाएँ";

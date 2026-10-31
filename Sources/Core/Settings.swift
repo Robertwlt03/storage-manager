@@ -5,6 +5,7 @@ import AppKit
 enum SettingsKey {
     static let scansAutomatically = "autoScan"
     static let extraFolders = "extraFolders"
+    static let excludedFolders = "excludedFolders"
     static let largeFileMegabytes = "largeFileMB"
     static let unusedDays = "unusedDays"
     static let layoutMode = "layoutMode"
@@ -64,6 +65,9 @@ enum AppSettings {
     static func store(_ folders: [String]) -> String { folders.joined(separator: "\n") }
     static var extraFolders: [String] {
         folders(from: defaults.string(forKey: SettingsKey.extraFolders) ?? "")
+    }
+    static var excludedFolders: [String] {
+        folders(from: defaults.string(forKey: SettingsKey.excludedFolders) ?? "")
     }
 }
 

@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Açılışta otomatik tara";
 "extraFolders" = "Ek Klasörler";
+"excludedFolders" = "Hariç Tutulan Klasörler";
 "none" = "Yok";
 "add" = "Ekle";
 "remove" = "Kaldır";

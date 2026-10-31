@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Tự động quét khi mở";
 "extraFolders" = "Thư mục bổ sung";
+"excludedFolders" = "Thư mục loại trừ";
 "none" = "Không có";
 "add" = "Thêm";
 "remove" = "Xóa";

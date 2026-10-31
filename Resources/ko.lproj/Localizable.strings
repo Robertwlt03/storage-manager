@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "실행할 때 자동으로 검사";
 "extraFolders" = "추가 폴더";
+"excludedFolders" = "제외할 폴더";
 "none" = "없음";
 "add" = "추가";
 "remove" = "제거";

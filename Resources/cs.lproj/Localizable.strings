@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Skenovat automaticky při spuštění";
 "extraFolders" = "Další složky";
+"excludedFolders" = "Vyloučené složky";
 "none" = "Žádné";
 "add" = "Přidat";
 "remove" = "Odebrat";

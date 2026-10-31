@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Automatisch scannen bij het openen";
 "extraFolders" = "Extra mappen";
+"excludedFolders" = "Uitgesloten mappen";
 "none" = "Geen";
 "add" = "Voeg toe";
 "remove" = "Verwijder";

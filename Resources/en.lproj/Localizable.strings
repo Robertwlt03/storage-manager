@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Scan automatically at launch";
 "extraFolders" = "Additional Folders";
+"excludedFolders" = "Excluded Folders";
 "none" = "None";
 "add" = "Add";
 "remove" = "Remove";

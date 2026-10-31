@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Mät automatiskt vid start";
 "extraFolders" = "Ytterligare mappar";
+"excludedFolders" = "Undantagna mappar";
 "none" = "Inga";
 "add" = "Lägg till";
 "remove" = "Ta bort";

@@ -159,6 +159,7 @@
 /* Settings */
 "autoScan" = "Mierz automatycznie przy uruchomieniu";
 "extraFolders" = "Dodatkowe foldery";
+"excludedFolders" = "Wykluczone foldery";
 "none" = "Brak";
 "add" = "Dodaj";
 "remove" = "Usuń";
