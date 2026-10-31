@@ -174,7 +174,14 @@ from a fork, you start from this repository's `main` (`git remote add upstream <
    icon for what changes, why, the issue, the checks and the screenshots, and the footer. Fill in every section and
    remove the hints; `Closes #1239` under "Issue" closes the issue once the pull request is merged.
 4. Merge once the checks are green, with "Create a merge commit" rather than "Squash and merge", so every commit
-   keeps its own message.
+   keeps its own message. When `main` has moved on meanwhile, bring the branch up to date by putting its commits on
+   top of `main` instead of merging `main` into it, so the history stays a straight line with one merge per pull
+   request; the branch was pushed already, so it goes up again with `--force-with-lease`, which only replaces it if
+   nobody else has pushed to it:
+   ```bash
+   git fetch && git rebase origin/main && git push --force-with-lease
+   ```
+   On GitHub, choose "Update with rebase" in the menu beside "Update branch"; the plain button merges `main` in.
 5. Then delete the branch on GitHub and on your Mac, and bring `main` up to date:
    ```bash
    git switch main && git pull && git branch -d 1239-scan-cancel && git fetch --prune
