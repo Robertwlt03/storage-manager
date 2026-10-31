@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "Tilapäiset tiedostot, joita ei ole muutettu vähintään kolmeen päivään.";
 "cleanTrash" = "Roskakori";
 "cleanTrashDetail" = "Tyhjentää roskakorin pysyvästi. Ei valittuna oletuksena.";
+"cleanInstallers" = "Vanhat asennustiedostot";
+"cleanInstallersDetail" = "Yli kuukauden vanhat levykuvat ja asennuspaketit Latauksissa. Ei valittuna oletuksena.";
 "cleanFailed" = "%@ kohdetta ei voitu poistaa, koska ne ovat käytössä tai suojattuja.";
 "cleaning" = "Siivotaan …";
 "cleanerRefresh" = "Hae uudelleen";
 "cleanSelected" = "Siivoa valinta (%@)";
 "cleanConfirmTitle" = "Poistetaanko %@ pysyvästi?";
 "cleanConfirmMessage" = "Tiedostot eivät siirry roskakoriin. Apit luovat välimuistinsa tarvittaessa uudelleen. Sen jälkeen app mittaa kaiken uudelleen.";
+"cleanConfirmInstallersMessage" = "Tiedostot eivät siirry roskakoriin. Apit luovat välimuistinsa tarvittaessa uudelleen. Sen jälkeen app mittaa kaiken uudelleen. Poistetut asennustiedostot on ladattava uudelleen.";
 "appsNoneUnused" = "Kaikkia appeja on käytetty äskettäin";
 "unusedSince" = "Ei avattu";
 "daysOption" = "yli %@ päivään";

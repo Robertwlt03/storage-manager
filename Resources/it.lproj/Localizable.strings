@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "File temporanei non modificati da almeno tre giorni.";
 "cleanTrash" = "Cestino";
 "cleanTrashDetail" = "Svuota il Cestino in modo definitivo. Non selezionato per impostazione predefinita.";
+"cleanInstallers" = "Vecchi installer";
+"cleanInstallersDetail" = "Immagini disco e pacchetti di installazione in Download più vecchi di un mese. Non selezionato per impostazione predefinita.";
 "cleanFailed" = "Non è stato possibile rimuovere %@ elementi perché sono in uso o protetti.";
 "cleaning" = "Pulizia in corso …";
 "cleanerRefresh" = "Cerca di nuovo";
 "cleanSelected" = "Pulisci la selezione (%@)";
 "cleanConfirmTitle" = "Rimuovere %@ definitivamente?";
 "cleanConfirmMessage" = "I file non vanno nel Cestino. Le app ricreano le loro cache quando serve. Dopo, l’app analizza di nuovo tutto.";
+"cleanConfirmInstallersMessage" = "I file non vanno nel Cestino. Le app ricreano le loro cache quando serve. Dopo, l’app analizza di nuovo tutto. Gli installer rimossi dovranno essere scaricati di nuovo.";
 "appsNoneUnused" = "Tutte le app sono state usate di recente";
 "unusedSince" = "Non aperta da";
 "daysOption" = "più di %@ giorni";

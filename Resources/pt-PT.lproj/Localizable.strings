@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "Ficheiros temporários sem alterações há pelo menos três dias.";
 "cleanTrash" = "Lixo";
 "cleanTrashDetail" = "Esvazia o Lixo permanentemente. Não selecionado por omissão.";
+"cleanInstallers" = "Instaladores antigos";
+"cleanInstallersDetail" = "Imagens de disco e pacotes de instalação em Descargas com mais de um mês. Não selecionado por omissão.";
 "cleanFailed" = "Não foi possível remover %@ itens porque estão em uso ou protegidos.";
 "cleaning" = "A limpar …";
 "cleanerRefresh" = "Procurar novamente";
 "cleanSelected" = "Limpar seleção (%@)";
 "cleanConfirmTitle" = "Remover %@ permanentemente?";
 "cleanConfirmMessage" = "Os ficheiros não vão para o Lixo. As apps recriam as caches quando necessário. Depois, a app volta a medir tudo.";
+"cleanConfirmInstallersMessage" = "Os ficheiros não vão para o Lixo. As apps recriam as caches quando necessário. Depois, a app volta a medir tudo. Os instaladores removidos terão de ser transferidos novamente.";
 "appsNoneUnused" = "Todas as apps foram utilizadas recentemente";
 "unusedSince" = "Sem abrir há";
 "daysOption" = "mais de %@ dias";

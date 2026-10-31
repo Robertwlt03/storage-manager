@@ -94,6 +94,16 @@ struct ServiceTests {
         #expect(unused.map(\.name) == ["Oldest", "Old"])
     }
 
+    @Test("Disk images and installer packages count as installers, whatever the case")
+    func installers() {
+        for name in ["Tool.dmg", "Setup.PKG", "Old.mpkg", "Xcode.xip"] {
+            #expect(CleanerService.isInstaller("/Downloads/" + name), "\(name)")
+        }
+        for name in ["Photo.jpg", "Notes.dmg.txt", "dmg"] {
+            #expect(!CleanerService.isInstaller("/Downloads/" + name), "\(name)")
+        }
+    }
+
     @Test("Without data the summary says so; with data it mentions only what there is to say")
     func summary() {
         let empty = SummaryService.Input(

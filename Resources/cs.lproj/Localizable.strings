@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "Dočasné soubory, které se nezměnily alespoň tři dny.";
 "cleanTrash" = "Koš";
 "cleanTrashDetail" = "Vysype Koš natrvalo. Ve výchozím nastavení není vybráno.";
+"cleanInstallers" = "Staré instalační soubory";
+"cleanInstallersDetail" = "Obrazy disků a instalační balíčky ve Stažených souborech starší než jeden měsíc. Ve výchozím nastavení není vybráno.";
 "cleanFailed" = "Položek, které se nepodařilo odstranit, protože se používají nebo jsou chráněné: %@.";
 "cleaning" = "Čistím …";
 "cleanerRefresh" = "Hledat znovu";
 "cleanSelected" = "Vyčistit výběr (%@)";
 "cleanConfirmTitle" = "Trvale odstranit %@?";
 "cleanConfirmMessage" = "Soubory nepřejdou do Koše. Aplikace si mezipaměti podle potřeby vytvoří znovu. Poté aplikace vše naskenuje znovu.";
+"cleanConfirmInstallersMessage" = "Soubory nepřejdou do Koše. Aplikace si mezipaměti podle potřeby vytvoří znovu. Poté aplikace vše naskenuje znovu. Odstraněné instalační soubory bude nutné stáhnout znovu.";
 "appsNoneUnused" = "Všechny aplikace byly nedávno použity";
 "unusedSince" = "Neotevřeno po dobu";
 "daysOption" = "více než %@ dní";

@@ -63,8 +63,8 @@ all files above a size you choose yourself, and **Search** finds folders and fil
 these lists as a grid of large tiles.
 
 In **Clean Up** you remove files your system barely needs. These include caches that apps rebuild on their own, old
-logs, old temporary files and, if you want, the Trash. Apps that are currently running, and macOS itself, are left
-untouched.
+logs, old temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently
+running, and macOS itself, are left untouched.
 
 The **Unused Apps** page reminds you of apps you have not opened for a long time. The date comes from macOS itself,
 so the app records nothing. Anything you no longer need, you can move to the Trash from there.

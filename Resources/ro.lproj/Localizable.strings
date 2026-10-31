@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "Fișiere temporare nemodificate de cel puțin trei zile.";
 "cleanTrash" = "Coș";
 "cleanTrashDetail" = "Golește definitiv Coșul. Nu este selectat implicit.";
+"cleanInstallers" = "Programe de instalare vechi";
+"cleanInstallersDetail" = "Imagini de disc și pachete de instalare din Descărcări mai vechi de o lună. Nu este selectat implicit.";
 "cleanFailed" = "%@ elemente nu au putut fi eliminate, fiindcă sunt în uz sau protejate.";
 "cleaning" = "Se curăță …";
 "cleanerRefresh" = "Caută din nou";
 "cleanSelected" = "Curăță selecția (%@)";
 "cleanConfirmTitle" = "Elimini definitiv %@?";
 "cleanConfirmMessage" = "Fișierele nu ajung în Coș. Aplicațiile își refac cache-urile la nevoie. Apoi aplicația măsoară totul din nou.";
+"cleanConfirmInstallersMessage" = "Fișierele nu ajung în Coș. Aplicațiile își refac cache-urile la nevoie. Apoi aplicația măsoară totul din nou. Programele de instalare eliminate trebuie descărcate din nou.";
 "appsNoneUnused" = "Toate aplicațiile au fost folosite recent";
 "unusedSince" = "Nedeschise de";
 "daysOption" = "mai mult de %@ zile";

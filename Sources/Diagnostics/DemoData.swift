@@ -177,7 +177,7 @@ struct DemoData {
     private static func cleanItems() -> [CleanItem] {
         let sizes: [CleanKind: Int64] = [
             .caches: 6_800 * megabyte, .developer: 11 * gigabyte, .logs: 420 * megabyte,
-            .temporary: 900 * megabyte, .trash: 1_300 * megabyte,
+            .temporary: 900 * megabyte, .installers: 2_600 * megabyte, .trash: 1_300 * megabyte,
         ]
         return CleanKind.allCases.map { kind in
             CleanItem(

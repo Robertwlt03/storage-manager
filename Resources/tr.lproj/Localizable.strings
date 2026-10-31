@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "En az üç gündür değiştirilmemiş geçici dosyalar.";
 "cleanTrash" = "Çöp Sepeti";
 "cleanTrashDetail" = "Çöp Sepeti'ni kalıcı olarak boşaltır. Varsayılan olarak seçili değildir.";
+"cleanInstallers" = "Eski Yükleyiciler";
+"cleanInstallersDetail" = "İndirilenler’deki bir aydan eski disk görüntüleri ve yükleme paketleri. Varsayılan olarak seçili değildir.";
 "cleanFailed" = "%@ öğe, kullanımda olduğu veya korumalı olduğu için kaldırılamadı.";
 "cleaning" = "Temizleniyor …";
 "cleanerRefresh" = "Yeniden Ara";
 "cleanSelected" = "Seçimi Temizle (%@)";
 "cleanConfirmTitle" = "%@ kalıcı olarak kaldırılsın mı?";
 "cleanConfirmMessage" = "Dosyalar Çöp Sepeti'ne gitmez. Uygulamalar önbelleklerini gerektiğinde yeniden oluşturur. Ardından uygulama her şeyi yeniden tarar.";
+"cleanConfirmInstallersMessage" = "Dosyalar Çöp Sepeti'ne gitmez. Uygulamalar önbelleklerini gerektiğinde yeniden oluşturur. Ardından uygulama her şeyi yeniden tarar. Kaldırılan yükleyicilerin yeniden indirilmesi gerekir.";
 "appsNoneUnused" = "Tüm uygulamalar yakın zamanda kullanıldı";
 "unusedSince" = "Şu süredir açılmadı";
 "daysOption" = "%@ günden fazla";

@@ -25,10 +25,15 @@ struct CleanerView: View {
             .task { if items == nil && !model.isScanning { model.refreshCleanItems() } }
             .confirmRemoval(
                 TextKey.cleanConfirmTitle.translated(with: Format.bytes(chosenBytes)),
-                isPresented: $isConfirming, button: .deleteForever, message: .cleanConfirmMessage
+                isPresented: $isConfirming, button: .deleteForever, message: confirmMessage
             ) {
                 Task { await clean() }
             }
+    }
+
+    /// Installers do not come back by themselves, unlike caches.
+    private var confirmMessage: TextKey {
+        selectedKinds.contains(.installers) ? .cleanConfirmInstallersMessage : .cleanConfirmMessage
     }
 
     private var refreshButton: some View {

@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "File sementara yang tidak berubah setidaknya tiga hari.";
 "cleanTrash" = "Tong Sampah";
 "cleanTrashDetail" = "Mengosongkan Tong Sampah secara permanen. Tidak dipilih secara default.";
+"cleanInstallers" = "Penginstal Lama";
+"cleanInstallersDetail" = "Image disk dan paket penginstal di Unduhan yang berumur lebih dari satu bulan. Tidak dipilih secara default.";
 "cleanFailed" = "%@ item tidak dapat dihapus karena sedang digunakan atau dilindungi.";
 "cleaning" = "Membersihkan …";
 "cleanerRefresh" = "Cari Lagi";
 "cleanSelected" = "Bersihkan Pilihan (%@)";
 "cleanConfirmTitle" = "Hapus %@ secara permanen?";
 "cleanConfirmMessage" = "File tidak masuk ke Tong Sampah. App membuat ulang cache-nya bila perlu. Setelah itu app mengukur semuanya lagi.";
+"cleanConfirmInstallersMessage" = "File tidak masuk ke Tong Sampah. App membuat ulang cache-nya bila perlu. Setelah itu app mengukur semuanya lagi. Penginstal yang dihapus harus diunduh lagi.";
 "appsNoneUnused" = "Semua app baru-baru ini digunakan";
 "unusedSince" = "Tidak dibuka selama";
 "daysOption" = "lebih dari %@ hari";

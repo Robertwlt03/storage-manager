@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "至少三天未更改的临时文件。";
 "cleanTrash" = "废纸篓";
 "cleanTrashDetail" = "永久清倒废纸篓。默认不选中。";
+"cleanInstallers" = "旧安装程序";
+"cleanInstallersDetail" = "“下载”中超过一个月的磁盘映像和安装包。默认不选中。";
 "cleanFailed" = "有 %@ 个项目无法移除，因为它们正在使用中或受到保护。";
 "cleaning" = "正在清理…";
 "cleanerRefresh" = "重新搜索";
 "cleanSelected" = "清理所选项目（%@）";
 "cleanConfirmTitle" = "要永久移除 %@ 吗？";
 "cleanConfirmMessage" = "这些文件不会进入废纸篓。App 会在需要时重新生成缓存。之后，本 App 会重新测量所有内容。";
+"cleanConfirmInstallersMessage" = "这些文件不会进入废纸篓。App 会在需要时重新生成缓存。之后，本 App 会重新测量所有内容。已移除的安装程序需要重新下载。";
 "appsNoneUnused" = "所有 App 最近都用过";
 "unusedSince" = "未打开时间";
 "daysOption" = "超过 %@ 天";

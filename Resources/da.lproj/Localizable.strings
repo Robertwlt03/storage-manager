@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "Midlertidige filer, der ikke er ændret i mindst tre dage.";
 "cleanTrash" = "Papirkurv";
 "cleanTrashDetail" = "Tømmer papirkurven permanent. Er ikke valgt som standard.";
+"cleanInstallers" = "Gamle installationsfiler";
+"cleanInstallersDetail" = "Diskbilleder og installationspakker i Downloads, der er ældre end en måned. Er ikke valgt som standard.";
 "cleanFailed" = "%@ emner kunne ikke fjernes, fordi de er i brug eller beskyttet.";
 "cleaning" = "Rydder op …";
 "cleanerRefresh" = "Søg igen";
 "cleanSelected" = "Ryd op i markeringen (%@)";
 "cleanConfirmTitle" = "Vil du fjerne %@ permanent?";
 "cleanConfirmMessage" = "Filerne havner ikke i papirkurven. Apps opretter deres cacher igen efter behov. Derefter måler appen alt igen.";
+"cleanConfirmInstallersMessage" = "Filerne havner ikke i papirkurven. Apps opretter deres cacher igen efter behov. Derefter måler appen alt igen. Fjernede installationsfiler skal hentes igen.";
 "appsNoneUnused" = "Alle apps er brugt for nylig";
 "unusedSince" = "Ikke åbnet i";
 "daysOption" = "mere end %@ dage";

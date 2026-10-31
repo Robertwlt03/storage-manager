@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "Tệp tạm không thay đổi trong ít nhất ba ngày.";
 "cleanTrash" = "Thùng rác";
 "cleanTrashDetail" = "Dọn sạch Thùng rác vĩnh viễn. Không được chọn theo mặc định.";
+"cleanInstallers" = "Trình cài đặt cũ";
+"cleanInstallersDetail" = "Ảnh đĩa và gói cài đặt trong Tải về cũ hơn một tháng. Không được chọn theo mặc định.";
 "cleanFailed" = "Không thể xóa %@ mục vì chúng đang được dùng hoặc được bảo vệ.";
 "cleaning" = "Đang dọn dẹp…";
 "cleanerRefresh" = "Tìm lại";
 "cleanSelected" = "Dọn mục đã chọn (%@)";
 "cleanConfirmTitle" = "Xóa vĩnh viễn %@?";
 "cleanConfirmMessage" = "Các tệp không được chuyển vào Thùng rác. Ứng dụng sẽ tạo lại bộ nhớ đệm khi cần. Sau đó, ứng dụng sẽ đo lại mọi thứ.";
+"cleanConfirmInstallersMessage" = "Các tệp không được chuyển vào Thùng rác. Ứng dụng sẽ tạo lại bộ nhớ đệm khi cần. Sau đó, ứng dụng sẽ đo lại mọi thứ. Các trình cài đặt đã xóa sẽ phải tải về lại.";
 "appsNoneUnused" = "Mọi ứng dụng đều được dùng gần đây";
 "unusedSince" = "Không mở trong";
 "daysOption" = "hơn %@ ngày";

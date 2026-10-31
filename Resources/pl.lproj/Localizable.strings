@@ -185,12 +185,15 @@
 "cleanTemporaryDetail" = "Pliki tymczasowe niezmieniane od co najmniej trzech dni.";
 "cleanTrash" = "Kosz";
 "cleanTrashDetail" = "Opróżnia Kosz na stałe. Domyślnie nie jest zaznaczone.";
+"cleanInstallers" = "Stare instalatory";
+"cleanInstallersDetail" = "Obrazy dysków i pakiety instalacyjne w Pobranych starsze niż miesiąc. Domyślnie nie jest zaznaczone.";
 "cleanFailed" = "Nie udało się usunąć %@ elementów, ponieważ są używane lub chronione.";
 "cleaning" = "Porządkowanie …";
 "cleanerRefresh" = "Szukaj ponownie";
 "cleanSelected" = "Uporządkuj zaznaczone (%@)";
 "cleanConfirmTitle" = "Usunąć %@ na stałe?";
 "cleanConfirmMessage" = "Pliki nie trafiają do Kosza. Aplikacje tworzą swoje pamięci podręczne ponownie w razie potrzeby. Potem aplikacja mierzy wszystko od nowa.";
+"cleanConfirmInstallersMessage" = "Pliki nie trafiają do Kosza. Aplikacje tworzą swoje pamięci podręczne ponownie w razie potrzeby. Potem aplikacja mierzy wszystko od nowa. Usunięte instalatory trzeba będzie pobrać ponownie.";
 "appsNoneUnused" = "Wszystkie aplikacje były ostatnio używane";
 "unusedSince" = "Nie otwierano od";
 "daysOption" = "ponad %@ dni";
