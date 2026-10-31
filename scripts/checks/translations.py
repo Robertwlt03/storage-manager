@@ -28,6 +28,14 @@ WORD = re.compile(r"[^\W\d_]+")  # letters only: placeholders such as %@ and num
 # The spell checker's names for languages whose folders are named differently.
 DICTIONARY_NAMES = {"pt-BR": "pt_BR"}
 SAME_ON_PURPOSE = "/* same as English on purpose */"
+# The languages by their folder names, so a finding says "Danish" and not only "da".
+LANGUAGE_NAMES = {
+    "cs": "Czech", "da": "Danish", "de": "German", "es": "Spanish", "fi": "Finnish",
+    "fr": "French", "it": "Italian", "ja": "Japanese", "ko": "Korean", "nb": "Norwegian",
+    "nl": "Dutch", "pl": "Polish", "pt-BR": "Brazilian Portuguese", "ru": "Russian",
+    "sv": "Swedish", "tr": "Turkish", "uk": "Ukrainian", "zh-Hans": "Simplified Chinese",
+    "zh-Hant": "Traditional Chinese",
+}
 
 
 # MARK: Reading the translations
@@ -97,7 +105,8 @@ def translation_problems(codebase: Codebase) -> list[str]:
         unknown = unknown_in(language, set().union(*words.values())) if words else set()
         findings += [
             f"{place(strings, key_line(strings, key))}: '{texts[language][key]}' ({key}) is still "
-            f"English; translate it, unless {language} uses these very words"
+            f"English in {LANGUAGE_NAMES.get(language, language)} ({language}); translate it, or "
+            f"mark the line {SAME_ON_PURPOSE} if {language} uses these very words"
             for key in keys if words[key] & unknown and not is_same_on_purpose(strings, key)
         ]
     return findings

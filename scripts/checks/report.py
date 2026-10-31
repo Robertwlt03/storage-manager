@@ -30,6 +30,9 @@ PLACED_FINDING = re.compile(r"""
     (?P<message> .+ ) $                             # what is wrong
 """, re.VERBOSE)
 GENERAL = "general"  # the group of findings that name no file
+# How GitHub's workflow commands write characters that would end a message or a property.
+MESSAGE_ESCAPES = {"%": "%25", "\r": "%0D", "\n": "%0A"}
+PROPERTY_ESCAPES = MESSAGE_ESCAPES | {":": "%3A", ",": "%2C"}
 
 
 # MARK: Pieces
@@ -82,14 +85,24 @@ def print_group(path: str, group: list[Finding], title: str) -> None:
     console.group(path)
     for finding in sorted(group, key=lambda finding: finding.line):
         console.entry(str(finding.line) if finding.line else "", finding.message)
-        if ON_GITHUB and finding.path != GENERAL:
+        if ON_GITHUB:
             console.data(github_annotation(finding, title))
     console.show("")
 
 
 def github_annotation(finding: Finding, title: str) -> str:
-    """A line GitHub turns into a note beside the finding's line in the pull request."""
-    return f"::error file={finding.path},line={finding.line},title={title}::{finding.message}"
+    """A line GitHub turns into a note beside the finding's line in the pull request, and into a
+    line of the run's summary; the message names the place too, as the summary shows only it."""
+    if finding.path == GENERAL:
+        return f"::error title={escaped(title, PROPERTY_ESCAPES)}::{escaped(finding.message)}"
+    message = escaped(f"{finding.path}:{finding.line}: {finding.message}")
+    properties = f"file={finding.path},line={finding.line},title={escaped(title, PROPERTY_ESCAPES)}"
+    return f"::error {properties}::{message}"
+
+
+def escaped(text: str, escapes: dict[str, str] = MESSAGE_ESCAPES) -> str:
+    """GitHub reads % and line breaks in a message as escapes, and also : and , in a property."""
+    return "".join(escapes.get(character, character) for character in text)
 
 
 def summary(results: list[tuple[str, int]]) -> None:
