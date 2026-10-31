@@ -2,7 +2,7 @@ import Foundation
 
 /// What the cleaner can remove; each kind regenerates by itself or is already thrown away.
 nonisolated enum CleanKind: String, CaseIterable, Identifiable {
-    case caches, developer, logs, temporary, trash
+    case caches, developer, logs, temporary, installers, trash
     var id: Self { self }
 
     var title: TextKey {
@@ -11,6 +11,7 @@ nonisolated enum CleanKind: String, CaseIterable, Identifiable {
         case .developer: .cleanDeveloper
         case .logs: .cleanLogs
         case .temporary: .cleanTemporary
+        case .installers: .cleanInstallers
         case .trash: .cleanTrash
         }
     }
@@ -21,6 +22,7 @@ nonisolated enum CleanKind: String, CaseIterable, Identifiable {
         case .developer: .cleanDeveloperDetail
         case .logs: .cleanLogsDetail
         case .temporary: .cleanTemporaryDetail
+        case .installers: .cleanInstallersDetail
         case .trash: .cleanTrashDetail
         }
     }
@@ -32,12 +34,13 @@ nonisolated enum CleanKind: String, CaseIterable, Identifiable {
         case .developer: .developer
         case .logs: .library
         case .temporary: .temporary
+        case .installers: .downloads
         case .trash: .trash
         }
     }
 
-    /// Selected by default; emptying the Trash stays a deliberate choice.
-    var isPreselected: Bool { self != .trash }
+    /// Selected by default; emptying the Trash and removing downloads stay a deliberate choice.
+    var isPreselected: Bool { self != .trash && self != .installers }
 }
 
 nonisolated struct CleanItem: Identifiable {

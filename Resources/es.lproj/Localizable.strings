@@ -119,7 +119,7 @@
 "freed" = "Espacio realmente liberado: %@";
 "deleteError" = "No se pudo eliminar todo: %@";
 "quitToDelete" = "Cierra %@ con ⌘Q para poder eliminar.";
-"openInExplorer" = "Abrir en el explorador";
+"openInExplorer" = "Mostrar en Carpetas";
 "deleteAll" = "Eliminar todas las copias …";
 "deleteTitle" = "¿Eliminar %@ copias de %@?";
 "deleteForever" = "Eliminar definitivamente";
@@ -158,10 +158,14 @@
 
 /* Settings */
 "autoScan" = "Analizar automáticamente al abrir";
+"exportReport" = "Exportar informe …";
+"reportTitle" = "Informe de almacenamiento del %@";
+"reportFileName" = "Informe de almacenamiento";
 "extraFolders" = "Carpetas adicionales";
 "showInMenuBar" = "Mostrar el espacio libre en la barra de menús";
 "openApp" = "Abrir %@";
 "lowSpaceWarning" = "Queda poco espacio. «Limpiar» y «Archivos grandes» muestran lo que se puede quitar.";
+"excludedFolders" = "Carpetas excluidas";
 "none" = "Ninguna";
 "add" = "Añadir";
 "remove" = "Quitar";
@@ -185,12 +189,15 @@
 "cleanTemporaryDetail" = "Archivos temporales sin modificar desde hace al menos tres días.";
 "cleanTrash" = "Papelera";
 "cleanTrashDetail" = "Vacía la Papelera de forma definitiva. No está seleccionada por defecto.";
+"cleanInstallers" = "Instaladores antiguos";
+"cleanInstallersDetail" = "Imágenes de disco y paquetes de instalación en Descargas con más de un mes. No está seleccionado por defecto.";
 "cleanFailed" = "No se pudieron eliminar %@ elementos porque están en uso o protegidos.";
 "cleaning" = "Limpiando …";
 "cleanerRefresh" = "Buscar de nuevo";
 "cleanSelected" = "Limpiar la selección (%@)";
 "cleanConfirmTitle" = "¿Eliminar %@ de forma definitiva?";
 "cleanConfirmMessage" = "Los archivos no van a la Papelera. Las apps recrean sus cachés cuando hace falta. Después, la app lo analiza todo de nuevo.";
+"cleanConfirmInstallersMessage" = "Los archivos no van a la Papelera. Las apps recrean sus cachés cuando hace falta. Después, la app lo analiza todo de nuevo. Los instaladores eliminados tendrán que descargarse de nuevo.";
 "appsNoneUnused" = "Todas las apps se han usado recientemente";
 "unusedSince" = "Sin abrir desde hace";
 "daysOption" = "más de %@ días";
@@ -234,6 +241,7 @@
 "summaryClean" = "Al limpiar se pueden liberar unos %@.";
 "summaryCopies" = "Las copias de apps que macOS crea al comprobarlas cuentan por %@.";
 "summaryApps" = "%@ apps no se han abierto desde hace tiempo.";
+"summaryFreed" = "Hasta ahora, esta app ha liberado %@.";
 "readAloud" = "Leer en voz alta";
 "stopReading" = "Detener la lectura";
 
@@ -241,6 +249,12 @@
 "sizeClassesTitle" = "¿Qué tamaño tienen tus archivos?";
 "sizeClassesCaption" = "Cuánto espacio ocupa cada clase de tamaño y cuántos archivos contiene. Unos pocos archivos grandes suelen ocupar más que muchos pequeños.";
 "figureLargeFilesFrom" = "archivos grandes desde %@";
+"historyTitle" = "Historial";
+"historyCaption" = "Espacio usado tras cada análisis completo.";
+"historyAfterNextScan" = "El historial aparece tras el próximo análisis completo.";
+"grownSince" = "Crecimiento desde %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Ninguna carpeta creció más de %@.";
 "bucketValue" = "%@
 %@ archivos";
 "settingsSystemNote" = "La apariencia y las unidades vienen de Ajustes del Sistema.";

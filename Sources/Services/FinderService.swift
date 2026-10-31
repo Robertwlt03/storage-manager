@@ -14,6 +14,23 @@ enum FinderService {
 
     static func openFullDiskAccessSettings() { NSWorkspace.shared.open(SystemLinks.fullDiskAccess) }
 
+    /// Asks where to keep a text and writes it there; when that fails, macOS's own alert says why.
+    /// False when canceled or not written.
+    @discardableResult
+    static func save(_ text: String, suggestedName: String) -> Bool {
+        let panel = NSSavePanel()
+        panel.allowedContentTypes = [.plainText]
+        panel.nameFieldStringValue = suggestedName
+        guard panel.runModal() == .OK, let url = panel.url else { return false }
+        do {
+            try text.write(to: url, atomically: true, encoding: .utf8)
+            return true
+        } catch {
+            NSAlert(error: error).runModal()
+            return false
+        }
+    }
+
     static func chooseFolders() -> [String] {
         let panel = NSOpenPanel()
         panel.canChooseFiles = false

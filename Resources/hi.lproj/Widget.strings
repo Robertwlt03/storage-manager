@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "खाली जगह";
+"widgetDescription" = "दिखाता है कि आपके Mac पर कितनी जगह उपलब्ध है।";
+"widgetAvailable" = "उपलब्ध";
+"widgetOfTotal" = "%@ में से";
+"widgetUnreadable" = "खाली जगह पढ़ी नहीं जा सकी।";

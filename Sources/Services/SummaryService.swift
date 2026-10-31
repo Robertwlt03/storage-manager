@@ -10,6 +10,7 @@ enum SummaryService {
         let cleanableBytes: Int64?
         let copyBytes: Int64
         let unusedAppCount: Int
+        let freedBytes: Int64
     }
 
     static func text(_ input: Input) -> String {
@@ -29,6 +30,9 @@ enum SummaryService {
         if input.unusedAppCount > 0 {
             sentences.append(
                 TextKey.summaryApps.translated(with: Format.count(input.unusedAppCount)))
+        }
+        if input.freedBytes > 0 {
+            sentences.append(TextKey.summaryFreed.translated(with: Format.bytes(input.freedBytes)))
         }
         return sentences.joined(separator: " ")
     }

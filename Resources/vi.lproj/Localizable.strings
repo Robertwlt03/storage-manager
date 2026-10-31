@@ -119,7 +119,7 @@
 "freed" = "Dung lượng thực sự được giải phóng: %@";
 "deleteError" = "Không thể xóa hết: %@";
 "quitToDelete" = "Thoát %@ bằng ⌘Q để xóa.";
-"openInExplorer" = "Mở trong Thư mục";
+"openInExplorer" = "Hiện trong Thư mục";
 "deleteAll" = "Xóa tất cả bản sao…";
 "deleteTitle" = "Xóa %@ bản sao của %@?";
 "deleteForever" = "Xóa vĩnh viễn";
@@ -158,10 +158,14 @@
 
 /* Settings */
 "autoScan" = "Tự động quét khi mở";
+"exportReport" = "Xuất báo cáo …";
+"reportTitle" = "Báo cáo dung lượng từ %@";
+"reportFileName" = "Báo cáo dung lượng";
 "extraFolders" = "Thư mục bổ sung";
 "showInMenuBar" = "Hiện dung lượng trống trên thanh menu";
 "openApp" = "Mở %@";
 "lowSpaceWarning" = "Sắp hết dung lượng. “Dọn dẹp” và “Tệp lớn” cho thấy những gì có thể xóa.";
+"excludedFolders" = "Thư mục loại trừ";
 "none" = "Không có";
 "add" = "Thêm";
 "remove" = "Xóa";
@@ -185,12 +189,15 @@
 "cleanTemporaryDetail" = "Tệp tạm không thay đổi trong ít nhất ba ngày.";
 "cleanTrash" = "Thùng rác";
 "cleanTrashDetail" = "Dọn sạch Thùng rác vĩnh viễn. Không được chọn theo mặc định.";
+"cleanInstallers" = "Trình cài đặt cũ";
+"cleanInstallersDetail" = "Ảnh đĩa và gói cài đặt trong Tải về cũ hơn một tháng. Không được chọn theo mặc định.";
 "cleanFailed" = "Không thể xóa %@ mục vì chúng đang được dùng hoặc được bảo vệ.";
 "cleaning" = "Đang dọn dẹp…";
 "cleanerRefresh" = "Tìm lại";
 "cleanSelected" = "Dọn mục đã chọn (%@)";
 "cleanConfirmTitle" = "Xóa vĩnh viễn %@?";
 "cleanConfirmMessage" = "Các tệp không được chuyển vào Thùng rác. Ứng dụng sẽ tạo lại bộ nhớ đệm khi cần. Sau đó, ứng dụng sẽ đo lại mọi thứ.";
+"cleanConfirmInstallersMessage" = "Các tệp không được chuyển vào Thùng rác. Ứng dụng sẽ tạo lại bộ nhớ đệm khi cần. Sau đó, ứng dụng sẽ đo lại mọi thứ. Các trình cài đặt đã xóa sẽ phải tải về lại.";
 "appsNoneUnused" = "Mọi ứng dụng đều được dùng gần đây";
 "unusedSince" = "Không mở trong";
 "daysOption" = "hơn %@ ngày";
@@ -234,6 +241,7 @@
 "summaryClean" = "Dọn dẹp có thể giải phóng khoảng %@.";
 "summaryCopies" = "Bản sao ứng dụng mà macOS tạo khi kiểm tra chiếm %@.";
 "summaryApps" = "%@ ứng dụng đã lâu không được mở.";
+"summaryFreed" = "Đến nay, ứng dụng đã giải phóng %@.";
 "readAloud" = "Đọc to";
 "stopReading" = "Dừng đọc";
 
@@ -241,6 +249,12 @@
 "sizeClassesTitle" = "Tệp của bạn lớn cỡ nào?";
 "sizeClassesCaption" = "Mỗi nhóm kích thước chiếm bao nhiêu dung lượng và có bao nhiêu tệp. Vài tệp lớn thường chiếm nhiều chỗ hơn rất nhiều tệp nhỏ.";
 "figureLargeFilesFrom" = "tệp lớn từ %@";
+"historyTitle" = "Lịch sử";
+"historyCaption" = "Dung lượng đã dùng sau mỗi lần quét đầy đủ.";
+"historyAfterNextScan" = "Lịch sử sẽ hiện sau lần quét đầy đủ tiếp theo.";
+"grownSince" = "Tăng từ %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Không thư mục nào tăng quá %@.";
 "bucketValue" = "%@
 %@ tệp";
 "settingsSystemNote" = "Giao diện và đơn vị lấy từ Cài đặt hệ thống.";

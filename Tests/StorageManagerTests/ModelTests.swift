@@ -8,10 +8,10 @@ import Testing
 struct ModelTests {
     private static let gigabyte: Int64 = 1_000_000_000
 
-    @Test("Only emptying the Trash needs a deliberate click in the cleaner")
+    @Test("Emptying the Trash and removing installers need a deliberate click in the cleaner")
     func cleanerPreselection() {
         let preselected = CleanKind.allCases.filter(\.isPreselected)
-        #expect(Set(preselected) == Set(CleanKind.allCases).subtracting([.trash]))
+        #expect(Set(preselected) == Set(CleanKind.allCases).subtracting([.trash, .installers]))
     }
 
     @Test("A volume runs low below a share of its capacity, but never above the fixed amount")

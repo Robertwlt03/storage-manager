@@ -119,7 +119,7 @@
 "freed" = "Espace réellement libéré : %@";
 "deleteError" = "Tout n’a pas pu être supprimé : %@";
 "quitToDelete" = "Quittez %@ avec ⌘Q pour pouvoir supprimer.";
-"openInExplorer" = "Ouvrir dans l’explorateur";
+"openInExplorer" = "Afficher dans Dossiers";
 "deleteAll" = "Supprimer toutes les copies …";
 "deleteTitle" = "Supprimer %@ copies de %@ ?";
 "deleteForever" = "Supprimer définitivement";
@@ -158,10 +158,14 @@
 
 /* Settings */
 "autoScan" = "Analyser automatiquement au lancement";
+"exportReport" = "Exporter le rapport …";
+"reportTitle" = "Rapport de stockage du %@";
+"reportFileName" = "Rapport de stockage";
 "extraFolders" = "Dossiers supplémentaires";
 "showInMenuBar" = "Afficher l’espace libre dans la barre des menus";
 "openApp" = "Ouvrir %@";
 "lowSpaceWarning" = "L’espace se fait rare. « Nettoyer » et « Fichiers volumineux » montrent ce qui peut partir.";
+"excludedFolders" = "Dossiers exclus";
 "none" = "Aucun";
 "add" = "Ajouter";
 "remove" = "Supprimer";
@@ -185,12 +189,15 @@
 "cleanTemporaryDetail" = "Fichiers temporaires non modifiés depuis au moins trois jours.";
 "cleanTrash" = "Corbeille";
 "cleanTrashDetail" = "Vide la Corbeille définitivement. Non sélectionné par défaut.";
+"cleanInstallers" = "Anciens installateurs";
+"cleanInstallersDetail" = "Images disque et paquets d’installation de plus d’un mois dans Téléchargements. Non sélectionné par défaut.";
 "cleanFailed" = "%@ éléments n’ont pas pu être supprimés, car ils sont en cours d’utilisation ou protégés.";
 "cleaning" = "Nettoyage en cours …";
 "cleanerRefresh" = "Rechercher à nouveau";
 "cleanSelected" = "Nettoyer la sélection (%@)";
 "cleanConfirmTitle" = "Supprimer %@ définitivement ?";
 "cleanConfirmMessage" = "Les fichiers ne vont pas dans la Corbeille. Les apps recréent leurs caches en cas de besoin. Ensuite, l’app réanalyse tout.";
+"cleanConfirmInstallersMessage" = "Les fichiers ne vont pas dans la Corbeille. Les apps recréent leurs caches en cas de besoin. Ensuite, l’app réanalyse tout. Les installateurs supprimés devront être téléchargés à nouveau.";
 "appsNoneUnused" = "Toutes les apps ont été utilisées récemment";
 "unusedSince" = "Non ouverte depuis";
 "daysOption" = "plus de %@ jours";
@@ -234,6 +241,7 @@
 "summaryClean" = "Un nettoyage peut libérer environ %@.";
 "summaryCopies" = "Les copies d’apps que macOS crée lors de leur vérification comptent pour %@.";
 "summaryApps" = "%@ apps n’ont pas été ouvertes depuis un moment.";
+"summaryFreed" = "Jusqu’ici, cette app a libéré %@.";
 "readAloud" = "Lire à voix haute";
 "stopReading" = "Arrêter la lecture";
 
@@ -241,6 +249,12 @@
 "sizeClassesTitle" = "Quelle est la taille de vos fichiers ?";
 "sizeClassesCaption" = "L’espace que prend chaque classe de taille et le nombre de fichiers qu’elle contient. Quelques gros fichiers occupent généralement plus de place que beaucoup de petits.";
 "figureLargeFilesFrom" = "fichiers volumineux à partir de %@";
+"historyTitle" = "Historique";
+"historyCaption" = "Espace utilisé après chaque analyse complète.";
+"historyAfterNextScan" = "L’historique apparaît après la prochaine analyse complète.";
+"grownSince" = "Croissance depuis %@";
+"grownBy" = "+%@";
+"nothingGrown" = "Aucun dossier n’a grossi de plus de %@.";
 "bucketValue" = "%@
 %@ fichiers";
 "settingsSystemNote" = "L’apparence et les unités viennent des Réglages Système.";

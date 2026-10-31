@@ -23,6 +23,7 @@ nonisolated enum LowSpace {
 nonisolated enum CleanUpRules {
     static let temporaryMinimumAgeDays = 3
     static let logMinimumAgeDays = 7
+    static let installerMinimumAgeDays = 30
     static let unusedDayOptions = [30, 90, 180, 365]
     static let defaultUnusedDays = 90
 }
