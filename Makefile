@@ -33,6 +33,8 @@ CONSOLE := $(PYTHON) -m checks.console
 # front of what a command starts after its heading, so that leaves its own heading out.
 HEADING := $(CONSOLE) heading
 HEADED := CONSOLE_HEADED=1
+# A step of a longer command reports in one line; the command itself draws the frame at the end.
+STEP := CONSOLE_STEP=1
 SNAPSHOT_MODE := $(if $(RECORD),--record)
 
 .DEFAULT_GOAL := help
@@ -44,18 +46,17 @@ SNAPSHOT_MODE := $(if $(RECORD),--record)
 # The text after ## is what make help shows for each command.
 
 help: ## List every command
-	$(HEADING) "Storage Manager · commands" "make <command>"
+	$(HEADING) "Storage Manager · commands" "make <command> · details in CONTRIBUTING.md"
 	@# Each command and its text, split at the ## into the two columns of the table.
 	grep --no-filename -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) \
 		| awk -F ':.*## ' '{ print "make " $$1 "\t" $$2 }' | $(CONSOLE) table
-	$(CONSOLE) note "Details for each command: CONTRIBUTING.md"
 
 build: ## Build the app and render its icon (INSTALL_APP=1 also copies it to ~/Applications)
 	$(PYTHON) scripts/build.py
 
 run: ## Build the app, then quit the running one and open the new one
 	$(HEADING) "Storage Manager · run" "build, then open $(APP)"
-	$(HEADED) $(MAKE) build
+	$(HEADED) $(STEP) $(MAKE) build
 	$(HEADED) $(MAKE) restart
 
 restart: ## Quit the app if it is open, then open the built one
@@ -63,14 +64,14 @@ restart: ## Quit the app if it is open, then open the built one
 
 demo: ## Build without your certificate, then open the app with made-up data (no scan)
 	$(HEADING) "Storage Manager · demo" "made-up data, nothing scanned"
-	$(HEADED) $(MAKE) build $(DEMO_BUILD)
+	$(HEADED) $(STEP) $(MAKE) build $(DEMO_BUILD)
 	open -n "$(DEMO_APP)" --args -demo YES
 	$(CONSOLE) frame success "Demo opened" "$(DEMO_APP)"
 
 snapshots: ## Optional: photograph every demo page, light and dark, and compare (RECORD=1 records)
 	@# Only you run it: macOS asks once whether your terminal may record the screen.
 	$(HEADING) "Storage Manager · snapshots" "every demo page, light and dark"
-	$(HEADED) $(MAKE) build $(DEMO_BUILD)
+	$(HEADED) $(STEP) $(MAKE) build $(DEMO_BUILD)
 	$(HEADED) swift scripts/snapshots.swift "$(DEMO_APP)" $(SNAPSHOT_MODE)
 
 check: ## Run the whole check pipeline, as on GitHub

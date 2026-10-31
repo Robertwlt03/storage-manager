@@ -77,9 +77,10 @@ func show(_ piece: String, _ texts: String...) {
 func ensureScreenRecordingAccess() {
     guard !CGPreflightScreenCaptureAccess() else { return }
     CGRequestScreenCaptureAccess()
-    show("failed", "Your terminal app may not record the screen yet")
-    show("note", "Allow it in System Settings › Privacy & Security ›")
-    show("note", "Screen & System Audio Recording, then run make snapshots again.")
+    show(
+        "stopped", "Your terminal app may not record the screen yet", "",
+        "Allow it in System Settings › Privacy & Security ›",
+        "Screen & System Audio Recording, then run make snapshots again.")
     exit(EXIT_FAILURE)
 }
 
@@ -261,7 +262,7 @@ func record() throws {
 
 let arguments = Array(CommandLine.arguments.dropFirst())
 guard let appPath = arguments.first else {
-    show("failed", "Which app?", "swift scripts/snapshots.swift <app> [--record]")
+    show("stopped", "Which app?", "swift scripts/snapshots.swift <app> [--record]")
     exit(EXIT_FAILURE)
 }
 let app = URL(filePath: appPath)
