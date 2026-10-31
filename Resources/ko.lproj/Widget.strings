@@ -1,0 +1,6 @@
+/* The widget's texts (Widget/WidgetText.swift) */
+"widgetName" = "여유 공간";
+"widgetDescription" = "Mac에서 사용할 수 있는 공간을 보여 줍니다.";
+"widgetAvailable" = "사용 가능";
+"widgetOfTotal" = "전체 %@";
+"widgetUnreadable" = "여유 공간을 읽을 수 없습니다.";

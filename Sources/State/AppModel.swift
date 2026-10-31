@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import SwiftUI
+import WidgetKit
 
 /// App state: what is selected, the scanned tree and everything derived from it.
 /// The work itself happens in the services; this class only orchestrates them.
@@ -333,6 +334,7 @@ extension AppModel {
         let freeBefore = VolumeService.startup()?.freeBytes
         try await removal()
         try? await Task.sleep(for: Self.waitForFreedSpace)
+        WidgetCenter.shared.reloadAllTimelines()  // the widget shows the new space at once
         let freed = VolumeService.freedBytes(
             before: freeBefore, after: VolumeService.startup()?.freeBytes,
             removedBytes: removedBytes)
