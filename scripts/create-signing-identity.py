@@ -51,9 +51,9 @@ def unlock_existing_keychain() -> str:
     """Opens the keychain with the password local.mk keeps, and returns it."""
     saved_password = SAVED_PASSWORD.search(saved_settings())
     if not saved_password:
-        console.failed("local.mk holds no password for the signing keychain", str(KEYCHAIN))
-        console.note("Copy local.mk from the checkout that made it, or start over with:")
-        console.note(f"security delete-keychain {KEYCHAIN}")
+        console.stopped("local.mk holds no password for the signing keychain", str(KEYCHAIN), (
+            "Copy local.mk from the checkout that made it, or start over with:",
+            f"security delete-keychain {KEYCHAIN}"))
         sys.exit(1)
     password = saved_password.group(1).strip()
     run(["security", "unlock-keychain", "-p", password, KEYCHAIN])

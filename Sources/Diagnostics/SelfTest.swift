@@ -19,10 +19,9 @@ enum SelfTest {
     static func run() -> Bool {
         Console.heading("Storage Manager · self test", detail: "counts and sizes only")
         guard PermissionService.hasFullDiskAccess else {
-            Console.failed(
-                "Full Disk Access is missing, so the self test stops before macOS asks per folder")
-            Console.note(
-                "Grant it to Storage Manager in System Settings, then run make selftest.")
+            Console.stopped(
+                "Full Disk Access is missing, so the self test stops before macOS asks per folder",
+                hints: ["Grant it to Storage Manager in System Settings, then run make selftest."])
             return false
         }
         let root = Node.virtualRoot()

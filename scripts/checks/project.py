@@ -188,9 +188,8 @@ def has_xcode() -> bool:
     developer_folder = os.environ.get("DEVELOPER_DIR") or run(["xcode-select", "-p"]).output
     if "Xcode" in developer_folder:
         return True
-    console.failed("Xcode 27 is needed", "the developer tools point elsewhere")
-    console.note("Install it, then switch once:")
-    console.note("sudo xcode-select --switch /Applications/Xcode.app")
+    console.stopped("Xcode 27 is needed", "the developer tools point elsewhere", (
+        "Install it, then switch once:", "sudo xcode-select --switch /Applications/Xcode.app"))
     return False
 
 

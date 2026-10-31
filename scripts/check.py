@@ -91,8 +91,9 @@ def chosen_steps(names: list[str]) -> list[Step] | None:
     step_names = [step for name in names for step in GROUPS.get(name, [name])]
     unknown = [name for name in step_names if name not in known]
     if unknown:
-        console.failed(f"Unknown step: {', '.join(unknown)}")
-        console.note(f"Steps: {', '.join(known)}; groups: {', '.join(GROUPS)}")
+        console.heading("Storage Manager · check pipeline")
+        console.stopped(f"Unknown step: {', '.join(unknown)}", hints=(
+            f"Steps: {', '.join(known)}", f"Groups: {', '.join(GROUPS)}"))
         return None
     return [known[name] for name in step_names] if names else STEPS
 
