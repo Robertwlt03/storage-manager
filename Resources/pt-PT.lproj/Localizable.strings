@@ -119,7 +119,7 @@
 "freed" = "Espaço realmente libertado: %@";
 "deleteError" = "Não foi possível apagar tudo: %@";
 "quitToDelete" = "Termine %@ com ⌘Q para poder apagar.";
-"openInExplorer" = "Abrir no explorador";
+"openInExplorer" = "Mostrar em Pastas";
 "deleteAll" = "Apagar todas as cópias …";
 "deleteTitle" = "Apagar %@ cópias de %@?";
 "deleteForever" = "Apagar permanentemente";

@@ -119,7 +119,7 @@
 "freed" = "Ténylegesen felszabadult: %@";
 "deleteError" = "Nem sikerült mindent törölni: %@";
 "quitToDelete" = "A törléshez lépj ki ebből: %@ (⌘Q).";
-"openInExplorer" = "Megnyitás a Mappák nézetben";
+"openInExplorer" = "Megjelenítés a Mappák nézetben";
 "deleteAll" = "Összes másolat törlése …";
 "deleteTitle" = "%2$@: %1$@ másolat törlése?";
 "deleteForever" = "Végleges törlés";

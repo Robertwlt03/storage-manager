@@ -119,7 +119,7 @@
 "freed" = "Espaço realmente liberado: %@";
 "deleteError" = "Nem tudo pôde ser excluído: %@";
 "quitToDelete" = "Encerre %@ com ⌘Q para poder excluir.";
-"openInExplorer" = "Abrir no explorador";
+"openInExplorer" = "Mostrar em Pastas";
 "deleteAll" = "Excluir todas as cópias …";
 "deleteTitle" = "Excluir %@ cópias de %@?";
 "deleteForever" = "Excluir permanentemente";
