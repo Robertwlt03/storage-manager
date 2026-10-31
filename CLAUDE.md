@@ -172,6 +172,12 @@ mode.
   and pull `main`. CONTRIBUTING.md shows the steps.
 - Branch names follow CONTRIBUTING.md (`1239-scan-cancel`, or `readme-typo` without an issue). When a task has no
   issue, suggest opening one that describes the problem or wish.
+- One topic per branch. Before working on a request that reaches beyond the current branch's topic, such as a
+  console fix on a branch for languages or a change to this file, say so and ask whether to start a new branch from
+  `main`, or, when both really are one task, to rename the current branch to name it; never mix it in silently.
+- Once the person is content with every open branch, list them in the order to merge, each with its reason: what
+  builds on what, which ones touch the same files (merge the smaller first, then bring the other up to date), and
+  what is safest to have on `main` early.
 - Pull request descriptions follow `.github/PULL_REQUEST_TEMPLATE.md`: its banner, every section with its
   icon filled in (none left with only its hint, the screenshots removed when nothing is visible), the footer, and the
   attribution line last. `gh pr create` does not fill the template by itself, so start from a copy and pass it with
