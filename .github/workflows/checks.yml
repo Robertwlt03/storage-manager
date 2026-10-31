@@ -1,5 +1,6 @@
-# Runs the whole check pipeline on every pull request and on main. A pull request with one finding
-# turns red, so it has to be fixed before it can be merged.
+# Runs the whole check pipeline on every pull request and on main, its groups side by side, each on
+# a Mac of its own. A pull request with one finding turns red, so it has to be fixed before it can
+# be merged.
 name: Checks
 
 on:
@@ -17,36 +18,95 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
-    # The app needs macOS 27 and Xcode 27: GitHub's own Mac image for them, on Apple silicon. Each
-    # run gets a fresh Mac that GitHub throws away afterwards, so a fork's pull request may run too.
+  # The groups of scripts/check.py (GROUPS), one job each, so the run shows every part on its own.
+  # The app needs macOS 27 and Xcode 27: GitHub's own Mac image for them, on Apple silicon. Each
+  # job gets a fresh Mac that GitHub throws away afterwards, so a fork's pull request may run too.
+  # Pinned to a commit, which nobody can move; for a newer version, pin its commit here. A new
+  # group gets a job of its own here and a place in the needs of checks.
+  build-and-tests:
+    # Formatting, SwiftLint, the build, the tests and their coverage.
+    name: Build and tests
     runs-on: xcode-27
     timeout-minutes: 30
     steps:
-      # Pinned to a commit, which nobody can move; for a newer version, pin its commit here.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false  # no later step needs the token, so it is not kept on disk
+      - uses: ./.github/actions/setup
+      - name: The steps of the group tools
+        env:
+          PYTHONPATH: scripts
+        run: python scripts/check.py tools
+
+  code-rules:
+    # The house rules, the architecture, dead code and the language of names.
+    name: Code rules
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false  # no later step needs the token, so it is not kept on disk
+      - uses: ./.github/actions/setup
+      - name: The steps of the group code
+        env:
+          PYTHONPATH: scripts
+        run: python scripts/check.py code
+
+  texts-and-guides:
+    # Translations, guides and unused files.
+    name: Texts and guides
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false  # no later step needs the token, so it is not kept on disk
+      - uses: ./.github/actions/setup
+      - name: The steps of the group texts
+        env:
+          PYTHONPATH: scripts
+        run: python scripts/check.py texts
+
+  safety-and-scripts:
+    # Secrets, security, the scripts, commit messages and the planted samples.
+    name: Safety and scripts
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           fetch-depth: 0  # the whole history, so the commit messages of a pull request can be read
           persist-credentials: false  # no later step needs the token, so it is not kept on disk
-      # The scripts need Python 3.13 or newer; a fixed one, so a new release never changes a run.
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
-        with:
-          python-version: "3.14"
-      # A fixed version, so a new SwiftLint never turns the checks red on unchanged code. The
-      # download must match the checksum GitHub shows for the release, or the job stops here.
-      - name: Install SwiftLint
+      - uses: ./.github/actions/setup
+      - name: The steps of the group safety
         env:
-          SWIFTLINT_RELEASES: https://github.com/realm/SwiftLint/releases/download
-          SWIFTLINT_VERSION: 0.65.1
-          SWIFTLINT_CHECKSUM: c1e429b0599cf1b516f369a2d9ec04eaf0e436f3c12b637df8851fa52ff694d0
+          PYTHONPATH: scripts
+        run: python scripts/check.py safety
+
+  app:
+    name: App and icon
+    runs-on: xcode-27
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - run: make build
+
+  checks:
+    # One result for the rule that protects main: green only when every job above is. It only
+    # compares results, so a small Linux machine does and no Mac waits for it. It also runs when
+    # a job failed, but not for a run a newer push replaced.
+    needs: [build-and-tests, code-rules, texts-and-guides, safety-and-scripts, app]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Every job passed
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
         run: |
-          archive="$RUNNER_TEMP/swiftlint.zip"
-          curl --fail --silent --show-error --location --output "$archive" \
-            "$SWIFTLINT_RELEASES/$SWIFTLINT_VERSION/portable_swiftlint.zip"
-          echo "$SWIFTLINT_CHECKSUM  $archive" | shasum --algorithm 256 --check
-          unzip -q "$archive" -d "$RUNNER_TEMP/swiftlint"
-          echo "$RUNNER_TEMP/swiftlint" >> "$GITHUB_PATH"
-      - name: The whole check pipeline (every step of scripts/check.py)
-        run: make check
-      - name: Build the app and its icon
-        run: make build
+          echo "Results: $RESULTS"
+          [[ " $RESULTS " != *" failure "* && " $RESULTS " != *" cancelled "* ]]

@@ -162,15 +162,19 @@ mode.
 - The workflow runs on GitHub's own Mac image for macOS 27 and Xcode 27 (`runs-on: xcode-27`): a fresh Mac per run,
   thrown away afterwards, so pull requests from forks are checked too, once the owner approves the run. GitHub names
   its Mac images after the Xcode version (`xcode-27`), not only after macOS (`macos-15`).
+- The workflow runs each group of `scripts/check.py` (`GROUPS`) as a job of its own with a telling name, side by side,
+  and builds the app beside them; the job `checks` sums them up, so the ruleset requires only that one name. A new
+  step goes into a group, or `check.py` stops at its start; a new group also gets a job and a place in the `needs` of
+  `checks`. The jobs share their setup (Python, SwiftLint) through `.github/actions/setup/action.yml`.
 - `main` is protected by a ruleset without exceptions: every change, the maintainer's too, comes in through a pull
   request whose `checks` are green, merged with a merge commit (no squash). Start each task on a new branch from an
   up-to-date `main`; after the merge, delete the branch on GitHub and locally (`git branch -d`, `git fetch --prune`)
   and pull `main`. CONTRIBUTING.md shows the steps.
 - Branch names follow CONTRIBUTING.md (`1239-scan-cancel`, or `readme-typo` without an issue). When a task has no
   issue, suggest opening one that describes the problem or wish.
-- Pull request descriptions follow `.github/PULL_REQUEST_TEMPLATE.md`: banner, every section with its icon filled in
-  (none left with only its hint, the screenshots removed when nothing is visible), the footer, and the attribution
-  line last. `gh pr create` does not fill the template by itself, so start from a copy and pass it with
+- Pull request descriptions follow `.github/PULL_REQUEST_TEMPLATE.md`: its banner, every section with its
+  icon filled in (none left with only its hint, the screenshots removed when nothing is visible), the footer, and the
+  attribution line last. `gh pr create` does not fill the template by itself, so start from a copy and pass it with
   `--body-file`. Its pictures use full addresses on `main`, because a description cannot load files by path.
 - Every action is pinned to a commit with its version in a comment; pick a release that has been out for a while.
 - `make hooks` (the person's choice) runs `make check` before every push. The hook starts with any `python3`, then

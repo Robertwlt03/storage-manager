@@ -1,0 +1,10 @@
+# A sample for the security check: a shared action has no permissions block of its own, which is
+# fine, but the rules for what it installs and runs hold for it, too.
+name: Set up the samples
+description: never used; the checks only read it
+
+runs:
+  using: composite
+  steps:
+    - run: brew install swiftlint  # expect: whatever version is newest
+      shell: bash
