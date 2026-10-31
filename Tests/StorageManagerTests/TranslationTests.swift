@@ -75,6 +75,17 @@ struct TranslationTests {
         #expect(names == sorted)
     }
 
+    @Test("A text missing in a language shows in English, a present one in that language")
+    func missingTextFallsBackToEnglish() throws {
+        let english = try #require(Bundle(url: Self.resources.appendingPathComponent("en.lproj")))
+        let german = try #require(Bundle(url: Self.resources.appendingPathComponent("de.lproj")))
+        // The test folder holds no texts at all, like a language that lacks every one of them.
+        let testFolder = Self.resources.deletingLastPathComponent().appendingPathComponent("Tests")
+        let withoutTexts = try #require(Bundle(url: testFolder))
+        #expect(Localizer.text("rescan", in: withoutTexts, english: english) == "Rescan")
+        #expect(Localizer.text("rescan", in: german, english: english) != "Rescan")
+    }
+
     @Test("An unknown language falls back to none, so English takes over")
     func unknownLanguage() {
         #expect(AppLanguage.match("xx") == nil)
