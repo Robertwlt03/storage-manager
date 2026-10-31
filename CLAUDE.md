@@ -178,6 +178,13 @@ mode.
 - Once the person is content with every open branch, list them in the order to merge, each with its reason: what
   builds on what, which ones touch the same files (merge the smaller first, then bring the other up to date), and
   what is safest to have on `main` early.
+- Keep each branch a straight line on top of `main`, so `main` gets exactly one merge commit per pull request: start
+  every branch from `main`, never from another feature branch, never merge one feature branch into another, and
+  bring a branch up to date with `git fetch && git rebase origin/main` instead of merging `main` into it, solving
+  conflicts there when its turn comes; a branch that was already pushed then goes up with
+  `git push --force-with-lease` (the ruleset guards only `main`). On GitHub that is "Update with rebase" or
+  `gh pr update-branch --rebase`; the plain "Update branch" merges `main` in. Merging `main` into branches, or
+  branches into each other, leaves a tangle of merge commits.
 - Pull request descriptions follow `.github/PULL_REQUEST_TEMPLATE.md`: its banner, every section with its
   icon filled in (none left with only its hint, the screenshots removed when nothing is visible), the footer, and the
   attribution line last. `gh pr create` does not fill the template by itself, so start from a copy and pass it with
