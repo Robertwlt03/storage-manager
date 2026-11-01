@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// List, tiles and, on Folders, rings: one switch at the top of every page with layouts.
+/// List, tiles and, on Folders, rings: one switch in the toolbar of every page with layouts.
 struct LayoutSwitcher: View {
     let pane: Pane
     @AppStorage(SettingsKey.layoutMode) private var layoutMode = LayoutMode.list

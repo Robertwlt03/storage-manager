@@ -61,11 +61,11 @@ downloads to caches.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
 all files above a size you choose yourself, and **Search** finds folders and files by name. Each of these lists can
-also show large tiles: ⌘1 shows the list and ⌘2 the tiles, and Overview, Folders, Large Files, Duplicates and Unused
-Apps also have a switch for it at the top of the page. On Folders the switch also offers **Rings** (⌘3), which show the
-subfolders as rings around the current folder: the wider a piece, the bigger the folder, and a click opens it. In the
-settings you can add folders to measure, such as an external project folder, and exclude folders that the app should
-neither measure nor show nor clean up.
+also show large tiles: ⌘1 shows the list and ⌘2 the tiles, and Overview, Folders, Large Files and Unused Apps also
+have a switch for it in the toolbar, like the view buttons in Finder. On Folders the switch also offers **Rings** (⌘3),
+which show the subfolders as rings around the current folder: the wider a piece, the bigger the folder, and a click
+opens it. In the settings you can add folders to measure, such as an external project folder, and exclude folders that
+the app should neither measure nor show nor clean up.
 
 In **Clean Up** you remove files your system barely needs. These include caches that apps rebuild on their own, old
 logs, old temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently
@@ -83,8 +83,10 @@ For advanced users, the app also shows two areas you cannot see in Finder: the *
 areas” in the settings. External drives and USB sticks appear in the sidebar too, as soon as you connect them.
 
 Every page says in one sentence at the top what it is for and what you can do there, and the info button beside it
-explains more. The app takes the light or dark appearance from your Mac, and it uses Liquid Glass. New content appears
-with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it out.
+explains more. The app takes the light or dark appearance from your Mac, and like Apple's own apps it uses Liquid
+Glass for the toolbar and the sidebar, while cards and buttons in the content keep the quiet macOS look. New content
+appears with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it
+out.
 
 With File › Export Report (⇧⌘E) you save the summary, every category and the largest files as a text file, for
 keeping or passing on. Each line has the size first, so it also pastes into a spreadsheet.

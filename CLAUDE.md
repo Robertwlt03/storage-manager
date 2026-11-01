@@ -102,7 +102,8 @@ changing code; do not repeat their content here or in comments.
    settings (as JSON) must still read what an earlier version saved, or say in the pull request what is lost once.
 6. When views changed, check the look in your own test window (see "Testing safely").
 
-Design goals: native Apple look (HIG, Liquid Glass), gentle and minimal animations as feedback only, no start
+Design goals: native Apple look (HIG; Liquid Glass only above the content, in the toolbar and sidebar, while cards and
+buttons in the content use the bordered macOS styles), gentle and minimal animations as feedback only, no start
 animation, energy-saving behavior (nothing animates or polls at rest), text contrast at least 4.5:1 in light and dark
 mode.
 

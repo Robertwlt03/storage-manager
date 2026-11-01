@@ -164,10 +164,12 @@
 "reportFileName" = "Tárhelyjelentés";
 "rings" = "Gyűrűk";
 "extraFolders" = "További mappák";
+"extraFoldersHint" = "Ezeket is méri, például egy másik meghajtón lévő mappát.";
 "showInMenuBar" = "Szabad hely mutatása a menüsoron";
 "openApp" = "%@ megnyitása";
 "lowSpaceWarning" = "Fogy a hely. A „Takarítás” és a „Nagy fájlok” megmutatja, mi mehet.";
 "excludedFolders" = "Kizárt mappák";
+"excludedFoldersHint" = "Minden mérésből és keresésből kimaradnak.";
 "none" = "Nincs";
 "add" = "Hozzáadás";
 "remove" = "Eltávolítás";

@@ -164,10 +164,12 @@
 "reportFileName" = "Lagerrapport";
 "rings" = "Ringe";
 "extraFolders" = "Yderligere mapper";
+"extraFoldersHint" = "Måles også, for eksempel en mappe på et andet drev.";
 "showInMenuBar" = "Vis ledig plads i menulinjen";
 "openApp" = "Åbn %@";
 "lowSpaceWarning" = "Pladsen er ved at slippe op. „Ryd op“ og „Store filer“ viser, hvad der kan fjernes.";
 "excludedFolders" = "Udelukkede mapper";
+"excludedFoldersHint" = "Udelades ved hver måling og søgning.";
 "none" = "Ingen";
 "add" = "Tilføj";
 "remove" = "Fjern";

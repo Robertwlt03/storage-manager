@@ -38,7 +38,7 @@ struct TemporaryFilesView: View {
     private func row(_ part: TemporaryAreaPart, in temporaryArea: Node) -> some View {
         let folder = temporaryArea.child(named: part.rawValue)
         return UI.NavigationRow(
-            part.title.translated, icon: .letter(part.rawValue),
+            part.title.translated, icon: .accent(part.symbol),
             detail: part.detail.translated,
             value: folder.map { folder in Format.bytes(folder.bytes) } ?? "–",
             action: folder.map { folder in { model.open(folder) } })

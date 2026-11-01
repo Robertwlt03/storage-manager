@@ -43,6 +43,8 @@ enum Theme {
         .cyan, .gray, .blue, .purple, .secondary,
     ]
     static let badgeSymbol = Color.white
+    /// Symbols and badges while the window is in the background, the gray of the sidebar's symbols.
+    static let inBackground = Color.gray
     static let freeSegment = Color.gray.opacity(0.25)
 
     // The app icon: a white ring on a blue gradient, drawn the same in light and dark mode.

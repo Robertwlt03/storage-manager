@@ -29,10 +29,7 @@ struct LargeFilesView: View {
                 with: Format.count(files.count), Format.bytes(totalBytes))
         )
         .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(.largeFiles) {
-                LayoutSwitcher(pane: .largeFiles)
-                minimumSizePicker
-            }
+            UI.PageHeader(.largeFiles) { minimumSizePicker }
         }
     }
 

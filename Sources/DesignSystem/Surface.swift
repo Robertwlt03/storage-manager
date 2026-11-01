@@ -1,12 +1,12 @@
 import AppKit
 import SwiftUI
 
-/// Card background: Liquid Glass, which follows the system's own setting (clear or tinted, System
-/// Settings › Appearance).
+/// Card background: the quiet fill macOS gives grouped content (System Settings, `GroupBox`).
+/// Liquid Glass belongs to the layer above the content (toolbar, sidebar), not to the cards.
 private struct SurfaceModifier: ViewModifier {
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: Layout.cardRadius, style: .continuous)
-        content.glassEffect(.regular, in: shape)
+        content.background(.quinary, in: shape)
     }
 }
 
@@ -33,10 +33,11 @@ private struct AppButtonModifier: ViewModifier {
         switch kind {
         case .quiet: content.buttonStyle(.borderless)
         case .content: content.buttonStyle(.plain)
+        // Buttons in the content are bordered like in Apple's own apps; glass is for the toolbar.
         case .primary:
-            content.buttonStyle(.glassProminent).tint(Theme.primaryFill.color)
+            content.buttonStyle(.borderedProminent).tint(Theme.primaryFill.color)
                 .controlSize(kind.size)
-        case .normal, .inline: content.buttonStyle(.glass).controlSize(kind.size)
+        case .normal, .inline: content.buttonStyle(.bordered).controlSize(kind.size)
         }
     }
 }

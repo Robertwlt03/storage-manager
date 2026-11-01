@@ -100,6 +100,16 @@ nonisolated enum TemporaryAreaPart: String, CaseIterable, Identifiable {
         }
     }
 
+    /// A symbol instead of the folder's one-letter name, which tells nobody what is inside.
+    var symbol: String {
+        switch self {
+        case .temporaryFiles: Symbols.temporaryArea
+        case .caches: Symbols.caches
+        case .appCopies: Symbols.copies
+        case .systemServices: Symbols.library
+        }
+    }
+
     var detail: TextKey {
         switch self {
         case .temporaryFiles: .temporaryFolderTDetail

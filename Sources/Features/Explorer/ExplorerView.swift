@@ -37,18 +37,22 @@ private struct FolderView: View {
         .smoothChanges(of: showsRings)
         .navigationTitle(node.isVirtual ? TextKey.paneExplorer.translated : node.displayName)
         .navigationSubtitle(subtitle)
-        .safeAreaInset(edge: .top, spacing: 0) {
-            UI.PageHeader(.explorer) { folderActions }
-        }
+        .safeAreaInset(edge: .top, spacing: 0) { header }
         .sheet(item: $informationEntry) { entry in InformationSheet(entry: entry) }
     }
 
-    @ViewBuilder private var folderActions: some View {
-        LayoutSwitcher(pane: .explorer)
-        if !node.isVirtual {
-            UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(node.path) }
-            UI.ActionButton(TextKey.info.translated) { informationEntry = .folder(node) }
+    /// The list of scanned places has no folder of its own to show or describe, so no buttons.
+    @ViewBuilder private var header: some View {
+        if node.isVirtual {
+            UI.PageHeader(.explorer) {}
+        } else {
+            UI.PageHeader(.explorer) { folderActions }
         }
+    }
+
+    @ViewBuilder private var folderActions: some View {
+        UI.ActionButton(TextKey.showInFinder.translated) { FinderService.reveal(node.path) }
+        UI.ActionButton(TextKey.info.translated) { informationEntry = .folder(node) }
     }
 
     private var subtitle: String {

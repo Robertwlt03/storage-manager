@@ -164,10 +164,12 @@
 "reportFileName" = "Opslagrapport";
 "rings" = "Ringen";
 "extraFolders" = "Extra mappen";
+"extraFoldersHint" = "Worden ook gemeten, bijvoorbeeld een map op een andere schijf.";
 "showInMenuBar" = "Toon vrije ruimte in de menubalk";
 "openApp" = "Open %@";
 "lowSpaceWarning" = "De ruimte raakt op. ‘Opruimen’ en ‘Grote bestanden’ laten zien wat weg kan.";
 "excludedFolders" = "Uitgesloten mappen";
+"excludedFoldersHint" = "Worden bij elke meting en zoekopdracht overgeslagen.";
 "none" = "Geen";
 "add" = "Voeg toe";
 "remove" = "Verwijder";

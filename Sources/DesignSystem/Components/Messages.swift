@@ -11,6 +11,7 @@ extension UI {
         }
         let text: String
         var style = Style.hint
+        @Environment(\.controlActiveState) private var activeState
 
         init(_ text: String, _ style: Style = .hint) {
             self.text = text
@@ -32,8 +33,10 @@ extension UI {
             }
         }
 
+        /// Gray like every symbol while the window is in the background (see `IconKind`); the muted
+        /// gray keeps the text readable.
         private func result(_ symbol: String, _ color: Color) -> some View {
-            Label(text, systemImage: symbol).foregroundStyle(color)
+            Label(text, systemImage: symbol).foregroundStyle(activeState == .key ? color : .muted)
                 .contentTransition(.symbolEffect(.replace))
         }
     }

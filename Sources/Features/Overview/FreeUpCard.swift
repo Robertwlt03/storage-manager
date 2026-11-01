@@ -73,7 +73,7 @@ struct FreeUpCard: View {
     /// next.
     private func row(_ step: FreeUpService.Step, detail: String, button: ButtonKind) -> some View {
         HStack(spacing: Space.item) {
-            UI.Icon(.symbol(step.pane.symbol)).foregroundStyle(.tint)
+            UI.Icon(.accent(step.pane.symbol))
             VStack(alignment: .leading, spacing: Space.hairline) {
                 Text(step.pane.title.translated)
                 Text(detail).textRole(.hint)
