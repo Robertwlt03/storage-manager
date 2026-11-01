@@ -1,61 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="190" viewBox="0 0 900 190" role="img" aria-label="Xcode: Opens Package.swift directly, without a separate Xcode project.; VS Code, Cursor and Zed: Understand Swift through the official Swift extension or out of the box.; Neovim, Helix and others: Talk to sourcekit-lsp, the language server that comes with Xcode.; JetBrains IDEs: Edit the files; building and checking happen in the terminal.">
-<svg xmlns="http://www.w3.org/2000/svg" x="-2" y="3" width="58.7" height="54.8"
-  viewBox="0 0 60 56" aria-hidden="true">
-<defs><linearGradient id="t0" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#5AA9FF"/><stop offset="1" stop-color="#0A6CF0"/>
-</linearGradient></defs>
-<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t0)"/>
-<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
-  stroke-opacity=".25"/>
-<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
-  stroke-linejoin="round"><path d="M14 4l6 6-2.5 2.5-6-6zM11.5 6.5L4 14l3 3 7.5-7.5"/></g>
-</svg>
-
+<rect x="0" y="4" width="40" height="40" rx="10" fill="#E8EEFB"/><g transform="translate(8 12) scale(1)" fill="none" stroke="#1F52DB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4l6 6-2.5 2.5-6-6zM11.5 6.5L4 14l3 3 7.5-7.5"/></g>
 <text x="58" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">Xcode</text>
 <text x="58" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">Opens Package.swift directly, without a separate</text>
 <text x="58" y="63" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">Xcode project.</text>
-<svg xmlns="http://www.w3.org/2000/svg" x="448" y="3" width="58.7" height="54.8"
-  viewBox="0 0 60 56" aria-hidden="true">
-<defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#8389FF"/><stop offset="1" stop-color="#4B4FD8"/>
-</linearGradient></defs>
-<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t1)"/>
-<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
-  stroke-opacity=".25"/>
-<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
-  stroke-linejoin="round"><path d="M8.5 8L4.5 12l4 4M15.5 8l4 4-4 4M13.5 5.5l-3 13"/></g>
-</svg>
-
+<rect x="450" y="4" width="40" height="40" rx="10" fill="#E8EEFB"/><g transform="translate(458 12) scale(1)" fill="none" stroke="#1F52DB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 8L4.5 12l4 4M15.5 8l4 4-4 4M13.5 5.5l-3 13"/></g>
 <text x="508" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">VS Code, Cursor and Zed</text>
 <text x="508" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">Understand Swift through the official Swift extension</text>
 <text x="508" y="63" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">or out of the box.</text>
-<svg xmlns="http://www.w3.org/2000/svg" x="-2" y="111" width="58.7" height="54.8"
-  viewBox="0 0 60 56" aria-hidden="true">
-<defs><linearGradient id="t2" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#5BD27A"/><stop offset="1" stop-color="#1E9B45"/>
-</linearGradient></defs>
-<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t2)"/>
-<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
-  stroke-opacity=".25"/>
-<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
-  stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9l3 3-3 3M12 15h5"/></g>
-</svg>
-
+<rect x="0" y="112" width="40" height="40" rx="10" fill="#E8EEFB"/><g transform="translate(8 120) scale(1)" fill="none" stroke="#1F52DB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9l3 3-3 3M12 15h5"/></g>
 <text x="58" y="130" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">Neovim, Helix and others</text>
 <text x="58" y="152" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">Talk to sourcekit-lsp, the language server that comes</text>
 <text x="58" y="171" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">with Xcode.</text>
-<svg xmlns="http://www.w3.org/2000/svg" x="448" y="111" width="58.7" height="54.8"
-  viewBox="0 0 60 56" aria-hidden="true">
-<defs><linearGradient id="t3" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#FFB340"/><stop offset="1" stop-color="#F07800"/>
-</linearGradient></defs>
-<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t3)"/>
-<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
-  stroke-opacity=".25"/>
-<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
-  stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18M9 8.5V20"/></g>
-</svg>
-
+<rect x="450" y="112" width="40" height="40" rx="10" fill="#E8EEFB"/><g transform="translate(458 120) scale(1)" fill="none" stroke="#1F52DB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18M9 8.5V20"/></g>
 <text x="508" y="130" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">JetBrains IDEs</text>
 <text x="508" y="152" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">Edit the files; building and checking happen in the</text>
 <text x="508" y="171" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">terminal.</text>

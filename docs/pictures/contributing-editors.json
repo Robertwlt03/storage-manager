@@ -4,25 +4,21 @@
   "items": [
     {
       "glyph": "hammer",
-      "color": "blue",
       "title": "Xcode",
       "text": "Opens Package.swift directly, without a separate Xcode project."
     },
     {
       "glyph": "code",
-      "color": "indigo",
       "title": "VS Code, Cursor and Zed",
       "text": "Understand Swift through the official Swift extension or out of the box."
     },
     {
       "glyph": "terminal",
-      "color": "green",
       "title": "Neovim, Helix and others",
       "text": "Talk to sourcekit-lsp, the language server that comes with Xcode."
     },
     {
       "glyph": "window",
-      "color": "orange",
       "title": "JetBrains IDEs",
       "text": "Edit the files; building and checking happen in the terminal."
     }

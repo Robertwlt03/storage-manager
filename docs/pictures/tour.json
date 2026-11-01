@@ -1,34 +1,34 @@
 {
   "kind": "slideshow",
-  "label": "A tour through Storage Manager: the overview, folders, large files, clean up, duplicates and unused apps",
+  "label": "A tour through Storage Manager in light appearance: the overview, folders, large files, clean up, duplicates and unused apps",
   "pictures": [
     {
-      "file": "{shots}/overview-{theme}.png",
+      "file": "{shots}/overview-light.png",
       "caption": "Overview",
       "line": "How much you can free, and the steps to get there."
     },
     {
-      "file": "{shots}/explorer-{theme}.png",
+      "file": "{shots}/explorer-light.png",
       "caption": "Folders",
       "line": "Every folder sorted by size; a click opens it."
     },
     {
-      "file": "{shots}/largeFiles-{theme}.png",
+      "file": "{shots}/largeFiles-light.png",
       "caption": "Large Files",
       "line": "Everything above the size you choose, as tiles or a list."
     },
     {
-      "file": "{shots}/cleaner-{theme}.png",
+      "file": "{shots}/cleaner-light.png",
       "caption": "Clean Up",
       "line": "Pick what may go. Running apps and macOS stay untouched."
     },
     {
-      "file": "{shots}/duplicates-{theme}.png",
+      "file": "{shots}/duplicates-light.png",
       "caption": "Duplicates",
       "line": "Extra copies go to the Trash, after you confirm."
     },
     {
-      "file": "{shots}/apps-{theme}.png",
+      "file": "{shots}/apps-light.png",
       "caption": "Unused Apps",
       "line": "Apps you have not opened for months, with their size."
     }

@@ -40,23 +40,25 @@ with `../../`:
 
 ## <img src="../../assets/icons/features.svg" height="33" align="absmiddle" alt="">The kinds
 
-Every description names its `kind`. Most kinds take a list of `items`, and every item may have its own glyph and
-color. A `label` is optional: without one, the picture's text for screen readers is built from the items.
+Every description names its `kind`. Most kinds take a list of `items`, each with a glyph. The pictures stay quiet on
+purpose: the glyphs share the accent color on a pale tile, nothing paints a background of its own, and so the colorful
+section icons remain the only accents that guide the eye. A `label` is optional: without one, the picture's text for
+screen readers is built from the items.
 
 ### Button
 
-One large button with a glyph, a title and a small line, such as the download button of the README.
+A macOS push button with a glyph and a title, the size of a regular button, such as the three below the README's
+banner. `"style": "primary"` fills it in the accent color for the one main action; the others stay outlined. A guide
+wraps it in a link and shows several in a row.
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/download-dark.svg">
-    <img src="../../assets/pictures/download-light.svg" alt="Preview: the download button" width="380">
-  </picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/button-download-dark.svg"><img src="../../assets/pictures/button-download-light.svg" alt="Preview: the primary download button" height="40"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/button-install-dark.svg"><img src="../../assets/pictures/button-install-light.svg" alt="Preview: an outlined button" height="40"></picture>
 </p>
 
 ```json
-{"kind": "button", "title": "Download for Mac", "line": "Free · macOS 27 · Apple silicon",
- "glyph": "download", "color": "blue", "label": "Download Storage Manager for Mac"}
+{"kind": "button", "style": "primary", "glyph": "download", "title": "Download for Mac",
+ "label": "Download Storage Manager for Mac"}
 ```
 
 ### Grid
@@ -71,7 +73,7 @@ sentence, so nothing is cut off.
 
 ```json
 {"kind": "grid", "columns": 4, "items": [
-  {"glyph": "shield", "color": "green", "title": "Private",
+  {"glyph": "shield", "title": "Private",
    "text": "Reads only names and sizes and sends nothing to the internet."}]}
 ```
 
@@ -117,6 +119,21 @@ after the prompt, `output` stands in the normal color, a `result` in green and a
  "lines": [["command", "make run"], ["result", "✔ Built  Storage Manager.app"]]}
 ```
 
+### Compare
+
+The same page twice, light on the left and dark on the right, with a divider that slides to and fro by itself. On
+GitHub a picture cannot be dragged, so the divider moves on its own.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/light-and-dark-dark.svg">
+  <img src="../../assets/pictures/light-and-dark-light.svg" alt="Preview: light and dark with a sliding divider" width="100%">
+</picture>
+
+```json
+{"kind": "compare", "light": "{shots}/overview-light.png", "dark": "{shots}/overview-dark.png",
+ "caption": "Light and dark", "line": "The app follows the appearance of your Mac.", "label": "…"}
+```
+
 ### Flow
 
 Steps from left to right with arrows between them, numbered by themselves.
@@ -128,12 +145,12 @@ Steps from left to right with arrows between them, numbered by themselves.
 
 ```json
 {"kind": "flow", "items": [
-  {"glyph": "search", "color": "blue", "title": "Scan", "text": "ScanService walks one area once."}]}
+  {"glyph": "search", "title": "Scan", "text": "ScanService walks one area once."}]}
 ```
 
 ### Layers
 
-Stacked bars for parts that build on each other, the top one first, each tinted in its color.
+Stacked rows for parts that build on each other, the top one first.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/architecture-layers-dark.svg">
@@ -142,12 +159,12 @@ Stacked bars for parts that build on each other, the top one first, each tinted 
 
 ```json
 {"kind": "layers", "items": [
-  {"glyph": "bolt", "color": "red", "title": "App", "text": "The start with window, menus and RootView."}]}
+  {"glyph": "bolt", "title": "App", "text": "The start with window, menus and RootView."}]}
 ```
 
 ### Slideshow
 
-Pictures that fade into each other, with a caption, a small line and dots for where you are. A picture is an SVG of
+Pictures that fade into each other on the page itself, with a caption, a small line and dots for where you are. A picture is an SVG of
 the project, which is drawn in sharp, or a screenshot, which becomes a small JPEG inside the SVG. In `file`,
 `{shots}` stands for the folder of screenshots and `{theme}` for light or dark.
 
@@ -163,22 +180,14 @@ the project, which is drawn in sharp, or a screenshot, which becomes a small JPE
   {"file": "{shots}/overview-{theme}.png", "caption": "Overview", "line": "How much you can free."}]}
 ```
 
-## <img src="../../assets/icons/palette.svg" height="33" align="absmiddle" alt="">Glyphs and colors
+## <img src="../../assets/icons/palette.svg" height="33" align="absmiddle" alt="">Glyphs
 
-A glyph is one of these names, or SVG shapes of your own in a 24-point grid, drawn in white strokes like the section
-icons. A new one that more pictures need belongs in `GLYPHS` in the script.
+A glyph is one of these names, or SVG shapes of your own in a 24-point grid, drawn in strokes like the section icons.
+A new one that more pictures need belongs in `GLYPHS` in the script.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/pictures-glyphs-dark.svg">
   <img src="../../assets/pictures/pictures-glyphs-light.svg" alt="Every glyph with its name" width="100%">
-</picture>
-
-The colors are the ones of the section icons in `scripts/doc-assets.py`, each a gradient from the top to the bottom
-of the tile:
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/pictures-colors-dark.svg">
-  <img src="../../assets/pictures/pictures-colors-light.svg" alt="Every color with its name and its two shades" width="100%">
 </picture>
 
 ## <img src="../../assets/icons/steps.svg" height="33" align="absmiddle" alt="">Adding a picture
@@ -194,6 +203,6 @@ of the tile:
 
 <p align="center">
   <b>Storage Manager · See at a glance where your storage goes.</b><br>
-  <sub><a href="../../README.md">Overview</a> · <a href="../../CONTRIBUTING.md">Contributing</a> · <a href="../../ARCHITECTURE.md">Architecture</a> · <a href="../../CODE_STYLE.md">Code rules</a> · <a href="../../CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="../../CLAUDE.md">Working with Claude</a></sub><br>
+  <sub><a href="../../README.md">Overview</a> · <a href="../../CONTRIBUTING.md">Contributing</a> · <a href="../../ARCHITECTURE.md">Architecture</a> · <a href="../../CODE_STYLE.md">Code rules</a> · <a href="../../docs/pictures/README.md">Pictures</a> · <a href="../../CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="../../CLAUDE.md">Working with Claude</a></sub><br>
   <sub>© 2026 Robertwlt03 · Released under the <a href="../../LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

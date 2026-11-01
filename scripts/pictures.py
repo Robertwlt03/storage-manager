@@ -7,7 +7,7 @@ Needs:  macOS (sips makes screenshots small); for the README's tour the demo pag
 Every file docs/pictures/<name>.json describes one picture, and the script draws it as
 assets/pictures/<name>-light.svg and -dark.svg; a guide shows them through <picture>, so GitHub
 picks the one that fits. The "kind" of a description says what it draws:
-  button     a large button, such as the download button (title, line, glyph, color)
+  button     a macOS push button with a glyph and a title; "style": "primary" fills it
   grid       items in columns without frames: a tile with a glyph, a title and a sentence;
              with "code": true the title is a command or path in a monospace chip instead
   chips      a flag (names from scripts/flags.py) or a short code in a chip, with a name and a
@@ -18,9 +18,10 @@ picks the one that fits. The "kind" of a description says what it draws:
   layers     stacked bars, the top one first, for parts that build on each other
   slideshow  pictures that fade into each other with a caption; "file" may name {shots} for
              the screenshots and {theme} for light or dark
-Glyphs are names from GLYPHS below or SVG shapes in a 24-point grid; colors are the names of
-doc-assets.py, so the pictures match the section icons. Slideshows and terminals move with
-SVG's own animation, which GitHub plays in a guide.
+  compare    one page light and dark ("light", "dark"), with a divider sliding between them
+Glyphs are names from GLYPHS below or SVG shapes in a 24-point grid, drawn in the accent color on
+a pale tile; no picture paints a background, so each sits on the page like text. Slideshows,
+comparisons and terminals move with SVG's own animation, which GitHub plays in a guide.
 """
 
 import argparse
@@ -45,22 +46,28 @@ OUT = PROJECT / "assets" / "pictures"
 SHOTS = PROJECT / "snapshots" / "current"
 FONT = doc_assets.FONT
 MONO = "ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace"
-# Apple's text colors; the shadow is the app icon's blue in light and black in dark.
+# Apple's text and accent colors; no picture paints a background of its own, so each one sits on
+# the page like the text around it, and the shadow is how strongly a window lifts off the page.
 THEMES = {
     "light": dict(text="#1D1D1F", muted="#6E6E73", chip="#E8EEFB", chip_text="#1F52DB",
                   window="#FFFFFF", bar="#F5F5F7", edge="#D2D2D7", prompt="#1E9B45",
-                  output="#3A3A3C", success="#1E9B45", quiet="#8E8E93", shadow="#1F52DB",
-                  backdrop=("#F7FAFF", "#DCE7FF"), tint=".10"),
+                  output="#3A3A3C", success="#1E9B45", quiet="#8E8E93", shadow=".18",
+                  accent="#007AFF", primary=("#3D95FF", "#0870EB"),
+                  secondary=("#FFFFFF", "#F2F2F4"),
+                  rim="#000000", rim_opacity=".14", gloss=".55", drop=".16"),
     "dark": dict(text="#F5F5F7", muted="#A1A1A6", chip="#1F2A44", chip_text="#8DB8FF",
                  window="#1C1C1E", bar="#2C2C2E", edge="#3A3A3C", prompt="#5BD27A",
-                 output="#E5E5EA", success="#5BD27A", quiet="#8E8E93", shadow="#000000",
-                 backdrop=("#1A2238", "#0B1020"), tint=".22"),
+                 output="#E5E5EA", success="#5BD27A", quiet="#8E8E93", shadow=".55",
+                 accent="#0A84FF", primary=("#3A97FF", "#0A78F0"), secondary=("#5C5C60", "#48484C"),
+                 rim="#FFFFFF", rim_opacity=".08", gloss=".16", drop=".45"),
 }
 WIDTH = 900  # a guide's width on GitHub, roughly; the pictures scale with the page
 CHIP_ROW, TERMINAL_LINE, LAYER_ROW, LINE, ROW_GAP = 52, 24, 64, 19, 26
 LETTER, MONO_LETTER = 7.0, 8.4  # rough widths of a letter at 13.5 and 14 points, for wrapping
 SECONDS_PER_PICTURE, FADE_SECONDS, SECONDS_PER_LETTER = 3.5, 0.6, 0.02
-SCREENSHOT_PIXELS, SCREENSHOT_QUALITY = 1200, 70  # sharp at a guide's width, light to load
+SCREENSHOT_PIXELS, SCREENSHOT_QUALITY = 1640, 82  # sharp on a Retina screen at a guide's width
+BUTTON_HEIGHT, BUTTON_LETTER, BUTTON_MARGIN = 32, 7.9, 4  # a large macOS push button, 14 points
+SECONDS_PER_COMPARISON = 9
 
 GLYPHS = {
     "overview": '<path d="M5 20v-7M10 20V6M15 20v-9M20 20V9"/>',
@@ -122,15 +129,15 @@ def glyph_shapes(glyph: str) -> str:
     return GLYPHS.get(glyph, glyph)
 
 
-def tile(left: float, top: float, color: str, glyph: str, number: int, size: float = 44) -> str:
-    """The section icon of the guides, scaled so its tile is size pixels wide."""
-    top_color, bottom_color = doc_assets.COLORS[color]
-    icon = doc_assets.ICON_TEMPLATE.format(
-        top=top_color, bottom=bottom_color, glyph=glyph_shapes(glyph))
-    unique = icon.replace('id="t"', f'id="t{number}"').replace("url(#t)", f"url(#t{number})")
-    scale = size / 45
-    placed = f'x="{left:g}" y="{top:g}" width="{60 * scale:.1f}" height="{56 * scale:.1f}"'
-    return unique.replace('width="60" height="56"', placed)
+def tile(left: float, top: float, glyph: str, colors: dict, size: float = 40) -> str:
+    """A quiet tile: the glyph in the accent color on a pale square, the same in every picture,
+    so the eye follows the words and the colorful section icons stay the only accents."""
+    scale = size / 40
+    return (f'<rect x="{left:g}" y="{top:g}" width="{size:g}" height="{size:g}" '
+            f'rx="{size * 0.25:g}" fill="{colors["chip"]}"/>'
+            f'<g transform="translate({left + 8 * scale:g} {top + 8 * scale:g}) scale({scale:g})" '
+            f'fill="none" stroke="{colors["chip_text"]}" stroke-width="1.8" stroke-linecap="round" '
+            f'stroke-linejoin="round">{glyph_shapes(glyph)}</g>')
 
 
 def svg(width: float, height: float, label: str, body: list[str]) -> str:
@@ -161,23 +168,34 @@ def label_of(items: list[dict]) -> str:
 
 
 def button(spec: dict, colors: dict) -> str:
-    top, bottom = doc_assets.COLORS[spec.get("color", "blue")]
+    """A macOS push button as AppKit draws it: a faint gradient, a light edge at the top, a thin
+    rim and a soft shadow below; in the accent color when "primary", in the button gray otherwise.
+    The picture leaves BUTTON_MARGIN around the button for its shadow."""
+    primary = spec.get("style") == "primary"
+    width = 50 + len(spec["title"]) * BUTTON_LETTER
+    top, bottom = colors["primary" if primary else "secondary"]
+    ink = "#FFFFFF" if primary else colors["text"]
+    box = (f'x="{BUTTON_MARGIN}" y="{BUTTON_MARGIN - 1}" width="{width:g}" '
+           f'height="{BUTTON_HEIGHT}" rx="7"')
     body = [
-        f'<defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1">'
-        f'<stop offset="0" stop-color="{top}"/><stop offset="1" stop-color="{bottom}"/>'
-        f'</linearGradient><filter id="s" x="-20%" y="-40%" width="140%" height="200%">'
-        f'<feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="{colors["shadow"]}" '
-        f'flood-opacity=".30"/></filter></defs>',
-        '<g filter="url(#s)">'
-        '<rect x="20" y="12" width="340" height="72" rx="20" fill="url(#b)"/></g>',
-        '<rect x="20.5" y="12.5" width="339" height="71" rx="19.5" fill="none" stroke="#fff" '
-        'stroke-opacity=".28"/>',
-        '<g transform="translate(44 30) scale(1.5)" fill="none" stroke="#fff" stroke-width="2" '
-        f'stroke-linecap="round" stroke-linejoin="round">{glyph_shapes(spec["glyph"])}</g>',
-        text(100, 46, spec["title"], 24, "#FFFFFF", 600),
-        text(100, 70, spec["line"], 14, "#E8F0FF"),
+        f'<defs><linearGradient id="face" x1="0" y1="0" x2="0" y2="1"><stop offset="0" '
+        f'stop-color="{top}"/><stop offset="1" stop-color="{bottom}"/></linearGradient>'
+        f'<filter id="lift" x="-10%" y="-20%" width="120%" height="160%"><feDropShadow dx="0" '
+        f'dy=".8" stdDeviation=".9" flood-color="#000000" flood-opacity="{colors["drop"]}"/>'
+        f'</filter></defs>',
+        f'<rect {box} fill="url(#face)" filter="url(#lift)"/>',
+        f'<rect {box} fill="none" stroke="{colors["rim"]}" '
+        f'stroke-opacity="{colors["rim_opacity"]}" stroke-width=".8"/>',
+        f'<path d="M{BUTTON_MARGIN + 6} {BUTTON_MARGIN - .4}h{width - 12:g}" stroke="#FFFFFF" '
+        f'stroke-opacity="{colors["gloss"]}" stroke-width=".8" stroke-linecap="round"/>',
+        f'<g transform="translate({BUTTON_MARGIN + 13} {BUTTON_MARGIN + 7}) scale(.75)" '
+        f'fill="none" stroke="{ink}" stroke-width="2.2" stroke-linecap="round" '
+        f'stroke-linejoin="round">'
+        f'{glyph_shapes(spec["glyph"])}</g>',
+        text(BUTTON_MARGIN + 39, BUTTON_MARGIN + 21.5, spec["title"], 14, ink, 500),
     ]
-    return svg(380, 104, spec["label"], body)
+    size = (width + 2 * BUTTON_MARGIN, BUTTON_HEIGHT + 2 * BUTTON_MARGIN)
+    return svg(*size, spec.get("label", spec["title"]), body)
 
 
 def grid(spec: dict, colors: dict) -> str:
@@ -190,15 +208,14 @@ def grid(spec: dict, colors: dict) -> str:
     for number, item in enumerate(items):
         left, top = number % columns * column_width, number // columns * row
         place = (left, top, column_width, colors)
-        body += code_item(item, *place) if code else tile_item(item, number, *place)
+        body += code_item(item, *place) if code else tile_item(item, *place)
     height = rows_of(items, columns) * row - ROW_GAP
     return svg(WIDTH, height, spec.get("label", label_of(items)), body)
 
 
-def tile_item(item: dict, number: int, left: float, top: float, width: float,
-              colors: dict) -> list[str]:
+def tile_item(item: dict, left: float, top: float, width: float, colors: dict) -> list[str]:
     lines = wrapped(item["text"], width - 76)
-    return [tile(left - 2, top + 3, item["color"], item["glyph"], number),
+    return [tile(left, top + 4, item["glyph"], colors),
             text(left + 58, top + 22, item["title"], 16, colors["text"], 600)] + [
         text(left + 58, top + 44 + row * LINE, line, 13.5, colors["muted"])
         for row, line in enumerate(lines)]
@@ -249,7 +266,7 @@ def flow(spec: dict, colors: dict) -> str:
     for number, step in enumerate(steps):
         middle = number * column_width + column_width / 2
         lines = wrapped(step["text"], column_width - 36)
-        body += [tile(middle - 26.4, 0, step["color"], step["glyph"], number, 48),
+        body += [tile(middle - 22, 0, step["glyph"], colors, 44),
                  text(middle, 80, f"{number + 1} · {step['title']}", 15, colors["text"], 600,
                       "middle")]
         body += [text(middle, 102 + row * 19, line, 13.5, colors["muted"], 400, "middle")
@@ -269,10 +286,9 @@ def layers(spec: dict, colors: dict) -> str:
     body = []
     for number, row in enumerate(rows):
         top = number * LAYER_ROW
-        tint = doc_assets.COLORS[row["color"]][1]
-        body += [f'<rect x="0" y="{top:g}" width="{WIDTH}" height="{LAYER_ROW - 10}" rx="14" '
-                 f'fill="{tint}" fill-opacity="{colors["tint"]}"/>',
-                 tile(14, top + 9, row["color"], row["glyph"], number, 36),
+        body += [f'<rect x=".5" y="{top + .5:g}" width="{WIDTH - 1}" height="{LAYER_ROW - 11}" '
+                 f'rx="12" fill="{colors["window"]}" stroke="{colors["edge"]}"/>',
+                 tile(14, top + 9, row["glyph"], colors, 36),
                  text(66, top + 24, row["title"], 15, colors["text"], 600),
                  text(66, top + 43, row["text"], 13, colors["muted"])]
     return svg(WIDTH, len(rows) * LAYER_ROW - 10, spec.get("label", label_of(rows)), body)
@@ -328,16 +344,17 @@ def terminal(spec: dict, colors: dict) -> str:
 
 
 def appearing(number: int, count: int) -> str:
-    """Picture number fades in over the one before and stays until the next one covers it; the
-    first lies at the bottom and shows again when the last fades out, so the show loops."""
-    if number == 0:
-        return ""
+    """Picture number fades in while the one before fades out, stays, and fades out while the
+    next one comes; the first fades back in at the end, so the show loops."""
     total = count * SECONDS_PER_PICTURE
     start, end = number * SECONDS_PER_PICTURE, (number + 1) * SECONDS_PER_PICTURE
-    last = number == count - 1
-    values = "0;0;1;1;0" if last else "0;0;1;1;0;0"
-    moments = [0, start - FADE_SECONDS, start, total - FADE_SECONDS if last else end]
-    moments += [total] if last else [end + 0.01, total]
+    if number == 0:
+        values, moments = "1;1;0;0;1", [0, end - FADE_SECONDS, end, total - FADE_SECONDS, total]
+    elif number == count - 1:
+        values, moments = "0;0;1;1;0", [0, start - FADE_SECONDS, start, total - FADE_SECONDS, total]
+    else:
+        values = "0;0;1;1;0;0"
+        moments = [0, start - FADE_SECONDS, start, end - FADE_SECONDS, end, total]
     key_times = ";".join(f"{moment / total:.4f}" for moment in moments)
     return (f'<animate attributeName="opacity" values="{values}" keyTimes="{key_times}" '
             f'dur="{total:g}s" repeatCount="indefinite"/>')
@@ -359,19 +376,13 @@ def slideshow(spec: dict, colors: dict, theme: str, shots: Path) -> str:
     files = [PROJECT / item["file"].format(shots=shots, theme=theme) for item in spec["pictures"]]
     area = max(picture_height(file, width) for file in files)
     height = 36 + area + 104
-    light, deep = colors["backdrop"]
-    body = [f'<defs><linearGradient id="bd" x1="0" y1="0" x2="1" y2="1">'
-            f'<stop offset="0" stop-color="{light}"/><stop offset="1" stop-color="{deep}"/>'
-            f'</linearGradient><filter id="sh" x="-10%" y="-10%" width="120%" height="130%">'
-            f'<feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="{colors["shadow"]}" '
-            f'flood-opacity=".25"/></filter></defs>']
+    body = [shadow(colors)]
     for number, (item, file) in enumerate(zip(spec["pictures"], files)):
         left, top = (WIDTH - width) / 2, 36 + (area - picture_height(file, width)) / 2
         drawn = (drawing(file, left, top, width) if file.suffix == ".svg"
                  else photo(file, (left, top, width), spec.get("corner", 13), number))
         hidden = ' opacity="0"' if number else ""
-        body.append(f'<g{hidden}>{appearing(number, len(files))}'
-                    f'<rect width="{WIDTH}" height="{height:g}" rx="24" fill="url(#bd)"/>{drawn}'
+        body.append(f'<g{hidden}>{appearing(number, len(files))}{drawn}'
                     + text(WIDTH / 2, height - 62, item["caption"], 20, colors["text"], 600,
                            "middle")
                     + text(WIDTH / 2, height - 38, item["line"], 14, colors["muted"], 400,
@@ -379,6 +390,47 @@ def slideshow(spec: dict, colors: dict, theme: str, shots: Path) -> str:
                     + dots(number, len(files), height, colors) + "</g>")
     label = spec.get("label", "; ".join(item["caption"] for item in spec["pictures"]))
     return svg(WIDTH, height, label, body)
+
+
+def shadow(colors: dict) -> str:
+    """The soft shadow under a window, as macOS draws it."""
+    return (f'<defs><filter id="sh" x="-10%" y="-10%" width="120%" height="130%">'
+            f'<feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" '
+            f'flood-opacity="{colors["shadow"]}"/></filter></defs>')
+
+
+def compare(spec: dict, colors: dict, theme: str, shots: Path) -> str:
+    """Two screenshots of the same page, light on the left and dark on the right, with a divider
+    that slides to and fro by itself, since a guide on GitHub cannot be dragged."""
+    del theme  # the comparison shows both appearances in either version
+    width = WIDTH - 90
+    light, dark = (PROJECT / spec[side].format(shots=shots) for side in ("light", "dark"))
+    height = picture_height(light, width)
+    left, top = 45, 30
+    middle = left + width / 2
+    reach = ";".join(f"{left + width * share:.1f}" for share in (.5, .82, .18, .5))
+    timing = (f'dur="{SECONDS_PER_COMPARISON}s" repeatCount="indefinite" calcMode="spline" '
+              f'keyTimes="0;.33;.67;1" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1"')
+    widths = ";".join(f"{float(x) - left:.1f}" for x in reach.split(";"))
+    moves = ";".join(f"{float(x) - middle:.1f} 0" for x in reach.split(";"))
+    knob = top + height / 2
+    body = [shadow(colors), photo(dark, (left, top, width), 13, 0),
+            f'<defs><clipPath id="half"><rect x="{left}" y="{top}" width="{width / 2:g}" '
+            f'height="{height:.1f}"><animate attributeName="width" values="{widths}" {timing}/>'
+            f'</rect></clipPath></defs>',
+            f'<g clip-path="url(#half)">{photo(light, (left, top, width), 13, 1)}</g>',
+            f'<line x1="{middle:g}" y1="{top}" x2="{middle:g}" y2="{top + height:.1f}" '
+            f'stroke="#FFFFFF" stroke-width="2"><animate attributeName="x1" values="{reach}" '
+            f'{timing}/><animate attributeName="x2" values="{reach}" {timing}/></line>',
+            f'<g><animateTransform attributeName="transform" type="translate" '
+            f'values="{moves}" {timing}/>'
+            f'<circle cx="{middle:g}" cy="{knob:.1f}" r="15" fill="#FFFFFF" '
+            f'stroke="{colors["edge"]}"/><path d="M{middle - 4:g} {knob - 5:.1f}l-5 5 5 5'
+            f'M{middle + 4:g} {knob - 5:.1f}l5 5-5 5" fill="none" stroke="#3A3A3C" '
+            f'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>',
+            text(WIDTH / 2, top + height + 50, spec["caption"], 20, colors["text"], 600, "middle"),
+            text(WIDTH / 2, top + height + 74, spec["line"], 14, colors["muted"], 400, "middle")]
+    return svg(WIDTH, top + height + 90, spec["label"], body)
 
 
 def drawing(path: Path, left: float, top: float, width: float) -> str:
@@ -428,7 +480,8 @@ def draw(description: Path, shots: Path) -> list[Path]:
     drawn = []
     for theme, colors in THEMES.items():
         kind = spec["kind"]
-        content = (slideshow(spec, colors, theme, shots) if kind == "slideshow"
+        moving = {"slideshow": slideshow, "compare": compare}
+        content = (moving[kind](spec, colors, theme, shots) if kind in moving
                    else KINDS[kind](spec, colors))
         path = OUT / f"{description.stem}-{theme}.svg"
         path.write_text(content)

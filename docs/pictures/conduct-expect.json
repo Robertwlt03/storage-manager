@@ -4,25 +4,21 @@
   "items": [
     {
       "glyph": "heart",
-      "color": "pink",
       "title": "Kind and patient",
       "text": "We treat each other kindly, even when we disagree."
     },
     {
       "glyph": "code",
-      "color": "indigo",
       "title": "Ideas, not people",
       "text": "We criticize ideas and code, but never people."
     },
     {
       "glyph": "sprout",
-      "color": "green",
       "title": "Help newcomers",
       "text": "Every one of us was a beginner once."
     },
     {
       "glyph": "lock",
-      "color": "blue",
       "title": "Respect privacy",
       "text": "No one else's data, not even in screenshots."
     }

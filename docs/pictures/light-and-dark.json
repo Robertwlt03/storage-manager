@@ -1,0 +1,8 @@
+{
+  "kind": "compare",
+  "light": "{shots}/overview-light.png",
+  "dark": "{shots}/overview-dark.png",
+  "caption": "Light and dark",
+  "line": "The app follows the appearance of your Mac.",
+  "label": "The overview in light appearance on the left and in dark appearance on the right, with a divider sliding between them"
+}

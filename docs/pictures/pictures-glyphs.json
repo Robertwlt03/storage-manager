@@ -5,139 +5,116 @@
   "items": [
     {
       "glyph": "overview",
-      "color": "blue",
       "title": "overview",
       "text": ""
     },
     {
       "glyph": "folders",
-      "color": "sky",
       "title": "folders",
       "text": ""
     },
     {
       "glyph": "search",
-      "color": "indigo",
       "title": "search",
       "text": ""
     },
     {
       "glyph": "clean",
-      "color": "purple",
       "title": "clean",
       "text": ""
     },
     {
       "glyph": "duplicates",
-      "color": "pink",
       "title": "duplicates",
       "text": ""
     },
     {
       "glyph": "clock",
-      "color": "red",
       "title": "clock",
       "text": ""
     },
     {
       "glyph": "menu bar",
-      "color": "orange",
       "title": "menu bar",
       "text": ""
     },
     {
       "glyph": "widget",
-      "color": "brown",
       "title": "widget",
       "text": ""
     },
     {
       "glyph": "document",
-      "color": "green",
       "title": "document",
       "text": ""
     },
     {
       "glyph": "shield",
-      "color": "teal",
       "title": "shield",
       "text": ""
     },
     {
       "glyph": "bolt",
-      "color": "gray",
       "title": "bolt",
       "text": ""
     },
     {
       "glyph": "code",
-      "color": "slate",
       "title": "code",
       "text": ""
     },
     {
       "glyph": "globe",
-      "color": "blue",
       "title": "globe",
       "text": ""
     },
     {
       "glyph": "download",
-      "color": "sky",
       "title": "download",
       "text": ""
     },
     {
       "glyph": "hammer",
-      "color": "indigo",
       "title": "hammer",
       "text": ""
     },
     {
       "glyph": "terminal",
-      "color": "purple",
       "title": "terminal",
       "text": ""
     },
     {
       "glyph": "tree",
-      "color": "pink",
       "title": "tree",
       "text": ""
     },
     {
       "glyph": "box",
-      "color": "red",
       "title": "box",
       "text": ""
     },
     {
       "glyph": "window",
-      "color": "orange",
       "title": "window",
       "text": ""
     },
     {
       "glyph": "heart",
-      "color": "brown",
       "title": "heart",
       "text": ""
     },
     {
       "glyph": "people",
-      "color": "green",
       "title": "people",
       "text": ""
     },
     {
       "glyph": "lock",
-      "color": "teal",
       "title": "lock",
       "text": ""
     },
     {
       "glyph": "sprout",
-      "color": "gray",
       "title": "sprout",
       "text": ""
     }
