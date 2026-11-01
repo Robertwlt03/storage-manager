@@ -1,0 +1,51 @@
+{
+  "kind": "grid",
+  "code": true,
+  "columns": 2,
+  "items": [
+    {
+      "title": "Sources/App",
+      "text": "The launch with window, menus and RootView."
+    },
+    {
+      "title": "Sources/Core",
+      "text": "Fixed values and choices: pages, settings, paths, constants."
+    },
+    {
+      "title": "Sources/Models",
+      "text": "The data: Node, Entry, categories, cleanup kinds, app usage."
+    },
+    {
+      "title": "Sources/Services",
+      "text": "The work without any interface: scan, search, clean up, report."
+    },
+    {
+      "title": "Sources/State",
+      "text": "AppModel, which brings the services together."
+    },
+    {
+      "title": "Sources/DesignSystem",
+      "text": "The UI building blocks with tokens, theme, surfaces and motion."
+    },
+    {
+      "title": "Sources/Features",
+      "text": "Every page in a folder of its own, plus the shared table and grid."
+    },
+    {
+      "title": "Sources/Localization",
+      "text": "TextKey and, in Resources, the texts in 28 languages."
+    },
+    {
+      "title": "Sources/Diagnostics",
+      "text": "Self test, stress test, demo data and the page list."
+    },
+    {
+      "title": "Widget",
+      "text": "The widget, a target of its own with a small design system."
+    },
+    {
+      "title": "Tests",
+      "text": "Swift Testing for tree, search, pages, design, contrast and texts."
+    }
+  ]
+}

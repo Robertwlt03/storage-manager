@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="310" viewBox="0 0 900 310" role="img" aria-label="The layers from top to bottom: the app&#x27;s start, the pages, the design system and the state, models and services, and the foundation">
+<rect x="0" y="0" width="900" height="54" rx="14" fill="#D92C20" fill-opacity=".10"/>
+<svg xmlns="http://www.w3.org/2000/svg" x="14" y="9" width="48.0" height="44.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t0" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#FF6B61"/><stop offset="1" stop-color="#D92C20"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t0)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><path d="M13 3L5 13.5h6L10 21l8-10.5h-6z"/></g>
+</svg>
+
+<text x="66" y="24" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">App</text>
+<text x="66" y="43" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">The start with window, menus and RootView: the very top.</text>
+<rect x="0" y="64" width="900" height="54" rx="14" fill="#F07800" fill-opacity=".10"/>
+<svg xmlns="http://www.w3.org/2000/svg" x="14" y="73" width="48.0" height="44.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#FFB340"/><stop offset="1" stop-color="#F07800"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t1)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18M9 8.5V20"/></g>
+</svg>
+
+<text x="66" y="88" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">Features</text>
+<text x="66" y="107" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">Every page in a folder of its own; they use everything below.</text>
+<rect x="0" y="128" width="900" height="54" rx="14" fill="#8B3FE0" fill-opacity=".10"/>
+<svg xmlns="http://www.w3.org/2000/svg" x="14" y="137" width="48.0" height="44.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t2" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#C58BFF"/><stop offset="1" stop-color="#8B3FE0"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t2)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="66" y="152" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">DesignSystem and State</text>
+<text x="66" y="171" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">The UI building blocks, and AppModel that brings the services together.</text>
+<rect x="0" y="192" width="900" height="54" rx="14" fill="#12957B" fill-opacity=".10"/>
+<svg xmlns="http://www.w3.org/2000/svg" x="14" y="201" width="48.0" height="44.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t3" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#56DBBE"/><stop offset="1" stop-color="#12957B"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t3)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><path d="M4 7.5L12 3l8 4.5v9L12 21l-8-4.5z"/><path d="M4 7.5L12 12l8-4.5M12 12v9"/></g>
+</svg>
+
+<text x="66" y="216" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">Models and Services</text>
+<text x="66" y="235" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">The data and the actual work, each without any interface.</text>
+<rect x="0" y="256" width="900" height="54" rx="14" fill="#0A6CF0" fill-opacity=".10"/>
+<svg xmlns="http://www.w3.org/2000/svg" x="14" y="265" width="48.0" height="44.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t4" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#5AA9FF"/><stop offset="1" stop-color="#0A6CF0"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t4)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><path d="M12 21v-9M12 12c0-4-3-6.5-7-6.5 0 4 3 6.5 7 6.5zM12 14c0-3.5 2.6-6 6.5-6 0 3.5-2.6 6-6.5 6z"/></g>
+</svg>
+
+<text x="66" y="280" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">Core, Localization and tokens</text>
+<text x="66" y="299" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">Fixed values, texts, spacing, colors and symbols: everyone may use them.</text>
+</svg>

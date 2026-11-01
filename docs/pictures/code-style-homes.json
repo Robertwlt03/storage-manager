@@ -1,0 +1,27 @@
+{
+  "kind": "grid",
+  "code": true,
+  "columns": 2,
+  "items": [
+    {
+      "title": "Tokens.swift",
+      "text": "Spacing, icon sizes, measurements and symbol names."
+    },
+    {
+      "title": "Theme.swift",
+      "text": "Colors, light and dark, with tested contrast."
+    },
+    {
+      "title": "Motion.swift",
+      "text": "Duration and kind of animations."
+    },
+    {
+      "title": "Constants.swift",
+      "text": "Limits of the scan, the cleanup and the search."
+    },
+    {
+      "title": "private static let",
+      "text": "Values that only a single type needs, in that type."
+    }
+  ]
+}

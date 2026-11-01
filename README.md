@@ -5,8 +5,8 @@
 <p align="center">
   <a href="https://github.com/Robertwlt03/storage-manager/releases/latest/download/Storage-Manager.dmg">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/readme/download-dark.svg">
-      <img src="assets/readme/download-light.svg" alt="Download Storage Manager for Mac" width="380">
+      <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/download-dark.svg">
+      <img src="assets/pictures/download-light.svg" alt="Download Storage Manager for Mac" width="380">
     </picture>
   </a>
 </p>
@@ -22,8 +22,8 @@ nothing to the internet.
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/tour-dark.svg">
-    <img src="assets/readme/tour-light.svg" alt="A tour through Storage Manager: the overview, folders as rings, large files, clean up, duplicates and unused apps" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/tour-dark.svg">
+    <img src="assets/pictures/tour-light.svg" alt="A tour through Storage Manager: the overview, folders as rings, large files, clean up, duplicates and unused apps" width="100%">
   </picture>
 </p>
 
@@ -32,8 +32,8 @@ nothing to the internet.
 ## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">What it does
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/features-dark.svg">
-  <img src="assets/readme/features-light.svg" alt="Overview, Folders, Large Files and Search, Clean Up, Duplicates, Unused Apps, menu bar, widget and report" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/features-dark.svg">
+  <img src="assets/pictures/features-light.svg" alt="Overview, Folders, Large Files and Search, Clean Up, Duplicates, Unused Apps, menu bar, widget and report" width="100%">
 </picture>
 
 <details>
@@ -86,8 +86,8 @@ then everything else you do with the mouse.
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/readme/install-dark.svg">
-    <img src="assets/readme/install-light.svg" alt="The five steps of the installation, one after another" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/install-dark.svg">
+    <img src="assets/pictures/install-light.svg" alt="The five steps of the installation, one after another" width="100%">
   </picture>
 </p>
 
@@ -108,8 +108,8 @@ little different.</sub>
 <br>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/terminal-install-dark.svg">
-  <img src="assets/readme/terminal-install-light.svg" alt="Installing from the terminal: attach the disk image, copy the app, detach it, allow the first launch and open the app" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/terminal-install-dark.svg">
+  <img src="assets/pictures/terminal-install-light.svg" alt="Installing from the terminal: attach the disk image, copy the app, detach it, allow the first launch and open the app" width="100%">
 </picture>
 
 These commands open the DMG from your Downloads folder, copy the app to “Applications” and allow the first launch:
@@ -145,8 +145,8 @@ you decline.
 ## <img src="assets/icons/privacy.svg" height="33" align="absmiddle" alt="">Made to be trusted
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/promises-dark.svg">
-  <img src="assets/readme/promises-light.svg" alt="Private, easy on energy, free and open source, 28 languages" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/promises-dark.svg">
+  <img src="assets/pictures/promises-light.svg" alt="Private, easy on energy, free and open source, 28 languages" width="100%">
 </picture>
 
 The app only reads names and sizes, never the contents of your files, and it sends nothing to the internet. Something
@@ -160,8 +160,8 @@ scan on its own.
 ## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Speaks your language
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/languages-dark.svg">
-  <img src="assets/readme/languages-light.svg" alt="28 languages: Chinese (Simplified), Chinese (Traditional), Czech, Danish, Dutch, English, Finnish, French, German, Greek, Hindi, Hungarian, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Brazil), Portuguese (Portugal), Romanian, Russian, Spanish, Swedish, Thai, Turkish, Ukrainian and Vietnamese" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/languages-dark.svg">
+  <img src="assets/pictures/languages-light.svg" alt="28 languages: Chinese (Simplified), Chinese (Traditional), Czech, Danish, Dutch, English, Finnish, French, German, Greek, Hindi, Hungarian, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Brazil), Portuguese (Portugal), Romanian, Russian, Spanish, Swedish, Thai, Turkish, Ukrainian and Vietnamese" width="100%">
 </picture>
 
 The app follows the language of your Mac. To use it in a different one, pick it in the app's settings; it shows after
@@ -180,8 +180,8 @@ together with Claude.
 ## <img src="assets/icons/community.svg" height="33" align="absmiddle" alt="">Join in
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/terminal-develop-dark.svg">
-  <img src="assets/readme/terminal-develop-light.svg" alt="make run builds and opens the app; make check runs all 27 checks" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/terminal-develop-dark.svg">
+  <img src="assets/pictures/terminal-develop-light.svg" alt="make run builds and opens the app; make check runs all 27 checks" width="100%">
 </picture>
 
 Storage Manager is open source. Anyone can read the code, improve it and bring in their own ideas. You can report

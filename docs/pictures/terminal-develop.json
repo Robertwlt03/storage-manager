@@ -1,0 +1,39 @@
+{
+  "kind": "terminal",
+  "title": "storage-manager \u2014 zsh",
+  "label": "make run builds and opens the app; make check runs every check",
+  "lines": [
+    [
+      "command",
+      "make run"
+    ],
+    [
+      "result",
+      "\u2714 Built  Storage Manager.app"
+    ],
+    [
+      "command",
+      "make check"
+    ],
+    [
+      "output",
+      "\u2714 Formatting (swift format)                 0 findings"
+    ],
+    [
+      "output",
+      "\u2714 Unit tests (Swift Testing)                0 findings"
+    ],
+    [
+      "output",
+      "\u2714 Every text translated                     0 findings"
+    ],
+    [
+      "note",
+      "  \u2026 and the other steps"
+    ],
+    [
+      "result",
+      "\u2714 All steps passed \u00b7 no errors, no warnings"
+    ]
+  ]
+}

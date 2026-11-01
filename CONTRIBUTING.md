@@ -31,11 +31,10 @@ You can work with any editor you like, because the project is a plain Swift pack
 Building, testing and checking always happen on the command line, and there it does not matter what you write the
 code with:
 
-- **Xcode** opens `Package.swift` directly, so you do not need a separate Xcode project.
-- **VS Code, Cursor and Zed** understand Swift through the official Swift extension or out of the box.
-- **Neovim, Helix and other editors** talk to `sourcekit-lsp`. This language server already comes with Xcode.
-- **JetBrains IDEs such as PhpStorm** can edit the files, but no longer offer their own Swift support. Building and
-  checking happen in the terminal there.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/contributing-editors-dark.svg">
+  <img src="assets/pictures/contributing-editors-light.svg" alt="Xcode opens Package.swift directly; VS Code, Cursor and Zed understand Swift through the official extension; Neovim, Helix and others talk to sourcekit-lsp; JetBrains IDEs edit the files while building and checking happen in the terminal" width="100%">
+</picture>
 
 So that the code still looks the same everywhere, the file `.swift-format` sets the layout. Many editors read it on
 their own when you save, and otherwise `make format` puts everything into shape.
@@ -49,25 +48,13 @@ to it. Claude Code reads that file too, and Git ignores it.
 You do not have to remember long commands. Just like npm scripts, every workflow is a short command in the
 `Makefile`, and `make` on its own shows you the list:
 
-| Command | What it does |
-| --- | --- |
-| `make run` | builds the app, quits it if it is open, and opens the new one |
-| `make demo` | builds the app without a certificate and opens it in demo mode with made-up data |
-| `make snapshots` | optional: photographs every page in demo mode, light and dark, and compares the pictures |
-| `make restart` | quits the app if it is open and opens it again, without building |
-| `make build` | builds the app and draws its icon |
-| `make check` | runs the whole check chain, exactly as on GitHub |
-| `make hooks` | optional: runs the check chain before every `git push`, so nothing red leaves the Mac |
-| `make banner` | draws a banner for a guide; asks whether to replace one (picked with the arrow keys), then for its texts |
-| `make readme` | draws the README's pictures again, light and dark; the tour comes from the pictures of `make snapshots` |
-| `make test` | runs only the tests |
-| `make coverage` | shows how much of the code the tests reach, per folder |
-| `make format` | puts all Swift files into the shared layout |
-| `make selftest` | runs the built app as a self test, measures real folders and compares with `du` |
-| `make stress` | opens a second app that clicks through all pages as fast as it can |
-| `make identity` | creates your own certificate once, in a keychain of its own |
-| `make release` | creates the DMG to pass on, in the `dist` folder |
-| `make clean` | deletes everything the build produces |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/contributing-commands-dark.svg">
+  <img src="assets/pictures/contributing-commands-light.svg" alt="make run, demo, check, test, build, restart, format, coverage, snapshots, hooks, selftest, stress, banner, pictures, identity, release and clean, each with what it does" width="100%">
+</picture>
+
+The pictures in the guides, such as this one, are drawn from small descriptions in `docs/pictures`: change the
+JSON file or add one, run `make pictures`, and show it in light and dark with `<picture>` as the other guides do.
 
 The commands only call the scripts that are in the project anyway, all of them written in Python. So you can keep
 using them directly as well, for example `scripts/check.py tests`, as long as `python3` is 3.13 or newer; otherwise
@@ -107,7 +94,7 @@ make demo
 
 This is how you check the look of the pages you changed before every contribution, in light and in dark
 appearance. The screenshots for the README are also taken in demo mode: `make snapshots` photographs the pages,
-and `make readme` turns them into the tour at the top of the README. The made-up data lives in
+and `make pictures` turns them into the tour at the top of the README. The made-up data lives in
 `Sources/Diagnostics/DemoData.swift`.
 
 If you like, let the Mac do the comparing. `make snapshots RECORD=1` photographs every page once light and once dark

@@ -7,11 +7,12 @@ they come from or which language they speak.
 
 ## <img src="assets/icons/expect.svg" height="33" align="absmiddle" alt="">What we expect
 
-- We treat each other kindly and patiently, even when we disagree.
-- We criticize ideas and code, but never people.
-- We help newcomers get started and remember that every one of us was a beginner once.
-- We respect other people’s privacy and do not publish anyone else’s data, including screenshots that show private
-  file or folder names.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/conduct-expect-dark.svg">
+  <img src="assets/pictures/conduct-expect-light.svg" alt="We treat each other kindly and patiently, even when we disagree; we criticize ideas and code, never people; we help newcomers; we respect other people's privacy" width="100%">
+</picture>
+
+That includes screenshots: please never publish one that shows someone's private file or folder names.
 
 ## <img src="assets/icons/forbidden.svg" height="33" align="absmiddle" alt="">What is not okay
 

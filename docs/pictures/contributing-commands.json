@@ -1,0 +1,75 @@
+{
+  "kind": "grid",
+  "code": true,
+  "columns": 2,
+  "items": [
+    {
+      "title": "make run",
+      "text": "Builds the app, quits it if it is open, and opens the new one."
+    },
+    {
+      "title": "make demo",
+      "text": "Builds without a certificate and opens the demo with made-up data."
+    },
+    {
+      "title": "make check",
+      "text": "Runs the whole check chain, exactly as on GitHub."
+    },
+    {
+      "title": "make test",
+      "text": "Runs only the tests."
+    },
+    {
+      "title": "make build",
+      "text": "Builds the app and draws its icon."
+    },
+    {
+      "title": "make restart",
+      "text": "Quits the app if it is open and opens it again, without building."
+    },
+    {
+      "title": "make format",
+      "text": "Puts all Swift files into the shared layout."
+    },
+    {
+      "title": "make coverage",
+      "text": "Shows how much of the code the tests reach, per folder."
+    },
+    {
+      "title": "make snapshots",
+      "text": "Optional: photographs every page in demo mode, light and dark, and compares."
+    },
+    {
+      "title": "make hooks",
+      "text": "Optional: runs the check chain before every git push."
+    },
+    {
+      "title": "make selftest",
+      "text": "Measures real folders as the built app and compares with du."
+    },
+    {
+      "title": "make stress",
+      "text": "Opens a second app that clicks through all pages as fast as it can."
+    },
+    {
+      "title": "make banner",
+      "text": "Draws a banner for a guide; asks for its texts."
+    },
+    {
+      "title": "make pictures",
+      "text": "Draws the guides' pictures from docs/pictures, light and dark."
+    },
+    {
+      "title": "make identity",
+      "text": "Creates your own certificate once, in a keychain of its own."
+    },
+    {
+      "title": "make release",
+      "text": "Creates the DMG to pass on, in the dist folder."
+    },
+    {
+      "title": "make clean",
+      "text": "Deletes everything the build produces."
+    }
+  ]
+}
