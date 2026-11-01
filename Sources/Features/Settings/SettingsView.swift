@@ -14,16 +14,18 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            languagePicker
-            Toggle(TextKey.autoScan.translated, isOn: $scansAtLaunch)
-            Toggle(TextKey.showInMenuBar.translated, isOn: $showsMenuBarItem)
-            Toggle(TextKey.showAdvancedPages.translated, isOn: $showsAdvancedPages)
-            LabeledContent(TextKey.extraFolders.translated) {
-                folderEditor($extraFolders, selection: $selectedExtraFolder)
+            Section {
+                languagePicker
+                Toggle(TextKey.autoScan.translated, isOn: $scansAtLaunch)
+                Toggle(TextKey.showInMenuBar.translated, isOn: $showsMenuBarItem)
+                Toggle(TextKey.showAdvancedPages.translated, isOn: $showsAdvancedPages)
             }
-            LabeledContent(TextKey.excludedFolders.translated) {
-                folderEditor($excludedFolders, selection: $selectedExcludedFolder)
-            }
+            folderSection(
+                .extraFolders, hint: .extraFoldersHint, $extraFolders,
+                selection: $selectedExtraFolder)
+            folderSection(
+                .excludedFolders, hint: .excludedFoldersHint, $excludedFolders,
+                selection: $selectedExcludedFolder)
             Text(TextKey.settingsSystemNote.translated).textRole(.hint)
         }
         .formStyle(.grouped)
@@ -54,7 +56,21 @@ struct SettingsView: View {
         UI.ActionButton(TextKey.accessRestart.translated, .inline) { LifecycleService.relaunch() }
     }
 
-    /// A list of folders stored one path per line, with buttons to add and remove.
+    /// A folder list as its own section, with a sentence below that says what the list does.
+    private func folderSection(
+        _ title: TextKey, hint: TextKey, _ stored: Binding<String>, selection: Binding<String?>
+    ) -> some View {
+        Section {
+            folderEditor(stored, selection: selection)
+        } header: {
+            Text(title.translated)
+        } footer: {
+            Text(hint.translated).textRole(.hint)
+        }
+    }
+
+    /// A list of folders stored one path per line, with the add and remove buttons below it on
+    /// the left, the way macOS lists in System Settings have them.
     private func folderEditor(_ stored: Binding<String>, selection: Binding<String?>) -> some View {
         let folders = AppSettings.folders(from: stored.wrappedValue)
         return VStack(alignment: .leading, spacing: Space.small) {
@@ -81,8 +97,10 @@ struct SettingsView: View {
                 stored.wrappedValue = AppSettings.store(remaining)
             }
             .disabled(selection.wrappedValue == nil)
+            Spacer(minLength: 0)
         }
         .labelStyle(.iconOnly)
+        .appButton(.quiet)
     }
 
     /// Adds the folders picked in the open panel; a folder already in the list stays once.

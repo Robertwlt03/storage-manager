@@ -164,10 +164,12 @@
 "reportFileName" = "Rapport de stockage";
 "rings" = "Anneaux";
 "extraFolders" = "Dossiers supplémentaires";
+"extraFoldersHint" = "Mesurés en plus, par exemple un dossier sur un autre disque.";
 "showInMenuBar" = "Afficher l’espace libre dans la barre des menus";
 "openApp" = "Ouvrir %@";
 "lowSpaceWarning" = "L’espace se fait rare. « Nettoyer » et « Fichiers volumineux » montrent ce qui peut partir.";
 "excludedFolders" = "Dossiers exclus";
+"excludedFoldersHint" = "Ignorés à chaque mesure et recherche.";
 "none" = "Aucun";
 "add" = "Ajouter";
 "remove" = "Supprimer";

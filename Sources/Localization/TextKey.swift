@@ -88,8 +88,8 @@ nonisolated enum TextKey: String, CaseIterable {
     case searchingDuplicatesDetail, duplicatesTotal
     case rings, layoutSwitch
     case exportReport, reportTitle, reportFileName
-    case extraFolders, excludedFolders, showInMenuBar, openApp, lowSpaceWarning, none, add,
-        remove,
+    case extraFolders, extraFoldersHint, excludedFolders, excludedFoldersHint, showInMenuBar,
+        openApp, lowSpaceWarning, none, add, remove,
         settingsSystemNote, appLanguage,
         languageLikeMac
     case languageRestartHint

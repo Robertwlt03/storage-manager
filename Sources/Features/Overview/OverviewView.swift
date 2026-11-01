@@ -13,8 +13,6 @@ struct OverviewView: View {
 
     var body: some View {
         UI.Page(.overview) {
-            LayoutSwitcher(pane: .overview)
-        } _: {
             FreeUpCard()
             if let startupVolume = model.startupVolume { startupDiskCard(startupVolume) }
             SummaryCard()

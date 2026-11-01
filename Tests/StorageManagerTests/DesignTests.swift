@@ -44,8 +44,8 @@ struct DesignTests {
         #expect(Motion.quickDuration < Motion.standardDuration)
     }
 
-    /// Approximations of the system surfaces: content, window, grouped rows, sidebar and glass
-    /// over the backdrop.
+    /// Approximations of the system surfaces: content, window, cards and grouped rows, sidebar, and
+    /// the glass of the toolbar.
     private static let lightSurfaces: [UInt32] = [0xFFFFFF, 0xF5F5F7, 0xECECEC, 0xE3E3E3, 0xDDE3EE]
     private static let darkSurfaces: [UInt32] = [
         0x1E1E1E, 0x262626, 0x2D2D2D, 0x323232, 0x3A3A3A, 0x28303E,

@@ -164,10 +164,12 @@
 "reportFileName" = "Lagringsrapport";
 "rings" = "Ringer";
 "extraFolders" = "Flere mapper";
+"extraFoldersHint" = "Måles i tillegg, for eksempel en mappe på en annen disk.";
 "showInMenuBar" = "Vis ledig plass i menylinjen";
 "openApp" = "Åpne %@";
 "lowSpaceWarning" = "Plassen er i ferd med å ta slutt. «Rydd opp» og «Store filer» viser hva som kan fjernes.";
 "excludedFolders" = "Utelatte mapper";
+"excludedFoldersHint" = "Utelates ved hver måling og søk.";
 "none" = "Ingen";
 "add" = "Legg til";
 "remove" = "Fjern";

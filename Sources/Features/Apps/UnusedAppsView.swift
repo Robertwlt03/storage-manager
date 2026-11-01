@@ -12,18 +12,13 @@ struct UnusedAppsView: View {
     private var unusedApps: [AppUsage] { AppUsageService.unused(model.apps, days: unusedDays) }
 
     var body: some View {
-        UI.Page(.apps, options: { options }, content)
+        UI.Page(.apps, options: { unusedSincePicker }, content)
             .confirmRemoval(
                 TextKey.trashAppTitle.translated(with: appToTrash?.name ?? ""),
                 item: $appToTrash, button: .moveToTrash, message: .trashAppMessage,
                 action: moveToTrash
             )
             .smoothChanges(of: layout)
-    }
-
-    @ViewBuilder private var options: some View {
-        LayoutSwitcher(pane: .apps)
-        unusedSincePicker
     }
 
     private var unusedSincePicker: some View {
@@ -78,9 +73,6 @@ struct UnusedAppsView: View {
             }
             Spacer(minLength: Space.item)
             Text(Format.bytes(app.bytes)).textRole(.value)
-            UI.ActionButton(TextKey.showInFinder.translated, .inline) {
-                FinderService.reveal(app.path)
-            }
             UI.ActionButton(TextKey.moveToTrash.translated, .inline, role: .destructive) {
                 appToTrash = app
             }

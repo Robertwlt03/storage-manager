@@ -164,10 +164,12 @@
 "reportFileName" = "저장 공간 보고서";
 "rings" = "링";
 "extraFolders" = "추가 폴더";
+"extraFoldersHint" = "함께 측정합니다. 예를 들어 다른 드라이브의 폴더입니다.";
 "showInMenuBar" = "메뉴 막대에 여유 공간 표시";
 "openApp" = "%@ 열기";
 "lowSpaceWarning" = "공간이 부족합니다. ‘정리’와 ‘큰 파일’에서 지울 수 있는 항목을 볼 수 있습니다.";
 "excludedFolders" = "제외할 폴더";
+"excludedFoldersHint" = "모든 측정과 검색에서 제외합니다.";
 "none" = "없음";
 "add" = "추가";
 "remove" = "제거";

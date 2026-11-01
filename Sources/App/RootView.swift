@@ -49,8 +49,18 @@ struct RootView: View {
         detail
             .frame(minWidth: Layout.pageMinimumWidth)
             .overlay(alignment: .leading) { floatingSidebar }
+            .toolbar { layoutSwitch }
             .smoothChanges(of: model.pane)
             .smoothChanges(of: model.isSearching)
+    }
+
+    /// List, tiles or rings sit in the toolbar like the Finder's view buttons, only on pages that
+    /// have more than one layout.
+    @ToolbarContentBuilder private var layoutSwitch: some ToolbarContent {
+        let pane = model.pane ?? .overview
+        if pane.supportsGrid && !model.isSearching {
+            ToolbarItem { LayoutSwitcher(pane: pane) }
+        }
     }
 
     @ViewBuilder private var detail: some View {

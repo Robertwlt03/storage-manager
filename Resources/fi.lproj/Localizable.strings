@@ -164,10 +164,12 @@
 "reportFileName" = "Tallennustilaraportti";
 "rings" = "Renkaat";
 "extraFolders" = "Lisäkansiot";
+"extraFoldersHint" = "Mitataan lisäksi, esimerkiksi toisella levyllä oleva kansio.";
 "showInMenuBar" = "Näytä vapaa tila valikkorivillä";
 "openApp" = "Avaa %@";
 "lowSpaceWarning" = "Tila on vähissä. ”Siivoa” ja ”Suuret tiedostot” näyttävät, mistä voi luopua.";
 "excludedFolders" = "Ohitettavat kansiot";
+"excludedFoldersHint" = "Jätetään pois jokaisesta mittauksesta ja hausta.";
 "none" = "Ei mitään";
 "add" = "Lisää";
 "remove" = "Poista";

@@ -164,10 +164,12 @@
 "reportFileName" = "Depolama Raporu";
 "rings" = "Halkalar";
 "extraFolders" = "Ek Klasörler";
+"extraFoldersHint" = "Bunlar da ölçülür, örneğin başka bir sürücüdeki klasör.";
 "showInMenuBar" = "Boş alanı menü çubuğunda göster";
 "openApp" = "%@ uygulamasını aç";
 "lowSpaceWarning" = "Alan azalıyor. “Temizle” ve “Büyük Dosyalar” nelerin silinebileceğini gösterir.";
 "excludedFolders" = "Hariç Tutulan Klasörler";
+"excludedFoldersHint" = "Her ölçümde ve aramada dışarıda bırakılır.";
 "none" = "Yok";
 "add" = "Ekle";
 "remove" = "Kaldır";

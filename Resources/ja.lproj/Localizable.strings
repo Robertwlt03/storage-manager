@@ -164,10 +164,12 @@
 "reportFileName" = "ストレージレポート";
 "rings" = "リング";
 "extraFolders" = "追加のフォルダ";
+"extraFoldersHint" = "追加で計測します。たとえば別のドライブにあるフォルダです。";
 "showInMenuBar" = "メニューバーに空き容量を表示";
 "openApp" = "%@を開く";
 "lowSpaceWarning" = "空き容量が少なくなっています。「クリーンアップ」と「大きなファイル」で削除できるものを確認できます。";
 "excludedFolders" = "除外するフォルダ";
+"excludedFoldersHint" = "計測と検索の対象から外します。";
 "none" = "なし";
 "add" = "追加";
 "remove" = "削除";

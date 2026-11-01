@@ -164,10 +164,12 @@
 "reportFileName" = "存储报告";
 "rings" = "圆环";
 "extraFolders" = "其他文件夹";
+"extraFoldersHint" = "额外测量，例如另一个磁盘上的文件夹。";
 "showInMenuBar" = "在菜单栏中显示可用空间";
 "openApp" = "打开 %@";
 "lowSpaceWarning" = "空间即将不足。“清理”和“大文件”会显示可以删除的内容。";
 "excludedFolders" = "排除的文件夹";
+"excludedFoldersHint" = "每次测量和搜索时都会跳过。";
 "none" = "无";
 "add" = "添加";
 "remove" = "移除";

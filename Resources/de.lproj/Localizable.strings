@@ -164,10 +164,12 @@
 "reportFileName" = "Speicherbericht";
 "rings" = "Ringe";
 "extraFolders" = "Zusätzliche Ordner";
+"extraFoldersHint" = "Werden zusätzlich gemessen, zum Beispiel ein Ordner auf einem anderen Laufwerk.";
 "showInMenuBar" = "Freien Platz in der Menüleiste zeigen";
 "openApp" = "%@ öffnen";
 "lowSpaceWarning" = "Der Platz wird knapp. „Aufräumen“ und „Große Dateien“ zeigen, was weg kann.";
 "excludedFolders" = "Ausgeschlossene Ordner";
+"excludedFoldersHint" = "Bleiben bei jeder Messung und Suche außen vor.";
 "none" = "Keine";
 "add" = "Hinzufügen";
 "remove" = "Entfernen";

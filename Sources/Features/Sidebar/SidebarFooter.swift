@@ -58,7 +58,7 @@ struct SidebarFooter: View {
             if model.isScanning {
                 // No spinner here: the progress bar right below already moves, and Apple prefers
                 // one determinate indicator over a second endless one.
-                UI.Icon(.symbol(Symbols.measure), size: .small).foregroundStyle(.tint)
+                UI.Icon(.accent(Symbols.measure), size: .small)
                 Text(TextKey.scanningPercent.translated(with: Format.percent(model.scanFraction)))
                     .monospacedDigit()
                     .contentTransition(.numericText(value: model.scanFraction))
