@@ -120,6 +120,16 @@ struct ServiceTests {
         #expect(DuplicateService.spareBytes([]) == 0)
     }
 
+    @Test("A file moved to the Trash leaves its group, and a group of one file is gone")
+    func duplicatesWithoutFile() {
+        let big = DuplicateService.smallestBytes
+        let threeCopies = ["/a", "/b", "/c"].map { path in Self.fileEntry(path, bytes: big) }
+        let twoCopies = ["/d", "/e"].map { path in Self.fileEntry(path, bytes: big * 2) }
+        let withoutA = DuplicateService.without("/a", in: [threeCopies, twoCopies])
+        let left = DuplicateService.without("/d", in: withoutA)
+        #expect(left.map { group in group.compactMap(\.path) } == [["/b", "/c"]])
+    }
+
     @Test("Files with the same content stay together, the others and unreadable ones drop out")
     func duplicateContent() async throws {
         let folder =

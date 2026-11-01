@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Du bruger alle dine apps jævnligt. Der er intet at rydde op i her.";
 "unusedSince" = "Ikke åbnet i";
 "daysOption" = "mere end %@ dage";
-"trashAppTitle" = "Vil du flytte »%@« til papirkurven?";
+"trashTitle" = "Vil du flytte »%@« til papirkurven?";
 "trashAppMessage" = "Du kan gendanne appen fra papirkurven, indtil du tømmer den.";
+"trashFileMessage" = "Du kan gendanne filen fra papirkurven, indtil du tømmer den.";
 "moveToTrash" = "Flyt til papirkurv";
 "lastOpened" = "Sidst åbnet den %@";
-"trashAppFailed" = "»%@« kunne ikke flyttes. I Finder virker det med din adgangskode.";
+"trashFailed" = "»%@« kunne ikke flyttes. I Finder virker det med din adgangskode.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ målt";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS opretter dette område for hver bruger under /private/var/folders. Det er skjult i Finder og bliver ikke specificeret i »Administrer lagerplads«.";
 "infoCopies" = "Når macOS kontrollerer en signatur, lægger det nogle gange komplette kopier af en app i mappen X. De er ikke egne programmer; macOS opretter en ny, når der er behov for det. Det er ufarligt at slette dem, så længe appen er afsluttet.";
 "paneDuplicates" = "Dubletter";
-"infoDuplicates" = "Store filer fra 10 MB, der findes flere gange med samme indhold. Filer af samme størrelse sammenlignes på indholdet. Intet fjernes her; „Vis i Finder“ fører til dem.";
+"infoDuplicates" = "Store filer fra 10 MB, der findes flere gange med samme indhold. Filer af samme størrelse sammenlignes på indholdet. Når der kun er én kopi tilbage, forsvinder filen fra listen.";
 "noDuplicates" = "Ingen dobbelte filer";
 "duplicateGroupTitle" = "Disse %@ filer er ens – %@ i ekstra kopier";
 "noDuplicatesDetail" = "Ingen store filer ligger to gange på din Mac. Der er intet at gøre her.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Kapaciteten på denne disk: hvad der er brugt, hvad macOS selv kan frigøre efter behov, og hvad der er ledigt. Eksterne diske kan måles her.";
 "guideOverview" = "Se med et blik, hvad der fylder din lagerplads, og hvor meget plads der stadig er fri.";
 "guideExplorer" = "De største mapper står øverst. Åbn en mappe for at se, hvad der er i den.";
-"guideLargeFiles" = "De største filer på din Mac. Vis dem, du ikke længere har brug for, i Finder, og slet dem der.";
+"guideLargeFiles" = "De største filer på din Mac. Det, du ikke længere har brug for, lægger du i papirkurven med et højreklik.";
 "guideCleaner" = "Filer, som din Mac ikke har brug for. Vælg, hvad der må fjernes, og ryd op med ét klik.";
-"guideDuplicates" = "Disse filer findes flere gange med samme indhold. Behold én af hver, og slet de andre i Finder.";
+"guideDuplicates" = "Disse filer findes flere gange med samme indhold. Behold én af hver, og læg de andre i papirkurven.";
 "guideApps" = "Apps, du ikke har åbnet i lang tid. Flyt dem, du ikke længere har brug for, til papirkurven.";
 "guideTemporaryFiles" = "Et skjult sted, hvor macOS gemmer filer i kort tid. Det tømmer for det meste sig selv; kun efterladte appkopier er værd at slette selv.";
 "guideCopies" = "Når macOS tjekker en app, efterlader det nogle gange kopier af den. Når appen er lukket, kan du trygt slette dem.";

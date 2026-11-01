@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Tüm uygulamalarınızı düzenli olarak kullanıyorsunuz. Burada toparlanacak bir şey yok.";
 "unusedSince" = "Şu süredir açılmadı";
 "daysOption" = "%@ günden fazla";
-"trashAppTitle" = "“%@” Çöp Sepeti'ne taşınsın mı?";
+"trashTitle" = "“%@” Çöp Sepeti'ne taşınsın mı?";
 "trashAppMessage" = "Çöp Sepeti'ni boşaltana kadar uygulamayı oradan geri yükleyebilirsiniz.";
+"trashFileMessage" = "Çöp Sepeti’ni boşaltana kadar dosyayı geri yükleyebilirsin.";
 "moveToTrash" = "Çöp Sepeti'ne Taşı";
 "lastOpened" = "Son açılış: %@";
-"trashAppFailed" = "“%@” taşınamadı. Finder'da parolanızla çalışır.";
+"trashFailed" = "“%@” taşınamadı. Finder'da parolanızla çalışır.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ tarandı";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS bu alanı her kullanıcı için /private/var/folders altında oluşturur. Finder'da gizlidir ve “Depolamayı Yönet” içinde ayrıntılandırılmaz.";
 "infoCopies" = "Bir imzayı kontrol ederken macOS bazen bir uygulamanın tam kopyalarını X klasörüne yerleştirir. Bunlar ayrı programlar değildir; macOS gerektiğinde yenisini oluşturur. Uygulama kapalıyken silmek güvenlidir.";
 "paneDuplicates" = "Kopyalar";
-"infoDuplicates" = "Aynı içerikle birden çok kez bulunan 10 MB üzerindeki büyük dosyalar. Aynı boyuttaki dosyalar içeriklerine göre karşılaştırılır. Burada hiçbir şey silinmez; “Finder’da Göster” onlara götürür.";
+"infoDuplicates" = "Aynı içerikle birden fazla kez bulunan 10 MB ve üzeri büyük dosyalar. Aynı boyuttaki dosyalar içeriklerine göre karşılaştırılır. Tek kopya kaldığında dosya bu listeden çıkar.";
 "noDuplicates" = "Yinelenen Dosya Yok";
 "duplicateGroupTitle" = "Bu %@ dosya aynı – fazla kopyalar %@ yer kaplıyor";
 "noDuplicatesDetail" = "Mac'inizde iki kez saklanan büyük bir dosya yok. Burada yapılacak bir şey yok.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Bu birimin kapasitesi: kullanılan, macOS'un gerektiğinde kendiliğinden boşaltabileceği ve boş olan alan. Harici birimler burada taranabilir.";
 "guideOverview" = "Depolama alanınızı neyin doldurduğunu ve ne kadar boş yer kaldığını bir bakışta görün.";
 "guideExplorer" = "En büyük klasörler en üstte yer alır. İçine bakmak için bir klasörü açın.";
-"guideLargeFiles" = "Mac'inizdeki en büyük dosyalar. Artık ihtiyacınız olmayanları Finder'da gösterin ve orada silin.";
+"guideLargeFiles" = "Mac’indeki en büyük dosyalar. Artık gerekmeyenleri sağ tıklayarak Çöp Sepeti’ne taşı.";
 "guideCleaner" = "Mac'inizin ihtiyaç duymadığı dosyalar. Nelerin gidebileceğini seçin ve tek tıklamayla temizleyin.";
-"guideDuplicates" = "Bu dosyalar aynı içerikle birden fazla kez var. Her birinden birini saklayın, diğerlerini Finder'da silin.";
+"guideDuplicates" = "Bu dosyalar aynı içerikle birden fazla kez var. Her birinden birini sakla, diğerlerini Çöp Sepeti’ne taşı.";
 "guideApps" = "Uzun süredir açmadığınız uygulamalar. Artık ihtiyacınız olmayanları Çöp Sepeti'ne taşıyın.";
 "guideTemporaryFiles" = "macOS'un dosyaları kısa bir süre sakladığı gizli bir yer. Çoğunlukla kendi kendine boşalır; yalnızca geride kalan uygulama kopyalarını kendiniz silmeye değer.";
 "guideCopies" = "macOS bir uygulamayı denetlerken bazen onun kopyalarını geride bırakır. Uygulama kapandıktan sonra bunları güvenle silebilirsiniz.";

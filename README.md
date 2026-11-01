@@ -57,12 +57,13 @@ category such as photos or app data opens it. After every full scan it keeps the
 storage changes over the weeks, and it lists the folders that grew most since the scan before; a click opens one.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
-all files above a size you choose yourself, and **Search** finds folders and files by name. Each of these lists can
-also show large tiles: ⌘1 shows the list and ⌘2 the tiles, and Folders, Large Files and Unused Apps also have a
-switch for it in the toolbar, like the view buttons in Finder. On Folders the switch also offers **Rings** (⌘3),
-which show the subfolders as rings around the current folder: the wider a piece, the bigger the folder, and a click
-opens it. In the settings you can add folders to measure, such as an external project folder, and exclude folders that
-the app should neither measure nor show nor clean up.
+all files above a size you choose yourself, and **Search** finds folders and files by name. In each of these lists a
+right-click moves a file you no longer need to the Trash, after you confirm it. The lists can also show large tiles:
+⌘1 shows the list and ⌘2 the tiles, and Folders, Large Files and Unused Apps also have a switch for it in the
+toolbar, like the view buttons in Finder. On Folders the switch also offers **Rings** (⌘3), which show the subfolders
+as rings around the current folder: the wider a piece, the bigger the folder, and a click opens it. In the settings you
+can add folders to measure, such as an external project folder, and exclude folders that the app should neither
+measure nor show nor clean up.
 
 In **Clean Up** you remove files your system barely needs. These include caches that apps rebuild on their own, old
 logs, old temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently
@@ -70,7 +71,7 @@ running, and macOS itself, are left untouched.
 
 **Duplicates** shows large files from 10 MB that exist more than once with the same content, each group as a card
 that says how much space the extra copies take. Only files of equal size are read and compared, in the background.
-Nothing is removed there; Show in Finder leads you to them, so you can keep one and delete the others.
+Each copy can go to the Trash right there after you confirm it, and once only one file is left, its card disappears.
 
 The **Unused Apps** page reminds you of apps you have not opened for a long time. The date comes from macOS itself,
 so the app records nothing. Anything you no longer need, you can move to the Trash from there.
@@ -183,8 +184,8 @@ decline.
 ## <img src="assets/icons/privacy.svg" height="33" align="absmiddle" alt="">Your data stays with you
 
 The app only reads names and sizes, never the contents of your files, and it sends nothing to the internet.
-Something is only deleted when you explicitly confirm it in Clean Up or for the app copies. Apps you no longer need
-go to the Trash and can be restored from there.
+Something is only deleted when you explicitly confirm it in Clean Up or for the app copies. Apps and files you no
+longer need go to the Trash, also only after you confirm it, and can be restored from there.
 
 ## <img src="assets/icons/energy.svg" height="33" align="absmiddle" alt="">Easy on energy
 

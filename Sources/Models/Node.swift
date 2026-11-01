@@ -97,6 +97,18 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
         parent = nil
     }
 
+    /// Removes one listed file from this folder and subtracts its size from every folder above.
+    func removeFile(_ path: String) {
+        guard let index = files.firstIndex(where: { file in file.path == path }) else { return }
+        let removed = files.remove(at: index)
+        var nextFolder: Node? = self
+        while let folder = nextFolder {
+            folder.bytes -= removed.bytes
+            folder.fileCount -= 1
+            nextFolder = folder.parent
+        }
+    }
+
     func removeAll() {
         for child in children { child.parent = nil }
         children = []

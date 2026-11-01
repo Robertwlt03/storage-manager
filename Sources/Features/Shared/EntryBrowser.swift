@@ -69,6 +69,13 @@ struct EntryMenu: View {
             Button(TextKey.info.translated) { informationEntry = entry }
             Divider()
             Button(TextKey.copyPath.translated) { FinderService.copyPath(path) }
+            if entry.node == nil { trashItem }
         }
+    }
+
+    /// Files only: a folder holds too much to hand to the Trash from a menu.
+    @ViewBuilder private var trashItem: some View {
+        Divider()
+        Button(TextKey.moveToTrash.translated, role: .destructive) { model.fileToTrash = entry }
     }
 }

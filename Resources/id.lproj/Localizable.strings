@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Anda menggunakan semua app secara rutin. Tidak ada yang perlu dirapikan di sini.";
 "unusedSince" = "Tidak dibuka selama";
 "daysOption" = "lebih dari %@ hari";
-"trashAppTitle" = "Pindahkan “%@” ke Tong Sampah?";
+"trashTitle" = "Pindahkan “%@” ke Tong Sampah?";
 "trashAppMessage" = "Anda dapat memulihkan app dari Tong Sampah selama belum dikosongkan.";
+"trashFileMessage" = "Kamu bisa memulihkan file dari Tong Sampah sampai kamu mengosongkannya.";
 "moveToTrash" = "Pindahkan ke Tong Sampah";
 "lastOpened" = "Terakhir dibuka pada %@";
-"trashAppFailed" = "“%@” tidak dapat dipindahkan. Di Finder, ini berhasil dengan kata sandi Anda.";
+"trashFailed" = "“%@” tidak dapat dipindahkan. Di Finder, ini berhasil dengan kata sandi Anda.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ dipindai";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS membuat area ini untuk setiap pengguna di /private/var/folders. Area ini tersembunyi di Finder dan tidak dirinci di “Kelola Penyimpanan”.";
 "infoCopies" = "Saat memeriksa tanda tangan, macOS terkadang menaruh salinan lengkap sebuah app di folder X. Salinan ini bukan program tersendiri; macOS membuat yang baru bila perlu. Menghapusnya aman selama app sudah ditutup.";
 "paneDuplicates" = "Duplikat";
-"infoDuplicates" = "File besar mulai 10 MB yang ada lebih dari sekali dengan isi yang sama. File berukuran sama dibandingkan isinya. Di sini tidak ada yang dihapus; “Tampilkan di Finder” membawa ke file tersebut.";
+"infoDuplicates" = "File besar mulai 10 MB yang ada beberapa kali dengan isi yang sama. File berukuran sama dibandingkan berdasarkan isinya. Begitu hanya tersisa satu salinan, file hilang dari daftar ini.";
 "noDuplicates" = "Tidak Ada File Duplikat";
 "duplicateGroupTitle" = "%@ file ini identik – %@ dalam salinan tambahan";
 "noDuplicatesDetail" = "Tidak ada file besar yang tersimpan dua kali di Mac Anda. Tidak ada yang perlu dilakukan di sini.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Kapasitas volume ini: yang terpakai, yang dapat dikosongkan macOS sendiri bila perlu, dan yang tersedia. Volume eksternal dapat diukur di sini.";
 "guideOverview" = "Lihat sekilas apa yang memenuhi penyimpanan Anda dan berapa banyak ruang yang masih kosong.";
 "guideExplorer" = "Folder terbesar ada di atas. Buka folder untuk melihat isinya.";
-"guideLargeFiles" = "File terbesar di Mac Anda. Tampilkan yang tidak lagi Anda perlukan di Finder, lalu hapus di sana.";
+"guideLargeFiles" = "File terbesar di Mac kamu. Yang tidak lagi kamu perlukan, pindahkan ke Tong Sampah dengan klik kanan.";
 "guideCleaner" = "File yang tidak diperlukan Mac Anda. Pilih apa yang boleh dihapus, lalu bersihkan dengan satu klik.";
-"guideDuplicates" = "File ini ada lebih dari sekali dengan isi yang sama. Simpan satu dari masing-masing dan hapus sisanya di Finder.";
+"guideDuplicates" = "File ini ada beberapa kali dengan isi yang sama. Simpan satu dari masing-masing dan pindahkan sisanya ke Tong Sampah.";
 "guideApps" = "App yang sudah lama tidak Anda buka. Pindahkan yang tidak lagi Anda perlukan ke Tong Sampah.";
 "guideTemporaryFiles" = "Tempat tersembunyi tempat macOS menyimpan file untuk sementara. Biasanya tempat ini kosong dengan sendirinya; hanya salinan app yang tertinggal yang layak Anda hapus sendiri.";
 "guideCopies" = "Saat macOS memeriksa app, terkadang salinannya tertinggal. Setelah app ditutup, Anda dapat menghapusnya dengan aman.";

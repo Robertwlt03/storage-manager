@@ -91,9 +91,8 @@ changing code; do not repeat their content here or in comments.
    became Storage Manager; its bundle identifier `local.speicher-explorer`, the signing keychain and the identity
    "Speicher-Explorer Dev" keep that name on purpose, because macOS ties Full Disk Access and the settings to them.
 3. A new folder below `Sources` first gets its row in the layer table of `scripts/checks/architecture.py` and a line in
-   ARCHITECTURE.md. Never call network interfaces. Deleting or trashing files stays in `CleanerService`,
-   `CopyService` and `AppUsageService`, behind the person's confirmation; the cleaner makes its list again right
-   before deleting.
+   ARCHITECTURE.md. Never call network interfaces. Deleting or trashing files stays in `CleanerService` and
+   `CopyService`, behind the person's confirmation; the cleaner makes its list again right before deleting.
 4. New logic gets a test in `Tests/StorageManagerTests` (hand-built `Node` trees via `TestTree`, never the real
    disk). Each logic folder has a coverage minimum that may only rise.
 5. The scanned tree (`Node`) belongs to the main actor: read it there and hand background work finished values,

@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Je gebruikt al je apps regelmatig. Hier valt niets op te ruimen.";
 "unusedSince" = "Niet geopend gedurende";
 "daysOption" = "meer dan %@ dagen";
-"trashAppTitle" = "“%@” naar de prullenmand verplaatsen?";
+"trashTitle" = "“%@” naar de prullenmand verplaatsen?";
 "trashAppMessage" = "Je kunt de app uit de prullenmand terughalen totdat je die leegt.";
+"trashFileMessage" = "Je kunt het bestand uit de prullenmand terugzetten tot je die leegmaakt.";
 "moveToTrash" = "Verplaats naar prullenmand";
 "lastOpened" = "Laatst geopend op %@";
-"trashAppFailed" = "“%@” kon niet worden verplaatst. In de Finder lukt het met je wachtwoord.";
+"trashFailed" = "“%@” kon niet worden verplaatst. In de Finder lukt het met je wachtwoord.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ gescand";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS maakt dit gebied voor elke gebruiker aan onder /private/var/folders. Het is verborgen in de Finder en wordt niet uitgesplitst in “Beheer opslag”.";
 "infoCopies" = "Bij het controleren van een handtekening plaatst macOS soms complete kopieën van een app in map X. Het zijn geen aparte programma’s; macOS maakt zo nodig een nieuwe aan. Verwijderen is veilig zolang de app is gestopt.";
 "paneDuplicates" = "Duplicaten";
-"infoDuplicates" = "Grote bestanden vanaf 10 MB die meer dan eens met dezelfde inhoud bestaan. Bestanden van dezelfde grootte worden op inhoud vergeleken. Hier wordt niets verwijderd; ‘Toon in Finder’ leidt ernaartoe.";
+"infoDuplicates" = "Grote bestanden vanaf 10 MB die meerdere keren met dezelfde inhoud voorkomen. Bestanden van dezelfde grootte worden op inhoud vergeleken. Zodra er nog maar één kopie over is, verdwijnt het bestand uit deze lijst.";
 "noDuplicates" = "Geen dubbele bestanden";
 "duplicateGroupTitle" = "Deze %@ bestanden zijn gelijk – %@ aan extra kopieën";
 "noDuplicatesDetail" = "Geen enkel groot bestand staat twee keer op je Mac. Hier hoef je niets te doen.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Capaciteit van dit volume: wat in gebruik is, wat macOS zo nodig zelf kan vrijmaken en wat vrij is. Externe volumes kunnen hier worden gescand.";
 "guideOverview" = "Zie in één oogopslag wat je opslag vult en hoeveel ruimte er nog vrij is.";
 "guideExplorer" = "De grootste mappen staan bovenaan. Open een map om erin te kijken.";
-"guideLargeFiles" = "De grootste bestanden op je Mac. Toon wat je niet meer nodig hebt in de Finder en verwijder het daar.";
+"guideLargeFiles" = "De grootste bestanden op je Mac. Wat je niet meer nodig hebt, zet je met een rechterklik in de prullenmand.";
 "guideCleaner" = "Bestanden die je Mac niet nodig heeft. Kies wat weg mag en ruim op met één klik.";
-"guideDuplicates" = "Deze bestanden staan er meer dan eens met dezelfde inhoud. Bewaar er telkens één en verwijder de andere in de Finder.";
+"guideDuplicates" = "Deze bestanden bestaan meerdere keren met dezelfde inhoud. Bewaar er telkens één en zet de andere in de prullenmand.";
 "guideApps" = "Apps die je lang niet hebt geopend. Wat je niet meer nodig hebt, zet je in de prullenmand.";
 "guideTemporaryFiles" = "Een verborgen plek waar macOS bestanden even bewaart. Die maakt zichzelf meestal leeg; alleen achtergebleven app-kopieën zijn het waard om zelf te verwijderen.";
 "guideCopies" = "Als macOS een app controleert, blijven er soms kopieën van achter. Zodra de app gesloten is, kun je ze veilig verwijderen.";

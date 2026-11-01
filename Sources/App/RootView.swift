@@ -23,6 +23,7 @@ struct RootView: View {
             prompt: TextKey.searchPrompt.translated
         )
         .sheet(isPresented: $model.isShowingAccessSheet) { AccessSheet() }
+        .modifier(FileTrash())
         .environment(\.scanStatus, scanStatus)
         .appLocale()
         .onExitCommand(perform: closeSidebarOrSearch)

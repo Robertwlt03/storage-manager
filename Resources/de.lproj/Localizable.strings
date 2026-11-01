@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Du nutzt alle deine Apps regelmäßig. Hier gibt es nichts aufzuräumen.";
 "unusedSince" = "Nicht geöffnet seit";
 "daysOption" = "mehr als %@ Tagen";
-"trashAppTitle" = "„%@“ in den Papierkorb legen?";
+"trashTitle" = "„%@“ in den Papierkorb legen?";
 "trashAppMessage" = "Aus dem Papierkorb lässt sich die App wiederherstellen, bis du ihn leerst.";
+"trashFileMessage" = "Aus dem Papierkorb lässt sich die Datei wiederherstellen, bis du ihn leerst.";
 "moveToTrash" = "In den Papierkorb";
 "lastOpened" = "Zuletzt geöffnet am %@";
-"trashAppFailed" = "„%@“ ließ sich nicht verschieben. Im Finder geht es mit deinem Passwort.";
+"trashFailed" = "„%@“ ließ sich nicht verschieben. Im Finder geht es mit deinem Passwort.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ gemessen";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS legt diesen Bereich für jeden Benutzer unter /private/var/folders an. Er ist im Finder versteckt und wird in „Speicher verwalten“ nicht aufgeschlüsselt.";
 "infoCopies" = "Beim Prüfen der Signatur legt macOS manchmal vollständige Kopien einer App im Ordner X an. Das sind keine eigenen Programme; macOS erstellt bei Bedarf eine neue. Löschen ist unbedenklich, solange die App beendet ist.";
 "paneDuplicates" = "Duplikate";
-"infoDuplicates" = "Große Dateien ab 10 MB, die mit gleichem Inhalt mehrfach vorhanden sind. Dateien gleicher Größe werden am Inhalt verglichen. Hier wird nichts entfernt; „Im Finder zeigen“ führt zu ihnen.";
+"infoDuplicates" = "Große Dateien ab 10 MB, die mit gleichem Inhalt mehrfach vorhanden sind. Dateien gleicher Größe werden am Inhalt verglichen. Ist nur noch eine Kopie übrig, verschwindet die Datei aus dieser Liste.";
 "noDuplicates" = "Keine doppelten Dateien";
 "duplicateGroupTitle" = "Diese %@ Dateien sind gleich – %@ doppelt";
 "noDuplicatesDetail" = "Keine große Datei liegt doppelt auf deinem Mac. Hier gibt es nichts zu tun.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Kapazität dieses Datenträgers: was belegt ist, was macOS bei Bedarf selbst freigeben kann und was frei ist. Externe Datenträger lassen sich hier messen.";
 "guideOverview" = "Hier siehst du auf einen Blick, was deinen Speicher füllt und wie viel Platz noch frei ist.";
 "guideExplorer" = "Die größten Ordner stehen oben. Öffne einen Ordner, um hineinzuschauen.";
-"guideLargeFiles" = "Die größten Dateien auf deinem Mac. Was du nicht mehr brauchst, zeigst du im Finder und löschst es dort.";
+"guideLargeFiles" = "Die größten Dateien auf deinem Mac. Was du nicht mehr brauchst, legst du mit einem Rechtsklick in den Papierkorb.";
 "guideCleaner" = "Dateien, die dein Mac nicht braucht. Wähle aus, was weg darf, und räume mit einem Klick auf.";
-"guideDuplicates" = "Diese Dateien gibt es mehrmals mit gleichem Inhalt. Behalte jeweils eine und lösche die anderen im Finder.";
+"guideDuplicates" = "Diese Dateien gibt es mehrmals mit gleichem Inhalt. Behalte jeweils eine und lege die anderen in den Papierkorb.";
 "guideApps" = "Apps, die du lange nicht geöffnet hast. Was du nicht mehr brauchst, legst du in den Papierkorb.";
 "guideTemporaryFiles" = "Ein versteckter Ort, an dem macOS Dateien für kurze Zeit ablegt. Er leert sich meist von selbst; nur liegen gebliebene App-Kopien lohnt es sich, selbst zu löschen.";
 "guideCopies" = "Wenn macOS eine App prüft, bleiben manchmal Kopien von ihr liegen. Ist die App geschlossen, kannst du sie gefahrlos löschen.";

@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "你經常使用所有 App。這裡沒有需要整理的項目。";
 "unusedSince" = "未打開時間";
 "daysOption" = "超過 %@ 天";
-"trashAppTitle" = "要將「%@」移到垃圾桶嗎？";
+"trashTitle" = "要將「%@」移到垃圾桶嗎？";
 "trashAppMessage" = "在清空垃圾桶之前，你可以從垃圾桶中將此 App 復原。";
+"trashFileMessage" = "在清空垃圾桶之前，你可以從中還原該檔案。";
 "moveToTrash" = "移到垃圾桶";
 "lastOpened" = "上次打開時間：%@";
-"trashAppFailed" = "無法移動「%@」。在 Finder 中，輸入你的密碼即可移動。";
+"trashFailed" = "無法移動「%@」。在 Finder 中，輸入你的密碼即可移動。";
 
 /* Scan progress and empty values */
 "scanningPercent" = "已掃描 %@";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS 會在 /private/var/folders 下為每位使用者建立此區域。它在 Finder 中是隱藏的，在「管理儲存空間」中也不會細分顯示。";
 "infoCopies" = "在檢查簽名時，macOS 有時會在檔案夾 X 中建立 App 的完整拷貝。它們不是獨立的程式；需要時 macOS 會重新建立。只要 App 已結束，就可以放心刪除。";
 "paneDuplicates" = "重複檔案";
-"infoDuplicates" = "內容相同且多次出現的 10 MB 以上大型檔案。大小相同的檔案會依內容比較。這裡不會移除任何內容；「在 Finder 中顯示」可前往這些檔案。";
+"infoDuplicates" = "以相同內容存在多份的 10 MB 以上大型檔案。大小相同的檔案會依內容比較。只剩一份時，該檔案會從此列表中消失。";
 "noDuplicates" = "沒有重複檔案";
 "duplicateGroupTitle" = "這 %@ 個檔案完全相同 – 多餘的拷貝佔用 %@";
 "noDuplicatesDetail" = "你的 Mac 上沒有存了兩份的大型檔案。這裡不需要做任何事。";
@@ -228,9 +229,9 @@
 "infoVolume" = "此磁碟機的容量：已使用的空間、macOS 需要時可自行釋放的空間，以及可用空間。外接磁碟機可以在這裡測量。";
 "guideOverview" = "一眼看清是什麼佔用了你的儲存空間，以及還剩多少可用空間。";
 "guideExplorer" = "最大的檔案夾排在最前面。打開檔案夾即可查看裡面的內容。";
-"guideLargeFiles" = "你 Mac 上最大的檔案。將不再需要的檔案在 Finder 中顯示，然後在那裡刪除。";
+"guideLargeFiles" = "你 Mac 上最大的檔案。不再需要的檔案，按右鍵即可移到垃圾桶。";
 "guideCleaner" = "你的 Mac 不需要的檔案。選擇可以移除的項目，按一下即可清理。";
-"guideDuplicates" = "這些檔案內容相同，存了不只一份。每組保留一個，在 Finder 中刪除其餘的。";
+"guideDuplicates" = "這些檔案以相同內容存在多份。每組保留一份，其餘移到垃圾桶。";
 "guideApps" = "你很久沒有打開過的 App。將不再需要的移到垃圾桶。";
 "guideTemporaryFiles" = "macOS 短暫存放檔案的隱藏位置。它通常會自動清空；只有殘留的 App 拷貝值得你自己刪除。";
 "guideCopies" = "macOS 檢查 App 時，有時會留下它的拷貝。App 結束後，你可以放心刪除這些拷貝。";

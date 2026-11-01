@@ -52,7 +52,6 @@ ONLY_AFTER_ASKING = Promise(
     allowed_in=(
         "Sources/Services/CleanerService.swift",
         "Sources/Services/CopyService.swift",
-        "Sources/Services/AppUsageService.swift",
     ),
 )
 PROMISES = (NO_NETWORK, ONLY_AFTER_ASKING)

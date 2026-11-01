@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Usas todas tus apps con regularidad. Aquí no hay nada que ordenar.";
 "unusedSince" = "Sin abrir desde hace";
 "daysOption" = "más de %@ días";
-"trashAppTitle" = "¿Mover “%@” a la Papelera?";
+"trashTitle" = "¿Mover “%@” a la Papelera?";
 "trashAppMessage" = "Puedes recuperar la app desde la Papelera hasta que la vacíes.";
+"trashFileMessage" = "Puedes recuperar el archivo de la Papelera hasta que la vacíes.";
 "moveToTrash" = "Mover a la Papelera";
 "lastOpened" = "Última apertura el %@";
-"trashAppFailed" = "No se pudo mover “%@”. En el Finder funciona con tu contraseña.";
+"trashFailed" = "No se pudo mover “%@”. En el Finder funciona con tu contraseña.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ analizado";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS crea esta zona para cada usuario en /private/var/folders. Está oculta en el Finder y no se desglosa en “Gestionar almacenamiento”.";
 "infoCopies" = "Al comprobar una firma, macOS a veces coloca copias completas de una app en la carpeta X. No son programas independientes; macOS crea una nueva cuando hace falta. Eliminarlas es seguro mientras la app esté cerrada.";
 "paneDuplicates" = "Duplicados";
-"infoDuplicates" = "Archivos grandes desde 10 MB que existen varias veces con el mismo contenido. Los archivos del mismo tamaño se comparan por su contenido. Aquí no se elimina nada; «Mostrar en el Finder» lleva a ellos.";
+"infoDuplicates" = "Archivos grandes desde 10 MB que existen varias veces con el mismo contenido. Los archivos del mismo tamaño se comparan por su contenido. Cuando solo queda una copia, el archivo sale de esta lista.";
 "noDuplicates" = "No hay archivos duplicados";
 "duplicateGroupTitle" = "Estos %@ archivos son idénticos – %@ en copias de más";
 "noDuplicatesDetail" = "Ningún archivo grande está guardado dos veces en tu Mac. Aquí no hay nada que hacer.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Capacidad de este volumen: lo que está usado, lo que macOS puede liberar por sí mismo cuando hace falta y lo que está libre. Aquí se pueden analizar los volúmenes externos.";
 "guideOverview" = "Mira de un vistazo qué ocupa tu almacenamiento y cuánto espacio queda libre.";
 "guideExplorer" = "Las carpetas más grandes aparecen primero. Abre una carpeta para ver qué contiene.";
-"guideLargeFiles" = "Los archivos más grandes de tu Mac. Muestra en el Finder los que ya no necesites y elimínalos allí.";
+"guideLargeFiles" = "Los archivos más grandes de tu Mac. Lo que ya no necesites, muévelo a la Papelera con un clic derecho.";
 "guideCleaner" = "Archivos que tu Mac no necesita. Elige lo que se puede quitar y limpia con un clic.";
-"guideDuplicates" = "Estos archivos están varias veces con el mismo contenido. Conserva uno de cada y elimina los demás en el Finder.";
+"guideDuplicates" = "Estos archivos existen varias veces con el mismo contenido. Conserva uno de cada y mueve los demás a la Papelera.";
 "guideApps" = "Apps que no abres desde hace mucho tiempo. Mueve a la Papelera las que ya no necesites.";
 "guideTemporaryFiles" = "Un lugar oculto donde macOS guarda archivos durante poco tiempo. Casi siempre se vacía solo; solo merece la pena que elimines tú mismo las copias de apps sobrantes.";
 "guideCopies" = "Cuando macOS comprueba una app, a veces deja copias de ella. Cuando la app esté cerrada, puedes eliminarlas sin riesgo.";

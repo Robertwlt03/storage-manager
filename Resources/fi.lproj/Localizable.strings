@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Käytät kaikkia appejasi säännöllisesti. Täällä ei ole mitään siivottavaa.";
 "unusedSince" = "Ei avattu";
 "daysOption" = "yli %@ päivään";
-"trashAppTitle" = "Siirretäänkö ”%@” roskakoriin?";
+"trashTitle" = "Siirretäänkö ”%@” roskakoriin?";
 "trashAppMessage" = "Voit palauttaa apin roskakorista, kunnes tyhjennät sen.";
+"trashFileMessage" = "Voit palauttaa tiedoston roskakorista, kunnes tyhjennät sen.";
 "moveToTrash" = "Siirrä roskakoriin";
 "lastOpened" = "Viimeksi avattu %@";
-"trashAppFailed" = "Kohdetta ”%@” ei voitu siirtää. Finderissa se onnistuu salasanallasi.";
+"trashFailed" = "Kohdetta ”%@” ei voitu siirtää. Finderissa se onnistuu salasanallasi.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ mitattu";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS luo tämän alueen jokaiselle käyttäjälle kohteeseen /private/var/folders. Se on piilotettu Finderissa, eikä sitä eritellä kohdassa ”Hallitse tallennustilaa”.";
 "infoCopies" = "Allekirjoitusta tarkistaessaan macOS luo joskus apista täydellisiä kopioita kansioon X. Ne eivät ole omia ohjelmiaan; macOS luo tarvittaessa uuden. Niiden poistaminen on turvallista, kun app on suljettu.";
 "paneDuplicates" = "Kaksoiskappaleet";
-"infoDuplicates" = "Vähintään 10 Mt:n suuret tiedostot, jotka ovat olemassa monta kertaa samalla sisällöllä. Samankokoisia tiedostoja verrataan sisällön perusteella. Täällä ei poisteta mitään; ”Näytä Finderissa” vie niihin.";
+"infoDuplicates" = "Vähintään 10 Mt:n suuret tiedostot, jotka ovat olemassa useaan kertaan samalla sisällöllä. Samankokoisia tiedostoja verrataan sisällön perusteella. Kun jäljellä on vain yksi kopio, tiedosto poistuu tältä listalta.";
 "noDuplicates" = "Ei kaksoiskappaleita";
 "duplicateGroupTitle" = "Nämä %@ tiedostoa ovat täsmälleen samat – %@ ylimääräisissä kopioissa";
 "noDuplicatesDetail" = "Macillasi ei ole yhtään suurta tiedostoa kahteen kertaan. Täällä ei ole mitään tehtävää.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Tämän taltion kapasiteetti: mitä on käytetty, minkä macOS voi tarvittaessa vapauttaa itse ja mitä on vapaana. Ulkoisia taltioita voi mitata täällä.";
 "guideOverview" = "Näet yhdellä silmäyksellä, mikä täyttää tallennustilasi ja paljonko tilaa on vielä vapaana.";
 "guideExplorer" = "Suurimmat kansiot ovat ylimpänä. Avaa kansio, niin näet sen sisällön.";
-"guideLargeFiles" = "Macisi suurimmat tiedostot. Näytä tarpeettomat Finderissa ja poista ne siellä.";
+"guideLargeFiles" = "Macisi suurimmat tiedostot. Siirrä tarpeettomat roskakoriin oikealla klikkauksella.";
 "guideCleaner" = "Tiedostoja, joita Macisi ei tarvitse. Valitse, mitä saa poistaa, ja siivoa yhdellä klikkauksella.";
-"guideDuplicates" = "Näitä tiedostoja on useampaan kertaan samalla sisällöllä. Säilytä yksi kustakin ja poista muut Finderissa.";
+"guideDuplicates" = "Nämä tiedostot ovat olemassa useaan kertaan samalla sisällöllä. Säilytä yksi kustakin ja siirrä muut roskakoriin.";
 "guideApps" = "Appeja, joita et ole avannut pitkään aikaan. Siirrä tarpeettomat roskakoriin.";
 "guideTemporaryFiles" = "Piilotettu paikka, jossa macOS säilyttää tiedostoja lyhyen aikaa. Se tyhjenee yleensä itsestään; vain jääneet appien kopiot kannattaa poistaa itse.";
 "guideCopies" = "Kun macOS tarkistaa apin, siitä jää joskus kopioita. Kun appi on suljettu, voit poistaa ne turvallisesti.";

@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Vous utilisez toutes vos apps régulièrement. Il n’y a rien à ranger ici.";
 "unusedSince" = "Non ouverte depuis";
 "daysOption" = "plus de %@ jours";
-"trashAppTitle" = "Placer « %@ » dans la Corbeille ?";
+"trashTitle" = "Placer « %@ » dans la Corbeille ?";
 "trashAppMessage" = "Vous pouvez restaurer l’app depuis la Corbeille tant que vous ne l’avez pas vidée.";
+"trashFileMessage" = "Tu peux récupérer le fichier dans la Corbeille tant que tu ne la vides pas.";
 "moveToTrash" = "Placer dans la Corbeille";
 "lastOpened" = "Dernière ouverture le %@";
-"trashAppFailed" = "« %@ » n’a pas pu être déplacée. Dans le Finder, cela fonctionne avec votre mot de passe.";
+"trashFailed" = "« %@ » n’a pas pu être déplacée. Dans le Finder, cela fonctionne avec votre mot de passe.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ analysés";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS crée cette zone pour chaque utilisateur dans /private/var/folders. Elle est masquée dans le Finder et n’est pas détaillée dans « Gérer le stockage ».";
 "infoCopies" = "Lors de la vérification d’une signature, macOS place parfois des copies complètes d’une app dans le dossier X. Ce ne sont pas des programmes distincts ; macOS en crée une nouvelle en cas de besoin. Les supprimer est sans risque tant que l’app est quittée.";
 "paneDuplicates" = "Doublons";
-"infoDuplicates" = "Fichiers volumineux à partir de 10 Mo présents plusieurs fois avec le même contenu. Les fichiers de même taille sont comparés par leur contenu. Rien n’est supprimé ici ; « Afficher dans le Finder » y mène.";
+"infoDuplicates" = "Fichiers volumineux à partir de 10 Mo présents plusieurs fois avec le même contenu. Les fichiers de même taille sont comparés selon leur contenu. Dès qu’il ne reste qu’une copie, le fichier quitte cette liste.";
 "noDuplicates" = "Aucun fichier en double";
 "duplicateGroupTitle" = "Ces %@ fichiers sont identiques – %@ en copies superflues";
 "noDuplicatesDetail" = "Aucun gros fichier n’est enregistré deux fois sur votre Mac. Il n’y a rien à faire ici.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Capacité de ce volume : ce qui est utilisé, ce que macOS peut libérer lui-même en cas de besoin et ce qui est libre. Les volumes externes peuvent être analysés ici.";
 "guideOverview" = "Voyez d’un coup d’œil ce qui remplit votre stockage et combien d’espace est encore libre.";
 "guideExplorer" = "Les plus gros dossiers apparaissent en premier. Ouvrez un dossier pour voir son contenu.";
-"guideLargeFiles" = "Les plus gros fichiers de votre Mac. Affichez dans le Finder ceux dont vous n’avez plus besoin et supprimez-les là-bas.";
+"guideLargeFiles" = "Les plus gros fichiers de ton Mac. Ce dont tu n’as plus besoin, place-le dans la Corbeille d’un clic droit.";
 "guideCleaner" = "Des fichiers dont votre Mac n’a pas besoin. Choisissez ce qui peut partir et faites le ménage en un clic.";
-"guideDuplicates" = "Ces fichiers existent en plusieurs exemplaires avec le même contenu. Gardez-en un de chaque et supprimez les autres dans le Finder.";
+"guideDuplicates" = "Ces fichiers existent plusieurs fois avec le même contenu. Garde-en un de chaque et place les autres dans la Corbeille.";
 "guideApps" = "Des apps que vous n’avez pas ouvertes depuis longtemps. Placez dans la Corbeille celles dont vous n’avez plus besoin.";
 "guideTemporaryFiles" = "Un endroit caché où macOS garde des fichiers pendant peu de temps. Il se vide le plus souvent tout seul ; il ne vaut la peine de supprimer vous-même que les copies d’apps restantes.";
 "guideCopies" = "Quand macOS vérifie une app, il en laisse parfois des copies. Une fois l’app fermée, vous pouvez les supprimer sans risque.";

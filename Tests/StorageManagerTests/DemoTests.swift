@@ -16,6 +16,19 @@ struct DemoTests {
         return model
     }
 
+    @Test("A copy moved to the Trash leaves its group, and the duplicates stay searched")
+    func trashDuplicate() async throws {
+        let model = Self.demoModel()
+        await model.findDuplicates()
+        let groupCount = try #require(model.duplicateGroups?.count)
+        let copy = try #require(model.duplicateGroups?.first?.first?.path)
+        let rootBytes = model.root.bytes
+        try model.moveToTrash(copy)
+        #expect(model.duplicateGroups?.count == groupCount - 1)
+        #expect(model.duplicateSpareBytes != nil)
+        #expect(model.root.bytes < rootBytes)
+    }
+
     @Test("Every page gets something to show")
     func fillsEveryPage() {
         let model = Self.demoModel()
