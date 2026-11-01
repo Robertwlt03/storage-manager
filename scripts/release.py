@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Builds the disk image to share: the app, a link to the Applications folder and the illustrated
-installation guide, in dist/Storage-Manager-<version>.dmg.
+installation guide, in dist/Storage-Manager.dmg. The name has no version, so the README's
+download link (releases/latest/download/Storage-Manager.dmg) always gets the newest one.
 
 Start:  make release
 Needs:  Xcode 27 and a signing identity in SIGN_IDENTITY (make identity writes it to local.mk).
@@ -87,7 +88,7 @@ def main() -> None:
         console.frame("No disk image", ["Create a signing identity first: make identity"],
                       console.FAILURE)
         sys.exit(1)
-    disk_image = RELEASE_FOLDER / f"{DISK_IMAGE_FILE}-{release_version}.dmg"
+    disk_image = RELEASE_FOLDER / f"{DISK_IMAGE_FILE}.dmg"
     build_signed_app(identity)
     gather_contents()
     pack(disk_image, identity)

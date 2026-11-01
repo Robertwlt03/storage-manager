@@ -39,8 +39,8 @@ SNAPSHOT_MODE := $(if $(RECORD),--record)
 
 .DEFAULT_GOAL := help
 .SILENT:  # make prints no commands; each command says itself what it did, through $(CONSOLE)
-.PHONY: help build run restart demo snapshots check hooks banner test coverage format selftest \
-	stress release identity clean python-path
+.PHONY: help build run restart demo snapshots check hooks banner readme test coverage format \
+	selftest stress release identity clean python-path
 
 # MARK: Commands
 # The text after ## is what make help shows for each command.
@@ -85,6 +85,9 @@ hooks: ## Optional: run make check before every git push (git push --no-verify s
 
 banner: ## Draw a banner for a guide: asks whether to replace one, then for its texts
 	$(PYTHON) scripts/doc-assets.py banner
+
+readme: ## Draw the README's pictures again; the tour comes from the pictures of make snapshots
+	$(PYTHON) scripts/readme-assets.py
 
 test: ## Run only the unit tests
 	$(PYTHON) scripts/check.py tests

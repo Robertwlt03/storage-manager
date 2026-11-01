@@ -66,6 +66,8 @@ changing code; do not repeat their content here or in comments.
 - `make test`, `make coverage` (the table per folder), `make format`, single steps with `scripts/check.py <step>`.
 - `make build BUILD_FOLDER=<scratchpad>/build SIGN_IDENTITY=-` for your own builds.
 - `make banner` draws a guide banner (asks everything, offers existing ones to replace).
+- `make readme` draws the README's pictures in `assets/readme` (light and dark, shown through `<picture>`): the
+  download button, the grids, the terminals and the slideshows; the tour comes from `snapshots/current`.
 
 ## <img src="assets/icons/claude-commit.svg" height="33" align="absmiddle" alt="">Before every commit
 

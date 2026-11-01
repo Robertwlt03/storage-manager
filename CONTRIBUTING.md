@@ -59,6 +59,7 @@ You do not have to remember long commands. Just like npm scripts, every workflow
 | `make check` | runs the whole check chain, exactly as on GitHub |
 | `make hooks` | optional: runs the check chain before every `git push`, so nothing red leaves the Mac |
 | `make banner` | draws a banner for a guide; asks whether to replace one (picked with the arrow keys), then for its texts |
+| `make readme` | draws the README's pictures again, light and dark; the tour comes from the pictures of `make snapshots` |
 | `make test` | runs only the tests |
 | `make coverage` | shows how much of the code the tests reach, per folder |
 | `make format` | puts all Swift files into the shared layout |
@@ -105,7 +106,8 @@ make demo
 ```
 
 This is how you check the look of the pages you changed before every contribution, in light and in dark
-appearance. The screenshots for the README are also taken in demo mode. The made-up data lives in
+appearance. The screenshots for the README are also taken in demo mode: `make snapshots` photographs the pages,
+and `make readme` turns them into the tour at the top of the README. The made-up data lives in
 `Sources/Diagnostics/DemoData.swift`.
 
 If you like, let the Mac do the comparing. `make snapshots RECORD=1` photographs every page once light and once dark
