@@ -69,17 +69,29 @@ then everything else you do with the mouse.
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/install-dark.svg">
-    <img src="assets/pictures/install-light.svg" alt="The installation step by step: drag the app into Applications, click Done, click Open Anyway, open System Settings and turn on Full Disk Access" width="100%">
+    <img src="assets/pictures/install-light.svg" alt="The installation step by step: open the disk image and click Done, click Open Anyway, drag the app into Applications, open it and allow it the same way, open System Settings and turn on Full Disk Access" width="100%">
   </picture>
 </p>
 
-1. **Open the DMG file and drag Storage Manager into the “Applications” folder.**
-2. **Open the app.** The first time, macOS reports that it could not verify the app, because I do not distribute it
-   through Apple’s paid developer program. Just click “Done” here.
-3. **Allow the first launch.** In System Settings › Privacy & Security you find a notice about Storage Manager right
-   at the bottom, with the button “Open Anyway”. You only do this once, and never again for later updates.
+1. **Open the disk image and allow it.** macOS first reports that it could not verify “Storage-Manager.dmg”, because
+   I do not distribute it through Apple’s paid developer program. Click “Done”, open System Settings › Privacy &
+   Security, and at the very bottom click “Open Anyway” next to the notice about Storage-Manager.dmg. Then open the
+   disk image again and click “Open”. This command opens Privacy & Security for you; copy it into Terminal:
+
+   ```bash
+   open "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension"
+   ```
+
+2. **Drag Storage Manager into the “Applications” folder.**
+3. **Open the app and allow it the same way.** macOS shows the same notice for the app: click “Done”, then “Open
+   Anyway” in Privacy & Security once more. You only do this once, and never again for later updates.
 4. **Grant Full Disk Access.** The app asks for it at launch: click “Open System Settings” and turn Storage Manager
-   on there. If it is missing from the list, add it with the plus button.
+   on there. If it is missing from the list, add it with the plus button. This command opens the list directly:
+
+   ```bash
+   open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+   ```
+
 5. **In the app, click “Restart App”.** From now on it measures everything without asking you again.
 
 **Why Full Disk Access?** Without it, macOS asks separately for every protected place: the Desktop, Documents,

@@ -64,6 +64,7 @@ THEMES = {
 WIDTH = 900  # a guide's width on GitHub, roughly; the pictures scale with the page
 CHIP_ROW, TERMINAL_LINE, LAYER_ROW, LINE, ROW_GAP = 52, 24, 64, 19, 26
 LETTER, MONO_LETTER = 7.0, 8.4  # rough widths of a letter at 13.5 and 14 points, for wrapping
+TERMINAL_LETTER = 9.03  # a letter of SF Mono at 15 points; typed commands are fitted to it
 SECONDS_PER_PICTURE, FADE_SECONDS, SECONDS_PER_LETTER = 3.5, 0.6, 0.02
 SCREENSHOT_PIXELS, SCREENSHOT_QUALITY = 1640, 82  # sharp on a Retina screen at a guide's width
 BUTTON_HEIGHT, BUTTON_LETTER, BUTTON_MARGIN = 32, 7.9, 4  # a large macOS push button, 14 points
@@ -113,9 +114,12 @@ GLYPHS = {
 
 
 def text(left: float, baseline: float, content: str, size: float, color: str, weight: int = 400,
-         anchor: str = "start", font: str = FONT) -> str:
+         anchor: str = "start", font: str = FONT, length: float = 0) -> str:
+    """A line of text; with a length, the browser fits it to exactly that width, whatever font
+    the reader's computer picks, so a picture can rely on where it ends."""
+    fitted = f' textLength="{length:.1f}" lengthAdjust="spacingAndGlyphs"' if length else ""
     return (f'<text x="{left:g}" y="{baseline:g}" font-family="{font}" font-size="{size}" '
-            f'font-weight="{weight}" fill="{color}" text-anchor="{anchor}" '
+            f'font-weight="{weight}" fill="{color}" text-anchor="{anchor}"{fitted} '
             f'xml:space="preserve">{ascii_only(escape(content))}</text>')
 
 
@@ -299,16 +303,19 @@ def layers(spec: dict, colors: dict) -> str:
 
 def typed_command(baseline: float, command: str, colors: dict,
                   begin: float) -> tuple[list[str], float]:
-    """A prompt and a command that appears letter by letter: a cover slides off to the right."""
+    """A prompt and a command that appears letter by letter: a cover slides off to the right.
+    The command is fitted to its width, so the cover hides all of it in every font."""
     seconds = len(command) * SECONDS_PER_LETTER
-    left, width = 45, len(command) * 9.1 + 4  # 9.1 pixels per letter of the 15-pixel monospace
+    length = len(command) * TERMINAL_LETTER
+    left, width = 45, length + 4
     timing = f'begin="{begin:.2f}s" dur="{seconds:.2f}s" fill="freeze"'
     cover = (f'<rect x="{left}" y="{baseline - 17:g}" width="{width:.1f}" height="23" '
              f'fill="{colors["window"]}">'
              f'<animate attributeName="x" from="{left}" to="{left + width:.1f}" {timing}/>'
              f'<animate attributeName="width" from="{width:.1f}" to="0" {timing}/></rect>')
     pieces = [text(28, baseline, "$", 15, colors["prompt"], 600, font=MONO),
-              text(46, baseline, command, 15, colors["text"], 500, font=MONO), cover]
+              text(46, baseline, command, 15, colors["text"], 500, font=MONO, length=length),
+              cover]
     return pieces, begin + seconds + 0.35
 
 

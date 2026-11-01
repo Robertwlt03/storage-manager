@@ -2,22 +2,27 @@
   "kind": "slideshow",
   "width": 620,
   "corner": 12,
-  "label": "Installing step by step",
+  "label": "The installation step by step: open the disk image and click Done, click Open Anyway, drag the app into Applications, open it and allow it the same way, open System Settings and turn on Full Disk Access",
   "pictures": [
     {
-      "file": "docs/guide/images/1-disk-image.svg",
-      "caption": "1 \u00b7 Drag the app into Applications",
-      "line": "Open Storage-Manager.dmg first."
-    },
-    {
-      "file": "docs/guide/images/2-warning.svg",
-      "caption": "2 \u00b7 Open it and click \u201cDone\u201d",
-      "line": "macOS has not checked the app yet."
+      "file": "docs/guide/images/0-disk-image-warning.svg",
+      "caption": "1 \u00b7 Open the disk image, click \u201cDone\u201d",
+      "line": "macOS has not checked it, because the app is not sold through Apple."
     },
     {
       "file": "docs/guide/images/3-open-anyway.svg",
-      "caption": "3 \u00b7 Click \u201cOpen Anyway\u201d",
-      "line": "System Settings \u203a Privacy & Security, only once."
+      "caption": "1 \u00b7 Click \u201cOpen Anyway\u201d",
+      "line": "System Settings \u203a Privacy & Security, then open the disk image again."
+    },
+    {
+      "file": "docs/guide/images/1-disk-image.svg",
+      "caption": "2 \u00b7 Drag the app into Applications",
+      "line": "Right from the window of the disk image."
+    },
+    {
+      "file": "docs/guide/images/2-warning.svg",
+      "caption": "3 \u00b7 Open the app and allow it the same way",
+      "line": "\u201cDone\u201d, then \u201cOpen Anyway\u201d once more, and never again."
     },
     {
       "file": "docs/guide/images/5-access-window.png",

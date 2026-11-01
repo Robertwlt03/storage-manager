@@ -5,7 +5,8 @@ download link (releases/latest/download/Storage-Manager.dmg) always gets the new
 
 Start:  make release
 Needs:  Xcode 27 and a signing identity in SIGN_IDENTITY (make identity writes it to local.mk).
-        Free: the self-signed identity; users confirm the first start once ("Open Anyway").
+        Free: the self-signed identity; users allow the disk image and the app once each
+        ("Open Anyway"), because only a notarized image opens without asking.
         Paid: SIGN_IDENTITY="Developer ID Application: …" and NOTARY_PROFILE=<profile> also
         notarize the image, so macOS opens it without any warning.
 """
