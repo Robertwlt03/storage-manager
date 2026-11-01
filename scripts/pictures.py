@@ -10,7 +10,8 @@ picks the one that fits. The "kind" of a description says what it draws:
   button     a large button, such as the download button (title, line, glyph, color)
   grid       items in columns without frames: a tile with a glyph, a title and a sentence;
              with "code": true the title is a command or path in a monospace chip instead
-  chips      short codes in a chip with a name and a smaller second name, such as languages
+  chips      a flag (names from scripts/flags.py) or a short code in a chip, with a name and a
+             smaller second name, such as the languages
   terminal   a terminal window that types its commands; lines are [kind, text] with the kinds
              command, output, result and note
   flow       steps from left to right with arrows between them
@@ -33,6 +34,7 @@ from pathlib import Path
 
 from checks.console import FAILURE, SUCCESS, frame, heading
 from checks.project import PROJECT, relative_path
+from flags import FLAGS
 
 doc_assets = import_module("doc-assets")  # the shared colors and the section icon's tile
 
@@ -219,14 +221,25 @@ def chips(spec: dict, colors: dict) -> str:
     for number, item in enumerate(items):
         left, top = number % columns * column_width, number // columns * CHIP_ROW
         body += [
+            flag(item["flag"], left, top + 9, number, colors) if "flag" in item else
             f'<rect x="{left:g}" y="{top + 6:g}" width="34" height="34" rx="9" '
-            f'fill="{colors["chip"]}"/>',
-            text(left + 17, top + 28, item["code"], 12, colors["chip_text"], 700, "middle"),
-            text(left + 46, top + 21, item["title"], 14.5, colors["text"], 600),
-            text(left + 46, top + 38, item["text"], 12, colors["muted"]),
+            f'fill="{colors["chip"]}"/>'
+            + text(left + 17, top + 28, item["code"], 12, colors["chip_text"], 700, "middle"),
+            text(left + 50, top + 21, item["title"], 14.5, colors["text"], 600),
+            text(left + 50, top + 38, item["text"], 12, colors["muted"]),
         ]
     label = spec.get("label", ", ".join(item["text"] for item in items))
     return svg(WIDTH, rows_of(items, columns) * CHIP_ROW, label, body)
+
+
+def flag(country: str, left: float, top: float, number: int, colors: dict) -> str:
+    """A flag of scripts/flags.py, 39 × 26 with rounded corners and a faint edge like a tile."""
+    return (f'<svg x="{left:g}" y="{top:g}" width="39" height="26" viewBox="0 0 30 20">'
+            f'<defs><clipPath id="f{number}"><rect width="30" height="20" rx="3.5"/></clipPath>'
+            f'</defs>'
+            f'<g clip-path="url(#f{number})">{FLAGS[country]}</g>'
+            f'<rect x=".25" y=".25" width="29.5" height="19.5" rx="3.3" fill="none" '
+            f'stroke="{colors["edge"]}" stroke-width=".5"/></svg>')
 
 
 def flow(spec: dict, colors: dict) -> str:

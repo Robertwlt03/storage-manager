@@ -89,7 +89,9 @@ With `"code": true` the title becomes a command or a path in a monospace chip, a
 
 ### Chips
 
-A short code in a chip, a name and a smaller second name, such as the languages.
+A flag, a name and a smaller second name, such as the languages. The flags live in
+[`scripts/flags.py`](../../scripts/flags.py), drawn simply so they stay clear this small; without a `flag`, a short
+`code` stands in a chip instead.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/languages-dark.svg">
@@ -97,7 +99,7 @@ A short code in a chip, a name and a smaller second name, such as the languages.
 </picture>
 
 ```json
-{"kind": "chips", "columns": 4, "items": [{"code": "DE", "title": "Deutsch", "text": "German"}]}
+{"kind": "chips", "columns": 4, "items": [{"flag": "DE", "title": "Deutsch", "text": "German"}]}
 ```
 
 ### Terminal

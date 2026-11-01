@@ -4,142 +4,142 @@
   "label": "28 languages: Chinese (Simplified), Chinese (Traditional), Czech, Danish, Dutch, English, Finnish, French, German, Greek, Hindi, Hungarian, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Brazil), Portuguese (Portugal), Romanian, Russian, Spanish, Swedish, Thai, Turkish, Ukrainian and Vietnamese",
   "items": [
     {
-      "code": "ZH",
+      "flag": "CN",
       "title": "\u7b80\u4f53\u4e2d\u6587",
       "text": "Chinese (Simplified)"
     },
     {
-      "code": "ZH",
+      "flag": "TW",
       "title": "\u7e41\u9ad4\u4e2d\u6587",
       "text": "Chinese (Traditional)"
     },
     {
-      "code": "CS",
+      "flag": "CZ",
       "title": "\u010ce\u0161tina",
       "text": "Czech"
     },
     {
-      "code": "DA",
+      "flag": "DK",
       "title": "Dansk",
       "text": "Danish"
     },
     {
-      "code": "NL",
+      "flag": "NL",
       "title": "Nederlands",
       "text": "Dutch"
     },
     {
-      "code": "EN",
+      "flag": "US",
       "title": "English",
       "text": "English"
     },
     {
-      "code": "FI",
+      "flag": "FI",
       "title": "Suomi",
       "text": "Finnish"
     },
     {
-      "code": "FR",
+      "flag": "FR",
       "title": "Fran\u00e7ais",
       "text": "French"
     },
     {
-      "code": "DE",
+      "flag": "DE",
       "title": "Deutsch",
       "text": "German"
     },
     {
-      "code": "EL",
+      "flag": "GR",
       "title": "\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac",
       "text": "Greek"
     },
     {
-      "code": "HI",
+      "flag": "IN",
       "title": "\u0939\u093f\u0928\u094d\u0926\u0940",
       "text": "Hindi"
     },
     {
-      "code": "HU",
+      "flag": "HU",
       "title": "Magyar",
       "text": "Hungarian"
     },
     {
-      "code": "ID",
+      "flag": "ID",
       "title": "Bahasa Indonesia",
       "text": "Indonesian"
     },
     {
-      "code": "IT",
+      "flag": "IT",
       "title": "Italiano",
       "text": "Italian"
     },
     {
-      "code": "JA",
+      "flag": "JP",
       "title": "\u65e5\u672c\u8a9e",
       "text": "Japanese"
     },
     {
-      "code": "KO",
+      "flag": "KR",
       "title": "\ud55c\uad6d\uc5b4",
       "text": "Korean"
     },
     {
-      "code": "NB",
+      "flag": "NO",
       "title": "Norsk",
       "text": "Norwegian"
     },
     {
-      "code": "PL",
+      "flag": "PL",
       "title": "Polski",
       "text": "Polish"
     },
     {
-      "code": "PT",
+      "flag": "BR",
       "title": "Portugu\u00eas (Brasil)",
       "text": "Portuguese (Brazil)"
     },
     {
-      "code": "PT",
+      "flag": "PT",
       "title": "Portugu\u00eas (Portugal)",
       "text": "Portuguese (Portugal)"
     },
     {
-      "code": "RO",
+      "flag": "RO",
       "title": "Rom\u00e2n\u0103",
       "text": "Romanian"
     },
     {
-      "code": "RU",
+      "flag": "RU",
       "title": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
       "text": "Russian"
     },
     {
-      "code": "ES",
+      "flag": "ES",
       "title": "Espa\u00f1ol",
       "text": "Spanish"
     },
     {
-      "code": "SV",
+      "flag": "SE",
       "title": "Svenska",
       "text": "Swedish"
     },
     {
-      "code": "TH",
+      "flag": "TH",
       "title": "\u0e44\u0e17\u0e22",
       "text": "Thai"
     },
     {
-      "code": "TR",
+      "flag": "TR",
       "title": "T\u00fcrk\u00e7e",
       "text": "Turkish"
     },
     {
-      "code": "UK",
+      "flag": "UA",
       "title": "\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430",
       "text": "Ukrainian"
     },
     {
-      "code": "VI",
+      "flag": "VN",
       "title": "Ti\u1ebfng Vi\u1ec7t",
       "text": "Vietnamese"
     }
