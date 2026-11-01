@@ -76,12 +76,22 @@ then everything else you do with the mouse.
 1. **Open the disk image and allow it.** macOS first reports that it could not verify “Storage-Manager.dmg”, because
    I do not distribute it through Apple’s paid developer program. Click “Done”, open System Settings › Privacy &
    Security, and at the very bottom click “Open Anyway” next to the notice about Storage-Manager.dmg. Then open the
-   disk image again and click “Open”.
+   disk image again and click “Open”. This command opens Privacy & Security for you; copy it into Terminal:
+
+   ```bash
+   open "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension"
+   ```
+
 2. **Drag Storage Manager into the “Applications” folder.**
 3. **Open the app and allow it the same way.** macOS shows the same notice for the app: click “Done”, then “Open
    Anyway” in Privacy & Security once more. You only do this once, and never again for later updates.
 4. **Grant Full Disk Access.** The app asks for it at launch: click “Open System Settings” and turn Storage Manager
-   on there. If it is missing from the list, add it with the plus button.
+   on there. If it is missing from the list, add it with the plus button. This command opens the list directly:
+
+   ```bash
+   open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
+   ```
+
 5. **In the app, click “Restart App”.** From now on it measures everything without asking you again.
 
 **Why Full Disk Access?** Without it, macOS asks separately for every protected place: the Desktop, Documents,
