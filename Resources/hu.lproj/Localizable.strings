@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ elérhető, összesen %@";
+"availableExplained" = "Elérhető = szabad hely + amit a macOS maga is fel tud szabadítani.";
 "categories" = "Kategóriák";
 "freeSpace" = "Szabad";
 "temporaryAreaName" = "A macOS rendszerfájljai";

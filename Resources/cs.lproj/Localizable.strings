@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "K dispozici %@ z %@";
+"availableExplained" = "K dispozici = volné místo + to, co macOS dokáže sám smazat.";
 "categories" = "Kategorie";
 "freeSpace" = "Volné";
 "temporaryAreaName" = "Systémové soubory macOS";

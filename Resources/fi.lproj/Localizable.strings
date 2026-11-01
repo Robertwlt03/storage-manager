@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ käytettävissä (yhteensä %@)";
+"availableExplained" = "Käytettävissä = vapaa tila + mitä macOS voi itse tyhjentää.";
 "categories" = "Luokat";
 "freeSpace" = "Vapaana";
 "temporaryAreaName" = "macOS:n järjestelmätiedostot";

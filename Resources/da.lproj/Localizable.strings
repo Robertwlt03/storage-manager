@@ -26,7 +26,8 @@
 "hideSidebar" = "Skjul indholdsoversigt";
 
 /* Overview and categories */
-"availableOf" = "%@ ledigt af %@";
+"availableOf" = "%@ tilgængeligt af %@";
+"availableExplained" = "Tilgængeligt = ledig plads + det, macOS selv kan rydde.";
 "categories" = "Kategorier";
 "freeSpace" = "Ledigt";
 "temporaryAreaName" = "Systemfiler fra macOS";

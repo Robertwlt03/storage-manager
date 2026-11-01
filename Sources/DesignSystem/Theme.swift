@@ -34,14 +34,32 @@ enum Theme {
     /// Invisible, but still catches clicks, for example beside the floating sidebar.
     static let clickCatcher = Color.clear
 
-    /// Category colors: Apple's dynamic system colors, which adapt to light, dark and increased
-    /// contrast by themselves. The white symbols on them are decorative (a text label always names
-    /// the category), so the 3:1 rule for meaningful graphics does not apply; all text keeps its
-    /// 4.5:1 check.
+    /// Category colors, one of its own for every kind in `CategoryKind`'s order: Apple's dynamic
+    /// system colors and blends of them, which adapt to light, dark and increased contrast by
+    /// themselves. The white symbols on them are decorative (a text label always names the
+    /// category), so the 3:1 rule for meaningful graphics does not apply; all text keeps its 4.5:1
+    /// check. The rings reuse them for their branches, from the start once they run out.
+    /// Close system pairs (red and pink, teal and mint) never both stand for a category.
     static let categoryColors: [Color] = [
-        .blue, .purple, .pink, .orange, .yellow, .green, .teal, .indigo, .red, .brown, .mint,
-        .cyan, .gray, .blue, .purple, .secondary,
+        .blue,  // apps
+        .purple,  // documents
+        .yellow,  // downloads
+        .orange,  // photos, music and movies
+        .cyan,  // iCloud Drive
+        .green,  // mail and messages
+        .teal,  // developer
+        .indigo,  // caches
+        .red,  // app data
+        .brown,  // Trash
+        .green.mix(with: .black, by: blendShare),  // temporary files, a forest green
+        .pink.mix(with: .purple, by: halfShare),  // other user data, an orchid
+        .gray.mix(with: .blue, by: blendShare),  // shared app data, a slate
+        .brown.mix(with: .yellow, by: blendShare),  // other files, a sand
+        .green.mix(with: .yellow, by: blendShare),  // purgeable by macOS, a lime
+        .gray,  // system and other
     ]
+    private static let blendShare = 0.4
+    private static let halfShare = 0.5
     static let badgeSymbol = Color.white
     /// Symbols and badges while the window is in the background, the gray of the sidebar's symbols.
     static let inBackground = Color.gray

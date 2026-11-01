@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ verfügbar von %@";
+"availableExplained" = "Verfügbar = frei + was macOS bei Bedarf selbst löscht.";
 "categories" = "Kategorien";
 "freeSpace" = "Frei";
 "temporaryAreaName" = "Systemdateien von macOS";

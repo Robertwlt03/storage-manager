@@ -80,7 +80,7 @@ struct SunburstChart: View {
     private var centerLabel: some View {
         let shown = hovered ?? folder
         return VStack(spacing: Space.extraSmall) {
-            Text(shown.isVirtual ? TextKey.paneExplorer.translated : shown.displayName)
+            Text(shown.listsAreas ? TextKey.paneExplorer.translated : shown.displayName)
                 .textRole(.section).lineLimit(Self.nameLines)
             Text(Format.bytes(shown.bytes)).textRole(.caption)
         }

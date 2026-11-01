@@ -90,8 +90,8 @@ enum CategoryService {
         func addBytes(of node: Node, at path: String, inheritedKind: CategoryKind) {
             let matchedKind = kindByPath[path]
             let kind = matchedKind ?? inheritedKind
-            if matchedKind != nil && categories[kind.rawValue].node == nil {
-                categories[kind.rawValue].node = node
+            if matchedKind != nil && inheritedKind != kind {
+                categories[kind.rawValue].folders.append(node)
             }
             var ownBytes = node.bytes
             for child in node.children {
@@ -108,6 +108,17 @@ enum CategoryService {
         if let volume { addEstimatedKinds(from: volume, to: &categories) }
         return categories.filter { category in category.bytes > 0 }
             .sorted { left, right in left.bytes > right.bytes }
+    }
+
+    /// What a click on a category shows: a page under the category's own name that lists its
+    /// folders, each without the subfolders of other kinds, so the sizes add up to the category's.
+    static func folder(of category: Category) -> Node? {
+        guard !category.folders.isEmpty else { return nil }
+        let kindByPath = kindsByExpandedPath()
+        let portions = category.folders.map { folder in
+            folder.portion { child in (kindByPath[child.path] ?? category.kind) == category.kind }
+        }
+        return Node.group(category.kind.title.translated, of: portions)
     }
 
     private static func kindsByExpandedPath() -> [String: CategoryKind] {

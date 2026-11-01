@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ tilgjengelig av %@";
+"availableExplained" = "Tilgjengelig = ledig plass + det macOS kan rydde selv.";
 "categories" = "Kategorier";
 "freeSpace" = "Ledig";
 "temporaryAreaName" = "Systemfiler fra macOS";

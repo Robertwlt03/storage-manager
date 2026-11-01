@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ διαθέσιμα από %@";
+"availableExplained" = "Διαθέσιμα = ελεύθερος χώρος + ό,τι μπορεί να διαγράψει μόνο του το macOS.";
 "categories" = "Κατηγορίες";
 "freeSpace" = "Ελεύθερα";
 "temporaryAreaName" = "Αρχεία συστήματος του macOS";

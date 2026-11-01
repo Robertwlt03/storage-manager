@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ kullanılabilir, toplam %@";
+"availableExplained" = "Kullanılabilir = boş alan + macOS'un kendisinin temizleyebildiği alan.";
 "categories" = "Kategoriler";
 "freeSpace" = "Boş";
 "temporaryAreaName" = "macOS Sistem Dosyaları";

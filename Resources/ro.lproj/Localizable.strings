@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ disponibil din %@";
+"availableExplained" = "Disponibil = spațiu liber + ce poate elibera macOS singur.";
 "categories" = "Categorii";
 "freeSpace" = "Liber";
 "temporaryAreaName" = "Fișiere de sistem macOS";

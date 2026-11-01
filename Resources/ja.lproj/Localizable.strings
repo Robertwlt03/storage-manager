@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@利用可能(全体%@)";
+"availableExplained" = "利用可能 = 空き容量 + macOSが自動で削除できる容量";
 "categories" = "カテゴリ";
 "freeSpace" = "空き";
 "temporaryAreaName" = "macOSのシステムファイル";

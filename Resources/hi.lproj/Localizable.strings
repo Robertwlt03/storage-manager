@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%2$@ में से %1$@ उपलब्ध";
+"availableExplained" = "उपलब्ध = खाली जगह + वह जो macOS ख़ुद हटा सकता है।";
 "categories" = "श्रेणियाँ";
 "freeSpace" = "खाली";
 "temporaryAreaName" = "macOS की सिस्टम फ़ाइलें";

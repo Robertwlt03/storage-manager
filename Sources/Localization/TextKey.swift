@@ -13,7 +13,8 @@ nonisolated enum TextKey: String, CaseIterable {
     case loadingAppsTitle, loadingAppsDetail, showSidebar, hideSidebar
 
     // Overview and categories
-    case availableOf, categories, freeSpace, temporaryAreaName, homeFolderName
+    case availableOf, availableExplained, categories, freeSpace, temporaryAreaName,
+        homeFolderName
     case categoryApps, categoryDocuments, categoryDownloads, categoryMedia, categoryICloud,
         categoryMail, categoryDeveloper, categoryCaches, categoryAppData
     case categoryTrash, categoryTemporary, categoryUser, categoryLibrary, categoryOther,

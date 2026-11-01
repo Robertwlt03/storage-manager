@@ -40,9 +40,36 @@ extension AppModel {
         }
     }
 
+    /// A folder inside the shown one goes on top of the path, so going back returns to what was
+    /// shown, a category's folders too; anything else opens with the path from its scan root.
     func open(_ node: Node) {
-        explorerPath = node.nodesFromRoot
+        if let shown = explorerPath.last, shown.children.contains(node) {
+            explorerPath.append(node)
+        } else {
+            explorerPath = node.isGroup ? [node] : node.nodesFromRoot
+        }
         endSearch()  // opening a result leaves the search, even when the explorer is already shown
         pane = .explorer
+    }
+
+    /// A click on a category: its folders, sized like the category (CategoryService.folder).
+    func open(_ category: Category) {
+        guard let folder = CategoryService.folder(of: category) else { return }
+        explorerPath = []
+        open(folder)
+        shownCategory = category.kind
+    }
+
+    /// A category's folders are copies that keep their old sizes after the tree changes, so its
+    /// view starts again from the new tree; going elsewhere forgets the category.
+    func refreshShownCategory() {
+        let shownCopies = explorerPath.contains { node in node.isGroup || !root.holds(node) }
+        guard let kind = shownCategory, shownCopies else {
+            shownCategory = nil
+            return
+        }
+        let category = categories.first { category in category.kind == kind }
+        let folder = category.flatMap(CategoryService.folder(of:))
+        explorerPath = folder.map { folder in [folder] } ?? []
     }
 }

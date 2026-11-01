@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "Доступно %@ з %@";
+"availableExplained" = "Доступно = вільне місце + те, що macOS може видалити сама.";
 "categories" = "Категорії";
 "freeSpace" = "Вільно";
 "temporaryAreaName" = "Системні файли macOS";

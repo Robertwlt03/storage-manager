@@ -8,18 +8,7 @@ import Testing
 struct ServiceTests {
     private static let gigabyte: Int64 = 1_000_000_000
 
-    /// The home folder with Downloads, Library/Caches and a folder no category names.
-    private static func homeTree() -> Node {
-        let root = Node.virtualRoot()
-        TestTree.folder(Paths.home, in: root) { home in
-            TestTree.folder("Downloads", in: home)
-            TestTree.folder("Library", in: home) { library in
-                TestTree.folder("Caches", in: library)
-            }
-            TestTree.folder("Projects", in: home)
-        }
-        return root
-    }
+    private static func homeTree() -> Node { TestTree.home() }
 
     private static func bytes(of kind: CategoryKind, in categories: [StorageManager.Category])
         -> Int64

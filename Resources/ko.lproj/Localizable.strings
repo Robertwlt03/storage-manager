@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ 사용 가능(전체 %@)";
+"availableExplained" = "사용 가능 = 여유 공간 + macOS가 스스로 삭제할 수 있는 공간";
 "categories" = "카테고리";
 "freeSpace" = "여유 공간";
 "temporaryAreaName" = "macOS 시스템 파일";

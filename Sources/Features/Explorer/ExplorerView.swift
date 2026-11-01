@@ -35,13 +35,14 @@ private struct FolderView: View {
             }
         }
         .smoothChanges(of: showsRings)
-        .navigationTitle(node.isVirtual ? TextKey.paneExplorer.translated : node.displayName)
+        .navigationTitle(node.listsAreas ? TextKey.paneExplorer.translated : node.displayName)
         .navigationSubtitle(subtitle)
         .safeAreaInset(edge: .top, spacing: 0) { header }
         .sheet(item: $informationEntry) { entry in InformationSheet(entry: entry) }
     }
 
-    /// The list of scanned places has no folder of its own to show or describe, so no buttons.
+    /// The list of scanned places and a category's group have no one folder to show or describe,
+    /// so no buttons.
     @ViewBuilder private var header: some View {
         if node.isVirtual {
             UI.PageHeader(.explorer) {}
@@ -57,8 +58,11 @@ private struct FolderView: View {
 
     private var subtitle: String {
         _ = model.revision  // the rings do not read the entries, so the total follows the scan here
-        return node.isVirtual
-            ? TextKey.measuredTotal.translated(with: Format.bytes(node.bytes))
+        if node.listsAreas {
+            return TextKey.measuredTotal.translated(with: Format.bytes(node.bytes))
+        }
+        return node.isGroup
+            ? Format.bytes(node.bytes)
             : Format.joined(Format.bytes(node.bytes), Paths.displayName(node.path))
     }
 }
