@@ -1,0 +1,31 @@
+{
+  "kind": "terminal",
+  "title": "Terminal \u2014 zsh",
+  "label": "Installing from the terminal: attach the disk image, copy the app, detach it, allow the first launch and open the app",
+  "lines": [
+    [
+      "command",
+      "hdiutil attach ~/Downloads/Storage-Manager.dmg"
+    ],
+    [
+      "command",
+      "cp -R \"/Volumes/Storage Manager/Storage Manager.app\" /Applications/"
+    ],
+    [
+      "command",
+      "hdiutil detach \"/Volumes/Storage Manager\""
+    ],
+    [
+      "command",
+      "xattr -dr com.apple.quarantine \"/Applications/Storage Manager.app\""
+    ],
+    [
+      "command",
+      "open \"/Applications/Storage Manager.app\""
+    ],
+    [
+      "note",
+      "# Storage Manager opens and asks for Full Disk Access"
+    ]
+  ]
+}

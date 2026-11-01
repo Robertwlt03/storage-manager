@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="355" viewBox="0 0 900 355" role="img" aria-label="Overview: Says how much space you can free and which step to take first.; Folders: Every folder sorted by size, as a list, as tiles or as rings.; Large Files &amp; Search: Finds big files and any name in seconds, without a new scan.; Clean Up: Removes caches, old logs and leftovers that macOS rebuilds anyway.; Duplicates: Spots files that exist twice and moves the extra copies to the Trash.; Unused Apps: Lists the apps you have not opened for months, with their size.; Menu bar: Shows the free space at a glance and warns you when it runs low.; Widget: Keeps the free space on your desktop or in Notification Center.; Report: Saves every category and the largest files as a text file.">
+<svg xmlns="http://www.w3.org/2000/svg" x="-2" y="3" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t0" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#5AA9FF"/><stop offset="1" stop-color="#0A6CF0"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t0)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><path d="M5 20v-7M10 20V6M15 20v-9M20 20V9"/></g>
+</svg>
+
+<text x="58" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Overview</text>
+<text x="58" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Says how much space you can free</text>
+<text x="58" y="63" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">and which step to take first.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="298" y="3" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#62CBFA"/><stop offset="1" stop-color="#1A86D9"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t1)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H9l2 2h8.5A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></g>
+</svg>
+
+<text x="358" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Folders</text>
+<text x="358" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Every folder sorted by size, as</text>
+<text x="358" y="63" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">a list, as tiles or as rings.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="598" y="3" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t2" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#8389FF"/><stop offset="1" stop-color="#4B4FD8"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t2)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></g>
+</svg>
+
+<text x="658" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Large Files &amp; Search</text>
+<text x="658" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Finds big files and any name in</text>
+<text x="658" y="63" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">seconds, without a new scan.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="-2" y="130" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t3" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#C58BFF"/><stop offset="1" stop-color="#8B3FE0"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t3)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></g>
+</svg>
+
+<text x="58" y="149" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Clean Up</text>
+<text x="58" y="171" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Removes caches, old logs and</text>
+<text x="58" y="190" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">leftovers that macOS rebuilds</text>
+<text x="58" y="209" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">anyway.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="298" y="130" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t4" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#FFB340"/><stop offset="1" stop-color="#F07800"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t4)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="8" y="3" width="11" height="14" rx="2"/><path d="M5 7v11a2 2 0 0 0 2 2h9"/></g>
+</svg>
+
+<text x="358" y="149" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Duplicates</text>
+<text x="358" y="171" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Spots files that exist twice and</text>
+<text x="358" y="190" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">moves the extra copies to the</text>
+<text x="358" y="209" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Trash.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="598" y="130" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t5" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#FF7AA2"/><stop offset="1" stop-color="#E0336B"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t5)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g>
+</svg>
+
+<text x="658" y="149" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Unused Apps</text>
+<text x="658" y="171" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Lists the apps you have not</text>
+<text x="658" y="190" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">opened for months, with their</text>
+<text x="658" y="209" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">size.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="-2" y="257" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t6" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#56DBBE"/><stop offset="1" stop-color="#12957B"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t6)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9h18M16 7h2"/></g>
+</svg>
+
+<text x="58" y="276" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Menu bar</text>
+<text x="58" y="298" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Shows the free space at a glance</text>
+<text x="58" y="317" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">and warns you when it runs low.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="298" y="257" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t7" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#5BD27A"/><stop offset="1" stop-color="#1E9B45"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t7)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="358" y="276" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Widget</text>
+<text x="358" y="298" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Keeps the free space on your</text>
+<text x="358" y="317" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">desktop or in Notification</text>
+<text x="358" y="336" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Center.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="598" y="257" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t8" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#A2A2AB"/><stop offset="1" stop-color="#6A6A74"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t8)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></g>
+</svg>
+
+<text x="658" y="276" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#F5F5F7" text-anchor="start" xml:space="preserve">Report</text>
+<text x="658" y="298" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">Saves every category and the</text>
+<text x="658" y="317" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="start" xml:space="preserve">largest files as a text file.</text>
+</svg>

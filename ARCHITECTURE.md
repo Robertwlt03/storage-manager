@@ -14,6 +14,15 @@ files of equal size can be the same, and `DuplicateService` reads just those, in
 
 ## <img src="assets/icons/dataflow.svg" height="33" align="absmiddle" alt="">How the data flows
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/architecture-flow-dark.svg">
+  <img src="assets/pictures/architecture-flow-light.svg" alt="The data flows in four steps: the scan walks the disk, a tree of nodes forms, AppModel holds it and everything that follows, and the pages only read from AppModel" width="100%">
+</picture>
+
+<details>
+<summary><b>Each step in detail</b></summary>
+<br>
+
 1. `ScanService` walks over one area of the disk once with `FileTreeWalker`, on the processor’s efficiency cores.
 2. This produces a tree of `Node`. Each folder merges its subfolders and files under one megabyte into a single row.
    That keeps the tree small.
@@ -21,7 +30,18 @@ files of equal size can be the same, and `DuplicateService` reads just those, in
    apps. It increments `revision` as soon as the tree changes.
 4. The pages only read from `AppModel` and calculate with the services. They never touch the disk themselves.
 
+</details>
+
 ## <img src="assets/icons/codemap.svg" height="33" align="absmiddle" alt="">Code map
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/architecture-map-dark.svg">
+  <img src="assets/pictures/architecture-map-light.svg" alt="The folders of the code: Sources/App, Core, Models, Services, State, DesignSystem, Features, Localization, Diagnostics, Widget and Tests, each with what it holds" width="100%">
+</picture>
+
+<details>
+<summary><b>Every folder in detail</b></summary>
+<br>
 
 **`Sources/App`:** The app’s launch with window, menus and `RootView`. `RootView` holds the sidebar, the search and
 the currently chosen page together.
@@ -61,6 +81,13 @@ for widgets. Because of that sandbox it cannot read the app's data, so it measur
 
 **`Tests/StorageManagerTests`:** The tests, written with Swift Testing, for the folder tree, search, pages, design
 values, contrast and translations. They build their folder trees by hand and never touch the disk.
+
+</details>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/architecture-layers-dark.svg">
+  <img src="assets/pictures/architecture-layers-light.svg" alt="The layers from top to bottom: the app's start, the pages, the design system and the state, models and services, and the foundation of Core, Localization and the tokens" width="100%">
+</picture>
 
 Which part may use which other one is a table in `scripts/checks/architecture.py`, and the check pipeline watches
 it. Everyone may use the foundation of `Core`, `Localization` and the tokens with colors, spacing and symbols.

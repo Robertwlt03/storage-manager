@@ -1,0 +1,29 @@
+{
+  "kind": "flow",
+  "items": [
+    {
+      "glyph": "search",
+      "color": "blue",
+      "title": "Scan",
+      "text": "ScanService walks one area once with FileTreeWalker, on the efficiency cores."
+    },
+    {
+      "glyph": "tree",
+      "color": "teal",
+      "title": "Tree",
+      "text": "A tree of Node; small files of a folder merge into one row."
+    },
+    {
+      "glyph": "box",
+      "color": "purple",
+      "title": "AppModel",
+      "text": "Holds the tree and all that follows from it, and counts revision up."
+    },
+    {
+      "glyph": "window",
+      "color": "orange",
+      "title": "Pages",
+      "text": "Only read from AppModel and the services, never from the disk."
+    }
+  ]
+}

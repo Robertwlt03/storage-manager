@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="159" viewBox="0 0 900 159" role="img" aria-label="Scan: ScanService walks one area once with FileTreeWalker, on the efficiency cores.; Tree: A tree of Node; small files of a folder merge into one row.; AppModel: Holds the tree and all that follows from it, and counts revision up.; Pages: Only read from AppModel and the services, never from the disk.">
+<svg xmlns="http://www.w3.org/2000/svg" x="86.1" y="0" width="64.0" height="59.7"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t0" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#5AA9FF"/><stop offset="1" stop-color="#0A6CF0"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t0)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.5 5.5"/></g>
+</svg>
+
+<text x="112.5" y="80" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#F5F5F7" text-anchor="middle" xml:space="preserve">1 &#183; Scan</text>
+<text x="112.5" y="102" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">ScanService walks one area</text>
+<text x="112.5" y="121" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">once with FileTreeWalker,</text>
+<text x="112.5" y="140" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">on the efficiency cores.</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="311.1" y="0" width="64.0" height="59.7"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#56DBBE"/><stop offset="1" stop-color="#12957B"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t1)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="12" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8.5 6H12v12H8.5M12 12h3.5"/></g>
+</svg>
+
+<text x="337.5" y="80" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#F5F5F7" text-anchor="middle" xml:space="preserve">2 &#183; Tree</text>
+<text x="337.5" y="102" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">A tree of Node; small files</text>
+<text x="337.5" y="121" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">of a folder merge into one</text>
+<text x="337.5" y="140" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">row.</text>
+<path d="M221 18l8 8-8 8" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" x="536.1" y="0" width="64.0" height="59.7"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t2" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#C58BFF"/><stop offset="1" stop-color="#8B3FE0"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t2)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><path d="M4 7.5L12 3l8 4.5v9L12 21l-8-4.5z"/><path d="M4 7.5L12 12l8-4.5M12 12v9"/></g>
+</svg>
+
+<text x="562.5" y="80" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#F5F5F7" text-anchor="middle" xml:space="preserve">3 &#183; AppModel</text>
+<text x="562.5" y="102" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">Holds the tree and all that</text>
+<text x="562.5" y="121" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">follows from it, and counts</text>
+<text x="562.5" y="140" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">revision up.</text>
+<path d="M446 18l8 8-8 8" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" x="761.1" y="0" width="64.0" height="59.7"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t3" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#FFB340"/><stop offset="1" stop-color="#F07800"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t3)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18M9 8.5V20"/></g>
+</svg>
+
+<text x="787.5" y="80" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#F5F5F7" text-anchor="middle" xml:space="preserve">4 &#183; Pages</text>
+<text x="787.5" y="102" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">Only read from AppModel and</text>
+<text x="787.5" y="121" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">the services, never from</text>
+<text x="787.5" y="140" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#A1A1A6" text-anchor="middle" xml:space="preserve">the disk.</text>
+<path d="M671 18l8 8-8 8" fill="none" stroke="#8E8E93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

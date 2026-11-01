@@ -1,0 +1,36 @@
+{
+  "kind": "layers",
+  "label": "The layers from top to bottom: the app's start, the pages, the design system and the state, models and services, and the foundation",
+  "items": [
+    {
+      "glyph": "bolt",
+      "color": "red",
+      "title": "App",
+      "text": "The start with window, menus and RootView: the very top."
+    },
+    {
+      "glyph": "window",
+      "color": "orange",
+      "title": "Features",
+      "text": "Every page in a folder of its own; they use everything below."
+    },
+    {
+      "glyph": "widget",
+      "color": "purple",
+      "title": "DesignSystem and State",
+      "text": "The UI building blocks, and AppModel that brings the services together."
+    },
+    {
+      "glyph": "box",
+      "color": "teal",
+      "title": "Models and Services",
+      "text": "The data and the actual work, each without any interface."
+    },
+    {
+      "glyph": "sprout",
+      "color": "blue",
+      "title": "Core, Localization and tokens",
+      "text": "Fixed values, texts, spacing, colors and symbols: everyone may use them."
+    }
+  ]
+}

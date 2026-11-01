@@ -40,13 +40,10 @@ opacity or a finished scan, they get a name too.
 
 Every name has a fixed home:
 
-| What for | Where |
-| --- | --- |
-| Spacing, icon sizes, measurements and symbol names | `Sources/DesignSystem/Tokens.swift` |
-| Colors | `Sources/DesignSystem/Theme.swift` |
-| Duration and kind of animations | `Sources/DesignSystem/Motion.swift` |
-| Limits of the scan, the cleanup and the search | `Sources/Core/Constants.swift` |
-| Values that only a single type needs | as `private static let` directly in that type |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/code-style-homes-dark.svg">
+  <img src="assets/pictures/code-style-homes-light.svg" alt="Spacing, icon sizes, measurements and symbol names live in Sources/DesignSystem/Tokens.swift, colors in Theme.swift, animations in Motion.swift, the limits of scan, cleanup and search in Sources/Core/Constants.swift, and values that only one type needs as private static let in that type" width="100%">
+</picture>
 
 ## <img src="assets/icons/palette.svg" height="33" align="absmiddle" alt="">Colors in one place
 

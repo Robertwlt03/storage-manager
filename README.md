@@ -3,167 +3,122 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/macOS-27%20or%20later-1D1D1F?style=flat-square&logo=apple&logoColor=white" alt="macOS 27 or later">
-  <img src="https://img.shields.io/badge/-SwiftUI-1D1D1F?style=flat-square&logo=swift&logoColor=F05138" alt="SwiftUI">
-  <img src="https://img.shields.io/badge/Languages-28-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="28 languages">
-  <img src="https://img.shields.io/badge/Price-free-1B7332?style=flat-square&labelColor=1D1D1F" alt="free">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-0A5BC4?style=flat-square&labelColor=1D1D1F" alt="License: MIT"></a>
+  <a href="https://github.com/Robertwlt03/storage-manager/releases/latest/download/Storage-Manager.dmg">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/download-dark.svg">
+      <img src="assets/pictures/download-light.svg" alt="Download Storage Manager for Mac" width="380">
+    </picture>
+  </a>
+</p>
+
+<p align="center">
+  <sub><a href="#install-it-in-a-minute">How to install it</a> · <a href="https://github.com/Robertwlt03/storage-manager/releases">All versions</a></sub>
 </p>
 
 **Storage Manager** shows you where the storage on your Mac goes. It measures all the important areas, sorts them
-into categories that make sense, and also finds what macOS otherwise hides from you. Everything stays on your Mac,
-because the app only reads sizes and sends nothing to the internet.
+into categories that make sense, and also finds what macOS otherwise hides from you. Then it tells you how much you can
+free and walks you there, one step at a time. Everything stays on your Mac, because the app only reads sizes and sends
+nothing to the internet.
 
-## <img src="assets/icons/about.svg" height="33" align="absmiddle" alt="">Why this app exists
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/tour-dark.svg">
+    <img src="assets/pictures/tour-light.svg" alt="A tour through Storage Manager: the overview, folders as rings, large files, clean up, duplicates and unused apps" width="100%">
+  </picture>
+</p>
 
-I always wanted to know exactly how the storage on my Mac is split up. macOS only shows this very roughly, though,
-and a large part often just ends up in a block called “System Data” without you ever learning what is inside. Until
-now, if you wanted to know more, you either had to work in the terminal or write yourself a script that makes it
-easier to move through the folders.
+<p align="center"><sub>The pictures show the demo with made-up data, which <code>make demo</code> opens.</sub></p>
 
-A script like that was my first step, too. With it I found out, for example, that macOS had created over a hundred
-copies of Google Chrome that together took up more than a hundred gigabytes. But a script is not something you can
-simply hand on to others. So I turned it into a proper app that is much friendlier to use, that anyone can work with
-without a terminal, and that you can share with others without having to wait for an update from Apple.
+## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">What it does
 
-## <img src="assets/icons/screens.svg" height="33" align="absmiddle" alt="">What Storage Manager looks like
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/features-dark.svg">
+  <img src="assets/pictures/features-light.svg" alt="Overview, Folders, Large Files and Search, Clean Up, Duplicates, Unused Apps, menu bar, widget and report" width="100%">
+</picture>
 
-<table>
-  <tr>
-    <td width="50%" valign="top"><img src="assets/screenshots/overview.png" alt="Overview with storage bar, legend and summary"></td>
-    <td width="50%" valign="top"><img src="assets/screenshots/clean-up.png" alt="Clean Up in dark appearance"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>The <b>Overview</b> with storage bar, legend and a short summary</sub></td>
-    <td align="center"><sub>In <b>Clean Up</b> you choose what may go, shown here in dark appearance</sub></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center" valign="top"><img src="assets/screenshots/unused-apps.png" width="50%" alt="Unused Apps with the time since each app was last opened"></td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><sub><b>Unused Apps</b> lists the apps you have not opened for a long time</sub></td>
-  </tr>
-</table>
-
-<sub>The pictures show the demo with made-up data, which `make demo` opens.</sub>
-
-## <img src="assets/icons/features.svg" height="33" align="absmiddle" alt="">What the app can do
+<details>
+<summary><b>Every page in detail</b></summary>
+<br>
 
 The **Overview** is your home page. Right at the top it answers the real question: how much space you can free up. It
 then lists the steps to get there in a sensible order, cleaning up, duplicates and unused apps, each with what it
-frees and a button that takes you to its page; duplicates count once their page has searched them, and once nothing
-worth freeing is left, it says so. Below that, it shows your Mac with a colored bar and a legend, where a click on a
-category such as photos or app data opens it. After every full scan it keeps the used space, so a line shows how your
-storage changes over the weeks, and it lists the folders that grew most since the scan before; a click opens one.
+frees and a button that takes you to its page. Below that, it shows your Mac with a colored bar and a legend, where a
+click on a category such as photos or app data opens it. After every full scan it keeps the used space, so a line
+shows how your storage changes over the weeks, and it lists the folders that grew most since the scan before.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
 all files above a size you choose yourself, and **Search** finds folders and files by name. In each of these lists a
-right-click moves a file you no longer need to the Trash, after you confirm it. The lists can also show large tiles:
-⌘1 shows the list and ⌘2 the tiles, and Folders, Large Files and Unused Apps also have a switch for it in the
-toolbar, like the view buttons in Finder. On Folders the switch also offers **Rings** (⌘3), which show the subfolders
-as rings around the current folder: the wider a piece, the bigger the folder, and a click opens it. In the settings you
-can add folders to measure, such as an external project folder, and exclude folders that the app should neither
-measure nor show nor clean up.
+right-click moves a file you no longer need to the Trash, after you confirm it. A switch in the toolbar, like the view
+buttons in Finder, shows a list or large tiles (⌘1 and ⌘2), and on Folders also **Rings** (⌘3): the subfolders as
+rings around the current folder, where the wider a piece, the bigger the folder.
 
-In **Clean Up** you remove files your system barely needs. These include caches that apps rebuild on their own, old
-logs, old temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently
-running, and macOS itself, are left untouched.
+In **Clean Up** you remove files your system barely needs: caches that apps rebuild on their own, old logs, old
+temporary files and, if you want, old installers in Downloads and the Trash. Apps that are currently running, and
+macOS itself, are left untouched.
 
 **Duplicates** shows large files from 10 MB that exist more than once with the same content, each group as a card
-that says how much space the extra copies take. Only files of equal size are read and compared, in the background.
-Each copy can go to the Trash right there after you confirm it, and once only one file is left, its card disappears.
+that says how much space the extra copies take. Each copy can go to the Trash right there after you confirm it.
 
-The **Unused Apps** page reminds you of apps you have not opened for a long time. The date comes from macOS itself,
-so the app records nothing. Anything you no longer need, you can move to the Trash from there.
+**Unused Apps** reminds you of apps you have not opened for a long time. The date comes from macOS itself, so the app
+records nothing, and anything you no longer need goes to the Trash from there.
 
 For advanced users, the app also shows two areas you cannot see in Finder: the **temporary area** of macOS and the
 **app copies** that macOS creates when it checks apps. They appear in the sidebar once you switch on “Show advanced
 areas” in the settings. External drives and USB sticks appear in the sidebar too, as soon as you connect them.
 
-Every page says in one sentence at the top what it is for and what you can do there, and the info button beside it
-explains more. The app takes the light or dark appearance from your Mac, and like Apple's own apps it uses Liquid
-Glass for the toolbar and the sidebar, while cards and buttons in the content keep the quiet macOS look. New content
-appears with gentle motion, and if you have turned on “Reduce motion” in the Accessibility settings, the app leaves it
-out.
+The **menu bar** shows how much space is available, even with the window closed, and warns you when it runs low. The
+**widget** shows the same on your desktop or in Notification Center: click the desktop with the right mouse button,
+choose Edit Widgets and look for Storage Manager. With File › Export Report (⇧⌘E) you save the summary, every
+category and the largest files as a **text file**, with the size first in each line, so it also pastes into a
+spreadsheet.
 
-With File › Export Report (⇧⌘E) you save the summary, every category and the largest files as a text file, for
-keeping or passing on. Each line has the size first, so it also pastes into a spreadsheet.
+Every page says in one sentence at the top what it is for, and the info button beside it explains more. The app takes
+the light or dark appearance from your Mac, and if you have turned on “Reduce motion” in the Accessibility settings,
+it leaves out its animations.
 
-A widget shows the available space on your desktop or in Notification Center. Add it like any other widget: click the
-desktop with the right mouse button, choose Edit Widgets and look for Storage Manager.
+</details>
 
-The menu bar shows how much space is available on your Mac, even with the window closed, and its menu opens the
-app or starts a new scan. When space runs low, a warning sign takes the place of the drive there, and the overview
-says so too. You can turn the menu bar item off in the settings.
+## <img src="assets/icons/install.svg" height="33" align="absmiddle" alt="">Install it in a minute
 
-## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Languages
+You need a Mac with Apple silicon, meaning M1 or newer, running macOS 27 or later. Download
+**[Storage-Manager.dmg](https://github.com/Robertwlt03/storage-manager/releases/latest/download/Storage-Manager.dmg)**,
+then everything else you do with the mouse.
 
-The app speaks 28 languages and follows the language of your Mac. To use it in a different one, pick it in the
-app's settings; it shows after a restart.
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/install-dark.svg">
+    <img src="assets/pictures/install-light.svg" alt="The five steps of the installation, one after another" width="100%">
+  </picture>
+</p>
 
-<table>
-<tr><td>🇨🇳 Chinese (Simplified)</td><td>🇹🇼 Chinese (Traditional)</td><td>🇨🇿 Czech</td><td>🇩🇰 Danish</td></tr>
-<tr><td>🇳🇱 Dutch</td><td>🇺🇸 English</td><td>🇫🇮 Finnish</td><td>🇫🇷 French</td></tr>
-<tr><td>🇩🇪 German</td><td>🇬🇷 Greek</td><td>🇮🇳 Hindi</td><td>🇭🇺 Hungarian</td></tr>
-<tr><td>🇮🇩 Indonesian</td><td>🇮🇹 Italian</td><td>🇯🇵 Japanese</td><td>🇰🇷 Korean</td></tr>
-<tr><td>🇳🇴 Norwegian</td><td>🇵🇱 Polish</td><td>🇧🇷 Portuguese (Brazil)</td><td>🇵🇹 Portuguese (Portugal)</td></tr>
-<tr><td>🇷🇴 Romanian</td><td>🇷🇺 Russian</td><td>🇪🇸 Spanish</td><td>🇸🇪 Swedish</td></tr>
-<tr><td>🇹🇭 Thai</td><td>🇹🇷 Turkish</td><td>🇺🇦 Ukrainian</td><td>🇻🇳 Vietnamese</td></tr>
-</table>
+1. **Open the DMG file and drag Storage Manager into the “Applications” folder.**
+2. **Open the app.** The first time, macOS reports that it could not verify the app, because I do not distribute it
+   through Apple’s paid developer program. Just click “Done” here.
+3. **Allow the first launch.** In System Settings › Privacy & Security you find a notice about Storage Manager right
+   at the bottom, with the button “Open Anyway”. You only do this once, and never again for later updates.
+4. **Grant Full Disk Access.** The app asks for it at launch: click “Open System Settings” and turn Storage Manager
+   on there. If it is missing from the list, add it with the plus button.
+5. **In the app, click “Restart App”.** From now on it measures everything without asking you again.
 
-## <img src="assets/icons/install.svg" height="33" align="absmiddle" alt="">Installing
+<sub>Most pictures are redrawn sketches of the English interface; depending on your macOS version, the original looks a
+little different.</sub>
 
-You need a Mac with Apple silicon, meaning M1 or newer, running macOS 27 or later, and the file **Storage-Manager-1.0.dmg**. Everything else you do
-with the mouse.
+<details>
+<summary><b>Prefer the terminal?</b></summary>
+<br>
 
-**1. Open the DMG file and drag Storage Manager into the “Applications” folder.**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/terminal-install-dark.svg">
+  <img src="assets/pictures/terminal-install-light.svg" alt="Installing from the terminal: attach the disk image, copy the app, detach it, allow the first launch and open the app" width="100%">
+</picture>
 
-<p align="center"><img src="docs/guide/images/1-disk-image.svg" alt="Drag the app into the Applications folder" width="620"></p>
-
-**2. Open the app.** The first time, macOS reports that it could not verify the app. That is because I do not
-distribute it through Apple’s paid developer program. Just click “Done” here.
-
-<p align="center"><img src="docs/guide/images/2-warning.svg" alt="Notice from macOS: click Done" width="620"></p>
-
-**3. Allow the first launch.** Open System Settings and go to “Privacy & Security”. Right at the bottom you will find
-a notice about Storage Manager with the button “Open Anyway”. You only have to do this once, and never again for
-later updates.
-
-<p align="center"><img src="docs/guide/images/3-open-anyway.svg" alt="Open Anyway in System Settings" width="620"></p>
-
-**4. Grant Full Disk Access.** The app asks for it at launch and, if you like, opens the right place in System
-Settings. Turn Storage Manager on there. If it is missing from the list, add it with the plus button.
-
-<p align="center"><img src="docs/guide/images/4-full-disk-access.svg" alt="Turn on Full Disk Access" width="620"></p>
-
-**5. In the app, click “Restart App”.** From now on it measures everything without asking you again.
-
-<p align="center"><img src="docs/guide/images/5-access-window.png" alt="The app’s access window" width="560"></p>
-
-<sub>The pictures for steps 1 to 4 are redrawn sketches, and they show the English interface. Depending on your macOS version, the original looks a little different.</sub>
-
-## <img src="assets/icons/terminal.svg" height="33" align="absmiddle" alt="">Installing from the terminal
-
-If you prefer working in the terminal, paste these commands in one after another. They open the DMG from your
-Downloads folder, copy the app to “Applications” and allow the first launch.
+These commands open the DMG from your Downloads folder, copy the app to “Applications” and allow the first launch:
 
 ```bash
-hdiutil attach ~/Downloads/Storage-Manager-1.0.dmg
-```
-
-```bash
+hdiutil attach ~/Downloads/Storage-Manager.dmg
 cp -R "/Volumes/Storage Manager/Storage Manager.app" /Applications/
-```
-
-```bash
 hdiutil detach "/Volumes/Storage Manager"
-```
-
-```bash
 xattr -dr com.apple.quarantine "/Applications/Storage Manager.app"
-```
-
-```bash
 open "/Applications/Storage Manager.app"
 ```
 
@@ -174,53 +129,85 @@ in System Settings for it:
 open "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"
 ```
 
-## <img src="assets/icons/access.svg" height="33" align="absmiddle" alt="">Why Full Disk Access?
+</details>
+
+<details>
+<summary><b>Why Full Disk Access?</b></summary>
+<br>
 
 Without it, macOS asks separately for every protected location, that is for the Desktop, Documents, Downloads, iCloud
 Drive, the data of other apps and external drives. Full Disk Access replaces all of these questions with a single
-switch. You can also carry on without it and answer the individual questions. Then the scan only misses the areas you
-decline.
+switch. You can also carry on without it and answer the individual questions; then the scan only misses the areas
+you decline.
 
-## <img src="assets/icons/privacy.svg" height="33" align="absmiddle" alt="">Your data stays with you
+</details>
 
-The app only reads names and sizes, never the contents of your files, and it sends nothing to the internet.
-Something is only deleted when you explicitly confirm it in Clean Up or for the app copies. Apps and files you no
-longer need go to the Trash, also only after you confirm it, and can be restored from there.
+## <img src="assets/icons/privacy.svg" height="33" align="absmiddle" alt="">Made to be trusted
 
-## <img src="assets/icons/energy.svg" height="33" align="absmiddle" alt="">Easy on energy
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/promises-dark.svg">
+  <img src="assets/pictures/promises-light.svg" alt="Private, easy on energy, free and open source, 28 languages" width="100%">
+</picture>
 
-Storage Manager measures everything once, in a single pass. To do that it uses the energy-efficient cores of your
-Mac and then remembers the result. Clicking, sorting and searching therefore never trigger a new scan. When the app is
-simply open, it needs practically no computing power, and in Low Power Mode it does not scan on its own.
+The app only reads names and sizes, never the contents of your files, and it sends nothing to the internet. Something
+is only deleted when you explicitly confirm it in Clean Up or for the app copies; apps and files you no longer need go
+to the Trash, also only after you confirm it, and can be restored from there.
 
-## <img src="assets/icons/build.svg" height="33" align="absmiddle" alt="">How the app was built
+Storage Manager measures everything once, in a single pass on the energy-efficient cores of your Mac, and then
+remembers the result. Clicking, sorting and searching never start a new scan, and in Low Power Mode the app does not
+scan on its own.
 
-Storage Manager is a real Mac app, written in Swift with SwiftUI, Apple’s own toolkit for Mac interfaces. That is
-why it looks like the apps that come with macOS and adapts to light and dark. It grew out of my small terminal
-script, which I expanded step by step into a complete app together with Claude.
+## <img src="assets/icons/languages.svg" height="33" align="absmiddle" alt="">Speaks your language
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/languages-dark.svg">
+  <img src="assets/pictures/languages-light.svg" alt="28 languages: Chinese (Simplified), Chinese (Traditional), Czech, Danish, Dutch, English, Finnish, French, German, Greek, Hindi, Hungarian, Indonesian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Brazil), Portuguese (Portugal), Romanian, Russian, Spanish, Swedish, Thai, Turkish, Ukrainian and Vietnamese" width="100%">
+</picture>
+
+The app follows the language of your Mac. To use it in a different one, pick it in the app's settings; it shows after
+a restart.
+
+## <img src="assets/icons/about.svg" height="33" align="absmiddle" alt="">Why this app exists
+
+I always wanted to know exactly how the storage on my Mac is split up. macOS only shows this very roughly, though, and
+a large part often just ends up in a block called “System Data” without you ever learning what is inside. A small
+script was my first step: with it I found out, for example, that macOS had created over a hundred copies of Google
+Chrome that together took up more than a hundred gigabytes. But a script is not something you can simply hand on to
+others, so I turned it into a proper Mac app that anyone can use without a terminal. It is written in Swift with
+SwiftUI, Apple’s own toolkit, which is why it looks like the apps that come with macOS, and it grew step by step
+together with Claude.
+
+## <img src="assets/icons/community.svg" height="33" align="absmiddle" alt="">Join in
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/terminal-develop-dark.svg">
+  <img src="assets/pictures/terminal-develop-light.svg" alt="make run builds and opens the app; make check runs all 27 checks" width="100%">
+</picture>
+
+Storage Manager is open source. Anyone can read the code, improve it and bring in their own ideas. You can report
+bugs and wishes in the [issues](../../issues), and I am happy to take improvements as pull requests. How to get
+started is in the [contributing guide](CONTRIBUTING.md), where to find what in the code is in the
+[architecture description](ARCHITECTURE.md), how we write code is in the [code rules](CODE_STYLE.md), and how the
+guides draw their pictures is in [pictures for the guides](docs/pictures/README.md). For how we
+treat each other, the [code of conduct](CODE_OF_CONDUCT.md) applies. Most translations were made by machine, so I am
+especially glad about improvements from native speakers.
 
 <details>
-<summary><b>For developers: build it yourself</b></summary>
+<summary><b>Build it yourself</b></summary>
+<br>
 
 You need Xcode 27 from the App Store, but only as a toolbox: building happens in the terminal, and you can use any
-editor you like. After installing it, switch the tools over to Xcode once.
+editor you like. After installing it, switch the tools over to Xcode once, then build and open the app:
 
 ```bash
 sudo xcode-select --switch /Applications/Xcode.app
-```
-
-```bash
 make run
 ```
 
-`make` shows you all the short commands, and the [contributing guide](CONTRIBUTING.md) explains them. There is a
-separate script for a DMG to pass on. It signs the app with a free certificate of your own, which you create once
-with `make identity`. That way Full Disk Access survives every update. With a Developer ID from Apple, the script
-also notarizes the DMG, and then steps 2 and 3 of the installation are no longer needed.
-
-```bash
-make release
-```
+`make` shows you all the short commands, and the [contributing guide](CONTRIBUTING.md) explains them. `make release`
+builds the DMG to pass on. It signs the app with a free certificate of your own, which you create once with
+`make identity`, so Full Disk Access survives every update. With a Developer ID from Apple, the script also notarizes
+the DMG, and then steps 2 and 3 of the installation are no longer needed.
 
 The code is split into small parts, and every file has exactly one job:
 
@@ -235,18 +222,10 @@ The code is split into small parts, and every file has exactly one job:
 | `Sources/Diagnostics` | A self test with real data and a stress test for the running app. |
 | `Widget` | The widget for the desktop and Notification Center, a target of its own that the build puts into the app. |
 | `Tests` | The tests for the folder tree, categories, search, design, contrast and translations. |
-| `scripts` | The code inspection, your own signing certificate and building the DMG. |
+| `scripts` | The code inspection, your own signing certificate, building the DMG and drawing the guides' pictures. |
+| `docs` | The installation guide that comes with the DMG, and the descriptions of the guides' pictures. |
 
 </details>
-
-## <img src="assets/icons/community.svg" height="33" align="absmiddle" alt="">Contributing
-
-Storage Manager is open source. Anyone can read the code, improve it and bring in their own ideas. You can report
-bugs and wishes in the [issues](../../issues), and I am happy to take improvements as pull requests. How to get
-started is in the [contributing guide](CONTRIBUTING.md), where to find what in the code is in the
-[architecture description](ARCHITECTURE.md), and how we write code is in the [code rules](CODE_STYLE.md). For how we treat each other, the [code of conduct](CODE_OF_CONDUCT.md) applies.
-Please add new texts in all languages, because otherwise the check during the build reports what is missing. Most
-translations were made by machine, so I am especially glad about improvements from native speakers.
 
 > <img src="assets/icons/windows.svg" height="22" align="absmiddle" alt=""> A version for **Windows** is planned, but not built yet.
 

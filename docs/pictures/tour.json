@@ -1,0 +1,36 @@
+{
+  "kind": "slideshow",
+  "label": "A tour through Storage Manager: the overview, folders, large files, clean up, duplicates and unused apps",
+  "pictures": [
+    {
+      "file": "{shots}/overview-{theme}.png",
+      "caption": "Overview",
+      "line": "How much you can free, and the steps to get there."
+    },
+    {
+      "file": "{shots}/explorer-{theme}.png",
+      "caption": "Folders",
+      "line": "Every folder sorted by size; a click opens it."
+    },
+    {
+      "file": "{shots}/largeFiles-{theme}.png",
+      "caption": "Large Files",
+      "line": "Everything above the size you choose, as tiles or a list."
+    },
+    {
+      "file": "{shots}/cleaner-{theme}.png",
+      "caption": "Clean Up",
+      "line": "Pick what may go. Running apps and macOS stay untouched."
+    },
+    {
+      "file": "{shots}/duplicates-{theme}.png",
+      "caption": "Duplicates",
+      "line": "Extra copies go to the Trash, after you confirm."
+    },
+    {
+      "file": "{shots}/apps-{theme}.png",
+      "caption": "Unused Apps",
+      "line": "Apps you have not opened for months, with their size."
+    }
+  ]
+}

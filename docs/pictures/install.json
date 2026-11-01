@@ -1,0 +1,33 @@
+{
+  "kind": "slideshow",
+  "width": 620,
+  "corner": 12,
+  "label": "Installing step by step",
+  "pictures": [
+    {
+      "file": "docs/guide/images/1-disk-image.svg",
+      "caption": "1 \u00b7 Drag the app into Applications",
+      "line": "Open Storage-Manager.dmg first."
+    },
+    {
+      "file": "docs/guide/images/2-warning.svg",
+      "caption": "2 \u00b7 Open it and click \u201cDone\u201d",
+      "line": "macOS has not checked the app yet."
+    },
+    {
+      "file": "docs/guide/images/3-open-anyway.svg",
+      "caption": "3 \u00b7 Click \u201cOpen Anyway\u201d",
+      "line": "System Settings \u203a Privacy & Security, only once."
+    },
+    {
+      "file": "docs/guide/images/5-access-window.png",
+      "caption": "4 \u00b7 Click \u201cOpen System Settings\u201d",
+      "line": "The app asks for Full Disk Access."
+    },
+    {
+      "file": "docs/guide/images/4-full-disk-access.svg",
+      "caption": "4 \u00b7 Turn Storage Manager on",
+      "line": "Then click \u201cRestart App\u201d in the app."
+    }
+  ]
+}

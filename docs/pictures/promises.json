@@ -1,0 +1,30 @@
+{
+  "kind": "grid",
+  "columns": 4,
+  "items": [
+    {
+      "glyph": "shield",
+      "color": "green",
+      "title": "Private",
+      "text": "Reads only names and sizes and sends nothing to the internet."
+    },
+    {
+      "glyph": "bolt",
+      "color": "orange",
+      "title": "Easy on energy",
+      "text": "Scans once on the efficient cores, then rests."
+    },
+    {
+      "glyph": "code",
+      "color": "indigo",
+      "title": "Free & open source",
+      "text": "No account, no ads, MIT license."
+    },
+    {
+      "glyph": "globe",
+      "color": "sky",
+      "title": "28 languages",
+      "text": "Follows the language of your Mac."
+    }
+  ]
+}
