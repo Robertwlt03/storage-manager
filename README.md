@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Robertwlt03/storage-manager/releases/latest/download/Storage-Manager.dmg"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pictures/button-download-dark.svg"><img src="assets/pictures/button-download-light.svg" alt="Download for Mac" height="34"></picture></a>
-  <a href="#install-it-in-a-minute"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pictures/button-install-dark.svg"><img src="assets/pictures/button-install-light.svg" alt="How to install" height="34"></picture></a>
-  <a href="https://github.com/Robertwlt03/storage-manager/releases"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pictures/button-versions-dark.svg"><img src="assets/pictures/button-versions-light.svg" alt="All versions" height="34"></picture></a>
+  <a href="https://github.com/Robertwlt03/storage-manager/releases/latest/download/Storage-Manager.dmg"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pictures/button-download-dark.svg"><img src="assets/pictures/button-download-light.svg" alt="Download for Mac" height="40"></picture></a>
+  <a href="#install-it-in-a-minute"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pictures/button-install-dark.svg"><img src="assets/pictures/button-install-light.svg" alt="How to install" height="40"></picture></a>
+  <a href="https://github.com/Robertwlt03/storage-manager/releases"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/pictures/button-versions-dark.svg"><img src="assets/pictures/button-versions-light.svg" alt="All versions" height="40"></picture></a>
 </p>
 
 **Storage Manager** shows you where the storage on your Mac goes. It measures all the important areas, sorts them

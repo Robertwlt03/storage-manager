@@ -52,18 +52,21 @@ THEMES = {
     "light": dict(text="#1D1D1F", muted="#6E6E73", chip="#E8EEFB", chip_text="#1F52DB",
                   window="#FFFFFF", bar="#F5F5F7", edge="#D2D2D7", prompt="#1E9B45",
                   output="#3A3A3C", success="#1E9B45", quiet="#8E8E93", shadow=".18",
-                  accent="#007AFF"),
+                  accent="#007AFF", primary=("#3D95FF", "#0870EB"),
+                  secondary=("#FFFFFF", "#F2F2F4"),
+                  rim="#000000", rim_opacity=".14", gloss=".55", drop=".16"),
     "dark": dict(text="#F5F5F7", muted="#A1A1A6", chip="#1F2A44", chip_text="#8DB8FF",
                  window="#1C1C1E", bar="#2C2C2E", edge="#3A3A3C", prompt="#5BD27A",
                  output="#E5E5EA", success="#5BD27A", quiet="#8E8E93", shadow=".55",
-                 accent="#0A84FF"),
+                 accent="#0A84FF", primary=("#3A97FF", "#0A78F0"), secondary=("#5C5C60", "#48484C"),
+                 rim="#FFFFFF", rim_opacity=".08", gloss=".16", drop=".45"),
 }
 WIDTH = 900  # a guide's width on GitHub, roughly; the pictures scale with the page
 CHIP_ROW, TERMINAL_LINE, LAYER_ROW, LINE, ROW_GAP = 52, 24, 64, 19, 26
 LETTER, MONO_LETTER = 7.0, 8.4  # rough widths of a letter at 13.5 and 14 points, for wrapping
 SECONDS_PER_PICTURE, FADE_SECONDS, SECONDS_PER_LETTER = 3.5, 0.6, 0.02
 SCREENSHOT_PIXELS, SCREENSHOT_QUALITY = 1640, 82  # sharp on a Retina screen at a guide's width
-BUTTON_HEIGHT, BUTTON_LETTER = 34, 8.2  # a regular macOS push button; letter width at 14 points
+BUTTON_HEIGHT, BUTTON_LETTER, BUTTON_MARGIN = 32, 7.9, 4  # a large macOS push button, 14 points
 SECONDS_PER_COMPARISON = 9
 
 GLYPHS = {
@@ -165,18 +168,34 @@ def label_of(items: list[dict]) -> str:
 
 
 def button(spec: dict, colors: dict) -> str:
-    """A macOS push button: filled in the accent color when "primary", outlined otherwise."""
+    """A macOS push button as AppKit draws it: a faint gradient, a light edge at the top, a thin
+    rim and a soft shadow below; in the accent color when "primary", in the button gray otherwise.
+    The picture leaves BUTTON_MARGIN around the button for its shadow."""
     primary = spec.get("style") == "primary"
     width = 50 + len(spec["title"]) * BUTTON_LETTER
-    fill, ink = (colors["accent"], "#FFFFFF") if primary else (colors["window"], colors["text"])
+    top, bottom = colors["primary" if primary else "secondary"]
+    ink = "#FFFFFF" if primary else colors["text"]
+    box = (f'x="{BUTTON_MARGIN}" y="{BUTTON_MARGIN - 1}" width="{width:g}" '
+           f'height="{BUTTON_HEIGHT}" rx="7"')
     body = [
-        f'<rect x=".5" y=".5" width="{width - 1:g}" height="{BUTTON_HEIGHT - 1}" rx="8" '
-        f'fill="{fill}" stroke="{colors["accent"] if primary else colors["edge"]}"/>',
-        f'<g transform="translate(14 8) scale(.75)" fill="none" stroke="{ink}" stroke-width="2.2" '
-        f'stroke-linecap="round" stroke-linejoin="round">{glyph_shapes(spec["glyph"])}</g>',
-        text(40, 22.5, spec["title"], 14, ink, 600),
+        f'<defs><linearGradient id="face" x1="0" y1="0" x2="0" y2="1"><stop offset="0" '
+        f'stop-color="{top}"/><stop offset="1" stop-color="{bottom}"/></linearGradient>'
+        f'<filter id="lift" x="-10%" y="-20%" width="120%" height="160%"><feDropShadow dx="0" '
+        f'dy=".8" stdDeviation=".9" flood-color="#000000" flood-opacity="{colors["drop"]}"/>'
+        f'</filter></defs>',
+        f'<rect {box} fill="url(#face)" filter="url(#lift)"/>',
+        f'<rect {box} fill="none" stroke="{colors["rim"]}" '
+        f'stroke-opacity="{colors["rim_opacity"]}" stroke-width=".8"/>',
+        f'<path d="M{BUTTON_MARGIN + 6} {BUTTON_MARGIN - .4}h{width - 12:g}" stroke="#FFFFFF" '
+        f'stroke-opacity="{colors["gloss"]}" stroke-width=".8" stroke-linecap="round"/>',
+        f'<g transform="translate({BUTTON_MARGIN + 13} {BUTTON_MARGIN + 7}) scale(.75)" '
+        f'fill="none" stroke="{ink}" stroke-width="2.2" stroke-linecap="round" '
+        f'stroke-linejoin="round">'
+        f'{glyph_shapes(spec["glyph"])}</g>',
+        text(BUTTON_MARGIN + 39, BUTTON_MARGIN + 21.5, spec["title"], 14, ink, 500),
     ]
-    return svg(width, BUTTON_HEIGHT, spec.get("label", spec["title"]), body)
+    size = (width + 2 * BUTTON_MARGIN, BUTTON_HEIGHT + 2 * BUTTON_MARGIN)
+    return svg(*size, spec.get("label", spec["title"]), body)
 
 
 def grid(spec: dict, colors: dict) -> str:

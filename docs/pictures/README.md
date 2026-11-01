@@ -52,8 +52,8 @@ banner. `"style": "primary"` fills it in the accent color for the one main actio
 wraps it in a link and shows several in a row.
 
 <p align="center">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/button-download-dark.svg"><img src="../../assets/pictures/button-download-light.svg" alt="Preview: the primary download button" height="34"></picture>
-  <picture><source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/button-install-dark.svg"><img src="../../assets/pictures/button-install-light.svg" alt="Preview: an outlined button" height="34"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/button-download-dark.svg"><img src="../../assets/pictures/button-download-light.svg" alt="Preview: the primary download button" height="40"></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="../../assets/pictures/button-install-dark.svg"><img src="../../assets/pictures/button-install-light.svg" alt="Preview: an outlined button" height="40"></picture>
 </p>
 
 ```json
