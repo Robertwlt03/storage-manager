@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Một lượt quét sẽ đo mọi vùng; sau đó mỗi cú bấm đều hiện ngay.";
 "scanningTitle" = "Đang quét…";
 "scanningDetail" = "Kết quả sẽ hiện ngay khi vùng đầu tiên xong.";
-"loadingSummaryTitle" = "Đang viết tóm tắt…";
-"loadingSummaryDetail" = "Khi mọi vùng đã được đo, vài câu ở đây sẽ cho bạn biết tình trạng dung lượng của mình.";
-"loadingSizesTitle" = "Đang đếm tệp theo kích thước…";
-"loadingSizesDetail" = "Biểu đồ sẽ hiện ngay khi mọi vùng đã được đo.";
 "loadingAppsTitle" = "Đang kiểm tra ứng dụng…";
 "loadingAppsDetail" = "Kích thước và lần dùng gần nhất sẽ chính xác khi quét xong.";
 "showSidebar" = "Hiển thị thanh bên";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ tệp · tổng %@";
 
 /* Temporary area */
-"location" = "Vị trí";
-"total" = "Tổng";
 "subfolders" = "Thư mục con";
 "viewCopies" = "Xem bản sao ứng dụng…";
 "temporaryFolderT" = "Tệp tạm";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Các bản sao không được chuyển vào Thùng rác. macOS sẽ tạo bản mới khi cần.";
 
 /* Volumes */
-"capacity" = "Dung lượng";
 "used" = "Đã dùng";
 "purgeable" = "macOS có thể xóa";
-"available" = "Khả dụng";
-"toOverview" = "Đến Tổng quan";
 "exploreContents" = "Khám phá nội dung";
 "scanAndExplore" = "Quét và khám phá";
 "volumeGone" = "Ổ đĩa không còn được kết nối";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Kiểu xem";
 "settings" = "Cài đặt";
 "emptyFolder" = "Thư mục này trống";
-"otherCategories" = "Khác";
 "cleanCaches" = "Bộ nhớ đệm ứng dụng";
 "cleanCachesDetail" = "Các tệp mà ứng dụng chỉ giữ lại để khởi động nhanh hơn. Ứng dụng sẽ tạo lại chúng khi cần; các ứng dụng đang mở không bị ảnh hưởng.";
 "cleanDeveloper" = "Phần còn sót lại của công cụ lập trình";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Tệp tạm cũ";
 "cleanTemporaryDetail" = "Các tệp mà ứng dụng chỉ cần trong chốc lát cho một việc và đã không đụng đến trong ít nhất ba ngày.";
 "cleanTrash" = "Thùng rác";
-"cleanTrashDetail" = "Dọn sạch Thùng rác. Những gì trong đó sẽ mất vĩnh viễn. Không được chọn theo mặc định.";
+"cleanTrashDetail" = "Dọn sạch Thùng rác. Những gì trong đó sẽ mất vĩnh viễn.";
 "cleanInstallers" = "Trình cài đặt cũ";
-"cleanInstallersDetail" = "Các tệp cài đặt trong Tải về cũ hơn một tháng. Bản thân các ứng dụng vẫn được cài đặt. Không được chọn theo mặc định.";
+"cleanInstallersDetail" = "Các tệp cài đặt trong Tải về cũ hơn một tháng. Bản thân các ứng dụng vẫn được cài đặt.";
 "cleanFailed" = "Không thể xóa %@ mục vì chúng đang được dùng hoặc được bảo vệ.";
 "cleanNothingLeft" = "Sạch sẽ cả rồi: hiện không có gì cần dọn dẹp.";
 "cleaning" = "Đang dọn dẹp…";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Chuyển vào Thùng rác";
 "lastOpened" = "Mở lần cuối ngày %@";
 "trashAppFailed" = "Không thể di chuyển “%@”. Trong Finder, bạn có thể làm việc này bằng mật khẩu của mình.";
-"bucketUnder1MB" = "dưới 1 MB";
-"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
-"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
-"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
-"bucketOver1GB" = "trên 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "Đã quét %@";
@@ -256,7 +241,6 @@
 "scanArea" = "Vùng";
 "scanFinished" = "Đã quét lúc";
 "accessMissingShort" = "Chưa cấp";
-"summaryTitle" = "Tóm tắt";
 "summaryDisk" = "Trên “%@”, đã dùng %@ trong tổng số %@ và còn %@ khả dụng.";
 "summaryTop" = "Chiếm nhiều dung lượng nhất là %@ với %@ và %@ với %@.";
 "summaryNotMeasured" = "Cách phân chia dung lượng sẽ hiện ở đây sau lần quét đầu tiên.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Bản sao ứng dụng mà macOS tạo khi kiểm tra chiếm %@.";
 "summaryApps" = "%@ ứng dụng đã lâu không được mở.";
 "summaryFreed" = "Đến nay, ứng dụng đã giải phóng %@.";
-"readAloud" = "Đọc to";
-"stopReading" = "Dừng đọc";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Tệp của bạn lớn cỡ nào?";
-"sizeClassesCaption" = "Mỗi nhóm kích thước chiếm bao nhiêu dung lượng và có bao nhiêu tệp. Vài tệp lớn thường chiếm nhiều chỗ hơn rất nhiều tệp nhỏ.";
 "historyTitle" = "Lịch sử";
 "historyCaption" = "Dung lượng đã dùng sau mỗi lần quét đầy đủ.";
 "historyAfterNextScan" = "Lịch sử sẽ hiện sau lần quét đầy đủ tiếp theo.";
 "grownSince" = "Tăng từ %@";
 "grownBy" = "+%@";
 "nothingGrown" = "Không thư mục nào tăng quá %@.";
-"bucketValue" = "%@
-%@ tệp";
-"settingsSystemNote" = "Giao diện và đơn vị lấy từ Cài đặt hệ thống.";
 "appLanguage" = "Ngôn ngữ";
 "languageLikeMac" = "Giống trên máy Mac";
 "languageRestartHint" = "Ngôn ngữ mới sẽ hiển thị sau khi khởi động lại.";

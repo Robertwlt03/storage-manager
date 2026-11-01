@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Eén ronde scant alle gebieden; daarna is elke klik meteen klaar.";
 "scanningTitle" = "Bezig met scannen …";
 "scanningDetail" = "De resultaten verschijnen zodra het eerste gebied klaar is.";
-"loadingSummaryTitle" = "Samenvatting wordt geschreven …";
-"loadingSummaryDetail" = "Zodra alle gebieden gemeten zijn, lees je hier in een paar zinnen hoe je opslag ervoor staat.";
-"loadingSizesTitle" = "Bestanden worden op grootte geteld …";
-"loadingSizesDetail" = "Het diagram verschijnt zodra alle gebieden gemeten zijn.";
 "loadingAppsTitle" = "Apps worden gecontroleerd …";
 "loadingAppsDetail" = "Groottes en laatste gebruik staan vast zodra de scan klaar is.";
 "showSidebar" = "Toon navigatiekolom";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ bestanden · %@ in totaal";
 
 /* Temporary area */
-"location" = "Locatie";
-"total" = "Totaal";
 "subfolders" = "Submappen";
 "viewCopies" = "App-kopieën bekijken …";
 "temporaryFolderT" = "Tijdelijke bestanden";
@@ -127,11 +121,8 @@
 "deleteMessage" = "De kopieën gaan niet naar de prullenmand. macOS maakt zo nodig een nieuwe aan.";
 
 /* Volumes */
-"capacity" = "Capaciteit";
 "used" = "In gebruik";
 "purgeable" = "Door macOS te wissen";
-"available" = "Beschikbaar";
-"toOverview" = "Ga naar overzicht";
 "exploreContents" = "Inhoud verkennen";
 "scanAndExplore" = "Scannen en verkennen";
 "volumeGone" = "Volume niet meer verbonden";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Weergave";
 "settings" = "Instellingen";
 "emptyFolder" = "Deze map is leeg";
-"otherCategories" = "Overig";
 "cleanCaches" = "App-caches";
 "cleanCachesDetail" = "Bestanden die apps alleen bewaren om sneller te starten. Apps maken ze zo nodig opnieuw aan; geopende apps blijven met rust gelaten.";
 "cleanDeveloper" = "Restjes van programmeertools";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Oude tijdelijke bestanden";
 "cleanTemporaryDetail" = "Bestanden die apps maar even nodig hadden voor een taak en die al minstens drie dagen niet zijn aangeraakt.";
 "cleanTrash" = "Prullenmand";
-"cleanTrashDetail" = "Leegt de prullenmand. Wat erin zit, is daarna voorgoed weg. Standaard niet geselecteerd.";
+"cleanTrashDetail" = "Leegt de prullenmand. Wat erin zit, is daarna voorgoed weg.";
 "cleanInstallers" = "Oude installatiebestanden";
-"cleanInstallersDetail" = "Installatiebestanden in Downloads die ouder zijn dan een maand. De apps zelf blijven geïnstalleerd. Standaard niet geselecteerd.";
+"cleanInstallersDetail" = "Installatiebestanden in Downloads die ouder zijn dan een maand. De apps zelf blijven geïnstalleerd.";
 "cleanFailed" = "%@ onderdelen konden niet worden verwijderd omdat ze in gebruik of beveiligd zijn.";
 "cleanNothingLeft" = "Alles is schoon: er valt nu niets op te ruimen.";
 "cleaning" = "Bezig met opruimen …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Verplaats naar prullenmand";
 "lastOpened" = "Laatst geopend op %@";
 "trashAppFailed" = "“%@” kon niet worden verplaatst. In de Finder lukt het met je wachtwoord.";
-"bucketUnder1MB" = "onder 1 MB";
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "boven 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ gescand";
@@ -256,7 +241,6 @@
 "scanArea" = "Gebied";
 "scanFinished" = "Gescand om";
 "accessMissingShort" = "Niet toegestaan";
-"summaryTitle" = "Kort samengevat";
 "summaryDisk" = "Op “%@” is %@ van %@ in gebruik en is %@ beschikbaar.";
 "summaryTop" = "De meeste ruimte gaat naar %@ met %@ en %@ met %@.";
 "summaryNotMeasured" = "Hoe de ruimte is verdeeld, verschijnt hier na de eerste scan.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Kopieën van apps die macOS maakt tijdens het controleren, tellen mee voor %@.";
 "summaryApps" = "%@ apps zijn al een tijd niet geopend.";
 "summaryFreed" = "Tot nu toe heeft deze app %@ vrijgemaakt.";
-"readAloud" = "Lees voor";
-"stopReading" = "Stop met voorlezen";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Hoe groot zijn je bestanden?";
-"sizeClassesCaption" = "Hoeveel ruimte elke groottecategorie inneemt en hoeveel bestanden erin zitten. Een paar grote bestanden nemen meestal meer ruimte in dan veel kleine.";
 "historyTitle" = "Geschiedenis";
 "historyCaption" = "Gebruikte ruimte na elke volledige scan.";
 "historyAfterNextScan" = "De geschiedenis verschijnt na de volgende volledige scan.";
 "grownSince" = "Gegroeid sinds %@";
 "grownBy" = "+%@";
 "nothingGrown" = "Geen map is meer dan %@ gegroeid.";
-"bucketValue" = "%@
-%@ bestanden";
-"settingsSystemNote" = "Weergave en eenheden komen uit Systeeminstellingen.";
 "appLanguage" = "Taal";
 "languageLikeMac" = "Zoals op de Mac";
 "languageRestartHint" = "De nieuwe taal verschijnt na een herstart.";

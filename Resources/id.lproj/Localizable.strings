@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Satu kali pindai mengukur semua area; setelah itu setiap klik langsung tampil.";
 "scanningTitle" = "Memindai …";
 "scanningDetail" = "Hasil muncul begitu area pertama selesai.";
-"loadingSummaryTitle" = "Menulis ringkasan …";
-"loadingSummaryDetail" = "Setelah semua area diukur, beberapa kalimat di sini menjelaskan keadaan penyimpanan Anda.";
-"loadingSizesTitle" = "Menghitung file menurut ukuran …";
-"loadingSizesDetail" = "Grafik muncul begitu semua area selesai diukur.";
 "loadingAppsTitle" = "Memeriksa app …";
 "loadingAppsDetail" = "Ukuran dan waktu terakhir dipakai baru pasti setelah pemindaian selesai.";
 "showSidebar" = "Tampilkan Bar Samping";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ file · total %@";
 
 /* Temporary area */
-"location" = "Lokasi";
-"total" = "Jumlah";
 "subfolders" = "Subfolder";
 "viewCopies" = "Lihat Salinan App …";
 "temporaryFolderT" = "File Sementara";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Salinan tidak masuk ke Tong Sampah. macOS membuat yang baru bila perlu.";
 
 /* Volumes */
-"capacity" = "Kapasitas";
 "used" = "Terpakai";
 "purgeable" = "Dapat Dihapus oleh macOS";
-"available" = "Tersedia";
-"toOverview" = "Ke Ikhtisar";
 "exploreContents" = "Jelajahi Isi";
 "scanAndExplore" = "Pindai dan Jelajahi";
 "volumeGone" = "Volume Tidak Lagi Terhubung";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Tampilan";
 "settings" = "Pengaturan";
 "emptyFolder" = "Folder ini kosong";
-"otherCategories" = "Lainnya";
 "cleanCaches" = "Cache App";
 "cleanCachesDetail" = "File yang disimpan app hanya agar dapat dibuka lebih cepat. App membuatnya lagi bila perlu; app yang sedang terbuka tidak disentuh.";
 "cleanDeveloper" = "Sisa dari Alat Pemrograman";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "File Sementara Lama";
 "cleanTemporaryDetail" = "File yang hanya diperlukan app sebentar untuk suatu tugas dan tidak disentuh lagi setidaknya selama tiga hari.";
 "cleanTrash" = "Tong Sampah";
-"cleanTrashDetail" = "Mengosongkan Tong Sampah. Isinya akan hilang untuk selamanya. Tidak dipilih secara default.";
+"cleanTrashDetail" = "Mengosongkan Tong Sampah. Isinya akan hilang untuk selamanya.";
 "cleanInstallers" = "Penginstal Lama";
-"cleanInstallersDetail" = "File penginstal di Unduhan yang berumur lebih dari satu bulan. App itu sendiri tetap terinstal. Tidak dipilih secara default.";
+"cleanInstallersDetail" = "File penginstal di Unduhan yang berumur lebih dari satu bulan. App itu sendiri tetap terinstal.";
 "cleanFailed" = "%@ item tidak dapat dihapus karena sedang digunakan atau dilindungi.";
 "cleanNothingLeft" = "Semua bersih: saat ini tidak ada yang perlu dibersihkan.";
 "cleaning" = "Membersihkan …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Pindahkan ke Tong Sampah";
 "lastOpened" = "Terakhir dibuka pada %@";
 "trashAppFailed" = "“%@” tidak dapat dipindahkan. Di Finder, ini berhasil dengan kata sandi Anda.";
-"bucketUnder1MB" = "di bawah 1 MB";
-"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
-"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
-"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
-"bucketOver1GB" = "di atas 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ dipindai";
@@ -256,7 +241,6 @@
 "scanArea" = "Area"; /* same as English on purpose */
 "scanFinished" = "Dipindai pukul";
 "accessMissingShort" = "Belum diizinkan";
-"summaryTitle" = "Singkatnya";
 "summaryDisk" = "Di “%@”, %@ dari %@ terpakai dan %@ tersedia.";
 "summaryTop" = "Ruang terbanyak dipakai oleh %@ sebesar %@ dan %@ sebesar %@.";
 "summaryNotMeasured" = "Pembagian ruang akan tampil di sini setelah pemindaian pertama.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Salinan app yang dibuat macOS saat memeriksanya terhitung %@.";
 "summaryApps" = "%@ app sudah lama tidak dibuka.";
 "summaryFreed" = "Sejauh ini, app ini telah mengosongkan %@.";
-"readAloud" = "Bacakan";
-"stopReading" = "Berhenti Membacakan";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Seberapa besar file Anda?";
-"sizeClassesCaption" = "Berapa banyak ruang yang dipakai tiap kelas ukuran dan berapa file di dalamnya. Beberapa file besar biasanya memakan lebih banyak ruang daripada banyak file kecil.";
 "historyTitle" = "Riwayat";
 "historyCaption" = "Ruang terpakai setelah setiap pemindaian penuh.";
 "historyAfterNextScan" = "Riwayat muncul setelah pemindaian penuh berikutnya.";
 "grownSince" = "Bertambah sejak %@";
 "grownBy" = "+%@";
 "nothingGrown" = "Tidak ada folder yang bertambah lebih dari %@.";
-"bucketValue" = "%@
-%@ file";
-"settingsSystemNote" = "Tampilan dan satuan mengikuti Pengaturan Sistem.";
 "appLanguage" = "Bahasa";
 "languageLikeMac" = "Sama seperti Mac";
 "languageRestartHint" = "Bahasa baru tampil setelah dimulai ulang.";

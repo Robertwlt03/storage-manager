@@ -52,17 +52,14 @@ without a terminal, and that you can share with others without having to wait fo
 The **Overview** is your home page. Right at the top it answers the real question: how much space you can free up. It
 then lists the steps to get there in a sensible order, cleaning up, duplicates and unused apps, each with what it
 frees and a button that takes you to its page; duplicates count once their page has searched them, and once nothing
-worth freeing is left, it says so. Below that, it shows your Mac with a colored bar and a legend. It then sums up in
-a few sentences how your storage is doing, including how much space the app has freed so far, and reads that out to
-you if you like. After every full scan it keeps the used space, so a line shows how your storage changes over the
-weeks, and it lists the folders that grew most since the scan before; a click opens one. A chart also shows you how
-much space small and large files take up, and at the very bottom you find all categories, from applications and
-downloads to caches.
+worth freeing is left, it says so. Below that, it shows your Mac with a colored bar and a legend, where a click on a
+category such as photos or app data opens it. After every full scan it keeps the used space, so a line shows how your
+storage changes over the weeks, and it lists the folders that grew most since the scan before; a click opens one.
 
 In **Folders** you click your way through all folders just like in Finder, sorted by size. **Large Files** shows you
 all files above a size you choose yourself, and **Search** finds folders and files by name. Each of these lists can
-also show large tiles: ⌘1 shows the list and ⌘2 the tiles, and Overview, Folders, Large Files and Unused Apps also
-have a switch for it in the toolbar, like the view buttons in Finder. On Folders the switch also offers **Rings** (⌘3),
+also show large tiles: ⌘1 shows the list and ⌘2 the tiles, and Folders, Large Files and Unused Apps also have a
+switch for it in the toolbar, like the view buttons in Finder. On Folders the switch also offers **Rings** (⌘3),
 which show the subfolders as rings around the current folder: the wider a piece, the bigger the folder, and a click
 opens it. In the settings you can add folders to measure, such as an external project folder, and exclude folders that
 the app should neither measure nor show nor clean up.
@@ -230,7 +227,7 @@ The code is split into small parts, and every file has exactly one job:
 | --- | --- |
 | `Sources/Features` | One folder for each page of the app, for example Overview, Folders and Clean Up. `Pages.swift` maps each page to its view. |
 | `Sources/DesignSystem` | All interface building blocks in the `UI` namespace, with fixed variants, plus spacing, fonts and colors. |
-| `Sources/Services` | Scanning, categories, cleaning up, apps, search, summary and reading aloud. |
+| `Sources/Services` | Scanning, categories, cleaning up, apps, search and the summary for the report. |
 | `Sources/State` | The app state that brings the services together. |
 | `Sources/Core` | Constants and fixed choices such as pages and settings. |
 | `Sources/Localization` and `Resources` | All texts in 28 languages, with German and English as the source. |

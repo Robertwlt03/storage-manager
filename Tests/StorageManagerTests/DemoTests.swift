@@ -22,7 +22,6 @@ struct DemoTests {
         #expect(model.isDemo)
         #expect(model.hasData)
         #expect(!model.categories.isEmpty)
-        #expect(model.statistics != nil)
         #expect(model.startupVolume != nil)
         #expect(AppUsageService.unused(model.apps, days: Self.unusedDays).count == 2)
         #expect(model.copyGroups.count == 1)

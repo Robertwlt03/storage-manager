@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Jeden průchod změří všechny oblasti, potom je každé kliknutí okamžité.";
 "scanningTitle" = "Skenování …";
 "scanningDetail" = "Výsledky se zobrazí, jakmile bude hotová první oblast.";
-"loadingSummaryTitle" = "Píše se shrnutí …";
-"loadingSummaryDetail" = "Až budou změřeny všechny oblasti, zde v několika větách uvidíte, jak na tom je vaše úložiště.";
-"loadingSizesTitle" = "Počítají se soubory podle velikosti …";
-"loadingSizesDetail" = "Graf se zobrazí, jakmile budou změřeny všechny oblasti.";
 "loadingAppsTitle" = "Kontrolují se aplikace …";
 "loadingAppsDetail" = "Velikosti a poslední použití budou konečné po dokončení skenování.";
 "showSidebar" = "Zobrazit postranní panel";
@@ -88,8 +84,6 @@
 "filesTotal" = "Souborů: %@ · celkem %@";
 
 /* Temporary area */
-"location" = "Umístění";
-"total" = "Celkem";
 "subfolders" = "Podsložky";
 "viewCopies" = "Zobrazit kopie aplikací …";
 "temporaryFolderT" = "Dočasné soubory";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Kopie nepřejdou do Koše. macOS v případě potřeby vytvoří novou.";
 
 /* Volumes */
-"capacity" = "Kapacita";
 "used" = "Využito";
 "purgeable" = "Odstranitelné systémem macOS";
-"available" = "K dispozici";
-"toOverview" = "Přejít na přehled";
 "exploreContents" = "Prozkoumat obsah";
 "scanAndExplore" = "Skenovat a prozkoumat";
 "volumeGone" = "Svazek už není připojen";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Zobrazení";
 "settings" = "Nastavení";
 "emptyFolder" = "Tato složka je prázdná";
-"otherCategories" = "Ostatní";
 "cleanCaches" = "Mezipaměti aplikací";
 "cleanCachesDetail" = "Soubory, které si aplikace uchovávají jen kvůli rychlejšímu spuštění. Aplikace si je v případě potřeby vytvoří znovu; otevřených aplikací se to nedotkne.";
 "cleanDeveloper" = "Zbytky z programátorských nástrojů";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Staré dočasné soubory";
 "cleanTemporaryDetail" = "Soubory, které aplikace potřebovaly jen krátce pro nějaký úkol a nejméně tři dny na ně nesáhly.";
 "cleanTrash" = "Koš";
-"cleanTrashDetail" = "Vysype Koš. Co v něm je, bude pak nadobro pryč. Ve výchozím nastavení není vybráno.";
+"cleanTrashDetail" = "Vysype Koš. Co v něm je, bude pak nadobro pryč.";
 "cleanInstallers" = "Staré instalační soubory";
-"cleanInstallersDetail" = "Instalační soubory ve Stažených souborech starší než jeden měsíc. Samotné aplikace zůstanou nainstalované. Ve výchozím nastavení není vybráno.";
+"cleanInstallersDetail" = "Instalační soubory ve Stažených souborech starší než jeden měsíc. Samotné aplikace zůstanou nainstalované.";
 "cleanFailed" = "Položek, které se nepodařilo odstranit, protože se používají nebo jsou chráněné: %@.";
 "cleanNothingLeft" = "Vše čisté: právě teď není co uklízet.";
 "cleaning" = "Čistím …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Přesunout do Koše";
 "lastOpened" = "Naposledy otevřeno %@";
 "trashAppFailed" = "Aplikaci „%@“ se nepodařilo přesunout. Ve Finderu to půjde po zadání hesla.";
-"bucketUnder1MB" = "do 1 MB";
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "přes 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "Naskenováno: %@";
@@ -256,7 +241,6 @@
 "scanArea" = "Oblast";
 "scanFinished" = "Naskenováno v";
 "accessMissingShort" = "Neuděleno";
-"summaryTitle" = "Stručně";
 "summaryDisk" = "Na disku „%@“ je využito %@ z %@, k dispozici je %@.";
 "summaryTop" = "Nejvíc místa zabírají %@ (%@) a %@ (%@).";
 "summaryNotMeasured" = "Jak je místo rozděleno, se zobrazí tady po prvním skenování.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Kopie aplikací, které macOS vytváří při kontrole, se započítávají do %@.";
 "summaryApps" = "Aplikací, které jste delší dobu neotevřeli: %@.";
 "summaryFreed" = "Tato aplikace zatím uvolnila %@.";
-"readAloud" = "Přečíst nahlas";
-"stopReading" = "Zastavit čtení";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Jak velké jsou vaše soubory?";
-"sizeClassesCaption" = "Kolik místa zabírá každá velikostní třída a kolik souborů v ní je. Několik velkých souborů obvykle zabírá víc než mnoho malých.";
 "historyTitle" = "Vývoj";
 "historyCaption" = "Obsazené místo po každém úplném skenování.";
 "historyAfterNextScan" = "Vývoj se zobrazí po příštím úplném skenování.";
 "grownSince" = "Narostlo od %@";
 "grownBy" = "+%@";
 "nothingGrown" = "Žádná složka nenarostla o více než %@.";
-"bucketValue" = "%@
-Souborů: %@";
-"settingsSystemNote" = "Vzhled a jednotky přebírá aplikace z Nastavení systému.";
 "appLanguage" = "Jazyk";
 "languageLikeMac" = "Stejný jako na Macu";
 "languageRestartHint" = "Nový jazyk se zobrazí po restartu.";

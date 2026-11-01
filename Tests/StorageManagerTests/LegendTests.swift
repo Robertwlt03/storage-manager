@@ -22,13 +22,11 @@ struct LegendTests {
         #expect(legend.map(\.id) == ["category0", "category1", StorageSegment.usedID, "free"])
     }
 
-    @Test("A long legend groups the smaller categories into one entry")
+    @Test("A long legend still names every category, so each one can be opened")
     func longLegend() {
-        let categories = (0..<Layout.legendMaximumEntries + 2).map(Self.category)
+        let categoryCount = 12
+        let categories = (0..<categoryCount).map(Self.category)
         let legend = StorageSegment.legend(of: categories + [Self.free])
-        #expect(legend.count == Layout.legendMaximumEntries + 1)
-        #expect(legend[Layout.legendMaximumEntries - 1].id == StorageSegment.otherID)
-        #expect(legend[Layout.legendMaximumEntries - 1].bytes == 3)
-        #expect(legend.last?.id == "free")
+        #expect(legend.map(\.id) == categories.map(\.id) + ["free"])
     }
 }

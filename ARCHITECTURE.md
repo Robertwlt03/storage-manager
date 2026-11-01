@@ -17,7 +17,7 @@ files of equal size can be the same, and `DuplicateService` reads just those, in
 1. `ScanService` walks over one area of the disk once with `FileTreeWalker`, on the processor’s efficiency cores.
 2. This produces a tree of `Node`. Each folder merges its subfolders and files under one megabyte into a single row.
    That keeps the tree small.
-3. `AppModel` holds this tree and everything that follows from it: categories, size classes, cleanup suggestions and
+3. `AppModel` holds this tree and everything that follows from it: categories, cleanup suggestions, app copies and
    apps. It increments `revision` as soon as the tree changes.
 4. The pages only read from `AppModel` and calculate with the services. They never touch the disk themselves.
 
@@ -34,8 +34,8 @@ the adjustable numbers of the scan.
 and app usage.
 
 **`Sources/Services`:** The actual work, each without any interface. This includes scanning, categories, search,
-cleaning up, the steps to free space, app copies, size classes, summary, reading aloud, thumbnails and everything
-that talks to Finder or System Settings.
+cleaning up, the steps to free space, app copies, the summary for the report, thumbnails and everything that talks to
+Finder or System Settings.
 
 **`Sources/State`:** `AppModel`, which brings the services together and holds the state of the interface.
 

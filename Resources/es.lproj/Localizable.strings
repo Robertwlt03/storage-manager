@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Una sola pasada analiza todas las zonas; después, cada clic es instantáneo.";
 "scanningTitle" = "Analizando …";
 "scanningDetail" = "Los resultados aparecen en cuanto termina la primera zona.";
-"loadingSummaryTitle" = "Redactando el resumen …";
-"loadingSummaryDetail" = "Cuando todas las zonas estén analizadas, aquí verás en pocas frases cómo está tu almacenamiento.";
-"loadingSizesTitle" = "Contando archivos por tamaño …";
-"loadingSizesDetail" = "El gráfico aparece en cuanto se han analizado todas las zonas.";
 "loadingAppsTitle" = "Comprobando apps …";
 "loadingAppsDetail" = "Los tamaños y el último uso son definitivos cuando termina el análisis.";
 "showSidebar" = "Mostrar barra lateral";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ archivos · %@ en total";
 
 /* Temporary area */
-"location" = "Ubicación";
-"total" = "Total";
 "subfolders" = "Subcarpetas";
 "viewCopies" = "Ver copias de apps …";
 "temporaryFolderT" = "Archivos temporales";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Las copias no van a la Papelera. macOS crea una nueva cuando hace falta.";
 
 /* Volumes */
-"capacity" = "Capacidad";
 "used" = "Usado";
 "purgeable" = "Purgable por macOS";
-"available" = "Disponible";
-"toOverview" = "Ir al resumen";
 "exploreContents" = "Explorar contenido";
 "scanAndExplore" = "Analizar y explorar";
 "volumeGone" = "El volumen ya no está conectado";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Vista";
 "settings" = "Ajustes";
 "emptyFolder" = "Esta carpeta está vacía";
-"otherCategories" = "Otras";
 "cleanCaches" = "Cachés de apps";
 "cleanCachesDetail" = "Archivos que las apps guardan solo para abrirse más rápido. Las apps los vuelven a crear cuando hace falta; las apps abiertas no se tocan.";
 "cleanDeveloper" = "Restos de herramientas de programación";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Archivos temporales antiguos";
 "cleanTemporaryDetail" = "Archivos que las apps solo necesitaron un momento para una tarea y que no han tocado desde hace al menos tres días.";
 "cleanTrash" = "Papelera";
-"cleanTrashDetail" = "Vacía la Papelera. Lo que haya dentro desaparecerá para siempre. No está seleccionada por defecto.";
+"cleanTrashDetail" = "Vacía la Papelera. Lo que haya dentro desaparecerá para siempre.";
 "cleanInstallers" = "Instaladores antiguos";
-"cleanInstallersDetail" = "Archivos de instalación en Descargas con más de un mes. Las apps siguen instaladas. No está seleccionado por defecto.";
+"cleanInstallersDetail" = "Archivos de instalación en Descargas con más de un mes. Las apps siguen instaladas.";
 "cleanFailed" = "No se pudieron eliminar %@ elementos porque están en uso o protegidos.";
 "cleanNothingLeft" = "Todo limpio: ahora mismo no hay nada que limpiar.";
 "cleaning" = "Limpiando …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Mover a la Papelera";
 "lastOpened" = "Última apertura el %@";
 "trashAppFailed" = "No se pudo mover “%@”. En el Finder funciona con tu contraseña.";
-"bucketUnder1MB" = "menos de 1 MB";
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "más de 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ analizado";
@@ -256,7 +241,6 @@
 "scanArea" = "Zona";
 "scanFinished" = "Analizado a las";
 "accessMissingShort" = "No concedido";
-"summaryTitle" = "En resumen";
 "summaryDisk" = "En “%@” hay %@ de %@ en uso y %@ disponibles.";
 "summaryTop" = "El mayor espacio lo ocupan %@ con %@ y %@ con %@.";
 "summaryNotMeasured" = "Cómo se reparte el espacio aparecerá aquí tras el primer análisis.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Las copias de apps que macOS crea al comprobarlas cuentan por %@.";
 "summaryApps" = "%@ apps no se han abierto desde hace tiempo.";
 "summaryFreed" = "Hasta ahora, esta app ha liberado %@.";
-"readAloud" = "Leer en voz alta";
-"stopReading" = "Detener la lectura";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "¿Qué tamaño tienen tus archivos?";
-"sizeClassesCaption" = "Cuánto espacio ocupa cada clase de tamaño y cuántos archivos contiene. Unos pocos archivos grandes suelen ocupar más que muchos pequeños.";
 "historyTitle" = "Historial";
 "historyCaption" = "Espacio usado tras cada análisis completo.";
 "historyAfterNextScan" = "El historial aparece tras el próximo análisis completo.";
 "grownSince" = "Crecimiento desde %@";
 "grownBy" = "+%@";
 "nothingGrown" = "Ninguna carpeta creció más de %@.";
-"bucketValue" = "%@
-%@ archivos";
-"settingsSystemNote" = "La apariencia y las unidades vienen de Ajustes del Sistema.";
 "appLanguage" = "Idioma";
 "languageLikeMac" = "Igual que en el Mac";
 "languageRestartHint" = "El nuevo idioma aparece tras reiniciar.";

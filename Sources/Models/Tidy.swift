@@ -58,37 +58,3 @@ nonisolated struct AppUsage: Identifiable {
     var bytes: Int64 = 0
     var id: String { path }
 }
-
-enum SizeBucket: CaseIterable, Identifiable {
-    case under1MB, to10MB, to100MB, to1GB, over1GB
-    var id: Self { self }
-
-    private static let tenMegabytes: Int64 = 10_000_000
-    private static let hundredMegabytes: Int64 = 100_000_000
-    private static let oneGigabyte: Int64 = 1_000_000_000
-
-    /// Upper bound in bytes (exclusive); nil for the last bucket.
-    var limit: Int64? {
-        switch self {
-        case .under1MB: ScanLimits.smallestListedBytes
-        case .to10MB: Self.tenMegabytes
-        case .to100MB: Self.hundredMegabytes
-        case .to1GB: Self.oneGigabyte
-        case .over1GB: nil
-        }
-    }
-
-    var title: TextKey {
-        switch self {
-        case .under1MB: .bucketUnder1MB
-        case .to10MB: .bucketTo10MB
-        case .to100MB: .bucketTo100MB
-        case .to1GB: .bucketTo1GB
-        case .over1GB: .bucketOver1GB
-        }
-    }
-}
-
-struct Statistics {
-    var sizeClasses: [(sizeClass: SizeBucket, count: Int, bytes: Int64)] = []
-}

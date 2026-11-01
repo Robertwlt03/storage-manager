@@ -2,7 +2,7 @@ import Foundation
 
 nonisolated enum VolumeService {
     private static let volumeKeys: [URLResourceKey] = [
-        .volumeNameKey, .volumeLocalizedFormatDescriptionKey, .volumeTotalCapacityKey,
+        .volumeNameKey, .volumeTotalCapacityKey,
         .volumeAvailableCapacityKey,
         .volumeAvailableCapacityForImportantUsageKey, .volumeIsInternalKey,
         .volumeIsRootFileSystemKey,
@@ -40,7 +40,7 @@ nonisolated enum VolumeService {
         let free = Int64(values.volumeAvailableCapacity ?? 0)
         return VolumeInformation(
             path: url.path, name: values.volumeName ?? url.lastPathComponent,
-            format: values.volumeLocalizedFormatDescription ?? "", totalBytes: Int64(total),
+            totalBytes: Int64(total),
             freeBytes: free,
             availableBytes: max(free, values.volumeAvailableCapacityForImportantUsage ?? 0),
             isInternal: values.volumeIsInternal ?? false,

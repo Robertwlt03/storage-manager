@@ -11,6 +11,7 @@ struct TemporaryFilesView: View {
 
     var body: some View {
         UI.Page(.temporaryFiles, options: { viewCopiesButton }, content)
+            .navigationSubtitle(temporaryArea.map { area in Format.bytes(area.bytes) } ?? "")
     }
 
     @ViewBuilder private var viewCopiesButton: some View {
@@ -21,12 +22,6 @@ struct TemporaryFilesView: View {
 
     @ViewBuilder private func content() -> some View {
         if let temporaryArea {
-            UI.Card {
-                UI.Fields([
-                    UI.Field(.location, model.shownTemporaryArea),
-                    UI.Field(.total, Format.bytes(temporaryArea.bytes)),
-                ])
-            }
             UI.Card(TextKey.subfolders.translated) {
                 UI.Rows(TemporaryAreaPart.allCases) { part in row(part, in: temporaryArea) }
             }

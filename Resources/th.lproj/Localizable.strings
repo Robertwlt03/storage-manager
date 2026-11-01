@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "สแกนครั้งเดียววัดได้ทุกส่วน หลังจากนั้นทุกการคลิกจะแสดงผลทันที";
 "scanningTitle" = "กำลังสแกน…";
 "scanningDetail" = "ผลลัพธ์จะแสดงทันทีที่ส่วนแรกเสร็จ";
-"loadingSummaryTitle" = "กำลังเขียนสรุป…";
-"loadingSummaryDetail" = "เมื่อวัดครบทุกส่วนแล้ว ที่นี่จะสรุปสั้นๆ ว่าพื้นที่จัดเก็บข้อมูลของคุณเป็นอย่างไร";
-"loadingSizesTitle" = "กำลังนับไฟล์ตามขนาด…";
-"loadingSizesDetail" = "แผนภูมิจะแสดงทันทีที่วัดครบทุกส่วน";
 "loadingAppsTitle" = "กำลังตรวจสอบแอป…";
 "loadingAppsDetail" = "ขนาดและการใช้ล่าสุดจะเป็นค่าสุดท้ายเมื่อสแกนเสร็จ";
 "showSidebar" = "แสดงแถบด้านข้าง";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ ไฟล์ · รวม %@";
 
 /* Temporary area */
-"location" = "ตำแหน่ง";
-"total" = "รวม";
 "subfolders" = "โฟลเดอร์ย่อย";
 "viewCopies" = "ดูสำเนาแอป…";
 "temporaryFolderT" = "ไฟล์ชั่วคราว";
@@ -127,11 +121,8 @@
 "deleteMessage" = "สำเนาจะไม่ถูกย้ายไปที่ถังขยะ macOS จะสร้างใหม่เมื่อจำเป็น";
 
 /* Volumes */
-"capacity" = "ความจุ";
 "used" = "ใช้แล้ว";
 "purgeable" = "macOS ล้างข้อมูลได้";
-"available" = "ว่าง";
-"toOverview" = "ไปที่ภาพรวม";
 "exploreContents" = "สำรวจเนื้อหา";
 "scanAndExplore" = "สแกนและสำรวจ";
 "volumeGone" = "ไดรฟ์ข้อมูลไม่ได้เชื่อมต่ออยู่แล้ว";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "มุมมอง";
 "settings" = "การตั้งค่า";
 "emptyFolder" = "โฟลเดอร์นี้ว่างเปล่า";
-"otherCategories" = "อื่นๆ";
 "cleanCaches" = "แคชของแอป";
 "cleanCachesDetail" = "ไฟล์ที่แอปเก็บไว้เพื่อให้เปิดได้เร็วขึ้นเท่านั้น แอปจะสร้างขึ้นใหม่เมื่อจำเป็น แอปที่เปิดอยู่จะไม่ถูกแตะต้อง";
 "cleanDeveloper" = "เศษไฟล์จากเครื่องมือเขียนโปรแกรม";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "ไฟล์ชั่วคราวเก่า";
 "cleanTemporaryDetail" = "ไฟล์ที่แอปต้องใช้เพียงชั่วครู่สำหรับงานหนึ่ง และไม่ได้แตะต้องมาอย่างน้อยสามวัน";
 "cleanTrash" = "ถังขยะ";
-"cleanTrashDetail" = "ล้างถังขยะ สิ่งที่อยู่ในนั้นจะหายไปอย่างถาวร ไม่ได้เลือกไว้ตามค่าเริ่มต้น";
+"cleanTrashDetail" = "ล้างถังขยะ สิ่งที่อยู่ในนั้นจะหายไปอย่างถาวร";
 "cleanInstallers" = "ตัวติดตั้งเก่า";
-"cleanInstallersDetail" = "ไฟล์ติดตั้งในดาวน์โหลดที่เก่ากว่าหนึ่งเดือน ตัวแอปยังคงติดตั้งอยู่ ไม่ได้เลือกไว้ตามค่าเริ่มต้น";
+"cleanInstallersDetail" = "ไฟล์ติดตั้งในดาวน์โหลดที่เก่ากว่าหนึ่งเดือน ตัวแอปยังคงติดตั้งอยู่";
 "cleanFailed" = "เอาออกไม่ได้ %@ รายการ เนื่องจากกำลังใช้งานอยู่หรือได้รับการป้องกัน";
 "cleanNothingLeft" = "สะอาดหมดแล้ว: ตอนนี้ไม่มีอะไรต้องล้าง";
 "cleaning" = "กำลังล้างข้อมูล…";
@@ -213,11 +203,6 @@
 "moveToTrash" = "ย้ายไปที่ถังขยะ";
 "lastOpened" = "เปิดล่าสุดเมื่อ %@";
 "trashAppFailed" = "ย้าย “%@” ไม่ได้ ใน Finder ทำได้โดยใช้รหัสผ่านของคุณ";
-"bucketUnder1MB" = "ต่ำกว่า 1 MB";
-"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
-"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
-"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
-"bucketOver1GB" = "มากกว่า 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "สแกนแล้ว %@";
@@ -256,7 +241,6 @@
 "scanArea" = "ส่วน";
 "scanFinished" = "สแกนเมื่อ";
 "accessMissingShort" = "ยังไม่ได้อนุญาต";
-"summaryTitle" = "โดยสรุป";
 "summaryDisk" = "บน “%@” ใช้ไปแล้ว %@ จาก %@ และยังว่างอยู่ %@";
 "summaryTop" = "พื้นที่ส่วนใหญ่เป็นของ %@ ที่ %@ และ %@ ที่ %@";
 "summaryNotMeasured" = "การแบ่งพื้นที่จะแสดงที่นี่หลังการสแกนครั้งแรก";
@@ -264,21 +248,14 @@
 "summaryCopies" = "สำเนาแอปที่ macOS สร้างขณะตรวจสอบใช้พื้นที่ %@";
 "summaryApps" = "มี %@ แอปที่ไม่ได้เปิดมาสักระยะ";
 "summaryFreed" = "จนถึงตอนนี้แอปนี้เพิ่มพื้นที่ว่างแล้ว %@";
-"readAloud" = "อ่านออกเสียง";
-"stopReading" = "หยุดอ่าน";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "ไฟล์ของคุณใหญ่แค่ไหน";
-"sizeClassesCaption" = "แต่ละกลุ่มขนาดใช้พื้นที่เท่าไรและมีไฟล์กี่ไฟล์ ไฟล์ใหญ่ไม่กี่ไฟล์มักใช้พื้นที่มากกว่าไฟล์เล็กจำนวนมาก";
 "historyTitle" = "ประวัติ";
 "historyCaption" = "พื้นที่ที่ใช้หลังการสแกนเต็มแต่ละครั้ง";
 "historyAfterNextScan" = "ประวัติจะแสดงหลังการสแกนเต็มครั้งถัดไป";
 "grownSince" = "เพิ่มขึ้นตั้งแต่ %@";
 "grownBy" = "+%@";
 "nothingGrown" = "ไม่มีโฟลเดอร์ใดเพิ่มขึ้นเกิน %@";
-"bucketValue" = "%@
-%@ ไฟล์";
-"settingsSystemNote" = "ลักษณะที่ปรากฏและหน่วยมาจากการตั้งค่าระบบ";
 "appLanguage" = "ภาษา";
 "languageLikeMac" = "เหมือนกับบน Mac";
 "languageRestartHint" = "ภาษาใหม่จะแสดงหลังจากเริ่มการทำงานใหม่";

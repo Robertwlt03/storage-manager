@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Yksi läpikäynti mittaa kaikki alueet; sen jälkeen jokainen napsautus toimii heti.";
 "scanningTitle" = "Mitataan …";
 "scanningDetail" = "Tulokset näkyvät heti, kun ensimmäinen alue on valmis.";
-"loadingSummaryTitle" = "Kirjoitetaan yhteenvetoa …";
-"loadingSummaryDetail" = "Kun kaikki alueet on mitattu, tässä kerrotaan muutamalla lauseella, miltä tallennustilasi näyttää.";
-"loadingSizesTitle" = "Tiedostoja lasketaan koon mukaan …";
-"loadingSizesDetail" = "Kaavio näkyy heti, kun kaikki alueet on mitattu.";
 "loadingAppsTitle" = "Tarkistetaan appeja …";
 "loadingAppsDetail" = "Koot ja viimeisin käyttö ovat lopullisia, kun mittaus on valmis.";
 "showSidebar" = "Näytä sivupalkki";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ tiedostoa · yhteensä %@";
 
 /* Temporary area */
-"location" = "Sijainti";
-"total" = "Yhteensä";
 "subfolders" = "Alikansiot";
 "viewCopies" = "Näytä appien kopiot …";
 "temporaryFolderT" = "Tilapäiset tiedostot";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Kopiot eivät siirry roskakoriin. macOS luo tarvittaessa uuden.";
 
 /* Volumes */
-"capacity" = "Kapasiteetti";
 "used" = "Käytetty";
 "purgeable" = "macOS voi tyhjentää";
-"available" = "Käytettävissä";
-"toOverview" = "Yleiskatsaukseen";
 "exploreContents" = "Tutki sisältöä";
 "scanAndExplore" = "Mittaa ja tutki";
 "volumeGone" = "Taltio ei ole enää kytkettynä";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Näkymä";
 "settings" = "Asetukset";
 "emptyFolder" = "Tämä kansio on tyhjä";
-"otherCategories" = "Muut";
 "cleanCaches" = "Appien välimuistit";
 "cleanCachesDetail" = "Tiedostoja, joita apit säilyttävät vain käynnistyäkseen nopeammin. Apit luovat ne tarvittaessa uudelleen; avoimiin appeihin ei kosketa.";
 "cleanDeveloper" = "Ohjelmointityökalujen jäänteet";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Vanhat tilapäiset tiedostot";
 "cleanTemporaryDetail" = "Tiedostoja, joita apit tarvitsivat vain hetken johonkin tehtävään ja joihin ne eivät ole koskeneet vähintään kolmeen päivään.";
 "cleanTrash" = "Roskakori";
-"cleanTrashDetail" = "Tyhjentää roskakorin. Sen sisältö katoaa sen jälkeen lopullisesti. Ei valittuna oletuksena.";
+"cleanTrashDetail" = "Tyhjentää roskakorin. Sen sisältö katoaa sen jälkeen lopullisesti.";
 "cleanInstallers" = "Vanhat asennustiedostot";
-"cleanInstallersDetail" = "Yli kuukauden vanhat asennustiedostot Latauksissa. Itse apit pysyvät asennettuina. Ei valittuna oletuksena.";
+"cleanInstallersDetail" = "Yli kuukauden vanhat asennustiedostot Latauksissa. Itse apit pysyvät asennettuina.";
 "cleanFailed" = "%@ kohdetta ei voitu poistaa, koska ne ovat käytössä tai suojattuja.";
 "cleanNothingLeft" = "Kaikki puhdasta: juuri nyt ei ole mitään siivottavaa.";
 "cleaning" = "Siivotaan …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Siirrä roskakoriin";
 "lastOpened" = "Viimeksi avattu %@";
 "trashAppFailed" = "Kohdetta ”%@” ei voitu siirtää. Finderissa se onnistuu salasanallasi.";
-"bucketUnder1MB" = "alle 1 MB";
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "yli 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ mitattu";
@@ -256,7 +241,6 @@
 "scanArea" = "Alue";
 "scanFinished" = "Mitattu klo";
 "accessMissingShort" = "Ei myönnetty";
-"summaryTitle" = "Lyhyesti";
 "summaryDisk" = "Levyllä ”%@” on käytetty %@ / %@ ja käytettävissä on %@.";
 "summaryTop" = "Eniten tilaa vievät %@ (%@) ja %@ (%@).";
 "summaryNotMeasured" = "Tilan jakautuminen näkyy tässä ensimmäisen mittauksen jälkeen.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Appien kopiot, jotka macOS luo tarkistuksen aikana, vievät laskettuna %@.";
 "summaryApps" = "%@ appia ei ole avattu pitkään aikaan.";
 "summaryFreed" = "Tähän mennessä sovellus on vapauttanut %@.";
-"readAloud" = "Lue ääneen";
-"stopReading" = "Lopeta lukeminen";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Kuinka suuria tiedostosi ovat?";
-"sizeClassesCaption" = "Kuinka paljon tilaa kukin kokoluokka vie ja kuinka monta tiedostoa siihen kuuluu. Muutama suuri tiedosto vie yleensä enemmän tilaa kuin monta pientä.";
 "historyTitle" = "Historia";
 "historyCaption" = "Käytetty tila jokaisen täyden mittauksen jälkeen.";
 "historyAfterNextScan" = "Historia näkyy seuraavan täyden mittauksen jälkeen.";
 "grownSince" = "Kasvu %@ lähtien";
 "grownBy" = "+%@";
 "nothingGrown" = "Mikään kansio ei kasvanut yli %@.";
-"bucketValue" = "%@
-%@ tiedostoa";
-"settingsSystemNote" = "Ulkoasu ja yksiköt tulevat Järjestelmäasetuksista.";
 "appLanguage" = "Kieli";
 "languageLikeMac" = "Sama kuin Macissa";
 "languageRestartHint" = "Uusi kieli näkyy uudelleenkäynnistyksen jälkeen.";

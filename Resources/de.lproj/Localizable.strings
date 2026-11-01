@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Ein Durchgang misst alle Bereiche; danach ist jeder Klick sofort da.";
 "scanningTitle" = "Wird gemessen …";
 "scanningDetail" = "Die Ergebnisse erscheinen, sobald der erste Bereich fertig ist.";
-"loadingSummaryTitle" = "Zusammenfassung wird geschrieben …";
-"loadingSummaryDetail" = "Wenn alle Bereiche gemessen sind, steht hier in wenigen Sätzen, wie es um deinen Speicher steht.";
-"loadingSizesTitle" = "Dateien werden nach Größe gezählt …";
-"loadingSizesDetail" = "Das Diagramm erscheint, sobald alle Bereiche gemessen sind.";
 "loadingAppsTitle" = "Apps werden geprüft …";
 "loadingAppsDetail" = "Größen und letzte Nutzung stehen fest, sobald die Messung fertig ist.";
 "showSidebar" = "Seitenleiste einblenden";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ Dateien · zusammen %@";
 
 /* Temporary area */
-"location" = "Ort";
-"total" = "Zusammen";
 "subfolders" = "Unterordner";
 "viewCopies" = "App-Kopien ansehen …";
 "temporaryFolderT" = "Temporäre Dateien";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Die Kopien landen nicht im Papierkorb. macOS legt bei Bedarf eine neue an.";
 
 /* Volumes */
-"capacity" = "Kapazität";
 "used" = "Belegt";
 "purgeable" = "Von macOS löschbar";
-"available" = "Verfügbar";
-"toOverview" = "Zum Überblick";
 "exploreContents" = "Inhalt erkunden";
 "scanAndExplore" = "Inhalt messen und erkunden";
 "volumeGone" = "Datenträger nicht mehr verbunden";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Darstellung";
 "settings" = "Einstellungen";
 "emptyFolder" = "Dieser Ordner ist leer";
-"otherCategories" = "Weitere";
 "cleanCaches" = "Zwischenspeicher von Apps";
 "cleanCachesDetail" = "Dateien, die Apps nur zum schnelleren Starten aufheben. Apps legen sie bei Bedarf neu an; geöffnete Apps bleiben unberührt.";
 "cleanDeveloper" = "Reste von Programmierwerkzeugen";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Alte temporäre Dateien";
 "cleanTemporaryDetail" = "Dateien, die Apps nur kurz für eine Aufgabe gebraucht und seit mindestens drei Tagen nicht mehr angefasst haben.";
 "cleanTrash" = "Papierkorb";
-"cleanTrashDetail" = "Leert den Papierkorb. Was darin liegt, ist danach endgültig weg. Standardmäßig nicht ausgewählt.";
+"cleanTrashDetail" = "Leert den Papierkorb. Was darin liegt, ist danach endgültig weg.";
 "cleanInstallers" = "Alte Installationsdateien";
-"cleanInstallersDetail" = "Installationsdateien in Downloads, die älter als einen Monat sind. Die Apps selbst bleiben installiert. Standardmäßig nicht ausgewählt.";
+"cleanInstallersDetail" = "Installationsdateien in Downloads, die älter als einen Monat sind. Die Apps selbst bleiben installiert.";
 "cleanFailed" = "%@ Einträge ließen sich nicht entfernen, weil sie gerade benutzt werden oder geschützt sind.";
 "cleanNothingLeft" = "Alles sauber: Gerade gibt es nichts aufzuräumen.";
 "cleaning" = "Räume auf …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "In den Papierkorb";
 "lastOpened" = "Zuletzt geöffnet am %@";
 "trashAppFailed" = "„%@“ ließ sich nicht verschieben. Im Finder geht es mit deinem Passwort.";
-"bucketUnder1MB" = "unter 1 MB";
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "über 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ gemessen";
@@ -256,7 +241,6 @@
 "scanArea" = "Bereich";
 "scanFinished" = "Gemessen um";
 "accessMissingShort" = "Nicht erteilt";
-"summaryTitle" = "Kurz gesagt";
 "summaryDisk" = "Auf „%@“ sind %@ von %@ belegt, %@ sind verfügbar.";
 "summaryTop" = "Am meisten Platz brauchen %@ mit %@ und %@ mit %@.";
 "summaryNotMeasured" = "Wie sich der Platz verteilt, steht nach der ersten Messung hier.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Kopien von Apps, die macOS beim Prüfen anlegt, belegen gezählt %@.";
 "summaryApps" = "%@ Apps wurden länger nicht geöffnet.";
 "summaryFreed" = "Bisher wurden mit dieser App %@ freigegeben.";
-"readAloud" = "Vorlesen";
-"stopReading" = "Vorlesen beenden";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Wie groß sind deine Dateien?";
-"sizeClassesCaption" = "Wie viel Platz jede Größenklasse belegt und wie viele Dateien darin liegen. Meist belegen wenige große Dateien mehr als viele kleine.";
 "historyTitle" = "Verlauf";
 "historyCaption" = "Belegter Platz nach jeder vollständigen Messung.";
 "historyAfterNextScan" = "Der Verlauf erscheint nach der nächsten vollständigen Messung.";
 "grownSince" = "Gewachsen seit %@";
 "grownBy" = "+%@";
 "nothingGrown" = "Kein Ordner ist um mehr als %@ gewachsen.";
-"bucketValue" = "%@
-%@ Dateien";
-"settingsSystemNote" = "Erscheinungsbild und Einheiten übernimmt die App aus den Systemeinstellungen.";
 "appLanguage" = "Sprache";
 "languageLikeMac" = "Wie auf dem Mac";
 "languageRestartHint" = "Die neue Sprache erscheint nach einem Neustart.";
