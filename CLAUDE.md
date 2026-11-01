@@ -10,7 +10,8 @@ with `scripts/doc-assets.py` (`--theme claude`), then move them into `assets/loc
 picture in `assets/` that no guide shows.
 
 The human-facing guides, all in English: README.md, CONTRIBUTING.md (setup, commands, editors), ARCHITECTURE.md (data
-path, code map, deliberate rules) and CODE_STYLE.md (code rules and how they are checked). Read the last two before
+path, code map, deliberate rules), CODE_STYLE.md (code rules and how they are checked) and docs/pictures/README.md
+(the guides' pictures, every kind with a preview). Read the last two before
 changing code; do not repeat their content here or in comments.
 
 ## <img src="assets/icons/claude-conversation.svg" height="33" align="absmiddle" alt="">Working with the person at the keyboard
@@ -122,7 +123,7 @@ mode.
 - A new or changed rule in `scripts/checks/` gets a planted mistake in `scripts/checks/samples` with an `expect:` note
   on its line, and a counter-test that the project itself stays clean. Keep rules general, never a list of today's
   code: derive what you can from the compiler's index, the platform or the project.
-- `make check` does not run the tool scripts themselves (build, release, hook, banner). After changing one, run it as
+- `make check` does not run the tool scripts themselves (build, release, hook, banner, pictures). After changing one, run it as
   described under "Testing safely".
 
 ## <img src="assets/icons/claude-testing.svg" height="33" align="absmiddle" alt="">Testing safely
@@ -228,6 +229,7 @@ mode.
 - Lists of items, tables, steps and terminal sessions in a guide are pictures: describe each in
   `docs/pictures/<name>.json` and draw it with `make pictures`, light and dark, then show it through `<picture>` with
   an alt text that holds every word of it. Commands people copy stay in code blocks below the picture.
+  `docs/pictures/README.md` shows every kind with a preview; a new kind gets its preview there.
 - Draw banners with `make banner` and icons with `scripts/doc-assets.py icon` (see its help) so they match the
   others; an existing file is only replaced with `--overwrite` or by picking it in `make banner`. Section icons: 60×56
   canvas, 45 px rounded tile with a two-stop gradient, white 2 px stroke glyph in a 24 px grid; within one guide every

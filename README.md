@@ -187,7 +187,8 @@ together with Claude.
 Storage Manager is open source. Anyone can read the code, improve it and bring in their own ideas. You can report
 bugs and wishes in the [issues](../../issues), and I am happy to take improvements as pull requests. How to get
 started is in the [contributing guide](CONTRIBUTING.md), where to find what in the code is in the
-[architecture description](ARCHITECTURE.md), and how we write code is in the [code rules](CODE_STYLE.md). For how we
+[architecture description](ARCHITECTURE.md), how we write code is in the [code rules](CODE_STYLE.md), and how the
+guides draw their pictures is in [pictures for the guides](docs/pictures/README.md). For how we
 treat each other, the [code of conduct](CODE_OF_CONDUCT.md) applies. Most translations were made by machine, so I am
 especially glad about improvements from native speakers.
 
@@ -221,7 +222,8 @@ The code is split into small parts, and every file has exactly one job:
 | `Sources/Diagnostics` | A self test with real data and a stress test for the running app. |
 | `Widget` | The widget for the desktop and Notification Center, a target of its own that the build puts into the app. |
 | `Tests` | The tests for the folder tree, categories, search, design, contrast and translations. |
-| `scripts` | The code inspection, your own signing certificate and building the DMG. |
+| `scripts` | The code inspection, your own signing certificate, building the DMG and drawing the guides' pictures. |
+| `docs` | The installation guide that comes with the DMG, and the descriptions of the guides' pictures. |
 
 </details>
 

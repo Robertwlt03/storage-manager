@@ -55,6 +55,7 @@ You do not have to remember long commands. Just like npm scripts, every workflow
 
 The pictures in the guides, such as this one, are drawn from small descriptions in `docs/pictures`: change the
 JSON file or add one, run `make pictures`, and show it in light and dark with `<picture>` as the other guides do.
+[Pictures for the guides](docs/pictures/README.md) shows every kind with a preview and an example.
 
 The commands only call the scripts that are in the project anyway, all of them written in Python. So you can keep
 using them directly as well, for example `scripts/check.py tests`, as long as `python3` is 3.13 or newer; otherwise

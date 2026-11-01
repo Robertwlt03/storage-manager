@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="241" viewBox="0 0 900 241" role="img" aria-label="The colors: blue, sky, indigo, purple, pink, red, orange, brown, green, teal, gray, slate">
+<svg xmlns="http://www.w3.org/2000/svg" x="-2" y="3" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t0" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#5AA9FF"/><stop offset="1" stop-color="#0A6CF0"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t0)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="58" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">blue</text>
+<text x="58" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#5AA9FF to #0A6CF0</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="223" y="3" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t1" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#62CBFA"/><stop offset="1" stop-color="#1A86D9"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t1)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="283" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">sky</text>
+<text x="283" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#62CBFA to #1A86D9</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="448" y="3" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t2" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#8389FF"/><stop offset="1" stop-color="#4B4FD8"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t2)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="508" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">indigo</text>
+<text x="508" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#8389FF to #4B4FD8</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="673" y="3" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t3" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#C58BFF"/><stop offset="1" stop-color="#8B3FE0"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t3)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="733" y="22" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">purple</text>
+<text x="733" y="44" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#C58BFF to #8B3FE0</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="-2" y="92" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t4" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#FF7AA2"/><stop offset="1" stop-color="#E0336B"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t4)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="58" y="111" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">pink</text>
+<text x="58" y="133" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#FF7AA2 to #E0336B</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="223" y="92" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t5" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#FF6B61"/><stop offset="1" stop-color="#D92C20"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t5)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="283" y="111" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">red</text>
+<text x="283" y="133" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#FF6B61 to #D92C20</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="448" y="92" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t6" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#FFB340"/><stop offset="1" stop-color="#F07800"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t6)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="508" y="111" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">orange</text>
+<text x="508" y="133" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#FFB340 to #F07800</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="673" y="92" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t7" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#E7A764"/><stop offset="1" stop-color="#A8641F"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t7)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="733" y="111" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">brown</text>
+<text x="733" y="133" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#E7A764 to #A8641F</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="-2" y="181" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t8" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#5BD27A"/><stop offset="1" stop-color="#1E9B45"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t8)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="58" y="200" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">green</text>
+<text x="58" y="222" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#5BD27A to #1E9B45</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="223" y="181" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t9" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#56DBBE"/><stop offset="1" stop-color="#12957B"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t9)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="283" y="200" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">teal</text>
+<text x="283" y="222" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#56DBBE to #12957B</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="448" y="181" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t10" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#76767F"/><stop offset="1" stop-color="#2C2C31"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t10)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="508" y="200" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">gray</text>
+<text x="508" y="222" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#76767F to #2C2C31</text>
+<svg xmlns="http://www.w3.org/2000/svg" x="673" y="181" width="58.7" height="54.8"
+  viewBox="0 0 60 56" aria-hidden="true">
+<defs><linearGradient id="t11" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#A2A2AB"/><stop offset="1" stop-color="#6A6A74"/>
+</linearGradient></defs>
+<rect x="1.5" y="1.5" width="45" height="45" rx="11" fill="url(#t11)"/>
+<rect x="2" y="2" width="44" height="44" rx="10.5" fill="none" stroke="#fff"
+  stroke-opacity=".25"/>
+<g transform="translate(12 12)" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+  stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/></g>
+</svg>
+
+<text x="733" y="200" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#1D1D1F" text-anchor="start" xml:space="preserve">slate</text>
+<text x="733" y="222" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="13.5" font-weight="400" fill="#6E6E73" text-anchor="start" xml:space="preserve">#A2A2AB to #6A6A74</text>
+</svg>
