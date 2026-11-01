@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Egyetlen menet minden területet felmér; utána minden kattintás azonnali.";
 "scanningTitle" = "Vizsgálat …";
 "scanningDetail" = "Az eredmények megjelennek, amint az első terület elkészült.";
-"loadingSummaryTitle" = "Összefoglaló készül …";
-"loadingSummaryDetail" = "Ha minden terület fel van mérve, itt néhány mondatban olvashatod, hogyan áll a tárhelyed.";
-"loadingSizesTitle" = "Fájlok számlálása méret szerint …";
-"loadingSizesDetail" = "A diagram megjelenik, amint minden terület fel van mérve.";
 "loadingAppsTitle" = "Appok ellenőrzése …";
 "loadingAppsDetail" = "A méretek és az utolsó használat a vizsgálat végére véglegesek.";
 "showSidebar" = "Oldalsáv megjelenítése";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ fájl · összesen %@";
 
 /* Temporary area */
-"location" = "Hely";
-"total" = "Összesen";
 "subfolders" = "Almappák";
 "viewCopies" = "Appmásolatok megtekintése …";
 "temporaryFolderT" = "Ideiglenes fájlok";
@@ -127,11 +121,8 @@
 "deleteMessage" = "A másolatok nem kerülnek a Kukába. A macOS szükség esetén újat készít.";
 
 /* Volumes */
-"capacity" = "Kapacitás";
 "used" = "Foglalt";
 "purgeable" = "macOS által felszabadítható";
-"available" = "Elérhető";
-"toOverview" = "Ugrás az áttekintéshez";
 "exploreContents" = "Tartalom felfedezése";
 "scanAndExplore" = "Vizsgálat és felfedezés";
 "volumeGone" = "A kötet már nincs csatlakoztatva";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Nézet";
 "settings" = "Beállítások";
 "emptyFolder" = "Ez a mappa üres";
-"otherCategories" = "Egyéb";
 "cleanCaches" = "Appok gyorsítótárai";
 "cleanCachesDetail" = "Fájlok, amelyeket az appok csak a gyorsabb indulás miatt tartanak meg. Szükség esetén az appok újra létrehozzák őket; a megnyitott appok érintetlenek maradnak.";
 "cleanDeveloper" = "Programozóeszközök maradványai";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Régi ideiglenes fájlok";
 "cleanTemporaryDetail" = "Fájlok, amelyekre az appoknak csak rövid ideig volt szükségük egy feladathoz, és legalább három napja nem nyúltak hozzájuk.";
 "cleanTrash" = "Kuka";
-"cleanTrashDetail" = "Kiüríti a Kukát. Ami benne van, az utána végleg eltűnik. Alapból nincs kijelölve.";
+"cleanTrashDetail" = "Kiüríti a Kukát. Ami benne van, az utána végleg eltűnik.";
 "cleanInstallers" = "Régi telepítők";
-"cleanInstallersDetail" = "Egy hónapnál régebbi telepítőfájlok a Letöltésekben. Maguk az appok telepítve maradnak. Alapból nincs kijelölve.";
+"cleanInstallersDetail" = "Egy hónapnál régebbi telepítőfájlok a Letöltésekben. Maguk az appok telepítve maradnak.";
 "cleanFailed" = "%@ elem nem távolítható el, mert használatban van vagy védett.";
 "cleanNothingLeft" = "Minden tiszta: most nincs mit kitakarítani.";
 "cleaning" = "Takarítás …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Áthelyezés a Kukába";
 "lastOpened" = "Utoljára megnyitva: %@";
 "trashAppFailed" = "„%@” nem helyezhető át. A Finderben a jelszavaddal sikerül.";
-"bucketUnder1MB" = "1 MB alatt";
-"bucketTo10MB" = "1–10 MB"; /* same as English on purpose */
-"bucketTo100MB" = "10–100 MB"; /* same as English on purpose */
-"bucketTo1GB" = "100 MB–1 GB"; /* same as English on purpose */
-"bucketOver1GB" = "1 GB felett";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ felmérve";
@@ -256,7 +241,6 @@
 "scanArea" = "Terület";
 "scanFinished" = "Vizsgálat ideje";
 "accessMissingShort" = "Nincs megadva";
-"summaryTitle" = "Röviden";
 "summaryDisk" = "„%@” kötet: %@ foglalt az összesen %@ helyből, és %@ elérhető.";
 "summaryTop" = "A legtöbb helyet a következők foglalják: %@ (%@) és %@ (%@).";
 "summaryNotMeasured" = "A hely megoszlása az első vizsgálat után itt jelenik meg.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Az appok másolatai, amelyeket a macOS ellenőrzéskor készít, %@ helyet foglalnak.";
 "summaryApps" = "%@ app egy ideje nem volt megnyitva.";
 "summaryFreed" = "Az app eddig %@ helyet szabadított fel.";
-"readAloud" = "Felolvasás";
-"stopReading" = "Felolvasás leállítása";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Mekkorák a fájljaid?";
-"sizeClassesCaption" = "Mennyi helyet foglalnak az egyes méretkategóriák, és hány fájl van bennük. Néhány nagy fájl általában több helyet foglal, mint sok kicsi.";
 "historyTitle" = "Előzmények";
 "historyCaption" = "Foglalt hely minden teljes vizsgálat után.";
 "historyAfterNextScan" = "Az előzmények a következő teljes vizsgálat után jelennek meg.";
 "grownSince" = "Növekedés %@ óta";
 "grownBy" = "+%@";
 "nothingGrown" = "Egyik mappa sem nőtt többet, mint %@.";
-"bucketValue" = "%@
-%@ fájl";
-"settingsSystemNote" = "A megjelenést és a mértékegységeket a Rendszerbeállítások adják.";
 "appLanguage" = "Nyelv";
 "languageLikeMac" = "Ugyanaz, mint a Macen";
 "languageRestartHint" = "Az új nyelv újraindítás után jelenik meg.";

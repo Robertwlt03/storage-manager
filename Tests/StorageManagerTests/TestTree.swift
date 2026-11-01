@@ -34,7 +34,7 @@ enum TestTree {
         -> VolumeInformation
     {
         VolumeInformation(
-            path: "/", name: "Disk", format: "APFS", totalBytes: totalBytes, freeBytes: freeBytes,
+            path: "/", name: "Disk", totalBytes: totalBytes, freeBytes: freeBytes,
             availableBytes: availableBytes, isInternal: true, isRoot: true)
     }
 }

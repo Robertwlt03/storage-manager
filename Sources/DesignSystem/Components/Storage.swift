@@ -7,22 +7,11 @@ struct StorageSegment: Identifiable {
     let colorIndex: Int?  // nil for free space
 
     static let usedID = "used"  // used space no category covers yet
-    static let otherID = "other"
-    /// When the legend is full, the last place goes to the entry that groups the rest.
-    private static let namedEntryLimit = Layout.legendMaximumEntries - 1
 
-    /// The legend's rows: at most a few categories by name, the smaller ones grouped as "other",
-    /// then free space and used space that no category covers.
+    /// The legend's rows: every category by name, so each one can be opened from here, then free
+    /// space and used space that no category covers.
     static func legend(of segments: [StorageSegment]) -> [StorageSegment] {
-        let named = segments.filter { segment in !segment.isListedLast }
-        let listedLast = segments.filter(\.isListedLast)
-        guard named.count > Layout.legendMaximumEntries else { return named + listedLast }
-        let rest = named.dropFirst(namedEntryLimit)
-        let other = StorageSegment(
-            id: otherID, title: TextKey.otherCategories.translated,
-            bytes: rest.reduce(0) { total, segment in total + segment.bytes },
-            colorIndex: rest.first?.colorIndex)
-        return Array(named.prefix(namedEntryLimit)) + [other] + listedLast
+        segments.filter { segment in !segment.isListedLast } + segments.filter(\.isListedLast)
     }
 
     private var isListedLast: Bool { colorIndex == nil || id == Self.usedID }
@@ -163,9 +152,8 @@ private struct StorageLegend: View {
         .accessibilityElement(children: .combine)
     }
 
-    /// Categories lead to their page; free space, uncovered space and the grouped rest do not.
+    /// Categories lead to their page; free space and uncovered space do not.
     private func leadsSomewhere(_ segment: StorageSegment) -> Bool {
-        let isCategory = segment.colorIndex != nil && segment.id != StorageSegment.otherID
-        return onSelect != nil && isCategory && canSelect(segment)
+        onSelect != nil && segment.colorIndex != nil && canSelect(segment)
     }
 }

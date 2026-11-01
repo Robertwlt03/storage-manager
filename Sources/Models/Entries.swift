@@ -48,7 +48,6 @@ nonisolated struct Entry: Identifiable {
 nonisolated struct VolumeInformation: Identifiable, Hashable {
     let path: String
     let name: String
-    let format: String
     /// `availableBytes` is `freeBytes` plus what macOS can purge on demand.
     let totalBytes, freeBytes, availableBytes: Int64
     let isInternal, isRoot: Bool

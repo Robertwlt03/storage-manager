@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "One pass measures every area; after that every click is instant.";
 "scanningTitle" = "Scanning …";
 "scanningDetail" = "Results appear as soon as the first area is done.";
-"loadingSummaryTitle" = "Writing the summary …";
-"loadingSummaryDetail" = "Once every area is measured, a few sentences here tell you how your storage looks.";
-"loadingSizesTitle" = "Counting files by size …";
-"loadingSizesDetail" = "The chart appears as soon as every area is measured.";
 "loadingAppsTitle" = "Checking apps …";
 "loadingAppsDetail" = "Sizes and last use are final once the scan is done.";
 "showSidebar" = "Show Sidebar";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ files · %@ total";
 
 /* Temporary area */
-"location" = "Location";
-"total" = "Total";
 "subfolders" = "Subfolders";
 "viewCopies" = "View App Copies …";
 "temporaryFolderT" = "Temporary Files";
@@ -127,11 +121,8 @@
 "deleteMessage" = "The copies do not go to the Trash. macOS creates a new one when needed.";
 
 /* Volumes */
-"capacity" = "Capacity";
 "used" = "Used";
 "purgeable" = "Purgeable by macOS";
-"available" = "Available";
-"toOverview" = "Go to Overview";
 "exploreContents" = "Explore Contents";
 "scanAndExplore" = "Scan and Explore";
 "volumeGone" = "Volume No Longer Connected";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Layout";
 "settings" = "Settings";
 "emptyFolder" = "This folder is empty";
-"otherCategories" = "Other";
 "cleanCaches" = "App Caches";
 "cleanCachesDetail" = "Files apps keep only to start faster. Apps create them again when needed; open apps stay untouched.";
 "cleanDeveloper" = "Leftovers from Programming Tools";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Old Temporary Files";
 "cleanTemporaryDetail" = "Files apps needed only briefly for a task and have left untouched for at least three days.";
 "cleanTrash" = "Trash";
-"cleanTrashDetail" = "Empties the Trash. What is in it is then gone for good. Not selected by default.";
+"cleanTrashDetail" = "Empties the Trash. What is in it is then gone for good.";
 "cleanInstallers" = "Old Installers";
-"cleanInstallersDetail" = "Installer files in Downloads older than one month. The apps themselves stay installed. Not selected by default.";
+"cleanInstallersDetail" = "Installer files in Downloads older than one month. The apps themselves stay installed.";
 "cleanFailed" = "%@ items could not be removed because they are in use or protected.";
 "cleanNothingLeft" = "All clean: there is nothing to clean up right now.";
 "cleaning" = "Cleaning up …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Move to Trash";
 "lastOpened" = "Last opened on %@";
 "trashAppFailed" = "“%@” could not be moved. In Finder it works with your password.";
-"bucketUnder1MB" = "under 1 MB";
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "over 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ scanned";
@@ -256,7 +241,6 @@
 "scanArea" = "Area";
 "scanFinished" = "Scanned at";
 "accessMissingShort" = "Not granted";
-"summaryTitle" = "In Short";
 "summaryDisk" = "On “%@”, %@ of %@ is used and %@ is available.";
 "summaryTop" = "The most space goes to %@ with %@ and %@ with %@.";
 "summaryNotMeasured" = "How the space is divided appears here after the first scan.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Copies of apps that macOS makes while checking them count for %@.";
 "summaryApps" = "%@ apps have not been opened for a while.";
 "summaryFreed" = "So far, this app has freed %@.";
-"readAloud" = "Read Aloud";
-"stopReading" = "Stop Reading";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "How big are your files?";
-"sizeClassesCaption" = "How much space each size class takes and how many files are in it. A few big files usually take more room than many small ones.";
 "historyTitle" = "History";
 "historyCaption" = "Used space after each full scan.";
 "historyAfterNextScan" = "The history appears after the next full scan.";
 "grownSince" = "Grown since %@";
 "grownBy" = "+%@";
 "nothingGrown" = "No folder grew by more than %@.";
-"bucketValue" = "%@
-%@ files";
-"settingsSystemNote" = "Appearance and units come from System Settings.";
 "appLanguage" = "Language";
 "languageLikeMac" = "Same as the Mac";
 "languageRestartHint" = "The new language shows after a restart.";

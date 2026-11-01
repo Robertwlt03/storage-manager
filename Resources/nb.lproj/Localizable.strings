@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Én runde måler alle områder; etter det er hvert klikk umiddelbart.";
 "scanningTitle" = "Måler …";
 "scanningDetail" = "Resultatene vises så snart det første området er ferdig.";
-"loadingSummaryTitle" = "Skriver sammendraget …";
-"loadingSummaryDetail" = "Når alle områder er målt, står det her i noen få setninger hvordan lagringen din ser ut.";
-"loadingSizesTitle" = "Teller filer etter størrelse …";
-"loadingSizesDetail" = "Diagrammet vises så snart alle områder er målt.";
 "loadingAppsTitle" = "Sjekker apper …";
 "loadingAppsDetail" = "Størrelser og siste bruk er endelige når målingen er ferdig.";
 "showSidebar" = "Vis sidepanel";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ filer · %@ totalt";
 
 /* Temporary area */
-"location" = "Plassering";
-"total" = "Totalt";
 "subfolders" = "Undermapper";
 "viewCopies" = "Vis appkopier …";
 "temporaryFolderT" = "Midlertidige filer";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Kopiene havner ikke i papirkurven. macOS oppretter en ny ved behov.";
 
 /* Volumes */
-"capacity" = "Kapasitet";
 "used" = "Brukt";
 "purgeable" = "Kan ryddes av macOS";
-"available" = "Tilgjengelig";
-"toOverview" = "Til oversikten";
 "exploreContents" = "Utforsk innhold";
 "scanAndExplore" = "Mål og utforsk";
 "volumeGone" = "Volumet er ikke lenger tilkoblet";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Visning";
 "settings" = "Innstillinger";
 "emptyFolder" = "Denne mappen er tom";
-"otherCategories" = "Andre";
 "cleanCaches" = "Hurtigbuffere for apper";
 "cleanCachesDetail" = "Filer apper bare tar vare på for å starte raskere. Apper lager dem på nytt ved behov; åpne apper blir ikke rørt.";
 "cleanDeveloper" = "Rester fra programmeringsverktøy";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Gamle midlertidige filer";
 "cleanTemporaryDetail" = "Filer apper bare trengte en kort stund til en oppgave og ikke har rørt på minst tre dager.";
 "cleanTrash" = "Papirkurv";
-"cleanTrashDetail" = "Tømmer papirkurven. Det som ligger der, er da borte for godt. Er ikke valgt som standard.";
+"cleanTrashDetail" = "Tømmer papirkurven. Det som ligger der, er da borte for godt.";
 "cleanInstallers" = "Gamle installasjonsfiler";
-"cleanInstallersDetail" = "Installasjonsfiler i Nedlastinger som er eldre enn en måned. Selve appene forblir installert. Er ikke valgt som standard.";
+"cleanInstallersDetail" = "Installasjonsfiler i Nedlastinger som er eldre enn en måned. Selve appene forblir installert.";
 "cleanFailed" = "%@ objekter kunne ikke fjernes fordi de er i bruk eller beskyttet.";
 "cleanNothingLeft" = "Alt er rent: Det er ingenting å rydde opp akkurat nå.";
 "cleaning" = "Rydder opp …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Flytt til papirkurven";
 "lastOpened" = "Sist åpnet %@";
 "trashAppFailed" = "«%@» kunne ikke flyttes. I Finder fungerer det med passordet ditt.";
-"bucketUnder1MB" = "under 1 MB"; /* same as English on purpose */
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "over 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ målt";
@@ -256,7 +241,6 @@
 "scanArea" = "Område";
 "scanFinished" = "Målt kl.";
 "accessMissingShort" = "Ikke gitt";
-"summaryTitle" = "Kort fortalt";
 "summaryDisk" = "På «%@» er %@ av %@ brukt, og %@ er tilgjengelig.";
 "summaryTop" = "Mest plass tar %@ med %@ og %@ med %@.";
 "summaryNotMeasured" = "Hvordan plassen fordeler seg, vises her etter den første målingen.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Kopier av apper som macOS oppretter ved kontroll, utgjør %@.";
 "summaryApps" = "%@ apper har ikke vært åpnet på en stund.";
 "summaryFreed" = "Så langt har appen frigjort %@.";
-"readAloud" = "Les opp";
-"stopReading" = "Stopp opplesing";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Hvor store er filene dine?";
-"sizeClassesCaption" = "Hvor mye plass hver størrelsesklasse tar, og hvor mange filer som ligger i den. Noen få store filer tar vanligvis mer plass enn mange små.";
 "historyTitle" = "Historikk";
 "historyCaption" = "Brukt plass etter hver full måling.";
 "historyAfterNextScan" = "Historikken vises etter neste fulle måling.";
 "grownSince" = "Vokst siden %@";
 "grownBy" = "+%@";
 "nothingGrown" = "Ingen mappe har vokst med mer enn %@.";
-"bucketValue" = "%@
-%@ filer";
-"settingsSystemNote" = "Utseende og enheter kommer fra Systeminnstillinger.";
 "appLanguage" = "Språk";
 "languageLikeMac" = "Som på Macen";
 "languageRestartHint" = "Det nye språket vises etter en omstart.";

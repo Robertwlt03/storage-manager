@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "Tek bir geçiş tüm alanları ölçer; ardından her tıklama anında yanıt verir.";
 "scanningTitle" = "Taranıyor …";
 "scanningDetail" = "İlk alan tamamlanır tamamlanmaz sonuçlar görünür.";
-"loadingSummaryTitle" = "Özet yazılıyor …";
-"loadingSummaryDetail" = "Tüm alanlar ölçüldüğünde burada depolamanın durumunu birkaç cümleyle görürsün.";
-"loadingSizesTitle" = "Dosyalar boyuta göre sayılıyor …";
-"loadingSizesDetail" = "Tüm alanlar ölçülür ölçülmez grafik görünür.";
 "loadingAppsTitle" = "Uygulamalar kontrol ediliyor …";
 "loadingAppsDetail" = "Boyutlar ve son kullanım, tarama bittiğinde kesinleşir.";
 "showSidebar" = "Kenar Çubuğunu Göster";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ dosya · toplam %@";
 
 /* Temporary area */
-"location" = "Konum";
-"total" = "Toplam";
 "subfolders" = "Alt Klasörler";
 "viewCopies" = "Uygulama Kopyalarını Göster …";
 "temporaryFolderT" = "Geçici Dosyalar";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Kopyalar Çöp Sepeti'ne gitmez. macOS gerektiğinde yenisini oluşturur.";
 
 /* Volumes */
-"capacity" = "Kapasite";
 "used" = "Kullanılan";
 "purgeable" = "macOS Tarafından Temizlenebilir";
-"available" = "Kullanılabilir";
-"toOverview" = "Genel Bakışa Git";
 "exploreContents" = "İçeriği Keşfet";
 "scanAndExplore" = "Tara ve Keşfet";
 "volumeGone" = "Birim Artık Bağlı Değil";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Görünüm";
 "settings" = "Ayarlar";
 "emptyFolder" = "Bu klasör boş";
-"otherCategories" = "Diğer";
 "cleanCaches" = "Uygulama Önbellekleri";
 "cleanCachesDetail" = "Uygulamaların yalnızca daha hızlı açılmak için sakladığı dosyalar. Uygulamalar bunları gerektiğinde yeniden oluşturur; açık uygulamalara dokunulmaz.";
 "cleanDeveloper" = "Programlama Araçlarından Kalanlar";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Eski Geçici Dosyalar";
 "cleanTemporaryDetail" = "Uygulamaların bir iş için yalnızca kısa süre ihtiyaç duyduğu ve en az üç gündür dokunmadığı dosyalar.";
 "cleanTrash" = "Çöp Sepeti";
-"cleanTrashDetail" = "Çöp Sepeti'ni boşaltır. İçindeki her şey kalıcı olarak silinir. Varsayılan olarak seçili değildir.";
+"cleanTrashDetail" = "Çöp Sepeti'ni boşaltır. İçindeki her şey kalıcı olarak silinir.";
 "cleanInstallers" = "Eski Yükleyiciler";
-"cleanInstallersDetail" = "İndirilenler’deki bir aydan eski yükleme dosyaları. Uygulamaların kendisi yüklü kalır. Varsayılan olarak seçili değildir.";
+"cleanInstallersDetail" = "İndirilenler’deki bir aydan eski yükleme dosyaları. Uygulamaların kendisi yüklü kalır.";
 "cleanFailed" = "%@ öğe, kullanımda olduğu veya korumalı olduğu için kaldırılamadı.";
 "cleanNothingLeft" = "Her şey temiz: Şu anda temizlenecek bir şey yok.";
 "cleaning" = "Temizleniyor …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Çöp Sepeti'ne Taşı";
 "lastOpened" = "Son açılış: %@";
 "trashAppFailed" = "“%@” taşınamadı. Finder'da parolanızla çalışır.";
-"bucketUnder1MB" = "1 MB altı";
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "1 GB üzeri";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ tarandı";
@@ -256,7 +241,6 @@
 "scanArea" = "Alan";
 "scanFinished" = "Tarama zamanı";
 "accessMissingShort" = "Verilmedi";
-"summaryTitle" = "Kısaca";
 "summaryDisk" = "“%@” üzerinde %@ / %@ kullanılıyor ve %@ kullanılabilir.";
 "summaryTop" = "En çok yeri %@ (%@) ve %@ (%@) kaplıyor.";
 "summaryNotMeasured" = "Alanın nasıl dağıldığı ilk taramadan sonra burada görünür.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "macOS'un kontrol sırasında oluşturduğu uygulama kopyaları %@ yer sayılıyor.";
 "summaryApps" = "%@ uygulama bir süredir açılmadı.";
 "summaryFreed" = "Bu uygulama şimdiye kadar %@ yer açtı.";
-"readAloud" = "Sesli Oku";
-"stopReading" = "Okumayı Durdur";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Dosyalarınız ne kadar büyük?";
-"sizeClassesCaption" = "Her boyut sınıfının ne kadar yer kapladığı ve içinde kaç dosya olduğu. Birkaç büyük dosya genellikle çok sayıda küçük dosyadan daha fazla yer kaplar.";
 "historyTitle" = "Geçmiş";
 "historyCaption" = "Her tam taramadan sonra kullanılan alan.";
 "historyAfterNextScan" = "Geçmiş, bir sonraki tam taramadan sonra görünür.";
 "grownSince" = "%@ tarihinden beri büyüme";
 "grownBy" = "+%@";
 "nothingGrown" = "Hiçbir klasör %@ değerinden fazla büyümedi.";
-"bucketValue" = "%@
-%@ dosya";
-"settingsSystemNote" = "Görünüm ve birimler Sistem Ayarları’ndan gelir.";
 "appLanguage" = "Dil";
 "languageLikeMac" = "Mac ile aynı";
 "languageRestartHint" = "Yeni dil yeniden başlatmadan sonra görünür.";

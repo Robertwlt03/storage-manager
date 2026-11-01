@@ -26,7 +26,6 @@ struct SettingsView: View {
             folderSection(
                 .excludedFolders, hint: .excludedFoldersHint, $excludedFolders,
                 selection: $selectedExcludedFolder)
-            Text(TextKey.settingsSystemNote.translated).textRole(.hint)
         }
         .formStyle(.grouped)
         .frame(width: Layout.settingsWidth)

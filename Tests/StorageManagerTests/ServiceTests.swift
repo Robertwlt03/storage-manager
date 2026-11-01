@@ -57,19 +57,6 @@ struct ServiceTests {
         #expect(Self.bytes(of: .purgeable, in: finished) == TestTree.small)
     }
 
-    @Test("Size classes sort every file by its size, and folded files count as the smallest")
-    func sizeClasses() {
-        let root = Node.virtualRoot()
-        TestTree.folder("/scan", in: root, fileBytes: TestTree.small) { scan in
-            TestTree.folder("film", in: scan, fileBytes: 2 * Self.gigabyte)
-        }
-        let statistics = StatisticsService.compute(root: root)
-        let bySizeClass = Dictionary(
-            uniqueKeysWithValues: statistics.sizeClasses.map { row in (row.sizeClass, row.count) })
-        #expect(bySizeClass[.under1MB] == 1)
-        #expect(bySizeClass[.over1GB] == 1)
-    }
-
     @Test("Each scan root is measured once, and never inside another one")
     func scanRoots() {
         let folders = ["/a", "/a/b", "/c", "/a", "/ab"]

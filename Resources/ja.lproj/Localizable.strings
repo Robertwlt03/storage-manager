@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "1回のスキャンですべての領域を調べます。その後はどのクリックもすぐに表示されます。";
 "scanningTitle" = "スキャン中…";
 "scanningDetail" = "最初の領域が終わり次第、結果が表示されます。";
-"loadingSummaryTitle" = "概要を作成中…";
-"loadingSummaryDetail" = "すべての領域を測定すると、ここにストレージの状況が数文で表示されます。";
-"loadingSizesTitle" = "ファイルをサイズ別に集計中…";
-"loadingSizesDetail" = "すべての領域の測定が終わるとグラフが表示されます。";
 "loadingAppsTitle" = "アプリを確認中…";
 "loadingAppsDetail" = "サイズと最終使用日はスキャン完了後に確定します。";
 "showSidebar" = "サイドバーを表示";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@個のファイル · 合計%@";
 
 /* Temporary area */
-"location" = "場所";
-"total" = "合計";
 "subfolders" = "サブフォルダ";
 "viewCopies" = "Appのコピーを表示…";
 "temporaryFolderT" = "一時ファイル";
@@ -127,11 +121,8 @@
 "deleteMessage" = "コピーはゴミ箱に入りません。必要に応じてmacOSが新しく作成します。";
 
 /* Volumes */
-"capacity" = "容量";
 "used" = "使用中";
 "purgeable" = "macOSが削除可能";
-"available" = "利用可能";
-"toOverview" = "概要へ移動";
 "exploreContents" = "内容を調べる";
 "scanAndExplore" = "スキャンして調べる";
 "volumeGone" = "ボリュームは接続されていません";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "表示方法";
 "settings" = "設定";
 "emptyFolder" = "このフォルダは空です";
-"otherCategories" = "その他";
 "cleanCaches" = "Appのキャッシュ";
 "cleanCachesDetail" = "Appがすばやく起動するためだけに保存しているファイルです。必要になればAppが作り直します。開いているAppのものはそのままです。";
 "cleanDeveloper" = "プログラミングツールの残り";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "古い一時ファイル";
 "cleanTemporaryDetail" = "Appが作業のために短い間だけ使い、少なくとも3日間触れていないファイルです。";
 "cleanTrash" = "ゴミ箱";
-"cleanTrashDetail" = "ゴミ箱を空にします。中身は完全に消えます。初期設定では選択されていません。";
+"cleanTrashDetail" = "ゴミ箱を空にします。中身は完全に消えます。";
 "cleanInstallers" = "古いインストーラ";
-"cleanInstallersDetail" = "ダウンロード内の1か月以上前のインストール用ファイルです。App自体はインストールされたままです。初期設定では選択されていません。";
+"cleanInstallersDetail" = "ダウンロード内の1か月以上前のインストール用ファイルです。App自体はインストールされたままです。";
 "cleanFailed" = "使用中または保護されているため、%@個の項目を削除できませんでした。";
 "cleanNothingLeft" = "すっきりしています。今はクリーンアップするものはありません。";
 "cleaning" = "クリーンアップ中…";
@@ -213,11 +203,6 @@
 "moveToTrash" = "ゴミ箱に入れる";
 "lastOpened" = "最後に開いた日: %@";
 "trashAppFailed" = "「%@」を移動できませんでした。Finderでは、パスワードを入力すれば移動できます。";
-"bucketUnder1MB" = "1 MB未満";
-"bucketTo10MB" = "1～10 MB";
-"bucketTo100MB" = "10～100 MB";
-"bucketTo1GB" = "100 MB～1 GB";
-"bucketOver1GB" = "1 GB以上";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@をスキャン済み";
@@ -256,7 +241,6 @@
 "scanArea" = "領域";
 "scanFinished" = "スキャン日時";
 "accessMissingShort" = "未許可";
-"summaryTitle" = "概要まとめ";
 "summaryDisk" = "「%@」では、%@/%@が使用中で、%@が利用可能です。";
 "summaryTop" = "最も容量を使っているのは、%@の%@と、%@の%@です。";
 "summaryNotMeasured" = "容量の内訳は、最初のスキャンのあとにここに表示されます。";
@@ -264,21 +248,14 @@
 "summaryCopies" = "macOSが確認時に作成するAppのコピーは、%@として計上されています。";
 "summaryApps" = "%@個のAppがしばらく開かれていません。";
 "summaryFreed" = "これまでにこのアプリで%@を解放しました。";
-"readAloud" = "読み上げ";
-"stopReading" = "読み上げを停止";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "ファイルの大きさはどのくらいですか?";
-"sizeClassesCaption" = "各サイズ区分が使っている容量と、その区分に含まれるファイルの数です。多くの場合、小さなファイルがたくさんあるより、大きなファイルが少しあるほうが多くの容量を使います。";
 "historyTitle" = "推移";
 "historyCaption" = "完全スキャンごとの使用容量です。";
 "historyAfterNextScan" = "次の完全スキャン後に推移が表示されます。";
 "grownSince" = "%@以降に増加";
 "grownBy" = "+%@";
 "nothingGrown" = "%@を超えて増えたフォルダはありません。";
-"bucketValue" = "%@
-%@個のファイル";
-"settingsSystemNote" = "外観と単位はシステム設定に従います。";
 "appLanguage" = "言語";
 "languageLikeMac" = "Macと同じ";
 "languageRestartHint" = "新しい言語は再起動後に表示されます。";

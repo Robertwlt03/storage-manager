@@ -14,7 +14,6 @@ struct DemoData {
 
     /// What the temporary area's page shows as its place. The demo's folders lie under the real
     /// path, so the app finds them where it looks, but the page shows nothing of this Mac.
-    static let shownTemporaryArea = "/private/var/folders/ab/demo0000000000000000000000gn"
 
     private static let megabyte: Int64 = 1_000_000
     private static let gigabyte: Int64 = 1_000_000_000
@@ -24,7 +23,7 @@ struct DemoData {
         return DemoData(
             scanRoots: scanRoots,
             volume: VolumeInformation(
-                path: "/", name: "Macintosh HD", format: "APFS", totalBytes: 494 * gigabyte,
+                path: "/", name: "Macintosh HD", totalBytes: 494 * gigabyte,
                 freeBytes: 96 * gigabyte, availableBytes: 118 * gigabyte, isInternal: true,
                 isRoot: true),
             apps: apps(now: now, in: scanRoots[1]),

@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "En genomgång mäter alla områden. Därefter går varje klick direkt.";
 "scanningTitle" = "Mäter …";
 "scanningDetail" = "Resultaten visas så snart det första området är klart.";
-"loadingSummaryTitle" = "Skriver sammanfattningen …";
-"loadingSummaryDetail" = "När alla områden är mätta står det här i några meningar hur din lagring ser ut.";
-"loadingSizesTitle" = "Räknar filer efter storlek …";
-"loadingSizesDetail" = "Diagrammet visas så snart alla områden är mätta.";
 "loadingAppsTitle" = "Kontrollerar appar …";
 "loadingAppsDetail" = "Storlekar och senaste användning är slutgiltiga när mätningen är klar.";
 "showSidebar" = "Visa sidofält";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ filer · %@ totalt";
 
 /* Temporary area */
-"location" = "Plats";
-"total" = "Totalt";
 "subfolders" = "Undermappar";
 "viewCopies" = "Visa appkopior …";
 "temporaryFolderT" = "Tillfälliga filer";
@@ -127,11 +121,8 @@
 "deleteMessage" = "Kopiorna hamnar inte i papperskorgen. macOS skapar en ny vid behov.";
 
 /* Volumes */
-"capacity" = "Kapacitet";
 "used" = "Använt";
 "purgeable" = "Kan rensas av macOS";
-"available" = "Tillgängligt";
-"toOverview" = "Till översikten";
 "exploreContents" = "Utforska innehåll";
 "scanAndExplore" = "Mät och utforska";
 "volumeGone" = "Volymen är inte längre ansluten";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "Vy";
 "settings" = "Inställningar";
 "emptyFolder" = "Den här mappen är tom";
-"otherCategories" = "Övrigt";
 "cleanCaches" = "Appars cacheminnen";
 "cleanCachesDetail" = "Filer som appar sparar bara för att starta snabbare. Appar skapar dem igen vid behov; öppna appar lämnas ifred.";
 "cleanDeveloper" = "Rester från programmeringsverktyg";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "Gamla tillfälliga filer";
 "cleanTemporaryDetail" = "Filer som appar bara behövde en kort stund för en uppgift och inte har rört på minst tre dagar.";
 "cleanTrash" = "Papperskorgen";
-"cleanTrashDetail" = "Tömmer papperskorgen. Det som ligger där är sedan borta för alltid. Inte markerad som standard.";
+"cleanTrashDetail" = "Tömmer papperskorgen. Det som ligger där är sedan borta för alltid.";
 "cleanInstallers" = "Gamla installationsfiler";
-"cleanInstallersDetail" = "Installationsfiler i Hämtade filer som är äldre än en månad. Själva apparna förblir installerade. Inte markerad som standard.";
+"cleanInstallersDetail" = "Installationsfiler i Hämtade filer som är äldre än en månad. Själva apparna förblir installerade.";
 "cleanFailed" = "%@ objekt kunde inte tas bort eftersom de används eller är skyddade.";
 "cleanNothingLeft" = "Allt är rent: det finns inget att rensa just nu.";
 "cleaning" = "Rensar upp …";
@@ -213,11 +203,6 @@
 "moveToTrash" = "Flytta till papperskorgen";
 "lastOpened" = "Senast öppnad den %@";
 "trashAppFailed" = "”%@” kunde inte flyttas. I Finder fungerar det med ditt lösenord.";
-"bucketUnder1MB" = "under 1 MB"; /* same as English on purpose */
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "över 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ mätt";
@@ -256,7 +241,6 @@
 "scanArea" = "Område";
 "scanFinished" = "Mätt kl.";
 "accessMissingShort" = "Inte beviljad";
-"summaryTitle" = "I korthet";
 "summaryDisk" = "På ”%@” är %@ av %@ använt och %@ är tillgängligt.";
 "summaryTop" = "Mest utrymme går till %@ med %@ och %@ med %@.";
 "summaryNotMeasured" = "Hur utrymmet fördelas visas här efter den första mätningen.";
@@ -264,21 +248,14 @@
 "summaryCopies" = "Kopior av appar som macOS skapar vid kontroll räknas för %@.";
 "summaryApps" = "%@ appar har inte öppnats på ett tag.";
 "summaryFreed" = "Hittills har appen frigjort %@.";
-"readAloud" = "Läs upp";
-"stopReading" = "Sluta läsa upp";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "Hur stora är dina filer?";
-"sizeClassesCaption" = "Hur mycket plats varje storleksklass tar och hur många filer som finns i den. Några få stora filer tar oftast mer plats än många små.";
 "historyTitle" = "Historik";
 "historyCaption" = "Använt utrymme efter varje fullständig mätning.";
 "historyAfterNextScan" = "Historiken visas efter nästa fullständiga mätning.";
 "grownSince" = "Vuxit sedan %@";
 "grownBy" = "+%@";
 "nothingGrown" = "Ingen mapp har vuxit med mer än %@.";
-"bucketValue" = "%@
-%@ filer";
-"settingsSystemNote" = "Utseende och enheter kommer från Systeminställningar.";
 "appLanguage" = "Språk";
 "languageLikeMac" = "Samma som på Mac";
 "languageRestartHint" = "Det nya språket visas efter en omstart.";

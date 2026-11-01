@@ -56,7 +56,8 @@ private struct FolderView: View {
     }
 
     private var subtitle: String {
-        node.isVirtual
+        _ = model.revision  // the rings do not read the entries, so the total follows the scan here
+        return node.isVirtual
             ? TextKey.measuredTotal.translated(with: Format.bytes(node.bytes))
             : Format.joined(Format.bytes(node.bytes), Paths.displayName(node.path))
     }

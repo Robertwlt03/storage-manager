@@ -8,7 +8,10 @@ struct VolumeView: View {
     private var volume: VolumeInformation? { model.volumes.first { volume in volume.path == path } }
 
     var body: some View {
-        if let volume {
+        // The startup disk is the Overview's; an external one can be measured and explored here.
+        if let volume, volume.isRoot {
+            UI.Page(.volume(path), title: volume.name) { volumeCard(volume) }
+        } else if let volume {
             UI.Page(
                 .volume(path), title: volume.name, options: { primaryAction(volume) },
                 { volumeCard(volume) })
@@ -19,11 +22,7 @@ struct VolumeView: View {
     }
 
     private func volumeCard(_ volume: VolumeInformation) -> some View {
-        UI.Card {
-            UI.VolumeSummary(volume, segments: segments(of: volume))
-            Divider()
-            UI.Fields(fields(of: volume))
-        }
+        UI.Card { UI.VolumeSummary(volume, segments: segments(of: volume)) }
     }
 
     /// Used space without what macOS can purge on demand.
@@ -42,21 +41,8 @@ struct VolumeView: View {
         ]
     }
 
-    private func fields(of volume: VolumeInformation) -> [UI.Field?] {
-        [
-            UI.Field(.capacity, Format.bytes(volume.totalBytes)),
-            UI.Field(.used, Format.bytes(usedBytes(of: volume))),
-            UI.Field(.purgeable, Format.bytes(volume.purgeableBytes)),
-            UI.Field(.freeSpace, Format.bytes(volume.freeBytes)),
-            UI.Field(.available, Format.bytes(volume.availableBytes)),
-            UI.Field(.kind, volume.format),
-        ]
-    }
-
     @ViewBuilder private func primaryAction(_ volume: VolumeInformation) -> some View {
-        if volume.isRoot {
-            UI.ActionButton(TextKey.toOverview.translated) { model.pane = .overview }
-        } else if let node = model.root.descendant(at: volume.path) {
+        if let node = model.root.descendant(at: volume.path) {
             UI.ActionButton(TextKey.exploreContents.translated) { model.open(node) }
         } else {
             UI.ActionButton(TextKey.scanAndExplore.translated, .primary) {

@@ -20,7 +20,7 @@ struct ModelTests {
         let limit = Int64(Double(total) * LowSpace.warningShare)
         func volume(available: Int64, total: Int64 = total) -> VolumeInformation {
             VolumeInformation(
-                path: "/", name: "Disk", format: "APFS", totalBytes: total, freeBytes: available,
+                path: "/", name: "Disk", totalBytes: total, freeBytes: available,
                 availableBytes: available, isInternal: true, isRoot: true)
         }
         #expect(volume(available: limit - 1).isLow)
@@ -33,7 +33,7 @@ struct ModelTests {
     @Test("Used and purgeable space never become negative")
     func volumeSpace() {
         let volume = VolumeInformation(
-            path: "/", name: "Disk", format: "APFS", totalBytes: 10 * Self.gigabyte,
+            path: "/", name: "Disk", totalBytes: 10 * Self.gigabyte,
             freeBytes: 12 * Self.gigabyte, availableBytes: 11 * Self.gigabyte,
             isInternal: true, isRoot: true)
         #expect(volume.usedBytes == 0)

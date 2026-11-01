@@ -57,7 +57,6 @@ enum Layout {
     static let folderListHeight: CGFloat = 90
     static let placeholderHeight: CGFloat = 320
     static let gridTileSize: CGFloat = 170
-    static let legendMaximumEntries = 6
     static let legendColumns = 2
     static let chartHeight: CGFloat = 220
     static let popoverWidth: CGFloat = 340
@@ -91,7 +90,6 @@ nonisolated enum Symbols {
     static let list = "list.bullet"
     static let grid = "square.grid.2x2"
     static let files = "doc.on.doc"
-    static let summary = "text.bubble"
     static let sidebar = "sidebar.left"
     static let explorer = "folder"
     static let largeFiles = "doc.viewfinder"

@@ -11,7 +11,7 @@ enum Pane: Hashable {
     static let everyPage = main + tidy + advanced
 
     var supportsGrid: Bool {
-        [.overview, .explorer, .largeFiles, .apps].contains(self)
+        [.explorer, .largeFiles, .apps].contains(self)
     }
     /// Only Folders can show its contents as rings.
     var supportsRings: Bool { self == .explorer }

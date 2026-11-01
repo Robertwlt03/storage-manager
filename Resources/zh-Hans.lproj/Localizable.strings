@@ -20,10 +20,6 @@
 "notMeasuredDetail" = "一次扫描即可测量所有区域，之后每次点按都会立即显示。";
 "scanningTitle" = "正在扫描…";
 "scanningDetail" = "第一个区域完成后，结果就会显示。";
-"loadingSummaryTitle" = "正在撰写摘要…";
-"loadingSummaryDetail" = "所有区域测量完成后，这里会用几句话说明你的存储空间情况。";
-"loadingSizesTitle" = "正在按大小统计文件…";
-"loadingSizesDetail" = "所有区域测量完成后，图表就会显示。";
 "loadingAppsTitle" = "正在检查应用…";
 "loadingAppsDetail" = "扫描完成后，大小和上次使用时间才会确定。";
 "showSidebar" = "显示边栏";
@@ -88,8 +84,6 @@
 "filesTotal" = "%@ 个文件 · 共 %@";
 
 /* Temporary area */
-"location" = "位置";
-"total" = "总计";
 "subfolders" = "子文件夹";
 "viewCopies" = "查看 App 副本…";
 "temporaryFolderT" = "临时文件";
@@ -127,11 +121,8 @@
 "deleteMessage" = "这些副本不会进入废纸篓。需要时，macOS 会重新创建。";
 
 /* Volumes */
-"capacity" = "容量";
 "used" = "已使用";
 "purgeable" = "可由 macOS 清除";
-"available" = "可用";
-"toOverview" = "前往概览";
 "exploreContents" = "浏览内容";
 "scanAndExplore" = "扫描并浏览";
 "volumeGone" = "宗卷已断开连接";
@@ -183,7 +174,6 @@
 "layoutSwitch" = "显示方式";
 "settings" = "设置";
 "emptyFolder" = "此文件夹为空";
-"otherCategories" = "其他";
 "cleanCaches" = "App 缓存";
 "cleanCachesDetail" = "App 仅为了更快启动而保存的文件。App 会在需要时重新创建它们；已打开的 App 不受影响。";
 "cleanDeveloper" = "编程工具的残留文件";
@@ -193,9 +183,9 @@
 "cleanTemporary" = "旧临时文件";
 "cleanTemporaryDetail" = "App 只为某项任务短暂需要、并且至少三天没有再动过的文件。";
 "cleanTrash" = "废纸篓";
-"cleanTrashDetail" = "清倒废纸篓。里面的内容之后将永久消失。默认不选中。";
+"cleanTrashDetail" = "清倒废纸篓。里面的内容之后将永久消失。";
 "cleanInstallers" = "旧安装程序";
-"cleanInstallersDetail" = "“下载”中超过一个月的安装文件。已安装的 App 本身不受影响。默认不选中。";
+"cleanInstallersDetail" = "“下载”中超过一个月的安装文件。已安装的 App 本身不受影响。";
 "cleanFailed" = "有 %@ 个项目无法移除，因为它们正在使用中或受到保护。";
 "cleanNothingLeft" = "一切都很干净：目前没有需要清理的内容。";
 "cleaning" = "正在清理…";
@@ -213,11 +203,6 @@
 "moveToTrash" = "移到废纸篓";
 "lastOpened" = "上次打开时间：%@";
 "trashAppFailed" = "无法移动“%@”。在访达中，输入你的密码即可移动。";
-"bucketUnder1MB" = "小于 1 MB";
-"bucketTo10MB" = "1–10 MB";
-"bucketTo100MB" = "10–100 MB";
-"bucketTo1GB" = "100 MB–1 GB";
-"bucketOver1GB" = "大于 1 GB";
 
 /* Scan progress and empty values */
 "scanningPercent" = "已扫描 %@";
@@ -256,7 +241,6 @@
 "scanArea" = "区域";
 "scanFinished" = "扫描时间";
 "accessMissingShort" = "未授权";
-"summaryTitle" = "简要说明";
 "summaryDisk" = "在“%@”上，已使用 %@（共 %@），可用 %@。";
 "summaryTop" = "占用空间最多的是 %@（%@）和 %@（%@）。";
 "summaryNotMeasured" = "空间的分配情况会在首次扫描后显示在这里。";
@@ -264,21 +248,14 @@
 "summaryCopies" = "macOS 在检查时创建的 App 副本计为 %@。";
 "summaryApps" = "有 %@ 个 App 已有一段时间没有打开。";
 "summaryFreed" = "到目前为止，此应用已释放 %@。";
-"readAloud" = "朗读";
-"stopReading" = "停止朗读";
 
 /* Statistics in plain words */
-"sizeClassesTitle" = "你的文件有多大？";
-"sizeClassesCaption" = "每个大小区间占用多少空间，其中有多少个文件。通常，少数大文件比许多小文件占用的空间更多。";
 "historyTitle" = "历史";
 "historyCaption" = "每次完整扫描后的已用空间。";
 "historyAfterNextScan" = "下次完整扫描后会显示历史。";
 "grownSince" = "自 %@ 以来增长";
 "grownBy" = "+%@";
 "nothingGrown" = "没有文件夹增长超过 %@。";
-"bucketValue" = "%@
-%@ 个文件";
-"settingsSystemNote" = "外观和单位来自“系统设置”。";
 "appLanguage" = "语言";
 "languageLikeMac" = "与 Mac 相同";
 "languageRestartHint" = "新语言将在重新启动后显示。";
