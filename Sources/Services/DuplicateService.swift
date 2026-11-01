@@ -21,6 +21,12 @@ nonisolated enum DuplicateService {
     }
 
     /// What keeping one file of each group and removing the others would free.
+    /// The groups once a file is gone; a group with a single file left is no duplicate any more.
+    static func without(_ path: String, in groups: [[Entry]]) -> [[Entry]] {
+        groups.map { group in group.filter { file in file.path != path } }
+            .filter { group in group.count > 1 }
+    }
+
     static func spareBytes(_ groups: [[Entry]]) -> Int64 {
         groups.reduce(0) { total, group in total + group[0].bytes * Int64(group.count - 1) }
     }

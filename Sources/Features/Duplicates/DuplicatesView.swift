@@ -71,13 +71,16 @@ struct DuplicatesView: View {
                 Text(file.location).textRole(.hint).lineLimit(1).truncationMode(.middle)
             }
             Spacer(minLength: Space.item)
-            if let path = file.path { finderButton(path) }
+            if file.path != nil { trashButton(file) }
         }
         .contentShape(Rectangle())
         .contextMenu { EntryMenu(entry: file, informationEntry: $informationEntry) }
     }
 
-    private func finderButton(_ path: String) -> some View {
-        UI.ActionButton(TextKey.showInFinder.translated, .inline) { FinderService.reveal(path) }
+    /// Every copy can go; the group leaves the page once a single file is left.
+    private func trashButton(_ file: Entry) -> some View {
+        UI.ActionButton(TextKey.moveToTrash.translated, .inline, role: .destructive) {
+            model.fileToTrash = file
+        }
     }
 }

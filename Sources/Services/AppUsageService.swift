@@ -35,11 +35,6 @@ nonisolated enum AppUsageService {
         return CopyService.isRunning(bundleID)
     }
 
-    /// Moves the app to the Trash (it can be put back from there).
-    static func moveToTrash(_ app: AppUsage) throws {
-        try FileManager.default.trashItem(at: URL(fileURLWithPath: app.path), resultingItemURL: nil)
-    }
-
     private static func appPaths() -> [String] {
         folders.flatMap(appPaths(in:))
     }

@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Îți folosești toate aplicațiile în mod regulat. Nu e nimic de curățat aici.";
 "unusedSince" = "Nedeschise de";
 "daysOption" = "mai mult de %@ zile";
-"trashAppTitle" = "Muți „%@” în Coș?";
+"trashTitle" = "Muți „%@” în Coș?";
 "trashAppMessage" = "Poți restaura aplicația din Coș până când îl golești.";
+"trashFileMessage" = "Poți recupera fișierul din Coș până îl golești.";
 "moveToTrash" = "Mută în Coș";
 "lastOpened" = "Deschisă ultima dată pe %@";
-"trashAppFailed" = "„%@” nu a putut fi mutată. În Finder funcționează cu parola ta.";
+"trashFailed" = "„%@” nu a putut fi mutată. În Finder funcționează cu parola ta.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ scanat";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS creează această zonă pentru fiecare utilizator în /private/var/folders. Este ascunsă în Finder și nu este detaliată în „Gestionează spațiul de stocare”.";
 "infoCopies" = "La verificarea unei semnături, macOS plasează uneori copii complete ale unei aplicații în dosarul X. Nu sunt programe separate; macOS creează una nouă la nevoie. Ștergerea lor este sigură cât timp aplicația este închisă.";
 "paneDuplicates" = "Duplicate";
-"infoDuplicates" = "Fișiere mari de la 10 MB care există de mai multe ori cu același conținut. Fișierele de aceeași dimensiune sunt comparate după conținut. Aici nu se șterge nimic; „Afișează în Finder” duce la ele.";
+"infoDuplicates" = "Fișiere mari de la 10 MB care există de mai multe ori cu același conținut. Fișierele de aceeași mărime sunt comparate după conținut. Când rămâne o singură copie, fișierul dispare din această listă.";
 "noDuplicates" = "Niciun fișier dublat";
 "duplicateGroupTitle" = "Aceste fișiere (%@) sunt identice – %@ în copii în plus";
 "noDuplicatesDetail" = "Niciun fișier mare nu este salvat de două ori pe Mac-ul tău. Nu ai nimic de făcut aici.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Capacitatea acestui volum: ce este utilizat, ce poate elibera macOS singur la nevoie și ce este liber. Volumele externe pot fi măsurate aici.";
 "guideOverview" = "Vezi dintr-o privire ce îți ocupă spațiul de stocare și cât spațiu mai este liber.";
 "guideExplorer" = "Cele mai mari dosare sunt primele. Deschide un dosar ca să vezi ce conține.";
-"guideLargeFiles" = "Cele mai mari fișiere de pe Mac-ul tău. Pe cele de care nu mai ai nevoie afișează-le în Finder și șterge-le acolo.";
+"guideLargeFiles" = "Cele mai mari fișiere de pe Mac. Ce nu-ți mai trebuie muți în Coș cu un clic dreapta.";
 "guideCleaner" = "Fișiere de care Mac-ul tău nu are nevoie. Alege ce poate pleca și fă curat cu un singur clic.";
-"guideDuplicates" = "Aceste fișiere există de mai multe ori, cu același conținut. Păstrează câte unul și șterge-le pe celelalte în Finder.";
+"guideDuplicates" = "Aceste fișiere există de mai multe ori cu același conținut. Păstrează câte unul și mută-le pe celelalte în Coș.";
 "guideApps" = "Aplicații pe care nu le-ai mai deschis de mult. Pe cele de care nu mai ai nevoie mută-le în Coș.";
 "guideTemporaryFiles" = "Un loc ascuns în care macOS păstrează fișiere pentru scurt timp. De obicei se golește singur; merită să ștergi tu doar copiile de aplicații rămase.";
 "guideCopies" = "Când macOS verifică o aplicație, uneori rămân în urmă copii ale ei. După ce aplicația este închisă, le poți șterge fără grijă.";

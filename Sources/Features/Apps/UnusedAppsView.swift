@@ -14,7 +14,7 @@ struct UnusedAppsView: View {
     var body: some View {
         UI.Page(.apps, options: { unusedSincePicker }, content)
             .confirmRemoval(
-                TextKey.trashAppTitle.translated(with: appToTrash?.name ?? ""),
+                TextKey.trashTitle.translated(with: appToTrash?.name ?? ""),
                 item: $appToTrash, button: .moveToTrash, message: .trashAppMessage,
                 action: moveToTrash
             )
@@ -94,8 +94,8 @@ struct UnusedAppsView: View {
 
     private func moveToTrash(_ app: AppUsage) {
         errorMessage = nil
-        do { try model.moveToTrash(app) } catch {
-            errorMessage = TextKey.trashAppFailed.translated(with: app.name)
+        do { try model.moveToTrash(app.path) } catch {
+            errorMessage = TextKey.trashFailed.translated(with: app.name)
         }
         appToTrash = nil
     }

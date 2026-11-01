@@ -20,6 +20,7 @@ import WidgetKit
     var isSearchPresented = false
     var searchScope = SearchScope.all
     var isShowingAccessSheet = false
+    var fileToTrash: Entry?  // waits for the user's answer, see `FileTrash`
     var sidebar = SidebarState()
 
     let root = Node.virtualRoot()
@@ -224,13 +225,6 @@ import WidgetKit
 extension AppModel {
     // MARK: Changes
 
-    /// The versions and sizes of an app's copies, read in the background. The demo's copies exist
-    /// only in the made-up tree, so their details are made up too.
-    func copyDetails(of group: CopyGroup) async -> CopyDetails {
-        if isDemo { return DemoData.copyDetails() }
-        return await Task.detached(priority: .utility) { CopyService.details(group) }.value
-    }
-
     /// Spotlight and the apps' bundles are read in the background; the sizes come from the tree.
     func refreshApps() {
         guard !isDemo else { return }
@@ -308,12 +302,23 @@ extension AppModel {
         }
     }
 
-    func moveToTrash(_ app: AppUsage) throws {
-        guard !isDemo else { return }
-        try AppUsageService.moveToTrash(app)
-        root.descendant(at: app.path)?.detach()
+    /// Moves an app, folder or file to the Trash after the user confirmed, and takes it out of the
+    /// tree, the apps and the duplicates, which stay searched. One already gone counts as moved;
+    /// the demo's made-up files only leave the tree.
+    func moveToTrash(_ path: String) throws {
+        do {
+            if !isDemo { try CleanerService.moveToTrash(path) }
+        } catch CocoaError.fileNoSuchFile {}
+        if let folder = root.descendant(at: path) {
+            folder.detach()
+        } else {
+            root.descendant(at: (path as NSString).deletingLastPathComponent)?.removeFile(path)
+        }
+        let wereSearched = duplicatesRevision == revision
+        let groups = duplicateGroups.map { groups in DuplicateService.without(path, in: groups) }
         treeChanged()
-        Motion.animate { apps.removeAll { listed in listed.path == app.path } }
+        if wereSearched { (duplicateGroups, duplicatesRevision) = (groups, revision) }
+        Motion.animate { apps.removeAll { listed in listed.path == path } }
     }
 
     /// Removes the chosen items, measures what really got free, then measures everything again.

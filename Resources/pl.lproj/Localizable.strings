@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Regularnie używasz wszystkich swoich aplikacji. Nie ma tu nic do sprzątania.";
 "unusedSince" = "Nie otwierano od";
 "daysOption" = "ponad %@ dni";
-"trashAppTitle" = "Przenieść „%@” do Kosza?";
+"trashTitle" = "Przenieść „%@” do Kosza?";
 "trashAppMessage" = "Aplikację możesz przywrócić z Kosza, dopóki go nie opróżnisz.";
+"trashFileMessage" = "Plik możesz przywrócić z Kosza, dopóki go nie opróżnisz.";
 "moveToTrash" = "Przenieś do Kosza";
 "lastOpened" = "Ostatnio otwarto %@";
-"trashAppFailed" = "Nie udało się przenieść „%@”. W Finderze zadziała to po podaniu hasła.";
+"trashFailed" = "Nie udało się przenieść „%@”. W Finderze zadziała to po podaniu hasła.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "Zmierzono: %@";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS tworzy ten obszar dla każdego użytkownika w /private/var/folders. Jest ukryty w Finderze i nie jest rozbijany w „Zarządzaj pamięcią”.";
 "infoCopies" = "Podczas sprawdzania podpisu macOS czasem tworzy pełne kopie aplikacji w folderze X. To nie są osobne programy; macOS tworzy nową w razie potrzeby. Usuwanie jest bezpieczne, dopóki aplikacja jest zamknięta.";
 "paneDuplicates" = "Duplikaty";
-"infoDuplicates" = "Duże pliki od 10 MB, które istnieją wielokrotnie z tą samą zawartością. Pliki tej samej wielkości są porównywane po zawartości. Nic nie jest tu usuwane; „Pokaż w Finderze” do nich prowadzi.";
+"infoDuplicates" = "Duże pliki od 10 MB, które istnieją kilka razy z tą samą zawartością. Pliki tej samej wielkości są porównywane według zawartości. Gdy zostanie tylko jedna kopia, plik znika z tej listy.";
 "noDuplicates" = "Brak zduplikowanych plików";
 "duplicateGroupTitle" = "Te pliki (%@) są identyczne – dodatkowe kopie zajmują %@";
 "noDuplicatesDetail" = "Żaden duży plik nie jest zapisany dwa razy na Twoim Macu. Nie ma tu nic do zrobienia.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Pojemność tego woluminu: co jest zajęte, co macOS może w razie potrzeby sam zwolnić i co jest wolne. Woluminy zewnętrzne można tu zmierzyć.";
 "guideOverview" = "Zobacz na pierwszy rzut oka, co zajmuje Twoją pamięć i ile miejsca jest jeszcze wolne.";
 "guideExplorer" = "Największe foldery są na górze. Otwórz folder, aby zajrzeć do środka.";
-"guideLargeFiles" = "Największe pliki na Twoim Macu. Te, których już nie potrzebujesz, pokaż w Finderze i tam je usuń.";
+"guideLargeFiles" = "Największe pliki na Twoim Macu. To, czego już nie potrzebujesz, przenieś do Kosza prawym kliknięciem.";
 "guideCleaner" = "Pliki, których Twój Mac nie potrzebuje. Wybierz, co może zniknąć, i posprzątaj jednym kliknięciem.";
-"guideDuplicates" = "Te pliki istnieją kilka razy z tą samą zawartością. Zachowaj po jednym z każdego i usuń pozostałe w Finderze.";
+"guideDuplicates" = "Te pliki istnieją kilka razy z tą samą zawartością. Zachowaj po jednym, a pozostałe przenieś do Kosza.";
 "guideApps" = "Aplikacje, które od dawna nie były otwierane. Te, których już nie potrzebujesz, przenieś do Kosza.";
 "guideTemporaryFiles" = "Ukryte miejsce, w którym macOS przechowuje pliki przez krótki czas. Zwykle opróżnia się samo; warto samodzielnie usunąć tylko pozostawione kopie aplikacji.";
 "guideCopies" = "Gdy macOS sprawdza aplikację, czasem zostają jej kopie. Gdy aplikacja jest zamknięta, możesz je bezpiecznie usunąć.";

@@ -25,6 +25,13 @@ extension AppModel {
         return min(estimate, Self.largestEstimatedFraction)
     }
 
+    /// The versions and sizes of an app's copies, read in the background. The demo's copies exist
+    /// only in the made-up tree, so their details are made up too.
+    func copyDetails(of group: CopyGroup) async -> CopyDetails {
+        if isDemo { return DemoData.copyDetails() }
+        return await Task.detached(priority: .utility) { CopyService.details(group) }.value
+    }
+
     /// What the clean-up suggestions would free; nil until they are listed.
     var cleanableBytes: Int64? { cleanItems?.reduce(0) { total, item in total + item.bytes } }
 

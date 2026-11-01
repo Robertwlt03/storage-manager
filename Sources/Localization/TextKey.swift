@@ -61,7 +61,7 @@ nonisolated enum TextKey: String, CaseIterable {
         cleanTrashDetail, cleanInstallers, cleanInstallersDetail, cleanConfirmInstallersMessage,
         cleanFailed, cleanNothingLeft, cleaning, cleanerRefresh, cleanSelected, cleanConfirmTitle,
         cleanConfirmMessage, appsNoneUnused, appsNoneUnusedDetail, unusedSince, daysOption,
-        trashAppTitle, trashAppMessage, moveToTrash, lastOpened, trashAppFailed
+        trashTitle, trashFileMessage, trashAppMessage, moveToTrash, lastOpened, trashFailed
 
     // Scan progress and empty values
     case scanningPercent, scanningArea, emptyValue

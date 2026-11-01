@@ -43,6 +43,18 @@ struct TreeTests {
         #expect(media.bytes == Self.bigFile + Self.smallFile)
     }
 
+    @Test("A file moved to the Trash leaves its folder, and every folder above shrinks")
+    func removeFile() {
+        let tree = Self.sampleTree()
+        let film = tree.media.files[0]
+        let rootBytes = tree.root.bytes
+        tree.media.removeFile(film.path)
+        #expect(tree.media.files.isEmpty)
+        #expect(tree.media.bytes == Self.smallFile)
+        #expect(tree.root.bytes == rootBytes - Self.bigFile)
+        #expect(tree.scanRoot.fileCount == tree.media.fileCount + tree.notes.fileCount)
+    }
+
     @Test("Small folders fold into their parent's row, big ones stay")
     func smallFoldersFold() {
         let tree = Self.sampleTree()

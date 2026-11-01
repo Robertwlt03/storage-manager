@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Bạn dùng tất cả ứng dụng của mình thường xuyên. Không có gì cần dọn ở đây.";
 "unusedSince" = "Không mở trong";
 "daysOption" = "hơn %@ ngày";
-"trashAppTitle" = "Chuyển “%@” vào Thùng rác?";
+"trashTitle" = "Chuyển “%@” vào Thùng rác?";
 "trashAppMessage" = "Bạn có thể khôi phục ứng dụng từ Thùng rác cho đến khi dọn sạch Thùng rác.";
+"trashFileMessage" = "Bạn có thể khôi phục tệp từ Thùng rác cho đến khi dọn sạch nó.";
 "moveToTrash" = "Chuyển vào Thùng rác";
 "lastOpened" = "Mở lần cuối ngày %@";
-"trashAppFailed" = "Không thể di chuyển “%@”. Trong Finder, bạn có thể làm việc này bằng mật khẩu của mình.";
+"trashFailed" = "Không thể di chuyển “%@”. Trong Finder, bạn có thể làm việc này bằng mật khẩu của mình.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "Đã quét %@";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS tạo vùng này cho mỗi người dùng trong /private/var/folders. Vùng này bị ẩn trong Finder và không được phân tích chi tiết trong “Quản lý dung lượng”.";
 "infoCopies" = "Khi kiểm tra chữ ký, đôi khi macOS đặt các bản sao đầy đủ của ứng dụng vào thư mục X. Đây không phải chương trình riêng; macOS sẽ tạo bản mới khi cần. Có thể xóa an toàn miễn là ứng dụng đã thoát.";
 "paneDuplicates" = "Tệp trùng lặp";
-"infoDuplicates" = "Các tệp lớn từ 10 MB tồn tại nhiều lần với cùng nội dung. Các tệp cùng kích thước được so sánh theo nội dung. Ở đây không xóa gì cả; “Hiển thị trong Finder” dẫn đến chúng.";
+"infoDuplicates" = "Tệp lớn từ 10 MB có nhiều bản với cùng nội dung. Các tệp cùng kích thước được so sánh theo nội dung. Khi chỉ còn một bản, tệp sẽ rời khỏi danh sách này.";
 "noDuplicates" = "Không có tệp trùng lặp";
 "duplicateGroupTitle" = "%@ tệp này giống hệt nhau – các bản thừa chiếm %@";
 "noDuplicatesDetail" = "Không có tệp lớn nào được lưu hai lần trên máy Mac của bạn. Không có gì cần làm ở đây.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Dung lượng của ổ đĩa này: phần đã dùng, phần macOS có thể tự giải phóng khi cần và phần còn trống. Có thể đo ổ đĩa ngoài tại đây.";
 "guideOverview" = "Xem nhanh những gì đang chiếm dung lượng của bạn và còn trống bao nhiêu.";
 "guideExplorer" = "Thư mục lớn nhất nằm ở trên cùng. Mở một thư mục để xem bên trong.";
-"guideLargeFiles" = "Các tệp lớn nhất trên máy Mac của bạn. Hiển thị những tệp bạn không cần nữa trong Finder rồi xóa ở đó.";
+"guideLargeFiles" = "Những tệp lớn nhất trên máy Mac của bạn. Thứ gì không cần nữa, hãy bấm chuột phải để chuyển vào Thùng rác.";
 "guideCleaner" = "Những tệp mà máy Mac của bạn không cần. Chọn những gì có thể bỏ đi và dọn dẹp chỉ với một cú bấm.";
-"guideDuplicates" = "Những tệp này có nhiều bản với cùng nội dung. Giữ lại một bản cho mỗi tệp và xóa các bản còn lại trong Finder.";
+"guideDuplicates" = "Những tệp này có nhiều bản với cùng nội dung. Giữ lại một bản mỗi loại và chuyển các bản khác vào Thùng rác.";
 "guideApps" = "Các ứng dụng bạn đã lâu không mở. Chuyển những ứng dụng bạn không cần nữa vào Thùng rác.";
 "guideTemporaryFiles" = "Một nơi ẩn mà macOS giữ tệp trong thời gian ngắn. Nơi này thường tự trống; chỉ các bản sao ứng dụng còn sót lại là đáng để bạn tự xóa.";
 "guideCopies" = "Khi macOS kiểm tra một ứng dụng, đôi khi còn sót lại bản sao của nó. Khi ứng dụng đã đóng, bạn có thể xóa chúng một cách an toàn.";

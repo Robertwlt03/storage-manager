@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "모든 앱을 꾸준히 사용하고 있습니다. 여기서 정리할 것은 없습니다.";
 "unusedSince" = "열지 않은 기간";
 "daysOption" = "%@일 이상";
-"trashAppTitle" = "“%@” 앱을 휴지통으로 이동하시겠습니까?";
+"trashTitle" = "“%@” 앱을 휴지통으로 이동하시겠습니까?";
 "trashAppMessage" = "휴지통을 비우기 전까지는 휴지통에서 앱을 복원할 수 있습니다.";
+"trashFileMessage" = "휴지통을 비우기 전까지 파일을 복원할 수 있습니다.";
 "moveToTrash" = "휴지통으로 이동";
 "lastOpened" = "마지막으로 연 날짜: %@";
-"trashAppFailed" = "“%@” 앱을 이동하지 못했습니다. Finder에서는 암호를 입력하면 이동할 수 있습니다.";
+"trashFailed" = "“%@” 앱을 이동하지 못했습니다. Finder에서는 암호를 입력하면 이동할 수 있습니다.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ 검사함";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS는 모든 사용자를 위해 /private/var/folders 아래에 이 영역을 만듭니다. Finder에서는 숨겨져 있으며 “저장 공간 관리”에서도 세부 내역이 표시되지 않습니다.";
 "infoCopies" = "서명을 확인할 때 macOS가 X 폴더에 앱의 전체 사본을 만들기도 합니다. 이는 별도의 프로그램이 아니며, 필요하면 macOS가 새로 만듭니다. 앱이 종료되어 있다면 삭제해도 안전합니다.";
 "paneDuplicates" = "중복 파일";
-"infoDuplicates" = "같은 내용으로 여러 번 존재하는 10MB 이상의 큰 파일입니다. 크기가 같은 파일은 내용으로 비교합니다. 여기서는 아무것도 삭제하지 않으며, ‘Finder에서 보기’로 이동할 수 있습니다.";
+"infoDuplicates" = "같은 내용으로 여러 번 존재하는 10MB 이상의 큰 파일입니다. 크기가 같은 파일은 내용으로 비교합니다. 사본이 하나만 남으면 파일이 이 목록에서 사라집니다.";
 "noDuplicates" = "중복 파일 없음";
 "duplicateGroupTitle" = "내용이 같은 파일 %@개 – 여분의 사본 %@";
 "noDuplicatesDetail" = "Mac에 두 번 저장된 큰 파일이 없습니다. 여기서 할 일은 없습니다.";
@@ -228,9 +229,9 @@
 "infoVolume" = "이 볼륨의 용량입니다. 사용 중인 공간, 필요할 때 macOS가 자동으로 확보할 수 있는 공간, 여유 공간을 보여 줍니다. 외장 볼륨도 여기에서 검사할 수 있습니다.";
 "guideOverview" = "무엇이 저장 공간을 채우고 있는지, 여유 공간이 얼마나 남았는지 한눈에 볼 수 있습니다.";
 "guideExplorer" = "가장 큰 폴더가 맨 위에 있습니다. 폴더를 열면 안을 볼 수 있습니다.";
-"guideLargeFiles" = "Mac에서 가장 큰 파일입니다. 더 이상 필요 없는 파일은 Finder에서 보고 그곳에서 삭제하십시오.";
+"guideLargeFiles" = "Mac에서 가장 큰 파일입니다. 더 이상 필요 없는 파일은 오른쪽 클릭으로 휴지통에 넣으세요.";
 "guideCleaner" = "Mac에 필요 없는 파일입니다. 지워도 되는 항목을 선택하고 클릭 한 번으로 정리하십시오.";
-"guideDuplicates" = "내용이 같은 파일이 여러 개 있습니다. 각각 하나만 남기고 나머지는 Finder에서 삭제하십시오.";
+"guideDuplicates" = "이 파일들은 같은 내용으로 여러 번 존재합니다. 각각 하나만 남기고 나머지는 휴지통에 넣으세요.";
 "guideApps" = "오랫동안 열지 않은 앱입니다. 더 이상 필요 없는 앱은 휴지통으로 옮기십시오.";
 "guideTemporaryFiles" = "macOS가 파일을 잠시 보관하는 숨겨진 곳입니다. 대부분 저절로 비워지며, 직접 삭제할 만한 것은 남은 앱 사본뿐입니다.";
 "guideCopies" = "macOS가 앱을 확인할 때 앱의 사본이 남는 경우가 있습니다. 앱이 종료되어 있으면 안전하게 삭제할 수 있습니다.";

@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Všechny své aplikace používáte pravidelně. Tady není co uklízet.";
 "unusedSince" = "Neotevřeno po dobu";
 "daysOption" = "více než %@ dní";
-"trashAppTitle" = "Přesunout „%@“ do Koše?";
+"trashTitle" = "Přesunout „%@“ do Koše?";
 "trashAppMessage" = "Dokud Koš nevysypete, můžete aplikaci z Koše obnovit.";
+"trashFileMessage" = "Soubor můžeš obnovit z Koše, dokud ho nevysypeš.";
 "moveToTrash" = "Přesunout do Koše";
 "lastOpened" = "Naposledy otevřeno %@";
-"trashAppFailed" = "Aplikaci „%@“ se nepodařilo přesunout. Ve Finderu to půjde po zadání hesla.";
+"trashFailed" = "Aplikaci „%@“ se nepodařilo přesunout. Ve Finderu to půjde po zadání hesla.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "Naskenováno: %@";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS tuto oblast vytváří pro každého uživatele v /private/var/folders. Ve Finderu je skrytá a v části „Spravovat úložiště“ se nerozepisuje.";
 "infoCopies" = "Při kontrole podpisu macOS někdy vytvoří úplné kopie aplikace ve složce X. Nejde o samostatné programy; macOS v případě potřeby vytvoří novou. Smazání je bezpečné, dokud je aplikace ukončená.";
 "paneDuplicates" = "Duplikáty";
-"infoDuplicates" = "Velké soubory od 10 MB, které existují vícekrát se stejným obsahem. Soubory stejné velikosti se porovnají podle obsahu. Nic se tu neodstraňuje; „Zobrazit ve Finderu“ k nim vede.";
+"infoDuplicates" = "Velké soubory od 10 MB, které existují víckrát se stejným obsahem. Soubory stejné velikosti se porovnávají podle obsahu. Jakmile zbude jen jedna kopie, soubor z tohoto seznamu zmizí.";
 "noDuplicates" = "Žádné duplicitní soubory";
 "duplicateGroupTitle" = "Shodné soubory: %@ – kopie navíc zabírají %@";
 "noDuplicatesDetail" = "Na vašem Macu není žádný velký soubor uložen dvakrát. Tady není co dělat.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Kapacita tohoto svazku: co je využito, co může macOS v případě potřeby uvolnit sám a co je volné. Externí svazky lze naskenovat tady.";
 "guideOverview" = "Na první pohled uvidíte, co zaplňuje vaše úložiště a kolik místa je ještě volné.";
 "guideExplorer" = "Největší složky jsou nahoře. Otevřete složku a podívejte se dovnitř.";
-"guideLargeFiles" = "Největší soubory na vašem Macu. Ty, které už nepotřebujete, zobrazte ve Finderu a tam je smažte.";
+"guideLargeFiles" = "Největší soubory na tvém Macu. Co už nepotřebuješ, přesuneš pravým kliknutím do Koše.";
 "guideCleaner" = "Soubory, které váš Mac nepotřebuje. Vyberte, co může pryč, a ukliďte jedním kliknutím.";
-"guideDuplicates" = "Tyto soubory jsou tu vícekrát se stejným obsahem. Od každého si jeden nechte a ostatní smažte ve Finderu.";
+"guideDuplicates" = "Tyto soubory existují víckrát se stejným obsahem. Z každého si nech jeden a ostatní přesuň do Koše.";
 "guideApps" = "Aplikace, které jste dlouho neotevřeli. Ty, které už nepotřebujete, přesuňte do Koše.";
 "guideTemporaryFiles" = "Skryté místo, kde macOS na krátkou dobu ukládá soubory. Většinou se vyprázdní samo; smazat sami se vyplatí jen zbylé kopie aplikací.";
 "guideCopies" = "Když macOS kontroluje aplikaci, občas po ní zůstanou kopie. Jakmile je aplikace zavřená, můžete je bez obav smazat.";

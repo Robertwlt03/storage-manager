@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "你经常使用所有 App。这里没有需要整理的内容。";
 "unusedSince" = "未打开时间";
 "daysOption" = "超过 %@ 天";
-"trashAppTitle" = "要将“%@”移到废纸篓吗？";
+"trashTitle" = "要将“%@”移到废纸篓吗？";
 "trashAppMessage" = "在清倒废纸篓之前，你可以从废纸篓中还原此 App。";
+"trashFileMessage" = "在清倒废纸篓之前，你可以从中恢复该文件。";
 "moveToTrash" = "移到废纸篓";
 "lastOpened" = "上次打开时间：%@";
-"trashAppFailed" = "无法移动“%@”。在访达中，输入你的密码即可移动。";
+"trashFailed" = "无法移动“%@”。在访达中，输入你的密码即可移动。";
 
 /* Scan progress and empty values */
 "scanningPercent" = "已扫描 %@";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS 会在 /private/var/folders 下为每位用户创建此区域。它在访达中是隐藏的，在“管理存储空间”中也不会细分显示。";
 "infoCopies" = "在检查签名时，macOS 有时会在文件夹 X 中创建 App 的完整副本。它们不是独立的程序；需要时 macOS 会重新创建。只要 App 已退出，就可以放心删除。";
 "paneDuplicates" = "重复文件";
-"infoDuplicates" = "内容相同且多次出现的 10 MB 以上大文件。大小相同的文件会按内容比较。这里不会删除任何内容；“在访达中显示”可以找到它们。";
+"infoDuplicates" = "以相同内容存在多份的 10 MB 以上大文件。大小相同的文件会按内容比较。只剩一份时，该文件会从此列表中消失。";
 "noDuplicates" = "没有重复文件";
 "duplicateGroupTitle" = "这 %@ 个文件完全相同 – 多余的副本占用 %@";
 "noDuplicatesDetail" = "你的 Mac 上没有存了两份的大文件。这里无需任何操作。";
@@ -228,9 +229,9 @@
 "infoVolume" = "此宗卷的容量：已使用的空间、macOS 需要时可自行释放的空间，以及可用空间。外置宗卷可以在这里测量。";
 "guideOverview" = "一眼看清是什么占用了你的存储空间，以及还剩多少可用空间。";
 "guideExplorer" = "最大的文件夹排在最前面。打开文件夹即可查看里面的内容。";
-"guideLargeFiles" = "你的 Mac 上最大的文件。把不再需要的文件在访达中显示，然后在那里删除。";
+"guideLargeFiles" = "你 Mac 上最大的文件。不再需要的文件，右键点按即可移到废纸篓。";
 "guideCleaner" = "你的 Mac 不需要的文件。选择可以删除的内容，一键清理。";
-"guideDuplicates" = "这些文件内容相同，存了不止一份。每组保留一个，在访达中删除其余的。";
+"guideDuplicates" = "这些文件以相同内容存在多份。每组保留一份，其余移到废纸篓。";
 "guideApps" = "你很久没有打开过的 App。把不再需要的移到废纸篓。";
 "guideTemporaryFiles" = "macOS 短暂存放文件的隐藏位置。它通常会自动清空；只有遗留的 App 副本值得你自己删除。";
 "guideCopies" = "macOS 检查 App 时，有时会留下它的副本。App 关闭后，你可以放心删除这些副本。";

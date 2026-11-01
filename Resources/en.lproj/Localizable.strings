@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "You use all your apps regularly. There is nothing to tidy up here.";
 "unusedSince" = "Not opened for";
 "daysOption" = "more than %@ days";
-"trashAppTitle" = "Move “%@” to the Trash?";
+"trashTitle" = "Move “%@” to the Trash?";
 "trashAppMessage" = "You can restore the app from the Trash until you empty it.";
+"trashFileMessage" = "You can restore the file from the Trash until you empty it.";
 "moveToTrash" = "Move to Trash";
 "lastOpened" = "Last opened on %@";
-"trashAppFailed" = "“%@” could not be moved. In Finder it works with your password.";
+"trashFailed" = "“%@” could not be moved. In Finder it works with your password.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ scanned";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "macOS creates this area for every user under /private/var/folders. It is hidden in Finder and not broken down in “Manage Storage”.";
 "infoCopies" = "While checking a signature, macOS sometimes places complete copies of an app in folder X. They are not separate programs; macOS creates a new one when needed. Deleting them is safe as long as the app is quit.";
 "paneDuplicates" = "Duplicates";
-"infoDuplicates" = "Large files from 10 MB that exist more than once with the same content. Files of the same size are compared by their content. Nothing is removed here; Show in Finder leads to them.";
+"infoDuplicates" = "Large files from 10 MB that exist more than once with the same content. Files of the same size are compared by their content. Once only one copy is left, the file leaves this list.";
 "noDuplicates" = "No Duplicate Files";
 "duplicateGroupTitle" = "These %@ files are identical – %@ in extra copies";
 "noDuplicatesDetail" = "No large file is stored twice on your Mac. There is nothing to do here.";
@@ -228,9 +229,9 @@
 "infoVolume" = "Capacity of this volume: what is used, what macOS can free by itself when needed and what is free. External volumes can be measured here.";
 "guideOverview" = "See at a glance what fills your storage and how much space is still free.";
 "guideExplorer" = "The biggest folders come first. Open a folder to look inside.";
-"guideLargeFiles" = "The biggest files on your Mac. Show the ones you no longer need in Finder and delete them there.";
+"guideLargeFiles" = "The biggest files on your Mac. Move what you no longer need to the Trash with a right-click.";
 "guideCleaner" = "Files your Mac does not need. Choose what may go and clean up with one click.";
-"guideDuplicates" = "These files exist more than once with the same content. Keep one of each and delete the others in Finder.";
+"guideDuplicates" = "These files exist more than once with the same content. Keep one of each and move the others to the Trash.";
 "guideApps" = "Apps you have not opened in a long time. Move the ones you no longer need to the Trash.";
 "guideTemporaryFiles" = "A hidden place where macOS keeps files for a short time. It mostly empties itself; only leftover app copies are worth deleting yourself.";
 "guideCopies" = "When macOS checks an app, it sometimes leaves copies of it behind. Once the app is closed, you can delete them safely.";

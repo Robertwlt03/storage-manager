@@ -4,6 +4,11 @@ import AppKit
 /// installers) or already thrown away (Trash). Caches of running apps and of macOS itself are left
 /// alone.
 nonisolated enum CleanerService {
+    /// Moves a file, folder or app to the Trash, from where it can be put back.
+    static func moveToTrash(_ path: String) throws {
+        try FileManager.default.trashItem(at: URL(fileURLWithPath: path), resultingItemURL: nil)
+    }
+
     private static let cachesFolder = Paths.home + "/Library/Caches"
     private static let logsFolder = Paths.home + "/Library/Logs"
     private static let trashFolder = Paths.home + "/.Trash"

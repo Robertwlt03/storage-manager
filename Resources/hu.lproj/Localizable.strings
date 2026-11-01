@@ -198,11 +198,12 @@
 "appsNoneUnusedDetail" = "Minden appodat rendszeresen használod. Itt nincs mit rendbe tenni.";
 "unusedSince" = "Nem volt megnyitva";
 "daysOption" = "több mint %@ napja";
-"trashAppTitle" = "„%@” áthelyezése a Kukába?";
+"trashTitle" = "„%@” áthelyezése a Kukába?";
 "trashAppMessage" = "Az appot visszaállíthatod a Kukából, amíg ki nem üríted.";
+"trashFileMessage" = "A fájlt visszaállíthatod a Kukából, amíg ki nem üríted.";
 "moveToTrash" = "Áthelyezés a Kukába";
 "lastOpened" = "Utoljára megnyitva: %@";
-"trashAppFailed" = "„%@” nem helyezhető át. A Finderben a jelszavaddal sikerül.";
+"trashFailed" = "„%@” nem helyezhető át. A Finderben a jelszavaddal sikerül.";
 
 /* Scan progress and empty values */
 "scanningPercent" = "%@ felmérve";
@@ -218,7 +219,7 @@
 "infoTemporaryFiles" = "A macOS ezt a területet minden felhasználónak a /private/var/folders alatt hozza létre. A Finderben rejtett, és a „Tárhely kezelése” sem bontja le.";
 "infoCopies" = "Az aláírás ellenőrzésekor a macOS néha egy app teljes másolatait helyezi az X mappába. Ezek nem különálló programok; a macOS szükség esetén újat készít. Törlésük biztonságos, amíg az app nem fut.";
 "paneDuplicates" = "Ismétlődések";
-"infoDuplicates" = "10 MB-nál nagyobb fájlok, amelyek azonos tartalommal többször is megvannak. Az azonos méretű fájlokat a tartalmuk alapján hasonlítja össze. Itt semmi sem törlődik; a „Megjelenítés a Finderben” elvezet hozzájuk.";
+"infoDuplicates" = "10 MB-nál nagyobb fájlok, amelyek azonos tartalommal többször is megvannak. Az azonos méretű fájlokat a tartalmuk alapján hasonlítja össze. Ha már csak egy példány maradt, a fájl eltűnik erről a listáról.";
 "noDuplicates" = "Nincsenek ismétlődő fájlok";
 "duplicateGroupTitle" = "%@ egyforma fájl – %@ fölösleges másolatokban";
 "noDuplicatesDetail" = "Egyetlen nagy fájl sincs kétszer a Maceden. Itt nincs semmi teendőd.";
@@ -228,9 +229,9 @@
 "infoVolume" = "A kötet kapacitása: mennyi foglalt, mennyit tud a macOS szükség esetén magától felszabadítani, és mennyi szabad. A külső kötetek itt felmérhetők.";
 "guideOverview" = "Egy pillantással láthatod, mi tölti meg a tárhelyedet, és mennyi hely szabad még.";
 "guideExplorer" = "A legnagyobb mappák vannak legfelül. Nyiss meg egy mappát, hogy belenézz.";
-"guideLargeFiles" = "A legnagyobb fájlok a Maceden. Amire már nincs szükséged, azt jelenítsd meg a Finderben, és ott töröld.";
+"guideLargeFiles" = "A Maced legnagyobb fájljai. Amire már nincs szükséged, jobb kattintással a Kukába teheted.";
 "guideCleaner" = "Fájlok, amelyekre a Macednek nincs szüksége. Válaszd ki, mi mehet, és takaríts egy kattintással.";
-"guideDuplicates" = "Ezek a fájlok többször is megvannak, ugyanazzal a tartalommal. Mindegyikből tarts meg egyet, a többit pedig töröld a Finderben.";
+"guideDuplicates" = "Ezek a fájlok többször is megvannak azonos tartalommal. Mindegyikből tarts meg egyet, a többit tedd a Kukába.";
 "guideApps" = "Appok, amelyeket régóta nem nyitottál meg. Amelyekre már nincs szükséged, azokat tedd a Kukába.";
 "guideTemporaryFiles" = "Egy rejtett hely, ahol a macOS rövid ideig fájlokat tárol. Többnyire magától kiürül; csak a hátramaradt appmásolatokat érdemes magadnak törölnöd.";
 "guideCopies" = "Amikor a macOS ellenőriz egy appot, néha másolatokat hagy hátra belőle. Ha az app be van zárva, nyugodtan törölheted őket.";
