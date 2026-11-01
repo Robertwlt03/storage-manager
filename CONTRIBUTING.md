@@ -66,6 +66,11 @@ start them with a newer one, such as `python3.14 scripts/check.py tests`.
 A single command builds the app and launches it. `make run` puts it in the `build` folder, quits an app that is
 already open and then opens the new one.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/pictures/terminal-develop-dark.svg">
+  <img src="assets/pictures/terminal-develop-light.svg" alt="make run builds and opens the app; make check runs every check and ends with all steps passed" width="100%">
+</picture>
+
 ```bash
 make run
 ```
@@ -238,6 +243,6 @@ We treat each other kindly and respectfully. The details are in the [code of con
 
 <p align="center">
   <b>Storage Manager · See at a glance where your storage goes.</b><br>
-  <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
+  <sub><a href="README.md">Overview</a> · <a href="CONTRIBUTING.md">Contributing</a> · <a href="ARCHITECTURE.md">Architecture</a> · <a href="CODE_STYLE.md">Code rules</a> · <a href="docs/pictures/README.md">Pictures</a> · <a href="CODE_OF_CONDUCT.md">Code of conduct</a> · <a href="CLAUDE.md">Working with Claude</a></sub><br>
   <sub>© 2026 Robertwlt03 · Released under the <a href="LICENSE">MIT license</a> · For macOS 27 on Macs with Apple silicon</sub>
 </p>

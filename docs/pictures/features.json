@@ -4,55 +4,46 @@
   "items": [
     {
       "glyph": "overview",
-      "color": "blue",
       "title": "Overview",
       "text": "Says how much space you can free and which step to take first."
     },
     {
       "glyph": "folders",
-      "color": "sky",
       "title": "Folders",
       "text": "Every folder sorted by size, as a list, as tiles or as rings."
     },
     {
       "glyph": "search",
-      "color": "indigo",
       "title": "Large Files & Search",
       "text": "Finds big files and any name in seconds, without a new scan."
     },
     {
       "glyph": "clean",
-      "color": "purple",
       "title": "Clean Up",
       "text": "Removes caches, old logs and leftovers that macOS rebuilds anyway."
     },
     {
       "glyph": "duplicates",
-      "color": "orange",
       "title": "Duplicates",
       "text": "Spots files that exist twice and moves the extra copies to the Trash."
     },
     {
       "glyph": "clock",
-      "color": "pink",
       "title": "Unused Apps",
       "text": "Lists the apps you have not opened for months, with their size."
     },
     {
       "glyph": "menu bar",
-      "color": "teal",
       "title": "Menu bar",
       "text": "Shows the free space at a glance and warns you when it runs low."
     },
     {
       "glyph": "widget",
-      "color": "green",
       "title": "Widget",
       "text": "Keeps the free space on your desktop or in Notification Center."
     },
     {
       "glyph": "document",
-      "color": "slate",
       "title": "Report",
       "text": "Saves every category and the largest files as a text file."
     }
