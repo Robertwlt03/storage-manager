@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ tersedia dari %@";
+"availableExplained" = "Tersedia = ruang kosong + yang dapat dihapus macOS sendiri.";
 "categories" = "Kategori";
 "freeSpace" = "Kosong";
 "temporaryAreaName" = "File Sistem macOS";

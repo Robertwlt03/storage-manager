@@ -15,6 +15,8 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
     /// Smaller files and folders directly inside, folded into one row.
     private(set) var restBytes: Int64 = 0
     private(set) var restCount = 0
+    /// The heading of a group of folders that is no folder on disk, such as a category's.
+    private(set) var title: String?
 
     init(name: String, parent: Node?) {
         self.name = name
@@ -24,13 +26,16 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
     static func virtualRoot() -> Node { Node(name: "", parent: nil) }
 
     var isVirtual: Bool { parent == nil && name.isEmpty }
+    var isGroup: Bool { title != nil }
+    /// The root that lists the measured areas, not a category's group of folders.
+    var listsAreas: Bool { isVirtual && !isGroup }
     var isScanRoot: Bool { parent?.isVirtual == true }
     /// Scan roots carry their absolute path as name.
     var path: String {
         guard let parent else { return name }
         return parent.isVirtual ? name : parent.path + "/" + name
     }
-    var displayName: String { isScanRoot ? Paths.displayName(name) : name }
+    var displayName: String { title ?? (isScanRoot ? Paths.displayName(name) : name) }
 
     func child(named name: String) -> Node? { children.first { child in child.name == name } }
 
@@ -72,6 +77,36 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
     func finish() {
         children.sort { left, right in left.bytes > right.bytes }
         files.sort { left, right in left.bytes > right.bytes }
+    }
+
+    // MARK: Views of the finished tree
+
+    /// Folders that belong together without one folder on disk, such as a category's, under a
+    /// title. The folders keep their own parents, so their paths still lead to the disk.
+    static func group(_ title: String, of folders: [Node]) -> Node {
+        let group = virtualRoot()
+        group.title = title
+        for folder in folders { group.adopt(folder) }
+        group.finish()
+        return group
+    }
+
+    /// This folder without the subfolders `keeps` turns down, at any depth, with its size and file
+    /// count shrunk to match. The copy keeps this folder's parent, so its path, Finder and the
+    /// Trash still reach the real folder; with nothing left out it is this folder itself.
+    func portion(keeping keeps: (Node) -> Bool) -> Node {
+        let portions = children.filter(keeps).map { child in child.portion(keeping: keeps) }
+        let isWhole =
+            portions.count == children.count
+            && zip(portions, children).allSatisfy { portion, child in portion === child }
+        if isWhole { return self }
+        let copy = Node(name: name, parent: parent)
+        (copy.files, copy.restBytes, copy.restCount) = (files, restBytes, restCount)
+        copy.bytes = bytes - children.reduce(0) { total, child in total + child.bytes }
+        copy.fileCount = fileCount - children.reduce(0) { total, child in total + child.fileCount }
+        for portion in portions { copy.adopt(portion) }
+        copy.finish()
+        return copy
     }
 
     // MARK: Changing the finished tree
@@ -129,6 +164,9 @@ nonisolated final class Node: Identifiable, Hashable, @unchecked Sendable {
         }
         return nil
     }
+
+    /// Whether this very folder is part of the tree below this (virtual) root, not a copy of it.
+    func holds(_ node: Node) -> Bool { descendant(at: node.path) === node }
 
     /// The size of a folder or listed file by absolute path; nil when it was folded or not
     /// scanned.

@@ -86,9 +86,11 @@ struct DesignTests {
         #expect(Contrast.ratio(0x000000, 0xFFFFFF) == blackOnWhite)
     }
 
-    @Test("Category colors repeat instead of running out")
-    func categoryColorsRepeat() {
+    @Test("Every category has a color of its own, and the colors repeat instead of running out")
+    func categoryColors() {
         let count = Theme.categoryColors.count
+        #expect(count >= CategoryKind.allCases.count)
+        #expect(Set(Theme.categoryColors).count == count)
         #expect(Theme.categoryColor(count) == Theme.categoryColor(0))
     }
 }

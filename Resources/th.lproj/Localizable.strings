@@ -26,7 +26,8 @@
 "hideSidebar" = "ซ่อนแถบด้านข้าง";
 
 /* Overview and categories */
-"availableOf" = "ว่าง %@ จาก %@";
+"availableOf" = "ใช้ได้ %@ จาก %@";
+"availableExplained" = "ใช้ได้ = พื้นที่ว่าง + ส่วนที่ macOS ล้างได้เอง";
 "categories" = "หมวดหมู่";
 "freeSpace" = "ว่าง";
 "temporaryAreaName" = "ไฟล์ระบบของ macOS";

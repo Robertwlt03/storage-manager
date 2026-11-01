@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ khả dụng trong tổng số %@";
+"availableExplained" = "Khả dụng = dung lượng trống + phần macOS có thể tự xóa.";
 "categories" = "Danh mục";
 "freeSpace" = "Trống";
 "temporaryAreaName" = "Tệp hệ thống của macOS";

@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ beschikbaar van %@";
+"availableExplained" = "Beschikbaar = vrije ruimte + wat macOS zelf kan wissen.";
 "categories" = "Categorieën";
 "freeSpace" = "Vrij";
 "temporaryAreaName" = "Systeembestanden van macOS";

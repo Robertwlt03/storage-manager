@@ -27,8 +27,9 @@
 
 /* Overview and categories */
 "availableOf" = "可用 %@，共 %@";
+"availableExplained" = "可用 = 閒置空間 + macOS 可自行清除的空間";
 "categories" = "類別";
-"freeSpace" = "可用";
+"freeSpace" = "閒置";
 "temporaryAreaName" = "macOS 系統檔案";
 "homeFolderName" = "你的個人專屬檔案夾";
 "categoryApps" = "應用程式";

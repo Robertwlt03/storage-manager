@@ -19,6 +19,9 @@ struct OverviewView: View {
         UI.Card {
             UI.VolumeSummary(
                 startupVolume, segments: segments, canSelect: canOpen, onSelect: open)
+            if startupVolume.purgeableBytes > 0 {
+                UI.Note(TextKey.availableExplained.translated, .hint).padding(.bottom, Space.row)
+            }
             if startupVolume.isLow {
                 UI.Note(TextKey.lowSpaceWarning.translated, .warning(symbol: Symbols.lowSpace))
                     .padding(.bottom, Space.row)
@@ -26,19 +29,26 @@ struct OverviewView: View {
         }
     }
 
+    /// Biggest first, but what macOS can delete comes last, next to the free space: together they
+    /// are the space the card calls available.
     private var segments: [StorageSegment] {
-        model.categories.map { category in
+        let purgeableLast = model.categories.sorted { left, right in
+            left.kind != .purgeable && right.kind == .purgeable
+        }
+        return purgeableLast.map { category in
             StorageSegment(
                 id: "\(category.kind)", title: category.kind.title.translated,
                 bytes: category.bytes, colorIndex: category.kind.rawValue)
         }
     }
 
-    private func node(for segment: StorageSegment) -> Node? {
-        model.categories.first { category in "\(category.kind)" == segment.id }?.node
+    private func category(for segment: StorageSegment) -> Category? {
+        model.categories.first { category in "\(category.kind)" == segment.id }
     }
 
-    private func canOpen(_ segment: StorageSegment) -> Bool { node(for: segment) != nil }
+    private func canOpen(_ segment: StorageSegment) -> Bool {
+        category(for: segment)?.folders.isEmpty == false
+    }
 
-    private func open(_ segment: StorageSegment) { node(for: segment).map(model.open) }
+    private func open(_ segment: StorageSegment) { category(for: segment).map(model.open) }
 }

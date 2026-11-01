@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ dostępne z %@";
+"availableExplained" = "Dostępne = wolne miejsce + to, co macOS może sam usunąć.";
 "categories" = "Kategorie";
 "freeSpace" = "Wolne";
 "temporaryAreaName" = "Pliki systemowe macOS";

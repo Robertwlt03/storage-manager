@@ -15,6 +15,7 @@ import WidgetKit
     /// Set before the first frame, so nothing animates in.
     var pane: Pane? = AppSettings.launchPane ?? .overview
     var explorerPath: [Node] = []
+    var shownCategory: CategoryKind?  // whose folders the explorer shows, see `open(_ category:)`
     var searchText = ""
     /// The search field has focus; results only replace the page once text is typed.
     var isSearchPresented = false
@@ -388,6 +389,7 @@ extension AppModel {
             root: root, volume: isScanning ? nil : startupVolume)
         Motion.animate { categories = measuredCategories }
         copyGroups = CopyService.groups(in: root.descendant(at: Paths.temporaryCopies))
+        refreshShownCategory()
         // Drives the tables, which must not update inside an animation (NSTableView reentrancy).
         revision += 1
     }

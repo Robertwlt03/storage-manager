@@ -149,10 +149,9 @@ enum UITest {
 
     /// Open every category, go five levels deep, back out, and repeat quickly.
     private static func browseFolders(_ model: AppModel) async {
-        for category in model.categories {
-            guard let node = category.node else { continue }
-            model.open(node)
-            var current = node
+        for category in model.categories where !category.folders.isEmpty {
+            model.open(category)
+            guard var current = model.explorerPath.last else { continue }
             for _ in 0..<folderDepth {
                 guard let next = current.children.first else { break }
                 model.explorerPath.append(next)

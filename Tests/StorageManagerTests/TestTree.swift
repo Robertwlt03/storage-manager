@@ -22,6 +22,19 @@ enum TestTree {
         return folder
     }
 
+    /// The home folder with Downloads, Library/Caches, Projects (which no category names) and the
+    /// folders `also` names, under a virtual root.
+    static func home(also names: [String] = []) -> Node {
+        let root = Node.virtualRoot()
+        folder(Paths.home, in: root) { home in
+            folder("Downloads", in: home)
+            folder("Library", in: home) { library in folder("Caches", in: library) }
+            folder("Projects", in: home)
+            for name in names { folder(name, in: home) }
+        }
+        return root
+    }
+
     /// Each folder inside the one before, all holding one file of `fileBytes`.
     static func chain(_ names: ArraySlice<String>, in parent: Node, fileBytes: Int64) {
         guard let name = names.first else { return }

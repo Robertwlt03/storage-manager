@@ -64,7 +64,8 @@ nonisolated struct VolumeInformation: Identifiable, Hashable {
 struct Category: Identifiable {
     let kind: CategoryKind
     var bytes: Int64 = 0
-    var node: Node?  // where a click leads, if anywhere
+    /// The folders of this kind, outermost first; a click shows them (CategoryService.folder).
+    var folders: [Node] = []
     var id: CategoryKind { kind }
 }
 

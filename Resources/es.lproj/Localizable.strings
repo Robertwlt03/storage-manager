@@ -27,6 +27,7 @@
 
 /* Overview and categories */
 "availableOf" = "%@ disponibles de %@";
+"availableExplained" = "Disponible = espacio libre + lo que macOS puede borrar por sí mismo.";
 "categories" = "Categorías";
 "freeSpace" = "Libre";
 "temporaryAreaName" = "Archivos del sistema de macOS";
