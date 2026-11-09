@@ -236,9 +236,9 @@ mode.
   icon has its own color and shape.
 - This file has the same form in Claude's colors (ivory, clay and slate from claude.com): `assets/banner-claude.svg`
   (`--theme claude`; a banner drawn again keeps its theme), `assets/banner-claude-footer.svg`, which is drawn again
-  with it, and the `claude-*` icons in the Claude tones of `scripts/doc-assets.py`. The clay tile carries Claude's mark,
-  the path of the logo on claude.com (`CLAUDE_MARK`). Claude and its mark belong to Anthropic; they appear here only to
-  name the tool, and the project's MIT license does not cover them.
+  with it, and the `claude-*` icons in the Claude tones of `scripts/doc-assets.py`. The clay tile carries our own
+  terminal mark `>_` (`TILE_MARK`), never Claude's logo: that mark belongs to Anthropic and needs its permission. The
+  name Claude appears here only to name the tool, and the project's MIT license does not cover it.
 - When requirements, commands or rules change, update README, CONTRIBUTING, CODE_STYLE, ARCHITECTURE and this file in
   the same commit.
 
